@@ -432,8 +432,14 @@ class AtFile:
         t1 = time.time()
         c.init_error_dialogs()
         files = at.findFilesToRead(root, all=True)
+        efc = g.app.externalFilesController
         for p in files:
             at.readFileAtPosition(p)
+            # An @<file> was read: In case this was a tab opened earlier, for which efc had entries,
+            # we need to update the external files controller's timestamp for those external files
+            # instead of leaving the _time_d empty, which would have defaulted to set_time's default.
+            if efc:
+                efc.set_time(c.fullPath(p))  # #4426 Same effect as leaving efc's _time_d empty.
         for p in files:
             p.v.clearDirty()
         if not g.unitTesting and files:  # pragma: no cover
@@ -680,7 +686,7 @@ class AtFile:
             g.doHook('after-reading-external-file', c=c, p=p)
         return p  # For #451: return p.
     #@+node:ekr.20150204165040.5: *5* at.readOneAtCleanNode & helpers
-    def readOneAtCleanNode(self, root: Position, *, new_contents: str = None) -> bool:
+    def readOneAtCleanNode(self, root: Position, *, new_contents: str = None) -> None:
         """Update the @clean/@nosent node at root."""
         at, c, x = self, self.c, self.c.shadowController
 
@@ -690,20 +696,20 @@ class AtFile:
             fileName = c.fullPath(root)
             if not g.os_path_exists(fileName):
                 g.es_print(f"not found: {fileName}", color='red', nodeLink=root.get_UNL())
-                return False
+                return
             # Suppresses file-changed dialog.
             at.rememberReadPath(fileName, root)
 
         # #4385: Do nothing if the file has not changed.
         try:
-            old_mod_time = root.v.u['_mod_time']  # #4385
+            old_mod_time = root.v.u['_mod_time']  # #4385 The file's *last-seen* mod time.
         except Exception:
             old_mod_time = None
-        new_mod_time = g.os_path_getmtime(fileName)
+        new_mod_time = g.os_path_getmtime(fileName)  # The file's *present* mod time.
 
-        # Don't update if the outline and file are in synch.
+        # Make sure it's newer: Don't update if the outline and file are in synch.
         if old_mod_time and old_mod_time >= new_mod_time:
-            return True
+            return
 
         # #4385: Init the per-file data.
         at.initReadIvars(root, fileName)
@@ -712,6 +718,10 @@ class AtFile:
         # #4385: *Clear* the mod time until we write the file.
         if '_mod_time' in root.v.u:
             del root.v.u['_mod_time']
+
+        # Until the @clean's content is modified and written: set to file's *present* mod time.
+        # This and writeOneAtCleanNode are the *only* two places that sets the `_mod_time` uA.
+        root.v.u['_mod_time'] = new_mod_time  # #4427
 
         # #4385: Remember all old bodies.
         for p in root.self_and_subtree():
@@ -731,9 +741,9 @@ class AtFile:
         else:
             new_private_lines = []
             root.b = ''.join(new_public_lines)
-            return True
+            return
         if new_private_lines == old_private_lines:
-            return True
+            return
         if not g.unitTesting:
             g.es_print("updating:", root.h)
         root.clearVisitedInTree()
@@ -755,8 +765,6 @@ class AtFile:
             c.setChanged(force=True)
             root.v.setDirty()
             at.changed_roots.append(root.copy())
-
-        return True  # No errors.
     #@+node:ekr.20150204165040.8: *6* at.read_at_clean_lines
     def read_at_clean_lines(self, fn: str) -> list[str]:  # pragma: no cover
         """Return all lines of the @clean/@nosent file at fn."""
@@ -1671,14 +1679,10 @@ class AtFile:
                 at.addToOrphanList(root)
             else:
                 contents = ''.join(at.outputList)
-
-                # #4385: at.replaceFile always writes @clean roots,
-                #        even if the file hasn't changed.
-                #        This forces the `_mod_time` uA to change.
                 at.replaceFile(contents, at.encoding, fileName, root)
-
-                # #4385: This is the *only* place that sets the `_mod_time` uA.
+                # #4385: This and readOneAtCleanNode are the *only* two places that sets the `_mod_time` uA.
                 root.v.u['_mod_time'] = g.os_path_getmtime(fileName)
+
         except Exception:
             at.writeException(fileName, root)
     #@+node:ekr.20090225080846.5: *6* at.writeOneAtEditNode
@@ -2963,20 +2967,20 @@ class AtFile:
         if not old_contents:
             old_contents = ''
 
-        if not root.isAtCleanNode():  # #4394: Always write @clean nodes!
-            # Compare the old and new contents.
-            unchanged = (
-                contents == old_contents
-                or (not at.explicitLineEnding and at.compareIgnoringLineEndings(old_contents, contents))
-                or ignoreBlankLines and at.compareIgnoringBlankLines(old_contents, contents))
-            if unchanged:
-                at.unchangedFiles += 1
-                if not g.unitTesting and c.config.getBool(
-                    'report-unchanged-files', default=True):
-                    g.es(f"{timestamp}unchanged: {sfn}")  # pragma: no cover
-                # Check unchanged files.
-                at.checkPythonCode(contents, fileName, root)
-                return False  # No change to original file.
+        unchanged = (
+            contents == old_contents
+            or (not at.explicitLineEnding and at.compareIgnoringLineEndings(old_contents, contents))
+            or ignoreBlankLines and at.compareIgnoringBlankLines(old_contents, contents))
+
+        if unchanged:
+            at.unchangedFiles += 1
+            if not g.unitTesting and c.config.getBool(
+                'report-unchanged-files', default=True):
+                g.es(f"{timestamp}unchanged: {sfn}")  # pragma: no cover
+
+            # Check *unchanged* files.
+            at.checkPythonCode(contents, fileName, root)
+            return False  # No change to original file.
 
         # Warn if we are only adjusting the line endings.
         if at.explicitLineEnding:  # pragma: no cover
@@ -3000,6 +3004,7 @@ class AtFile:
             g.error('error writing', sfn)
             g.es('not written:', sfn)
             at.addToOrphanList(root)
+
         # Check *after* writing the file.
         at.checkPythonCode(contents, fileName, root)
         return ok
