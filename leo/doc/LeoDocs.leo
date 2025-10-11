@@ -29238,7 +29238,7 @@ between tokens in the token list and ast nodes in the parse tree.
 
 Are you sure you want to use leoAst?
 
-- `asttokens &lt;https://asttokens.readthedocs.io/en/latest/user-guide.html&gt;`_ will usually be a better choice:
+- `asttokens &lt;https://asttokens.readthedocs.io/en/latest/user-guide.html&gt;`_will usually be a better choice:
 - Support for the leoAst module ends with Python 3.14.
 
 leoAst.py is part of `Leo &lt;https://leo-editor.github.io/leo-editor/&gt;`_, and can be used
@@ -33348,7 +33348,8 @@ Leo is an [IDE, outliner and PIM](https://leo-editor.github.io/leo-editor/prefac
 - PR #4403: Add support for Python 3.14. Require Python 3.10 or above.
 - PR #4423: All of Leo's importers now import `@clean` files perfectly.
 - PR #4412: Greatly improve Leo's `parse-body` command.
-- PR #4418: Fix bugs involving the `_mod_tim    e` attribute in `.leo` files.
+- PR #4418: Fix bugs involving the `_mod_time` attribute in `.leo` files.
+- PR #4456: Added leo_to_html_outline_viewer.py plugin.
 - Fix several other minor bugs. See the `What's new` section for details.
 
 **Links**
@@ -33373,6 +33374,7 @@ Leo is an [IDE, outliner and PIM](https://leo-editor.github.io/leo-editor/prefac
 .. _`PR #4423`: https://github.com/leo-editor/leo-editor/pull/4423
 .. _`PR #4430`: https://github.com/leo-editor/leo-editor/pull/4430
 .. _`PR #4430`: https://github.com/leo-editor/leo-editor/pull/4444
+.. _`PR #4456`: https://github.com/leo-editor/leo-editor/pull/4444
 
 - `PR #4403`: Require python 3.10 or above. Add support for Python 3.14.
 - `PR #4412`: Greatly improve Leo's `parse-body` command.
@@ -33381,6 +33383,7 @@ Leo is an [IDE, outliner and PIM](https://leo-editor.github.io/leo-editor/prefac
 - `PR #4423`: A milestone: Leo's beautifiers import `@clean` files perfectly.
 - `PR #4430`: Fix bugs in Leo's colorizer.
 - `PR #4444`: Fix a crasher in Leo's undo logic.
+- `PR #4456`: Added leo_to_html_outline_viewer.py plugin.
 
 </t>
 <t tx="felix.20210825213137.1">Since a WebSocket server can receive events from clients, process them to update the
