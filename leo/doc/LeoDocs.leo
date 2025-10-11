@@ -29238,7 +29238,7 @@ between tokens in the token list and ast nodes in the parse tree.
 
 Are you sure you want to use leoAst?
 
-- `asttokens &lt;https://asttokens.readthedocs.io/en/latest/user-guide.html&gt;`_will usually be a better choice:
+- `asttokens &lt;https://asttokens.readthedocs.io/en/latest/user-guide.html&gt;`_ will usually be a better choice:
 - Support for the leoAst module ends with Python 3.14.
 
 leoAst.py is part of `Leo &lt;https://leo-editor.github.io/leo-editor/&gt;`_, and can be used
@@ -33348,7 +33348,7 @@ Leo is an [IDE, outliner and PIM](https://leo-editor.github.io/leo-editor/prefac
 - PR #4403: Add support for Python 3.14. Require Python 3.10 or above.
 - PR #4423: All of Leo's importers now import `@clean` files perfectly.
 - PR #4412: Greatly improve Leo's `parse-body` command.
-- PR #4418: Fix bugs involving the `_mod_time` attribute in `.leo` files.
+- PR #4418: Fix bugs involving the `_mod_tim    e` attribute in `.leo` files.
 - Fix several other minor bugs. See the `What's new` section for details.
 
 **Links**
