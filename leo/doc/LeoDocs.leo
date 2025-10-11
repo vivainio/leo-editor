@@ -33373,7 +33373,7 @@ Leo is an [IDE, outliner and PIM](https://leo-editor.github.io/leo-editor/prefac
 .. _`PR #4421`: https://github.com/leo-editor/leo-editor/pull/4421
 .. _`PR #4423`: https://github.com/leo-editor/leo-editor/pull/4423
 .. _`PR #4430`: https://github.com/leo-editor/leo-editor/pull/4430
-.. _`PR #4430`: https://github.com/leo-editor/leo-editor/pull/4444
+.. _`PR #4444`: https://github.com/leo-editor/leo-editor/pull/4444
 .. _`PR #4456`: https://github.com/leo-editor/leo-editor/pull/4444
 
 - `PR #4403`: Require python 3.10 or above. Add support for Python 3.14.
