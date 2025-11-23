@@ -2529,6 +2529,7 @@
 <v t="ekr.20250317133518.1"></v>
 <v t="ekr.20210402080752.1"></v>
 </v>
+<v t="ekr.20251123054520.1"><vh>Thomas</vh></v>
 </vnodes>
 <tnodes>
 <t tx="EKR.20040524104904.140">Leo stores options in **@settings trees**, outlines whose headline is ``@settings``. When opening a .leo file, Leo looks for ``@settings`` trees not only in the outline being opened but also in various ``leoSettings.leo`` files. This scheme allows for the following kinds of settings:
@@ -11128,6 +11129,17 @@ do."&amp;#8213;Ian Mulvany
 "When first I opened Leo, it was out of curiosity. But having used it, I'll
 never go back. They'll have to pry Leo out of my cold, dead fingers!"&amp;#8213;Travers A. Hough
 &lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+Leo makes managing long, complex code bases many many times more easy and feasible than anything else I've tried. Leo also makes trying experimental code way easier than anything else (e.g., running a script to test out some programming issue).
+I use Leo every day, all the time,  for non-programming things. I don't see how I could replace it if it somehow vanished.
+&lt;blockquote&gt;
+
+&lt;blockquote&gt;
+Leo makes managing long, complex code bases many many times more easy and feasible than anything else I've tried. Leo also makes trying experimental code way easier than anything else (e.g., running a script to test out some programming issue).
+I use Leo every day, all the time,  for non-programming things. I don't see how I could replace it if it somehow vanished."&amp;#8213;Thomas Passin
+&lt;blockquote&gt;
+
 &lt;p&gt;
 Leo is a scriptable outliner that accelerates the work flow of programmers, authors and web designers.
 &lt;em&gt;Outline nodes may appear in more than one place&lt;/em&gt;, allowing multidimensional views of data, including computer programs, within a single outline.
@@ -33366,6 +33378,10 @@ Info (half clones): https://github.com/leo-editor/leo-editor/issues/4478
 
 @language python
 </t>
+<t tx="ekr.20251123054520.1">&lt;blockquote&gt;
+Leo makes managing long, complex code bases many many times more easy and feasible than anything else I've tried. Leo also makes trying experimental code way easier than anything else (e.g., running a script to test out some programming issue).
+I use Leo every day, all the time,  for non-programming things. I don't see how I could replace it if it somehow vanished."&amp;#8213;Thomas Passin
+&lt;blockquote&gt;</t>
 <t tx="felix.20210825213137.1">Since a WebSocket server can receive events from clients, process them to update the
 application state, and synchronize the resulting state across clients, leoserver.py
 has the ability to listen and interact with more than one concurrent client, and have
