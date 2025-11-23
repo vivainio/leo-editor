@@ -11132,7 +11132,7 @@ never go back. They'll have to pry Leo out of my cold, dead fingers!"&amp;#8213;
 
 &lt;blockquote&gt;
 Leo makes managing long, complex code bases many many times more easy and feasible than anything else I've tried. Leo also makes trying experimental code way easier than anything else (e.g., running a script to test out some programming issue).
-I use Leo every day, all the time,  for non-programming things. I don't see how I could replace it if it somehow vanished.
+I use Leo every day, all the time,  for non-programming things. I don't see how I could replace it if it somehow vanished."&amp;#8213;
 &lt;/blockquote&gt;
 
 &lt;p&gt;
@@ -33375,7 +33375,7 @@ Info (half clones): https://github.com/leo-editor/leo-editor/issues/4478
 </t>
 <t tx="ekr.20251123054520.1">&lt;blockquote&gt;
 Leo makes managing long, complex code bases many many times more easy and feasible than anything else I've tried. Leo also makes trying experimental code way easier than anything else (e.g., running a script to test out some programming issue).
-I use Leo every day, all the time,  for non-programming things. I don't see how I could replace it if it somehow vanished.
+I use Leo every day, all the time,  for non-programming things. I don't see how I could replace it if it somehow vanished."&amp;#8213;Thomas Passin
 &lt;/blockquote&gt;
 </t>
 <t tx="felix.20210825213137.1">Since a WebSocket server can receive events from clients, process them to update the
