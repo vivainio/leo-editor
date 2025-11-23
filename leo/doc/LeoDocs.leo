@@ -728,7 +728,7 @@
 <v t="ekr.20150415111217.1"><vh>How can I use clones to reorganize an outline?</vh></v>
 <v t="ekr.20141108064630.8"><vh>How does EKR use clones?</vh></v>
 <v t="ekr.20120229094652.15152"><vh>How does Leo handle clone conflicts?</vh></v>
-<v t="ekr.20250317133518.1"><vh>Is there a way to clone only part of a tree?</vh></v>
+<v t="ekr.20250317133518.1"><vh>How can Leonine scripts simulate half clones?</vh></v>
 <v t="ekr.20060111192108"><vh>When is deleting a node dangerous?</vh></v>
 <v t="ekr.20170228103914.1"><vh>When may I delete clones safely?</vh></v>
 <v t="ekr.20110521135104.18151"><vh>Why doesn't Leo support cross-outline clones?</vh></v>
@@ -2523,6 +2523,12 @@
 </v>
 <v t="ekr.20250830050946.1"></v>
 <v t="ekr.20250830050853.1"></v>
+<v t="ekr.20131017174814.17479"></v>
+<v t="ekr.20251122055611.1"><vh>=== PR #4481: Improve Leo's docs</vh>
+<v t="ekr.20111019104425.15904"><vh>&lt;&lt; Leo Quotes &gt;&gt;</vh></v>
+<v t="ekr.20250317133518.1"></v>
+<v t="ekr.20210402080752.1"></v>
+</v>
 </vnodes>
 <tnodes>
 <t tx="EKR.20040524104904.140">Leo stores options in **@settings trees**, outlines whose headline is ``@settings``. When opening a .leo file, Leo looks for ``@settings`` trees not only in the outline being opened but also in various ``leoSettings.leo`` files. This scheme allows for the following kinds of settings:
@@ -11108,6 +11114,24 @@ if changed:
     c.undoer.afterChangeTree(p,'remove-@url-final-output',b)
     c.redraw()
 </t>
+<t tx="ekr.20111019104425.15904">&lt;p&gt;&lt;blockquote&gt;
+"Leo is a revolutionary step in the right direction for programming."&amp;#8213;Brian Takita
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt; "Leo is the best IDE that I have had the pleasure to use. It
+has totally changed not only the way that I program, but also the way that
+I store and organize all of the information that I need for the job that I
+do."&amp;#8213;Ian Mulvany
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+"When first I opened Leo, it was out of curiosity. But having used it, I'll
+never go back. They'll have to pry Leo out of my cold, dead fingers!"&amp;#8213;Travers A. Hough
+&lt;/blockquote&gt;
+&lt;p&gt;
+Leo is a scriptable outliner that accelerates the work flow of programmers, authors and web designers.
+&lt;em&gt;Outline nodes may appear in more than one place&lt;/em&gt;, allowing multidimensional views of data, including computer programs, within a single outline.
+</t>
 <t tx="ekr.20111108052738.5507">run-marked-unit-tests-externally = Alt-4
 run-all-unit-tests-externally = Alt-5
 </t>
@@ -15254,61 +15278,32 @@ Each Leo outline contains a hidden vnode, c.hiddenRootNode::
    &lt;br /&gt;
 
 
-######################
-A Brief Summary of Leo
-######################
+#########################
+Technical Overview of Leo
+#########################
 
 .. Use full links here so links are active in LeoDocs.leo
 
 .. _`Clones`: tutorial-pim.html
 .. _`clone find commands`: html/commands.html# clone-find-commands
-.. _`Directed Acyclic Graphs`: https://en.wikipedia.org/wiki/Directed_acyclic_graph
-.. _`Emacs`: https://www.gnu.org/software/emacs/
-.. _`Leo's tutorial`: tutorial.html
-.. _`Leonine`: leonine-world.html
-.. _`Leonine way to refactor programs`: appendices.html#the-leonine-way-to-refactor-code
-.. _`Next`: testimonials.html
-.. _`Python API`: tutorial-scripting.html
-.. _`ask for help`:   https://groups.google.com/forum/#!forum/leo-editor
 .. _`group of developers and users`: https://groups.google.com/forum/#!forum/leo-editor
+.. _`Leonine`: leonine-world.html
+.. _`new way to refactor computer programs`: appendices.html#the-leonine-way-to-refactor-code
+.. _`Python API`: tutorial-scripting.html
 .. _`outline-oriented directives`: tutorial-basics.html#markup
 
-    "Word outlines are very useful. But Leo makes Word look like a clunky toy."---Joe Orr
+Leo *completely integrates* Python scripting and outlines, creating a fundamentally different way of using and organizing data, and computer programs. Leo has been under active development for 45+ years with an active `group of developers and users`_.
 
-Leo is a fundamentally different way of using and organizing data, programs and scripts. Leo has been under active development for 20+ years with an active `group of developers and users`_.
-
-**Leo is:**
-
-- A fully-featured IDE, with many features inspired by `Emacs`_.
-- An outliner. Everything in Leo is an outline.
-- A data manager and personal information manager.
-- A powerful scripting environment.
-- A tool for organizing and studying computer code.
-- Extensible via a simple plugin architecture.
-- A tool that plays well with Vim and Emacs.
-- Written in 100% pure Python.
-
-**Leo's unique features**
-
-Leo *completely integrates* Python scripting and outlines. Simulating the following features in Vim, Emacs or Eclipse is possible, just as it is possible to simulate Python in assembly language...
-
-- All commands and scripts have easy access to outline structure via a simple `Python API`_. |br|
-  For example, p.b is the body text of the selected outline node. |br|
-  Scripts have full access to all of Leo's sources.
-- `Clones`_ create multiple views of an outline.  |br|
-  Leo's underlying data is a `Directed Acyclic Graphs`_.  |br|
-  As a result, Leo organizes data in completely new ways.
-- Leo's `clone find commands`_ enable the `Leonine way to refactor programs`_.
+- Scripts have complete access to outline structure via a simple `Python API`_. Examples:|br|
+  `c.p.b` is the body text of the selected outline node. |br|
+  `for p in c.all_nodes()` iterates p through all the nodes of the outline.
+- Unlike standard tree-based editors, Leo allows a **cloned** node to appear in multiple places simultaneously. Editing a node in one location updates it everywhere. `Clones`_ allow you to create multidimensional views of any data, including source code.
+- Leo's `clone find commands`_ create *organized* clones of all the nodes that match the search criteria. These data create a `new way to refactor computer programs`_.
 - Scripts and programs can be composed from outlines using `outline-oriented directives`_.
-- Importers convert flat text into outlines.
+- Importers convert flat text files into outlines.
 - @button scripts apply scripts to outline data.
 
-These features combine to create a `Leonine`_ way of programming and
-organizing. You won't learn all about Leo in a day or two. `Leo's
-tutorial`_ explains the basic features. You can learn more advanced
-features later. Please `ask for help`_ immediately if you get stuck.
-
-</t>
+These features combine to create a new (`Leonine`_) way of organizing complex data, including computer programs.</t>
 <t tx="ekr.20131018100353.16706">To start a project, clone nodes related to the project and drag them at or near the top level, where you can get at them easily. When the project is complete, just delete the clones. This workflow is surprisingly effective:
 
 - The original nodes never move, but they change whenever their clones do.
@@ -29557,9 +29552,9 @@ Fixed all known bugs.</t>
 .. _`LaTeX`:    https://www.latex-project.org/
 .. _`Sphinx`:   https://sphinx-doc.org/
 .. _`reStructuredText`: https://docutils.sourceforge.net/rst.html
+.. _`4478`: https://github.com/leo-editor/leo-editor/issues/4478
 
-This section explains how to use **user filters** to alter the output of
-the ``rst3`` command.
+This section explains how to use **user filters** to alter the output of the ``rst3`` command. See Leo info issue `4478`_ and ``leo/plugins/example_rst_filter.py`` and for examples.
 
 **Background**
 
@@ -29573,98 +29568,58 @@ options, ``rst3`` will:
 
 **User filters**
 
-Plugins or scripts may define two functions: a **headline filter** and a
-**body filter**:
+Plugins or scripts may define two functions: a **headline filter** and a **body filter**. The signature of both filters is ``filter-name (c, p)`` where c and p are defined as usual.
 
-- ``rst3`` calls the body filter for all nodes except descendants of
-  ``@rst-ignore`` or ``@rst-ignore-tree`` nodes.
+- ``rst3`` calls the body filter for all nodes except descendants of ``@rst-ignore`` or ``@rst-ignore-tree`` nodes.
 
-- ``rst3`` calls the headline filter for all nodes except:
-
-    .. code-block:: python
-
-        rst-no-head nodes or
-        descendants of @rst-ignore or @rst-ignore-tree nodes.
+- ``rst3`` calls the headline filter for all nodes except ``@rst-no-head nodes`` or descendants of ``@rst-ignore`` or ``@rst-ignore-tree`` nodes.
 
 - plugins or scripts register filters as follows:
 
-    .. code-block:: python
-
-        c.rstCommands.register_body_filter(body_filter)
-        c.rstCommands.register_headline_filter(headline_filter)
-
-- The signature of all filters is ``filter-name (c, p)`` where c and p are
-  defined as usual.
-
-**Example filters**
-
-Do-nothing filters would be defined like this:
-
 .. code-block:: python
 
-    def body_filter(c, p):
-        return p.b
+    c.rstCommands.register_body_filter(body_filter)
+    c.rstCommands.register_headline_filter(headline_filter)
 
-    def headline_filter(c, p):
-        return p.h
+**Filters can do anything**
 
-The following filters would simulate the frequently-requested "half clone" feature.
-That is, within any ``@rst`` tree, the following filters would skip the children of all clones:
+Filters can use the data in p.b, p.h, p.u, or p.gnx, but filters are not *limited* to the data in p. Filters can access:
 
-.. code-block:: python
-
-    def has_cloned_parent(c, p):
-        """Return True if p has a cloned parent within the @rst tree."""
-        root = c.rstCommands.root  # The @rst node.
-        p = p.parent()
-        while p and p != root:
-            if p.isCloned():
-                return True
-            p.moveToParent()
-        return False
-
-    def body_filter(c, p):
-        return '' if has_cloned_parent(c, p) else p.b
-
-    def headline_filter(c, p):
-        return '' if has_cloned_parent(c, p) else p.h
-
-Folks, this might send a shiver down your spine. Both filters ignore all
-descendants of clones in the ``@rst`` tree. We have the effect of half clones,
-with no changes to Leo's core!
-
-Note: ``has_cloned_parent`` stops the scan at the ``@rst`` node itself, ensuring
-that the ``rst3`` command includes "top-level" clones themselves.
-
-See ``leo/plugins/example_rst_filter.py`` for a complete example.
-
-**Filters can do practically anything**
-
-Filters can use the data in p.b, p.h, p.u, or p.gnx, but filters are not *limited* to the data in p. The has_cloned_parent filter shows that filters can access:
-
-- Any ancestor or descendant of node p.
+- Any ancestor or descendant of position p.
 - Any data accessible from c, that is, *all* the data in the outline, including cached data!
 
-Indeed, has_cloned_parent gets the current ``@rst`` node using ``root = c.rstCommands.root``.
-
-Moreover, filters can define special conventions, including:
+Filters can define their own conventions, including:
 
 - Special-format comments embedded in p.b,
 - Special-purpose headlines.
 
-**Summary**
+**Changing text depending on context**
 
-Plugins and scripts can define headline and body filters that alter the intermediate string.
+.. code-block:: python
 
-The ``leo/plugins/example_rst_filter.py`` plugin shows how to set up plugins that define custom filters.
+    def in_context(p: Position, context: str) -&gt; bool:
+        return any(z.h == context for z in p.parents())
 
-Filters have easy access to all data within the outline, including:
+    def body_filter(c, p):
+        """Include bodies only in 'FAQ' or 'Ref' context."""
+        if in_context('FAQ'):
+            &lt;&lt; return `p.b`, modified for the FAQ &gt;&gt;
+        elif in_context('Reference'):
+            &lt;&lt; return `p.b`, modified for the Reference &gt;&gt;
+        return ''
 
-- ``c.rstCommands.root``, the ``@rst`` node containing p.
-- All ancestors or descendants of p.
-- All data contained *anywhere* in the outline.
+    def headline_filter(c, p):
+        """Include headlines only in 'FAQ' or 'Ref' context."""
+        return (
+            f"FAQ: {p.h}" if in_context(p, 'FAQ')
+            else f"Ref: {p.h}" if in_context(p, 'Ref')
+            else ''
+        )
+     
+**Simulating half clones**
 
-The example filters shown above simulate the often-requested "half clone" feature.</t>
+Scripts may simulate half clones by ignoring children of clones in some contexts and processing those same children in other contexts. That's all there is to it!
+</t>
 <t tx="ekr.20210405100137.1058">https://github.com/leo-editor/leo-editor/issues/1806</t>
 <t tx="ekr.20210405100137.1061">https://github.com/leo-editor/leo-editor/issues/1808</t>
 <t tx="ekr.20210405100137.1062">https://github.com/leo-editor/leo-editor/issues/1813
@@ -33081,16 +33036,38 @@ unl: Conclusion
 </t>
 <t tx="ekr.20250317133518.1">@language rest
 
-.. _`This post`: https://groups.google.com/g/leo-editor/c/_NOfUwJPNng/m/wkl8i-KoBgAJ
-.. _`example_rst_filter.py plugin`: unl:gnx://leoPy.leo#ekr.20210329114352.1
+All clones of the same node share the same VNode, and thus they all have exactly the same headline, body text, and children. Therefore, changing p.b or p.h, or adding a child to one clone modifies the underlying VNode, reflected instantly in all other clones.
 
+However, Leo's users often request a vague enhancement informally known as "half clones." We can make this ill-defined notion precise by saying that we often want to treat clones differently depending on **context**, the **Position** of that clone within the entire outline.
 
-Yes, there are several ways for scripts to simulate the often-requested "half-clone" features:
+**Using context in scripts**
 
-- `This post`_ explains the general idea.
-- The `example_rst_filter.py plugin`_ contains example code. 
+Scripts are not limited to using the data in `p.v`, that is, `p.b`, `p.h`, `p.u`, or `p.gnx`.  Scripts may access:
 
+- Any ancestor or descendant of `p`.
+- Any data accessible from `c`, that is, *all* the data in the outline, including cached data!
 
+Scripts can define their own conventions, including:
+
+- Special-format comments embedded in `p.b`,
+- Special-purpose conventions for headlines.
+
+**Changing text depending on context**
+
+.. code-block:: python
+
+    def in_context(p: Position, context: str) -&gt; bool:
+        return any(z.h == context for z in p.parents())
+ 
+    for p in c.all_positions():
+        if in_context('FAQ'):
+            handle_faq node(p)
+        elif in_context('Reference'):
+            handle_ref_node(p)
+
+**Simulating half clones**
+
+Scripts may simulate half clones by ignoring children (of clones) in some contexts and processing those *same* children in other contexts. That's all there is to it!
 </t>
 <t tx="ekr.20250422050813.2">.. Use the link-pr abbreviation to create these links.
 
@@ -33380,6 +33357,16 @@ Leo is an [IDE, outliner and PIM](https://leo-editor.github.io/leo-editor/prefac
 - `PR #4444`_: Fix a crasher in Leo's undo logic.
 - `PR #4456`_: Added leo_to_html_outline_viewer.py plugin.
 
+</t>
+<t tx="ekr.20251122055611.1">@language rest
+@wrap
+@nosearch
+
+https://github.com/leo-editor/leo-editor/issues/4480
+PR: https://github.com/leo-editor/leo-editor/pull/4481
+Info (half clones): https://github.com/leo-editor/leo-editor/issues/4478
+
+@language python
 </t>
 <t tx="felix.20210825213137.1">Since a WebSocket server can receive events from clients, process them to update the
 application state, and synchronize the resulting state across clients, leoserver.py
