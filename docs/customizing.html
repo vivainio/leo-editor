@@ -44,39 +44,39 @@
 <nav class="contents local" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#using-settings" id="id1">Using settings</a></p>
+<li><p><a class="reference internal" href="#using-settings" id="id2">Using settings</a></p>
 <ul>
-<li><p><a class="reference internal" href="#configuration-directories" id="id2">Configuration directories</a></p></li>
-<li><p><a class="reference internal" href="#search-order-for-settings-files" id="id3">Search order for settings files</a></p></li>
-<li><p><a class="reference internal" href="#safe-rules-for-local-settings" id="id4">Safe rules for local settings</a></p></li>
-<li><p><a class="reference internal" href="#organizer-nodes" id="id5">Organizer nodes</a></p></li>
-<li><p><a class="reference internal" href="#ignore-and-if-nodes" id="id6">&#64;ignore and &#64;if nodes</a></p></li>
-<li><p><a class="reference internal" href="#simple-settings-nodes" id="id7">Simple settings nodes</a></p></li>
-<li><p><a class="reference internal" href="#complex-settings-nodes" id="id8">Complex settings nodes</a></p></li>
+<li><p><a class="reference internal" href="#configuration-directories" id="id3">Configuration directories</a></p></li>
+<li><p><a class="reference internal" href="#search-order-for-settings-files" id="id4">Search order for settings files</a></p></li>
+<li><p><a class="reference internal" href="#safe-rules-for-local-settings" id="id5">Safe rules for local settings</a></p></li>
+<li><p><a class="reference internal" href="#organizer-nodes" id="id6">Organizer nodes</a></p></li>
+<li><p><a class="reference internal" href="#ignore-and-if-nodes" id="id7">&#64;ignore and &#64;if nodes</a></p></li>
+<li><p><a class="reference internal" href="#simple-settings-nodes" id="id8">Simple settings nodes</a></p></li>
+<li><p><a class="reference internal" href="#complex-settings-nodes" id="id9">Complex settings nodes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#controlling-syntax-coloring" id="id9">Controlling syntax coloring</a></p>
+<li><p><a class="reference internal" href="#controlling-syntax-coloring" id="id10">Controlling syntax coloring</a></p>
 <ul>
-<li><p><a class="reference internal" href="#color-settings" id="id10">Color settings</a></p></li>
-<li><p><a class="reference internal" href="#font-settings" id="id11">Font settings</a></p></li>
+<li><p><a class="reference internal" href="#color-settings" id="id11">Color settings</a></p></li>
+<li><p><a class="reference internal" href="#font-settings" id="id12">Font settings</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#customizing-the-rst3-command" id="id12">Customizing the rst3 command</a></p></li>
-<li><p><a class="reference internal" href="#theme-files" id="id13">Theme files</a></p></li>
-<li><p><a class="reference internal" href="#input-modes" id="id14">Input modes</a></p></li>
-<li><p><a class="reference internal" href="#ua-s-extensible-attribues-of-nodes" id="id15">uA’s: extensible attribues of nodes</a></p></li>
-<li><p><a class="reference internal" href="#decluttering-headlines" id="id16">Decluttering headlines</a></p>
+<li><p><a class="reference internal" href="#customizing-the-rst3-command" id="id13">Customizing the rst3 command</a></p></li>
+<li><p><a class="reference internal" href="#theme-files" id="id14">Theme files</a></p></li>
+<li><p><a class="reference internal" href="#input-modes" id="id15">Input modes</a></p></li>
+<li><p><a class="reference internal" href="#ua-s-extensible-attribues-of-nodes" id="id16">uA’s: extensible attribues of nodes</a></p></li>
+<li><p><a class="reference internal" href="#decluttering-headlines" id="id17">Decluttering headlines</a></p>
 <ul>
-<li><p><a class="reference internal" href="#examples" id="id17">Examples</a></p></li>
-<li><p><a class="reference internal" href="#rule-replacement-lines" id="id18">Rule &amp; replacement lines</a></p></li>
-<li><p><a class="reference internal" href="#style-lines" id="id19">Style lines</a></p></li>
+<li><p><a class="reference internal" href="#examples" id="id18">Examples</a></p></li>
+<li><p><a class="reference internal" href="#rule-replacement-lines" id="id19">Rule &amp; replacement lines</a></p></li>
+<li><p><a class="reference internal" href="#style-lines" id="id20">Style lines</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#translating-leo-s-menus-and-messages" id="id20">Translating Leo’s menus and messages</a></p></li>
+<li><p><a class="reference internal" href="#translating-leo-s-menus-and-messages" id="id21">Translating Leo’s menus and messages</a></p></li>
 </ul>
 </nav>
 <section id="using-settings">
-<h2><a class="toc-backref" href="#id1" role="doc-backlink">Using settings</a><a class="headerlink" href="#using-settings" title="Link to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Using settings</a><a class="headerlink" href="#using-settings" title="Link to this heading">¶</a></h2>
 <p>Leo stores options in <strong>&#64;settings trees</strong>, outlines whose headline is <code class="docutils literal notranslate"><span class="pre">&#64;settings</span></code>. When opening a .leo file, Leo looks for <code class="docutils literal notranslate"><span class="pre">&#64;settings</span></code> trees not only in the outline being opened but also in various <code class="docutils literal notranslate"><span class="pre">leoSettings.leo</span></code> files. This scheme allows for the following kinds of settings:</p>
 <ul class="simple">
 <li><p>Per-installation or per-machine settings.</p></li>
@@ -93,7 +93,7 @@
 </ol>
 <p>The following sections describe the kinds of nodes in <code class="docutils literal notranslate"><span class="pre">&#64;settings</span></code> trees.</p>
 <section id="configuration-directories">
-<h3><a class="toc-backref" href="#id2" role="doc-backlink">Configuration directories</a><a class="headerlink" href="#configuration-directories" title="Link to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">Configuration directories</a><a class="headerlink" href="#configuration-directories" title="Link to this heading">¶</a></h3>
 <p>Settings files can be found in the following directories:</p>
 <ul class="simple">
 <li><p><strong>homeDir</strong>, the <code class="docutils literal notranslate"><span class="pre">HOME/.leo</span></code> directory. HOME is given by Python’s HOME environment variable, or by <code class="docutils literal notranslate"><span class="pre">os.expanduser('~')</span></code> if no HOME environment variable exists.</p></li>
@@ -104,7 +104,7 @@
 <p>Leo reports in the Log pane window on startup and when opening .leo files what HOME dir is used and which settings files are read.</p>
 </section>
 <section id="search-order-for-settings-files">
-<h3><a class="toc-backref" href="#id3" role="doc-backlink">Search order for settings files</a><a class="headerlink" href="#search-order-for-settings-files" title="Link to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Search order for settings files</a><a class="headerlink" href="#search-order-for-settings-files" title="Link to this heading">¶</a></h3>
 <p>When reading a .leo file, Leo looks for settings in default settings files first, then settings in personal settings files, and finally settings in local settings files.  The exact search order is:</p>
 <p><strong>First</strong>: Default settings files:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">configDir</span><span class="o">/</span><span class="n">leoSettings</span><span class="o">.</span><span class="n">leo</span>
@@ -130,7 +130,7 @@
 <p><em>Note</em>: it is good style to limit settings placed in <code class="docutils literal notranslate"><span class="pre">myLeoSettings.leo</span></code> to those settings that differ from default settings.</p>
 </section>
 <section id="safe-rules-for-local-settings">
-<h3><a class="toc-backref" href="#id4" role="doc-backlink">Safe rules for local settings</a><a class="headerlink" href="#safe-rules-for-local-settings" title="Link to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Safe rules for local settings</a><a class="headerlink" href="#safe-rules-for-local-settings" title="Link to this heading">¶</a></h3>
 <p>You should use special care when placing default or personal settings files in <strong>local</strong> directories, that is, directories other than homeDir, configDir or machineDir. In particular, the value of localDir can change when Leo reads additional files. This can result in Leo finding new default and personal settings files. The values of these newly-read settings files will, as always, override any previously-read settings.</p>
 <p>Let us say that a setting is <strong>volatile</strong> if it is different from a default setting. Let us say that settings file A.leo <strong>covers</strong> settings file if B.leo if all volatile settings in B.leo occur in A.leo. With these definitions, the <strong>safe rule</strong> for placing settings files in local directories is:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Settings</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">local</span> <span class="n">directories</span> <span class="n">should</span>
@@ -140,11 +140,11 @@
 <p>Following this rule will ensure that the per-directory defaults specified in the local settings file will take precedence over all previously-read default and personal settings files. Ignore this principle at your peril.</p>
 </section>
 <section id="organizer-nodes">
-<h3><a class="toc-backref" href="#id5" role="doc-backlink">Organizer nodes</a><a class="headerlink" href="#organizer-nodes" title="Link to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Organizer nodes</a><a class="headerlink" href="#organizer-nodes" title="Link to this heading">¶</a></h3>
 <p>Organizer nodes have headlines that do no start with <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>. Organizer nodes may be inserted freely without changing the meaning of an <code class="docutils literal notranslate"><span class="pre">&#64;setting</span></code> tree.</p>
 </section>
 <section id="ignore-and-if-nodes">
-<h3><a class="toc-backref" href="#id6" role="doc-backlink">&#64;ignore and &#64;if nodes</a><a class="headerlink" href="#ignore-and-if-nodes" title="Link to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">&#64;ignore and &#64;if nodes</a><a class="headerlink" href="#ignore-and-if-nodes" title="Link to this heading">¶</a></h3>
 <p>Leo ignores any subtree of an <code class="docutils literal notranslate"><span class="pre">&#64;settings</span></code> tree whose headline starts with <code class="docutils literal notranslate"><span class="pre">&#64;ignore</span></code>.</p>
 <p>You can use several other kinds of nodes to cause Leo to ignore parts of an <code class="docutils literal notranslate"><span class="pre">&#64;settings</span></code> tree:</p>
 <ul class="simple">
@@ -165,7 +165,7 @@
 <p>True if <code class="docutils literal notranslate"><span class="pre">&#64;ifhostname</span> <span class="pre">&lt;host&gt;</span></code> <em>doesn’t</em> match.</p>
 </section>
 <section id="simple-settings-nodes">
-<h3><a class="toc-backref" href="#id7" role="doc-backlink">Simple settings nodes</a><a class="headerlink" href="#simple-settings-nodes" title="Link to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">Simple settings nodes</a><a class="headerlink" href="#simple-settings-nodes" title="Link to this heading">¶</a></h3>
 <p>Simple settings nodes have headlines of the form <code class="docutils literal notranslate"><span class="pre">&#64;&lt;type&gt;</span> <span class="pre">name</span> <span class="pre">=</span> <span class="pre">val</span></code>.
 These settings set the value of name to val, with the indicated type:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="nb">type</span><span class="o">&gt;</span>          <span class="n">Valid</span> <span class="n">values</span>
@@ -195,7 +195,7 @@ These settings set the value of name to val, with the indicated type:</p>
 <p><strong>Important</strong>: you can use the <code class="docutils literal notranslate"><span class="pre">show-colors</span></code> command to guide you in making these settings.</p>
 </section>
 <section id="complex-settings-nodes">
-<h3><a class="toc-backref" href="#id8" role="doc-backlink">Complex settings nodes</a><a class="headerlink" href="#complex-settings-nodes" title="Link to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">Complex settings nodes</a><a class="headerlink" href="#complex-settings-nodes" title="Link to this heading">¶</a></h3>
 <p>Complex settings nodes have headlines of the form <code class="docutils literal notranslate"><span class="pre">&#64;&lt;type&gt;</span> <span class="pre">description</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">@&lt;</span><span class="nb">type</span><span class="o">&gt;</span>             <span class="n">Valid</span> <span class="n">values</span>
 <span class="o">-------</span>             <span class="o">------------</span>
@@ -350,12 +350,12 @@ Leo script to execute when the user selects the menu item.</p>
 </section>
 </section>
 <section id="controlling-syntax-coloring">
-<h2><a class="toc-backref" href="#id9" role="doc-backlink">Controlling syntax coloring</a><a class="headerlink" href="#controlling-syntax-coloring" title="Link to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Controlling syntax coloring</a><a class="headerlink" href="#controlling-syntax-coloring" title="Link to this heading">¶</a></h2>
 <p>Several settings control Leo’s syntax colorer.</p>
 <p>You may specify default fonts and colors.
 You may also specify fonts and colors on a language-by-language basis.</p>
 <section id="color-settings">
-<h3><a class="toc-backref" href="#id10" role="doc-backlink">Color settings</a><a class="headerlink" href="#color-settings" title="Link to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id11" role="doc-backlink">Color settings</a><a class="headerlink" href="#color-settings" title="Link to this heading">¶</a></h3>
 <p>To specify a color, say for comment1, for <em>all</em> languages, create an &#64;color node:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@color</span> <span class="n">comment1</span> <span class="o">=</span> <span class="n">blue</span>
 </pre></div>
@@ -474,7 +474,7 @@ with the language name.  For example:</p>
 <p><strong>Note</strong>: all &#64;color settings may optionally end with the _color suffix.</p>
 </section>
 <section id="font-settings">
-<h3><a class="toc-backref" href="#id11" role="doc-backlink">Font settings</a><a class="headerlink" href="#font-settings" title="Link to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">Font settings</a><a class="headerlink" href="#font-settings" title="Link to this heading">¶</a></h3>
 <p>To specify a font, say for keyword_font, to be used as the default font for <strong>all</strong> languages, put the following in the body text of an &#64;font node in leoSettings.leo:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># keyword_font_family = None</span>
 <span class="n">keyword_font_size</span> <span class="o">=</span> <span class="mi">16</span>
@@ -497,9 +497,8 @@ with the language name.  For example:</p>
 </section>
 </section>
 <section id="customizing-the-rst3-command">
-<h2><a class="toc-backref" href="#id12" role="doc-backlink">Customizing the rst3 command</a><a class="headerlink" href="#customizing-the-rst3-command" title="Link to this heading">¶</a></h2>
-<p>This section explains how to use <strong>user filters</strong> to alter the output of
-the <code class="docutils literal notranslate"><span class="pre">rst3</span></code> command.</p>
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">Customizing the rst3 command</a><a class="headerlink" href="#customizing-the-rst3-command" title="Link to this heading">¶</a></h2>
+<p>This section explains how to use <strong>user filters</strong> to alter the output of the <code class="docutils literal notranslate"><span class="pre">rst3</span></code> command. See Leo info issue <a class="reference external" href="https://github.com/leo-editor/leo-editor/issues/4478">4478</a> and <code class="docutils literal notranslate"><span class="pre">leo/plugins/example_rst_filter.py</span></code> and for examples.</p>
 <p><strong>Background</strong></p>
 <p>The <code class="docutils literal notranslate"><span class="pre">rst3</span></code> command converts <code class="docutils literal notranslate"><span class="pre">&#64;rst</span></code> trees containing <a class="reference external" href="https://docutils.sourceforge.net/rst.html">reStructuredText</a> (rST)
 or <a class="reference external" href="https://sphinx-doc.org/">Sphinx</a> markup to an <strong>intermediate string</strong>. Depending on user
@@ -510,89 +509,53 @@ options, <code class="docutils literal notranslate"><span class="pre">rst3</span
 <a class="reference external" href="https://www.latex-project.org/">LaTeX</a>, etc.</p></li>
 </ul>
 <p><strong>User filters</strong></p>
-<p>Plugins or scripts may define two functions: a <strong>headline filter</strong> and a
-<strong>body filter</strong>:</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">rst3</span></code> calls the body filter for all nodes except descendants of
-<code class="docutils literal notranslate"><span class="pre">&#64;rst-ignore</span></code> or <code class="docutils literal notranslate"><span class="pre">&#64;rst-ignore-tree</span></code> nodes.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">rst3</span></code> calls the headline filter for all nodes except:</p>
-<blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rst</span><span class="o">-</span><span class="n">no</span><span class="o">-</span><span class="n">head</span> <span class="n">nodes</span> <span class="ow">or</span>
-<span class="n">descendants</span> <span class="n">of</span> <span class="nd">@rst</span><span class="o">-</span><span class="n">ignore</span> <span class="ow">or</span> <span class="nd">@rst</span><span class="o">-</span><span class="n">ignore</span><span class="o">-</span><span class="n">tree</span> <span class="n">nodes</span><span class="o">.</span>
-</pre></div>
-</div>
-</div></blockquote>
-</li>
-<li><p>plugins or scripts register filters as follows:</p>
-<blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">rstCommands</span><span class="o">.</span><span class="n">register_body_filter</span><span class="p">(</span><span class="n">body_filter</span><span class="p">)</span>
+<p>Plugins or scripts may define two functions: a <strong>headline filter</strong> and a <strong>body filter</strong>. The signature of both filters is <code class="docutils literal notranslate"><span class="pre">filter-name</span> <span class="pre">(c,</span> <span class="pre">p)</span></code> where c and p are defined as usual.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">rst3</span></code> calls the body filter for all nodes except descendants of <code class="docutils literal notranslate"><span class="pre">&#64;rst-ignore</span></code> or <code class="docutils literal notranslate"><span class="pre">&#64;rst-ignore-tree</span></code> nodes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rst3</span></code> calls the headline filter for all nodes except <code class="docutils literal notranslate"><span class="pre">&#64;rst-no-head</span> <span class="pre">nodes</span></code> or descendants of <code class="docutils literal notranslate"><span class="pre">&#64;rst-ignore</span></code> or <code class="docutils literal notranslate"><span class="pre">&#64;rst-ignore-tree</span></code> nodes.</p></li>
+<li><p>plugins or scripts register filters as follows:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">rstCommands</span><span class="o">.</span><span class="n">register_body_filter</span><span class="p">(</span><span class="n">body_filter</span><span class="p">)</span>
 <span class="n">c</span><span class="o">.</span><span class="n">rstCommands</span><span class="o">.</span><span class="n">register_headline_filter</span><span class="p">(</span><span class="n">headline_filter</span><span class="p">)</span>
 </pre></div>
 </div>
-</div></blockquote>
-</li>
-<li><p>The signature of all filters is <code class="docutils literal notranslate"><span class="pre">filter-name</span> <span class="pre">(c,</span> <span class="pre">p)</span></code> where c and p are
-defined as usual.</p></li>
-</ul>
-<p><strong>Example filters</strong></p>
-<p>Do-nothing filters would be defined like this:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">body_filter</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">p</span><span class="o">.</span><span class="n">b</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">headline_filter</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">p</span><span class="o">.</span><span class="n">h</span>
-</pre></div>
-</div>
-<p>The following filters would simulate the frequently-requested “half clone” feature.
-That is, within any <code class="docutils literal notranslate"><span class="pre">&#64;rst</span></code> tree, the following filters would skip the children of all clones:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">has_cloned_parent</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return True if p has a cloned parent within the @rst tree.&quot;&quot;&quot;</span>
-    <span class="n">root</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">rstCommands</span><span class="o">.</span><span class="n">root</span>  <span class="c1"># The @rst node.</span>
-    <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">parent</span><span class="p">()</span>
-    <span class="k">while</span> <span class="n">p</span> <span class="ow">and</span> <span class="n">p</span> <span class="o">!=</span> <span class="n">root</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">isCloned</span><span class="p">():</span>
-            <span class="k">return</span> <span class="kc">True</span>
-        <span class="n">p</span><span class="o">.</span><span class="n">moveToParent</span><span class="p">()</span>
-    <span class="k">return</span> <span class="kc">False</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">body_filter</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-    <span class="k">return</span> <span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="n">has_cloned_parent</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="k">else</span> <span class="n">p</span><span class="o">.</span><span class="n">b</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">headline_filter</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-    <span class="k">return</span> <span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="n">has_cloned_parent</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="k">else</span> <span class="n">p</span><span class="o">.</span><span class="n">h</span>
-</pre></div>
-</div>
-<p>Folks, this might send a shiver down your spine. Both filters ignore all
-descendants of clones in the <code class="docutils literal notranslate"><span class="pre">&#64;rst</span></code> tree. We have the effect of half clones,
-with no changes to Leo’s core!</p>
-<p>Note: <code class="docutils literal notranslate"><span class="pre">has_cloned_parent</span></code> stops the scan at the <code class="docutils literal notranslate"><span class="pre">&#64;rst</span></code> node itself, ensuring
-that the <code class="docutils literal notranslate"><span class="pre">rst3</span></code> command includes “top-level” clones themselves.</p>
-<p>See <code class="docutils literal notranslate"><span class="pre">leo/plugins/example_rst_filter.py</span></code> for a complete example.</p>
-<p><strong>Filters can do practically anything</strong></p>
-<p>Filters can use the data in p.b, p.h, p.u, or p.gnx, but filters are not <em>limited</em> to the data in p. The has_cloned_parent filter shows that filters can access:</p>
+<p><strong>Filters can do anything</strong></p>
+<p>Filters can use the data in p.b, p.h, p.u, or p.gnx, but filters are not <em>limited</em> to the data in p. Filters can access:</p>
 <ul class="simple">
-<li><p>Any ancestor or descendant of node p.</p></li>
+<li><p>Any ancestor or descendant of position p.</p></li>
 <li><p>Any data accessible from c, that is, <em>all</em> the data in the outline, including cached data!</p></li>
 </ul>
-<p>Indeed, has_cloned_parent gets the current <code class="docutils literal notranslate"><span class="pre">&#64;rst</span></code> node using <code class="docutils literal notranslate"><span class="pre">root</span> <span class="pre">=</span> <span class="pre">c.rstCommands.root</span></code>.</p>
-<p>Moreover, filters can define special conventions, including:</p>
+<p>Filters can define their own conventions, including:</p>
 <ul class="simple">
 <li><p>Special-format comments embedded in p.b,</p></li>
 <li><p>Special-purpose headlines.</p></li>
 </ul>
-<p><strong>Summary</strong></p>
-<p>Plugins and scripts can define headline and body filters that alter the intermediate string.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">leo/plugins/example_rst_filter.py</span></code> plugin shows how to set up plugins that define custom filters.</p>
-<p>Filters have easy access to all data within the outline, including:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">c.rstCommands.root</span></code>, the <code class="docutils literal notranslate"><span class="pre">&#64;rst</span></code> node containing p.</p></li>
-<li><p>All ancestors or descendants of p.</p></li>
-<li><p>All data contained <em>anywhere</em> in the outline.</p></li>
-</ul>
-<p>The example filters shown above simulate the often-requested “half clone” feature.</p>
+<p><strong>Changing text depending on context</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">in_context</span><span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="n">Position</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">h</span> <span class="o">==</span> <span class="n">context</span> <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">parents</span><span class="p">())</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">body_filter</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Include bodies only in &#39;FAQ&#39; or &#39;Ref&#39; context.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">in_context</span><span class="p">(</span><span class="s1">&#39;FAQ&#39;</span><span class="p">):</span>
+        <span class="o">&lt;&lt;</span> <span class="k">return</span> <span class="err">`</span><span class="n">p</span><span class="o">.</span><span class="n">b</span><span class="err">`</span><span class="p">,</span> <span class="n">modified</span> <span class="k">for</span> <span class="n">the</span> <span class="n">FAQ</span> <span class="o">&gt;&gt;</span>
+    <span class="k">elif</span> <span class="n">in_context</span><span class="p">(</span><span class="s1">&#39;Reference&#39;</span><span class="p">):</span>
+        <span class="o">&lt;&lt;</span> <span class="k">return</span> <span class="err">`</span><span class="n">p</span><span class="o">.</span><span class="n">b</span><span class="err">`</span><span class="p">,</span> <span class="n">modified</span> <span class="k">for</span> <span class="n">the</span> <span class="n">Reference</span> <span class="o">&gt;&gt;</span>
+    <span class="k">return</span> <span class="s1">&#39;&#39;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">headline_filter</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Include headlines only in &#39;FAQ&#39; or &#39;Ref&#39; context.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;FAQ: </span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">h</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">in_context</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s1">&#39;FAQ&#39;</span><span class="p">)</span>
+        <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;Ref: </span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">h</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">in_context</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s1">&#39;Ref&#39;</span><span class="p">)</span>
+        <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Simulating half clones</strong></p>
+<p>Scripts may simulate half clones by ignoring children of clones in some contexts and processing those same children in other contexts. That’s all there is to it!</p>
 </section>
 <section id="theme-files">
-<h2><a class="toc-backref" href="#id13" role="doc-backlink">Theme files</a><a class="headerlink" href="#theme-files" title="Link to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">Theme files</a><a class="headerlink" href="#theme-files" title="Link to this heading">¶</a></h2>
 <p>A <strong>theme</strong> file is a .leo file containing appearance-related settings.  The leo/themes folder contains several examples.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">open-theme-file</span></code> command will show you the effect of a theme file without changing Leo in any way.</p>
 <p>To enable a theme, put the following setting in <code class="docutils literal notranslate"><span class="pre">myLeoSettings.leo</span></code>:</p>
@@ -616,7 +579,7 @@ that the <code class="docutils literal notranslate"><span class="pre">rst3</span
 </div>
 </section>
 <section id="input-modes">
-<h2><a class="toc-backref" href="#id14" role="doc-backlink">Input modes</a><a class="headerlink" href="#input-modes" title="Link to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">Input modes</a><a class="headerlink" href="#input-modes" title="Link to this heading">¶</a></h2>
 <p>Leo now allows you to specify input modes. You enter mode x with the <code class="docutils literal notranslate"><span class="pre">enter-x-mode</span></code> command. The purpose of a mode is to create different bindings for keys within a mode. Often plain keys are useful in input modes.</p>
 <p>You can specify modes with <code class="docutils literal notranslate"><span class="pre">&#64;mode</span></code> nodes in <code class="docutils literal notranslate"><span class="pre">leoSettings.leo</span></code>. <code class="docutils literal notranslate"><span class="pre">&#64;mode</span></code> nodes work just like <code class="docutils literal notranslate"><span class="pre">&#64;shortcuts</span></code> nodes, but in addition they have the side effect of creating the <code class="docutils literal notranslate"><span class="pre">enter-&lt;mode</span> <span class="pre">name&gt;-mode</span></code> command.</p>
 <p>Notes:</p>
@@ -636,7 +599,7 @@ that the <code class="docutils literal notranslate"><span class="pre">rst3</span
 <p>With all these options it should be possible to emulate the keyboard behavior of any other editor.</p>
 </section>
 <section id="ua-s-extensible-attribues-of-nodes">
-<h2><a class="toc-backref" href="#id15" role="doc-backlink">uA’s: extensible attribues of nodes</a><a class="headerlink" href="#ua-s-extensible-attribues-of-nodes" title="Link to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">uA’s: extensible attribues of nodes</a><a class="headerlink" href="#ua-s-extensible-attribues-of-nodes" title="Link to this heading">¶</a></h2>
 <p id="index-0">Leo’s .leo file format is extensible. The basis for extending .leo files are the v.unknownAttributes ivars of vnodes, also know as <strong>user attributes</strong>, uA’s for short. Leo translates between uA’s and xml attributes in the corresponding &lt;v&gt; elements in .leo files. Plugins may also use v.tempAttributes ivars to hold temporary information that will <em>not</em> be written to the .leo file. These two ivars are called <strong>attribute ivars</strong>.</p>
 <p>Attribute ivars must be Python dictionaries, whose keys are names of plugins and whose values are <em>other</em> dictionaries, called <strong>inner dictionaries</strong>, for exclusive use of each plugin.</p>
 <p>The v.u Python property allows plugins to get and set v.unknownAttributes easily:</p>
@@ -677,7 +640,7 @@ that the <code class="docutils literal notranslate"><span class="pre">rst3</span
 </ul>
 </section>
 <section id="decluttering-headlines">
-<h2><a class="toc-backref" href="#id16" role="doc-backlink">Decluttering headlines</a><a class="headerlink" href="#decluttering-headlines" title="Link to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id17" role="doc-backlink">Decluttering headlines</a><a class="headerlink" href="#decluttering-headlines" title="Link to this heading">¶</a></h2>
 <p><strong>Decluttering</strong> replaces controls custom formatting of headlines, including:</p>
 <ul class="simple">
 <li><p>Hiding or changing headline text,</p></li>
@@ -709,7 +672,7 @@ You specify decluttering rulesets in the body text of:</p>
 Decluttering affects only those headlines that match a rule pattern.</p>
 <p>The following section shows some example rulesets. Later sections discuss decluttering commands, patterns and styles in more detail.</p>
 <section id="examples">
-<h3><a class="toc-backref" href="#id17" role="doc-backlink">Examples</a><a class="headerlink" href="#examples" title="Link to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id18" role="doc-backlink">Examples</a><a class="headerlink" href="#examples" title="Link to this heading">¶</a></h3>
 <p>Here are some examples of decluttering rulesets:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Hide org-mode tags and bold the headline.
 RULE :([\w_@]+:)+\s*$
@@ -728,7 +691,7 @@ REPLACE …\1\2
 </div>
 </section>
 <section id="rule-replacement-lines">
-<h3><a class="toc-backref" href="#id18" role="doc-backlink">Rule &amp; replacement lines</a><a class="headerlink" href="#rule-replacement-lines" title="Link to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id19" role="doc-backlink">Rule &amp; replacement lines</a><a class="headerlink" href="#rule-replacement-lines" title="Link to this heading">¶</a></h3>
 <p>All rulesets start with a <strong>rule line</strong> of the form:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">RULE</span> <span class="o">&lt;</span><span class="n">regular</span> <span class="n">expression</span><span class="o">&gt;</span>
 </pre></div>
@@ -754,7 +717,7 @@ REPLACE …\1\2
 </ul>
 </section>
 <section id="style-lines">
-<h3><a class="toc-backref" href="#id19" role="doc-backlink">Style lines</a><a class="headerlink" href="#style-lines" title="Link to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id20" role="doc-backlink">Style lines</a><a class="headerlink" href="#style-lines" title="Link to this heading">¶</a></h3>
 <p>Leo applies style lines only if they appear in a ruleset that matches a headline. Style lines do the following…</p>
 <p>Add an icon to the headline:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ICON</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">icon</span>
@@ -786,7 +749,7 @@ REPLACE …\1\2
 </section>
 </section>
 <section id="translating-leo-s-menus-and-messages">
-<h2><a class="toc-backref" href="#id20" role="doc-backlink">Translating Leo’s menus and messages</a><a class="headerlink" href="#translating-leo-s-menus-and-messages" title="Link to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id21" role="doc-backlink">Translating Leo’s menus and messages</a><a class="headerlink" href="#translating-leo-s-menus-and-messages" title="Link to this heading">¶</a></h2>
 <p>It is easy to translate Leo’s menu strings: simply create an <code class="docutils literal notranslate"><span class="pre">&#64;menus</span></code> tree in <code class="docutils literal notranslate"><span class="pre">leoSettings.leo</span></code> or <code class="docutils literal notranslate"><span class="pre">myLeoSettings.leo</span></code> that contains the translated menu names.</p>
 <p><strong>New in Leo 4.4.8</strong>: Leo now contains support for translating messages sent to Leo’s log:</p>
 <ul class="simple">
@@ -848,7 +811,7 @@ REPLACE …\1\2
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright 1997-2025, Edward K. Ream.
-      Last updated on October 11, 2025.
+      Last updated on November 23, 2025.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
     </div>
   </body>

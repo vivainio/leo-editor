@@ -62,7 +62,7 @@
 <li><p><a class="reference internal" href="#how-can-i-use-clones-to-reorganize-an-outline" id="id11">How can I use clones to reorganize an outline?</a></p></li>
 <li><p><a class="reference internal" href="#how-does-ekr-use-clones" id="id12">How does EKR use clones?</a></p></li>
 <li><p><a class="reference internal" href="#how-does-leo-handle-clone-conflicts" id="id13">How does Leo handle clone conflicts?</a></p></li>
-<li><p><a class="reference internal" href="#is-there-a-way-to-clone-only-part-of-a-tree" id="id14">Is there a way to clone only part of a tree?</a></p></li>
+<li><p><a class="reference internal" href="#how-can-leonine-scripts-simulate-half-clones" id="id14">How can Leonine scripts simulate half clones?</a></p></li>
 <li><p><a class="reference internal" href="#when-is-deleting-a-node-dangerous" id="id15">When is deleting a node dangerous?</a></p></li>
 <li><p><a class="reference internal" href="#when-may-i-delete-clones-safely" id="id16">When may I delete clones safely?</a></p></li>
 <li><p><a class="reference internal" href="#why-doesn-t-leo-support-cross-outline-clones" id="id17">Why doesn’t Leo support cross-outline clones?</a></p></li>
@@ -405,13 +405,34 @@ node to the “recent code” tree.</p>
 <p>Thus, if C appears in x.leo, y.py and z.py, Leo will choose the value for C in x.py or y.py, depending on which &#64;&lt;file&gt; node appears later in the outline.</p>
 <p><strong>Note</strong>: Whenever Leo detects multiple values for C when opening an outline, Leo creates a “Recovered nodes” tree. This tree contains all the various values for C, nicely formatted so that it is easy to determine where the differences are.</p>
 </section>
-<section id="is-there-a-way-to-clone-only-part-of-a-tree">
-<h3><a class="toc-backref" href="#id14" role="doc-backlink">Is there a way to clone only part of a tree?</a><a class="headerlink" href="#is-there-a-way-to-clone-only-part-of-a-tree" title="Link to this heading">¶</a></h3>
-<p>Yes, there are several ways for scripts to simulate the often-requested “half-clone” features:</p>
+<section id="how-can-leonine-scripts-simulate-half-clones">
+<h3><a class="toc-backref" href="#id14" role="doc-backlink">How can Leonine scripts simulate half clones?</a><a class="headerlink" href="#how-can-leonine-scripts-simulate-half-clones" title="Link to this heading">¶</a></h3>
+<p>All clones of the same node share the same VNode, and thus they all have exactly the same headline, body text, and children. Therefore, changing p.b or p.h, or adding a child to one clone modifies the underlying VNode, reflected instantly in all other clones.</p>
+<p>However, Leo’s users often request a vague enhancement informally known as “half clones.” We can make this ill-defined notion precise by saying that we often want to treat clones differently depending on <strong>context</strong>, the <strong>Position</strong> of that clone within the entire outline.</p>
+<p><strong>Using context in scripts</strong></p>
+<p>Scripts are not limited to using the data in <cite>p.v</cite>, that is, <cite>p.b</cite>, <cite>p.h</cite>, <cite>p.u</cite>, or <cite>p.gnx</cite>.  Scripts may access:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://groups.google.com/g/leo-editor/c/_NOfUwJPNng/m/wkl8i-KoBgAJ">This post</a> explains the general idea.</p></li>
-<li><p>The <a class="reference external" href="unl:gnx://leoPy.leo#ekr.20210329114352.1">example_rst_filter.py plugin</a> contains example code.</p></li>
+<li><p>Any ancestor or descendant of <cite>p</cite>.</p></li>
+<li><p>Any data accessible from <cite>c</cite>, that is, <em>all</em> the data in the outline, including cached data!</p></li>
 </ul>
+<p>Scripts can define their own conventions, including:</p>
+<ul class="simple">
+<li><p>Special-format comments embedded in <cite>p.b</cite>,</p></li>
+<li><p>Special-purpose conventions for headlines.</p></li>
+</ul>
+<p><strong>Changing text depending on context</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">in_context</span><span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="n">Position</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">h</span> <span class="o">==</span> <span class="n">context</span> <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">parents</span><span class="p">())</span>
+
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">all_positions</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">in_context</span><span class="p">(</span><span class="s1">&#39;FAQ&#39;</span><span class="p">):</span>
+        <span class="n">handle_faq</span> <span class="n">node</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">in_context</span><span class="p">(</span><span class="s1">&#39;Reference&#39;</span><span class="p">):</span>
+        <span class="n">handle_ref_node</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Simulating half clones</strong></p>
+<p>Scripts may simulate half clones by ignoring children (of clones) in some contexts and processing those <em>same</em> children in other contexts. That’s all there is to it!</p>
 </section>
 <section id="when-is-deleting-a-node-dangerous">
 <h3><a class="toc-backref" href="#id15" role="doc-backlink">When is deleting a node dangerous?</a><a class="headerlink" href="#when-is-deleting-a-node-dangerous" title="Link to this heading">¶</a></h3>
@@ -1976,7 +1997,7 @@ The default is UTF-8 (case not important).</p>
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright 1997-2025, Edward K. Ream.
-      Last updated on October 11, 2025.
+      Last updated on November 23, 2025.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
     </div>
   </body>

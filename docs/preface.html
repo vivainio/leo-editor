@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>A Brief Summary of Leo &#8212; Leo 6.8.7 documentation</title>
+    <title>Technical Overview of Leo &#8212; Leo 6.8.7 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/classic.css?v=2bf1fcf8" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=a1d61795" />
@@ -29,7 +29,7 @@
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="leo_toc.html">Leo 6.8.7 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="preliminaries.html" accesskey="U">Preliminaries</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">A Brief Summary of Leo</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Technical Overview of Leo</a></li> 
       </ul>
     </div>  
 
@@ -38,41 +38,20 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="a-brief-summary-of-leo">
-<h1>A Brief Summary of Leo<a class="headerlink" href="#a-brief-summary-of-leo" title="Link to this heading">¶</a></h1>
-<blockquote>
-<div><p>“Word outlines are very useful. But Leo makes Word look like a clunky toy.”—Joe Orr</p>
-</div></blockquote>
-<p>Leo is a fundamentally different way of using and organizing data, programs and scripts. Leo has been under active development for 20+ years with an active <a class="reference external" href="https://groups.google.com/forum/#!forum/leo-editor">group of developers and users</a>.</p>
-<p><strong>Leo is:</strong></p>
+  <section id="technical-overview-of-leo">
+<h1>Technical Overview of Leo<a class="headerlink" href="#technical-overview-of-leo" title="Link to this heading">¶</a></h1>
+<p>Leo <em>completely integrates</em> Python scripting and outlines, creating a fundamentally different way of using and organizing data, and computer programs. Leo has been under active development for 45+ years with an active <a class="reference external" href="https://groups.google.com/forum/#!forum/leo-editor">group of developers and users</a>.</p>
 <ul class="simple">
-<li><p>A fully-featured IDE, with many features inspired by <a class="reference external" href="https://www.gnu.org/software/emacs/">Emacs</a>.</p></li>
-<li><p>An outliner. Everything in Leo is an outline.</p></li>
-<li><p>A data manager and personal information manager.</p></li>
-<li><p>A powerful scripting environment.</p></li>
-<li><p>A tool for organizing and studying computer code.</p></li>
-<li><p>Extensible via a simple plugin architecture.</p></li>
-<li><p>A tool that plays well with Vim and Emacs.</p></li>
-<li><p>Written in 100% pure Python.</p></li>
-</ul>
-<p><strong>Leo’s unique features</strong></p>
-<p>Leo <em>completely integrates</em> Python scripting and outlines. Simulating the following features in Vim, Emacs or Eclipse is possible, just as it is possible to simulate Python in assembly language…</p>
-<ul class="simple">
-<li><p>All commands and scripts have easy access to outline structure via a simple <a class="reference external" href="tutorial-scripting.html">Python API</a>. <br />
-For example, p.b is the body text of the selected outline node. <br />
-Scripts have full access to all of Leo’s sources.</p></li>
-<li><p><a class="reference external" href="tutorial-pim.html">Clones</a> create multiple views of an outline.  <br />
-Leo’s underlying data is a <a class="reference external" href="https://en.wikipedia.org/wiki/Directed_acyclic_graph">Directed Acyclic Graphs</a>.  <br />
-As a result, Leo organizes data in completely new ways.</p></li>
-<li><p>Leo’s <a class="reference external" href="html/commands.html#clone-find-commands">clone find commands</a> enable the <a class="reference external" href="appendices.html#the-leonine-way-to-refactor-code">Leonine way to refactor programs</a>.</p></li>
+<li><p>Scripts have complete access to outline structure via a simple <a class="reference external" href="tutorial-scripting.html">Python API</a>. Examples:<br />
+<cite>c.p.b</cite> is the body text of the selected outline node. <br />
+<cite>for p in c.all_nodes()</cite> iterates p through all the nodes of the outline.</p></li>
+<li><p>Unlike standard tree-based editors, Leo allows a <strong>cloned</strong> node to appear in multiple places simultaneously. Editing a node in one location updates it everywhere. <a class="reference external" href="tutorial-pim.html">Clones</a> allow you to create multidimensional views of any data, including source code.</p></li>
+<li><p>Leo’s <a class="reference external" href="html/commands.html#clone-find-commands">clone find commands</a> create <em>organized</em> clones of all the nodes that match the search criteria. These data create a <a class="reference external" href="appendices.html#the-leonine-way-to-refactor-code">new way to refactor computer programs</a>.</p></li>
 <li><p>Scripts and programs can be composed from outlines using <a class="reference external" href="tutorial-basics.html#markup">outline-oriented directives</a>.</p></li>
-<li><p>Importers convert flat text into outlines.</p></li>
+<li><p>Importers convert flat text files into outlines.</p></li>
 <li><p>&#64;button scripts apply scripts to outline data.</p></li>
 </ul>
-<p>These features combine to create a <a class="reference external" href="leonine-world.html">Leonine</a> way of programming and
-organizing. You won’t learn all about Leo in a day or two. <a class="reference external" href="tutorial.html">Leo’s
-tutorial</a> explains the basic features. You can learn more advanced
-features later. Please <a class="reference external" href="https://groups.google.com/forum/#!forum/leo-editor">ask for help</a> immediately if you get stuck.</p>
+<p>These features combine to create a new (<a class="reference external" href="leonine-world.html">Leonine</a>) way of organizing complex data, including computer programs.</p>
 </section>
 
 
@@ -120,12 +99,12 @@ features later. Please <a class="reference external" href="https://groups.google
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="leo_toc.html">Leo 6.8.7 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="preliminaries.html" >Preliminaries</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">A Brief Summary of Leo</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Technical Overview of Leo</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright 1997-2025, Edward K. Ream.
-      Last updated on October 11, 2025.
+      Last updated on November 23, 2025.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
     </div>
   </body>
