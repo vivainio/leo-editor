@@ -29581,19 +29581,19 @@ Plugins or scripts may define two functions: a **headline filter** and a **body 
     c.rstCommands.register_body_filter(body_filter)
     c.rstCommands.register_headline_filter(headline_filter)
 
-**Filters can do anything**
+**Using context in filters**
 
-Filters can use the data in p.b, p.h, p.u, or p.gnx, but filters are not *limited* to the data in p. Filters can access:
+Filters are not limited to using `p.b`, `p.h`, `p.u`, or `p.gnx`. Filters may access:
 
 - Any ancestor or descendant of position p.
 - Any data accessible from c, that is, *all* the data in the outline, including cached data!
 
 Filters can define their own conventions, including:
 
-- Special-format comments embedded in p.b,
+- Special-format comments embedded in `p.b`,
 - Special-purpose headlines.
 
-**Changing text depending on context**
+For example::
 
 .. code-block:: python
 
@@ -29603,9 +29603,9 @@ Filters can define their own conventions, including:
     def body_filter(c, p):
         """Include bodies only in 'FAQ' or 'Ref' context."""
         if in_context('FAQ'):
-            &lt;&lt; return `p.b`, modified for the FAQ &gt;&gt;
+            return do_faq(p)  # Return p.b modified for the FAQ
         elif in_context('Reference'):
-            &lt;&lt; return `p.b`, modified for the Reference &gt;&gt;
+            return do_ref(p) # return p.b modified for the User Ref.
         return ''
 
     def headline_filter(c, p):
@@ -29615,10 +29615,10 @@ Filters can define their own conventions, including:
             else f"Ref: {p.h}" if in_context(p, 'Ref')
             else ''
         )
-     
+
 **Simulating half clones**
 
-Scripts may simulate half clones by ignoring children of clones in some contexts and processing those same children in other contexts. That's all there is to it!
+Filters may simulate half clones by ignoring children of clones in some contexts and processing those same children in other contexts. That's all there is to it!
 </t>
 <t tx="ekr.20210405100137.1058">https://github.com/leo-editor/leo-editor/issues/1806</t>
 <t tx="ekr.20210405100137.1061">https://github.com/leo-editor/leo-editor/issues/1808</t>
