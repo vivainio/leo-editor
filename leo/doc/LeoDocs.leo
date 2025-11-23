@@ -2528,6 +2528,7 @@
 <v t="ekr.20111019104425.15904"><vh>&lt;&lt; Leo Quotes &gt;&gt;</vh></v>
 <v t="ekr.20250317133518.1"></v>
 <v t="ekr.20210402080752.1"></v>
+<v t="ekr.20050830074815.1"></v>
 </v>
 <v t="ekr.20251123054520.1"><vh>Thomas</vh></v>
 </vnodes>
@@ -3922,6 +3923,9 @@ See the section &lt;&lt; How Leo implements unlimited undo &gt;&gt; in ``leoUndo
 "Edward... you've come up with perhaps the most powerful new concept in code manipulation since VI and Emacs.---David McNab
 
 "Leo is...a revolutionary step in the right direction for programming."---Brian Takita
+
+"Leo makes managing long, complex code bases many many times more easy and feasible than anything else I've tried. Leo also makes trying experimental code way easier than anything else (e.g., running a script to test out some programming issue).
+I use Leo every day, all the time,  for non-programming things. I don't see how I could replace it if it somehow vanished."---Thomas Passin
 </t>
 <t tx="ekr.20050830074815.10">"I am extremely impressed at how stable and useful Leo appears to be."---Marcus
 A. Martin
