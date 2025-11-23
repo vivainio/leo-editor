@@ -29593,7 +29593,7 @@ Filters can define their own conventions, including:
 - Special-format comments embedded in `p.b`,
 - Special-purpose headlines.
 
-For example::
+For example:
 
 .. code-block:: python
 
@@ -29601,15 +29601,13 @@ For example::
         return any(z.h == context for z in p.parents())
 
     def body_filter(c, p):
-        """Include bodies only in 'FAQ' or 'Ref' context."""
-        if in_context('FAQ'):
-            return do_faq(p)  # Return p.b modified for the FAQ
-        elif in_context('Reference'):
-            return do_ref(p) # return p.b modified for the User Ref.
-        return ''
+        return (
+            do_faq(p) if if in_context(p, 'FAQ')
+            else do_ref(p) if in_context(p, 'Ref')
+            else ''
+        )
 
     def headline_filter(c, p):
-        """Include headlines only in 'FAQ' or 'Ref' context."""
         return (
             f"FAQ: {p.h}" if in_context(p, 'FAQ')
             else f"Ref: {p.h}" if in_context(p, 'Ref')

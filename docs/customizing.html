@@ -531,35 +531,24 @@ options, <code class="docutils literal notranslate"><span class="pre">rst3</span
 <li><p>Special-purpose headlines.</p></li>
 </ul>
 <p>For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">code</span><span class="o">-</span><span class="n">block</span><span class="p">::</span> <span class="n">python</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">in_context</span><span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="n">Position</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">h</span> <span class="o">==</span> <span class="n">context</span> <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">parents</span><span class="p">())</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">body_filter</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">do_faq</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">if</span> <span class="k">if</span> <span class="n">in_context</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s1">&#39;FAQ&#39;</span><span class="p">)</span>
+        <span class="k">else</span> <span class="n">do_ref</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">if</span> <span class="n">in_context</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s1">&#39;Ref&#39;</span><span class="p">)</span>
+        <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+    <span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">headline_filter</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;FAQ: </span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">h</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">in_context</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s1">&#39;FAQ&#39;</span><span class="p">)</span>
+        <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;Ref: </span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">h</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">in_context</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s1">&#39;Ref&#39;</span><span class="p">)</span>
+        <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+    <span class="p">)</span>
 </pre></div>
 </div>
-<blockquote>
-<div><dl>
-<dt>def in_context(p: Position, context: str) -&gt; bool:</dt><dd><p>return any(z.h == context for z in p.parents())</p>
-</dd>
-<dt>def body_filter(c, p):</dt><dd><p>“””Include bodies only in ‘FAQ’ or ‘Ref’ context.”””
-if in_context(‘FAQ’):</p>
-<blockquote>
-<div><p>return do_faq(p)  # Return p.b modified for the FAQ</p>
-</div></blockquote>
-<dl class="simple">
-<dt>elif in_context(‘Reference’):</dt><dd><p>return do_ref(p) # return p.b modified for the User Ref.</p>
-</dd>
-</dl>
-<p>return ‘’</p>
-</dd>
-<dt>def headline_filter(c, p):</dt><dd><p>“””Include headlines only in ‘FAQ’ or ‘Ref’ context.”””
-return (</p>
-<blockquote>
-<div><p>f”FAQ: {p.h}” if in_context(p, ‘FAQ’)
-else f”Ref: {p.h}” if in_context(p, ‘Ref’)
-else ‘’</p>
-</div></blockquote>
-<p>)</p>
-</dd>
-</dl>
-</div></blockquote>
 <p><strong>Simulating half clones</strong></p>
 <p>Filters may simulate half clones by ignoring children of clones in some contexts and processing those same children in other contexts. That’s all there is to it!</p>
 </section>
