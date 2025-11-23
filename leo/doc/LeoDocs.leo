@@ -29583,14 +29583,14 @@ Plugins or scripts may define two functions: a **headline filter** and a **body 
 
 **Using context in filters**
 
-Filters are not limited to using `p.b`, `p.h`, `p.u`, or `p.gnx`. Filters may access:
+Filters are not limited to using ``p.b``, ``p.h``, ``p.u``, or ``p.gnx``. Filters may access:
 
 - Any ancestor or descendant of position p.
 - Any data accessible from c, that is, *all* the data in the outline, including cached data!
 
 Filters can define their own conventions, including:
 
-- Special-format comments embedded in `p.b`,
+- Special-format comments embedded in ``p.b``,
 - Special-purpose headlines.
 
 For example:
