@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Technical Overview of Leo &#8212; Leo 6.8.7 documentation</title>
+    <title>Technical introduction to Leo &#8212; Leo 6.8.7 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/classic.css?v=2bf1fcf8" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=a1d61795" />
@@ -29,7 +29,7 @@
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="leo_toc.html">Leo 6.8.7 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="preliminaries.html" accesskey="U">Preliminaries</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Technical Overview of Leo</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Technical introduction to Leo</a></li> 
       </ul>
     </div>  
 
@@ -38,20 +38,16 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="technical-overview-of-leo">
-<h1>Technical Overview of Leo<a class="headerlink" href="#technical-overview-of-leo" title="Link to this heading">¶</a></h1>
-<p>Leo <em>completely integrates</em> Python scripting and outlines, creating a fundamentally different way of using and organizing data, and computer programs. Leo has been under active development for 45+ years with an active <a class="reference external" href="https://groups.google.com/forum/#!forum/leo-editor">group of developers and users</a>.</p>
-<ul class="simple">
-<li><p>Scripts have complete access to outline structure via a simple <a class="reference external" href="tutorial-scripting.html">Python API</a>. Examples:<br />
-<cite>c.p.b</cite> is the body text of the selected outline node. <br />
-<cite>for p in c.all_nodes()</cite> iterates p through all the nodes of the outline.</p></li>
-<li><p>Unlike standard tree-based editors, Leo allows a <strong>cloned</strong> node to appear in multiple places simultaneously. Editing a node in one location updates it everywhere. <a class="reference external" href="tutorial-pim.html">Clones</a> allow you to create multidimensional views of any data, including source code.</p></li>
-<li><p>Leo’s <a class="reference external" href="html/commands.html#clone-find-commands">clone find commands</a> create <em>organized</em> clones of all the nodes that match the search criteria. These data create a <a class="reference external" href="appendices.html#the-leonine-way-to-refactor-code">new way to refactor computer programs</a>.</p></li>
-<li><p>Scripts and programs can be composed from outlines using <a class="reference external" href="tutorial-basics.html#markup">outline-oriented directives</a>.</p></li>
-<li><p>Importers convert flat text files into outlines.</p></li>
-<li><p>&#64;button scripts apply scripts to outline data.</p></li>
-</ul>
-<p>These features combine to create a new (<a class="reference external" href="leonine-world.html">Leonine</a>) way of organizing complex data, including computer programs.</p>
+  <section id="technical-introduction-to-leo">
+<h1>Technical introduction to Leo<a class="headerlink" href="#technical-introduction-to-leo" title="Link to this heading">¶</a></h1>
+<p>Leo puts hierarchy (outline structure) at the center of everything. This structure helps you create, manage, and revise any kind of document, including computer programs, documentation, to-do lists, and novels. Leo can write external files automatically from select parts of the outline.</p>
+<p>Leo outlines may contain programs in any programming or markup language, including Python, C++, JavaScript, Rust, Markdown, and restructuredText.</p>
+<p><strong>Multiple views of data</strong></p>
+<p>Writers and programmers often want to view or manipulate the same text in different ways, depending on context. Leo’s <a class="reference external" href="tutorial-pim.html">clones</a> lets you create multiple different views of data within the <em>same</em> outline. You can organize code by functionality in one view and by file in another. You can see documentation from as many points of view as you like.</p>
+<p><strong>Integrated Python Scripting</strong></p>
+<p>Leo is fully scriptable in Python. Any outline node can contain a Python script that accesses the outline’s data directly. Such <a class="reference external" href="leonine-world.html">leonine</a> scripts also have full access to all of Leo’s source code via a straightforward <a class="reference external" href="tutorial-scripting.html">Python API</a>. Leonine scripts and plugins can create new Leo commands. See Leo’s <a class="reference external" href="tutorial-basics.html#scripting-basics">scripting basics chapter</a>  for more details.</p>
+<p><strong>Summary</strong></p>
+<p>Traditional editors <em>simulate</em> hierarchy through comments, naming conventions, and the hierarchy of external files. In contrast, Leo puts hierarchy (outline structure) at the center of everything. As a result, Leo excels in managing complex text, including computer programs.</p>
 </section>
 
 
@@ -99,12 +95,12 @@
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="leo_toc.html">Leo 6.8.7 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="preliminaries.html" >Preliminaries</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Technical Overview of Leo</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Technical introduction to Leo</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright 1997-2025, Edward K. Ream.
-      Last updated on November 23, 2025.
+      Last updated on December 04, 2025.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
     </div>
   </body>
