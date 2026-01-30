@@ -33340,11 +33340,47 @@ Leo is an [IDE, outliner and PIM](https://leo-editor.github.io/leo-editor/prefac
 - `PR #4456`_: Added leo_to_html_outline_viewer.py plugin.
 
 </t>
-<t tx="ekr.20251204122149.1">.. Use the link-pr abbreviation to create these links.
-
+<t tx="ekr.20251204122149.1">.. _`PR #4464`: https://github.com/leo-editor/leo-editor/pull/4464
+.. _`PR #4467`: https://github.com/leo-editor/leo-editor/pull/4467
+.. _`PR #4477`: https://github.com/leo-editor/leo-editor/pull/4477
 .. _`PR #4484`: https://github.com/leo-editor/leo-editor/pull/4484
+.. _`PR #4486`: https://github.com/leo-editor/leo-editor/pull/4486
+.. _`PR #4487`: https://github.com/leo-editor/leo-editor/pull/4487
+.. _`PR #4490`: https://github.com/leo-editor/leo-editor/pull/4490
+.. _`PR #4498`: https://github.com/leo-editor/leo-editor/pull/4498
+.. _`PR #4502`: https://github.com/leo-editor/leo-editor/pull/4502
+.. _`PR #4503`: https://github.com/leo-editor/leo-editor/pull/4503
 
-- `PR #4456`_: Add check_leo script.
+- `PR #4464`_ and `PR #0000`_: Fix abbreviation bugs.
+- `PR #4467`_: Remove support for leoflexx and --gui=browser.
+- `PR #4477`_: Fix colorizer bug.
+- `PR #4484`_: Add check_leo script.
+- `PR #4486`_: Improve the flatten-outline-to-node command.
+- `PR #4490`_, Add support for ruff format and retire Leo's legacy beautier.
+  This PR summarizes several other PRs relating to this project.
+- `PR #4498`_: Fix bug: the external files controller leaves ``c.p`` unchanged.
+- `PR #4487`_: Reformat Leo using ruff format.
+- `PR #4503`_ and `PR #4506`_: Add ``gdc.summary_diff_two_revs`` script helper.
+
+**Add settings for ruff format**
+
+The defaults are shown below:
+
+- Add ``@bool write-black-sentinels = False``
+- Add ``@int black-line-length = None``
+- Add ``@string black-toml = None``
+
+**Retire settings for Leo's legacy beautifier**
+
+- Retire ``@bool beautify-allow-joined-strings``
+- Retire ``@int beautify-max-join-line-length``
+- Retire ``@int beautify-max-split-line-length``
+
+**Minor breaking API change**
+
+- Retire two Commands methods: ``c.goToNextHistory`` and ``c.goToPrevHistory``.
+  Use ``c.goNextVisitedNode`` and ``c.goPrevVisitedNode`` instead.
+
 </t>
 <t tx="ekr.20251204122305.1">Leo https://leo-editor.github.io/leo-editor/ 6.8.7 is now available on [GitHub](https://github.com/leo-editor/leo-editor/releases) and [pypi](https://pypi.org/project/leo/).
 
@@ -33352,8 +33388,12 @@ Leo is an [outline-oriented text editor](https://leo-editor.github.io/leo-editor
 
 **The highlights of Leo 6.8.8**
 
-- PR #4456: Add check_leo script.
-- Fix several other minor bugs. See the `What's new` section for details.
+- Replace Leo's legacy beautifier commands by full support for
+  [ruff format](https://docs.astral.sh/ruff/formatter/).
+- Remove support for leoflexx and --gui=browser.
+- Add check_leo.py script.
+- Add gdc.summary_diff_two_revs script helper.
+- Fix several minor bugs.
 
 **Links**
 

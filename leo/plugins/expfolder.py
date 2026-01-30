@@ -1,8 +1,8 @@
-#@+leo-ver=5-thin
-#@+node:ajones.20070122153625: * @file ../plugins/expfolder.py
-#@+<< docstring >>
-#@+node:ajones.20070122153625.1: ** << docstring >> (expfolder.py)
-""" Adds @expfolder nodes that represent folders in the file system.
+# @+leo-ver=5-thin
+# @+node:ajones.20070122153625: * @file ../plugins/expfolder.py
+# @+<< docstring >>
+# @+node:ajones.20070122153625.1: ** << docstring >> (expfolder.py)
+"""Adds @expfolder nodes that represent folders in the file system.
 
 The double-click-icon-box command on an @expfolder node reads the files in
 the directory at the path specified and creates child nodes for each file
@@ -22,7 +22,7 @@ must load before the expfolder plugin. This can be set using the Plugin
 Manager's Plugin Load Order pane.
 
 """
-#@-<< docstring >>
+# @-<< docstring >>
 
 import os
 import os.path
@@ -32,8 +32,9 @@ from leo.plugins.textnode import savetextnode
 
 textexts = []
 
-#@+others
-#@+node:ajones.20070122154835: ** init (expfolder.py)
+
+# @+others
+# @+node:ajones.20070122154835: ** init (expfolder.py)
 def init():
     """Return True if the plugin has loaded successfully."""
     g.plugin_signon(__name__)
@@ -47,14 +48,18 @@ def init():
     except ConfigParser.NoSectionError:
         pass
     return True
-#@+node:ajones.20070122153625.2: ** on_icondclick
+
+
+# @+node:ajones.20070122153625.2: ** on_icondclick
 def on_icondclick(tag, keywords):
     c = keywords.get("c")
     p = keywords.get("p")
     h = p.h
     if g.match_word(h, 0, "@expfolder"):
         if p.hasChildren():
-            result = g.app.gui.runAskYesNoDialog(c, "Reread?", "Reread contents of folder " + h[11:] + "?")
+            result = g.app.gui.runAskYesNoDialog(
+                c, "Reread?", "Reread contents of folder " + h[11:] + "?"
+            )
             if result == "no":
                 return
             kids = []
@@ -95,7 +100,9 @@ def on_icondclick(tag, keywords):
             c.setHeadString(pn, "@expfolder " + d)
         c.expandSubtree(p)
         c.redraw()
-#@-others
-#@@language python
-#@@tabwidth -4
-#@-leo
+
+
+# @-others
+# @@language python
+# @@tabwidth -4
+# @-leo
