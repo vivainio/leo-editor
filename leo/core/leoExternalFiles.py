@@ -529,6 +529,11 @@ class ExternalFilesController:
                 self.files = [z for z in self.files if z != ef]
                 return
 
+    # @+node:felix.20260401212949.1: *4* efc.reloadSettings
+    def reloadSettings(self) -> None:
+        """Clear the enabled_d dict"""
+        self.enabled_d = {}
+
     # @+node:ekr.20150404092538.1: *4* efc.shut_down
     def shut_down(self) -> None:
         """
@@ -558,7 +563,7 @@ class ExternalFilesController:
         if not c.config.getBool('raise-file-update-dialogs', default=False):
             return 'yes'
 
-        is_leo = path.endswith(('.leo', '.db'))
+        is_leo = path.endswith(('.leo', '.db', '.leojs'))
         is_external_file = not is_leo
 
         # Create the message. Concatenate strings to make finding this message easier.
