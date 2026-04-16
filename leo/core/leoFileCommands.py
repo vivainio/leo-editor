@@ -19,7 +19,7 @@ import shutil
 import sqlite3
 import tempfile
 import time
-from typing import Any, IO, Iterable, Optional, Union, TYPE_CHECKING
+from typing import Any, IO, Iterable, Optional, TYPE_CHECKING
 import zipfile
 import xml.etree.ElementTree as ElementTree
 import xml.sax
@@ -151,7 +151,7 @@ class FastRead:
         return v
 
     # @+node:ekr.20210316035646.1: *3* fast.readFileFromClipboard
-    def readFileFromClipboard(self, s_or_b: Union[bytes, str]) -> Optional[VNode]:
+    def readFileFromClipboard(self, s_or_b: bytes | str) -> Optional[VNode]:
         """
         Recreate a file from a string s_or_b, and return its hidden vnode.
 
@@ -174,7 +174,11 @@ class FastRead:
 
     bad_path_dict: dict[str, bool] = {}
 
-    def readWithElementTree(self, path: str, s_or_b: Union[str, bytes]) -> tuple[VNode, Value]:
+    def readWithElementTree(
+        self,
+        path: str,
+        s_or_b: str | bytes,
+    ) -> tuple[VNode, Value]:
         contents = g.toUnicode(s_or_b)
         table = contents.maketrans(self.translate_dict)  # type:ignore #1510.
         contents = contents.translate(table)  # #1036, #1046.
@@ -1277,9 +1281,13 @@ class FileCommands:
         oldGnxDict = self.gnxDict
         self.gnxDict = {}  # Fix #943
         try:
-            # This encoding must match the encoding used in outline_to_clipboard_string.
-            s_bytes = g.toEncodedString(s, self.leo_file_encoding, reportErrors=True)
-            v = FastRead(c, {}).readFileFromClipboard(s_bytes)
+            if s.lstrip().startswith("{"):
+                # Maybe JSON
+                v = FastRead(c, {}).readFileFromJsonClipboard(s)
+            else:
+                # This encoding must match the encoding used in outline_to_clipboard_string.
+                s_bytes = g.toEncodedString(s, self.leo_file_encoding, reportErrors=True)
+                v = FastRead(c, {}).readFileFromClipboard(s_bytes)
             if not v:
                 g.es("the clipboard is not valid ", color="blue")
                 return None

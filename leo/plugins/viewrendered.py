@@ -675,10 +675,7 @@ class ViewRenderedController(QtWidgets.QWidget):  # type:ignore
         self.locked = False
         self.pdf_qwv = None  # The singleton qwv instance, with support for pdf.
         self.qwv = None  # The singleton qwv instance.
-        self.scrollbar_pos_dict: dict[
-            VNode, Position
-        ] = {}  # Keys are vnodes, values are positions.
-        # User settings.
+        self.scrollbar_pos_dict: dict[VNode, int] = {}
         self.reloadSettings()
         self.node_changed = True
         # Init.
@@ -945,7 +942,6 @@ class ViewRenderedController(QtWidgets.QWidget):  # type:ignore
     # @+node:ekr.20110320120020.14486: *5* vr.embed_widget
     def embed_widget(self, w: QWidget) -> None:
         """Embed widget w in the layout."""
-
         assert w == self.w, g.callers()  # Invariant.
 
         # Delete all previous widgets.
