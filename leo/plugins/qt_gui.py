@@ -1195,10 +1195,27 @@ class LeoQtGui(leoGui.LeoGui):
         }
         weight_val = d.get(weight.lower(), Weight.Normal)
         italic = slant == 'italic'
-        if not family:
-            family = 'DejaVu Sans Mono'
+        # Build the family list for Qt's font fallback mechanism.
+        # Split comma-separated names so Qt can pick the first installed one.
+        if family:
+            families = [f.strip() for f in family.split(',') if f.strip()]
+        else:
+            families = []
+        if sys.platform == 'win32':
+            # DejaVu Sans Mono (the Leo default) is rarely installed on Windows.
+            # Prefer modern fonts that render well on high-DPI displays.
+            windows_defaults = ['Cascadia Code', 'Cascadia Mono', 'Consolas', 'Courier New']
+            # Append Windows defaults after any user-specified families so they
+            # act as fallbacks when the requested font isn't installed.
+            for f in windows_defaults:
+                if f not in families:
+                    families.append(f)
+        if not families:
+            families = ['DejaVu Sans Mono']
         try:
-            font = QtGui.QFont(family, i_size, weight_val, italic)
+            font = QtGui.QFont(families[0], i_size, weight_val, italic)
+            if len(families) > 1:
+                font.setFamilies(families)
             if sys.platform.startswith('linux'):
                 try:
                     font.setHintingPreference(font.PreferFullHinting)
