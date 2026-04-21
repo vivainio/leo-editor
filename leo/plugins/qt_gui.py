@@ -117,6 +117,14 @@ class LeoQtGui(leoGui.LeoGui):
         self.styleSheetManagerClass = StyleSheetManager
         # Be aware of the systems native colors, fonts, etc.
         QtWidgets.QApplication.setDesktopSettingsAware(True)
+        if sys.platform == 'win32':
+            # Allow fractional DPI scale factors (e.g. 125%, 150%) instead of
+            # rounding to the nearest integer. Without this, Qt renders at 1x
+            # and Windows DWM upscales by the fractional remainder, causing
+            # character clipping and blurry text on high-DPI monitors.
+            QtWidgets.QApplication.setHighDpiScaleFactorRoundingPolicy(
+                QtCore.Qt.HighDpiScaleFactorRoundingPolicy.PassThrough
+            )
         # Create objects...
         self.qtApp = QtWidgets.QApplication(sys.argv)
         self.reloadSettings()
@@ -1216,7 +1224,12 @@ class LeoQtGui(leoGui.LeoGui):
             font = QtGui.QFont(families[0], i_size, weight_val, italic)
             if len(families) > 1:
                 font.setFamilies(families)
-            if sys.platform.startswith('linux'):
+            if sys.platform == 'win32':
+                # At fractional DPI scale factors (e.g. 125%), Qt's hinting
+                # can clip the tops of glyphs. Disable it and let Windows
+                # ClearType handle sub-pixel rendering natively.
+                font.setHintingPreference(QtGui.QFont.HintingPreference.PreferNoHinting)
+            elif sys.platform.startswith('linux'):
                 try:
                     font.setHintingPreference(font.PreferFullHinting)
                 except AttributeError:
