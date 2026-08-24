@@ -1,7 +1,15 @@
-# @+leo-ver=5-thin
-# @+node:danr7.20060902083957: * @file ../plugins/leo_to_rtf.py
-# @+<< docstring >>
-# @+node:danr7.20060902085340: ** << docstring >> (leo_to_rtf.py)
+#@+leo-ver=cub-1-thin
+#@0 [danr7.20060902083957] @f ../plugins/leo_to_rtf.py
+#@+<< docstring >>
+#@-<< docstring >>
+
+# leoToRTF 1.0 plugin by Dan Rahmel
+import configparser as ConfigParser
+from leo.core import leoGlobals as g
+
+
+#@+others
+#@> << docstring >> (leo_to_rtf.py)
 r"""Outputs a Leo outline as a numbered list to an RTF file. The RTF file
 can be loaded into Microsoft Word and formatted as a proper outline.
 
@@ -16,15 +24,7 @@ The default export path is also stored in the INI file. By default, it's
 set to c:\ so you may need to modify it depending on your system.
 
 """
-# @-<< docstring >>
-
-# leoToRTF 1.0 plugin by Dan Rahmel
-import configparser as ConfigParser
-from leo.core import leoGlobals as g
-
-
-# @+others
-# @+node:ekr.20100128073941.5373: ** init
+#@ init
 def init():
     """Return True if the plugin has loaded successfully."""
     # Ok for unit testing: creates menu.
@@ -33,7 +33,7 @@ def init():
     return True
 
 
-# @+node:danr7.20060902083957.2: ** createExportMenu (leo_to_rtf)
+#@ createExportMenu (leo_to_rtf)
 def createExportMenu(tag, keywords):
     c = keywords.get("c")
     if not c:
@@ -45,7 +45,7 @@ def createExportMenu(tag, keywords):
     )
 
 
-# @+node:danr7.20060902083957.3: ** export_rtf
+#@ export_rtf
 def export_rtf(c):
     # pylint: disable=line-too-long
     # Get user preferences from INI file
@@ -69,9 +69,9 @@ def export_rtf(c):
         "{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang1033{\\fonttbl{\\f0\\fswiss\\fcharset0 Arial;}}\n\n"
     )
     # Write RTF list table that provides numbered list formatting
-    # @+<< listtable >>
-    # @+node:danr7.20060902085826: *3* << listtable >>
-    # @@wrap
+    #@+<< listtable >>
+    #@> << listtable >>
+    #@@wrap
 
     f.write("{\\*\\listtable{\\list\\listtemplateid1723346216\\listhybrid\n")
 
@@ -147,7 +147,7 @@ def export_rtf(c):
     f.write(
         "{\\*\\listoverridetable{\\listoverride\\listid127936308\\listoverridecount0\\ls1}}\n\n"
     )
-    # @-<< listtable >>
+    #@-<< listtable >>
     # Write text formatting foundation
     f.write("\\viewkind4\\uc1\\pard\\f0\\fs20\n\n")
     # Create generic level header
@@ -198,7 +198,7 @@ def export_rtf(c):
     g.es(" Leo -> RTF completed.", color="turquoise4")
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

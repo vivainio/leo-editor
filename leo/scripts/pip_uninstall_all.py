@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20240322173731.1: * @file ../scripts/pip_uninstall_all.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20240322173731.1] @f ../scripts/pip_uninstall_all.py
 """
 pip_uninstall_all.py: Use pip to uninstall *all* python packages.
 
@@ -40,4 +40,4 @@ if os.path.exists('temp_requirements.txt'):
 
 # cd to the leo-editor directory.
 os.chdir(leo_editor_dir)
-# @-leo
+#@-leo

@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20260512145309.1: * @file ../unittests/commands/test_leoAbbrev.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20260512145309.1] @f ../unittests/commands/test_leoAbbrev.py
 """Tests of leoAbbrev.py"""
 
 # pylint: disable=no-member
@@ -17,16 +17,16 @@ if TYPE_CHECKING:
 assert g
 
 
-# @+others
-# @+node:ekr.20260512145550.104: ** class TestAbbrev (LeoUnitTest)
+#@+others
+#@> class TestAbbrev (LeoUnitTest)
 class TestAbbrev(LeoUnitTest):
     def setUp(self) -> None:
         super().setUp()
         c = self.c
         c.findCommands.ftm = StringFindTabManager(c)
 
-    # @+others
-    # @+node:ekr.20260512164351.1: *3* TestAbbrev.test_multiline_abbreviations
+    #@+others
+    #@> TestAbbrev.test_multiline_abbreviations
     def test_multiline_abbreviations(self):
 
         c = self.c
@@ -80,7 +80,7 @@ class TestAbbrev(LeoUnitTest):
                 expected_p_h = expected.replace('\n', ' ').replace('  ', ' ')
                 test('head', p.h, expected_p_h)
 
-    # @+node:ekr.20260518063848.1: *3* TestAbbrev.test_find_command_selects_place_holder
+    #@ TestAbbrev.test_find_command_selects_place_holder
     def test_find_command_selects_place_holder(self):
 
         c = self.c
@@ -157,7 +157,7 @@ class TestAbbrev(LeoUnitTest):
                 expected_p_h = expected.replace('\n', ' ').replace('  ', ' ')
                 test_contents('head', p.h, expected_p_h)
 
-    # @+node:ekr.20260512173657.1: *3* TestAbbrev.test_scripting_abbreviations
+    #@ TestAbbrev.test_scripting_abbreviations
     def test_scripting_abbreviations(self):
 
         c = self.c
@@ -204,7 +204,7 @@ class TestAbbrev(LeoUnitTest):
             c.endEditing()
             test(p.h)
 
-    # @+node:ekr.20260512150121.1: *3* TestAbbrev.test_simple_abbreviations
+    #@ TestAbbrev.test_simple_abbreviations
     def test_simple_abbreviations(self):
 
         c = self.c
@@ -254,7 +254,7 @@ class TestAbbrev(LeoUnitTest):
             c.endEditing()
             test(p.h, expected)
 
-    # @+node:ekr.20210905064816.3: *3* TestAbbrev.test_addAbbrevHelper
+    #@ TestAbbrev.test_addAbbrevHelper
     def test_addAbbrevHelper(self):
         c = self.c
         f = c.abbrevCommands.addAbbrevHelper
@@ -278,8 +278,8 @@ class TestAbbrev(LeoUnitTest):
                 result = d.get(name)
                 self.assertEqual(result, expected, msg=kind)
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

@@ -1,8 +1,8 @@
-# @+leo-ver=5-thin
-# @+node:mork.20041018204908.1: * @file ../plugins/multifile.py
-# @+<< docstring >>
-# @+node:ekr.20050226114732: ** << docstring >>
-# @@language rest
+#@+leo-ver=cub-1-thin
+#@0 [mork.20041018204908.1] @f ../plugins/multifile.py
+#@+<< docstring >>
+#@> << docstring >>
+#@@language rest
 r"""Allows Leo to write a file to multiple locations.
 
 This plugin acts as a post-write mechanism, a file must be written to the
@@ -45,9 +45,9 @@ an ancestor a copy of the file is created. These directives must at the
 beginning of the line and by themselves.
 """
 
-# @-<< docstring >>
-# @+<< imports >>
-# @+node:ekr.20050226114732.1: ** << imports >>
+#@-<< docstring >>
+#@+<< imports >>
+#@ << imports >>
 import os.path
 import shutil
 import weakref
@@ -55,7 +55,7 @@ from typing import Any
 from leo.core import leoGlobals as g
 from leo.core import leoAtFile
 
-# @-<< imports >>
+#@-<< imports >>
 multiprefix = '@multiprefix'
 multipath = '@multipath'
 haveseen: weakref.WeakKeyDictionary = weakref.WeakKeyDictionary()
@@ -63,8 +63,8 @@ files: dict[str, Any] = {}  # Values are positions.
 original_precheck: Any = None
 
 
-# @+others
-# @+node:ekr.20050226115130.1: ** init & helpers (multifile.py)
+#@+others
+#@ init & helpers (multifile.py)
 def init():
     """Return True if the plugin has loaded successfully."""
     if g.unitTesting:
@@ -87,7 +87,7 @@ def init():
     return True  # gui-independent.
 
 
-# @+node:mork.20041019091317: *3* addMenu
+#@> addMenu
 def addMenu(tag, keywords):
     c = keywords.get('c')
     if not c or c in haveseen:
@@ -99,7 +99,7 @@ def addMenu(tag, keywords):
     )
 
 
-# @+node:mork.20041019091524: *3* insertDirectoryString
+#@ insertDirectoryString
 def insertDirectoryString(c):
     d = g.app.gui.runOpenDirectoryDialog(title='Select a directory', startdir=os.curdir)
     if d:
@@ -110,7 +110,7 @@ def insertDirectoryString(c):
         # w.update_idletasks()
 
 
-# @+node:mork.20041018204908.3: ** decorated_precheck
+#@< decorated_precheck
 def decorated_precheck(self, fileName, root):
     """Call at.precheck, then add fileName to the global files list."""
 
@@ -125,7 +125,7 @@ def decorated_precheck(self, fileName, root):
     return val
 
 
-# @+node:mork.20041018204908.6: ** stop
+#@ stop
 def stop(tag, keywords):
     c = keywords.get('c')
     if not c:
@@ -147,7 +147,7 @@ def stop(tag, keywords):
     files.clear()
 
 
-# @+node:mork.20041018204908.5: ** scanForMultiPath
+#@ scanForMultiPath
 def scanForMultiPath(c):
     """Return a dictionary whose keys are fileNames and whose values are
     lists of paths to which the fileName is to be written.
@@ -185,7 +185,7 @@ def scanForMultiPath(c):
     return d
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

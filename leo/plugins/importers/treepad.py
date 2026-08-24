@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20180201203240.2: * @file ../plugins/importers/treepad.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20180201203240.2] @f ../plugins/importers/treepad.py
 """The @auto importer for the TreePad file format."""
 
 from __future__ import annotations
@@ -13,8 +13,8 @@ if TYPE_CHECKING:
     from leo.core.leoNodes import Position, VNode
 
 
-# @+others
-# @+node:ekr.20180201203240.3: ** class Treepad_Importer(Importer)
+#@+others
+#@> class Treepad_Importer(Importer)
 class Treepad_Importer(Importer):
     """
     The importer for the TreePad file format.
@@ -24,8 +24,8 @@ class Treepad_Importer(Importer):
 
     language = 'plain'  # A reasonable default.
 
-    # @+others
-    # @+node:ekr.20230528062654.1: *3* treepad_i.gen_block
+    #@+others
+    #@> treepad_i.gen_block
     def gen_block(self, parent: Position) -> None:
         """
         Treepad_Importer: gen_block.
@@ -93,10 +93,10 @@ class Treepad_Importer(Importer):
         for p in parent.self_and_subtree():
             p.b = ''.join(lines_dict[p.v])
 
-    # @-others
+    #@-others
 
 
-# @-others
+#@-others
 
 
 def do_import(c: Cmdr, parent: Position, s: str) -> None:
@@ -110,8 +110,8 @@ importer_dict = {
     ],
     'func': do_import,
 }
-# @@language python
-# @@tabwidth -4
+#@@language python
+#@@tabwidth -4
 
 
-# @-leo
+#@-leo

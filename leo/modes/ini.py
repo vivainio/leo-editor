@@ -1,6 +1,6 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20240227082119.1: * @file ../modes/ini.py
-# @@language python
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20240227082119.1] @f ../modes/ini.py
+#@@language python
 
 # Leo's colorizer control file for .ini and .toml files.
 # This file is in the public domain.
@@ -72,4 +72,4 @@ rulesDictDict = {
 
 # Import dict for ini mode.
 importDict = {}
-# @-leo
+#@-leo

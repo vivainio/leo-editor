@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20180119164431.1: * @file ../plugins/patch_python_colorizer.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20180119164431.1] @f ../plugins/patch_python_colorizer.py
 """
 Shows how to patch python colorizer.
 """
@@ -10,8 +10,8 @@ from leo.core import leoGlobals as g
 assert g
 
 
-# @+others
-# @+node:ekr.20180119164528.6: ** init
+#@+others
+#@> init
 def init():
     ok = g.app.gui.guiName() == 'qt'
     if ok:
@@ -20,14 +20,14 @@ def init():
     return ok
 
 
-# @+node:ekr.20180119164528.7: ** onCreate
+#@ onCreate
 def onCreate(tag, keys):
     c = keys.get('c')
     if c:
         patch_colorizer(c)
 
 
-# @+node:ekr.20180119171526.1: ** patch_colorizer
+#@ patch_colorizer
 def patch_colorizer(c):
     colorizer = c.frame.body.colorizer
     mode = colorizer.modes.get('python_main')
@@ -40,7 +40,7 @@ def patch_colorizer(c):
     c.frame.body.wrapper.setAllText(c.p.b)
 
 
-# @+node:ekr.20180119164405.1: ** python_rule_global
+#@ python_rule_global
 def python_rule_global(colorer, s, i):
     pattern = re.compile(r'\b(G[A-Z0-9_]*)')
     self = colorer
@@ -55,7 +55,7 @@ def python_rule_global(colorer, s, i):
     return j - i
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

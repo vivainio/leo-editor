@@ -1,28 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20061024060248.1: * @file leoPymacs.py
-# @+<< leoPymacs docstring>>
-# @+node:ekr.20061024060248.2: ** << leoPymacs docstring >>
-"""A module to allow the Pymacs bridge to access Leo data.
-
-All code in this module must be called *from* Emacs:
-calling Pymacs.lisp in other situations will hang Leo.
-
-Notes:
-
-- The init method adds the parent directory of leoPymacs.py to
-  Python's sys.path. This is essential to make imports work from
-  inside Emacs.
-
-- As of Leo 4.5, the following code, when executed from an Emacs buffer,
-  will open trunk/leo/test.leo::
-
-      (pymacs-load "c:\\Repos\\leo-editor\\leo\\core\\leoPymacs" "leo-")
-      (setq c (leo-open "c:\\Repos\\leo-editor\\leo\\test\\test.leo"))
-
-  Note that full path names are required in each case.
-
-"""
-# @-<< leoPymacs docstring>>
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20061024060248.1] @f leoPymacs.py
+#@+<< leoPymacs docstring>>
+#@-<< leoPymacs docstring>>
 
 # As in leo.py we must be very careful about imports.
 
@@ -33,15 +12,15 @@ inited = False
 pymacsFile = __file__
 
 
-# @+others
-# @+node:ekr.20061024131236: ** dump (pymacs)
+#@+others
+#@> dump (pymacs)
 def dump(anObject):
     # global g
     init()
     return str(g.toEncodedString(repr(anObject), encoding='ascii'))
 
 
-# @+node:ekr.20061024130957: ** getters (pymacs)
+#@ getters (pymacs)
 def get_app():
     """Scripts can use g.app.scriptDict for communication with pymacs."""
     # global g
@@ -61,13 +40,13 @@ def script_result():
     return g.app.scriptResult
 
 
-# @+node:ekr.20061024060248.3: ** hello (pymacs)
+#@ hello (pymacs)
 def hello():
     init()
     return f"Hello from Leo.  g.app: {g.app}"
 
 
-# @+node:ekr.20061024075542: ** init  (pymacs)
+#@ init  (pymacs)
 def init():
     global inited
     if inited:
@@ -103,7 +82,7 @@ def init():
         g.trace('gui', g.app.gui)
 
 
-# @+node:ekr.20061024075542.1: ** open (pymacs)
+#@ open (pymacs)
 def open(fileName=None) -> Any:
     # global g
     init()
@@ -121,7 +100,7 @@ def open(fileName=None) -> Any:
     return c
 
 
-# @+node:ekr.20061024084200: ** run-script (pymacs)
+#@ run-script (pymacs)
 def run_script(c, script, p=None):
     # global g
     assert g
@@ -144,8 +123,8 @@ def run_script(c, script, p=None):
     return g.app.scriptResult
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @@pagewidth 70
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@@pagewidth 70
+#@-leo

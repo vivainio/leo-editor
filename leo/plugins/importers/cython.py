@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20200619141135.1: * @file ../plugins/importers/cython.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20200619141135.1] @f ../plugins/importers/cython.py
 """@auto importer for cython."""
 
 from __future__ import annotations
@@ -12,8 +12,8 @@ if TYPE_CHECKING:
     from leo.core.leoNodes import Position
 
 
-# @+others
-# @+node:ekr.20200619141201.2: ** class Cython_Importer(Python_Importer)
+#@+others
+#@> class Cython_Importer(Python_Importer)
 class Cython_Importer(Python_Importer):
     """A class to store and update scanning state."""
 
@@ -37,7 +37,7 @@ class Cython_Importer(Python_Importer):
     )
 
 
-# @-others
+#@-others
 
 
 def do_import(c: Cmdr, parent: Position, s: str) -> None:
@@ -51,6 +51,6 @@ importer_dict = {
     ],
     'func': do_import,
 }
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@@language python
+#@@tabwidth -4
+#@-leo

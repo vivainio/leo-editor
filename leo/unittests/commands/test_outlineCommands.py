@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20221113062857.1: * @file ../unittests/commands/test_outlineCommands.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20221113062857.1] @f ../unittests/commands/test_outlineCommands.py
 """
 New unit tests for Leo's outline commands.
 
@@ -16,22 +16,22 @@ assert g
 assert sys
 
 
-# @+others
-# @+node:ekr.20221113062938.1: ** class TestOutlineCommands(LeoUnitTest)
+#@+others
+#@> class TestOutlineCommands(LeoUnitTest)
 class TestOutlineCommands(LeoUnitTest):
     """
     Unit tests for Leo's outline commands.
     """
 
-    # @+others
-    # @+node:ekr.20230724130924.1: *3* TestOutlineCommands.test_paste_as_template
+    #@+others
+    #@> TestOutlineCommands.test_paste_as_template
     def test_paste_as_template(self):
         c = self.c
         p = c.p
         u = c.undoer
 
-        # @+others  # Define test_tree function.
-        # @+node:ekr.20230724130959.5: *4* function: test_tree (test_paste_as_template)
+        #@+others # Define test_tree function.
+        #@> function: test_tree (test_paste_as_template)
         def test_tree(pasted_flag: bool, tag: str) -> None:
             """Test the tree."""
             tag_s = (
@@ -92,7 +92,7 @@ class TestOutlineCommands(LeoUnitTest):
                 # g.printObj([f"{z.gnx:30} {' '*z.level()}{z.h:10} {z.b!r}" for z in c.all_positions()], tag='bodies')
                 self.fail(message)  # This throws another exception!
 
-        # @-others
+        #@-others
 
         # Every paste will invalidate positions, so search for headlines instead.
         valid_target_headlines = (
@@ -179,14 +179,14 @@ class TestOutlineCommands(LeoUnitTest):
                     self.assertEqual(0, c.checkOutline())
                     test_tree(pasted_flag=True, tag=f"redo {i}")
 
-    # @+node:ekr.20230724064558.1: *3* TestOutlineCommands.test_paste_node
+    #@< TestOutlineCommands.test_paste_node
     def test_paste_node(self):
         c = self.c
         p = c.p
         u = c.undoer
 
-        # @+others  # Define test_tree function.
-        # @+node:ekr.20230724064558.5: *4* function: test_tree (test_paste_node)
+        #@+others # Define test_tree function.
+        #@> function: test_tree (test_paste_node)
         def test_tree(pasted_flag: bool, tag: str) -> None:
             """Test the tree"""
             seen = set()
@@ -209,7 +209,7 @@ class TestOutlineCommands(LeoUnitTest):
                 # g.printObj(vnodes, tag='vnodes')
                 self.fail(message)
 
-        # @-others
+        #@-others
 
         self.clean_tree()
         cc = self.create_test_paste_outline()
@@ -278,7 +278,7 @@ class TestOutlineCommands(LeoUnitTest):
                     self.assertEqual(0, c.checkOutline())
                     test_tree(pasted_flag=True, tag=f"redo {i}")
 
-    # @+node:ekr.20230722104508.1: *3* TestOutlineCommands.test_paste_retaining_clones
+    #@< TestOutlineCommands.test_paste_retaining_clones
     def test_paste_retaining_clones(self):
         c = self.c
         p = c.p
@@ -288,8 +288,8 @@ class TestOutlineCommands(LeoUnitTest):
         # g.app.debug.extend(['test:strict'])
         # g.app.debug.extend(['test:verbose'])
 
-        # @+others  # Define test_tree function.
-        # @+node:ekr.20230723160812.1: *4* function: test_tree (test_paste_retaining_clones)
+        #@+others # Define test_tree function.
+        #@> function: test_tree (test_paste_retaining_clones)
         def test_tree(pasted_flag: bool, tag: str) -> None:
             """Test the tree"""
             seen = set()
@@ -335,7 +335,7 @@ class TestOutlineCommands(LeoUnitTest):
                 # g.printObj([f"{z.gnx:30} {' '*z.level()}{z.h:10} {z.b!r}" for z in c.all_positions()], tag='bodies')
                 self.fail(message)  # This throws another exception!
 
-        # @-others
+        #@-others
 
         # Every paste will invalidate positions, so search for headlines instead.
         valid_target_headlines = (
@@ -415,7 +415,7 @@ class TestOutlineCommands(LeoUnitTest):
                     self.assertEqual(0, c.checkOutline())
                     test_tree(pasted_flag=True, tag=f"redo {i}")
 
-    # @+node:ekr.20230729042305.1: *3* TestOutlineCommands.test_c_checkVnodeLinks
+    #@< TestOutlineCommands.test_c_checkVnodeLinks
     def test_c_checkVnodeLinks(self):
         c = self.c
 
@@ -429,21 +429,21 @@ class TestOutlineCommands(LeoUnitTest):
         children_dict = {}
         parents_dict = {}
 
-        # @+others  # define helpers
-        # @+node:ekr.20230730070124.1: *4* function: init_dicts
+        #@+others # define helpers
+        #@> function: init_dicts
         def init_dicts() -> None:
             for z in vnodes_list:
                 children_dict[z.gnx] = z.children[:]
             for z in vnodes_list:
                 parents_dict[z.gnx] = z.parents[:]
 
-        # @+node:ekr.20230730070250.1: *4* function: restore_tree
+        #@ function: restore_tree
         def restore_tree():
             for v in vnodes_list:
                 v.children = children_dict[v.gnx][:]
                 v.parents = parents_dict[v.gnx][:]
 
-        # @+node:ekr.20230729124541.1: *4* function: do_defect
+        #@ function: do_defect
         def do_defect(parent: Position, child: Position, defect: str) -> None:
             """
             Create the defect if possible. Return True if the defect was created.
@@ -465,7 +465,7 @@ class TestOutlineCommands(LeoUnitTest):
             else:
                 assert False, defect
 
-        # @+node:ekr.20230729124819.1: *4* function: enable_options
+        #@ function: enable_options
         def enable_options(parent: Position, options: list[tuple[str, str]]) -> None:
             """
             Enable options in g.app.debug for given list of option descriptors.
@@ -484,7 +484,7 @@ class TestOutlineCommands(LeoUnitTest):
                     if 'v' in option and 'test:verbose' not in g.app.debug:
                         g.app.debug.append('test:verbose')
 
-        # @+node:ekr.20230729124441.1: *4* function: test (test_c_checkVnodeLinks)
+        #@ function: test (test_c_checkVnodeLinks)
         def test(parent: Position, child: Position) -> int:
             """
             Run all tests on all positions with the given headline with all possible defects.
@@ -503,7 +503,7 @@ class TestOutlineCommands(LeoUnitTest):
                 self.assertEqual(0, c.checkOutline(), msg=f" After: {tag_s}")
             return n
 
-        # @-others
+        #@-others
 
         init_dicts()
 
@@ -534,13 +534,13 @@ class TestOutlineCommands(LeoUnitTest):
                 n_tests += test(parent, child)
         # g.trace('Done', n_tests, 'tests', n_positions, 'positions')
 
-    # @+node:ekr.20230722083123.1: *3* TestOutlineCommands.test_restoreFromCopiedTree
+    #@< TestOutlineCommands.test_restoreFromCopiedTree
     def test_restoreFromCopiedTree(self):
         c = self.c
         u = c.undoer
 
-        # @+others  # Define helper functions.
-        # @+node:ekr.20230724210028.1: *4* function: test_tree (test_restoreFromCopiedTree)
+        #@+others # Define helper functions.
+        #@> function: test_tree (test_restoreFromCopiedTree)
         def test_tree(tag: str) -> None:
             """Test the tree."""
             assert tag[0].isnumeric()
@@ -559,7 +559,7 @@ class TestOutlineCommands(LeoUnitTest):
                 # g.printObj(vnodes, tag='vnodes')
                 self.fail(message)
 
-        # @-others
+        #@-others
 
         # Create the tree.
         self.clean_tree()
@@ -606,7 +606,7 @@ class TestOutlineCommands(LeoUnitTest):
                 self.assertEqual(0, c.checkOutline())
                 test_tree(tag=tag)
 
-    # @+node:ekr.20221112051634.1: *3* TestOutlineCommands.test_sort_children
+    #@< TestOutlineCommands.test_sort_children
     def test_sort_children(self):
         c, u = self.c, self.c.undoer
         assert self.root_p.h == 'root'
@@ -626,7 +626,7 @@ class TestOutlineCommands(LeoUnitTest):
         result_children = [z.h for z in self.root_p.v.children]
         self.assertEqual(result_children, original_children)
 
-    # @+node:ekr.20221112051650.1: *3* TestOutlineCommands.test_sort_siblings
+    #@ TestOutlineCommands.test_sort_siblings
     def test_sort_siblings(self):
         c, u = self.c, self.c.undoer
         assert self.root_p.h == 'root'
@@ -647,7 +647,7 @@ class TestOutlineCommands(LeoUnitTest):
         result_children = [z.h for z in self.root_p.v.children]
         self.assertEqual(result_children, original_children)
 
-    # @+node:ekr.20230902053728.1: *3* TestOutlineCommands.test_move_outline_to_first_child
+    #@ TestOutlineCommands.test_move_outline_to_first_child
     def test_move_outline_to_first_child(self):
         # Setup.
         c, u = self.c, self.c.undoer
@@ -676,7 +676,7 @@ class TestOutlineCommands(LeoUnitTest):
         assert c.checkOutline() == 0
         assert root.v.children == original_children
 
-    # @+node:ekr.20230902053751.1: *3* TestOutlineCommands.test_move_outline_to_last_child
+    #@ TestOutlineCommands.test_move_outline_to_last_child
     def test_move_outline_to_last_child(self):
         # Setup.
         c, u = self.c, self.c.undoer
@@ -706,8 +706,8 @@ class TestOutlineCommands(LeoUnitTest):
         assert c.checkOutline() == 0
         assert root.v.children == original_children
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

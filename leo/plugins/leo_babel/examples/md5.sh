@@ -1,5 +1,5 @@
-#@+leo-ver=5-thin
-#@+node:bob.20170830131933.1: * @file md5.sh
+#@+leo-ver=cub-1-thin
+#@0 [bob.20170830131933.1] @f md5.sh
 #@@language shell
 
 for fpn in "$@" ; do

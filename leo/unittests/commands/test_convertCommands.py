@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20211013081056.1: * @file ../unittests/commands/test_convertCommands.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20211013081056.1] @f ../unittests/commands/test_convertCommands.py
 """Tests of leo.commands.leoConvertCommands."""
 
 import os
@@ -10,13 +10,13 @@ from leo.commands.convertCommands import ConvertCommandsClass
 from leo.unittests.plugins.test_importers import BaseTestImporter
 
 
-# @+others
-# @+node:ekr.20220824193803.1: ** class Test_To_Python(BaseTestImporter):
+#@+others
+#@> class Test_To_Python(BaseTestImporter):
 class Test_To_Python(BaseTestImporter):
     """Test cases for commands using To_Python class."""
 
-    # @+others
-    # @+node:ekr.20220824193932.1: *3* test_c_to_python
+    #@+others
+    #@> test_c_to_python
     def test_c_to_python(self):
         c = self.c
         x1 = ConvertCommandsClass(c)
@@ -33,10 +33,10 @@ class Test_To_Python(BaseTestImporter):
         lines = g.splitLines(s)
         x.convertCodeList(lines)
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20220108083112.1: ** class TestAddMypyAnnotations(LeoUnitTest):
+#@< class TestAddMypyAnnotations(LeoUnitTest):
 class TestAddMypyAnnotations(LeoUnitTest):
     """Test cases for add-mypy-annotations command"""
 
@@ -61,8 +61,8 @@ class TestAddMypyAnnotations(LeoUnitTest):
             'v': 'VNode',
         }
 
-    # @+others
-    # @+node:ekr.20220108091352.1: *3* test_ama.test_already_annotated
+    #@+others
+    #@> test_ama.test_already_annotated
     def test_already_annotated(self):
         p = self.p
         p.b = contents = self.prep(
@@ -77,7 +77,7 @@ class TestAddMypyAnnotations(LeoUnitTest):
         self.x.convert_body(p)
         self.assertEqual(p.b, contents)
 
-    # @+node:ekr.20220416053117.1: *3* test_ama.test_bug_2606
+    #@ test_ama.test_bug_2606
     def test_bug_2606(self):
         # https://github.com/leo-editor/leo-editor/issues/2606
         p = self.p
@@ -109,7 +109,7 @@ class TestAddMypyAnnotations(LeoUnitTest):
         self.x.convert_body(p)
         self.assertEqual(p.b, expected)
 
-    # @+node:ekr.20220108093044.1: *3* test_ama.test_initializers
+    #@ test_ama.test_initializers
     def test_initializers(self):
         p = self.p
         p.b = self.prep(
@@ -127,7 +127,7 @@ class TestAddMypyAnnotations(LeoUnitTest):
         self.x.convert_body(p)
         self.assertEqual(p.b, expected)
 
-    # @+node:ekr.20220108093621.1: *3* test_ama.test_multiline_def
+    #@ test_ama.test_multiline_def
     def test_multiline_def(self):
         p = self.p
         p.b = self.prep(
@@ -159,7 +159,7 @@ class TestAddMypyAnnotations(LeoUnitTest):
         self.x.convert_body(p)
         self.assertEqual(p.b, expected)
 
-    # @+node:ekr.20220108153333.1: *3* test_ama.test_multiline_def_with_comments
+    #@ test_ama.test_multiline_def_with_comments
     def test_multiline_def_with_comments(self):
         p = self.p
         p.b = self.prep(
@@ -191,7 +191,7 @@ class TestAddMypyAnnotations(LeoUnitTest):
         # g.printObj(p.b)
         self.assertEqual(p.b, expected)
 
-    # @+node:ekr.20220108083112.4: *3* test_ama.test_plain_args
+    #@ test_ama.test_plain_args
     def test_plain_args(self):
         p = self.p
         p.b = self.prep(
@@ -209,7 +209,7 @@ class TestAddMypyAnnotations(LeoUnitTest):
         self.x.convert_body(p)
         self.assertEqual(p.b, expected)
 
-    # @+node:ekr.20220416082758.1: *3* test_ama.test_special_methods
+    #@ test_ama.test_special_methods
     def test_special_methods(self):
         p = self.p
         p.b = self.prep(
@@ -239,15 +239,15 @@ class TestAddMypyAnnotations(LeoUnitTest):
         self.x.convert_body(p)
         self.assertEqual(p.b, expected)
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20231121061008.1: ** class TestPythonToTypeRust(LeoUnitTest):
+#@< class TestPythonToTypeRust(LeoUnitTest):
 class TestPythonToTypeRust(LeoUnitTest):
     """Test cases for python-to-typescript command"""
 
-    # @+others
-    # @+node:ekr.20231121061008.2: *3*  test_py2rust.setUp
+    #@+others
+    #@>  test_py2rust.setUp
     def setUp(self):
         super().setUp()
         c = self.c
@@ -257,7 +257,7 @@ class TestPythonToTypeRust(LeoUnitTest):
         root = self.root_p
         root.deleteAllChildren()
 
-    # @+node:ekr.20231121061008.4: *3* slow_test_py2rust.test_convert_position_class
+    #@ slow_test_py2rust.test_convert_position_class
     def slow_test_convert_position_class(self):
         # Convert a copy of the Position class
         c = self.c
@@ -287,7 +287,7 @@ class TestPythonToTypeRust(LeoUnitTest):
         c.selectPosition(self.p)
         self.x.convert(self.p)
 
-    # @+node:ekr.20231121061008.5: *3* test_py2rust.test_f_strings()
+    #@ test_py2rust.test_f_strings()
     def test_f_strings(self):
         x = self.x
         tests = (
@@ -310,7 +310,7 @@ class TestPythonToTypeRust(LeoUnitTest):
             x.do_f_strings(lines)
             self.assertEqual(lines[-1], expected)
 
-    # @+node:ekr.20231121062934.1: *3* test_py2rust.test_if_statements()
+    #@ test_py2rust.test_if_statements()
     def test_if_statements(self):
         x = self.x
         tests = (
@@ -343,7 +343,7 @@ class TestPythonToTypeRust(LeoUnitTest):
             # g.printObj(lines, tag='result')
             self.assertEqual(lines, expected)
 
-    # @+node:ekr.20231121061008.3: *3* test_py2rust.test_setup
+    #@ test_py2rust.test_setup
     def test_setup(self):
         c = self.c
         assert self.x
@@ -354,15 +354,15 @@ class TestPythonToTypeRust(LeoUnitTest):
             for p in c.all_positions():
                 g.printObj(p.b, tag=p.h)
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20211013081200.1: ** class TestPythonToTypeScript(LeoUnitTest):
+#@< class TestPythonToTypeScript(LeoUnitTest):
 class TestPythonToTypeScript(LeoUnitTest):
     """Test cases for python-to-typescript command"""
 
-    # @+others
-    # @+node:ekr.20211013090653.1: *3*  test_py2ts.setUp
+    #@+others
+    #@>  test_py2ts.setUp
     def setUp(self):
         super().setUp()
         c = self.c
@@ -394,7 +394,7 @@ class TestPythonToTypeScript(LeoUnitTest):
         self.p = root
         c.selectPosition(self.p)
 
-    # @+node:ekr.20211013081200.2: *3* test_py2ts.test_setup
+    #@ test_py2ts.test_setup
     def test_setup(self):
         c = self.c
         assert self.x
@@ -405,12 +405,12 @@ class TestPythonToTypeScript(LeoUnitTest):
             for p in c.all_positions():
                 g.printObj(p.b, tag=p.h)
 
-    # @+node:ekr.20211013085659.1: *3* test_py2ts.test_convert_position_class
+    #@ test_py2ts.test_convert_position_class
     def test_convert_position_class(self):
         # Convert a copy of the Position class
         self.x.convert(self.p)
 
-    # @+node:ekr.20211021075411.1: *3* test_py2ts.test_do_f_strings()
+    #@ test_py2ts.test_do_f_strings()
     def test_do_f_strings(self):
         x = self.x
         tests = (
@@ -433,8 +433,8 @@ class TestPythonToTypeScript(LeoUnitTest):
             x.do_f_strings(lines)
             self.assertEqual(lines[-1], expected)
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

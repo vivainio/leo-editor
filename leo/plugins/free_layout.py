@@ -1,7 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20120419093256.10048: * @file ../plugins/free_layout.py
-# @+<< free_layout docstring >>
-# @+node:ekr.20110319161401.14467: ** << free_layout docstring >>
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20120419093256.10048] @f ../plugins/free_layout.py
+#@+<< free_layout docstring >>
+#@> << free_layout docstring >>
 """
 Free layout
 ===========
@@ -24,10 +24,10 @@ free-layout-zoom
 
 """
 
-# @-<< free_layout docstring >>
+#@-<< free_layout docstring >>
 # Written by Terry Brown.
-# @+<< free_layout imports >>
-# @+node:tbrown.20110203111907.5520: ** << free_layout imports >>
+#@+<< free_layout imports >>
+#@ << free_layout imports >>
 from __future__ import annotations
 import json
 from typing import Any, TYPE_CHECKING
@@ -45,9 +45,9 @@ except Exception:
     NestedSplitter = None
 
 # Do not call g.assertUi('qt') here. It's too early in the load process.
-# @-<< free_layout imports >>
-# @+<< free_layout annotations >>
-# @+node:ekr.20220828125201.1: ** << free_layout annotations >>
+#@-<< free_layout imports >>
+#@+<< free_layout annotations >>
+#@ << free_layout annotations >>
 if TYPE_CHECKING:  # pragma: no cover
     from leo.core.leoCommands import Commands as Cmdr
     from leo.core.leoGui import LeoKeyEvent
@@ -58,19 +58,19 @@ if TYPE_CHECKING:  # pragma: no cover
     QWidget = QtWidgets.QWidget
 
 
-# @-<< free_layout annotations >>
-# @+others
-# @+node:tbrown.20110203111907.5521: ** free_layout:init
+#@-<< free_layout annotations >>
+#@+others
+#@ free_layout:init
 def init() -> bool:
     """Return True if the free_layout plugin can be loaded."""
     # #3910: The free_layout and nested_splitter plugins are deprecated.
     return bool(g.app.gui.guiName() == "qt" and NestedSplitter)
 
 
-# @+node:ekr.20110318080425.14389: ** class FreeLayoutController
+#@ class FreeLayoutController
 class FreeLayoutController:
-    # @+<< FreeLayoutController docstring >>
-    # @+node:ekr.20201013042712.1: *3* << FreeLayoutController docstring >>
+    #@+<< FreeLayoutController docstring >>
+    #@> << FreeLayoutController docstring >>
     """Glue between Leo and the NestedSplitter gui widget.  All Leo aware
     code should be in here, none in NestedSplitter.
 
@@ -94,9 +94,9 @@ class FreeLayoutController:
       item we advertised is selected
     """
 
-    # @-<< FreeLayoutController docstring >>
-    # @+<< define default_layout >>
-    # @+node:ekr.20201013042741.1: *3* << define default_layout >>
+    #@-<< FreeLayoutController docstring >>
+    #@+<< define default_layout >>
+    #@ << define default_layout >>
     default_layout = {
         'content': [
             {
@@ -112,10 +112,10 @@ class FreeLayoutController:
         'orientation': 2,
         'sizes': [216, 216],
     }
-    # @-<< define default_layout >>
+    #@-<< define default_layout >>
 
-    # @+others
-    # @+node:ekr.20110318080425.14390: *3*  flc.ctor
+    #@+others
+    #@  flc.ctor
     def __init__(self, c: Cmdr) -> None:
         """Ctor for FreeLayoutController class."""
         self.c = c
@@ -123,7 +123,7 @@ class FreeLayoutController:
         # Plugins must be loaded first to provide their widgets in panels etc.
         g.registerHandler('after-create-leo-frame2', self.loadLayouts)
 
-    # @+node:tbrown.20110203111907.5522: *3*  flc.init
+    #@  flc.init
     def init(self, tag: str, keys: dict) -> None:
         """Attach to an outline and
 
@@ -171,7 +171,7 @@ class FreeLayoutController:
         splitter.register_provider(self)
         splitter.splitterClicked_connect(self.splitter_clicked)
 
-    # @+node:tbrown.20120119080604.22982: *3* flc.embed
+    #@ flc.embed
     def embed(self) -> None:
         """called from ns_do_context - embed layout in outline's
         @settings, an alternative to the Load/Save named layout system
@@ -197,7 +197,7 @@ class FreeLayoutController:
             g.es("WARNING: @data free-layout-layout node is not under an active @settings node")
         c.redraw()
 
-    # @+node:ekr.20160424035257.1: *3* flc.get_main_splitter
+    #@ flc.get_main_splitter
     def get_main_splitter(self, w: QTextMixin | None = None) -> NestedSplitter | None:
         """
         Return the main splitter.
@@ -207,7 +207,7 @@ class FreeLayoutController:
         top = self.get_top_splitter()
         return top if top.objectName() == 'main_splitter' else None
 
-    # @+node:ekr.20160424035254.1: *3* flc.get_secondary_splitter
+    #@ flc.get_secondary_splitter
     def get_secondary_splitter(self) -> NestedSplitter | None:
         """
         Return the secondary splitter, that is, the splitter containing the outline pane.
@@ -220,7 +220,7 @@ class FreeLayoutController:
                 return w
         return None
 
-    # @+node:tbrown.20110621120042.22914: *3* flc.get_top_splitter
+    #@ flc.get_top_splitter
     def get_top_splitter(self) -> NestedSplitter | None:
         """Return the top splitter of c.frame.top."""
         f = self.c.frame
@@ -229,7 +229,7 @@ class FreeLayoutController:
             return child and child.top()
         return None
 
-    # @+node:ekr.20120419095424.9927: *3* flc.loadLayouts (sets wrap=True)
+    #@ flc.loadLayouts (sets wrap=True)
     def loadLayouts(self, tag: str, keys: dict, reloading: bool = False) -> None:
         """loadLayouts - Load the outline's layout
 
@@ -287,7 +287,7 @@ class FreeLayoutController:
             if splitter := c.free_layout.get_top_splitter():
                 splitter.load_layout(c, layout)
 
-    # @+node:tbrown.20110628083641.11730: *3* flc.ns_context
+    #@ flc.ns_context
     def ns_context(self) -> list[tuple[str, str]]:
         ans: list[Any] = [
             ('Embed layout', '_fl_embed_layout'),
@@ -302,7 +302,7 @@ class FreeLayoutController:
         ans.append(('Help for this menu', '_fl_help:'))
         return ans
 
-    # @+node:tbrown.20110628083641.11732: *3* flc.ns_do_context
+    #@ flc.ns_do_context
     def ns_do_context(self, id_: QWidget, splitter: QSplitter, index: int) -> bool:
         c = self.c
         if id_.startswith('_fl_embed_layout'):
@@ -363,7 +363,7 @@ class FreeLayoutController:
             return True
         return False
 
-    # @+node:tbrown.20110628083641.11724: *3* flc.ns_provide
+    #@ flc.ns_provide
     def ns_provide(self, id_: str) -> str | QTextMixin | None:
         if id_.startswith('_leo_tab:'):
             id_ = id_.split(':', 1)[1]
@@ -386,7 +386,7 @@ class FreeLayoutController:
             return w
         return None
 
-    # @+node:tbrown.20110627201141.11745: *3* flc.ns_provides
+    #@ flc.ns_provides
     def ns_provides(self) -> list[tuple[str, str]]:
         ans: list[tuple[str, str]] = []
         # list of things in tab widget
@@ -404,7 +404,7 @@ class FreeLayoutController:
         ans.append(('Tab pane', '_leo_pane:logFrame'))
         return ans
 
-    # @+node:tbnorth.20160510122413.1: *3* flc.splitter_clicked
+    #@ flc.splitter_clicked
     def splitter_clicked(
         self,
         splitter: QSplitter,
@@ -442,11 +442,11 @@ class FreeLayoutController:
                 splitter.zoom_toggle(local=True)
                 return
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20160416065221.1: ** commands: free_layout.py
-# @+node:tbrown.20140524112944.32658: *3* @g.command free-layout-context-menu
+#@< commands: free_layout.py
+#@> @g.command free-layout-context-menu
 @g.command('free-layout-context-menu')
 def free_layout_context_menu(event: LeoKeyEvent | None = None) -> None:
     """
@@ -461,7 +461,7 @@ def free_layout_context_menu(event: LeoKeyEvent | None = None) -> None:
     handle.splitter_menu(handle.rect().topLeft())
 
 
-# @+node:tbrown.20130403081644.25265: *3* @g.command free-layout-restore
+#@ @g.command free-layout-restore
 @g.command('free-layout-restore')
 def free_layout_restore(event: LeoKeyEvent | None = None) -> None:
     """
@@ -471,7 +471,7 @@ def free_layout_restore(event: LeoKeyEvent | None = None) -> None:
         c.free_layout.loadLayouts('reload', {'c': c}, reloading=True)
 
 
-# @+node:tbrown.20131111194858.29876: *3* @g.command free-layout-load
+#@ @g.command free-layout-load
 @g.command('free-layout-load')
 def free_layout_load(event: LeoKeyEvent | None = None) -> None:
     """Load layout from menu."""
@@ -494,7 +494,7 @@ def free_layout_load(event: LeoKeyEvent | None = None) -> None:
         c.free_layout.get_top_splitter().load_layout(c, layout)
 
 
-# @+node:tbrown.20140522153032.32658: *3* @g.command free-layout-zoom
+#@ @g.command free-layout-zoom
 @g.command('free-layout-zoom')
 def free_layout_zoom(event: LeoKeyEvent | None = None) -> None:
     """(un)zoom the current pane."""
@@ -502,7 +502,7 @@ def free_layout_zoom(event: LeoKeyEvent | None = None) -> None:
         c.free_layout.get_top_splitter().zoom_toggle()
 
 
-# @+node:ekr.20160327060009.1: *3* free_layout:register_provider
+#@ free_layout:register_provider
 def register_provider(c: Cmdr, provider_instance: object) -> None:
     """Register the provider instance with the top splitter."""
     if getattr(c, 'free_layout', None):
@@ -510,8 +510,8 @@ def register_provider(c: Cmdr, provider_instance: object) -> None:
             splitter.register_provider(provider_instance)
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @@pagewidth 70
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@@pagewidth 70
+#@-leo

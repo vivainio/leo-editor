@@ -1,9 +1,9 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20150514040118.1: * @file ../commands/debugCommands.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20150514040118.1] @f ../commands/debugCommands.py
 """Per-commander debugging class."""
 
-# @+<< debugCommands imports & annotations >>
-# @+node:ekr.20181006100818.1: ** << debugCommands imports & annotations >>
+#@+<< debugCommands imports & annotations >>
+#@> << debugCommands imports & annotations >>
 from __future__ import annotations
 from collections.abc import Callable
 import os
@@ -16,7 +16,7 @@ from leo.commands.baseCommands import BaseEditCommandsClass
 if TYPE_CHECKING:  # pragma: no cover
     from leo.core.leoGui import LeoKeyEvent
 
-# @-<< debugCommands imports & annotations >>
+#@-<< debugCommands imports & annotations >>
 
 
 def cmd(name: str) -> Callable:
@@ -25,8 +25,8 @@ def cmd(name: str) -> Callable:
 
 
 class DebugCommandsClass(BaseEditCommandsClass):
-    # @+others
-    # @+node:ekr.20150514063305.104: ** debug.debug & helper
+    #@+others
+    #@ debug.debug & helper
     @cmd('debug')
     def invoke_debugger(self, event: LeoKeyEvent | None = None) -> None:
         """
@@ -63,7 +63,7 @@ class DebugCommandsClass(BaseEditCommandsClass):
         args = [python, winpdb, '-t', filename]
         subprocess.Popen(args)
 
-    # @+node:ekr.20150514063305.105: *3* debug.findDebugger
+    #@> debug.findDebugger
     def findDebugger(self) -> str | None:
         """Find the winpdb debugger."""
         c = self.c
@@ -88,7 +88,7 @@ class DebugCommandsClass(BaseEditCommandsClass):
             print(z)
         return None
 
-    # @+node:ekr.20170713112849.1: ** debug.dump-node
+    #@< debug.dump-node
     @cmd('dump-node')
     def dumpNode(self, event: LeoKeyEvent | None = None) -> None:
         """Dump c.p.v, including gnx, uA's, etc."""
@@ -100,7 +100,7 @@ class DebugCommandsClass(BaseEditCommandsClass):
             else:
                 g.es_print('no uAs')
 
-    # @+node:ekr.20150514063305.103: ** debug.gc-collect-garbage
+    #@ debug.gc-collect-garbage
     @cmd('gc-collect-garbage')
     def collectGarbage(self, event: LeoKeyEvent | None = None) -> None:
         """Run Python's Garbage Collector."""
@@ -108,19 +108,19 @@ class DebugCommandsClass(BaseEditCommandsClass):
 
         gc.collect()
 
-    # @+node:ekr.20150514063305.106: ** debug.gc-dump-all-objects
+    #@ debug.gc-dump-all-objects
     @cmd('gc-dump-all-objects')
     def dumpAllObjects(self, event: LeoKeyEvent | None = None) -> None:
         """Print a summary of all existing Python objects."""
         g.printGc()
 
-    # @+node:ekr.20150514063305.111: ** debug.gc-show-summary
+    #@ debug.gc-show-summary
     @cmd('gc-show-summary')
     def printGcSummary(self, event: LeoKeyEvent | None = None) -> None:
         """Print a brief summary of all Python objects."""
         g.printGcSummary()
 
-    # @+node:ekr.20170429154309.1: ** debug.kill-log-listener
+    #@ debug.kill-log-listener
     @cmd('kill-log-listener')
     @cmd('log-kill-listener')
     def killLogListener(self, event: LeoKeyEvent | None = None) -> None:
@@ -135,7 +135,7 @@ class DebugCommandsClass(BaseEditCommandsClass):
         else:
             g.es_print('log listener not active.')
 
-    # @+node:ekr.20150514063305.110: ** debug.show-focus
+    #@ debug.show-focus
     @cmd('show-focus')
     def printFocus(self, event: LeoKeyEvent | None = None) -> None:
         """
@@ -148,9 +148,9 @@ class DebugCommandsClass(BaseEditCommandsClass):
         g.es_print('c.requestedFocusWidget:', c.widget_name(c.requestedFocusWidget))
         g.es_print('           c.get_focus:', c.widget_name(c.get_focus()))
 
-    # @-others
+    #@-others
 
 
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@@language python
+#@@tabwidth -4
+#@-leo

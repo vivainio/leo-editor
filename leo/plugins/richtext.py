@@ -1,8 +1,14 @@
-# @+leo-ver=5-thin
-# @+node:tbrown.20130813134319.11942: * @file ../plugins/richtext.py
+#@+leo-ver=cub-1-thin
+#@0 [tbrown.20130813134319.11942] @f ../plugins/richtext.py
 # This plugin is obsolete. There are no plans to make it work with Qt6.
-# @+<< docstring >>
-# @+node:tbrown.20130813134319.14333: ** << docstring >> (richtext.py)
+#@+<< docstring >>
+#@-<< docstring >>
+# This complaint is probably valid.
+# pylint: disable=no-name-in-module
+#@+<< imports >>
+#@-<< imports >>
+#@+others
+#@> << docstring >> (richtext.py)
 """
 richtext.py - Rich text editing
 ===============================
@@ -58,11 +64,7 @@ To make a button to toggle the editor on and off, use::
 
 """
 
-# @-<< docstring >>
-# This complaint is probably valid.
-# pylint: disable=no-name-in-module
-# @+<< imports >>
-# @+node:tbrown.20130813134319.14335: ** << imports >> (richtext.py)
+#@ << imports >> (richtext.py)
 import time
 from typing import Any, cast
 from urllib.parse import unquote
@@ -77,9 +79,7 @@ g.assertUi('qt')  # May raise g.UiTypeException, caught by the plugins manager.
 real_webkit = QtWebKit and 'engine' not in g.os_path_basename(QtWebKit.__file__).lower()
 
 
-# @-<< imports >>
-# @+others
-# @+node:tbrown.20130813134319.14337: ** init (richtext.py)
+#@ init (richtext.py)
 def init():
     """Return True if the plugin has loaded successfully."""
     if not QtWebKit:
@@ -95,10 +95,10 @@ def init():
     return ok
 
 
-# @+node:tbrown.20130813134319.5691: ** class CKEEditor
+#@ class CKEEditor
 class CKEEditor(QtWidgets.QWidget):
-    # @+others
-    # @+node:tbrown.20130813134319.7225: *3* __init__ & reloadSettings (CKEEditor)
+    #@+others
+    #@> __init__ & reloadSettings (CKEEditor)
     def __init__(self, *args, **kwargs):
         self.c = kwargs['c']
         del kwargs['c']
@@ -146,7 +146,7 @@ class CKEEditor(QtWidgets.QWidget):
         if self.config:
             self.config = '\n'.join(self.config).strip()
 
-    # @+node:tbrown.20130813134319.7226: *3* select_node
+    #@ select_node
     def select_node(self, tag, kwargs):
         c = kwargs['c']
         if c != self.c:
@@ -187,7 +187,7 @@ class CKEEditor(QtWidgets.QWidget):
 
         self.webview.setHtml(data, QtCore.QUrl.fromLocalFile(path + "/"))
 
-    # @+node:tbrown.20130813134319.7228: *3* unselect_node
+    #@ unselect_node
     def unselect_node(self, tag, kwargs):
         c = kwargs['c']
         if c != self.c:
@@ -228,7 +228,7 @@ class CKEEditor(QtWidgets.QWidget):
                 pass  # discard edits
         return None
 
-    # @+node:tbrown.20130813134319.7229: *3* close
+    #@ close
     def close(self):
         if self.c and not self.at_rich_close:
             # save changes?
@@ -238,10 +238,10 @@ class CKEEditor(QtWidgets.QWidget):
         g.unregisterHandler('unselect1', self.unselect_node)
         return QtWidgets.QWidget.close(self)
 
-    # @-others
+    #@-others
 
 
-# @+node:tbrown.20130813134319.5694: ** class CKEPaneProvider
+#@< class CKEPaneProvider
 class CKEPaneProvider:
     ns_id = '_add_cke_pane'
 
@@ -268,14 +268,14 @@ class CKEPaneProvider:
         return self.ns_id
 
 
-# @+node:tbrown.20130813134319.14339: ** onCreate
+#@ onCreate
 def onCreate(tag, key):
     c = key.get('c')
 
     CKEPaneProvider(c)
 
 
-# @+node:tbrown.20130814090427.22458: ** at_rich_check
+#@ at_rich_check
 def at_rich_check(tag, key):
     p = key.get('new_p')
 
@@ -294,7 +294,7 @@ def at_rich_check(tag, key):
         cmd_OpenEditor(key, at_rich=True)
 
 
-# @+node:tbrown.20130813134319.5692: ** @g.command('cke-text-open')
+#@ @g.command('cke-text-open')
 @g.command('cke-text-open')
 def cmd_OpenEditor(event=None, at_rich=False):
     """Open the rich text editor, hide the regular editor."""
@@ -312,7 +312,7 @@ def cmd_OpenEditor(event=None, at_rich=False):
     splitter.replace_widget(body, w)
 
 
-# @+node:tbrown.20130813134319.5693: ** @g.command('cke-text-close')
+#@ @g.command('cke-text-close')
 @g.command('cke-text-close')
 def cmd_CloseEditor(event=None, at_rich=False):
     """Close the rich text editor, unhide the regular editor."""
@@ -334,7 +334,7 @@ def cmd_CloseEditor(event=None, at_rich=False):
     splitter.replace_widget(rte, body)
 
 
-# @+node:tbrown.20130813134319.7233: ** @g.command('cke-text-switch')
+#@ @g.command('cke-text-switch')
 @g.command('cke-text-switch')
 def cmd_SwitchEditor(event):
     """Switch between regular and rich text editor."""
@@ -347,7 +347,7 @@ def cmd_SwitchEditor(event):
         cmd_CloseEditor(event)
 
 
-# @+node:tbrown.20130813134319.7231: ** @g.command('cke-text-toggle-autosave')
+#@ @g.command('cke-text-toggle-autosave')
 @g.command('cke-text-toggle-autosave')
 def cmd_ToggleAutosave(event):
     """
@@ -362,7 +362,7 @@ def cmd_ToggleAutosave(event):
     g.es("Rich text autosave " + ("ENABLED" if c._ckeeditor_autosave else "disabled"))
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

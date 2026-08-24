@@ -1,7 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20031218072017.2608: * @file leoApp.py
-# @+<< leoApp imports >>
-# @+node:ekr.20120219194520.10463: ** << leoApp imports >>
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20031218072017.2608] @f leoApp.py
+#@+<< leoApp imports >>
+#@> << leoApp imports >>
 from __future__ import annotations
 from collections.abc import Callable
 import importlib
@@ -31,9 +31,9 @@ from leo.core.leoSessions import SessionManager
 from leo.plugins.qt_events import LossageData
 from leo.plugins.qt_idle_time import IdleTime
 
-# @-<< leoApp imports >>
-# @+<< leoApp annotations >>
-# @+node:ekr.20220819191617.1: ** << leoApp annotations >>
+#@-<< leoApp imports >>
+#@+<< leoApp annotations >>
+#@ << leoApp annotations >>
 if TYPE_CHECKING:  # pragma: no cover
     from subprocess import Popen
     from types import ModuleType
@@ -46,15 +46,15 @@ if TYPE_CHECKING:  # pragma: no cover
     SpellDict = Any  # dict[str, list[str]]
 
 
-# @-<< leoApp annotations >>
-# @+others
-# @+node:ekr.20150509193629.1: ** cmd (decorator)
+#@-<< leoApp annotations >>
+#@+others
+#@ cmd (decorator)
 def cmd(name: str) -> Callable:
     """Command decorator for the LeoApp class."""
     return g.new_cmd_decorator(name, ['g', 'app'])
 
 
-# @+node:ekr.20161026122804.1: ** class IdleTimeManager
+#@ class IdleTimeManager
 class IdleTimeManager:
     """
     A singleton class to manage idle-time handling. This class handles all
@@ -72,13 +72,13 @@ class IdleTimeManager:
         self.on_idle_count = 0
         self.timer: IdleTime | None = None  # May not exist.
 
-    # @+others
-    # @+node:ekr.20161026125611.1: *3* itm.add_callback
+    #@+others
+    #@> itm.add_callback
     def add_callback(self, callback: Callable) -> None:
         """Add a callback to be called at every idle time."""
         self.callback_list.append(callback)
 
-    # @+node:ekr.20161026124810.1: *3* itm.on_idle
+    #@ itm.on_idle
     def on_idle(self, timer: Callable) -> None:
         """IdleTimeManager: Run all idle-time callbacks."""
         if not g.app:
@@ -101,17 +101,17 @@ class IdleTimeManager:
         # Handle idle-time hooks.
         g.app.pluginsController.on_idle()
 
-    # @+node:ekr.20161028034808.1: *3* itm.start
+    #@ itm.start
     def start(self) -> None:
         """Start the idle-time timer."""
         self.timer = g.IdleTime(self.on_idle, delay=500, tag='IdleTimeManager.on_idle')
         if self.timer:
             self.timer.start()
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20120209051836.10241: ** class LeoApp
+#@< class LeoApp
 class LeoApp:
     """
     A class representing the Leo application itself.
@@ -119,9 +119,9 @@ class LeoApp:
     Ivars of this class are Leo's global variables.
     """
 
-    # @+others
-    # @+node:ekr.20150509193643.1: *3* app.Birth & startup
-    # @+node:ekr.20031218072017.1416: *4* app.__init__ (helpers contain language dicts)
+    #@+others
+    #@> app.Birth & startup
+    #@> app.__init__ (helpers contain language dicts)
     def __init__(self) -> None:
         """
         Ctor for LeoApp class. These ivars are Leo's global vars.
@@ -132,8 +132,8 @@ class LeoApp:
         from leo.core.leoConfig import GlobalConfigManager
         from leo.core.leoJupytext import JupytextManager
 
-        # @+<< LeoApp: command-line arguments >>
-        # @+node:ekr.20161028035755.1: *5* << LeoApp: command-line arguments >>
+        #@+<< LeoApp: command-line arguments >>
+        #@> << LeoApp: command-line arguments >>
         # Default: write session data only if no files on command line.
         self.always_write_session_data = False
         self.batchMode = False  # True: run in batch mode.
@@ -156,9 +156,9 @@ class LeoApp:
         self.translateToUpperCase = False  # Never set to True.
         self.use_splash_screen = True  # True: put up a splash screen.
 
-        # @-<< LeoApp: command-line arguments >>
-        # @+<< LeoApp: Debugging & statistics >>
-        # @+node:ekr.20161028035835.1: *5* << LeoApp: Debugging & statistics >>
+        #@-<< LeoApp: command-line arguments >>
+        #@+<< LeoApp: Debugging & statistics >>
+        #@ << LeoApp: Debugging & statistics >>
         self.debug_dict: dict[str, Any] = {}  # For general use.
         self.disable_redraw = False  # True: disable all redraws.
         self.disableSave = False  # May be set by plugins.
@@ -170,14 +170,14 @@ class LeoApp:
         self.statsDict: dict[str, Any] = {}  # dict used by g.stat, g.clear_stats, g.print_stats.
         self.statsLockout = False  # A lockout to prevent unbound recursion while gathering stats.
         self.validate_outline = False  # True: enables c.validate_outline. (slow)
-        # @-<< LeoApp: Debugging & statistics >>
-        # @+<< LeoApp: error messages >>
-        # @+node:ekr.20161028035902.1: *5* << LeoApp: error messages >>
+        #@-<< LeoApp: Debugging & statistics >>
+        #@+<< LeoApp: error messages >>
+        #@ << LeoApp: error messages >>
         self.menuWarningsGiven = False  # True: suppress warnings in menu code.
         self.unicodeErrorGiven = True  # True: suppress unicode tracebacks.
-        # @-<< LeoApp: error messages >>
-        # @+<< LeoApp: global directories >>
-        # @+node:ekr.20161028035924.1: *5* << LeoApp: global directories >>
+        #@-<< LeoApp: error messages >>
+        #@+<< LeoApp: global directories >>
+        #@ << LeoApp: global directories >>
         self.extensionsDir = ''  # The leo/extensions directory
         self.globalConfigDir = ''  # leo/config directory
         self.globalOpenDir = ''  # The directory last used to open a file.
@@ -188,9 +188,9 @@ class LeoApp:
         self.machineDir = ''  # The machine-specific directory.
         # The directory from which the theme file was loaded, if any.
         self.theme_directory = ''
-        # @-<< LeoApp: global directories >>
-        # @+<< LeoApp: global data >>
-        # @+node:ekr.20161028035956.1: *5* << LeoApp: global data >>
+        #@-<< LeoApp: global directories >>
+        #@+<< LeoApp: global data >>
+        #@ << LeoApp: global data >>
         self.atAutoNames: set[str] = set()  # The set of all @auto spellings.
         self.atFileNames: set[str] = set()  # The set of all built-in @<file> spellings.
         self.globalKillBuffer: list[str] = []  # The global kill buffer.
@@ -203,9 +203,9 @@ class LeoApp:
         self.numberOfUntitledWindows = 0  # Number of opened untitled windows.
         self.windowList: list[LeoFrame] = []  # Global list of all frames.
         self.realMenuNameDict: dict[str, str] = {}  # Translations of menu names.
-        # @-<< LeoApp: global data >>
-        # @+<< LeoApp: global controller/manager objects >>
-        # @+node:ekr.20161028040028.1: *5* << LeoApp: global controller/manager objects >>
+        #@-<< LeoApp: global data >>
+        #@+<< LeoApp: global controller/manager objects >>
+        #@ << LeoApp: global controller/manager objects >>
         # Singleton applications objects which all exist.
 
         # We can't always use a cast here because doing so would create circular imports.
@@ -226,9 +226,9 @@ class LeoApp:
         # Global status vars for the Commands class...
         self.commandName = ''  # The name of the command being executed.
         self.commandInterruptFlag = False  # True: command within a command.
-        # @-<< LeoApp: global controller/manager objects >>
-        # @+<< LeoApp: global importer/reader/writer data >>
-        # @+node:ekr.20170302075110.1: *5* << LeoApp: global importer/reader/writer data >>
+        #@-<< LeoApp: global controller/manager objects >>
+        #@+<< LeoApp: global importer/reader/writer data >>
+        #@ << LeoApp: global importer/reader/writer data >>
         # Leo 6.8.7: Keys are language names; values are importer classes.
         self.importerClassesDict: dict[str, Any] = {}
         # Leo 6.8.7: Keys are language names; values are importer modules.
@@ -250,9 +250,9 @@ class LeoApp:
         # leo 5.6: allow undefined section references in all @auto files.
         # Leo 6.6.4: Make this a permanent g.app ivar.
         self.allow_undefined_refs = False
-        # @-<< LeoApp: global importer/reader/writer data >>
-        # @+<< LeoApp: global status vars >>
-        # @+node:ekr.20161028040054.1: *5* << LeoApp: global status vars >>
+        #@-<< LeoApp: global importer/reader/writer data >>
+        #@+<< LeoApp: global status vars >>
+        #@ << LeoApp: global status vars >>
         # A list of file names that *might* be open in another copy of Leo.
         self.already_open_files: list[str] = []
         self.dragging = False  # True: dragging.
@@ -268,9 +268,9 @@ class LeoApp:
         self.restarting = False  # True: restarting all of Leo. #1240.
         self.reverting = False  # True: executing the revert command.
         self.syntax_error_files: list[str] = []
-        # @-<< LeoApp: global status vars >>
-        # @+<< LeoApp: the global log >>
-        # @+node:ekr.20161028040141.1: *5* << LeoApp: the global log >>
+        #@-<< LeoApp: global status vars >>
+        #@+<< LeoApp: the global log >>
+        #@ << LeoApp: the global log >>
         # The LeoFrame containing the present log.
         self.log: LeoFrame = None
         # False: all log message go to logWaiting list.
@@ -284,29 +284,29 @@ class LeoApp:
         self.signon = ''
         self.signon1 = ''
         self.signon2 = ''
-        # @-<< LeoApp: the global log >>
-        # @+<< LeoApp: global types >>
-        # @+node:ekr.20161028040204.1: *5* << LeoApp: global types >>
+        #@-<< LeoApp: the global log >>
+        #@+<< LeoApp: global types >>
+        #@ << LeoApp: global types >>
         from leo.core import leoFrame
         from leo.core import leoGui
 
         self.nullGui = leoGui.NullGui()
         self.nullLog = leoFrame.NullLog()
-        # @-<< LeoApp: global types >>
-        # @+<< LeoApp: plugins and event handlers >>
-        # @+node:ekr.20161028040229.1: *5* << LeoApp: plugins and event handlers >>
+        #@-<< LeoApp: global types >>
+        #@+<< LeoApp: plugins and event handlers >>
+        #@ << LeoApp: plugins and event handlers >>
         self.hookError = False  # True: suppress further calls to hooks.
         self.hookFunction: Callable | None = None  # Application wide hook function.
         self.idle_time_hooks_enabled = True  # True: idle-time hooks are enabled.
-        # @-<< LeoApp: plugins and event handlers >>
-        # @+<< LeoApp: scripting ivars >>
-        # @+node:ekr.20161028040303.1: *5* << LeoApp: scripting ivars >>
+        #@-<< LeoApp: plugins and event handlers >>
+        #@+<< LeoApp: scripting ivars >>
+        #@ << LeoApp: scripting ivars >>
         # For use by scripts. Cleared before running each script.
         self.scriptDict: dict[str, Any] = {}
         self.scriptResult: Any = None  # For use by leoPymacs.
         # For use by scripts. Never cleared automatically.
         self.permanentScriptDict: dict[str, Any] = {}
-        # @-<< LeoApp: scripting ivars >>
+        #@-<< LeoApp: scripting ivars >>
         # Define all global data.
         self.init_at_auto_names()
         self.init_at_file_names()
@@ -316,676 +316,7 @@ class LeoApp:
         self.define_extension_dict()
         self.define_delegate_language_dict()
 
-    # @+node:ekr.20141102043816.5: *5* app.define_delegate_language_dict
-    def define_delegate_language_dict(self) -> None:
-        self.delegate_language_dict: dict[str, str] = {
-            # Keys are new language names.
-            "codon":      "python",
-            "elisp":      "lisp",
-            "glsl":       "c",
-            "handlebars": "html",
-            "hbs":        "html",
-            "less":       "css",
-            "katex":      "html",  # Leo 6.8.4
-            "mathjax":    "html",  # Leo 6.8.4
-            "toml": "ini",
-            # Values are existing languages in leo/modes.
-        }  # fmt: skip
-
-    # @+node:ekr.20120522160137.9911: *5* app.define_extension_dict
-    def define_extension_dict(self) -> None:
-        # Keys are extensions, values are languages
-        self.extension_dict: dict[str, str] = {
-            # "ada":    "ada",
-            "ada":      "ada95",  # modes/ada95.py exists.
-            "ahk":      "autohotkey",
-            "aj":       "aspect_j",
-            "apdl":     "apdl",
-            "as":       "actionscript",  # jason 2003-07-03
-            "asp":      "asp",
-            "awk":      "awk",
-            "b":        "b",
-            "bas":      "rapidq",  # fil 2004-march-11
-            "bash":     "shellscript",
-            "bat":      "batch",
-            "bbj":      "bbj",
-            "bcel":     "bcel",
-            "bib":      "bibtex",
-            "c":        "c",
-            "c++":      "cplusplus",
-            "cbl":      "cobol",  # Only one extension is valid: .cob
-            "cob":      "cobol",
-            "cc":       "cplusplus",
-            "cfg":      "config",
-            "cfm":      "coldfusion",
-            "ch":       "chill",    # Other extensions, .c186,.c286
-            "clj":      "clojure",  # 2013/09/25: Fix bug 879338.
-            "cljc":     "clojure",
-            "cljs":     "clojure",
-            "cmd":      "batch",
-            "codon":    "codon",
-            "coffee":   "coffeescript",
-            "comp":     "glsl",
-            "conf":     "apacheconf",
-            "cpp":      "cplusplus",  # 2020/08/12: was cpp.
-            "css":      "css",
-            "d":        "d",
-            "dart":     "dart",
-            "e":        "eiffel",
-            "el":       "elisp",
-            "eml":      "mail",
-            "erl":      "erlang",
-            "ex":       "elixir",
-            "f":        "fortran",
-            "f90":      "fortran90",
-            "factor":   "factor",
-            "forth":    "forth",
-            "frag":     "glsl",
-            "g":        "antlr",
-            "geom":     "glsl",
-            "glsl":     "glsl",
-            "go":       "go",
-            "groovy":   "groovy",
-            "h":        "c",  # 2012/05/23.
-            "hh":       "cplusplus",
-            "handlebars": "html",  # McNab.
-            "hbs":      "html",    # McNab.
-            "hs":       "haskell",
-            "html":     "html",
-            "hx":       "haxe",
-            "i":        "swig",
-            "i4gl":     "i4gl",
-            "icn":      "icon",
-            "idl":      "idl",
-            "inf":      "inform",
-            "info":     "texinfo",
-            "ini":      "ini",
-            "io":       "io",
-            "ipynb":    "jupytext",
-            "iss":      "inno_setup",
-            "java":     "java",
-            "jhtml":    "jhtml",
-            "jl":       "julia",
-            "jmk":      "jmk",
-            "js":       "javascript",  # For javascript import test.
-            "jsp":      "javaserverpage",
-            "json":     "json",
-            # "jsp":      "jsp",
-            "ksh":      "kshell",
-            "kv":       "kivy",  # PeckJ 2014/05/05
-            "latex":    "latex",
-            "less":     "css",  # McNab
-            "lua":      "lua",  # ddm 13/02/06
-            "ly":       "lilypond",
-            "m":        "matlab",
-            "mak":      "makefile",
-            "md":       "md",  # PeckJ 2013/02/07
-            "ml":       "ml",  # Also ocaml.
-            "mm":       "objective_c",  # Only one extension is valid: .m
-            "mod":      "modula3",
-            "mpl":      "maple",
-            "mqsc":     "mqsc",
-            "nqc":      "nqc",
-            "nim":      "nim",
-            "nsi":      "nsi",  # EKR: 2010/10/27
-            # "nsi":      "nsis2",
-            "nw":       "noweb",
-            "occ":      "occam",
-            "otl":      "vimoutline",  # TL 8/25/08 Vim's outline plugin
-            "p":        "pascal",
-            # "p":      "pop11", # Conflicts with pascal.
-            "php":      "php",
-            "pike":     "pike",
-            "pl":       "perl",
-            "pl1":      "pl1",
-            "po":       "gettext",
-            "pod":      "perlpod",
-            "pov":      "povray",
-            "prg":      "foxpro",
-            "pro":      "prolog",
-            "ps":       "postscript",
-            "psp":      "psp",
-            "pug":      "pug",
-            "jade":     "pug",
-            "ptl":      "ptl",
-            "py":       "python",
-            "pyx":      "cython",  # Other extensions, .pyd,.pyi
-            # "pyx":    "pyrex",
-            # "r":      "r", # modes/r.py does not exist.
-            "r":        "rebol",  # jason 2003-07-03
-            "rb":       "ruby",  # thyrsus 2008-11-05
-            "rest":     "rst",
-            "rex":      "objectrexx",
-            "rhtml":    "rhtml",
-            "rib":      "rib",
-            "rs":       "rust",  # EKR: 2019/08/11
-            "sas":      "sas",
-            "scad":     "openscad",  # PeckJ 2024/11/13
-            "scala":    "scala",
-            "scm":      "scheme",
-            "scpt":     "applescript",
-            "sgml":     "sgml",
-            "sh":       "shell",  # DS 4/1/04. modes/shell.py exists.
-            "shtml":    "shtml",
-            "sm":       "smalltalk",
-            "splus":    "splus",
-            "sql":      "plsql",  # qt02537 2005-05-27
-            "sqr":      "sqr",
-            "ss":       "ssharp",
-            "ssi":      "shtml",
-            "sty":      "latex",
-            "tcl":      "tcl",  # modes/tcl.py exists.
-            # "tcl":    "tcltk",
-            "tesc":     "glsl",
-            "tese":     "glsl",
-            "tex":      "latex",
-            # "tex":      "tex",
-            "toml":     "toml",
-            "tpl":      "tpl",
-            "ts":       "typescript",
-            "txt":      "plain",
-            # "txt":      "text",
-            # "txt":      "unknown", # Set when @comment is seen.
-            "typ":      "typst",
-            "typst":    "typst",
-            "uc":       "uscript",
-            "v":        "verilog",
-            "vbs":      "vbscript",
-            "vhd":      "vhdl",
-            "vhdl":     "vhdl",
-            "vim":      "vim",
-            "vtl":      "velocity",
-            "w":        "cweb",
-            "wiki":     "moin",
-            "xml":      "xml",
-            "xom":      "omnimark",
-            "xsl":      "xsl",
-            "yaml":     "yaml",
-            "vert":     "glsl",
-            "vue":      "javascript",
-            "zpt":      "zpt",
-
-            # UPPERCASE VARIANTS: legacy languages that suported, or even expected, uppercase extensions.
-            "BAS":      "rapidq",
-            "BAT":      "batch",
-            "CBL":      "cobol",
-            "CMD":      "batch",
-
-            "F":        "fortran",
-            "F90":      "fortran90",
-
-            "H":        "c",
-            "C":        "cplusplus",
-            "CC":       "cplusplus",
-            "CPP":      "cplusplus",
-
-            "MAK":      "makefile",
-            "P":        "pascal",
-            "PL1":      "pl1",
-            "PRG":      "foxpro",
-            "REX":      "objectrexx",
-
-            "VHD":      "vhdl",
-            "VHDL":     "vhdl",
-
-            "ADA":      "ada95",
-            "IDL":      "idl",
-            "INI":      "ini",
-            "MOD":      "modula3",
-            "PRO":      "prolog",
-            "PS":       "postscript",
-            "SQL":      "plsql",
-            "TCL":      "tcl",
-            "TEX":      "latex",
-            "TXT":      "plain",
-
-            "JSON":     "json",
-            "MD":       "md",
-            "YAML":     "yaml",
-            "VIM":      "vim",
-            "SH":       "shell",
-            "PL":       "perl",
-            "RB":       "ruby",
-
-
-        }  # fmt: skip
-
-        # These aren't real languages, or have no delims...
-        # cvs_commit, dsssl, embperl, freemarker, hex, jcl,
-        # patch, phpsection, progress, props, pseudoplain,
-        # relax_ng_compact, rtf, svn_commit.
-
-        # These have extensions which conflict with other languages.
-        # assembly_6502:    .asm or .a or .s
-        # assembly_macro32: .asm or .a
-        # assembly_mcs51:   .asm or .a
-        # assembly_parrot:  .asm or .a
-        # assembly_r2000:   .asm or .a
-        # assembly_x86:     .asm or .a
-        # squidconf:        .conf
-        # rpmspec:          .rpm
-
-        # Extra language extensions, used to associate extensions with mode files.
-        # Used by importCommands.languageForExtension.
-        # Keys are extensions, values are corresponding mode file (without .py)
-        # A value of 'none' is a signal to unit tests that no extension file exists.
-        self.extra_extension_dict = {
-            'pod': 'perl',
-            'unknown_language': 'none',
-            'w': 'c',
-        }  # fmt: skip
-
-    # @+node:ekr.20031218072017.1417: *5* app.define_global_constants
-    def define_global_constants(self) -> None:
-        # self.prolog_string = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-        xml_url = 'https://leo-editor.github.io/leo-editor/namespaces/leo-python-editor/1.1'
-        self.prolog_prefix_string = '<?xml version="1.0" encoding='
-        self.prolog_postfix_string = '?>'
-        self.prolog_namespace_string = f'xmlns:leo="{xml_url}"'
-
-    # @+node:ekr.20120522160137.9909: *5* app.define_language_delims_dict
-    def define_language_delims_dict(self) -> None:
-        self.language_delims_dict: dict[str, str] = {
-            # Internally, lower case is used for all language names.
-            # Keys are languages, values are strings that contain 1, 2 or 3 delims separated by spaces.
-            "actionscript"       : "// /* */",  # jason 2003-07-03
-            "ada"                : "--",
-            "ada95"              : "--",
-            "ahk"                : ";",
-            "antlr"              : "// /* */",
-            "apacheconf"         : "#",
-            "apdl"               : "!",
-            "applescript"        : "-- (* *)",
-            "asp"                : "<!-- -->",
-            "aspect_j"           : "// /* */",
-            "assembly_6502"      : ";",
-            "assembly_macro32"   : ";",
-            "assembly_mcs51"     : ";",
-            "assembly_parrot"    : "#",
-            "assembly_r2000"     : "#",
-            "assembly_x86"       : ";",
-            "autohotkey"         : "; /* */",  # TL - AutoHotkey language
-            "awk"                : "#",
-            "b"                  : "// /* */",
-            "batch"              : "REM_",  # Use the REM hack.
-            "bbj"                : "/* */",
-            "bcel"               : "// /* */",
-            "bibtex"             : "%",
-            "c"                  : "// /* */",  # C, C++ or objective C.
-            "chill"              : "/* */",
-            "clojure"            : ";",  # 2013/09/25: Fix bug 879338.
-            "cobol"              : "*",
-            "codon"              : "#",
-            "coldfusion"         : "<!-- -->",
-            "coffeescript"       : "#",  # 2016/02/26.
-            "config"             : "#",  # Leo 4.5.1
-            "cplusplus"          : "// /* */",
-            "cpp"                : "// /* */",  # C++.
-            "csharp"             : "// /* */",  # C#
-            "css"                : "/* */",   # 4/1/04
-            "cweb"               : "@q@ @>",  # Use the "cweb hack"
-            "cython"             : "#",
-            "d"                  : "// /* */",
-            "dart"               : "// /* */",  # Leo 5.0.
-            "doxygen"            : "#",
-            "eiffel"             : "--",
-            "elisp"              : ";",
-            "erlang"             : "%",
-            "elixir"             : "#",
-            "factor"             : "!_ ( )",  # Use the rem hack.
-            "forth"              : "\\_ _(_ _)",  # Use the "REM hack"
-            "fortran"            : "C",
-            "fortran90"          : "!",
-            "foxpro"             : "&&",
-            "gettext"            : "# ",
-            "glsl"               : "// /* */",  # Same as C.
-            "go"                 : "//",
-            "groovy"             : "// /* */",
-            "handlebars"         : "<!-- -->",  # McNab: delegate to html.
-            "haskell"            : "--_ {-_ _-}",
-            "haxe"               : "// /* */",
-            "hbs"                : "<!-- -->",  # McNab: delegate to html.
-            "html"               : "<!-- -->",
-            "i4gl"               : "-- { }",
-            "icon"               : "#",
-            "idl"                : "// /* */",
-            "inform"             : "!",
-            "ini"                : ";",
-            "inno_setup"         : ";",
-            "interlis"           : "/* */",
-            "io"                 : "// */",
-            "java"               : "// /* */",
-            "javascript"         : "// /* */",   # EKR: 2011/11/12: For javascript import test.
-            "javaserverpage"     : "<%-- --%>",  # EKR: 2011/11/25 (See also, jsp)
-            "jhtml"              : "<!-- -->",
-            "jmk"                : "#",
-            "json"               : "#",  # EKR: 2020/07/27: Json has no delims. This is a dummy entry.
-            "jsp"                : "<%-- --%>",
-            "julia"              : "#",
-            "jupyter"            : "<%-- --%>",  # Default to markdown?
-            "jupytext"           : "#",
-            "katex"              : "%",  # Leo 6.8.7.
-            "kivy"               : "#",  # PeckJ 2014/05/05
-            "kshell"             : "#",  # Leo 4.5.1.
-            "latex"              : "%",
-            "less"               : "/* */",  # NcNab: delegate to css.
-            "lilypond"           : "% %{ %}",
-            "lisp"               : ";",  # EKR: 2010/09/29
-            "lotos"              : "(* *)",
-            "lua"                : "--",  # ddm 13/02/06
-            "mail"               : ">",
-            "makefile"           : "#",
-            "maple"              : "//",
-            "markdown"           : "<!-- -->",  # EKR, 2018/03/03: html comments.
-            "matlab"             : "%",  # EKR: 2011/10/21
-            "mathjax"            : "% <!-- -->",  # EKR: 2024/12/27: latex & html comments.
-            "md"                 : "<!-- -->",  # PeckJ: 2013/02/08
-            "ml"                 : "(* *)",
-            "modula3"            : "(* *)",
-            "moin"               : "##",
-            "mqsc"               : "*",
-            "netrexx"            : "-- /* */",
-            "nim"                : "#",
-            "noweb"              : "%",  # EKR: 2009-01-30. Use Latex for doc chunks.
-            "nqc"                : "// /* */",
-            "nsi"                : ";",  # EKR: 2010/10/27
-            "nsis2"              : ";",
-            "objective_c"        : "// /* */",
-            "objectrexx"         : "-- /* */",
-            "occam"              : "--",
-            "ocaml"              : "(* *)",
-            "omnimark"           : ";",
-            "pandoc"             : "<!-- -->",
-            "openscad"           : "// /* */",  # EKR: 2024/11/13: same as "C".
-            "pascal"             : "// { }",
-            "perl"               : "#",
-            "perlpod"            : "# __=pod__ __=cut__",  # 9/25/02: The perlpod hack.
-            "php"                : "// /* */",  # 6/23/07: was "//",
-            "pike"               : "// /* */",
-            "pl1"                : "/* */",
-            "plain"              : "#",  # We must pick something.
-            "plsql"              : "-- /* */",  # SQL scripts qt02537 2005-05-27
-            "pop11"              : ";;; /* */",
-            "postscript"         : "%",
-            "povray"             : "// /* */",
-            "powerdynamo"        : "// <!-- -->",
-            "prolog"             : "% /* */",
-            "psp"                : "<!-- -->",
-            "ptl"                : "#",
-            "pvwave"             : ";",
-            "pyrex"              : "#",
-            "pug"                : "//-",
-            "python"             : "#",
-            "r"                  : "#",
-            "rapidq"             : "'",  # fil 2004-march-11
-            "rebol"              : ";",  # jason 2003-07-03
-            "redcode"            : ";",
-            "rest"               : ".._",
-            "rhtml"              : "<%# %>",
-            "rib"                : "#",
-            "rpmspec"            : "#",
-            "rst"                : ".._",
-            "rust"               : "// /* */",
-            "ruby"               : "#",  # thyrsus 2008-11-05
-            "rview"              : "// /* */",
-            "sas"                : "* /* */",
-            "scala"              : "// /* */",
-            "scheme"             : "; #| |#",
-            "sdl_pr"             : "/* */",
-            "sgml"               : "<!-- -->",
-            "shell"              : "#",  # shell scripts
-            "shellscript"        : "#",
-            "shtml"              : "<!-- -->",
-            "smalltalk"          : '" "',  # Comments are enclosed in double quotes(!!)
-            "smi_mib"            : "--",
-            "splus"              : "#",
-            "sqr"                : "!",
-            "squidconf"          : "#",
-            "ssharp"             : "#",
-            "swig"               : "// /* */",
-            "tcl"                : "#",
-            "tcltk"              : "#",
-            "tex"                : "%",  # Bug fix: 2008-1-30: Fixed Mark Edginton's bug.
-            "text"               : "#",  # We must pick something.
-            "texinfo"            : "@c",
-            "toml"               : "#",
-            "tpl"                : "<!-- -->",
-            "tsql"               : "-- /* */",
-            "typst"              : "//",
-            "typescript"         : "// /* */",  # For typescript import test.
-            "unknown"            : "#",  # Set when @comment is seen.
-            "unknown_language"   : '#--unknown-language--',  # For unknown extensions in @shadow files.
-            "uscript"            : "// /* */",
-            "vbscript"           : "'",
-            "velocity"           : "## #* *#",
-            "verilog"            : "// /* */",
-            "vhdl"               : "--",
-            "vim"                : "\"",
-            "vimoutline"         : "#",  # TL 8/25/08 Vim's outline plugin
-            "xml"                : "<!-- -->",
-            "xsl"                : "<!-- -->",
-            "xslt"               : "<!-- -->",
-            "yaml"               : "#",
-            "zpt"                : "<!-- -->",
-
-            # These aren't real languages, or have no delims...
-            # "cvs_commit"         : "",
-            # "dsssl"              : "; <!-- -->",
-            # "embperl"            : "<!-- -->",  # Internal colorizing state.
-            # "freemarker"         : "",
-            # "hex"                : "",
-            # "jcl"                : "",
-            # "patch"              : "",
-            # "phpsection"         : "<!-- -->",  # Internal colorizing state.
-            # "props"              : "#",         # Unknown language.
-            # "pseudoplain"        : "",
-            # "relax_ng_compact"   : "#",         # An xml schema.
-            # "rtf"                : "",
-            # "svn_commit"         : "",
-        }  # fmt: skip
-
-    # @+node:ekr.20120522160137.9910: *5* app.define_language_extension_dict
-    def define_language_extension_dict(self) -> None:
-        # Used only by g.app.externalFilesController.get_ext.
-
-        # Keys are languages, values are extensions.
-        self.language_extension_dict: dict[str, str] = {
-            "actionscript"  : "as",  # jason 2003-07-03
-            "ada"           : "ada",
-            "ada95"         : "ada",
-            "ahk"           : "ahk",
-            "antlr"         : "g",
-            "apacheconf"    : "conf",
-            "apdl"          : "apdl",
-            "applescript"   : "scpt",
-            "asp"           : "asp",
-            "aspect_j"      : "aj",
-            "autohotkey"    : "ahk",  # TL - AutoHotkey language
-            "awk"           : "awk",
-            "b"             : "b",
-            "batch"         : "bat",  # Leo 4.5.1.
-            "bbj"           : "bbj",
-            "bcel"          : "bcel",
-            "bibtex"        : "bib",
-            "c"             : "c",
-            "chill"         : "ch",   # Only one extension is valid: .c186, .c286
-            "clojure"       : "clj",  # 2013/09/25: Fix bug 879338.
-            "cobol"         : "cbl",  # Only one extension is valid: .cob
-            "codon"         : "codon",
-            "coldfusion"    : "cfm",
-            "coffeescript"  : "coffee",
-            "config"        : "cfg",
-            "cplusplus"     : "c++",
-            "cpp"           : "cpp",
-            "css"           : "css",
-            "cweb"          : "w",
-            "cython"        : "pyx",  # Only one extension is valid at present: .pyi, .pyd.
-            "d"             : "d",
-            "dart"          : "dart",
-            "eiffel"        : "e",
-            "elisp"         : "el",
-            "erlang"        : "erl",
-            "elixir"        : "ex",
-            "factor"        : "factor",
-            "forth"         : "forth",
-            "fortran"       : "f",
-            "fortran90"     : "f90",
-            "foxpro"        : "prg",
-            "gettext"       : "po",
-            "glsl"          : "glsl",  # .comp, .frag, .geom, .tesc, .tese, .vert.
-            "go"            : "go",
-            "groovy"        : "groovy",
-            "haskell"       : "hs",
-            "haxe"          : "hx",
-            "html"          : "html",
-            "i4gl"          : "i4gl",
-            "icon"          : "icn",
-            "idl"           : "idl",
-            "inform"        : "inf",
-            "ini"           : "ini",
-            "inno_setup"    : "iss",
-            "io"            : "io",
-            "java"          : "java",
-            "javascript"    : "js",   # EKR: 2011/11/12: For javascript import test.
-            "javaserverpage": "jsp",  # EKR: 2011/11/25
-            "jhtml"         : "jhtml",
-            "jmk"           : "jmk",
-            "json"          : "json",
-            "jsp"           : "jsp",
-            "julia"         : "jl",
-            "jupytext"      : "ipynb",
-            "kivy"          : "kv",   # PeckJ 2014/05/05
-            "kshell"        : "ksh",  # Leo 4.5.1.
-            "latex"         : "tex",  # 1/8/04
-            "lilypond"      : "ly",
-            "lua"           : "lua",  # ddm 13/02/06
-            "mail"          : "eml",
-            "makefile"      : "mak",
-            "maple"         : "mpl",
-            "matlab"        : "m",
-            "md"            : "md",  # PeckJ: 2013/02/07
-            "ml"            : "ml",  # Also ocaml.
-            "modula3"       : "mod",
-            "moin"          : "wiki",
-            "mqsc"          : "mqsc",
-            "nim"           : "nim",
-            "noweb"         : "nw",
-            "nqc"           : "nqc",
-            "nsi"           : "nsi",  # EKR: 2010/10/27
-            "nsis2"         : "nsi",
-            "objective_c"   : "mm",  # Only one extension is valid: .m
-            "objectrexx"    : "rex",
-            "occam"         : "occ",
-            "ocaml"         : "ml",
-            "omnimark"      : "xom",
-            "openscad"      : "scad",  # EKR, per PeckJ 2024/11/13
-            "pascal"        : "p",
-            "perl"          : "pl",
-            "perlpod"       : "pod",
-            "php"           : "php",
-            "pike"          : "pike",
-            "pl1"           : "pl1",
-            "plain"         : "txt",
-            "plsql"         : "sql",  # qt02537 2005-05-27
-            # "pop11"       : "p", # Conflicts with pascal.
-            "postscript"    : "ps",
-            "povray"        : "pov",
-            "prolog"        : "pro",
-            "psp"           : "psp",
-            "ptl"           : "ptl",
-            "pyrex"         : "pyx",
-            "pug"           : "pug",
-            "python"        : "py",
-            "r"             : "r",
-            "rapidq"        : "bas",  # fil 2004-march-11
-            "rebol"         : "r",  # jason 2003-07-03
-            "rhtml"         : "rhtml",
-            "rib"           : "rib",
-            "rst"           : "rest",
-            "ruby"          : "rb",  # thyrsus 2008-11-05
-            "rust"          : "rs",  # EKR: 2019/08/11
-            "sas"           : "sas",
-            "scala"         : "scala",
-            "scheme"        : "scm",
-            "sgml"          : "sgml",
-            "shell"         : "sh",  # DS 4/1/04
-            "shellscript"   : "bash",
-            "shtml"         : "ssi",  # Only one extension is valid: .shtml
-            "smalltalk"     : "sm",
-            "splus"         : "splus",
-            "sqr"           : "sqr",
-            "ssharp"        : "ss",
-            "swig"          : "i",
-            "tcl"           : "tcl",
-            "tcltk"         : "tcl",
-            "tex"           : "tex",
-            "texinfo"       : "info",
-            "text"          : "txt",
-            "toml"          : "toml",
-            "tpl"           : "tpl",
-            "tsql"          : "sql",  # A guess.
-            "typescript"    : "ts",
-            "typst"         : "typ",
-            "unknown"       : "txt",  # Set when @comment is seen.
-            "uscript"       : "uc",
-            "vbscript"      : "vbs",
-            "velocity"      : "vtl",
-            "verilog"       : "v",
-            "vhdl"          : "vhd",  # Only one extension is valid: .vhdl
-            "vim"           : "vim",
-            "vimoutline"    : "otl",  # TL 8/25/08 Vim's outline plugin
-            "xml"           : "xml",
-            "xsl"           : "xsl",
-            "xslt"          : "xsl",
-            "yaml"          : "yaml",
-            "zpt"           : "zpt",
-        }  # fmt: skip
-
-        # These aren't real languages, or have no delims...
-        # cvs_commit, dsssl, embperl, freemarker, hex, jcl,
-        # patch, phpsection, progress, props, pseudoplain,
-        # relax_ng_compact, rtf, svn_commit.
-
-        # These have extensions which conflict with other languages.
-        # assembly_6502:    .asm or .a or .s
-        # assembly_macro32: .asm or .a
-        # assembly_mcs51:   .asm or .a
-        # assembly_parrot:  .asm or .a
-        # assembly_r2000:   .asm or .a
-        # assembly_x86:     .asm or .a
-        # squidconf:        .conf
-        # rpmspec:          .rpm
-
-    # @+node:ekr.20140729162415.18086: *5* app.init_at_auto_names
-    def init_at_auto_names(self) -> None:
-        """Init the app.atAutoNames set."""
-        self.atAutoNames = set(
-            [
-                "@auto-rst",
-                "@auto",
-            ]
-        )
-
-    # @+node:ekr.20140729162415.18091: *5* app.init_at_file_names
-    def init_at_file_names(self) -> None:
-        """Init the app.atFileNames set."""
-        self.atFileNames = set(
-            [
-                "@asis",
-                "@clean",
-                "@edit",
-                "@file-asis",
-                "@file-thin",
-                "@file-nosent",
-                "@file",
-                "@jupytext",
-                "@nosent",
-                "@shadow",
-                "@thin",
-            ]
-        )
-
-    # @+node:ekr.20090717112235.6007: *4* app.computeSignon & printSignon
+    #@< app.computeSignon & printSignon
     def computeSignon(self) -> None:
         from leo.core import leoVersion
 
@@ -1046,8 +377,8 @@ class LeoApp:
         print(app.signon)
         print(app.signon1)
 
-    # @+node:ekr.20100831090251.5838: *4* app.createXGui
-    # @+node:ekr.20090619065122.8593: *5* app.createDefaultGui
+    #@ app.createXGui
+    #@> app.createDefaultGui
     def createDefaultGui(self, fileName: str = '', verbose: bool = False) -> None:
         """A convenience routines for plugins to create the default gui class."""
         app = self
@@ -1077,14 +408,14 @@ class LeoApp:
             # runLeo.py will catch the SystemExit exception and print the message.
             sys.exit(message)
 
-    # @+node:ekr.20031218072017.1938: *5* app.createNullGuiWithScript
+    #@ app.createNullGuiWithScript
     def createNullGuiWithScript(self, script: str = '') -> None:
         app = self
         app.batchMode = True
         app.gui = g.app.nullGui
         app.gui.setScript(script)
 
-    # @+node:ekr.20090202191501.1: *5* app.createQtGui
+    #@ app.createQtGui
     # Do NOT omit fileName param: it is used in plugin code.
 
     def createQtGui(self, fileName: str = '', verbose: bool = False) -> None:
@@ -1109,7 +440,7 @@ class LeoApp:
         if app.gui and fileName and verbose:
             print(f"Qt Gui created in {fileName}")
 
-    # @+node:ville.20090620122043.6275: *4* app.setGlobalDb
+    #@< app.setGlobalDb
     def setGlobalDb(self) -> None:
         """Create global pickleshare db
 
@@ -1123,7 +454,7 @@ class LeoApp:
         g.app.global_cacher = leoCache.GlobalCacher()
         g.app.db = g.app.global_cacher.db
 
-    # @+node:ekr.20031218072017.1978: *4* app.setLeoID & helpers
+    #@ app.setLeoID & helpers
     def setLeoID(self, useDialog: bool = True, verbose: bool = True) -> str:
         """Get g.app.leoID from various sources."""
         self.leoID = ''
@@ -1140,7 +471,7 @@ class LeoApp:
                 self.setIDFile()
         return self.leoID
 
-    # @+node:ekr.20191017061451.1: *5* app.cleanLeoID
+    #@> app.cleanLeoID
     def cleanLeoID(self, id_: str, tag: str) -> str:
         """#1404: Make sure that the given Leo ID will not corrupt a .leo file."""
         old_id = id_ if isinstance(id_, str) else repr(id_)
@@ -1162,7 +493,7 @@ class LeoApp:
             )
         return id_
 
-    # @+node:ekr.20031218072017.1979: *5* app.setIDFromSys
+    #@ app.setIDFromSys
     def setIDFromSys(self, verbose: bool) -> None:
         """
         Attempt to set g.app.leoID from sys.leoID.
@@ -1178,7 +509,7 @@ class LeoApp:
                 if verbose:
                     g.red("leoID=", self.leoID, spaces=False)
 
-    # @+node:ekr.20031218072017.1980: *5* app.setIDFromFile
+    #@ app.setIDFromFile
     def setIDFromFile(self, verbose: bool) -> None:
         """Attempt to set g.app.leoID from leoID.txt."""
         tag = ".leoID.txt"
@@ -1203,7 +534,7 @@ class LeoApp:
                 g.error('unexpected exception in app.setLeoID')
                 g.es_exception()
 
-    # @+node:ekr.20060211140947.1: *5* app.setIDFromEnv
+    #@ app.setIDFromEnv
     def setIDFromEnv(self, verbose: bool) -> None:
         """Set leoID from environment vars."""
         try:
@@ -1218,7 +549,7 @@ class LeoApp:
         except Exception:
             pass
 
-    # @+node:ekr.20031218072017.1981: *5* app.setIdFromDialog
+    #@ app.setIdFromDialog
     def setIdFromDialog(self) -> None:
         """Get leoID from a Tk dialog."""
         # Don't put up a splash screen: it would obscure the coming dialog.
@@ -1244,7 +575,7 @@ class LeoApp:
         self.leoID = id_
         g.blue('leoID=', repr(self.leoID), spaces=False)
 
-    # @+node:ekr.20031218072017.1982: *5* app.setIDFile
+    #@ app.setIDFile
     def setIDFile(self) -> None:
         """Create leoID.txt."""
         tag = ".leoID.txt"
@@ -1261,7 +592,7 @@ class LeoApp:
                     pass
                 g.error('can not create', tag, 'in', theDir)
 
-    # @+node:ekr.20031218072017.1847: *4* app.setLog, lockLog, unlocklog
+    #@< app.setLog, lockLog, unlocklog
     def setLog(self, log: LeoFrame) -> None:
         """set the frame to which log messages will go"""
         if not self.logIsLocked:
@@ -1277,7 +608,7 @@ class LeoApp:
         # print("app.unlockLog:")
         self.logIsLocked = False
 
-    # @+node:ekr.20031218072017.2619: *4* app.writeWaitingLog
+    #@ app.writeWaitingLog
     def writeWaitingLog(self, c: Cmdr) -> None:
         """Write all waiting lines to the log."""
         # Do not call g.es, g.es_print, g.pr or g.trace here!
@@ -1317,13 +648,13 @@ class LeoApp:
         # Essential when opening multiple files...
         g.app.setLog(None)
 
-    # @+node:ekr.20180924093227.1: *3* app.c property
+    #@< app.c property
     @property
     def c(self) -> Cmdr | None:
         return self.log and self.log.c
 
-    # @+node:ekr.20171127111053.1: *3* app.Closing
-    # @+node:ekr.20031218072017.2609: *4* app.closeLeoWindow
+    #@ app.Closing
+    #@> app.closeLeoWindow
     def closeLeoWindow(
         self,
         frame: LeoFrame,
@@ -1372,7 +703,7 @@ class LeoApp:
             g.app.finishQuit()
         return True  # The window has been closed.
 
-    # @+node:ekr.20031218072017.2612: *4* app.destroyAllOpenWithFiles
+    #@ app.destroyAllOpenWithFiles
     def destroyAllOpenWithFiles(self) -> None:
         """Remove temp files created with the Open With command."""
         if 'shutdown' in g.app.debug:
@@ -1382,7 +713,7 @@ class LeoApp:
             # Disable further processing. Disable the otherwise valid mypy complaint.
             g.app.externalFilesController = cast(ExternalFilesController, None)
 
-    # @+node:ekr.20031218072017.2615: *4* app.destroyWindow
+    #@ app.destroyWindow
     def destroyWindow(self, frame: LeoFrame) -> None:
         """Destroy all ivars in a Leo frame."""
         if 'shutdown' in g.app.debug:
@@ -1395,7 +726,7 @@ class LeoApp:
         # Important: this also destroys all the objects of the commander.
         frame.destroySelf()
 
-    # @+node:ekr.20031218072017.1732: *4* app.finishQuit
+    #@ app.finishQuit
     def finishQuit(self) -> None:
         # forceShutdown may already have fired the "end1" hook.
         assert self == g.app, repr(g.app)
@@ -1416,7 +747,7 @@ class LeoApp:
         if g.app.gui:
             g.app.gui.destroySelf()  # Calls qtApp.quit()
 
-    # @+node:ekr.20031218072017.2616: *4* app.forceShutdown
+    #@ app.forceShutdown
     def forceShutdown(self) -> None:
         """
         Forces an immediate shutdown of Leo at any time.
@@ -1445,7 +776,7 @@ class LeoApp:
             g.pr('before finishQuit')
         self.finishQuit()
 
-    # @+node:ekr.20031218072017.2617: *4* app.onQuit
+    #@ app.onQuit
     @cmd('exit-leo')
     @cmd('quit-leo')
     def onQuit(self, event: LeoKeyEvent | None = None) -> None:
@@ -1456,19 +787,19 @@ class LeoApp:
         # #2433 - use the same method as clicking on the close box.
         g.app.gui.close_event(QCloseEvent())
 
-    # @+node:ekr.20230703100758.1: *4* app.saveSession
+    #@ app.saveSession
     def saveSession(self) -> None:
         """Save session data depending on command-line arguments."""
         if self.sessionManager and (self.loaded_session or self.always_write_session_data):
             self.sessionManager.save_snapshot()
 
-    # @+node:ville.20090602181814.6219: *3* app.commanders
+    #@< app.commanders
     def commanders(self) -> list[Cmdr]:
         """Return list of currently active commanders."""
         return [f.c for f in g.app.windowList]
 
-    # @+node:ekr.20120427064024.10068: *3* app.Detecting already-open files
-    # @+node:ekr.20120427064024.10064: *4* app.checkForOpenFile
+    #@ app.Detecting already-open files
+    #@> app.checkForOpenFile
     def checkForOpenFile(self, c: Cmdr, fn: str) -> None:
         """Warn if fn is already open and add fn to already_open_files list."""
         d, tag = g.app.db, 'open-leo-files'
@@ -1493,7 +824,7 @@ class LeoApp:
         else:
             g.app.rememberOpenFile(fn)
 
-    # @+node:ekr.20120427064024.10066: *4* app.forgetOpenFile
+    #@ app.forgetOpenFile
     def forgetOpenFile(self, fn: str) -> None:
         """
         Remove fn from g.app.db, so that is no longer considered open.
@@ -1511,7 +842,7 @@ class LeoApp:
                 g.pr(f"forgetOpenFile: {fn2}")
             d[tag] = aList
 
-    # @+node:ekr.20120427064024.10065: *4* app.rememberOpenFile
+    #@ app.rememberOpenFile
     def rememberOpenFile(self, fn: str) -> None:
         # Do not call g.trace, etc. here.
         d, tag = g.app.db, 'open-leo-files'
@@ -1525,7 +856,7 @@ class LeoApp:
             aList.append(os.path.normpath(fn))
             d[tag] = aList
 
-    # @+node:ekr.20150621062355.1: *4* app.runAlreadyOpenDialog
+    #@ app.runAlreadyOpenDialog
     def runAlreadyOpenDialog(self, c: Cmdr) -> None:
         """Warn about possibly already-open files."""
         if g.app.already_open_files:
@@ -1538,8 +869,8 @@ class LeoApp:
             )  # fmt: skip
             g.app.gui.runAskOkDialog(c, title='Already Open Files', message=message, text="Ok")
 
-    # @+node:ekr.20171127111141.1: *3* app.Import utils
-    # @+node:ekr.20140727180847.17985: *4* app.scanner_for_at_auto
+    #@< app.Import utils
+    #@> app.scanner_for_at_auto
     def scanner_for_at_auto(self, p: Position) -> Callable | None:
         """A factory returning a scanner function for p, an @auto node."""
         d = g.app.atAutoDict
@@ -1549,12 +880,12 @@ class LeoApp:
                 return func
         return None
 
-    # @+node:ekr.20140130172810.15471: *4* app.scanner_for_ext
+    #@ app.scanner_for_ext
     def scanner_for_ext(self, ext: str) -> Callable | None:
         """A factory returning a scanner function for the given file extension."""
         return g.app.classDispatchDict.get(ext)
 
-    # @+node:ekr.20170429152049.1: *3* app.listenToLog
+    #@< app.listenToLog
     @cmd('listen-to-log')
     @cmd('log-listen')
     def listenToLog(self) -> None:
@@ -1580,7 +911,7 @@ class LeoApp:
             [sys.executable, path], shell=True, universal_newlines=True
         )
 
-    # @+node:ekr.20171118024827.1: *3* app.makeAllBindings
+    #@ app.makeAllBindings
     def makeAllBindings(self) -> None:
         """
         LeoApp.makeAllBindings:
@@ -1591,7 +922,7 @@ class LeoApp:
         for c in app.commanders():
             c.k.makeAllBindings()
 
-    # @+node:ekr.20031218072017.2188: *3* app.newCommander
+    #@ app.newCommander
     def newCommander(
         self,
         fileName: str,
@@ -1615,7 +946,7 @@ class LeoApp:
         )
         return c
 
-    # @+node:ekr.20120304065838.15588: *3* app.selectLeoWindow
+    #@ app.selectLeoWindow
     def selectLeoWindow(self, c: Cmdr) -> None:
         frame = c.frame
         frame.deiconify()
@@ -1633,10 +964,10 @@ class LeoApp:
             c.bodyWantsFocus()
         c.outerUpdate()
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20120209051836.10242: ** class LoadManager
+#@< class LoadManager
 class LoadManager:
     """A class to manage loading .leo files, including configuration files."""
 
@@ -1657,8 +988,8 @@ class LoadManager:
 
     LM_NOTHEME_FLAG = 'lm_theme_use_none'
 
-    # @+others
-    # @+node:ekr.20120214060149.15851: *3*  LM.ctor
+    #@+others
+    #@>  LM.ctor
     def __init__(self) -> None:
         # Global settings & shortcuts dicts...
         # The are the defaults for computing settings and shortcuts for all loaded files.
@@ -1689,15 +1020,15 @@ class LoadManager:
         self.theme_c: Cmdr | None = None  # #1374.
         self.theme_path = ''
 
-    # @+node:ekr.20120211121736.10812: *3* LM.Directory & file utils
-    # @+node:ekr.20120219154958.10481: *4* LM.completeFileName
+    #@ LM.Directory & file utils
+    #@> LM.completeFileName
     def completeFileName(self, fileName: str) -> str:
         fileName = g.toUnicode(fileName)
         fileName = g.finalize(fileName)
         # 2011/10/12: don't add .leo to *any* file.
         return fileName
 
-    # @+node:ekr.20120209051836.10372: *4* LM.computeLeoSettingsPath
+    #@ LM.computeLeoSettingsPath
     def computeLeoSettingsPath(self) -> str:
         """Return the full path to leoSettings.leo."""
         # lm = self
@@ -1715,7 +1046,7 @@ class LoadManager:
                 return path
         return ''
 
-    # @+node:ekr.20120209051836.10373: *4* LM.computeMyLeoSettingsPath
+    #@ LM.computeMyLeoSettingsPath
     def computeMyLeoSettingsPath(self) -> str:
         """
         Return the full path to either myLeoSettings.leo or myLeoSettings.leojs.
@@ -1750,7 +1081,7 @@ class LoadManager:
                 return path + ".leojs"
         return ''
 
-    # @+node:ekr.20120209051836.10252: *4* LM.computeStandardDirectories & helpers
+    #@ LM.computeStandardDirectories & helpers
     def computeStandardDirectories(self) -> None:
         """
         Compute the locations of standard directories and
@@ -1768,7 +1099,7 @@ class LoadManager:
         g.app.leoEditorDir = join(g.app.loadDir, '..', '..')
         g.app.testDir = join(g.app.loadDir, '..', 'test')
 
-    # @+node:ekr.20120209051836.10253: *5* LM.computeGlobalConfigDir
+    #@> LM.computeGlobalConfigDir
     def computeGlobalConfigDir(self) -> str:
         if leo_config_dir := getattr(sys, 'leo_config_directory', None):
             theDir = leo_config_dir
@@ -1780,7 +1111,7 @@ class LoadManager:
             theDir = ''
         return theDir
 
-    # @+node:ekr.20120209051836.10254: *5* LM.computeHomeDir
+    #@ LM.computeHomeDir
     def computeHomeDir(self) -> str:
         """Returns the user's home directory."""
         # Windows searches the HOME, HOMEPATH and HOMEDRIVE
@@ -1797,7 +1128,7 @@ class LoadManager:
                 home = ''
         return home
 
-    # @+node:ekr.20120209051836.10260: *5* LM.computeHomeLeoDir
+    #@ LM.computeHomeLeoDir
     def computeHomeLeoDir(self) -> str:
         # lm = self
         homeLeoDir = g.finalize_join(g.app.homeDir, '.leo')
@@ -1806,25 +1137,25 @@ class LoadManager:
         ok = g.makeAllNonExistentDirectories(homeLeoDir)
         return homeLeoDir if ok else ''  # #1450
 
-    # @+node:ekr.20120209051836.10255: *5* LM.computeLeoDir
+    #@ LM.computeLeoDir
     def computeLeoDir(self) -> str:
         # lm = self
         loadDir = g.app.loadDir
         # We don't want the result in sys.path
         return g.os_path_dirname(loadDir)
 
-    # @+node:ekr.20120209051836.10256: *5* LM.computeLoadDir
+    #@ LM.computeLoadDir
     def computeLoadDir(self) -> str:
         """Returns the directory containing leo.py."""
         try:
             if path := g.__file__:
-                # @+<< resolve symlinks >>
-                # @+node:ekr.20120209051836.10257: *6* << resolve symlinks >>
+                #@+<< resolve symlinks >>
+                #@> << resolve symlinks >>
                 if path.endswith('pyc'):
                     srcfile = path[:-1]
                     if os.path.islink(srcfile):
                         path = os.path.realpath(srcfile)
-                # @-<< resolve symlinks >>
+                #@-<< resolve symlinks >>
                 if g.isWindows:
                     # Fix a hangnail: on Windows the drive letter returned by
                     # __file__ is randomly upper or lower case!
@@ -1849,7 +1180,7 @@ class LoadManager:
             print("Exception getting load directory")
             raise
 
-    # @+node:ekr.20120213164030.10697: *5* LM.computeMachineName
+    #@< LM.computeMachineName
     def computeMachineName(self) -> str:
         """Return the name of the current machine, i.e, HOSTNAME."""
         # This is prepended to leoSettings.leo or myLeoSettings.leo
@@ -1867,7 +1198,7 @@ class LoadManager:
             name = ''
         return name
 
-    # @+node:ekr.20180318120148.1: *4* LM.computeThemeDirectories
+    #@< LM.computeThemeDirectories
     def computeThemeDirectories(self) -> list[str]:
         """
         Return a list of *existing* directories that might contain theme .leo files.
@@ -1885,7 +1216,7 @@ class LoadManager:
         # Make sure home has normalized slashes.
         return [g.os_path_normslashes(z) for z in table if g.os_path_exists(z)]
 
-    # @+node:ekr.20180318133620.1: *4* LM.computeThemeFilePath & helper
+    #@ LM.computeThemeFilePath & helper
     def computeThemeFilePath(self) -> str:
         """
         Return the absolute path to the theme .leo file, resolved using the search order for themes.
@@ -1937,7 +1268,7 @@ class LoadManager:
             g.trace("myLeoSettings.leo", path)
         return path
 
-    # @+node:ekr.20180321124503.1: *5* LM.resolve_theme_path
+    #@> LM.resolve_theme_path
     def resolve_theme_path(self, fn: str, tag: str) -> str:
         """Search theme directories for the given .leo file."""
         if not fn:
@@ -1954,7 +1285,7 @@ class LoadManager:
         print(f"theme .leo file not found: {fn}")
         return ''
 
-    # @+node:ekr.20120211121736.10772: *4* LM.computeWorkbookFileName
+    #@< LM.computeWorkbookFileName
     def computeWorkbookFileName(self) -> str | None:
         """
         Return full path to the workbook.
@@ -1972,7 +1303,7 @@ class LoadManager:
 
         return fn if os.path.exists(directory) else None
 
-    # @+node:ekr.20120219154958.10485: *4* LM.reportDirectories
+    #@ LM.reportDirectories
     def reportDirectories(self) -> None:
         """Report directories."""
         # The cwd changes later, so it would be misleading to report it here.
@@ -1984,8 +1315,8 @@ class LoadManager:
         ):  # g.blue calls g.es_print, and that's annoying.
             g.es(f"{kind:>10}:", os.path.normpath(theDir), color='blue')
 
-    # @+node:ekr.20120215062153.10740: *3* LM.Settings
-    # @+node:ekr.20120130101219.10182: *4* LM.computeBindingLetter
+    #@< LM.Settings
+    #@> LM.computeBindingLetter
     def computeBindingLetter(self, c: Cmdr, path: str) -> str:
         lm = self
         if not path:
@@ -2008,7 +1339,7 @@ class LoadManager:
             return '@'
         return 'D'
 
-    # @+node:ekr.20120223062418.10421: *4* LM.computeLocalSettings
+    #@ LM.computeLocalSettings
     def computeLocalSettings(
         self,
         c: Cmdr | None,
@@ -2038,14 +1369,14 @@ class LoadManager:
             bindings_d = lm.mergeShortcutsDicts(c, bindings_d, shortcuts_d2, localFlag)
         return settings_d, bindings_d
 
-    # @+node:ekr.20121126202114.3: *4* LM.createDefaultSettingsDicts
+    #@ LM.createDefaultSettingsDicts
     def createDefaultSettingsDicts(self) -> tuple[g.SettingsDict, g.SettingsDict]:
         """Create lm.globalSettingsDict & lm.globalBindingsDict."""
         settings_d = g.SettingsDict('lm.globalSettingsDict')
         bindings_d = g.SettingsDict('lm.globalBindingsDict')
         return settings_d, bindings_d
 
-    # @+node:ekr.20120214165710.10726: *4* LM.createSettingsDicts
+    #@ LM.createSettingsDicts
     def createSettingsDicts(
         self,
         c: Cmdr | None,
@@ -2060,7 +1391,7 @@ class LoadManager:
             return shortcutsDict, settingsDict
         return None, None
 
-    # @+node:ekr.20120223062418.10414: *4* LM.getPreviousSettings
+    #@ LM.getPreviousSettings
     def getPreviousSettings(self, fn: str) -> PreviousSettings:
         """
         Return the settings in effect for fn. Typically, this involves
@@ -2096,7 +1427,7 @@ class LoadManager:
             d1 = d2 = None
         return PreviousSettings(d1, d2)
 
-    # @+node:ekr.20120214132927.10723: *4* LM.mergeShortcutsDicts & helpers
+    #@ LM.mergeShortcutsDicts & helpers
     def mergeShortcutsDicts(
         self,
         c: Cmdr | None,
@@ -2120,8 +1451,8 @@ class LoadManager:
         # Check for duplicate shortcuts only in the new file.
         if c:  # PR #4779
             if g.app.trace_binding:
-                # @+<< trace the binding >>
-                # @+node:ekr.20220820162604.1: *5* << trace the binding >>
+                #@+<< trace the binding >>
+                #@> << trace the binding >>
                 binding = g.app.trace_binding
                 # First, see if the binding is for a command. (Doesn't work for plugin commands).
                 if localFlag and binding in c.k.killedBindings:
@@ -2146,74 +1477,13 @@ class LoadManager:
                                 f"--trace-binding: {fn:20} binds {stroke2} to {bi.commandName:>20}{pane}"
                             )
                         print('')
-                # @-<< trace the binding >>
+                #@-<< trace the binding >>
             lm.checkForDuplicateShortcuts(c, inverted_new_d)
         inverted_old_d.update(inverted_new_d)  # Updates inverted_old_d in place.
         result = lm.uninvert(inverted_old_d)
         return result
 
-    # @+node:ekr.20120311070142.9904: *5* LM.checkForDuplicateShortcuts
-    @typing.no_type_check
-    def checkForDuplicateShortcuts(self, c: Cmdr, d: dict[str, str]) -> None:
-        """
-        Check for duplicates in an "inverted" dictionary d
-        whose keys are strokes and whose values are lists of BindingInfo nodes.
-
-        Duplicates happen only if panes conflict.
-        """
-        # Check for duplicate shortcuts only in the new file.
-        for ks in sorted(list(d.keys())):
-            duplicates, panes = [], ['all']
-            aList: list[g.BindingInfo] = d.get(ks, [])
-            aList2 = [z for z in aList if z and not z.pane.startswith('mode')]
-            if len(aList) > 1:
-                for bi in aList2:
-                    if bi.pane in panes:
-                        duplicates.append(bi)
-                    else:
-                        panes.append(bi.pane)
-            if duplicates:
-                bindings = list(set([z.stroke.s for z in duplicates]))
-                if len(bindings) == 1:
-                    kind = 'duplicate, (not conflicting)'
-                else:
-                    kind = 'conflicting'
-                g.es_print(f"{kind} key bindings in {c.shortFileName()}")
-                for bi in aList2:
-                    g.es_print(f"{bi.pane:6} {bi.stroke.s} {bi.commandName}")
-
-    # @+node:ekr.20120214132927.10724: *5* LM.invert
-    def invert(self, d: dict) -> g.SettingsDict:
-        """
-        Invert a shortcut dict whose keys are command names,
-        returning a dict whose keys are strokes.
-        """
-        if not d:
-            d = {}
-        result = g.SettingsDict(f"inverted {d.name()}")
-        for commandName in d.keys():
-            for bi in d.get(commandName, []):
-                stroke = bi.stroke  # This is canonicalized.
-                bi.commandName = commandName  # Add info.
-                assert stroke
-                result.add_to_list(stroke, bi)
-        return result
-
-    # @+node:ekr.20120214132927.10725: *5* LM.uninvert
-    def uninvert(self, d: g.SettingsDict) -> g.SettingsDict:
-        """
-        Uninvert an inverted shortcut dict whose keys are strokes,
-        returning a dict whose keys are command names.
-        """
-        result = g.SettingsDict(f"uninverted {d.name()}")
-        for stroke in d.keys():
-            for bi in d.get(stroke, []):
-                commandName = bi.commandName
-                assert commandName
-                result.add_to_list(commandName, bi)
-        return result
-
-    # @+node:ekr.20120222103014.10312: *4* LM.openSettingsFile
+    #@< LM.openSettingsFile
     def openSettingsFile(self, fn: str) -> Cmdr | None:
         """
         Open a settings file with a null gui.  Return the commander.
@@ -2247,7 +1517,7 @@ class LoadManager:
             g.app.unlockLog()
             g.app.gui = oldGui
 
-    # @+node:ekr.20120213081706.10382: *4* LM.readGlobalSettingsFiles
+    #@ LM.readGlobalSettingsFiles
     def readGlobalSettingsFiles(self) -> None:
         """
         Read leoSettings.leo and myLeoSettings.leo using a null gui.
@@ -2298,7 +1568,7 @@ class LoadManager:
             if c and c not in old_commanders:
                 g.app.forgetOpenFile(c.fileName())
 
-    # @+node:ekr.20120214165710.10838: *4* LM.traceSettingsDict
+    #@ LM.traceSettingsDict
     def traceSettingsDict(self, d: dict[str, str], verbose: bool = False) -> None:
         if verbose:
             print(d)
@@ -2309,7 +1579,7 @@ class LoadManager:
         else:
             print(f"{d.name()} {len(d.keys())}")
 
-    # @+node:ekr.20120214165710.10822: *4* LM.traceShortcutsDict
+    #@ LM.traceShortcutsDict
     def traceShortcutsDict(self, d: dict[str, str], verbose: bool = True) -> None:
         print(d)
         if verbose:
@@ -2318,7 +1588,7 @@ class LoadManager:
             if d:
                 print('')
 
-    # @+node:ekr.20120219154958.10452: *3* LM.load & helpers
+    #@< LM.load & helpers
     def load(self, fileName: str = '', pymacs: bool = False) -> None:
         """This is Leo's main startup method."""
         lm = self
@@ -2396,7 +1666,7 @@ class LoadManager:
         # and the gui.setScript has already been called.
         g.app.gui.runMainLoop()
 
-    # @+node:ekr.20150225133846.7: *4* LM.doDiff
+    #@> LM.doDiff
     def doDiff(self) -> None:
         """Support --diff option after loading Leo."""
         if len(self.old_argv[2:]) == 2:
@@ -2411,7 +1681,7 @@ class LoadManager:
             c = commanders[0]
             c.editFileCommands.compareAnyTwoFiles(event=None)
 
-    # @+node:ekr.20120219154958.10487: *4* LM.doPostPluginsInit & helpers
+    #@ LM.doPostPluginsInit & helpers
     def doPostPluginsInit(self) -> bool:
         """Create a Leo window for each file in the lm.files list."""
         # Clear g.app.initing _before_ creating commanders.
@@ -2479,7 +1749,7 @@ class LoadManager:
         c.initialFocusHelper()
         return True
 
-    # @+node:ekr.20131028155339.17098: *5* LM.openWorkBook
+    #@> LM.openWorkBook
     def openWorkBook(self) -> Cmdr | None:
         """
         Open or create a new workbook.
@@ -2517,7 +1787,7 @@ class LoadManager:
         # Do not redraw. Do not set c.p.
         return c
 
-    # @+node:ekr.20120219154958.10477: *4* LM.doPrePluginsInit & helpers
+    #@< LM.doPrePluginsInit & helpers
     def doPrePluginsInit(self, fileName: str, pymacs: bool) -> None:
         """Scan options, set directories and read settings."""
         lm = self
@@ -2548,7 +1818,7 @@ class LoadManager:
         # Create the gui after reading options and settings.
         lm.createGui(pymacs)
 
-    # @+node:ekr.20170302093006.1: *5* LM.createAllImporterData & helpers
+    #@> LM.createAllImporterData & helpers
     def createAllImporterData(self) -> None:
         """
         New in Leo 5.5:
@@ -2559,7 +1829,7 @@ class LoadManager:
         self.createWritersData()  # Was an AtFile method.
         self.createImporterData()  # Was a LeoImportCommands method.
 
-    # @+node:ekr.20140724064952.18037: *6* LM.createImporterData & helper
+    #@> LM.createImporterData & helper
     def createImporterData(self) -> None:
         """Create the data structures describing importer plugins."""
         # Allow plugins to be defined in ~/.leo/plugins.
@@ -2597,7 +1867,7 @@ class LoadManager:
             else:
                 g.trace(f"No importer for {language_name}")
 
-    # @+node:ekr.20140723140445.18076: *7* LM.parse_importer_dict
+    #@> LM.parse_importer_dict
     def parse_importer_dict(self, sfn: str, m: ModuleType) -> None:
         """
         Set entries in g.app.classDispatchDict, g.app.atAutoDict and
@@ -2626,7 +1896,7 @@ class LoadManager:
         ):
             g.warning(f"leo/plugins/importers/{sfn} has no importer_dict")
 
-    # @+node:ekr.20140728040812.17990: *6* LM.createWritersData & helper
+    #@< LM.createWritersData & helper
     def createWritersData(self) -> None:
         """Create the data structures describing writer plugins."""
         # Do *not* remove this trace.
@@ -2660,7 +1930,7 @@ class LoadManager:
             g.trace('LM.atAutoWritersDict')
             g.printDict(g.app.atAutoWritersDict)
 
-    # @+node:ekr.20140728040812.17991: *7* LM.parse_writer_dict
+    #@> LM.parse_writer_dict
     def parse_writer_dict(self, sfn: str, m: ModuleType) -> None:
         """
         Set entries in g.app.writersDispatchDict and g.app.atAutoWritersDict
@@ -2692,7 +1962,7 @@ class LoadManager:
         elif sfn not in ('basewriter.py',):
             g.warning(f"leo/plugins/writers/{sfn} has no writer_dict")
 
-    # @+node:ekr.20120219154958.10478: *5* LM.createGui
+    #@<2 LM.createGui
     def createGui(self, pymacs: bool) -> None:
         lm = self
         gui_option = lm.options.get('gui', '')
@@ -2714,7 +1984,7 @@ class LoadManager:
         else:
             lm.createSpecialGui(gui_option, pymacs, script, windowFlag)
 
-    # @+node:ekr.20120219154958.10479: *5* LM.createSpecialGui
+    #@ LM.createSpecialGui
     def createSpecialGui(self, gui: str, pymacs: bool, script: str, windowFlag: bool) -> None:
         # lm = self
         if pymacs:
@@ -2729,7 +1999,7 @@ class LoadManager:
         else:
             g.app.createDefaultGui()
 
-    # @+node:ekr.20120219154958.10482: *5* LM.getDefaultFile
+    #@ LM.getDefaultFile
     def getDefaultFile(self) -> str | None:
         # Get the name of the workbook.
         fn = g.app.config.getString('default-leo-file')
@@ -2745,7 +2015,7 @@ class LoadManager:
         # It's too risky to open a default file if it is relative.
         return None
 
-    # @+node:ekr.20120219154958.10484: *5* LM.initApp
+    #@ LM.initApp
     def initApp(self, verbose: bool) -> None:
         # Can be done early. Uses only g.app.loadDir & g.app.homeDir.
         self.createAllImporterData()
@@ -2774,13 +2044,13 @@ class LoadManager:
         # Complete the plugins class last.
         g.app.pluginsController.finishCreate()
 
-    # @+node:ekr.20210927034148.1: *5* LM.scanOptions & helpers
+    #@ LM.scanOptions & helpers
     def scanOptions(self, fileName: str, pymacs: bool) -> dict[str, Any]:
         """Handle all options, remove them from sys.argv and set lm.options."""
 
         # Define helper functions.
-        # @+others
-        # @+node:ekr.20210927034148.3: *6* function: computeFilesList
+        #@+others
+        #@> function: computeFilesList
         def computeFilesList(fileName: str) -> list[str]:
             """Return the list of files on the command line."""
             lm = self
@@ -2798,7 +2068,7 @@ class LoadManager:
                     result.append(z)
             return [g.os_path_normslashes(z) for z in result]
 
-        # @+node:ekr.20230615062931.1: *6* function: defineUsage
+        #@ function: defineUsage
         def defineUsage() -> str:
             """
             Return Leo's usage message.
@@ -2843,7 +2113,7 @@ class LoadManager:
           -v, --version         print version number and exit
         """)
 
-        # @+node:ekr.20210927034148.4: *6* function: doGuiOption
+        #@ function: doGuiOption
         def doGuiOption() -> str:
             """Handle --gui option. Default to 'qt'"""
             m = utils.find_complex_option(r'--gui=(\w+)')
@@ -2862,7 +2132,7 @@ class LoadManager:
             g.app.guiArgName = gui
             return gui
 
-        # @+node:ekr.20210927034148.7: *6* function: doScriptOption
+        #@ function: doScriptOption
         def doScriptOption() -> str | None:
             """Handle --script=path"""
             m = utils.find_complex_option(r'--script=(.+)')
@@ -2877,18 +2147,18 @@ class LoadManager:
                 utils.option_error(arg, f"Script not found: {m.group(1)!r}")
             return script
 
-        # @+node:ekr.20230615055158.1: *6* function: doSelectOption
+        #@ function: doSelectOption
         def doSelectOption() -> str | None:
             """Handle --select=headline"""
             m = utils.find_complex_option(r'--select=(.+)')
             return m.group(1) if m else None
 
-        # @+node:ekr.20230615034517.1: *6* function: doSimpleOptions
+        #@ function: doSimpleOptions
         def doSimpleOptions() -> None:
             """Handle options without arguments."""
 
-            # @+<< define scanArgv helpers >>
-            # @+node:ekr.20230615053133.1: *7* << define scanArgv helpers >>
+            #@+<< define scanArgv helpers >>
+            #@> << define scanArgv helpers >>
             def _diff() -> None:
                 g.app.diff = True
 
@@ -2923,7 +2193,7 @@ class LoadManager:
             def _silent() -> None:
                 g.app.silentMode = True
 
-            # @-<< define scanArgv helpers >>
+            #@-<< define scanArgv helpers >>
 
             options_dict: dict[str, Callable] = {
                 '--diff': _diff,
@@ -2942,13 +2212,13 @@ class LoadManager:
                 if option in sys.argv:
                     helper()
 
-        # @+node:ekr.20230615060055.1: *6* function: doThemeOption
+        #@< function: doThemeOption
         def doThemeOption() -> str | None:
             """Handle --theme=path"""
             m = utils.find_complex_option(r'--theme=(.+)')
             return m.group(1).replace('"', '') if m else None
 
-        # @+node:ekr.20230615075314.1: *6* function: doTraceOptions
+        #@ function: doTraceOptions
         def doTraceOptions() -> None:
             """Handle --trace-binding, --trace-setting and --trace"""
 
@@ -3006,7 +2276,7 @@ class LoadManager:
                 utils.option_error(arg, 'Invalid value')
             print(f"\nEnabling --trace={', '.join(g.app.debug)}\n")
 
-        # @+node:ekr.20210927034148.10: *6* function: doWindowSizeOption
+        #@ function: doWindowSizeOption
         def doWindowSizeOption() -> tuple[int, int] | None:
             """Handle --window-size"""
             m = utils.find_complex_option(r'--window-size=(\d+)x(\d+)')
@@ -3019,7 +2289,7 @@ class LoadManager:
                 utils.option_error(arg, 'Invalid value: expected int x int')
             return h, w
 
-        # @+node:ekr.20210927034148.9: *6* function: doWindowSpotOption
+        #@ function: doWindowSpotOption
         def doWindowSpotOption() -> tuple[int, int] | None:
             """Handle --window-spot"""
             m = utils.find_complex_option(r'--window-spot=(\d+)x(\d+)')
@@ -3032,7 +2302,7 @@ class LoadManager:
                 utils.option_error(arg, 'Invalid value: expected int x int')
             return top, left
 
-        # @-others
+        #@-others
 
         obsolete_options = [
             '--dock',
@@ -3073,7 +2343,7 @@ class LoadManager:
             'windowSpot': doWindowSpotOption(),
         }
 
-    # @+node:ekr.20160718072648.1: *5* LM.setStdStreams
+    #@< LM.setStdStreams
     def setStdStreams(self) -> None:
         """
         Make sure that stdout and stderr exist.
@@ -3081,8 +2351,8 @@ class LoadManager:
         """
 
         # Define class LeoStdOut
-        # @+others
-        # @+node:ekr.20160718091844.1: *6* class LeoStdOut
+        #@+others
+        #@> class LeoStdOut
         class LeoStdOut:
             """A class to put stderr & stdout to Leo's log pane."""
 
@@ -3094,8 +2364,8 @@ class LoadManager:
             def flush(self, *args: Any, **keys: Any) -> None:
                 pass
 
-            # @+others
-            # @+node:ekr.20160718102306.1: *7* LeoStdOut.write
+            #@+others
+            #@> LeoStdOut.write
             def write(self, *args: Any, **keys: Any) -> None:
                 """Put all non-keyword args to the log pane, as in g.es."""
                 # Tracing will lead to unbounded recursion unless
@@ -3136,15 +2406,15 @@ class LoadManager:
                         (s, color, newline),
                     )
 
-            # @-others
+            #@-others
 
-        # @-others
+        #@-others
         if not sys.stdout:
             sys.stdout = sys.__stdout__ = LeoStdOut('stdout')  # type:ignore
         if not sys.stderr:
             sys.stderr = sys.__stderr__ = LeoStdOut('stderr')  # type:ignore
 
-    # @+node:ekr.20120219154958.10491: *4* LM.isValidPython
+    #@<3 LM.isValidPython
     def isValidPython(self) -> bool:
         if sys.platform == 'cli':
             return True
@@ -3166,7 +2436,7 @@ class LoadManager:
             print(f"LM.isValidPython: unexpected exception {e}")
             return False
 
-    # @+node:ekr.20120223062418.10393: *4* LM.openWithFileName & helpers
+    #@ LM.openWithFileName & helpers
     def openWithFileName(self, fn: str, gui: LeoGui | None, old_c: Cmdr | None) -> Cmdr:
         """
         Completely read a file, creating the corresponding outline.
@@ -3197,7 +2467,7 @@ class LoadManager:
 
     loadLocalFile = openWithFileName  # Compatibility.
 
-    # @+node:ekr.20120223062418.10405: *5* LM.createMenu
+    #@> LM.createMenu
     def createMenu(self, c: Cmdr, fn: str = '') -> None:
         # lm = self
         # Create the menu as late as possible so it can use user commands.
@@ -3210,7 +2480,7 @@ class LoadManager:
             # Fix bug 844953: tell Unity which menu to use.
             # c.enableMenuBar()
 
-    # @+node:ekr.20120223062418.10406: *5* LM.findOpenFile
+    #@ LM.findOpenFile
     def findOpenFile(self, fn: str) -> Cmdr | None:
         def munge(name: str) -> str:
             return g.os_path_normpath(name or '').lower()
@@ -3228,7 +2498,7 @@ class LoadManager:
                 return c
         return None
 
-    # @+node:ekr.20120223062418.10407: *5* LM.finishOpen
+    #@ LM.finishOpen
     def finishOpen(self, c: Cmdr) -> None:
         """
         Common operations to finish opening any file.
@@ -3263,7 +2533,7 @@ class LoadManager:
         c.outerUpdate()  # #181: Honor focus requests.
         c.initialFocusHelper()
 
-    # @+node:ekr.20120223062418.10419: *5* LM.isLeoFile & LM.isZippedFile
+    #@ LM.isLeoFile & LM.isZippedFile
     def isLeoFile(self, fn: str) -> bool:
         """
         Return True if fn has the extension of any kind of Leo file,
@@ -3277,7 +2547,7 @@ class LoadManager:
         """Return True if fn is a zipped file."""
         return bool(fn and zipfile.is_zipfile(fn))
 
-    # @+node:ekr.20220318033804.1: *5* LM.openEmptyLeoFile
+    #@ LM.openEmptyLeoFile
     def openEmptyLeoFile(self, fn: str, gui: LeoGui | None, old_c: Cmdr | None) -> Cmdr:
         """Open an empty Leo file with the given file name."""
         lm = self
@@ -3310,7 +2580,7 @@ class LoadManager:
         lm.finishOpen(c)
         return c
 
-    # @+node:ekr.20231124134846.1: *5* LM.openExistingLeoFile & helper
+    #@ LM.openExistingLeoFile & helper
     def openExistingLeoFile(self, fn: str, gui: LeoGui | None, old_c: Cmdr | None) -> Cmdr:
         """
         Create a commander for an existing .leo, .db, or .leojs file.
@@ -3348,7 +2618,7 @@ class LoadManager:
         lm.finishOpen(c)
         return c
 
-    # @+node:ekr.20231128064705.1: *6* LM.openBadLeoFile
+    #@> LM.openBadLeoFile
     def openBadLeoFile(self, c: Cmdr, fn: str) -> None:
         """
         Open a bad Leo file using some of the logic of lm.openExternalFile.
@@ -3381,7 +2651,7 @@ class LoadManager:
         c.frame.setTitle(title)
         c.clearChanged()
 
-    # @+node:ekr.20120223062418.10408: *5* LM.openExternalFile
+    #@< LM.openExternalFile
     def openExternalFile(self, fn: str, gui: LeoGui | None, old_c: Cmdr | None) -> Cmdr | None:
         """
         Create a wrapper commander (in a new tab) for the given external file.
@@ -3445,7 +2715,7 @@ class LoadManager:
         lm.finishOpen(c)
         return c
 
-    # @+node:ekr.20260711055732.1: *5* LM.openWithFileNameHelper
+    #@ LM.openWithFileNameHelper
     def openWithFileNameHelper(
         self,
         file_name: str,
@@ -3471,7 +2741,7 @@ class LoadManager:
                 return c
         return None
 
-    # @+node:ekr.20120223062418.10410: *5* LM.openZipFile
+    #@ LM.openZipFile
     def openZipFile(self, fn: str) -> StringIO | None:
         """
         Open a zipped file for reading.
@@ -3495,7 +2765,7 @@ class LoadManager:
                 g.error("can not open:", fn)
             return None
 
-    # @+node:ekr.20160430063406.1: *3* LM.revertCommander
+    #@<2 LM.revertCommander
     def revertCommander(self, c: Cmdr) -> None:
         """Revert c to the previously saved contents."""
         lm = self
@@ -3524,10 +2794,10 @@ class LoadManager:
         finally:
             g.app.reverting = False
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20120223062418.10420: ** class PreviousSettings
+#@< class PreviousSettings
 class PreviousSettings:
     """
     A class holding the settings and shortcuts dictionaries
@@ -3557,7 +2827,7 @@ class PreviousSettings:
     __str__ = __repr__
 
 
-# @+node:ekr.20120225072226.10283: ** class RecentFilesManager
+#@ class RecentFilesManager
 class RecentFilesManager:
     """A class to manipulate leoRecentFiles.txt."""
 
@@ -3578,8 +2848,8 @@ class RecentFilesManager:
         self.recentFileMessageWritten = False  # To suppress all but the first message.
         self.write_recent_files_as_needed = False  # Will be set later.
 
-    # @+others
-    # @+node:ekr.20041201080436: *3* rf.appendToRecentFiles
+    #@+others
+    #@> rf.appendToRecentFiles
     def appendToRecentFiles(self, files: list[str]) -> None:
         rf = self
         files = [theFile.strip() for theFile in files]
@@ -3594,7 +2864,7 @@ class RecentFilesManager:
                     rf.recentFiles.remove(name2)
             rf.recentFiles.append(name)
 
-    # @+node:ekr.20120225072226.10289: *3* rf.cleanRecentFiles
+    #@ rf.cleanRecentFiles
     def cleanRecentFiles(self, c: Cmdr) -> None:
         """
         Remove items from the recent files list that no longer exist.
@@ -3608,7 +2878,7 @@ class RecentFilesManager:
                 self.updateRecentFiles(path)
             self.writeRecentFilesFile(c)
 
-    # @+node:ekr.20180212141017.1: *3* rf.demangleRecentFiles
+    #@ rf.demangleRecentFiles
     def demangleRecentFiles(self, c: Cmdr, data: list[str]) -> None:
         """Rewrite recent files based on c.config.getData('path-demangle')"""
         changes = []
@@ -3630,7 +2900,7 @@ class RecentFilesManager:
             self.updateRecentFiles(t)
         self.writeRecentFilesFile(c)
 
-    # @+node:ekr.20120225072226.10297: *3* rf.clearRecentFiles
+    #@ rf.clearRecentFiles
     def clearRecentFiles(self, c: Cmdr) -> None:
         """Clear the recent files list, then add the present file."""
         rf = self
@@ -3645,7 +2915,7 @@ class RecentFilesManager:
         # Write the file immediately.
         rf.writeRecentFilesFile(c)
 
-    # @+node:ekr.20120225072226.10301: *3* rf.createRecentFilesMenuItems
+    #@ rf.createRecentFilesMenuItems
     def createRecentFilesMenuItems(self, c: Cmdr) -> None:
         rf = self
         menu = c.frame.menu
@@ -3716,7 +2986,7 @@ class RecentFilesManager:
         if groupedEntries:  # store so we can delete them later
             rf.groupedMenus = [z for z in dirCount if dirCount[z]['entry']]
 
-    # @+node:vitalije.20170703115609.1: *3* rf.editRecentFiles
+    #@ rf.editRecentFiles
     def editRecentFiles(self, c: Cmdr) -> None:
         """
         Dump recentFiles into new node appended as lastTopLevel, selects it and
@@ -3735,13 +3005,13 @@ class RecentFilesManager:
         c.bodyWantsFocusNow()
         g.es('edit list and run write-edited-recent-files to save recentFiles')
 
-    # @+node:ekr.20120225072226.10286: *3* rf.getRecentFiles
+    #@ rf.getRecentFiles
     def getRecentFiles(self) -> list[str]:
         # Fix #299: Leo loads a deleted file.
         self.recentFiles = [z for z in self.recentFiles if g.os_path_exists(z)]
         return self.recentFiles
 
-    # @+node:ekr.20120225072226.10304: *3* rf.getRecentFilesTable
+    #@ rf.getRecentFilesTable
     def getRecentFilesTable(self) -> tuple:
         return (
             "*clear-recent-files",
@@ -3751,7 +3021,7 @@ class RecentFilesManager:
             ("-", None, None),
         )
 
-    # @+node:ekr.20070224115832: *3* rf.readRecentFiles & helpers
+    #@ rf.readRecentFiles & helpers
     def readRecentFiles(self, localConfigFile: str) -> None:
         """Read all .leoRecentFiles.txt files."""
         # The order of files in this list affects the order of the recent files list.
@@ -3767,7 +3037,7 @@ class RecentFilesManager:
         if not seen and rf.write_recent_files_as_needed:
             rf.createRecentFiles()
 
-    # @+node:ekr.20061010121944: *4* rf.createRecentFiles
+    #@> rf.createRecentFiles
     def createRecentFiles(self) -> None:
         """
         Try to create .leoRecentFiles.txt, in the users home directory, or in
@@ -3784,7 +3054,7 @@ class RecentFilesManager:
                     g.error('can not create', fn)
                     g.es_exception()
 
-    # @+node:ekr.20050424115658: *4* rf.readRecentFilesFile
+    #@ rf.readRecentFilesFile
     def readRecentFilesFile(self, path: str) -> bool:
         fileName = g.os_path_join(path, '.leoRecentFiles.txt')
         if not g.os_path_exists(fileName):
@@ -3806,7 +3076,7 @@ class RecentFilesManager:
             self.appendToRecentFiles(lines)
         return True
 
-    # @+node:ekr.20120225072226.10285: *3* rf.sanitize
+    #@< rf.sanitize
     def sanitize(self, name: str) -> str:
         """Return a sanitized file name."""
         if name is None:
@@ -3816,13 +3086,13 @@ class RecentFilesManager:
             name = name.replace(ch, '')
         return name or ''
 
-    # @+node:ekr.20120215072959.12478: *3* rf.setRecentFiles
+    #@ rf.setRecentFiles
     def setRecentFiles(self, files: list[str]) -> None:
         """Update the recent files list."""
         rf = self
         rf.appendToRecentFiles(files)
 
-    # @+node:ekr.20120225072226.10293: *3* rf.sortRecentFiles
+    #@ rf.sortRecentFiles
     def sortRecentFiles(self, c: Cmdr) -> None:
         """Sort the recent files list."""
         rf = self
@@ -3838,7 +3108,7 @@ class RecentFilesManager:
             rf.updateRecentFiles(z)
         rf.writeRecentFilesFile(c)
 
-    # @+node:ekr.20031218072017.2083: *3* rf.updateRecentFiles
+    #@ rf.updateRecentFiles
     def updateRecentFiles(self, fileName: str) -> None:
         """Create the RecentFiles menu.  May be called with Null fileName."""
         rf = self
@@ -3866,7 +3136,7 @@ class RecentFilesManager:
             for frame in g.app.windowList:
                 rf.createRecentFilesMenuItems(frame.c)
 
-    # @+node:vitalije.20170703115616.1: *3* rf.writeEditedRecentFiles
+    #@ rf.writeEditedRecentFiles
     def writeEditedRecentFiles(self, c: Cmdr) -> None:
         """
         Write content of "edit_headline" node as recentFiles and recreates
@@ -3883,7 +3153,7 @@ class RecentFilesManager:
         else:
             g.red('not found:', self.edit_headline)
 
-    # @+node:ekr.20050424114937.2: *3* rf.writeRecentFilesFile & helper
+    #@ rf.writeRecentFilesFile & helper
     def writeRecentFilesFile(self, c: Cmdr) -> None:
         """Write the appropriate .leoRecentFiles.txt file."""
         tag = '.leoRecentFiles.txt'
@@ -3923,7 +3193,7 @@ class RecentFilesManager:
                     g.red(f"creating: {fileName}")
                 rf.writeRecentFilesFileHelper(fileName)
 
-    # @+node:ekr.20050424131051: *4* rf.writeRecentFilesFileHelper
+    #@> rf.writeRecentFilesFileHelper
     def writeRecentFilesFileHelper(self, fileName: str) -> bool:
         # Don't update the file if it begins with read-only.
 
@@ -3954,11 +3224,11 @@ class RecentFilesManager:
                 raise
         return False
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20150514125218.1: ** Top-level-commands
-# @+node:ekr.20150514125218.2: *3* ctrl-click-at-cursor
+#@<2 Top-level-commands
+#@> ctrl-click-at-cursor
 @g.command('ctrl-click-at-cursor')
 def ctrlClickAtCursor(event: LeoKeyEvent | None = None) -> None:
     """Simulate a control-click at the cursor."""
@@ -3966,7 +3236,7 @@ def ctrlClickAtCursor(event: LeoKeyEvent | None = None) -> None:
         g.openUrlOnClick(event)
 
 
-# @+node:ekr.20180213045148.1: *3* demangle-recent-files
+#@ demangle-recent-files
 @g.command('demangle-recent-files')
 def demangle_recent_files_command(event: LeoKeyEvent | None = None) -> None:
     """
@@ -3986,7 +3256,7 @@ def demangle_recent_files_command(event: LeoKeyEvent | None = None) -> None:
             g.es_print('No patterns in @data path-demangle')
 
 
-# @+node:ekr.20150514125218.3: *3* enable/disable/toggle-idle-time-events
+#@ enable/disable/toggle-idle-time-events
 @g.command('disable-idle-time-events')
 def disable_idle_time_events(event: LeoKeyEvent | None = None) -> None:
     """Disable default idle-time event handling."""
@@ -4005,7 +3275,7 @@ def toggle_idle_time_events(event: LeoKeyEvent | None = None) -> None:
     g.app.idle_time_hooks_enabled = not g.app.idle_time_hooks_enabled
 
 
-# @+node:ekr.20150514125218.5: *3* open-url
+#@ open-url
 @g.command('open-url')
 def openUrl(event: LeoKeyEvent | None = None) -> None:
     """
@@ -4018,15 +3288,15 @@ def openUrl(event: LeoKeyEvent | None = None) -> None:
         g.openUrl(c.p)
 
 
-# @+node:ekr.20150514125218.6: *3* open-url-under-cursor
+#@ open-url-under-cursor
 @g.command('open-url-under-cursor')
 def openUrlUnderCursor(event: LeoKeyEvent | None = None) -> None:
     """Open the url under the cursor."""
     g.openUrlOnClick(event)
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @@pagewidth 70
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@@pagewidth 70
+#@-leo

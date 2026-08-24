@@ -1,15 +1,15 @@
-# @+leo-ver=5-thin
-# @+node:edream.110203113231.720: * @file ../plugins/outline_export.py
+#@+leo-ver=cub-1-thin
+#@0 [edream.110203113231.720] @f ../plugins/outline_export.py
 """Modifies the way exported outlines are written."""
 
-# @@language python
-# @@tabwidth -4
+#@@language python
+#@@tabwidth -4
 
 from leo.core import leoGlobals as g
 
 
-# @+others
-# @+node:ekr.20100128073941.5375: ** init
+#@+others
+#@> init
 def init():
     """Return True if the plugin has loaded successfully."""
     ok = not g.unitTesting  # Not for unit testing: modifies core class.
@@ -19,7 +19,7 @@ def init():
     return ok
 
 
-# @+node:edream.110203113231.721: ** newMoreHead
+#@ newMoreHead
 # Returns the headline string in MORE format.
 
 
@@ -40,12 +40,12 @@ def newMoreHead(self, firstLevel, useVerticalBar=True):
     return s
 
 
-# @+node:ekr.20100128073941.5376: ** onStart
+#@ onStart
 def onStart(tag, keywords):
     from leo.core import leoNodes
 
     g.funcToMethod(newMoreHead, leoNodes.VNode, "moreHead")
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

@@ -1,44 +1,14 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20140831085423.18598: * @file ../plugins/qt_text.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20140831085423.18598] @f ../plugins/qt_text.py
 """Text classes for the Qt version of Leo"""
 
-# @+<< qt_text imports & annotations>>
-# @+node:ekr.20220416085845.1: ** << qt_text imports & annotations >>
-from __future__ import annotations
-from collections.abc import Callable
-from typing import Any, cast, TYPE_CHECKING
-from leo.core import leoGlobals as g
-from leo.core.leoQt import QtCore, QtGui, Qsci, QtWidgets
-from leo.core.leoQt import ContextMenuPolicy, Key, KeyboardModifier
-from leo.core.leoQt import MouseButton, MoveMode, MoveOperation
-from leo.core.leoQt import Shadow, Shape, SliderAction, SolidLine, WindowType, WrapMode
-
-if TYPE_CHECKING:  # pragma: no cover
-    from leo.core.leoCommands import Commands as Cmdr
-    from leo.core.leoGui import LeoKeyEvent
-
-    QEvent = QtCore.QEvent
-    QFrame = QtWidgets.QFrame
-    QKeyEvent = QtGui.QKeyEvent
-    QLineEdit = QtWidgets.QLineEdit
-    QObject = QtCore.QObject
-    QMouseEvent = QtGui.QMouseEvent
-    QPainter = QtGui.QPainter
-    QPaintEvent = QtGui.QPaintEvent
-    QPoint = QtCore.QPoint
-    QTreeWidgetItem = QtWidgets.QTreeWidgetItem
-    QWheelEvent = QtGui.QWheelEvent
-    QWidget = QtWidgets.QWidget
-
-FullWidthSelection = 0x06000
-QColor = QtGui.QColor
-QFontMetrics = QtGui.QFontMetrics
-# @-<< qt_text imports & annotations>>
+#@+<< qt_text imports & annotations>>
+#@-<< qt_text imports & annotations>>
 
 
-# @+others
-# @+node:ekr.20191001084541.1: **  zoom commands
-# @+node:tbrown.20130411145310.18857: *3* @g.command('zoom-in')
+#@+others
+#@>  zoom commands
+#@> @g.command('zoom-in')
 @g.command("zoom-in")
 def zoom_in(event: LeoKeyEvent | None = None, delta: int = 1) -> None:
     """increase body font size by one
@@ -48,7 +18,7 @@ def zoom_in(event: LeoKeyEvent | None = None, delta: int = 1) -> None:
     zoom_helper(event, delta=1)
 
 
-# @+node:ekr.20191001084646.1: *3* @g.command('zoom-out')
+#@ @g.command('zoom-out')
 @g.command("zoom-out")
 def zoom_out(event: LeoKeyEvent | None = None) -> None:
     """decrease body font size by one
@@ -59,7 +29,7 @@ def zoom_out(event: LeoKeyEvent | None = None) -> None:
     zoom_helper(event=event, delta=-1)
 
 
-# @+node:ekr.20191001084612.1: *3* zoom_helper
+#@ zoom_helper
 def zoom_helper(event: LeoKeyEvent | None, delta: int) -> None:
     """
     Common helper for zoom commands.
@@ -89,7 +59,7 @@ def zoom_helper(event: LeoKeyEvent | None, delta: int) -> None:
     wrapper.setAllText(wrapper.getAllText())  # Recolor everything.
 
 
-# @+node:tom.20210904233317.1: ** Show Hilite Settings command
+#@< Show Hilite Settings command
 # Add item to known "help-for" commands
 hilite_doc = r'''
 Changing The Current Line Highlighting Color
@@ -118,7 +88,7 @@ def helpForLineHighlight(self: Any, event: LeoKeyEvent | None = None) -> None:
     self.c.putHelpFor(hilite_doc)
 
 
-# @+node:tom.20220424002954.1: ** Show Right Margin Settings command
+#@ Show Right Margin Settings command
 # Add item to known "help-for" commands
 rmargin_doc = r'''
 Right Margin Guidelines
@@ -144,7 +114,7 @@ def helpForRMarginGuides(self, event=None):
     self.c.putHelpFor(rmargin_doc)
 
 
-# @+node:ekr.20140901062324.18719: **   class QTextMixin
+#@   class QTextMixin
 class QTextMixin:
     """
     A mixin class for StringTextWrapper, QTextEditWrapper and QScintillaWrapper classes.
@@ -152,8 +122,8 @@ class QTextMixin:
     This is also the annotation for all text-related wrappers.
     """
 
-    # @+others
-    # @+node:ekr.20140901062324.18732: *3* QTextMixin.ctor & helper
+    #@+others
+    #@> QTextMixin.ctor & helper
     def __init__(self, c: Cmdr | None = None) -> None:
         """Ctor for QTextMixin class"""
         self.c = c
@@ -167,7 +137,7 @@ class QTextMixin:
         if c:
             self.injectIvars(c)
 
-    # @+node:ekr.20140901062324.18721: *4* QTextMixin.injectIvars
+    #@> QTextMixin.injectIvars
     def injectIvars(self, c: Cmdr) -> QTextMixin:
         """Inject standard leo ivars into the QTextEdit or QsciScintilla widget."""
         w = self
@@ -178,13 +148,13 @@ class QTextMixin:
         w.leo_frame = None
         return w
 
-    # @+node:ekr.20140901062324.18825: *3* QTextMixin.getName
+    #@< QTextMixin.getName
     def getName(self) -> str:
         return self.name or ''  # Essential.
 
-    # @+node:ekr.20140901122110.18733: *3* QTextMixin.Event handlers
+    #@ QTextMixin.Event handlers
     # These are independent of the kind of Qt widget.
-    # @+node:ekr.20140901062324.18716: *4* QTextMixin.onCursorPositionChanged
+    #@> QTextMixin.onCursorPositionChanged
     def onCursorPositionChanged(self, event: QEvent | None = None) -> None:
         c = self.c
         name = c.widget_name(self)
@@ -195,7 +165,7 @@ class QTextMixin:
         if hasattr(c.frame, 'statusLine'):
             c.frame.statusLine.update()
 
-    # @+node:ekr.20140901062324.18714: *4* QTextMixin.onTextChanged
+    #@ QTextMixin.onTextChanged
     def onTextChanged(self) -> None:
         """
         Update Leo after the body has been changed.
@@ -232,16 +202,16 @@ class QTextMixin:
             newSel=newSel,
         )
 
-    # @+node:ekr.20140901122110.18734: *3* QTextMixin.Generic high-level interface
+    #@< QTextMixin.Generic high-level interface
     # These call only wrapper methods.
-    # @+node:ekr.20140902181058.18645: *4* QTextMixin.Enable/disable
+    #@> QTextMixin.Enable/disable
     def disable(self) -> None:
         self.enabled = False
 
     def enable(self, enabled: bool = True) -> None:
         self.enabled = enabled
 
-    # @+node:ekr.20140902181058.18644: *4* QTextMixin.Clipboard
+    #@ QTextMixin.Clipboard
     def clipboard_append(self, s: str) -> None:
         s1 = g.app.gui.getTextFromClipboard()
         g.app.gui.replaceClipboardWith(s1 + s)
@@ -249,7 +219,7 @@ class QTextMixin:
     def clipboard_clear(self) -> None:
         g.app.gui.replaceClipboardWith('')
 
-    # @+node:ekr.20140901062324.18698: *4* QTextMixin.setFocus
+    #@ QTextMixin.setFocus
     def setFocus(self) -> None:
         if 'focus' in g.app.debug:
             print('BaseQTextWrapper.setFocus', self.widget)
@@ -264,14 +234,14 @@ class QTextMixin:
         assert isinstance(self.widget, tuple(classes)), self.widget
         QtWidgets.QTextBrowser.setFocus(self.widget)
 
-    # @+node:ekr.20140901062324.18717: *4* QTextMixin.Generic text
-    # @+node:ekr.20140901062324.18703: *5* QTextMixin.appendText
+    #@ QTextMixin.Generic text
+    #@> QTextMixin.appendText
     def appendText(self, s: str) -> None:
         s2 = self.getAllText()
         self.setAllText(s2 + s)
         self.setInsertPoint(len(s2))
 
-    # @+node:ekr.20140901141402.18706: *5* QTextMixin.delete
+    #@ QTextMixin.delete
     def delete(self, i: int, j: int | None = None) -> None:
         if j is None:
             j = i + 1
@@ -283,12 +253,12 @@ class QTextMixin:
         # Bug fix: Significant in external tests.
         self.setSelectionRange(i, i, insert=i)
 
-    # @+node:ekr.20140901062324.18827: *5* QTextMixin.deleteTextSelection
+    #@ QTextMixin.deleteTextSelection
     def deleteTextSelection(self) -> None:
         i, j = self.getSelectionRange()
         self.delete(i, j)
 
-    # @+node:ekr.20110605121601.18102: *5* QTextMixin.get
+    #@ QTextMixin.get
     def get(self, i: int, j: int | None = None) -> str:
         # 2012/04/12: fix the following two bugs by using the vanilla code:
         # https://bugs.launchpad.net/leo-editor/+bug/979142
@@ -296,14 +266,14 @@ class QTextMixin:
         s = self.getAllText()
         return s[i:j]
 
-    # @+node:ekr.20140901062324.18704: *5* QTextMixin.getLastIndex & getLength
+    #@ QTextMixin.getLastIndex & getLength
     def getLastIndex(self) -> int:
         return len(self.getAllText())
 
     def getLength(self) -> int:
         return len(self.getAllText())
 
-    # @+node:ekr.20140901062324.18705: *5* QTextMixin.getSelectedText
+    #@ QTextMixin.getSelectedText
     def getSelectedText(self) -> str:
         i, j = self.getSelectionRange()  # Returns (int, int)
         if i == j:
@@ -311,30 +281,30 @@ class QTextMixin:
         s = self.getAllText()
         return s[i:j]
 
-    # @+node:ekr.20140901141402.18702: *5* QTextMixin.insert
+    #@ QTextMixin.insert
     def insert(self, i: int, s: str) -> int:
         s2 = self.getAllText()
         self.setAllText(s2[:i] + s + s2[i:])
         self.setInsertPoint(i + len(s))
         return i
 
-    # @+node:ekr.20140902084950.18634: *5* QTextMixin.seeInsertPoint
+    #@ QTextMixin.seeInsertPoint
     def seeInsertPoint(self) -> None:
         """Ensure the insert point is visible."""
         # getInsertPoint defined in client classes.
         self.see(self.getInsertPoint())
 
-    # @+node:ekr.20140902135648.18668: *5* QTextMixin.selectAllText
+    #@ QTextMixin.selectAllText
     def selectAllText(self) -> None:
         self.setSelectionRange(0, self.getLength())
 
-    # @+node:ekr.20140901141402.18704: *5* QTextMixin.toPythonIndexRowCol
+    #@ QTextMixin.toPythonIndexRowCol
     def toPythonIndexRowCol(self, index: int) -> tuple[int, int]:
         s = self.getAllText()
         row, col = g.convertPythonIndexToRowCol(s, index)
         return row, col
 
-    # @+node:ekr.20140901062324.18729: *4* QTextMixin.rememberSelectionAndScroll
+    #@< QTextMixin.rememberSelectionAndScroll
     def rememberSelectionAndScroll(self) -> None:
         w = self
         v = self.c.p.v  # Always accurate.
@@ -347,10 +317,10 @@ class QTextMixin:
         v.selectionLength = j - i
         v.scrollBarSpot = w.getYScrollPosition()
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20110605121601.18058: **  class QLineEditWrapper(QTextMixin)
+#@<2  class QLineEditWrapper(QTextMixin)
 class QLineEditWrapper(QTextMixin):
     """
     A class to wrap QLineEdit widgets.
@@ -359,8 +329,8 @@ class QLineEditWrapper(QTextMixin):
     redefines the do-nothing check method here.
     """
 
-    # @+others
-    # @+node:ekr.20110605121601.18060: *3* QLineEditWrapper.__init__ & __repr__
+    #@+others
+    #@> QLineEditWrapper.__init__ & __repr__
     def __init__(self, widget: QLineEdit, name: str, c: Cmdr | None = None) -> None:
         """Ctor for QLineEditWrapper class."""
         super().__init__(c)
@@ -373,15 +343,15 @@ class QLineEditWrapper(QTextMixin):
 
     __str__ = __repr__
 
-    # @+node:ekr.20140901191541.18599: *3* QLineEditWrapper.check
+    #@ QLineEditWrapper.check
     def check(self) -> bool:
         """
         QLineEditWrapper.
         """
         return True
 
-    # @+node:ekr.20110605121601.18118: *3* QLineEditWrapper:Widget-specific overrides
-    # @+node:ekr.20220911105050.1: *4* QLineEditWrapper: do-nothings
+    #@ QLineEditWrapper:Widget-specific overrides
+    #@> QLineEditWrapper: do-nothings
     def flashCharacter(
         self, i: int, bg: str = 'white', fg: str = 'red', flashes: int = 3, delay: int = 75
     ) -> None:
@@ -399,7 +369,7 @@ class QLineEditWrapper(QTextMixin):
     def setYScrollPosition(self, i: int) -> None:
         pass
 
-    # @+node:ekr.20110605121601.18120: *4* QLineEditWrapper.getAllText
+    #@ QLineEditWrapper.getAllText
     def getAllText(self) -> str:
         """QHeadlineWrapper."""
         if self.check():
@@ -407,14 +377,14 @@ class QLineEditWrapper(QTextMixin):
             return w.text()
         return ''
 
-    # @+node:ekr.20110605121601.18121: *4* QLineEditWrapper.getInsertPoint
+    #@ QLineEditWrapper.getInsertPoint
     def getInsertPoint(self) -> int:
         """QHeadlineWrapper."""
         if self.check():
             return self.widget.cursorPosition()
         return 0
 
-    # @+node:ekr.20110605121601.18122: *4* QLineEditWrapper.getSelectionRange
+    #@ QLineEditWrapper.getSelectionRange
     def getSelectionRange(self, sort: bool = True) -> tuple[int, int]:
         """QHeadlineWrapper."""
         w = self.widget
@@ -428,34 +398,34 @@ class QLineEditWrapper(QTextMixin):
             return i, j
         return 0, 0
 
-    # @+node:ekr.20110605121601.18123: *4* QLineEditWrapper.hasSelection
+    #@ QLineEditWrapper.hasSelection
     def hasSelection(self) -> bool:
         """QHeadlineWrapper."""
         if self.check():
             return self.widget.hasSelectedText()
         return False
 
-    # @+node:ekr.20110605121601.18124: *4* QLineEditWrapper.see & seeInsertPoint
+    #@ QLineEditWrapper.see & seeInsertPoint
     def see(self, i: int) -> None:
         """QHeadlineWrapper."""
 
     def seeInsertPoint(self) -> None:
         """QHeadlineWrapper."""
 
-    # @+node:ekr.20110605121601.18125: *4* QLineEditWrapper.setAllText
+    #@ QLineEditWrapper.setAllText
     def setAllText(self, s: str) -> None:
         """Set all text of a Qt single-line widget."""
         if self.check():
             w = self.widget
             w.setText(s.replace('\n', ' ').replace('\n', ' '))
 
-    # @+node:ekr.20110605121601.18128: *4* QLineEditWrapper.setFocus
+    #@ QLineEditWrapper.setFocus
     def setFocus(self) -> None:
         """QHeadlineWrapper."""
         if self.check():
             g.app.gui.set_focus(self.c, self.widget)
 
-    # @+node:ekr.20110605121601.18129: *4* QLineEditWrapper.setInsertPoint
+    #@ QLineEditWrapper.setInsertPoint
     def setInsertPoint(self, i: int, s: str | None = None) -> None:
         """QHeadlineWrapper."""
         if not self.check():
@@ -466,7 +436,7 @@ class QLineEditWrapper(QTextMixin):
         i = max(0, min(i, len(s)))
         w.setCursorPosition(i)
 
-    # @+node:ekr.20110605121601.18130: *4* QLineEditWrapper.setSelectionRange
+    #@ QLineEditWrapper.setSelectionRange
     def setSelectionRange(
         self, i: int, j: int, insert: int | None = None, s: str | None = None
     ) -> None:
@@ -495,10 +465,10 @@ class QLineEditWrapper(QTextMixin):
             else:
                 w.setSelection(i, length)
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20150403094619.1: ** class LeoLineTextWidget(QFrame)
+#@<2 class LeoLineTextWidget(QFrame)
 class LeoLineTextWidget(QtWidgets.QFrame):
     """
     A QFrame supporting gutter line numbers.
@@ -506,8 +476,8 @@ class LeoLineTextWidget(QtWidgets.QFrame):
     This class *has* a QTextEdit.
     """
 
-    # @+others
-    # @+node:ekr.20150403094706.9: *3* LeoLineTextWidget.__init__
+    #@+others
+    #@> LeoLineTextWidget.__init__
     def __init__(self, c: Cmdr, e: QWidget, *args: Any) -> None:
         """Ctor for LineTextWidget."""
         super().__init__(*args)
@@ -527,7 +497,7 @@ class LeoLineTextWidget(QtWidgets.QFrame):
         e.installEventFilter(self)
         e.viewport().installEventFilter(self)
 
-    # @+node:ekr.20150403094706.10: *3* LeoLineTextWidget.eventFilter
+    #@ LeoLineTextWidget.eventFilter
     def eventFilter(self, obj: QObject, event: QEvent) -> bool:
         """
         Update the line numbers for all events on the text edit and the viewport.
@@ -540,17 +510,17 @@ class LeoLineTextWidget(QtWidgets.QFrame):
             return False
         return QtWidgets.QFrame.eventFilter(self, obj, event)  # Bug fix: 2024/03/24
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20110605121601.18005: ** class LeoQTextBrowser (QtWidgets.QTextBrowser)
+#@< class LeoQTextBrowser (QtWidgets.QTextBrowser)
 if QtWidgets:
 
     class LeoQTextBrowser(QtWidgets.QTextBrowser):
         """A subclass of QTextBrowser that overrides the mouse event handlers."""
 
-        # @+others
-        # @+node:ekr.20110605121601.18006: *3*  LeoQTextBrowser.__init__
+        #@+others
+        #@>  LeoQTextBrowser.__init__
         def __init__(self, parent: QWidget, c: Cmdr) -> None:
             """
             ctor for LeoQTextBrowser class, a subclass of QtWidgets.QTextBrowser.
@@ -586,17 +556,17 @@ if QtWidgets:
                 'last_hl_color': hl_color,
             }
 
-        # @+node:ekr.20110605121601.18007: *3* LeoQTextBrowser. __repr__ & __str__
+        #@ LeoQTextBrowser. __repr__ & __str__
         def __repr__(self) -> str:
             return f"<LeoQTextBrowser: {id(self)} {self.objectName() or 'no name'}>"
 
         __str__ = __repr__
 
-        # @+node:ekr.20110605121601.18008: *3* LeoQTextBrowser: Auto completion
-        # @+node:ekr.20110605121601.18009: *4* class LeoQListWidget(QListWidget)
+        #@ LeoQTextBrowser: Auto completion
+        #@> class LeoQListWidget(QListWidget)
         class LeoQListWidget(QtWidgets.QListWidget):
-            # @+others
-            # @+node:ekr.20110605121601.18010: *5* LeoQListWidget.ctor
+            #@+others
+            #@> LeoQListWidget.ctor
             def __init__(self, c: Cmdr) -> None:
                 """ctor for LeoQListWidget class"""
                 super().__init__()
@@ -606,12 +576,12 @@ if QtWidgets:
                 self.leo_c = c
                 self.itemClicked.connect(self.select_callback)
 
-            # @+node:ekr.20110605121601.18011: *5* LeoQListWidget.closeEvent
+            #@ LeoQListWidget.closeEvent
             def closeEvent(self, event: QEvent) -> None:
                 """Kill completion and close the window."""
                 self.leo_c.k.autoCompleter.abort()
 
-            # @+node:ekr.20110605121601.18012: *5* LeoQListWidget.end_completer
+            #@ LeoQListWidget.end_completer
             def end_completer(self) -> None:
                 """End completion."""
                 c = self.leo_c
@@ -625,12 +595,12 @@ if QtWidgets:
                     # Avoid bug 1338773: Autocompleter error
                     pass
 
-            # @+node:ekr.20141024170936.7: *5* LeoQListWidget.get_selection
+            #@ LeoQListWidget.get_selection
             def get_selection(self) -> str:
                 """Return the presently selected item's text."""
                 return self.currentItem().text()
 
-            # @+node:ekr.20110605121601.18013: *5* LeoQListWidget.keyPressEvent
+            #@ LeoQListWidget.keyPressEvent
             def keyPressEvent(self, event: QKeyEvent) -> None:
                 """Handle a key event from QListWidget."""
                 c = self.leo_c
@@ -649,7 +619,7 @@ if QtWidgets:
                     # Pass all other keys to the autocompleter via the event filter.
                     w.ev_filter.eventFilter(obj=self, event=event)
 
-            # @+node:ekr.20110605121601.18014: *5* LeoQListWidget.select_callback
+            #@ LeoQListWidget.select_callback
             def select_callback(self) -> None:
                 """
                 Called when user selects an item in the QListWidget.
@@ -686,7 +656,7 @@ if QtWidgets:
                     )
                 self.end_completer()
 
-            # @+node:tbrown.20111011094944.27031: *5* LeoQListWidget.tab_callback
+            #@ LeoQListWidget.tab_callback
             def tab_callback(self) -> None:
                 """Called when user hits tab on an item in the QListWidget."""
                 c = self.leo_c
@@ -708,7 +678,7 @@ if QtWidgets:
                 w.setInsertPoint(i)
                 c.k.autoCompleter.compute_completion_list()
 
-            # @+node:ekr.20110605121601.18015: *5* LeoQListWidget.set_position
+            #@ LeoQListWidget.set_position
             def set_position(self, c: Cmdr) -> None:
                 """Set the position of the QListWidget."""
 
@@ -736,7 +706,7 @@ if QtWidgets:
                 geom2 = QtCore.QRect(geom2_topLeft, geom2_size)
                 self.setGeometry(geom2)
 
-            # @+node:ekr.20110605121601.18016: *5* LeoQListWidget.show_completions
+            #@ LeoQListWidget.show_completions
             def show_completions(self, aList: list[str]) -> None:
                 """Set the QListView contents to aList."""
                 self.clear()
@@ -745,9 +715,9 @@ if QtWidgets:
                 self.activateWindow()
                 self.setFocus()
 
-            # @-others
+            #@-others
 
-        # @+node:ekr.20110605121601.18017: *4* LeoQTextBrowser.init_completer
+        #@< LeoQTextBrowser.init_completer
         def init_completer(self, options: list[str]) -> LeoQListWidget:
             """Connect a QCompleter."""
             c = self.leo_c
@@ -762,7 +732,7 @@ if QtWidgets:
             qc.show_completions(options)
             return qc
 
-        # @+node:ekr.20110605121601.18018: *4* LeoQTextBrowser.redirections to LeoQListWidget
+        #@ LeoQTextBrowser.redirections to LeoQListWidget
         def end_completer(self) -> None:
             if hasattr(self, 'leo_qc'):
                 self.leo_qc.end_completer()
@@ -772,9 +742,9 @@ if QtWidgets:
             if hasattr(self, 'leo_qc'):
                 self.leo_qc.show_completions(aList)
 
-        # @+node:tom.20210827230127.1: *3* LeoQTextBrowser: Highlight Current Line
-        # @+node:tom.20210827225119.3: *4* LeoQTextBrowser.parse_css
-        # @@language python
+        #@< LeoQTextBrowser: Highlight Current Line
+        #@> LeoQTextBrowser.parse_css
+        #@@language python
         @staticmethod
         def parse_css(css_string: str, clas: str = '') -> tuple[str, str]:
             """Extract colors from a css stylesheet string.
@@ -809,8 +779,8 @@ if QtWidgets:
                     break
             return color, bg
 
-        # @+node:tom.20210827225119.4: *4* LeoQTextBrowser.assign_bg
-        # @@language python
+        #@ LeoQTextBrowser.assign_bg
+        #@@language python
         @staticmethod
         def assign_bg(fg: str) -> QColor:
             """If fg or bg colors are missing, assign
@@ -836,8 +806,8 @@ if QtWidgets:
                     bg = 'black'
             return QColor(bg)
 
-        # @+node:tom.20210827225119.5: *4* LeoQTextBrowser.calc_hl
-        # @@language python
+        #@ LeoQTextBrowser.calc_hl
+        #@@language python
         @staticmethod
         def calc_hl(palette: QtGui.QPalette) -> QColor:
             """Return the line highlight color.
@@ -864,8 +834,8 @@ if QtWidgets:
                     hl = bg.lighter(140)
             return hl
 
-        # @+node:tom.20210827225119.2: *4* LeoQTextBrowser.highlightCurrentLine
-        # @@language python
+        #@ LeoQTextBrowser.highlightCurrentLine
+        #@@language python
         def highlightCurrentLine(self) -> None:
             """Highlight cursor line."""
             c = self.leo_c
@@ -893,8 +863,8 @@ if QtWidgets:
 
             hl_color = params['last_hl_color']
 
-            # @+<< Recalculate Color >>
-            # @+node:tom.20210909124441.1: *5* << Recalculate Color >>
+            #@+<< Recalculate Color >>
+            #@> << Recalculate Color >>
             config_setting = c.config.getString('line-highlight-color') or ''
             config_setting = (
                 config_setting.replace("'", '').replace('"', '').lower().replace('none', '')
@@ -927,9 +897,9 @@ if QtWidgets:
                     params['last_hl_color'] = hl_color
                     params['last_fg'] = fg
                     params['last_bg'] = bg
-            # @-<< Recalculate Color >>
-            # @+<< Apply Highlight >>
-            # @+node:tom.20210909124551.1: *5* << Apply Highlight >>
+            #@-<< Recalculate Color >>
+            #@+<< Apply Highlight >>
+            #@ << Apply Highlight >>
             # Based on code from
             # https://doc.qt.io/qt-5/qtwidgets-widgets-codeeditor-example.html
 
@@ -940,9 +910,9 @@ if QtWidgets:
             selection.cursor.clearSelection()
 
             editor.setExtraSelections([selection])
-            # @-<< Apply Highlight >>
+            #@-<< Apply Highlight >>
 
-        # @+node:ekr.20141103061944.31: *3* LeoQTextBrowser.get/setXScrollPosition
+        #@<2 LeoQTextBrowser.get/setXScrollPosition
         def getXScrollPosition(self) -> int:
             """Get the horizontal scrollbar position."""
             w = self
@@ -957,7 +927,7 @@ if QtWidgets:
                 sb = w.horizontalScrollBar()
                 sb.setSliderPosition(pos)
 
-        # @+node:ekr.20111002125540.7021: *3* LeoQTextBrowser.get/setYScrollPosition
+        #@ LeoQTextBrowser.get/setYScrollPosition
         def getYScrollPosition(self) -> int:
             """Get the vertical scrollbar position."""
             w = self
@@ -973,7 +943,7 @@ if QtWidgets:
             sb = w.verticalScrollBar()
             sb.setSliderPosition(pos)
 
-        # @+node:ekr.20110605121601.18019: *3* LeoQTextBrowser.leo_dumpButton
+        #@ LeoQTextBrowser.leo_dumpButton
         def leo_dumpButton(self, event: LeoKeyEvent | None, tag: str) -> str:
             if not event:
                 return ''
@@ -992,14 +962,14 @@ if QtWidgets:
                 kind = f"unknown: {repr(button)}"
             return kind
 
-        # @+node:ekr.20200304130514.1: *3* LeoQTextBrowser.onContextMenu
+        #@ LeoQTextBrowser.onContextMenu
         def onContextMenu(self, point: QPoint) -> None:
             """LeoQTextBrowser: Callback for customContextMenuRequested events."""
             # #1286.
             c, w = self.leo_c, self
             g.app.gui.onContextMenu(c, w, point)
 
-        # @+node:ekr.20120925061642.13506: *3* LeoQTextBrowser.onSliderChanged
+        #@ LeoQTextBrowser.onSliderChanged
         def onSliderChanged(self, arg: int) -> None:
             """Handle a Qt onSliderChanged event."""
             c = self.leo_c
@@ -1014,7 +984,7 @@ if QtWidgets:
             if p:
                 p.v.scrollBarSpot = arg
 
-        # @+node:ekr.20201204172235.1: *3* LeoQTextBrowser.paintEvent
+        #@ LeoQTextBrowser.paintEvent
         leo_cursor_width = 0
 
         leo_vim_mode: bool | None = None
@@ -1032,36 +1002,8 @@ if QtWidgets:
             if w == getattr(c.frame.body, 'widget', None) and c.config.getBool(
                 'show-rmargin-guide'
             ):
-                # @+<< paint margin guides >>
-                # @+node:tom.20220423204906.1: *4* << paint margin guides  >>
-                # based on https://stackoverflow.com/questions/30371613
-                # draw-vertical-lines-on-qtextedit-in-pyqt
-                # Honor @pagewidth directive if any
-                rcol = c.getPageWidth(c.p) or c.config.getInt('rguide-col', 80)
-                vp = w.viewport()
-                palette = vp.palette()
-                font = w.document().defaultFont()
-                fm = QFontMetrics(font)
-                rmargin = fm.horizontalAdvance('9' * rcol) + 2
-                if vp.width() >= rmargin:
-                    painter = QtGui.QPainter(vp)
-                    pen = QtGui.QPen(SolidLine)
-
-                    # guideline color
-                    fg = palette.text().color()
-                    bg = palette.window().color()
-                    hsv_fg = fg.getHsv()[2]
-                    hsv_bg = bg.getHsv()[2]
-                    if hsv_fg < hsv_bg:
-                        fg = fg.lighter()
-                    else:
-                        fg = fg.darker()
-                    pen.setColor(fg)
-
-                    pen.setWidth(1)
-                    painter.setPen(pen)
-                    painter.drawLine(rmargin, 0, rmargin, vp.height())
-                # @-<< paint margin guides >>
+                #@+<< paint margin guides >>
+                #@-<< paint margin guides >>
 
             # First, call the base class paintEvent.
             QtWidgets.QTextBrowser.paintEvent(self, event)
@@ -1098,7 +1040,7 @@ if QtWidgets:
             qp.drawRect(w.cursorRect())
             qp.end()
 
-        # @+node:tbrown.20130411145310.18855: *3* LeoQTextBrowser.wheelEvent
+        #@ LeoQTextBrowser.wheelEvent
         def wheelEvent(self, event: QWheelEvent) -> None:
             """Handle a wheel event."""
             if KeyboardModifier.ControlModifier & event.modifiers():
@@ -1116,13 +1058,13 @@ if QtWidgets:
                 return
             QtWidgets.QTextBrowser.wheelEvent(self, event)
 
-        # @-others
+        #@-others
 
 
-# @+node:ekr.20150403094706.2: ** class NumberBar(QFrame)
+#@< class NumberBar(QFrame)
 class NumberBar(QtWidgets.QFrame):
-    # @+others
-    # @+node:ekr.20150403094706.3: *3* NumberBar.__init__
+    #@+others
+    #@> NumberBar.__init__
     def __init__(self, c: Cmdr, e: QWidget, *args: Any) -> None:
         """Ctor for NumberBar class."""
         super().__init__(*args)
@@ -1143,7 +1085,7 @@ class NumberBar(QtWidgets.QFrame):
         self.setObjectName('gutter')
         self.reloadSettings()
 
-    # @+node:ekr.20181005093003.1: *3* NumberBar.reloadSettings
+    #@ NumberBar.reloadSettings
     def reloadSettings(self) -> None:
         c = self.c
         c.registerReloadSettings(self)
@@ -1152,7 +1094,7 @@ class NumberBar(QtWidgets.QFrame):
         # The y offset of the first line of the gutter.
         self.y_adjust = c.config.getInt('gutter-y-adjust') or 10
 
-    # @+node:ekr.20181005085507.1: *3* NumberBar.mousePressEvent
+    #@ NumberBar.mousePressEvent
     def mousePressEvent(self, event: QMouseEvent) -> None:
         c = self.c
 
@@ -1179,7 +1121,7 @@ class NumberBar(QtWidgets.QFrame):
         else:
             xdb.qc.put(f"b {path}:{n}")
 
-    # @+node:ekr.20150403094706.5: *3* NumberBar.update
+    #@ NumberBar.update
     def update(self, *args: Any) -> None:
         """
         Updates the number bar to display the current set of numbers.
@@ -1192,7 +1134,7 @@ class NumberBar(QtWidgets.QFrame):
             self.setFixedWidth(width)
         QtWidgets.QWidget.update(self, *args)
 
-    # @+node:ekr.20150403094706.6: *3* NumberBar.paintEvent
+    #@ NumberBar.paintEvent
     def paintEvent(self, event: QPaintEvent) -> None:
         """
         Enhance QFrame.paintEvent.
@@ -1225,7 +1167,7 @@ class NumberBar(QtWidgets.QFrame):
         painter.end()
         QtWidgets.QWidget.paintEvent(self, event)  # Propagate the event.
 
-    # @+node:ekr.20150403094706.7: *3* NumberBar.paintBlock
+    #@ NumberBar.paintBlock
     def paintBlock(
         self,
         bold: bool,
@@ -1264,25 +1206,25 @@ class NumberBar(QtWidgets.QFrame):
             else:
                 painter.drawEllipse(target_r)
 
-    # @+node:ekr.20150403094706.8: *3* NumberBar.setBold
+    #@ NumberBar.setBold
     def setBold(self, painter: QPainter, flag: bool) -> None:
         """Set or clear bold facing in the painter, depending on flag."""
         font = painter.font()
         font.setBold(flag)
         painter.setFont(font)
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20110605121601.18116: ** class QHeadlineWrapper (QLineEditWrapper)
+#@< class QHeadlineWrapper (QLineEditWrapper)
 class QHeadlineWrapper(QLineEditWrapper):
     """
     A wrapper class for QLineEdit widgets in QTreeWidget's.
     This class just redefines the check method.
     """
 
-    # @+others
-    # @+node:ekr.20110605121601.18117: *3* QHeadlineWrapper.Birth
+    #@+others
+    #@> QHeadlineWrapper.Birth
     def __init__(self, c: Cmdr, item: QTreeWidgetItem, name: str, widget: QLineEdit) -> None:
         """The ctor for the QHeadlineWrapper class."""
         assert isinstance(widget, QtWidgets.QLineEdit), widget
@@ -1299,7 +1241,7 @@ class QHeadlineWrapper(QLineEditWrapper):
     def __repr__(self) -> str:
         return f"QHeadlineWrapper: {id(self)}"
 
-    # @+node:ekr.20110605121601.18119: *3* QHeadlineWrapper.check
+    #@ QHeadlineWrapper.check
     def check(self) -> bool:
         """Return True if the tree item exists and it's edit widget exists."""
         tree = self.c.frame.tree
@@ -1311,10 +1253,10 @@ class QHeadlineWrapper(QLineEditWrapper):
         result = valid and e == self.widget
         return result
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20110605121601.18131: ** class QMinibufferWrapper (QLineEditWrapper)
+#@< class QMinibufferWrapper (QLineEditWrapper)
 class QMinibufferWrapper(QLineEditWrapper):
     def __init__(self, c: Cmdr) -> None:
         """Ctor for QMinibufferWrapper class."""
@@ -1325,23 +1267,8 @@ class QMinibufferWrapper(QLineEditWrapper):
         g.app.gui.setFilter(c, w, self, tag='minibuffer')
 
         # Monkey-patch the event handlers
-        # @+<< define mouseReleaseEvent >>
-        # @+node:ekr.20110605121601.18132: *3* << define mouseReleaseEvent >> (QMinibufferWrapper)
-        def mouseReleaseEvent(event: QEvent, self: QMinibufferWrapper = self) -> None:
-            """Override QLineEdit.mouseReleaseEvent.
-
-            Simulate alt-x if we are not in an input state.
-            """
-            assert isinstance(self, QMinibufferWrapper), self
-            assert isinstance(self.widget, QtWidgets.QLineEdit), self.widget
-            c, k = self.c, self.c.k
-            if not k.state.kind:
-                # c.widgetWantsFocusNow(w) # Doesn't work.
-                event2 = g.app.gui.create_key_event(c, w=c.frame.body.wrapper)
-                k.fullCommand(event2)
-                # c.outerUpdate() # Doesn't work.
-
-        # @-<< define mouseReleaseEvent >>
+        #@+<< define mouseReleaseEvent >>
+        #@-<< define mouseReleaseEvent >>
 
         w.mouseReleaseEvent = mouseReleaseEvent
 
@@ -1365,7 +1292,7 @@ class QMinibufferWrapper(QLineEditWrapper):
             self.widget._sel_and_insert = (i, j, insert)
 
 
-# @+node:ekr.20110605121601.18103: ** class QScintillaWrapper(QTextMixin)
+#@ class QScintillaWrapper(QTextMixin)
 class QScintillaWrapper(QTextMixin):
     """
     A wrapper for QsciScintilla supporting the high-level interface.
@@ -1376,8 +1303,8 @@ class QScintillaWrapper(QTextMixin):
     - Add support for all scintilla lexers.
     """
 
-    # @+others
-    # @+node:ekr.20110605121601.18105: *3* QScintillaWrapper.ctor
+    #@+others
+    #@> QScintillaWrapper.ctor
     def __init__(self, widget: QWidget, c: Cmdr, name: str | None = None) -> None:
         """Ctor for the QScintillaWrapper class."""
         super().__init__(c)
@@ -1391,7 +1318,7 @@ class QScintillaWrapper(QTextMixin):
         # Set the signal.
         g.app.gui.setFilter(c, widget, self, tag=name)
 
-    # @+node:ekr.20110605121601.18106: *3* QScintillaWrapper.set_config
+    #@ QScintillaWrapper.set_config
     def set_config(self) -> None:
         """Set QScintillaWrapper configuration options."""
         c, w = self.c, self.widget
@@ -1407,8 +1334,8 @@ class QScintillaWrapper(QTextMixin):
         w.setIndentationsUseTabs(False)
         w.setAutoIndent(True)
 
-    # @+node:ekr.20110605121601.18107: *3* QScintillaWrapper.WidgetAPI
-    # @+node:ekr.20140901062324.18593: *4* QScintillaWrapper.delete
+    #@ QScintillaWrapper.WidgetAPI
+    #@> QScintillaWrapper.delete
     def delete(self, i: int, j: int | None = None) -> None:
         """Delete s[i:j]"""
         w = self.widget
@@ -1421,7 +1348,7 @@ class QScintillaWrapper(QTextMixin):
         finally:
             self.changingText = False
 
-    # @+node:ekr.20140901062324.18594: *4* QScintillaWrapper.flashCharacter (disabled)
+    #@ QScintillaWrapper.flashCharacter (disabled)
     def flashCharacter(
         self,
         i: int,
@@ -1437,13 +1364,13 @@ class QScintillaWrapper(QTextMixin):
             if g.unitTesting:
                 return
 
-            # @+others
-            # @+node:ekr.20140902084950.18635: *5* after
+            #@+others
+            #@> after
             def after(func: Callable, delay: int = delay) -> None:
                 """Run func after the given delay."""
                 QtCore.QTimer.singleShot(delay, func)
 
-            # @+node:ekr.20140902084950.18636: *5* addFlashCallback
+            #@ addFlashCallback
             def addFlashCallback(self=self) -> None:
                 i = self.flashIndex
                 w = self.widget
@@ -1455,7 +1382,7 @@ class QScintillaWrapper(QTextMixin):
                 self.flashCount -= 1
                 after(removeFlashCallback)
 
-            # @+node:ekr.20140902084950.18637: *5* removeFlashCallback
+            #@ removeFlashCallback
             def removeFlashCallback(self=self) -> None:
                 """Remove the extra selections."""
                 self.setInsertPoint(self.flashIndex)
@@ -1467,7 +1394,7 @@ class QScintillaWrapper(QTextMixin):
                     self.setInsertPoint(self.flashIndex1)
                     w.setFocus()
 
-            # @-others
+            #@-others
             # Numbered color names don't work in Ubuntu 8.10, so...
             if bg and bg[-1].isdigit() and bg[0] != '#':
                 bg = bg[:-1]
@@ -1481,7 +1408,7 @@ class QScintillaWrapper(QTextMixin):
             self.flashFg = None if fg.lower() == 'same' else fg
             addFlashCallback()
 
-    # @+node:ekr.20140901062324.18595: *4* QScintillaWrapper.get
+    #@< QScintillaWrapper.get
     def get(self, i: int, j: int | None = None) -> str:
         # Fix the following two bugs by using vanilla code:
         # https://bugs.launchpad.net/leo-editor/+bug/979142
@@ -1489,20 +1416,20 @@ class QScintillaWrapper(QTextMixin):
         s = self.getAllText()
         return s[i:j]
 
-    # @+node:ekr.20110605121601.18108: *4* QScintillaWrapper.getAllText
+    #@ QScintillaWrapper.getAllText
     def getAllText(self) -> str:
         """Get all text from a QsciScintilla widget."""
         w = self.widget
         return w.text()
 
-    # @+node:ekr.20110605121601.18109: *4* QScintillaWrapper.getInsertPoint
+    #@ QScintillaWrapper.getInsertPoint
     def getInsertPoint(self) -> int:
         """Get the insertion point from a QsciScintilla widget."""
         w = self.widget
         i = int(w.SendScintilla(w.SCI_GETCURRENTPOS))
         return i
 
-    # @+node:ekr.20110605121601.18110: *4* QScintillaWrapper.getSelectionRange
+    #@ QScintillaWrapper.getSelectionRange
     def getSelectionRange(self, sort: bool = True) -> tuple[int, int]:
         """Get the selection range from a QsciScintilla widget."""
         w = self.widget
@@ -1512,7 +1439,7 @@ class QScintillaWrapper(QTextMixin):
             i, j = j, i
         return i, j
 
-    # @+node:ekr.20140901062324.18599: *4* QScintillaWrapper.getX/YScrollPosition
+    #@ QScintillaWrapper.getX/YScrollPosition
     def getXScrollPosition(self) -> int:
         # w = self.widget
         return 0  # Not ready yet.
@@ -1521,12 +1448,12 @@ class QScintillaWrapper(QTextMixin):
         # w = self.widget
         return 0  # Not ready yet.
 
-    # @+node:ekr.20110605121601.18111: *4* QScintillaWrapper.hasSelection
+    #@ QScintillaWrapper.hasSelection
     def hasSelection(self) -> bool:
         """Return True if a QsciScintilla widget has a selection range."""
         return self.widget.hasSelectedText()
 
-    # @+node:ekr.20140901062324.18601: *4* QScintillaWrapper.insert
+    #@ QScintillaWrapper.insert
     def insert(self, i: int, s: str) -> int:
         """Insert s at position i."""
         w = self.widget
@@ -1536,14 +1463,14 @@ class QScintillaWrapper(QTextMixin):
         w.SendScintilla(w.SCI_SETSEL, i, i)
         return i
 
-    # @+node:ekr.20140901062324.18603: *4* QScintillaWrapper.linesPerPage
+    #@ QScintillaWrapper.linesPerPage
     def linesPerPage(self) -> int:
         """Return the number of lines presently visible."""
         # Not used in Leo's core. Not tested.
         w = self.widget
         return int(w.SendScintilla(w.SCI_LINESONSCREEN))
 
-    # @+node:ekr.20140901062324.18604: *4* QScintillaWrapper.scrollDelegate (maybe)
+    #@ QScintillaWrapper.scrollDelegate (maybe)
     if 0:  # Not yet.
 
         def scrollDelegate(self, kind: str) -> None:
@@ -1577,7 +1504,7 @@ class QScintillaWrapper(QTextMixin):
             vScroll.setValue(val + (delta * lineSpacing))
             c.bodyWantsFocus()
 
-    # @+node:ekr.20110605121601.18112: *4* QScintillaWrapper.see
+    #@ QScintillaWrapper.see
     def see(self, i: int) -> None:
         """Ensure insert point i is visible in a QsciScintilla widget."""
         # Ok for now.  Using SCI_SETYCARETPOLICY might be better.
@@ -1586,7 +1513,7 @@ class QScintillaWrapper(QTextMixin):
         row, col = g.convertPythonIndexToRowCol(s, i)
         w.ensureLineVisible(row)
 
-    # @+node:ekr.20110605121601.18113: *4* QScintillaWrapper.setAllText
+    #@ QScintillaWrapper.setAllText
     def setAllText(self, s: str) -> None:
         """Set the text of a QScintilla widget."""
         w = self.widget
@@ -1594,7 +1521,7 @@ class QScintillaWrapper(QTextMixin):
         w.setText(s)
         # w.update()
 
-    # @+node:ekr.20110605121601.18114: *4* QScintillaWrapper.setInsertPoint
+    #@ QScintillaWrapper.setInsertPoint
     def setInsertPoint(self, i: int, s: str | None = None) -> None:
         """Set the insertion point in a QsciScintilla widget."""
         w = self.widget
@@ -1602,7 +1529,7 @@ class QScintillaWrapper(QTextMixin):
         # w.SendScintilla(w.SCI_SETANCHOR,i)
         w.SendScintilla(w.SCI_SETSEL, i, i)
 
-    # @+node:ekr.20110605121601.18115: *4* QScintillaWrapper.setSelectionRange
+    #@ QScintillaWrapper.setSelectionRange
     def setSelectionRange(
         self, i: int, j: int, insert: int | None = None, s: str | None = None
     ) -> None:
@@ -1615,22 +1542,22 @@ class QScintillaWrapper(QTextMixin):
         else:
             w.SendScintilla(w.SCI_SETSEL, j, i)
 
-    # @+node:ekr.20140901062324.18609: *4* QScintillaWrapper.setX/YScrollPosition
+    #@ QScintillaWrapper.setX/YScrollPosition
     def setXScrollPosition(self, pos: int) -> None:
         """Set the position of the horizontal scrollbar."""
 
     def setYScrollPosition(self, pos: int) -> None:
         """Set the position of the vertical scrollbar."""
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20110605121601.18071: ** class QTextEditWrapper(QTextMixin)
+#@<2 class QTextEditWrapper(QTextMixin)
 class QTextEditWrapper(QTextMixin):
     """A wrapper for a QTextEdit/QTextBrowser supporting the high-level interface."""
 
-    # @+others
-    # @+node:ekr.20110605121601.18073: *3* QTextEditWrapper.__init__ & helpers
+    #@+others
+    #@> QTextEditWrapper.__init__ & helpers
     def __init__(self, *, widget: Any, name: str = 'TestWrapper', c: Cmdr) -> None:
         """Ctor for QTextEditWrapper class. widget is a QTextEdit/QTextBrowser."""
         super().__init__(c)
@@ -1646,7 +1573,7 @@ class QTextEditWrapper(QTextMixin):
             self.set_config()
             self.set_signals()
 
-    # @+node:ekr.20110605121601.18076: *4* QTextEditWrapper.set_config
+    #@> QTextEditWrapper.set_config
     def set_config(self) -> None:
         """Set configuration options for QTextEdit."""
         w = self.widget
@@ -1654,7 +1581,7 @@ class QTextEditWrapper(QTextMixin):
         # tab stop in pixels - no config for this (yet)
         w.setTabStopDistance(24)
 
-    # @+node:ekr.20140901062324.18566: *4* QTextEditWrapper.set_signals
+    #@ QTextEditWrapper.set_signals
     def set_signals(self) -> None:
         """Set up signals."""
         c, name = self.c, self.name
@@ -1667,8 +1594,8 @@ class QTextEditWrapper(QTextMixin):
             w.cursorPositionChanged.connect(self.onCursorPositionChanged)
         if name in ('body', 'log'):
             # Monkey patch the event handler.
-            # @+others
-            # @+node:ekr.20140901062324.18565: *5* QTextEditWrapper.mouseReleaseEvent (monkey-patch)
+            #@+others
+            #@> QTextEditWrapper.mouseReleaseEvent (monkey-patch)
             def mouseReleaseEvent(event: QMouseEvent, self: QTextEditWrapper = self) -> None:
                 """
                 Monkey patch for self.widget (QTextEditWrapper) mouseReleaseEvent.
@@ -1689,19 +1616,19 @@ class QTextEditWrapper(QTextMixin):
                     # Do *not* change the focus! This would rip focus away from tab panes.
                     c.k.keyboardQuit(setFocus=False)
 
-            # @-others
+            #@-others
             cast(Any, self.widget).mouseReleaseEvent = mouseReleaseEvent
 
-    # @+node:ekr.20200312052821.1: *3* QTextEditWrapper.repr
+    #@<2 QTextEditWrapper.repr
     def __repr__(self) -> str:
         # Add a leading space to align with StringTextWrapper.
         return f" <QTextEditWrapper: {id(self)} {self.name}>"
 
     __str__ = __repr__
 
-    # @+node:ekr.20110605121601.18078: *3* QTextEditWrapper: High-level interface
+    #@ QTextEditWrapper: High-level interface
     # These are all widget-dependent
-    # @+node:ekr.20110605121601.18079: *4* QTextEditWrapper.delete (avoid call to setAllText)
+    #@> QTextEditWrapper.delete (avoid call to setAllText)
     def delete(self, i: int, j: int | None = None) -> None:
         """QTextEditWrapper."""
         w = self.widget
@@ -1730,7 +1657,7 @@ class QTextEditWrapper(QTextMixin):
             self.changingText = False
         sb.setSliderPosition(pos)
 
-    # @+node:ekr.20110605121601.18080: *4* QTextEditWrapper.flashCharacter
+    #@ QTextEditWrapper.flashCharacter
     def flashCharacter(
         self,
         i: int,
@@ -1786,18 +1713,18 @@ class QTextEditWrapper(QTextMixin):
         self.flashFg = None if fg.lower() == 'same' else fg
         addFlashCallback()
 
-    # @+node:ekr.20110605121601.18081: *4* QTextEditWrapper.getAllText
+    #@ QTextEditWrapper.getAllText
     def getAllText(self) -> str:
         """QTextEditWrapper."""
         w = self.widget
         return w.toPlainText()
 
-    # @+node:ekr.20110605121601.18082: *4* QTextEditWrapper.getInsertPoint
+    #@ QTextEditWrapper.getInsertPoint
     def getInsertPoint(self) -> int:
         """QTextEditWrapper."""
         return self.widget.textCursor().position()
 
-    # @+node:ekr.20110605121601.18083: *4* QTextEditWrapper.getSelectionRange
+    #@ QTextEditWrapper.getSelectionRange
     def getSelectionRange(self, sort: bool = True) -> tuple[int, int]:
         """QTextEditWrapper."""
         w = self.widget
@@ -1805,7 +1732,7 @@ class QTextEditWrapper(QTextMixin):
         i, j = tc.selectionStart(), tc.selectionEnd()
         return i, j
 
-    # @+node:ekr.20110605121601.18084: *4* QTextEditWrapper.getX/YScrollPosition
+    #@ QTextEditWrapper.getX/YScrollPosition
     # **Important**: There is a Qt bug here: the scrollbar position
     # is valid only if cursor is visible.  Otherwise the *reported*
     # scrollbar position will be such that the cursor *is* visible.
@@ -1824,12 +1751,12 @@ class QTextEditWrapper(QTextMixin):
         pos = sb.sliderPosition()
         return pos
 
-    # @+node:ekr.20110605121601.18085: *4* QTextEditWrapper.hasSelection
+    #@ QTextEditWrapper.hasSelection
     def hasSelection(self) -> bool:
         """QTextEditWrapper."""
         return self.widget.textCursor().hasSelection()
 
-    # @+node:ekr.20110605121601.18089: *4* QTextEditWrapper.insert (avoid call to setAllText)
+    #@ QTextEditWrapper.insert (avoid call to setAllText)
     def insert(self, i: int, s: str) -> None:
         """QTextEditWrapper."""
         w = self.widget
@@ -1842,7 +1769,7 @@ class QTextEditWrapper(QTextMixin):
         finally:
             self.changingText = False
 
-    # @+node:ekr.20110605121601.18077: *4* QTextEditWrapper.leoMoveCursorHelper & helper
+    #@ QTextEditWrapper.leoMoveCursorHelper & helper
     def leoMoveCursorHelper(self, kind: str, extend: bool = False, linesPerPage: int = 15) -> None:
         """QTextEditWrapper."""
         w = self.widget
@@ -1900,7 +1827,7 @@ class QTextEditWrapper(QTextMixin):
             g.app.gui.setClipboardSelection(sel)
         self.c.frame.updateStatusLine()
 
-    # @+node:btheado.20120129145543.8180: *5* QTextEditWrapper.pageUpDown
+    #@> QTextEditWrapper.pageUpDown
     def pageUpDown(self, op: object, moveMode: object) -> None:
         """
         The QTextEdit PageUp/PageDown functionality seems to be "baked-in"
@@ -1932,7 +1859,7 @@ class QTextEditWrapper(QTextMixin):
                 sb.triggerAction(SliderAction.SliderPageStepAdd)
         control.setTextCursor(cursor)
 
-    # @+node:ekr.20110605121601.18087: *4* QTextEditWrapper.linesPerPage
+    #@< QTextEditWrapper.linesPerPage
     def linesPerPage(self) -> float:
         """QTextEditWrapper."""
         # Not used in Leo's core.
@@ -1942,7 +1869,7 @@ class QTextEditWrapper(QTextMixin):
         n = h / lineSpacing
         return n
 
-    # @+node:ekr.20110605121601.18088: *4* QTextEditWrapper.scrollDelegate
+    #@ QTextEditWrapper.scrollDelegate
     def scrollDelegate(self, kind: str) -> None:
         """
         Scroll a QTextEdit up or down one page.
@@ -1974,7 +1901,7 @@ class QTextEditWrapper(QTextMixin):
         vScroll.setValue(val + (delta * lineSpacing))
         c.bodyWantsFocus()
 
-    # @+node:ekr.20110605121601.18090: *4* QTextEditWrapper.see & seeInsertPoint
+    #@ QTextEditWrapper.see & seeInsertPoint
     def see(self, see_i: int) -> None:
         """Scroll so that position see_i is visible."""
         w = self.widget
@@ -1995,7 +1922,7 @@ class QTextEditWrapper(QTextMixin):
         """Make sure the insert point is visible."""
         self.widget.ensureCursorVisible()
 
-    # @+node:ekr.20110605121601.18092: *4* QTextEditWrapper.setAllText
+    #@ QTextEditWrapper.setAllText
     def setAllText(self, s: str) -> None:
         """Set the text of body pane."""
         w = self.widget
@@ -2007,11 +1934,11 @@ class QTextEditWrapper(QTextMixin):
         finally:
             self.changingText = False
 
-    # @+node:ekr.20110605121601.18095: *4* QTextEditWrapper.setInsertPoint
+    #@ QTextEditWrapper.setInsertPoint
     def setInsertPoint(self, i: int) -> None:
         self.setSelectionRange(i=i, j=i, insert=i)
 
-    # @+node:ekr.20110605121601.18096: *4* QTextEditWrapper.setSelectionRange
+    #@ QTextEditWrapper.setSelectionRange
     def setSelectionRange(self, i: int, j: int, insert: int | None = None) -> None:
         """Set the selection range and the insert point."""
         c = self.c
@@ -2066,7 +1993,7 @@ class QTextEditWrapper(QTextMixin):
         v.selectionLength = j - i
         v.scrollBarSpot = w.verticalScrollBar().value()
 
-    # @+node:ekr.20141103061944.40: *4* QTextEditWrapper.setXScrollPosition
+    #@ QTextEditWrapper.setXScrollPosition
     def setXScrollPosition(self, pos: int) -> None:
         """Set the position of the horizontal scrollbar."""
         if pos is not None:
@@ -2074,7 +2001,7 @@ class QTextEditWrapper(QTextMixin):
             sb = w.horizontalScrollBar()
             sb.setSliderPosition(pos)
 
-    # @+node:ekr.20110605121601.18098: *4* QTextEditWrapper.setYScrollPosition
+    #@ QTextEditWrapper.setYScrollPosition
     def setYScrollPosition(self, pos: int) -> None:
         """Set the vertical scrollbar position."""
         if pos is not None:
@@ -2082,7 +2009,7 @@ class QTextEditWrapper(QTextMixin):
             sb = w.verticalScrollBar()
             sb.setSliderPosition(pos)
 
-    # @+node:ekr.20110605121601.18101: *4* QTextEditWrapper.toPythonIndexRowCol (fast)
+    #@ QTextEditWrapper.toPythonIndexRowCol (fast)
     def toPythonIndexRowCol(self, index: int) -> tuple[int, int]:
         te = self.widget
         doc = te.document()
@@ -2091,12 +2018,12 @@ class QTextEditWrapper(QTextMixin):
         col = index - bl.position()
         return row, col
 
-    # @-others
+    #@-others
 
 
-# @-others
+#@-others
 
-# @@language python
-# @@tabwidth -4
-# @@pagewidth 70
-# @-leo
+#@@language python
+#@@tabwidth -4
+#@@pagewidth 70
+#@-leo

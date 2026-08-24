@@ -1,6 +1,6 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20210219115553.109: * @file ../modes/python.py
-# @@language python
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20210219115553.109] @f ../modes/python.py
+#@@language python
 # Leo colorizer control file for python mode.
 # This file is in the public domain.
 
@@ -19,8 +19,8 @@ properties = {
     "lineComment": "#",
 }
 
-# @+<< Python attributes dicts >>
-# @+node:ekr.20230419163615.1: ** << Python attributes dicts >>
+#@+<< Python attributes dicts >>
+#@> << Python attributes dicts >>
 
 # Attributes dict for python_main ruleset.
 python_main_attributes_dict = {
@@ -36,9 +36,9 @@ python_main_attributes_dict = {
 attributesDictDict = {
     "python_main": python_main_attributes_dict,
 }
-# @-<< Python attributes dicts >>
-# @+<< Python keywords dicts >>
-# @+node:ekr.20230419163648.1: ** << Python keywords dicts >>
+#@-<< Python attributes dicts >>
+#@+<< Python keywords dicts >>
+#@ << Python keywords dicts >>
 # Keywords dict for python_main ruleset.
 python_main_keywords_dict = {
     "ArithmeticError": "keyword3",
@@ -314,11 +314,11 @@ keywordsDictDict = {
 }
 
 
-# @-<< Python keywords dicts >>
-# @+<< Python rules >>
-# @+node:ekr.20230419163736.1: ** << Python rules >>
-# @+others
-# @+node:ekr.20230419163819.1: *3* python_comment
+#@-<< Python keywords dicts >>
+#@+<< Python rules >>
+#@ << Python rules >>
+#@+others
+#@> python_comment
 def python_comment(colorer, s, i):
     """
     Switch to md coloring if s is '# %% [markdown]', provided that c.p.b
@@ -362,12 +362,12 @@ def python_comment(colorer, s, i):
     return n  # Succeed. Do not allow other matches.
 
 
-# @+node:ekr.20230419163819.4: *3* python_double_quote
+#@ python_double_quote
 def python_double_quote(colorer, s, i):
     return colorer.match_span(s, i, kind="literal1", begin="\"", end="\"")
 
 
-# @+node:ekr.20230419163819.2: *3* python_double_quote_docstring
+#@ python_double_quote_docstring
 def python_double_quote_docstring(colorer, s, i):
     c = colorer.c
     seq = '"""'
@@ -378,24 +378,24 @@ def python_double_quote_docstring(colorer, s, i):
     return colorer.match_span(s, i, kind='literal2', begin=seq, end=seq, delegate=delegate)
 
 
-# @+node:ekr.20231209010502.1: *3* python_fstring (not used)
+#@ python_fstring (not used)
 def python_fstring(colorer, s, i):
     return colorer.match_fstring(s, i)
 
 
-# @+node:ekr.20230419163819.22: *3* python_keyword
+#@ python_keyword
 def python_keyword(colorer, s, i):
     return colorer.match_keywords(s, i)
 
 
-# @+node:ekr.20240213104932.1: *3* python_len_op1 (all single-character ops)
+#@ python_len_op1 (all single-character ops)
 def python_op1(colorer, s, i):
     """Color a s[i] as an operator."""
     colorer.colorRangeWithTag(s, i, i + 1, tag='operator')
     return 1
 
 
-# @+node:ekr.20240213105320.1: *3* python_number
+#@ python_number
 # Does not include suffixes or hex digits.
 int_s = r'[0-9]+'
 float_s = rf'{int_s}\.({int_s})?'
@@ -412,7 +412,7 @@ def python_number(colorer, s, i):
     return n
 
 
-# @+node:ekr.20240213103850.1: *3* python_op_gt/lt & helpers
+#@ python_op_gt/lt & helpers
 def python_op_gt(colorer, s, i):
     """Color '>=' and '>'."""
     n = 2 if s[i : i + 2] == '>=' else 1
@@ -427,7 +427,7 @@ def python_op_lt(colorer, s, i):
     return n
 
 
-# @+node:ekr.20230419163931.1: *3* python_rule_h/f_url (not used)
+#@ python_rule_h/f_url (not used)
 if 0:
     url = False
 
@@ -450,12 +450,12 @@ if 0:
             return 0
 
 
-# @+node:ekr.20230419163819.5: *3* python_single_quote
+#@ python_single_quote
 def python_single_quote(colorer, s, i):
     return colorer.match_span(s, i, kind="literal1", begin="'", end="'")
 
 
-# @+node:ekr.20230419163819.3: *3* python_single_quote_docstring
+#@ python_single_quote_docstring
 def python_single_quote_docstring(colorer, s, i):
     c = colorer.c
     seq = "'''"
@@ -466,10 +466,10 @@ def python_single_quote_docstring(colorer, s, i):
     return colorer.match_span(s, i, kind='literal2', begin=seq, end=seq, delegate=delegate)
 
 
-# @-others
-# @-<< Python rules >>
-# @+<< Python rules dicts >>
-# @+node:ekr.20230419164059.1: ** << Python rules dicts >>
+#@-others
+#@-<< Python rules >>
+#@+<< Python rules dicts >>
+#@< << Python rules dicts >>
 # Rules dict for python_main ruleset.
 rulesDict1 = {
     # Operators of length 1.
@@ -523,8 +523,8 @@ if False:  # #3770: Revert colorizing of PEP 701 f-strings.
 rulesDictDict = {
     "python_main": rulesDict1,
 }
-# @-<< Python rules dicts >>
+#@-<< Python rules dicts >>
 
 # Import dict for python mode.
 importDict = {}
-# @-leo
+#@-leo

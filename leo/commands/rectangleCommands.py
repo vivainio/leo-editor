@@ -1,9 +1,9 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20150514040146.1: * @file ../commands/rectangleCommands.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20150514040146.1] @f ../commands/rectangleCommands.py
 """Leo's rectangle commands."""
 
-# @+<< rectangleCommands imports & annotations >>
-# @+node:ekr.20150514050446.1: ** << rectangleCommands imports & annotations >>
+#@+<< rectangleCommands imports & annotations >>
+#@> << rectangleCommands imports & annotations >>
 from __future__ import annotations
 from collections.abc import Callable
 from typing import TYPE_CHECKING
@@ -14,7 +14,7 @@ from leo.plugins.qt_text import QTextMixin
 if TYPE_CHECKING:  # pragma: no cover
     from leo.core.leoCommands import Commands as Cmdr
     from leo.core.leoGui import LeoKeyEvent
-# @-<< rectangleCommands imports & annotations >>
+#@-<< rectangleCommands imports & annotations >>
 
 
 def cmd(name: str) -> Callable:
@@ -22,11 +22,11 @@ def cmd(name: str) -> Callable:
     return g.new_cmd_decorator(name, ['c', 'rectangleCommands'])
 
 
-# @+others
-# @+node:ekr.20160514120751.1: ** class RectangleCommandsClass
+#@+others
+#@ class RectangleCommandsClass
 class RectangleCommandsClass(BaseEditCommandsClass):
-    # @+others
-    # @+node:ekr.20150514063305.448: *3* RectangleCommandsClass.__init__
+    #@+others
+    #@> RectangleCommandsClass.__init__
     def __init__(self, c: Cmdr) -> None:
         """Ctor for RectangleCommandsClass."""
         # pylint: disable=super-init-not-called
@@ -44,7 +44,7 @@ class RectangleCommandsClass(BaseEditCommandsClass):
         }
         self.w: QTextMixin
 
-    # @+node:ekr.20150514043714.13: *3* RectangleCommandsClass.getRectanglePoints
+    #@ RectangleCommandsClass.getRectanglePoints
     def getRectanglePoints(self, w: QTextMixin) -> tuple[int, int, int, int]:
         """Return the rectangle corresponding to the selection range."""
         c = self.c
@@ -55,8 +55,8 @@ class RectangleCommandsClass(BaseEditCommandsClass):
         r3, r4 = g.convertPythonIndexToRowCol(s, j)
         return r1 + 1, r2, r3 + 1, r4
 
-    # @+node:ekr.20150514063305.453: *3* RectangleCommandsClass.Entries
-    # @+node:ekr.20150514063305.454: *4* RectangleCommandsClass.clearRectangle
+    #@ RectangleCommandsClass.Entries
+    #@> RectangleCommandsClass.clearRectangle
     @cmd('rectangle-clear')
     def clearRectangle(self, event: LeoKeyEvent | None = None) -> None:
         """Clear the rectangle defined by the start and end of selected text."""
@@ -80,7 +80,7 @@ class RectangleCommandsClass(BaseEditCommandsClass):
         w.setSelectionRange(toInt(f"{r1}.{r2}"), toInt(f"{r3}.{r2 + len(fill)}"))
         self.endCommand()
 
-    # @+node:ekr.20150514063305.455: *4* RectangleCommandsClass.closeRectangle
+    #@ RectangleCommandsClass.closeRectangle
     @cmd('rectangle-close')
     def closeRectangle(self, event: LeoKeyEvent | None = None) -> None:
         """Delete the rectangle if it contains nothing but whitespace.."""
@@ -109,7 +109,7 @@ class RectangleCommandsClass(BaseEditCommandsClass):
         w.setSelectionRange(i, j, insert=j)
         self.endCommand()
 
-    # @+node:ekr.20150514063305.456: *4* RectangleCommandsClass.deleteRectangle
+    #@ RectangleCommandsClass.deleteRectangle
     @cmd('rectangle-delete')
     def deleteRectangle(self, event: LeoKeyEvent | None = None) -> None:
         """Delete the rectangle defined by the start and end of selected text."""
@@ -132,7 +132,7 @@ class RectangleCommandsClass(BaseEditCommandsClass):
         w.setSelectionRange(i, j, insert=j)
         self.endCommand()
 
-    # @+node:ekr.20150514063305.457: *4* RectangleCommandsClass.killRectangle
+    #@ RectangleCommandsClass.killRectangle
     @cmd('rectangle-kill')
     def killRectangle(self, event: LeoKeyEvent | None = None) -> None:
         """Kill the rectangle defined by the start and end of selected text."""
@@ -159,7 +159,7 @@ class RectangleCommandsClass(BaseEditCommandsClass):
             w.setSelectionRange(ins, ins, insert=ins)
         self.endCommand()
 
-    # @+node:ekr.20150514063305.458: *4* RectangleCommandsClass.openRectangle
+    #@ RectangleCommandsClass.openRectangle
     @cmd('rectangle-open')
     def openRectangle(self, event: LeoKeyEvent | None = None) -> None:
         """
@@ -186,7 +186,7 @@ class RectangleCommandsClass(BaseEditCommandsClass):
         w.setSelectionRange(i, j, insert=j)
         self.endCommand()
 
-    # @+node:ekr.20150514063305.459: *4* RectangleCommandsClass.stringRectangle
+    #@ RectangleCommandsClass.stringRectangle
     @cmd('rectangle-string')
     def stringRectangle(self, event: LeoKeyEvent | None = None) -> None:
         """
@@ -228,7 +228,7 @@ class RectangleCommandsClass(BaseEditCommandsClass):
         # string-rectangle kills syntax highlighting.
         c.recolor(c.p)
 
-    # @+node:ekr.20150514063305.460: *4* RectangleCommandsClass.yankRectangle
+    #@ RectangleCommandsClass.yankRectangle
     @cmd('rectangle-yank')
     def yankRectangle(self, event: LeoKeyEvent | None = None) -> None:
         """Yank into the rectangle defined by the start and end of selected text."""
@@ -261,8 +261,8 @@ class RectangleCommandsClass(BaseEditCommandsClass):
         w.setSelectionRange(i, j, insert=j)
         self.endCommand()
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

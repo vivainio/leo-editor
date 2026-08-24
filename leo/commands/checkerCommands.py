@@ -1,9 +1,9 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20161021090740.1: * @file ../commands/checkerCommands.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20161021090740.1] @f ../commands/checkerCommands.py
 """Commands that invoke external checkers"""
 
-# @+<< checkerCommands imports >>
-# @+node:ekr.20161021092038.1: ** << checkerCommands imports >>
+#@+<< checkerCommands imports >>
+#@> << checkerCommands imports >>
 from __future__ import annotations
 import os
 import re
@@ -33,19 +33,19 @@ except Exception:
 # Leo imports.
 from leo.core import leoGlobals as g
 
-# @-<< checkerCommands imports >>
-# @+<< checkerCommands annotations >>
-# @+node:ekr.20220826075856.1: ** << checkerCommands annotations >>
+#@-<< checkerCommands imports >>
+#@+<< checkerCommands annotations >>
+#@ << checkerCommands annotations >>
 if TYPE_CHECKING:  # pragma: no cover
     from leo.core.leoCommands import Commands as Cmdr
     from leo.core.leoGui import LeoKeyEvent
     from leo.core.leoNodes import Position
 
 
-# @-<< checkerCommands annotations >>
-# @+others
-# @+node:ekr.20161021091557.1: **  Commands
-# @+node:ekr.20230104132446.1: *3* check-nodes
+#@-<< checkerCommands annotations >>
+#@+others
+#@  Commands
+#@> check-nodes
 @g.command('check-nodes')
 def check_nodes(event: LeoKeyEvent | None = None) -> None:
     """
@@ -95,7 +95,7 @@ def check_nodes(event: LeoKeyEvent | None = None) -> None:
     CheckNodes(c).check(event)
 
 
-# @+node:ekr.20190608084751.1: *3* find-long-lines
+#@ find-long-lines
 @g.command('find-long-lines')
 def find_long_lines(event: LeoKeyEvent | None = None) -> None:
     """
@@ -106,8 +106,8 @@ def find_long_lines(event: LeoKeyEvent | None = None) -> None:
     if not c:
         return
 
-    # @+others # helper functions
-    # @+node:ekr.20190609135639.1: *4* function: get_root
+    #@+others # helper functions
+    #@> function: get_root
     def get_root(p: Position) -> Position | None:
         """Return True if p is any @<file> node."""
         for parent in p.self_and_parents():
@@ -115,7 +115,7 @@ def find_long_lines(event: LeoKeyEvent | None = None) -> None:
                 return parent
         return None
 
-    # @+node:ekr.20190608084751.2: *4* function: in_no_pylint
+    #@ function: in_no_pylint
     def in_nopylint(p: Position) -> bool:
         """Return p if p is controlled by @nopylint."""
         for parent in p.self_and_parents():
@@ -123,7 +123,7 @@ def find_long_lines(event: LeoKeyEvent | None = None) -> None:
                 return True
         return False
 
-    # @-others
+    #@-others
     log = c.frame.log
     max_line = c.config.getInt('max-find-long-lines-length') or 110
     count, files, ignore = 0, [], []
@@ -158,7 +158,7 @@ def find_long_lines(event: LeoKeyEvent | None = None) -> None:
     )
 
 
-# @+node:ekr.20190615180048.1: *3* find-missing-docstrings
+#@< find-missing-docstrings
 @g.command('find-missing-docstrings')
 def find_missing_docstrings(event: LeoKeyEvent | None = None) -> None:
     """Report missing docstrings in the log, with clickable links."""
@@ -166,8 +166,8 @@ def find_missing_docstrings(event: LeoKeyEvent | None = None) -> None:
     if not c:
         return
 
-    # @+others # Define functions
-    # @+node:ekr.20190615181104.1: *4* function: has_docstring
+    #@+others # Define functions
+    #@> function: has_docstring
     def has_docstring(lines: list[str], n: int) -> bool:
         """
         Returns True if function/method/class whose definition
@@ -182,7 +182,7 @@ def find_missing_docstrings(event: LeoKeyEvent | None = None) -> None:
                 return True
         return False
 
-    # @+node:ekr.20190615181104.2: *4* function: is_a_definition
+    #@ function: is_a_definition
     def is_a_definition(line: str) -> bool:
         """Return True if line is a definition line."""
         # By Виталије Милошевић.
@@ -193,7 +193,7 @@ def find_missing_docstrings(event: LeoKeyEvent | None = None) -> None:
             and not line.partition(' ')[2].startswith('__init__')
         )  # fmt: skip
 
-    # @+node:ekr.20190615182754.1: *4* function: is_root
+    #@ function: is_root
     def is_root(p: Position) -> bool:
         """
         A predicate returning True if p is an @<file> node that is not under @nopylint.
@@ -203,7 +203,7 @@ def find_missing_docstrings(event: LeoKeyEvent | None = None) -> None:
                 return False
         return p.isAnyAtFileNode() and p.h.strip().endswith(('py', 'pyw'))
 
-    # @-others
+    #@-others
     log = c.frame.log
     count, files, found, t1 = 0, 0, [], time.process_time()
     for root in g.findRootsWithPredicate(c, c.p, predicate=is_root):
@@ -229,7 +229,7 @@ def find_missing_docstrings(event: LeoKeyEvent | None = None) -> None:
     )
 
 
-# @+node:ekr.20210302111730.1: *3* mypy command
+#@< mypy command
 @g.command('mypy')
 def mypy_command(event: LeoKeyEvent | None = None) -> None:
     """
@@ -265,7 +265,7 @@ def mypy_command(event: LeoKeyEvent | None = None) -> None:
         g.es_print('can not import mypy')
 
 
-# @+node:vv.20260807120000.1: *3* ruff command
+#@ ruff command
 @g.command('ruff')
 def ruff_command(event: LeoKeyEvent | None = None) -> None:
     """
@@ -286,7 +286,7 @@ def ruff_command(event: LeoKeyEvent | None = None) -> None:
         g.print_unique_message('can not import ruff')
 
 
-# @+node:ekr.20260820160919.1: *3* ty command
+#@ ty command
 @g.command('ty')
 def ty_command(event: LeoKeyEvent | None = None) -> None:
     """
@@ -307,7 +307,7 @@ def ty_command(event: LeoKeyEvent | None = None) -> None:
         g.print_unique_message('can not import ty')
 
 
-# @+node:ekr.20230221105941.1: ** class CheckNodes
+#@< class CheckNodes
 class CheckNodes:
     def_pattern = re.compile(r'^def\b')
     ok_head_patterns: list[re.Pattern]
@@ -318,8 +318,8 @@ class CheckNodes:
         """ctor for CheckNodes class."""
         self.c = c
 
-    # @+others
-    # @+node:ekr.20230221110024.1: *3* CheckNodes.check
+    #@+others
+    #@> CheckNodes.check
     def check(self, event: LeoKeyEvent | None = None) -> None:
         c = self.c
         self.get_data()
@@ -334,7 +334,7 @@ class CheckNodes:
         c.selectPosition(dubious)
         c.redraw()
 
-    # @+node:ekr.20230104142059.1: *3* CheckNodes.create_dubious_nodes
+    #@ CheckNodes.create_dubious_nodes
     def create_dubious_nodes(self) -> Position:
         c = self.c
         u = c.undoer
@@ -353,7 +353,7 @@ class CheckNodes:
         u.afterInsertNode(dubious, 'check-nodes', undoData)
         return dubious
 
-    # @+node:ekr.20230104142418.1: *3* CheckNodes.get_data
+    #@ CheckNodes.get_data
     def get_data(self) -> None:
         """
         Get user data from @data nodes.
@@ -370,7 +370,7 @@ class CheckNodes:
                 g.es_print('Bad pattern in @data check-nodes-ok-patterns')
                 g.es_print(repr(s))
 
-    # @+node:ekr.20230104141545.1: *3* CheckNodes.is_dubious_node
+    #@ CheckNodes.is_dubious_node
     def is_dubious_node(self, p: Position) -> bool:
         lines = p.b.splitlines()
         stripped_lines = p.b.strip().splitlines()
@@ -394,10 +394,10 @@ class CheckNodes:
         )  # fmt: skip
         return any((too_many_defs, leading_blank_line, empty_body, trailing_class_or_def))
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20210302111917.1: ** class MypyCommand
+#@< class MypyCommand
 class MypyCommand:
     """A class to run mypy on all Python @<file> nodes in c.p's tree."""
 
@@ -409,8 +409,8 @@ class MypyCommand:
         self.link_limit = None  # Set in check_file.
         self.unknown_path_names: list[str] = []
 
-    # @+others
-    # @+node:ekr.20210302111935.3: *3* mypy.check_all
+    #@+others
+    #@> mypy.check_all
     def check_all(self, roots: list[Position]) -> None:
         """Run mypy on all files in paths."""
         c = self.c
@@ -422,7 +422,7 @@ class MypyCommand:
             fn = os.path.normpath(c.fullPath(root))
             self.check_file(fn, root)
 
-    # @+node:ekr.20210727212625.1: *3* mypy.check_file
+    #@ mypy.check_file
     def check_file(self, fn: str, root: Position) -> None:
         """Run mypy on one file."""
         c = self.c
@@ -433,7 +433,7 @@ class MypyCommand:
         bpm = g.app.backgroundProcessManager
         bpm.start_process(c, command, fn=fn, kind='mypy')
 
-    # @+node:ekr.20210302111935.7: *3* mypy.run (entry)
+    #@ mypy.run (entry)
     def run(self, p: Position) -> None:
         """Run mypy on all Python @<file> nodes in c.p's tree."""
         c = self.c
@@ -448,10 +448,10 @@ class MypyCommand:
         roots = g.findRootsWithPredicate(c, root, predicate=None)
         self.check_all(roots)
 
-    # @-others
+    #@-others
 
 
-# @+node:vv.20260807120000.2: ** class RuffCommand
+#@< class RuffCommand
 class RuffCommand:
     """A class to run ruff on all Python @<file> nodes in c.p's tree."""
 
@@ -461,8 +461,8 @@ class RuffCommand:
         """ctor for RuffCommand class."""
         self.c = c
 
-    # @+others
-    # @+node:vv.20260807120000.3: *3* ruff.check_all
+    #@+others
+    #@> ruff.check_all
     def check_all(self, roots: list[Position]) -> None:
         """Run ruff on all files in roots."""
         c = self.c
@@ -470,7 +470,7 @@ class RuffCommand:
             fn = os.path.normpath(c.fullPath(root))
             self.check_file(fn, root)
 
-    # @+node:vv.20260807120000.4: *3* ruff.check_file
+    #@ ruff.check_file
     def check_file(self, fn: str, root: Position) -> None:
         """Run ruff on one file."""
         c = self.c
@@ -481,7 +481,7 @@ class RuffCommand:
         bpm = g.app.backgroundProcessManager
         bpm.start_process(c, command, fn=fn, kind='ruff')
 
-    # @+node:vv.20260807120000.6: *3* ruff.check_on_write (sync, for on-write checking)
+    #@ ruff.check_on_write (sync, for on-write checking)
     def check_on_write(self, root: Position) -> bool:
         """
         Run ruff synchronously on root's file. Return True if ruff reports no errors.
@@ -504,7 +504,7 @@ class RuffCommand:
             c.frame.log.put_html_links(s)
         return result.returncode == 0
 
-    # @+node:ekr.20260808005852.1: *3* ruff.check_script_file
+    #@ ruff.check_script_file
     def check_script_file(self, fn: str, script_p: Position) -> bool:
         """
         Run ruff synchronously the file. Return True if ruff reports no errors.
@@ -534,7 +534,7 @@ class RuffCommand:
             c.frame.log.put_html_links(s, script_p=script_p)
         return result.returncode == 0
 
-    # @+node:vv.20260807120000.5: *3* ruff.run (entry)
+    #@ ruff.run (entry)
     def run(self, p: Position) -> None:
         """Run ruff on all Python @<file> nodes in c.p's tree."""
         c = self.c
@@ -549,10 +549,10 @@ class RuffCommand:
         roots = g.findRootsWithPredicate(c, root, predicate=None)
         self.check_all(roots)
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20260820125628.1: ** class TyCommand
+#@< class TyCommand
 class TyCommand:
     """A class to run ty on all Python @<file> nodes in c.p's tree."""
 
@@ -562,8 +562,8 @@ class TyCommand:
         """ctor for RuffCommand class."""
         self.c = c
 
-    # @+others
-    # @+node:ekr.20260820160750.2: *3* ty.check_all
+    #@+others
+    #@> ty.check_all
     def check_all(self, roots: list[Position]) -> None:
         """Run ty on all files in roots."""
         c = self.c
@@ -571,7 +571,7 @@ class TyCommand:
             fn = os.path.normpath(c.fullPath(root))
             self.check_file(fn, root)
 
-    # @+node:ekr.20260820160750.3: *3* ty.check_file
+    #@ ty.check_file
     def check_file(self, fn: str, root: Position) -> None:
         """Run ty on one file."""
         c = self.c
@@ -582,7 +582,7 @@ class TyCommand:
         bpm = g.app.backgroundProcessManager
         bpm.start_process(c, command, fn=fn, kind='ty')
 
-    # @+node:ekr.20260820160750.4: *3* ty.check_on_write (sync, for on-write checking)
+    #@ ty.check_on_write (sync, for on-write checking)
     def check_on_write(self, root: Position) -> bool:
         """
         Run ty synchronously on root's file. Return True if ty reports no errors.
@@ -600,7 +600,7 @@ class TyCommand:
             c.frame.log.put_html_links(s)
         return result.returncode == 0
 
-    # @+node:ekr.20260820160750.5: *3* ty.check_script_file
+    #@ ty.check_script_file
     def check_script_file(self, fn: str, script_p: Position) -> bool:
         """
         Run ty synchronously the file. Return True if ty reports no errors.
@@ -631,7 +631,7 @@ class TyCommand:
             c.frame.log.put_html_links(s, script_p=script_p)
         return result.returncode == 0
 
-    # @+node:ekr.20260820160750.6: *3* ty.run (entry)
+    #@ ty.run (entry)
     def run(self, p: Position) -> None:
         """Run ty on all Python @<file> nodes in c.p's tree."""
         c = self.c
@@ -646,12 +646,12 @@ class TyCommand:
         roots = g.findRootsWithPredicate(c, root, predicate=None)
         self.check_all(roots)
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @@pagewidth 70
+#@-others
+#@@language python
+#@@tabwidth -4
+#@@pagewidth 70
 
-# @-leo
+#@-leo

@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20120519121124.9919: * @file ../external/leosax.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20120519121124.9919] @f ../external/leosax.py
 """
 Read .leo files into a simple python data structure with
 h, b, u (unknown attribs), gnx and children information.
@@ -15,9 +15,9 @@ from xml.sax import parseString
 from leo.core import leoGlobals as g
 
 
-# @+others
-# @+node:ekr.20120519121124.9920: ** leosax declarations
-# @+node:ekr.20120519121124.9921: ** class LeoNode
+#@+others
+#@> leosax declarations
+#@ class LeoNode
 class LeoNode:
     """Representation of a Leo node.  Root node has itself as parent.
 
@@ -38,8 +38,8 @@ class LeoNode:
           list of nodes that lead to this one from root, including this one
     """
 
-    # @+others
-    # @+node:ekr.20120519121124.9922: *3* __init__
+    #@+others
+    #@> __init__
     def __init__(self):
         """Set ivars"""
         self.children = []
@@ -51,7 +51,7 @@ class LeoNode:
         self.parent = self
         self.path = []
 
-    # @+node:ekr.20120519121124.9923: *3* __str__
+    #@ __str__
     def __str__(self, level=0):
         """Return long text representation of node and
         descendants with indentation"""
@@ -65,7 +65,7 @@ class LeoNode:
             ans.append(child.__str__(level=level + 1))
         return '\n'.join(ans)
 
-    # @+node:ekr.20120519121124.9924: *3* UNL (leosax.py)
+    #@ UNL (leosax.py)
     def node_pos_count(self, node):
         """node_pos_count - return the position (index) and count of
         preceding siblings with the same name, also return headline
@@ -83,7 +83,7 @@ class LeoNode:
         """Return the UNL string leading to this node"""
         return '-->'.join(["%s:%d,%d" % self.node_pos_count(i) for i in self.path])
 
-    # @+node:ekr.20120519121124.9925: *3* flat
+    #@ flat
     def flat(self):
         """iterate this node and all its descendants in a flat list,
         useful for finding things and building an UNL based view"""
@@ -93,10 +93,10 @@ class LeoNode:
             for j in i.flat():
                 yield j
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20120519121124.9926: ** class LeoReader
+#@< class LeoReader
 class LeoReader(ContentHandler):
     """Read .leo files into a simple python data structure with
     h, b, u (unknown attribs), gnx and children information.
@@ -119,8 +119,8 @@ class LeoReader(ContentHandler):
 
     """
 
-    # @+others
-    # @+node:ekr.20120519121124.9927: *3* __init__
+    #@+others
+    #@> __init__
     def __init__(self, *args, **kwargs):
         """Set ivars"""
         super().__init__(*args, **kwargs)
@@ -134,7 +134,7 @@ class LeoReader(ContentHandler):
         self.in_attrs = {}
         self.path = []
 
-    # @+node:ekr.20120519121124.9928: *3* startElement
+    #@ startElement
     def startElement(self, name, attrs):
         """collect information from v and t elements"""
         self.in_ = name
@@ -156,7 +156,7 @@ class LeoReader(ContentHandler):
                     continue
                 self.idx[attrs['tx']].u[k] = attrs[k]
 
-    # @+node:ekr.20120519121124.9929: *3* endElement
+    #@ endElement
     def endElement(self, name):
         """decode unknownAttributes when t element is done"""
 
@@ -182,7 +182,7 @@ class LeoReader(ContentHandler):
 
                 nd.u[k] = s
 
-    # @+node:ekr.20120519121124.9930: *3* characters
+    #@ characters
     def characters(self, content):
         """collect body text and headlines"""
 
@@ -192,10 +192,10 @@ class LeoReader(ContentHandler):
         if self.in_ == 't':
             self.idx[self.in_attrs['tx']].b.append(content)
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20120519121124.9931: ** get_leo_data
+#@< get_leo_data
 def get_leo_data(source):
     """Return the root node for the specified .leo file (path or file)"""
     parser = LeoReader()
@@ -205,7 +205,7 @@ def get_leo_data(source):
     return parser.root
 
 
-# @-others
+#@-others
 
 if __name__ == '__main__':
     import sys
@@ -217,9 +217,9 @@ if __name__ == '__main__':
     leo_data = get_leo_data(g.readFileIntoUnicodeString(wb))
     print(leo_data)
 
-# @@language python
-# @@killbeautify
-# @@language python
-# @@tabwidth -4
-# @@pagewidth 70
-# @-leo
+#@@language python
+#@@killbeautify
+#@@language python
+#@@tabwidth -4
+#@@pagewidth 70
+#@-leo

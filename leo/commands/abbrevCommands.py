@@ -1,9 +1,9 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20150514035236.1: * @file ../commands/abbrevCommands.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20150514035236.1] @f ../commands/abbrevCommands.py
 """Leo's abbreviations commands."""
 
-# @+<< abbrevCommands imports & abbreviations >>
-# @+node:ekr.20150514045700.1: ** << abbrevCommands imports & abbreviations >>
+#@+<< abbrevCommands imports & abbreviations >>
+#@> << abbrevCommands imports & abbreviations >>
 from __future__ import annotations
 from collections.abc import Callable
 import functools
@@ -19,7 +19,7 @@ if TYPE_CHECKING:  # pragma: no cover
     from leo.core.leoCommands import Commands as Cmdr
     from leo.core.leoGui import LeoKeyEvent
 
-# @-<< abbrevCommands imports & abbreviations >>
+#@-<< abbrevCommands imports & abbreviations >>
 
 
 def cmd(name: str) -> Callable:
@@ -27,16 +27,16 @@ def cmd(name: str) -> Callable:
     return g.new_cmd_decorator(name, ['c', 'abbrevCommands'])
 
 
-# @+others
-# @+node:ekr.20160514095531.1: ** class AbbrevCommands
+#@+others
+#@ class AbbrevCommands
 class AbbrevCommandsClass(BaseEditCommandsClass):
     """
     A class to handle user-defined abbreviations.
     See apropos-abbreviations for details.
     """
 
-    # @+<< AbbrevCommandsClass: __slots__ >>
-    # @+node:ekr.20260515152425.1: *3* << AbbrevCommandsClass: __slots__ >>
+    #@+<< AbbrevCommandsClass: __slots__ >>
+    #@> << AbbrevCommandsClass: __slots__ >>
     __slots__ = (
         'abbrevs',
         'c',
@@ -49,10 +49,10 @@ class AbbrevCommandsClass(BaseEditCommandsClass):
         'tree_abbrevs_d',
         'w',
     )
-    # @-<< AbbrevCommandsClass: __slots__ >>
+    #@-<< AbbrevCommandsClass: __slots__ >>
 
-    # @+others
-    # @+node:ekr.20150514043850.3: *3* abbrev.__init__
+    #@+others
+    #@ abbrev.__init__
     def __init__(self, c: Cmdr) -> None:
         """Ctor for AbbrevCommandsClass class."""
         # pylint: disable=super-init-not-called
@@ -70,7 +70,7 @@ class AbbrevCommandsClass(BaseEditCommandsClass):
         self.tree_abbrevs_d: dict[str, str] = {}  # Keys are names, values are (tree,tag).
         self.w: QTextMixin
 
-    # @+node:ekr.20150514043850.11: *3* abbrev.expandAbbrev & helpers (entry point)
+    #@ abbrev.expandAbbrev & helpers (entry point)
     def expandAbbrev(self, event: LeoKeyEvent | None, stroke: g.KeyStroke) -> bool:
         """
         Not a command.  Expand abbreviations..
@@ -79,8 +79,8 @@ class AbbrevCommandsClass(BaseEditCommandsClass):
         """
         # Define ins, prefixes, self.in_head and self.w
         # Return if there is nothing to do.
-        # @+<< expandAbbrev: prolog >>
-        # @+node:ekr.20260516052046.1: *4* << expandAbbrev: prolog >>
+        #@+<< expandAbbrev: prolog >>
+        #@> << expandAbbrev: prolog >>
         c = self.c
         ch = self.get_ch(event, stroke)
         w = event.w if event else c.frame.body.wrapper
@@ -99,7 +99,7 @@ class AbbrevCommandsClass(BaseEditCommandsClass):
         # Set local ivars.
         self.in_head = w_name.startswith('head')
         self.w = w
-        # @-<< expandAbbrev: prolog >>
+        #@-<< expandAbbrev: prolog >>
 
         # Try to match an abbreviation.
         for prefix in prefixes:
@@ -117,290 +117,12 @@ class AbbrevCommandsClass(BaseEditCommandsClass):
                 return True
         return False
 
-    # @+node:ekr.20260516063712.1: *4* abbrev: startup
-    # @+node:ekr.20161121111502.1: *5* abbrev.get_ch
-    def get_ch(self, event: LeoKeyEvent | None, stroke: g.KeyStroke) -> str:
-        """Return the ch from the stroke or event."""
-        event_ch = event.char or '' if event else ''
-        assert g.isStrokeOrNone(stroke), stroke
-        if stroke in ('BackSpace', 'Delete'):
-            return ''
-        d = {'Return': '\n', 'Tab': '\t', 'space': ' ', 'underscore': '_'}
-        if not stroke:
-            return event_ch
-        ch = d.get(stroke.s, stroke.s)
-        if len(ch) == 1:
-            return ch
-        if any(stroke.find(z) > -1 for z in ('Ctrl+', 'Alt+', 'Meta+')):
-            return ''
-        return event_ch
-
-    # @+node:ekr.20161121112346.1: *5* abbrev.get_prefixes
-    def get_prefixes(self, ins: int, s: str) -> list[str]:
-        """
-        Return the prefixes at given insert point.
-
-        Any sequence longer than 1 may abbreviation.
-
-        Any whitespace stops the search.
-        """
-        i, prefixes = ins - 1, []
-        while len(s) > i >= 0 and s[i] not in ' \t\n':
-            prefixes.append(s[i:ins])
-            i -= 1
-        prefixes = list(reversed(prefixes))
-        if '' not in prefixes:
-            prefixes.append('')
-        return prefixes
-
-    # @+node:ekr.20260516063651.1: *4* abbrev: expansion
-    # @+node:ekr.20150514043850.13: *5* abbrev.expand_tree
-    def expand_tree(self, i: int, j: int, word: str, expansion: str) -> None:
-        """
-        Paste `expansion` as children of c.p.
-        This happens *before* any substitutions are made.
-        """
-        c = self.c
-        u, undoType = c.undoer, 'Expand Tree Abbreviation'
-        if c.p.hasChildren():
-            g.es_print('tree abbreviations must not have children', color='blue')
-            return
-        if not c.canPasteOutline(expansion):
-            g.es_print(f"bad copied outline: {expansion}")
-            return
-
-        # Begin the undo.
-        u.beforeChangeGroup(c.p, command=undoType, verboseUndoGroup=True)
-        self.replace_selection(i, j, '')
-
-        # Set status flags.
-        isRoot = c.p.isRoot()
-        wasHoisted = len(c.hoistStack) > 0
-        parent = c.p.getParent()
-        noSiblings = parent and parent.numberOfChildren() == 1
-        isFirstChild = parent and parent.firstChild() == c.p
-        prevSibling = c.p.moveToBack()
-        prevSiblingExpanded = prevSibling and prevSibling.isExpanded()
-
-        # Carefully replace the old node with the new node.
-        if c.canDeleteHeadline():
-            if prevSiblingExpanded:
-                prevSibling.contract()  # To prevent pasting as last child of prevSibling.
-            c.deleteOutline(op_name="Cut Node")
-            c.pasteOutline(s=expansion)
-            if noSiblings:
-                c.moveOutlineRight()  # Inserted below instead of as child, so move right.
-            if isRoot:
-                c.moveOutlineUp()  # Delete & paste made it second position, so move up.
-        else:
-            c.pasteOutline(s=expansion)
-            c.selectPosition(c.p.moveToBack())
-            c.deleteOutline(op_name="Cut Node")
-            if wasHoisted:
-                c.selectVisNext()
-
-        # Replace the container node with its first child.
-        if child := c.p.copy().moveToFirstChild():
-            c.selectPosition(child)
-            c.moveOutlineLeft()
-            c.goToPrevSibling()
-            c.deleteOutline(op_name="Cut Node")
-            if isFirstChild or (not isRoot):
-                c.selectVisNext()
-
-        # Restore the previous expansion.
-        if prevSiblingExpanded:
-            prevSibling.expand()
-
-        # End the undo.
-        u.afterChangeGroup(c.p, undoType=undoType)
-        c.redraw(c.p)
-
-    # @+node:ekr.20260515084054.1: *5* abbrev.init_place_holder_search
-    def init_place_holder_search(self, *, node_only: bool) -> None:
-        c = self.c
-        p = c.p
-        finder = c.findCommands
-        start_pat = re.escape(c.abbrev_place_start)
-        end_pat = re.escape(c.abbrev_place_end)
-        template_regex = re.compile(rf"^.*?{start_pat}.*?{end_pat}")
-        finder.reverse = False
-
-        # Define the settings for Leo's find command.
-        settings = g.Bunch(
-            p               = c.p,
-            in_headline     = False,
-            find_text       = rf"({start_pat}.*?{end_pat})",
-            change_text     = '',
-            file_only       = False,
-            mark_changes    = False,
-            mark_finds      = False,
-            ignore_case     = True,
-            node_only       = node_only,
-            pattern_match   = True,
-            search_body     = True,
-            search_headline = True,
-            suboutline_only = not node_only,
-            whole_word      = False,
-        )  # fmt: skip
-        assert settings
-
-        def find_template(s: str) -> bool:
-            return any(template_regex.match(z) for z in g.splitLines(s))
-
-        # Init the search only if <\...\> appears in the expansion.
-        positions = [p] if node_only else (z for z in p.self_and_subtree())
-        for p in positions:
-            if any(find_template(z) for z in (p.h, p.b)):
-                break
-        else:
-            return
-
-        # Tell the search command to restore settings on failure.
-        bunch = g.Bunch()
-        for ivar in finder.ivars:
-            bunch[ivar] = getattr(finder, ivar)
-        finder.previous_settings = bunch
-
-        # Search!
-        c.endEditing()  # No need to re-edit the headline!
-        self.w.setInsertPoint(0)  # Start search at start.
-        finder.interactive_search_helper(settings=settings)
-
-    # @+node:ekr.20150514043850.18: *5* abbrev.replace_selection
-    def replace_selection(self, i: int, j: int, s: str) -> None:
-        """Undoably replace w[i:j] by s."""
-        c = self.c
-        p = c.p
-        u = c.undoer
-        w = self.w
-
-        # Start the undo.
-        bunch = u.beforeChangeNodeContents(p)
-
-        # Make the replacement.
-        w.delete(i, j)
-        w.insert(i, s)
-
-        # Update only body text. Setting p.h here would be wrong.
-        if not self.in_head:
-            p.v.b = w.getAllText()
-
-        # Complete the undo.
-        u.afterChangeNodeContents(p, command='Abbreviation', bunch=bunch)
-
-    # @+node:ekr.20260516063743.1: *4* abbrev: script substitution
-    # @+node:ekr.20260516063159.1: *5* abbrev.make_all_scripting_substitutions
-    def make_all_scripting_substitutions(self, word: str) -> None:
-        """Make scripting substitutions throughout c.p's tree."""
-        c = self.c
-        if not self.scripting_enabled:
-            return
-
-        # Do nothing if {|{... appears nowwhere in c.p's tree.
-        start_pat = re.escape(c.abbrev_subst_start)
-        end_pat = re.escape(c.abbrev_subst_end)
-        substitution_regex = re.compile(rf"^.*?{start_pat}.*?{end_pat}")
-
-        def find_template(s: str) -> bool:
-            return any(substitution_regex.match(z) for z in g.splitLines(s))
-
-        for p in c.p.self_and_subtree():
-            if any(find_template(z) for z in (p.h, p.b)):
-                break
-        else:
-            return
-
-        c.abbrev_subst_env['_abr'] = word
-        c.endEditing()  # No need to re-edit the headline!
-
-        # A hack to accommodate existing abbreviations: evaluate bodies before headlines.
-        for p in c.p.self_and_subtree():
-            p.b = self._substitution_helper(p.b)
-            p.h = self._substitution_helper(p.h)
-
-    # @+node:ekr.20150514043850.15: *5* abbrev.make_script_substitutions
-    def make_script_substitutions(self, word: str) -> None:
-        """
-        Replace word by scripting expansion in p.h or p.b.
-        """
-        c = self.c
-        p = c.p
-        w = self.w
-        if not self.scripting_enabled:
-            return
-
-        c.abbrev_subst_env['_abr'] = word
-
-        # Replace the contents only if they have changed!
-        ins = w.getInsertPoint()
-        if self.in_head:
-            c.endEditing()
-            try:
-                contents = p.h
-                end_text = contents[ins:]
-                new_contents = self._substitution_helper(contents)
-                if new_contents != contents:
-                    p.h = new_contents
-                    if new_contents.endswith(end_text):
-                        new_ins = len(new_contents) - len(end_text)
-                    else:
-                        new_ins = min(ins, len(new_contents))
-                    w.setInsertPoint(new_ins)
-            finally:
-                c.treeWantsFocusNow()
-                c.editHeadline()
-        else:
-            contents = p.b
-            end_text = contents[ins:]
-            new_contents = self._substitution_helper(contents)
-            if new_contents != contents:
-                p.b = new_contents
-                if new_contents.endswith(end_text):
-                    new_ins = len(new_contents) - len(end_text)
-                else:
-                    new_ins = min(ins, len(new_contents))
-                p.setSelection(new_ins, len(new_contents))
-                w.setInsertPoint(new_ins)
-
-    # @+node:ekr.20260516060909.1: *5* abbrev._substitution_helper
-    def _substitution_helper(self, content: str) -> str:
-        """
-        Replace 'word' by the 'definition' in the 'content' string.
-        """
-        c = self.c
-        if c.abbrev_subst_start not in content:
-            return content
-        while c.abbrev_subst_start in content:
-            prefix, rest = content.split(c.abbrev_subst_start, 1)
-            content_list = rest.split(c.abbrev_subst_end, 1)
-            if len(content_list) != 2:
-                break
-            content, rest = content_list
-            try:
-                self.expanding = True
-                c.abbrev_subst_env['x'] = ''
-                exec(content, c.abbrev_subst_env, c.abbrev_subst_env)
-            except NameError:
-                pass  # The script should define the name ???
-            except Exception as e:
-                g.es_print(f"exception evaluating {content!r}: {e}")
-                g.trace(g.callers())
-                g.es_exception()
-            finally:
-                self.expanding = False
-            x = c.abbrev_subst_env.get('x') or ''
-            # Make sure there are no endless expansions.
-            x = x.replace(c.abbrev_subst_start, '').replace(c.abbrev_subst_end, '')
-            content = f"{prefix}{x}{rest}"
-        return content
-
-    # @+node:ekr.20150514043850.5: *3* abbrev.finishCreate
+    #@< abbrev.finishCreate
     def finishCreate(self) -> None:
         """AbbrevCommandsClass.finishCreate."""
         self.reload_settings()
 
-    # @+node:ekr.20170221035644.1: *3* abbrev.reload_settings & helpers
+    #@ abbrev.reload_settings & helpers
     def reload_settings(self) -> None:
         """Reload all abbreviation settings."""
         self.abbrevs = {}
@@ -411,7 +133,7 @@ class AbbrevCommandsClass(BaseEditCommandsClass):
 
     reloadSettings = reload_settings
 
-    # @+node:ekr.20150514043850.6: *4* abbrev.init_abbrev & helper
+    #@> abbrev.init_abbrev & helper
     def init_abbrev(self) -> None:
         """
         Init the user abbreviations from @data global-abbreviations
@@ -443,7 +165,7 @@ class AbbrevCommandsClass(BaseEditCommandsClass):
             for s in sorted(result):
                 self.addAbbrevHelper(s)
 
-    # @+node:ekr.20150514043850.25: *5* abbrev.addAbbrevHelper
+    #@> abbrev.addAbbrevHelper
     def addAbbrevHelper(self, s: str, tag: str = '') -> None:
         """Enter the abbreviation 's' into the self.abbrevs dict."""
         if not s.strip():
@@ -464,7 +186,7 @@ class AbbrevCommandsClass(BaseEditCommandsClass):
         except ValueError:
             g.es_print(f"bad abbreviation: {s}")
 
-    # @+node:ekr.20150514043850.7: *4* abbrev.init_env
+    #@< abbrev.init_env
     def init_env(self) -> None:
         """
         Init c.abbrev_subst_env by executing the contents of the
@@ -507,7 +229,7 @@ class AbbrevCommandsClass(BaseEditCommandsClass):
             g.es('Error executing @data abbreviations-subst-env')
             g.es_exception()
 
-    # @+node:ekr.20150514043850.8: *4* abbrev.init_settings
+    #@ abbrev.init_settings
     def init_settings(self) -> None:
         """Called from AbbrevCommands.reload_settings aka reloadSettings."""
         c = self.c
@@ -540,7 +262,7 @@ class AbbrevCommandsClass(BaseEditCommandsClass):
         c.abbrev_subst_start = getString('abbreviations-subst-start') or '{|{'
         c.abbrev_subst_end = getString('abbreviations-subst-end') or '}|}'
 
-    # @+node:ekr.20150514043850.9: *4* abbrev.init_tree_abbrev
+    #@ abbrev.init_tree_abbrev
     def init_tree_abbrev(self) -> None:
         """Init tree_abbrevs_d from @data tree-abbreviations nodes."""
         c = self.c
@@ -574,7 +296,7 @@ class AbbrevCommandsClass(BaseEditCommandsClass):
                 g.app.disable_redraw = old_disable
         self.tree_abbrevs_d = d
 
-    # @+node:ekr.20170227062001.1: *5* abbrev.init_tree_abbrev_helper
+    #@> abbrev.init_tree_abbrev_helper
     def init_tree_abbrev_helper(self, d: dict[str, str], tree_s: str) -> None:
         """Init d from tree_s, the text of a copied outline."""
         c = self.c
@@ -595,8 +317,8 @@ class AbbrevCommandsClass(BaseEditCommandsClass):
                     else:
                         g.trace(f"no definition for {abbrev_name}")
 
-    # @+node:ekr.20260511152312.1: *3* abbrev: Commands & helpers
-    # @+node:ekr.20150514043850.23: *4* abbrev._getDynamicList (helper)
+    #@<2 abbrev: Commands & helpers
+    #@> abbrev._getDynamicList (helper)
     def _getDynamicList(self, w: QTextMixin, s: str) -> list[str]:
         """Return a list of dynamic abbreviations."""
         if self.globalDynamicAbbrevs:
@@ -610,7 +332,7 @@ class AbbrevCommandsClass(BaseEditCommandsClass):
         items = sorted(set([z for z in items if z.startswith(s)]))
         return items
 
-    # @+node:ekr.20150514043850.20: *4* abbrev.dynamicCompletion C-M-/
+    #@ abbrev.dynamicCompletion C-M-/
     @cmd('dabbrev-completion')
     def dynamicCompletion(self, event: LeoKeyEvent | None = None) -> None:
         """
@@ -645,7 +367,7 @@ class AbbrevCommandsClass(BaseEditCommandsClass):
             c.undoer.afterChangeNodeContents(p, command='dabbrev-completion', bunch=b)
             c.recolor()
 
-    # @+node:ekr.20150514043850.21: *4* abbrev.dynamicExpansion M-/ & helper
+    #@ abbrev.dynamicExpansion M-/ & helper
     @cmd('dabbrev-expands')
     def dynamicExpansion(self, event: LeoKeyEvent | None = None) -> None:
         """
@@ -675,7 +397,7 @@ class AbbrevCommandsClass(BaseEditCommandsClass):
         prefix = prefix.strip()
         self.dynamicExpandHelper(event, prefix, aList, w)
 
-    # @+node:ekr.20150514043850.22: *5* abbrev.dynamicExpandHelper
+    #@> abbrev.dynamicExpandHelper
     def dynamicExpandHelper(
         self,
         event: LeoKeyEvent | None = None,
@@ -722,13 +444,13 @@ class AbbrevCommandsClass(BaseEditCommandsClass):
             c.undoer.afterChangeNodeContents(p, command='dabbrev-expand', bunch=b)
             c.recolor()
 
-    # @+node:ekr.20150514043850.28: *4* abbrev.killAllAbbrevs
+    #@< abbrev.killAllAbbrevs
     @cmd('abbrev-kill-all')
     def killAllAbbrevs(self, event: LeoKeyEvent | None = None) -> None:
         """Delete all abbreviations."""
         self.abbrevs = {}
 
-    # @+node:ekr.20150514043850.29: *4* abbrev.listAbbrevs
+    #@ abbrev.listAbbrevs
     @cmd('abbrev-list')
     def listAbbrevs(self, event: LeoKeyEvent | None = None) -> None:
         """List all abbreviations."""
@@ -742,7 +464,7 @@ class AbbrevCommandsClass(BaseEditCommandsClass):
             tail = s.removesuffix('\\n')
             g.es_print(f"{name:>15} {g.truncate(tail, 90)}")
 
-    # @+node:ekr.20150514043850.32: *4* abbrev.toggleAbbrevMode
+    #@ abbrev.toggleAbbrevMode
     @cmd('toggle-abbrev-mode')
     def toggleAbbrevMode(self, event: LeoKeyEvent | None = None) -> None:
         """Toggle abbreviation mode."""
@@ -752,8 +474,8 @@ class AbbrevCommandsClass(BaseEditCommandsClass):
         if not g.unitTesting and not g.app.batchMode:
             g.es('Abbreviations are ' + ('on' if k.abbrevOn else 'off'))
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

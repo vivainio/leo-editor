@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ville.20090310191936.10: * @file ../plugins/colorize_headlines.py
+#@+leo-ver=cub-1-thin
+#@0 [ville.20090310191936.10] @f ../plugins/colorize_headlines.py
 """Manipulates appearance of individual tree widget items. (Qt only).
 
 This plugin is mostly an example of how to change the appearance of headlines. As
@@ -9,15 +9,15 @@ nodes in bold.
 """
 
 # By VMV.
-# @+<< imports >>
-# @+node:ville.20090310191936.13: ** << imports >>
+#@+<< imports >>
+#@> << imports >>
 from leo.core import leoGlobals as g
 from leo.core import leoPlugins  # Uses leoPlugins.TryNext.
 
 
-# @-<< imports >>
-# @+others
-# @+node:ville.20090310191936.14: ** init
+#@-<< imports >>
+#@+others
+#@ init
 def init():
     """Return True if the plugin has loaded successfully."""
     ok = g.app.gui.guiName() == "qt"
@@ -26,7 +26,7 @@ def init():
     return ok
 
 
-# @+node:ville.20090310191936.19: ** colorize_headlines_visitor
+#@ colorize_headlines_visitor
 def colorize_headlines_visitor(c, p, item):
     """Changes @thin, @auto, @shadow to bold"""
     t = p.h.split(None, 1)
@@ -37,7 +37,7 @@ def colorize_headlines_visitor(c, p, item):
     raise leoPlugins.TryNext
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

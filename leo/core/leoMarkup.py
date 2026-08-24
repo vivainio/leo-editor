@@ -1,9 +1,9 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20190515070742.1: * @file leoMarkup.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20190515070742.1] @f leoMarkup.py
 """Supports @adoc, @pandoc and @sphinx nodes and related commands."""
 
-# @+<< leoMarkup: imports & annotations >>
-# @+node:ekr.20190515070742.3: ** << leoMarkup: imports & annotations >>
+#@+<< leoMarkup: imports & annotations >>
+#@> << leoMarkup: imports & annotations >>
 from __future__ import annotations
 import functools
 import io
@@ -23,9 +23,9 @@ if TYPE_CHECKING:  # pragma: no cover
     from leo.core.leoNodes import Position
 
     File_List = list[str] | None
-# @-<< leoMarkup: imports & annotations >>
-# @+<< leoMarkup: cached functions >>
-# @+node:ekr.20260421071144.1: ** << leoMarkup: cached functions >>
+#@-<< leoMarkup: imports & annotations >>
+#@+<< leoMarkup: cached functions >>
+#@ << leoMarkup: cached functions >>
 
 
 # PR #4615: Defer calls to `which` until needed.
@@ -49,16 +49,16 @@ def _sphinx_build() -> str | None:
     return which('sphinx-build')
 
 
-# @-<< leoMarkup: cached functions >>
+#@-<< leoMarkup: cached functions >>
 
 
-# @+others
-# @+node:ekr.20191006153522.1: ** adoc, pandoc & sphinx commands
-# @+node:ekr.20190515070742.22: *3* @g.command: 'adoc' & 'adoc-with-preview')
+#@+others
+#@ adoc, pandoc & sphinx commands
+#@> @g.command: 'adoc' & 'adoc-with-preview')
 @g.command('adoc')
 def adoc_command(event: LeoKeyEvent | None = None, verbose: bool = True) -> File_List:
-    # @+<< adoc command docstring >>
-    # @+node:ekr.20190515115100.1: *4* << adoc command docstring >>
+    #@+<< adoc command docstring >>
+    #@> << adoc command docstring >>
     """
     The adoc command writes all @adoc nodes in the selected tree to the
     files given in each @doc node. If no @adoc nodes are found, the
@@ -109,7 +109,7 @@ def adoc_command(event: LeoKeyEvent | None = None, verbose: bool = True) -> File
         g.execute_shell_commands([f"asciidoctor {' '.join(paths)}"])
 
     """
-    # @-<< adoc command docstring >>
+    #@-<< adoc command docstring >>
     c = event and event.get('c')
     if not c:
         return None
@@ -125,11 +125,11 @@ def adoc_with_preview_command(event: LeoKeyEvent | None = None, verbose: bool = 
     return c.markupCommands.adoc_command(event, preview=True, verbose=verbose)
 
 
-# @+node:ekr.20191006153411.1: *3* @g.command: 'pandoc' & 'pandoc-with-preview'
+#@< @g.command: 'pandoc' & 'pandoc-with-preview'
 @g.command('pandoc')
 def pandoc_command(event: LeoKeyEvent | None = None, verbose: bool = True) -> File_List:
-    # @+<< pandoc command docstring >>
-    # @+node:ekr.20191006153547.1: *4* << pandoc command docstring >>
+    #@+<< pandoc command docstring >>
+    #@> << pandoc command docstring >>
     """
     The pandoc command writes all @pandoc nodes in the selected tree to the
     files given in each @pandoc node. If no @pandoc nodes are found, the
@@ -170,7 +170,7 @@ def pandoc_command(event: LeoKeyEvent | None = None, verbose: bool = True) -> Fi
         g.execute_shell_commands([f"asciidoctor {' '.join(paths)}"])
 
     """
-    # @-<< pandoc command docstring >>
+    #@-<< pandoc command docstring >>
     c = event and event.get('c')
     if not c:
         return None
@@ -189,11 +189,11 @@ def pandoc_with_preview_command(
     return c.markupCommands.pandoc_command(event, preview=True, verbose=verbose)
 
 
-# @+node:ekr.20191017163422.1: *3* @g.command: 'sphinx' & 'sphinx-with-preview'
+#@< @g.command: 'sphinx' & 'sphinx-with-preview'
 @g.command('sphinx')
 def sphinx_command(event: LeoKeyEvent | None = None, verbose: bool = True) -> File_List:
-    # @+<< sphinx command docstring >>
-    # @+node:ekr.20191017163422.2: *4* << sphinx command docstring >>
+    #@+<< sphinx command docstring >>
+    #@> << sphinx command docstring >>
     """
     The sphinx command writes all @sphinx nodes in the selected tree to the
     files given in each @sphinx node. If no @sphinx nodes are found, the
@@ -234,7 +234,7 @@ def sphinx_command(event: LeoKeyEvent | None = None, verbose: bool = True) -> Fi
         g.execute_shell_commands([f"asciidoctor {' '.join(paths)}"])
 
     """
-    # @-<< sphinx command docstring >>
+    #@-<< sphinx command docstring >>
     c = event and event.get('c')
     if not c:
         return None
@@ -253,7 +253,7 @@ def sphinx_with_preview_command(
     return c.markupCommands.sphinx_command(event, preview=True, verbose=verbose)
 
 
-# @+node:ekr.20191006154236.1: ** class MarkupCommands
+#@<2 class MarkupCommands
 class MarkupCommands:
     """A class to write AsiiDoctor or docutils markup in Leo outlines."""
 
@@ -272,8 +272,8 @@ class MarkupCommands:
         self.sphinx_input_dir = getString('sphinx-input-directory')
         self.sphinx_output_dir = getString('sphinx-output-directory')
 
-    # @+others
-    # @+node:ekr.20191006153233.1: *3* markup.command_helper & helpers
+    #@+others
+    #@> markup.command_helper & helpers
     def command_helper(
         self,
         event: LeoKeyEvent | None,
@@ -339,7 +339,7 @@ class MarkupCommands:
             g.es_print(f"{kind}: wrote {n} file{g.plural(n)} in {(t2 - t1):4.2f} sec.")
         return i_paths
 
-    # @+node:ekr.20190515084219.1: *4* markup.filename
+    #@> markup.filename
     adoc_pattern = re.compile(r'^@(adoc|asciidoctor)')
 
     def filename(self, p: Position) -> str:
@@ -359,7 +359,7 @@ class MarkupCommands:
         g.trace('BAD KIND', kind)
         return ''
 
-    # @+node:ekr.20191007053522.1: *4* markup.compute_opath
+    #@ markup.compute_opath
     def compute_opath(self, i_path: str) -> str:
         """
         Neither asciidoctor nor pandoc handles extra extensions well.
@@ -373,7 +373,7 @@ class MarkupCommands:
         base_dir = os.path.dirname(c.fileName())
         return g.finalize_join(base_dir, i_path + '.html')
 
-    # @+node:ekr.20191007043110.1: *4* markup.run_asciidoctor
+    #@ markup.run_asciidoctor
     def run_asciidoctor(self, i_path: str, o_path: str) -> None:
         """
         Process the input file given by i_path with asciidoctor or asciidoc3.
@@ -390,7 +390,7 @@ class MarkupCommands:
         command = f"{prog} {i_path} -o {o_path} -b html5"
         g.execute_shell_commands(command, shell=True)  # #4681: enable shell.
 
-    # @+node:ekr.20191007043043.1: *4* markup.run_pandoc
+    #@ markup.run_pandoc
     def run_pandoc(self, i_path: str, o_path: str) -> None:
         """
         Process the input file given by i_path with pandoc.
@@ -401,7 +401,7 @@ class MarkupCommands:
         command = f"pandoc {i_path} -t html5 -o {o_path}"
         g.execute_shell_commands(command, shell=True)
 
-    # @+node:ekr.20191017165427.1: *4* markup.run_sphinx
+    #@ markup.run_sphinx
     def run_sphinx(self, i_path: str, o_path: str) -> None:
         """Process i_path and o_path with sphinx."""
         trace = True
@@ -441,7 +441,7 @@ class MarkupCommands:
             g.trace(f"\ncommand: {command!r}\n")
         g.execute_shell_commands(command, shell=True)
 
-    # @+node:ekr.20190515070742.24: *3* markup.write_root & helpers
+    #@< markup.write_root & helpers
     def write_root(self, root: Position) -> None:
         """Process all nodes in an @adoc tree to self.output_file"""
         # Write only the body of the root.
@@ -478,7 +478,7 @@ class MarkupCommands:
                 # not including @others: mote to next node
                 p.moveToThreadNext()
 
-    # @+node:ekr.20190515114836.1: *4* markup.compute_level_offset
+    #@> markup.compute_level_offset
     adoc_title_pat = re.compile(r'^= ')
     pandoc_title_pat = re.compile(r'^= ')
 
@@ -492,7 +492,7 @@ class MarkupCommands:
                 return 1
         return 0
 
-    # @+node:ekr.20190515070742.38: *4* markup.write_body
+    #@ markup.write_body
     def write_body(self, p: Position) -> None:
         """Write p.b"""
         # We no longer add newlines to the start of nodes because
@@ -501,7 +501,7 @@ class MarkupCommands:
         s = self.remove_directives(script)
         self.output_file.write(g.ensureTrailingNewlines(s, 2))
 
-    # @+node:ekr.20190515070742.47: *4* markup.write_headline
+    #@ markup.write_headline
     def write_headline(self, p: Position) -> None:
         """Generate an AsciiDoctor section"""
         if not p.h.strip():
@@ -528,7 +528,7 @@ class MarkupCommands:
             return
         self.output_file.write(f"{section} {p.h}\n")
 
-    # @+node:ekr.20191007054942.1: *4* markup.remove_directives
+    #@ markup.remove_directives
     def remove_directives(self, s: str) -> str:
         lines = g.splitLines(s)
         result = []
@@ -541,7 +541,7 @@ class MarkupCommands:
             result.append(s)
         return ''.join(result)
 
-    # @+node:swot.20260218221512.1: *4* compute_effective_level
+    #@ compute_effective_level
     def compute_effective_level(self, p: Position) -> int:
         """Compute the effective level of a node, accounting for @ignore-node ancestors."""
         effective_level = p.level()
@@ -553,7 +553,7 @@ class MarkupCommands:
             current = current.parent()
         return effective_level
 
-    # @+node:ekr.20191006155051.1: *3* markup.commands
+    #@< markup.commands
     def adoc_command(
         self,
         event: LeoKeyEvent | None = None,
@@ -590,11 +590,11 @@ class MarkupCommands:
         g.es_print(f"{name} requires sphinx")
         return []
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @@pagewidth 70
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@@pagewidth 70
+#@-leo

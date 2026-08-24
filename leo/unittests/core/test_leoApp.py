@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20210901170451.1: * @file ../unittests/core/test_leoApp.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20210901170451.1] @f ../unittests/core/test_leoApp.py
 """Tests of leoApp.py"""
 
 import os
@@ -8,13 +8,13 @@ from leo.core import leoGlobals as g
 from leo.core.leoTest2 import LeoUnitTest
 
 
-# @+others
-# @+node:ekr.20210901170531.1: ** class TestApp(LeoUnitTest)
+#@+others
+#@> class TestApp(LeoUnitTest)
 class TestApp(LeoUnitTest):
     """Test cases for leoApp.py"""
 
-    # @+others
-    # @+node:ekr.20210901140645.11: *3* TestApp.test_official_g_app_directories
+    #@+others
+    #@> TestApp.test_official_g_app_directories
     def test_official_g_app_directories(self):
         ivars = ('extensionsDir', 'globalConfigDir', 'loadDir', 'testDir')
         for ivar in ivars:
@@ -26,7 +26,7 @@ class TestApp(LeoUnitTest):
             )
         assert hasattr(g.app, 'homeDir')  # May well be None.
 
-    # @+node:ekr.20210901140645.12: *3* TestApp.test_official_g_app_ivars
+    #@ TestApp.test_official_g_app_ivars
     def test_official_g_app_ivars(self):
         ivars = (
             # Global managers.
@@ -60,7 +60,7 @@ class TestApp(LeoUnitTest):
         for ivar in ivars:
             self.assertTrue(hasattr(g.app, ivar))
 
-    # @+node:ekr.20210909194336.2: *3* TestApp.test_consistency_of_leoApp_tables
+    #@ TestApp.test_consistency_of_leoApp_tables
     def test_consistency_of_leoApp_tables(self):
         delims_d = g.app.language_delims_dict
         lang_d = g.app.language_extension_dict
@@ -73,7 +73,7 @@ class TestApp(LeoUnitTest):
             lang = ext_d.get(ext)
             assert lang in lang_d, lang
 
-    # @+node:ekr.20210909194336.4: *3* TestApp.test_rfm_writeRecentFilesFileHelper
+    #@ TestApp.test_rfm_writeRecentFilesFileHelper
     def test_rfm_writeRecentFilesFileHelper(self):
         fn = 'ффф.leo'
         g.app.recentFilesManager.writeRecentFilesFileHelper(fn)
@@ -81,7 +81,7 @@ class TestApp(LeoUnitTest):
         os.remove(fn)
         assert not g.os_path_exists(fn), fn
 
-    # @+node:ekr.20230617065356.1: *3* TestApp.test_LM_scanOptions
+    #@ TestApp.test_LM_scanOptions
     def test_LM_scanOptions(self):
         bad_table = (
             '-h',
@@ -160,8 +160,8 @@ class TestApp(LeoUnitTest):
             sys.argv = old_argv
             sys.stdout = old_stdout
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

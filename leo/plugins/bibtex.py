@@ -1,9 +1,9 @@
-# @+leo-ver=5-thin
-# @+node:timo.20050213160555: * @file ../plugins/bibtex.py
-# @+<< docstring >>
-# @+node:ekr.20050912175750: ** << docstring >>
-# @@nocolor-node
-# @@wrap
+#@+leo-ver=cub-1-thin
+#@0 [timo.20050213160555] @f ../plugins/bibtex.py
+#@+<< docstring >>
+#@> << docstring >>
+#@@nocolor-node
+#@@wrap
 r"""Creates a BibTex file from an  '@bibtex <filename>' tree.
 
 Nodes of the form '@<x> key' create entries in the file.
@@ -62,53 +62,21 @@ BibTeX file.
 
 """
 
-# @-<< docstring >>
+#@-<< docstring >>
 from leo.core import leoGlobals as g
 
 # By Timo Honkasalo: contributed under the same license as Leo.py itself.
 # 2017/02/23: Rewritten by EKR
-# @+<< define templates dict>>
-# @+node:timo.20050215183130: ** <<define templates dict>>
-# pylint: disable=line-too-long
-templates = {
-    '@article':         'author       = {},\ntitle        = {},\njournal      = {},\nyear         = ',
-    '@book':            'author       = {},\ntitle        = {},\npublisher    = {},\nyear         = ',
-    '@booklet':         'title        = {}',
-    '@conference':      'author       = {},\ntitle        = {},\nbooktitle    = {},\nyear         = ',
-    '@inbook':          'author       = {},\ntitle        = {},\nchapter      = {},\npublisher    = {},\nyear         = ',
-    '@incollection':    'author       = {},\ntitle        = {},\nbooktitle    = {},\npublisher    = {},\nyear         = ',
-    '@inproceedings':   'author       = {},\ntitle        = {},\nbooktitle    = {},\nyear         = ',
-    '@manual':          'title        = {},',
-    '@mastersthesis':   'author       = {},\ntitle        = {},\nschool       = {},\nyear         = ',
-    '@misc':            '',
-    '@phdthesis':       'author       = {},\ntitle        = {},\nschool       = {},\nyear         = ',
-    '@proceedings':     'title        = {},\nyear         = ',
-    '@techreport':      'author       = {},\ntitle        = {},\ninstitution  = {},\nyear         = ',
-    '@unpublished':     'author       = {},\ntitle        = {},\nnote         = {}'
-}  # fmt: skip
-# @-<< define templates dict>>
+#@+<< define templates dict>>
+#@-<< define templates dict>>
 entrytypes = list(templates.keys())
 entrytypes.append('@string')
 
 
-# @+<< to do >>
-# @+node:timo.20050213185039: ** <<to do>>
-# @+at To do list (in approximate order of importance):
-#
-# - Translating between non-ascii characters and LaTeX code when reading/writing
-# - Checking for duplicate keys
-# - Checking for missing commas when writing the file
-# - Customisable config file (for defining the templates)
-# - Easy access to the tree as a Python object for scripting (maybe Pybliographer)
-# - Import/write in BibTeXml format
-# - Sorting by chosen fields
-# - Import/write in other bibliographic formats
-# - Expanding strings
-# - Syntax checking
-# - Syntax highligting
-# @-<< to do >>
-# @+others
-# @+node:ekr.20100128073941.5370: ** init (bibtex.py)
+#@+<< to do >>
+#@-<< to do >>
+#@+others
+#@ init (bibtex.py)
 def init():
     """Return True if the plugin has loaded successfully."""
     ok = not g.unitTesting
@@ -120,7 +88,7 @@ def init():
     return ok
 
 
-# @+node:timo.20050215222802: ** onHeadKey
+#@ onHeadKey
 def onHeadKey(tag, keywords):
     """
     Write template for the entry in body pane.
@@ -150,7 +118,7 @@ def onHeadKey(tag, keywords):
                 return
 
 
-# @+node:timo.20050213160555.3: ** onIconDoubleClick
+#@ onIconDoubleClick
 #
 # this does not check for proper filename syntax.
 # path is the current dir, or the place @folder points to
@@ -178,7 +146,7 @@ def onIconDoubleClick(tag, keywords):
             readBibTexFileIntoTree(c, fn, p)
 
 
-# @+node:timo.20050214174623.1: ** readBibTexFileIntoTree
+#@ readBibTexFileIntoTree
 def readBibTexFileIntoTree(c, fn, p):
     """Import a BibTeX file into a @bibtex tree."""
     root = p.copy()
@@ -215,7 +183,7 @@ def readBibTexFileIntoTree(c, fn, p):
     c.redraw()
 
 
-# @+node:timo.20050213160555.7: ** writeTreeAsBibTex
+#@ writeTreeAsBibTex
 def writeTreeAsBibTex(c, fn, root):
     """Write root's *subtree* to bibFile."""
     strings, entries = [], []
@@ -238,7 +206,7 @@ def writeTreeAsBibTex(c, fn, root):
             f.write(g.toEncodedString(s, encoding=encoding))
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

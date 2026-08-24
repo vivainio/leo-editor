@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20071113085315: * @file ../plugins/test/failed_to_load_plugin.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20071113085315] @f ../plugins/test/failed_to_load_plugin.py
 """
 This plugin intentially reports that it fails to load.
 It is used for testing Leo's plugin loading logic.
@@ -11,4 +11,4 @@ def init():
     return False  # Report failure to load.
 
 
-# @-leo
+#@-leo

@@ -1,7 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:danr7.20061010105952.1: * @file ../plugins/word_count.py
-# @+<< docstring >>
-# @+node:danr7.20061010105952.2: ** << docstring >>
+#@+leo-ver=cub-1-thin
+#@0 [danr7.20061010105952.1] @f ../plugins/word_count.py
+#@+<< docstring >>
+#@> << docstring >>
 """
 
 Word Count plugin by Dan Rahmel
@@ -13,13 +13,13 @@ It adds a "Word Count..." option to the bottom of the Edit menu that will
 activate the command.
 
 """
-# @-<< docstring >>
+#@-<< docstring >>
 
 from leo.core import leoGlobals as g
 
 
-# @+others
-# @+node:ekr.20070301062245: ** init
+#@+others
+#@ init
 def init():
     """Return True if the plugin has loaded successfully."""
     ok = True  # Ok for unit testing: creates menu.
@@ -28,7 +28,7 @@ def init():
     return ok
 
 
-# @+node:danr7.20061010105952.5: ** createWordCountMenu
+#@ createWordCountMenu
 def createWordCountMenu(tag, keywords):
     c = keywords.get("c")
     if not c:
@@ -46,7 +46,7 @@ def createWordCountMenu(tag, keywords):
     c.add_command(menu, label=index_label, underline=amp_index, command=lambda c=c: word_count(c))
 
 
-# @+node:danr7.20061010105952.6: ** word_count
+#@ word_count
 def word_count(c):
     s = c.p.b
     charNum = len(s)
@@ -61,7 +61,7 @@ def word_count(c):
     g.es("Words: %s, Chars: %s\nParagraphs: %s, Lines: %s" % (wordNum, charNum, paraNum, lineNum))
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

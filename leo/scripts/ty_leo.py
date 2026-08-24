@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20260809120840.1: * @file ../scripts/ty_leo.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20260809120840.1] @f ../scripts/ty_leo.py
 """
 ty_leo.py: Run ty on all of Leo.
 """
@@ -16,8 +16,8 @@ leo_editor_dir = os.path.abspath(os.path.join(__file__, '..', '..', '..'))
 os.chdir(leo_editor_dir)
 
 
-# @+others
-# @+node:ekr.20260823160000.1: ** check_optional_deps
+#@+others
+#@> check_optional_deps
 def check_optional_deps() -> bool:
     """Return True if every package that a `# type:ignore` fallback assumes is present is importable. See #4952."""
     # (pip package name, importable module name)
@@ -51,7 +51,7 @@ def check_optional_deps() -> bool:
     return True
 
 
-# @-others
+#@-others
 
 if not check_optional_deps():
     sys.exit(1)
@@ -60,4 +60,4 @@ args = ' '.join(sys.argv[1:])
 python = sys.executable
 command = rf'{python} -m ty check leo {args}'
 subprocess.run(command, shell=True, check=False)
-# @-leo
+#@-leo

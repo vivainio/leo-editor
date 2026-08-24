@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20181014073705.1: * @file ../../run_pytest_tests.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20181014073705.1] @f ../../run_pytest_tests.py
 import sys
 import pytest
 
@@ -29,4 +29,4 @@ if result == 5:
 if result not in (1, 5):
     sys.stderr.write(message)
     sys.stdout.flush()
-# @-leo
+#@-leo

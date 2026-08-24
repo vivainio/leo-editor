@@ -1,10 +1,10 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20130302121602.10208: * @file leoDebugger.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20130302121602.10208] @f leoDebugger.py
 # Disable all mypy errors.
 # type:ignore
 
-# @+<< leoDebugger.py docstring >>
-# @+node:ekr.20181006100710.1: ** << leoDebugger.py docstring >>
+#@+<< leoDebugger.py docstring >>
+#@> << leoDebugger.py docstring >>
 """
 Leo's integrated debugger supports the xdb and various db-* commands,
 corresponding to the pdb commands:
@@ -70,9 +70,9 @@ use_gutter must be True.
 The xdb_pane plugin creates the Debug pane in the Log window.
 """
 
-# @-<< leoDebugger.py docstring >>
-# @+<< leoDebugger.py imports >>
-# @+node:ekr.20181006100604.1: ** << leoDebugger.py imports >>
+#@-<< leoDebugger.py docstring >>
+#@+<< leoDebugger.py imports >>
+#@ << leoDebugger.py imports >>
 import bdb
 import queue
 import os
@@ -83,9 +83,9 @@ import threading
 from leo.core import leoGlobals as g
 
 
-# @-<< leoDebugger.py imports >>
-# @+others
-# @+node:ekr.20180701050839.5: ** class Xdb (pdb.Pdb, threading.Thread)
+#@-<< leoDebugger.py imports >>
+#@+others
+#@ class Xdb (pdb.Pdb, threading.Thread)
 class Xdb(pdb.Pdb, threading.Thread):
     """
      An debugger, a subclass of Pdb, that runs in a separate thread without
@@ -113,8 +113,8 @@ class Xdb(pdb.Pdb, threading.Thread):
      when xdb is active.
     """
 
-    # @+others
-    # @+node:ekr.20180701050839.4: *3* class QueueStdin (obj)
+    #@+others
+    #@> class QueueStdin (obj)
     class QueueStdin:
         """
         A replacement for Python's stdin class containing only readline().
@@ -137,7 +137,7 @@ class Xdb(pdb.Pdb, threading.Thread):
                     print(s)
             return s
 
-    # @+node:ekr.20181003020344.1: *3* class QueueStdout (obj)
+    #@ class QueueStdout (obj)
     class QueueStdout:
         """
         A replacement for Python's stdout class containing only write().
@@ -153,7 +153,7 @@ class Xdb(pdb.Pdb, threading.Thread):
             """Write s to the qr channel"""
             self.qr.put(['put-stdout', s])
 
-    # @+node:ekr.20181006160108.1: *3* xdb.__init__
+    #@ xdb.__init__
     def __init__(self, path=None):
         self.qc = queue.Queue()  # The command queue.
         self.qr = queue.Queue()  # The request queue.
@@ -179,8 +179,8 @@ class Xdb(pdb.Pdb, threading.Thread):
         self.saved_frame = None
         self.saved_traceback = None
 
-    # @+node:ekr.20181002053718.1: *3* Overrides
-    # @+node:ekr.20190108040329.1: *4* xdb.checkline (overrides Pdb)
+    #@ Overrides
+    #@> xdb.checkline (overrides Pdb)
     def checkline(self, path: str, n: int, module_globals=None) -> bool:
         # pylint: disable=unexpected-keyword-arg
         try:
@@ -193,7 +193,7 @@ class Xdb(pdb.Pdb, threading.Thread):
             g.es_exception()
             return False
 
-    # @+node:ekr.20181002061627.1: *4* xdb.cmdloop (overrides Cmd)
+    #@ xdb.cmdloop (overrides Cmd)
     def cmdloop(self, intro=None):
         """Override Cmd.cmdloop."""
         assert not intro, repr(intro)
@@ -214,7 +214,7 @@ class Xdb(pdb.Pdb, threading.Thread):
             if stop:
                 self.select_line(self.saved_frame, self.saved_traceback)
 
-    # @+node:ekr.20180701050839.6: *4* xdb.do_clear (overrides Pdb)
+    #@ xdb.do_clear (overrides Pdb)
     def do_clear(self, arg=None):
         """cl(ear) filename:lineno\ncl(ear) [bpnumber [bpnumber...]]
         With a space separated list of breakpoint numbers, clear
@@ -264,7 +264,7 @@ class Xdb(pdb.Pdb, threading.Thread):
 
     # complete_clear = self._complete_location
     # complete_cl = self._complete_location
-    # @+node:ekr.20180701050839.7: *4* xdb.do_quit (overrides Pdb)
+    #@ xdb.do_quit (overrides Pdb)
     def do_quit(self, arg=None):
         """q(uit)\nexit
         Quit from the debugger. The program being executed is aborted.
@@ -279,7 +279,7 @@ class Xdb(pdb.Pdb, threading.Thread):
     do_q = do_quit
     do_exit = do_quit
 
-    # @+node:ekr.20180701050839.8: *4* xdb.interaction (overrides Pdb)
+    #@ xdb.interaction (overrides Pdb)
     def interaction(self, frame, traceback):
         """Override."""
         self.saved_frame = frame
@@ -288,7 +288,7 @@ class Xdb(pdb.Pdb, threading.Thread):
         # Call the base class method.
         pdb.Pdb.interaction(self, frame, traceback)
 
-    # @+node:ekr.20180701050839.10: *4* xdb.set_continue (overrides Bdb)
+    #@ xdb.set_continue (overrides Bdb)
     def set_continue(self):
         """override Bdb.set_continue"""
         # Don't stop except at breakpoints or when finished
@@ -303,7 +303,7 @@ class Xdb(pdb.Pdb, threading.Thread):
                 del frame.f_trace
                 frame = frame.f_back
 
-    # @+node:ekr.20181006052604.1: *3* xdb.has_breakpoint & has_breakpoints
+    #@< xdb.has_breakpoint & has_breakpoints
     def has_breakpoint(self, filename, lineno):
         """Return True if there is a breakpoint at the given file and line."""
         filename = self.canonic(filename)
@@ -314,7 +314,7 @@ class Xdb(pdb.Pdb, threading.Thread):
         """Return True if there are any breakpoints."""
         return self.breaks
 
-    # @+node:ekr.20181002094126.1: *3* xdb.run
+    #@ xdb.run
     def run(self):
         """The thread's run method: called via start."""
         # pylint: disable=arguments-differ
@@ -326,7 +326,7 @@ class Xdb(pdb.Pdb, threading.Thread):
         else:
             self.set_trace()
 
-    # @+node:ekr.20180701090439.1: *3* xdb.run_path
+    #@ xdb.run_path
     def run_path(self, path):
         """Begin execution of the python file."""
         source = g.readFileIntoUnicodeString(path)
@@ -349,7 +349,7 @@ class Xdb(pdb.Pdb, threading.Thread):
             self.quitting = True
             sys.settrace(None)
 
-    # @+node:ekr.20180701151233.1: *3* xdb.select_line
+    #@ xdb.select_line
     def select_line(self, frame, traceback):
         """Select the given line in Leo."""
         stack, curindex = self.get_stack(frame, traceback)
@@ -359,17 +359,17 @@ class Xdb(pdb.Pdb, threading.Thread):
         # xdb.show_line finalizes the file name.
         self.qr.put(['select-line', lineno, filename])
 
-    # @+node:ekr.20181007044254.1: *3* xdb.write
+    #@ xdb.write
     def write(self, s):
         """Write s to the output stream."""
         self.qr.put(['put-stdout', s])
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20181007063214.1: ** top-level functions
+#@< top-level functions
 # These functions run in Leo's main thread.
-# @+node:ekr.20181004120344.1: *3* function: get_gnx_from_file
+#@> function: get_gnx_from_file
 def get_gnx_from_file(file_s, p, path):
     """Set p's gnx from the @file node in the derived file."""
     pat = re.compile(r'^#@\+node:(.*): \*+ @file (.+)$')
@@ -385,7 +385,7 @@ def get_gnx_from_file(file_s, p, path):
     return False
 
 
-# @+node:ekr.20180701050839.3: *3* function: listener
+#@ function: listener
 def listener(timer):
     """
     Listen, at idle-time, in Leo's main thread, for data on the qr channel.
@@ -427,7 +427,7 @@ def listener(timer):
         # self.timer.stop()
 
 
-# @+node:ekr.20181004060517.1: *3* function: make_at_file_node
+#@ function: make_at_file_node
 def make_at_file_node(line, path):
     """
     Make and populate an @auto node for the given path.
@@ -454,7 +454,7 @@ def make_at_file_node(line, path):
     return p
 
 
-# @+node:ekr.20180701061957.1: *3* function: show_line (leoDebugger.py)
+#@ function: show_line (leoDebugger.py)
 def show_line(line, fn) -> None:
     """
     Put the cursor on the requested line of the given file.
@@ -481,8 +481,8 @@ def show_line(line, fn) -> None:
         g.trace('FAIL:', target)
 
 
-# @+node:ekr.20181001054314.1: ** top-level xdb commands
-# @+node:ekr.20181003015017.1: *3* db-again
+#@< top-level xdb commands
+#@> db-again
 @g.command('db-again')
 def xdb_again(event):
     """Repeat the previous xdb command."""
@@ -492,7 +492,7 @@ def xdb_again(event):
         print('xdb not active')
 
 
-# @+node:ekr.20181003054157.1: *3* db-b
+#@ db-b
 @g.command('db-b')
 def xdb_breakpoint(event=None):
     """Set the breakpoint at the presently select line in Leo."""
@@ -526,7 +526,7 @@ def xdb_breakpoint(event=None):
         xdb.qc.put(f"b {path}:{n + 1}")
 
 
-# @+node:ekr.20180702074705.1: *3* db-c/h/l/n/q/r/s/w
+#@ db-c/h/l/n/q/r/s/w
 @g.command('db-c')
 def xdb_c(event):
     """execute the pdb 'continue' command."""
@@ -575,7 +575,7 @@ def xdb_w(event):
     db_command(event, 'w')
 
 
-# @+node:ekr.20180701050839.2: *3* db-input
+#@ db-input
 @g.command('db-input')
 def xdb_input(event=None):
     """Prompt the user for a pdb command and execute it."""
@@ -600,7 +600,7 @@ def xdb_input(event=None):
     c.interactive(callback, event, prompts=['Debugger command: '])
 
 
-# @+node:ekr.20181003015636.1: *3* db-status
+#@ db-status
 @g.command('db-status')
 def xdb_status(event):
     """Print whether xdb is active."""
@@ -608,7 +608,7 @@ def xdb_status(event):
     print('active' if xdb else 'inactive')
 
 
-# @+node:ekr.20181006163454.1: *3* do_command
+#@ do_command
 def db_command(event, command):
     if xdb := getattr(g.app, 'xdb', None):
         xdb.qc.put(command)
@@ -616,7 +616,7 @@ def db_command(event, command):
         print('xdb not active')
 
 
-# @+node:ekr.20180701050839.1: *3* xdb
+#@ xdb
 @g.command('xdb')
 def xdb_command(event=None):
     """Start the external debugger on a toy test program."""
@@ -648,7 +648,7 @@ def xdb_command(event=None):
         xdb.qr.put(['clear-stdout'])
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

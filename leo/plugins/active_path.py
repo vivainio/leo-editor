@@ -1,7 +1,23 @@
-# @+leo-ver=5-thin
-# @+node:tbrown.20080613095157.2: * @file ../plugins/active_path.py
-# @+<< docstring >>
-# @+node:tbrown.20080613095157.3: ** << docstring >> (active_path)
+#@+leo-ver=cub-1-thin
+#@0 [tbrown.20080613095157.2] @f ../plugins/active_path.py
+#@+<< docstring >>
+#@-<< docstring >>
+#@+<< imports >>
+#@> << imports >>
+import ast  # for docstring loading
+import os
+import re
+import shutil
+import time  # for recursion bailout
+from leo.core import leoGlobals as g
+from leo.core import leoPlugins  # uses leoPlugins.TryNext
+
+#@-<< imports >>
+testing = False
+
+
+#@+others
+#@ << docstring >> (active_path)
 r"""Synchronizes \@path nodes with folders.
 
 If a node is named '\@path *<path_to_folder>*', the content (file and folder
@@ -70,7 +86,7 @@ Set ``@bool active_path_load_docstring = True`` to have active_path load the
 docstring of .py files automatically. These nodes start with the special
 string::
 
-    @language rest # AUTOLOADED DOCSTRING
+#@@language rest # AUTOLOADED DOCSTRING
 
 which must be left intact if you want active path to be able to double-click
 load the file later.
@@ -100,23 +116,7 @@ sub-folders more automatically.
 
 """
 
-# @-<< docstring >>
-# @+<< imports >>
-# @+node:ekr.20140612210500.17669: ** << imports >>
-import ast  # for docstring loading
-import os
-import re
-import shutil
-import time  # for recursion bailout
-from leo.core import leoGlobals as g
-from leo.core import leoPlugins  # uses leoPlugins.TryNext
-
-# @-<< imports >>
-testing = False
-
-
-# @+others
-# @+node:tbrown.20091128094521.15048: ** init (active_path.py)
+#@ init (active_path.py)
 def init():
     """Return True if the plugin has loaded successfully."""
     g.registerHandler('after-create-leo-frame', attachToCommander)
@@ -127,7 +127,7 @@ def init():
     return True
 
 
-# @+node:tbrown.20091128094521.15047: ** attachToCommander
+#@ attachToCommander
 # defer binding event until c exists
 def attachToCommander(t, k):
     c = k.get('c')
@@ -169,7 +169,7 @@ def attachToCommander(t, k):
     c.__active_path['DS_SENTINEL'] = "@language rest # AUTOLOADED DOCSTRING"
 
 
-# @+node:tbrown.20091128094521.15042: ** popup_entry (active_path)
+#@ popup_entry (active_path)
 def popup_entry(c, p, menu):
     """Populate the Path submenu of the popup."""
     pathmenu = menu.addMenu("Path")
@@ -186,7 +186,7 @@ def popup_entry(c, p, menu):
             a.triggered.connect(active_path_wrapper)
 
 
-# @+node:tbrown.20091128094521.15037: ** isDirNode
+#@ isDirNode
 def isDirNode(p):
     return (
         p.h.startswith('@path ')
@@ -197,7 +197,7 @@ def isDirNode(p):
     )
 
 
-# @+node:tbrown.20091128094521.15039: ** isFileNode
+#@ isFileNode
 def isFileNode(p):
     """really isEligibleToBecomeAFileNode"""
     return (
@@ -214,7 +214,7 @@ def isFileNode(p):
     )
 
 
-# @+node:jlunz.20150611151435.1: ** inAny
+#@ inAny
 def inAny(item, group, regEx=False):
     """Helper function to check if word from list is in a string"""
     if regEx:
@@ -222,7 +222,7 @@ def inAny(item, group, regEx=False):
     return any(word in item for word in group)
 
 
-# @+node:jlunz.20150611151003.1: ** checkIncExc
+#@ checkIncExc
 def checkIncExc(item, inc, exc, regEx):
     """Primary logic to check if an item is in either the include or exclude list"""
     if inc and not exc:
@@ -232,7 +232,7 @@ def checkIncExc(item, inc, exc, regEx):
     return True
 
 
-# @+node:tbrown.20091129085043.9329: ** inReList
+#@ inReList
 def inReList(txt, lst):
     for pat in lst:
         if pat.search(txt):
@@ -240,7 +240,7 @@ def inReList(txt, lst):
     return False
 
 
-# @+node:tbrown.20091128094521.15040: ** subDir
+#@ subDir
 def subDir(d, p):
     if p.h.strip().startswith('@path'):
         p = p.h.split(None, 1)
@@ -260,7 +260,7 @@ def subDir(d, p):
     return os.path.join(d, p)
 
 
-# @+node:tbrown.20080613095157.4: ** onSelect
+#@ onSelect
 def onSelect(tag, keywords):
     """Determine if a file or directory node was clicked, and the path"""
     c = keywords.get('c') or keywords.get('new_c')
@@ -276,7 +276,7 @@ def onSelect(tag, keywords):
     return None
 
 
-# @+node:tbrown.20080616153649.4: ** getPath (active_path.py)
+#@ getPath (active_path.py)
 def getPath(c, p):
     for n in p.self_and_parents():
         if n.h.startswith('@path'):
@@ -294,7 +294,7 @@ def getPath(c, p):
     return path
 
 
-# @+node:tbrown.20080613095157.5: ** flattenOrganizers
+#@ flattenOrganizers
 def flattenOrganizers(p):
     """Children of p, some of which may be in organizer nodes
 
@@ -316,7 +316,7 @@ def flattenOrganizers(p):
                 yield i
 
 
-# @+node:tbrown.20080613095157.6: ** sync_node_to_folder
+#@ sync_node_to_folder
 def sync_node_to_folder(c, parent, d, updateOnly=False, recurse=False):
     """Decide whether we're opening or creating a file or a folder"""
 
@@ -350,7 +350,7 @@ def sync_node_to_folder(c, parent, d, updateOnly=False, recurse=False):
     return False
 
 
-# @+node:tbrown.20080613095157.7: ** createDir
+#@ createDir
 def createDir(c, parent, d):
     """Ask if we should create a new folder"""
     newd = parent.h.strip(' /')
@@ -367,7 +367,7 @@ def createDir(c, parent, d):
     return True
 
 
-# @+node:tbrown.20080613095157.8: ** createFile
+#@ createFile
 def createFile(c, parent, d):
     """Ask if we should create a new file"""
     directory = os.path.dirname(d)
@@ -387,7 +387,7 @@ def createFile(c, parent, d):
     return True
 
 
-# @+node:tbrown.20080613095157.9: ** openFile
+#@ openFile
 def openFile(c, parent, d, autoload=False):
     """Open an existing file"""
 
@@ -438,7 +438,7 @@ def openFile(c, parent, d, autoload=False):
     c.bodyWantsFocus()
 
 
-# @+node:tbrown.20080613095157.10: ** openDir
+#@ openDir
 def openDir(c, parent, d):
     """
     Expand / refresh an existing folder
@@ -574,7 +574,7 @@ def openDir(c, parent, d):
     c.selectPosition(parent)
 
 
-# @+node:tbrown.20100304090709.31081: ** loadDocstring
+#@ loadDocstring
 def loadDocstring(file_path):
     try:
         src = open(file_path).read()
@@ -595,7 +595,7 @@ def loadDocstring(file_path):
     return doc_string
 
 
-# @+node:tbrown.20100401100336.24943: ** query
+#@ query
 def query(c, s):
     """Return yes/no answer from user for question s"""
 
@@ -604,7 +604,7 @@ def query(c, s):
     return ok == 'yes'
 
 
-# @+node:tbrown.20090225191501.1: ** run_recursive
+#@ run_recursive
 def run_recursive(c):
     """Recursive descent."""
 
@@ -621,7 +621,7 @@ def run_recursive(c):
     c.redraw(p)
 
 
-# @+node:ville.20090223183051.1: ** cmd_ActOnNode (active_path.py)
+#@ cmd_ActOnNode (active_path.py)
 @g.command('active-path-act-on-node')
 def cmd_ActOnNode(event, p=None):
     """act_on_node handler for active_path.py"""
@@ -641,7 +641,7 @@ def cmd_ActOnNode(event, p=None):
 active_path_act_on_node = cmd_ActOnNode
 
 
-# @+node:tbrown.20111207143354.19381: ** cmd_MakeDir (active_path.py)
+#@ cmd_MakeDir (active_path.py)
 @g.command('active-path-make-dir')
 def cmd_MakeDir(event):
     c = event.get('c')
@@ -655,7 +655,7 @@ def cmd_MakeDir(event):
     g.es("Path will be created if a file is saved on it")
 
 
-# @+node:tbrown.20080616153649.2: ** cmd_ShowCurrentPath (active_path.py)
+#@ cmd_ShowCurrentPath (active_path.py)
 @g.command('active-path-show-current-path')
 def cmd_ShowCurrentPath(event):
     """Just show the path to the current file/directory node in the log pane."""
@@ -663,7 +663,7 @@ def cmd_ShowCurrentPath(event):
     g.es(getPath(c, c.p))
 
 
-# @+node:tbrown.20100401100336.13608: ** cmd_LoadRecursive (active_path.py)
+#@ cmd_LoadRecursive (active_path.py)
 @g.command('active-path-load-recursive')
 def cmd_LoadRecursive(event):
     """Recursive update, with expansions."""
@@ -675,7 +675,7 @@ def cmd_LoadRecursive(event):
             sync_node_to_folder(c, s, path, updateOnly=True, recurse=True)
 
 
-# @+node:tbrown.20080619080950.16: ** cmd_UpdateRecursive (active_path.py)
+#@ cmd_UpdateRecursive (active_path.py)
 @g.command('active-path-update-recursive')
 def cmd_UpdateRecursive(event):
     """Recursive update, no new expansions."""
@@ -686,7 +686,7 @@ def cmd_UpdateRecursive(event):
             sync_node_to_folder(c, s, path, updateOnly=True)
 
 
-# @+node:tbrown.20091214212801.13475: ** cmd_SetNodeToAbsolutePathRecursive (active_path.py)
+#@ cmd_SetNodeToAbsolutePathRecursive (active_path.py)
 @g.command('active-path-set-node-to-absolute-path-recursive')
 def cmd_SetNodeToAbsolutePathRecursive(event):
     """Change "/dirname/" to "@path /absolute/path/to/dirname", recursively"""
@@ -695,7 +695,7 @@ def cmd_SetNodeToAbsolutePathRecursive(event):
         cmd_SetNodeToAbsolutePath(event, p=s)
 
 
-# @+node:tbrown.20080616153649.5: ** cmd_SetNodeToAbsolutePath (active_path.py)
+#@ cmd_SetNodeToAbsolutePath (active_path.py)
 @g.command('active-path-set-node-to-absolute-path')
 def cmd_SetNodeToAbsolutePath(event, p=None):
     """Change "/dirname/" to "@path /absolute/path/to/dirname"."""
@@ -714,7 +714,7 @@ def cmd_SetNodeToAbsolutePath(event, p=None):
     p.h = type_ + path
 
 
-# @+node:tbrown.20080618141617.879: ** cmd_PurgeVanishedFiles (active_path.py)
+#@ cmd_PurgeVanishedFiles (active_path.py)
 def cond(p):
     return p.h.startswith('*') and p.h.endswith('*')
 
@@ -796,7 +796,7 @@ def deleteDescendents(p, cond, dtor=None, descendAnyway=False, _culls=0):
     return _culls
 
 
-# @+node:tbrown.20140308075026.27803: ** cmd_PickDir (active_path.py)
+#@ cmd_PickDir (active_path.py)
 @g.command('active-path-pick-dir')
 def cmd_PickDir(event):
     """cmd_PickDir - Show user a folder picker to create"""
@@ -825,7 +825,7 @@ def cmd_PickDir(event):
     c.redraw()
 
 
-# @+node:tbnorth.20160122134156.1: ** cmd_MarkContent (active_path.py)
+#@ cmd_MarkContent (active_path.py)
 @g.command('active-path-mark-content')
 def cmd_MarkContent(event):
     """cmd_MarkContent - mark nodes in @path sub-tree with non-filesystem content
@@ -865,7 +865,7 @@ def cmd_MarkContent(event):
         c.redraw()
 
 
-# @+node:tbnorth.20160224113800.1: ** cmd_ToggleAutoLoad (active_path.py)
+#@ cmd_ToggleAutoLoad (active_path.py)
 @g.command('active-path-toggle-autoload')
 def cmd_ToggleAutoLoad(event):
     """cmd_ToggleAutoLoad - toggle autoloading behavior"""
@@ -874,8 +874,8 @@ def cmd_ToggleAutoLoad(event):
     g.es("Autoload: %s" % c.__active_path['do_autoload'])
 
 
-# @+node:tbrown.20080619080950.14: ** testing
-# @+node:tbrown.20080619080950.15: *3* makeTestHierachy
+#@ testing
+#@> makeTestHierachy
 files = """
 a/
 a/a/
@@ -920,7 +920,7 @@ def deleteTestHierachy(c):
 if testing:
     cmd_MakeTestHierachy = makeTestHierachy
     cmd_DeleteFromTestHierachy = deleteTestHierachy
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

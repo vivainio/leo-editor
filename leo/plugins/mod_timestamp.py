@@ -1,17 +1,17 @@
-# @+leo-ver=5-thin
-# @+node:edream.110203113231.727: * @file ../plugins/mod_timestamp.py
+#@+leo-ver=cub-1-thin
+#@0 [edream.110203113231.727] @f ../plugins/mod_timestamp.py
 """Timestamps all save operations to show when they occur."""
 
-# @@language python
-# @@tabwidth -4
+#@@language python
+#@@tabwidth -4
 
 # By Paul Paterson.
 import time
 from leo.core import leoGlobals as g
 
 
-# @+others
-# @+node:ekr.20100128073941.5374: ** init
+#@+others
+#@> init
 def init():
     """Return True if the plugin has loaded successfully."""
     g.registerHandler("command1", timestamp)
@@ -19,7 +19,7 @@ def init():
     return True  # OK for unit testing.
 
 
-# @+node:edream.110203113231.728: ** timestamp
+#@ timestamp
 def timestamp(tag=None, keywords=None):
     cmd = keywords.get('label', 'save')
 
@@ -27,5 +27,5 @@ def timestamp(tag=None, keywords=None):
         g.es("%s: %s" % (cmd, time.ctime()))
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

@@ -1,22 +1,22 @@
-# @+leo-ver=5-thin
-# @+node:ville.20110115234843.8742: * @file ../plugins/dragdropgoodies.py
-# @+<< docstring >>
-# @+node:ville.20110115234843.8743: ** << docstring >>
+#@+leo-ver=cub-1-thin
+#@0 [ville.20110115234843.8742] @f ../plugins/dragdropgoodies.py
+#@+<< docstring >>
+#@> << docstring >>
 """A plugin containing utils relating to drag and drop."""
 
-# @-<< docstring >>
-# @+<< imports >>
-# @+node:ville.20110115234843.8745: ** << imports >>
+#@-<< docstring >>
+#@+<< imports >>
+#@ << imports >>
 from leo.core import leoGlobals as g
 
 #
 # Fail fast, right after all imports.
 g.assertUi('qt')  # May raise g.UiTypeException, caught by the plugins manager.
-# @-<< imports >>
+#@-<< imports >>
 
 
-# @+others
-# @+node:ville.20110115234843.8746: ** init
+#@+others
+#@ init
 def init():
     ok = g.app.gui.guiName() == "qt"
     if ok:
@@ -32,7 +32,7 @@ def init():
     return ok
 
 
-# @+node:ville.20110115234843.8753: ** onDrop
+#@ onDrop
 def onDrop(tag, keys):
     print("ta", tag)
     ev = keys['dropevent']
@@ -46,7 +46,7 @@ def onDrop(tag, keys):
     return False
 
 
-# @+node:ville.20110116001102.8714: ** mimeDataDump
+#@ mimeDataDump
 def mime_data_dump(md):
     for fo in md.formats():
         da = str(md.data(fo))
@@ -55,24 +55,24 @@ def mime_data_dump(md):
         print("END")
 
 
-# @+node:ville.20110115234843.8747: ** onCreate
+#@ onCreate
 def onCreate(tag, keys):
     c = keys.get('c')
     if c:
         pluginController(c)
 
 
-# @+node:ville.20110115234843.8748: ** class pluginController
+#@ class pluginController
 class pluginController:
-    # @+others
-    # @+node:ville.20110115234843.8749: *3* __init__
+    #@+others
+    #@> __init__
     def __init__(self, c):
         pass
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

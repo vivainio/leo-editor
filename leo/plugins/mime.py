@@ -1,7 +1,18 @@
-# @+leo-ver=5-thin
-# @+node:dan.20090217132953.1: * @file ../plugins/mime.py
-# @+<< docstring >>
-# @+node:dan.20090203174248.27: ** << docstring >> (mime.py)
+#@+leo-ver=cub-1-thin
+#@0 [dan.20090217132953.1] @f ../plugins/mime.py
+#@+<< docstring >>
+#@-<< docstring >>
+
+# By Dan White <etihwnad _at_ gmail _dot_ com>.
+
+import os
+import subprocess
+import sys
+from leo.core import leoGlobals as g
+
+
+#@+others
+#@> << docstring >> (mime.py)
 r"""Opens files with their default platform program.
 
 The double-click-icon-box command on @mime nodes will attempt to open the
@@ -36,18 +47,7 @@ association handler" and either define a default _mime_open_cmd string, where
 "%s" will be replaced with the filename, or define a function taking the
 filename string as its only argument and set as open_func.
 """
-# @-<< docstring >>
-
-# By Dan White <etihwnad _at_ gmail _dot_ com>.
-
-import os
-import subprocess
-import sys
-from leo.core import leoGlobals as g
-
-
-# @+others
-# @+node:dan.20090210183435.1: ** exec_full_cmd (mime.py)
+#@ exec_full_cmd (mime.py)
 def exec_full_cmd(cmd):
     """Accept a command string including filename and return a function
     which executes the command."""
@@ -58,7 +58,7 @@ def exec_full_cmd(cmd):
     return f
 
 
-# @+node:dan.20090210180636.27: ** exec_string_cmd (mime.py)
+#@ exec_string_cmd (mime.py)
 def exec_string_cmd(cmd):
     """Accept a command string and return a function which opens executes the command,
     replacing %s with the full file path."""
@@ -73,7 +73,7 @@ def exec_string_cmd(cmd):
     return f
 
 
-# @+node:dan.20090203174248.30: ** init (mime.py)
+#@ init (mime.py)
 def init():
     """Return True if the plugin has loaded successfully."""
     ok = not g.unitTesting
@@ -84,7 +84,7 @@ def init():
     return ok
 
 
-# @+node:dan.20090203174248.31: ** open_mimetype
+#@ open_mimetype
 def open_mimetype(tag, keywords, val=None):
     """Simulate double-clicking on the filename in a file manager.
 
@@ -132,17 +132,16 @@ def open_mimetype(tag, keywords, val=None):
     return True
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @+<< guess file association handler >>
-# @+node:dan.20090203174248.35: ** << guess file association handler >>
-# @+at Search for the best method of opening files.  If running a desktop manager,
+#@-others
+#@@language python
+#@@tabwidth -4
+#@+<< guess file association handler >>
+#@ << guess file association handler >>
 # do the action corresponding to a double-click in the file manager.
 #
 # Helper functions return a function f(fpath) which takes the full file path,
 # launches the viewer and returns immediately.
-# @@c
+#@@c
 
 # open_func is called with the full file path
 open_func = None
@@ -165,5 +164,5 @@ if sys.platform == 'linux2':
 elif sys.platform == 'win32':
     # Use this directly as 1-arg fn, default action is 'open'
     open_func = os.startfile
-# @-<< guess file association handler >>
-# @-leo
+#@-<< guess file association handler >>
+#@-leo

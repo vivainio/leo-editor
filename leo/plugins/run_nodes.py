@@ -1,7 +1,47 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20040910070811.1: * @file ../plugins/run_nodes.py
-# @+<< docstring >>
-# @+node:ekr.20050912181956: ** << docstring >> (run_nodes.py)
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20040910070811.1] @f ../plugins/run_nodes.py
+#@+<< docstring >>
+#@-<< docstring >>
+
+# At present, this plugin is *broken*.
+
+#@+<< imports >>
+#@> << imports >>
+import os
+import subprocess
+import threading
+import time
+from typing import Any
+from leo.core import leoGlobals as g
+
+#@-<< imports >>
+#@+<< globals >>
+#@ << globals >>
+if os.name == "dos" or os.name == "nt":
+    Encoding = "mbcs"
+else:
+    Encoding = "ascii"
+
+# g.blue("@run encoding: "+Encoding)
+
+# misc global variables...
+RunNode = None
+RunList: list[Any] | None = None  # List of Positions.
+WorkDir = None
+ExitCode = None
+
+# files and threads...
+In = None
+OutThread = None
+ErrThread = None
+
+# idle hook own flags...
+OwnIdleHook = False
+#@-<< globals >>
+
+
+#@+others
+#@ << docstring >> (run_nodes.py)
 r"""Runs a program and interface Leo through its input/output/error streams.
 
 The double-click-icon-box command on a node whose headlines is @run 'cmd args' will execute
@@ -34,47 +74,7 @@ than 0, then it will stop there)
 
 By Alexis Gendron Paquette. Please send comments to the Leo forums.
 """
-# @-<< docstring >>
-
-# At present, this plugin is *broken*.
-
-# @+<< imports >>
-# @+node:ekr.20040910070811.4: ** << imports >>
-import os
-import subprocess
-import threading
-import time
-from typing import Any
-from leo.core import leoGlobals as g
-
-# @-<< imports >>
-# @+<< globals >>
-# @+node:ekr.20040910070811.5: ** << globals >>
-if os.name == "dos" or os.name == "nt":
-    Encoding = "mbcs"
-else:
-    Encoding = "ascii"
-
-# g.blue("@run encoding: "+Encoding)
-
-# misc global variables...
-RunNode = None
-RunList: list[Any] | None = None  # List of Positions.
-WorkDir = None
-ExitCode = None
-
-# files and threads...
-In = None
-OutThread = None
-ErrThread = None
-
-# idle hook own flags...
-OwnIdleHook = False
-# @-<< globals >>
-
-
-# @+others
-# @+node:ekr.20060108160737: ** init (run_nodes.py)
+#@ init (run_nodes.py)
 def init():
     """Return True if the plugin has loaded successfully."""
     g.registerHandler("bodykey2", OnBodyKey)
@@ -85,8 +85,8 @@ def init():
     return True  # Ok for unit testing.
 
 
-# @+node:ekr.20060108160737.1: ** Hooks
-# @+node:ekr.20040910070811.12: *3* OnBodyKey
+#@ Hooks
+#@> OnBodyKey
 def OnBodyKey(tag, keywords):
     # global RunNode, In
 
@@ -109,7 +109,7 @@ def OnBodyKey(tag, keywords):
         c.setBodyText(p, "")
 
 
-# @+node:ekr.20040910070811.13: *3* OnIconDoubleClick
+#@ OnIconDoubleClick
 def OnIconDoubleClick(tag, keywords):
     global ExitCode, OwnIdleHook, RunList  # RunNode
 
@@ -122,8 +122,8 @@ def OnIconDoubleClick(tag, keywords):
         if RunNode or RunList:
             g.error("@run already running!")
         else:
-            # @+<< handle double click in @run icon >>
-            # @+node:ekr.20040910102554: *4* << handle double click in @run icon >>
+            #@+<< handle double click in @run icon >>
+            #@> << handle double click in @run icon >>
             RunList = []
 
             for p2 in p.self_and_subtree():
@@ -133,11 +133,11 @@ def OnIconDoubleClick(tag, keywords):
 
             ExitCode = None
             OwnIdleHook = True
-            # @-<< handle double click in @run icon >>
+            #@-<< handle double click in @run icon >>
     elif g.match_word(h, 0, "@in"):
         if RunNode:
-            # @+<< handle double click in @in icon >>
-            # @+node:ekr.20040910102554.1: *4* << handle double click in @in icon >>
+            #@+<< handle double click in @in icon >>
+            #@ << handle double click in @in icon >>
             b = p.b
 
             try:
@@ -146,10 +146,10 @@ def OnIconDoubleClick(tag, keywords):
                 g.es(b)
             except OSError as ioerr:
                 g.error("@run OSError: " + str(ioerr))
-            # @-<< handle double click in @in icon >>
+            #@-<< handle double click in @in icon >>
 
 
-# @+node:ekr.20040910070811.14: *3* OnIdle
+#@< OnIdle
 def OnIdle(tag, keywords):
     global OwnIdleHook
     # global ErrThread, ExitCode, OutThread, RunNode, RunList
@@ -174,7 +174,7 @@ def OnIdle(tag, keywords):
         g.disableIdleTimeHook()
 
 
-# @+node:ekr.20040910070811.15: *3* OnQuit (run_nodes.py)
+#@ OnQuit (run_nodes.py)
 def OnQuit(tag, keywords=None):
     global RunList  # RunNode
 
@@ -187,15 +187,15 @@ def OnQuit(tag, keywords=None):
         g.error("@run: forced quit!")
 
 
-# @+node:ekr.20040910070811.6: ** class readingThread
+#@< class readingThread
 class readingThread(threading.Thread):
     File = None
     TextLock = threading.Lock()
     TextLock.acquire()
     Text = ""
 
-    # @+others
-    # @+node:ekr.20040910070811.7: *3* run
+    #@+others
+    #@> run
     def run(self):
         """Called automatically when the thread is created."""
 
@@ -216,10 +216,10 @@ class readingThread(threading.Thread):
             s = self.File.readline()
             time.sleep(0.01)
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20040910070811.8: ** CloseProcess
+#@< CloseProcess
 def CloseProcess(c):
     global RunNode, ExitCode, WorkDir
     # global In, OutThread, ErrThread
@@ -248,7 +248,7 @@ def CloseProcess(c):
     c.redraw()
 
 
-# @+node:ekr.20040910070811.9: ** FindRunChildren (no longer used)
+#@ FindRunChildren (no longer used)
 def FindRunChildren(p):
     # global RunList
 
@@ -258,7 +258,7 @@ def FindRunChildren(p):
         FindRunChildren(child)
 
 
-# @+node:ekr.20040910070811.10: ** OpenProcess
+#@ OpenProcess
 def OpenProcess(p):
     global RunNode, WorkDir
     global In, OutThread, ErrThread  # ExitCode
@@ -266,8 +266,8 @@ def OpenProcess(p):
     command = p.h[4:].strip()  # Remove @run
     if not command:
         return
-    # @+<< set the working directory or return >>
-    # @+node:ekr.20040910094754: *3* << set the working directory or return >>
+    #@+<< set the working directory or return >>
+    #@> << set the working directory or return >>
     args = command.split(' ')
 
     path, fname = os.path.split(args[0])
@@ -282,9 +282,9 @@ def OpenProcess(p):
         else:
             g.error("@run: invalid path: %s" % (path))
             return
-    # @-<< set the working directory or return >>
-    # @+<< set the command, removing all args following '#' >>
-    # @+node:ekr.20040910100935: *3* << set the command, removing all args following '#' >>
+    #@-<< set the working directory or return >>
+    #@+<< set the command, removing all args following '#' >>
+    #@ << set the command, removing all args following '#' >>
     command = fname
 
     for arg in args[1:]:
@@ -292,13 +292,13 @@ def OpenProcess(p):
             break
         else:
             command += ' ' + arg.strip()
-    # @-<< set the command, removing all args following '#' >>
+    #@-<< set the command, removing all args following '#' >>
     if not command.strip():
         return
     RunNode = p
     args = []
-    # @+<< append arguments from child nodes to command >>
-    # @+node:ekr.20040910095147: *3* << append arguments from child nodes to command >>
+    #@+<< append arguments from child nodes to command >>
+    #@ << append arguments from child nodes to command >>
     for child in p.children():
         h = child.h
         if g.match_word(h, 0, "@arg"):
@@ -311,7 +311,7 @@ def OpenProcess(p):
                 and not g.match_word(h, 0, "@input")
             ):
                 args.append(child.b.strip())
-    # @-<< append arguments from child nodes to command >>
+    #@-<< append arguments from child nodes to command >>
 
     g.blue("@run %s>%s" % (os.getcwd(), command))
     for arg in args:
@@ -336,7 +336,7 @@ def OpenProcess(p):
         c.redraw()
 
 
-# @+node:ekr.20040910070811.11: ** UpdateText
+#@< UpdateText
 def UpdateText(t, wcolor="black"):
     # global RunNode, Encoding
 
@@ -353,7 +353,7 @@ def UpdateText(t, wcolor="black"):
     return True
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

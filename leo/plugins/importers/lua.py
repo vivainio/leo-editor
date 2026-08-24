@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20170530024520.2: * @file ../plugins/importers/lua.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20170530024520.2] @f ../plugins/importers/lua.py
 """
 The @auto importer for the lua language.
 
@@ -16,8 +16,8 @@ if TYPE_CHECKING:
     from leo.core.leoNodes import Position
 
 
-# @+others
-# @+node:ekr.20170530024520.3: ** class Lua_Importer(Importer)
+#@+others
+#@> class Lua_Importer(Importer)
 class Lua_Importer(Importer):
     """The importer for the lua language."""
 
@@ -30,8 +30,8 @@ class Lua_Importer(Importer):
         ('function', re.compile(r'.*?([\w\.]+)\s*\(function\b\s*\(')),
     )
 
-    # @+others
-    # @+node:ekr.20230527120748.1: *3* lua_i.find_end_of_block
+    #@+others
+    #@> lua_i.find_end_of_block
     def find_end_of_block(self, i: int, i2: int) -> int:
         """
         Lua_Importer.find_end_of_block.
@@ -55,10 +55,10 @@ class Lua_Importer(Importer):
                         return i
         return i2
 
-    # @-others
+    #@-others
 
 
-# @-others
+#@-others
 
 
 def do_import(c: Cmdr, parent: Position, s: str) -> None:
@@ -72,8 +72,8 @@ importer_dict = {
     ],
     'func': do_import,
 }
-# @@language python
-# @@tabwidth -4
+#@@language python
+#@@tabwidth -4
 
 
-# @-leo
+#@-leo

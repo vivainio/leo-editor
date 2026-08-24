@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:edream.110203113231.916: * @file ../plugins/examples/override_classes.py
+#@+leo-ver=cub-1-thin
+#@0 [edream.110203113231.916] @f ../plugins/examples/override_classes.py
 """A plugin showing how to override Leo's core classes."""
 
 from leo.core import leoGlobals as g
@@ -7,8 +7,8 @@ from leo.core import leoApp
 from leo.core import leoFrame
 
 
-# @+others
-# @+node:ekr.20111104210837.9692: ** init
+#@+others
+#@> init
 def init():
     """Return True if the plugin has loaded successfully."""
     ok = not g.unitTesting  # Not for unit testing: overrides core methods.
@@ -35,7 +35,7 @@ def init():
     return ok
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

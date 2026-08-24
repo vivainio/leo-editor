@@ -1,9 +1,9 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20180121041003.1: * @file leoTips.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20180121041003.1] @f leoTips.py
 """Save and show tips to the user."""
 
-# @+<< leoTips imports & annotations >>
-# @+node:ekr.20220901094023.1: ** << leoTips imports & annotations >>
+#@+<< leoTips imports & annotations >>
+#@> << leoTips imports & annotations >>
 from __future__ import annotations
 import random
 import textwrap
@@ -12,7 +12,7 @@ from leo.core import leoGlobals as g
 
 if TYPE_CHECKING:  # pragma: no cover
     from leo.core.leoCommands import Commands as Cmdr
-# @-<< leoTips imports & annotations >>
+#@-<< leoTips imports & annotations >>
 assert g
 
 # Define constant strings for use in f-strings.
@@ -20,9 +20,9 @@ at_s = "@"
 ref1_s = "<<"
 ref2_s = ">>"
 
-# @+others
-# @+node:ekr.20180121041252.1: ** class TipManager
-# @@beautify
+#@+others
+#@ class TipManager
+#@@beautify
 
 
 class TipManager:
@@ -30,8 +30,8 @@ class TipManager:
 
     key = 'shown-tips'
 
-    # @+others
-    # @+node:ekr.20180121041748.1: *3* tipm.get_next_tip
+    #@+others
+    #@> tipm.get_next_tip
     def get_next_tip(self) -> UserTip:
         # global tips
         db = g.app.db
@@ -49,11 +49,11 @@ class TipManager:
         db[self.key] = seen
         return tips[i]
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20180121041301.1: ** class UserTip
-# @@beautify
+#@< class UserTip
+#@@beautify
 
 
 class UserTip:
@@ -73,8 +73,8 @@ class UserTip:
     __str__ = __repr__
 
 
-# @+node:ekr.20180121045646.1: ** make_tips (leoTips.py)
-# @@beautify
+#@ make_tips (leoTips.py)
+#@@beautify
 
 
 def make_tips(c: Cmdr) -> None:
@@ -151,8 +151,8 @@ UserTip(
             print(template % (tip.n, tags, title, tip.text))
 
 
-# @+node:ekr.20180126052528.1: ** make_tip_nodes (leoTips.py)
-# @@beautify
+#@ make_tip_nodes (leoTips.py)
+#@@beautify
 
 
 def make_tip_nodes(c: Cmdr) -> None:
@@ -173,16 +173,16 @@ def make_tip_nodes(c: Cmdr) -> None:
     c.redraw()
 
 
-# @-others
+#@-others
 
 # The global tips array.
 tips: list[UserTip] = [
-    # @+<< define tips >>
-    # @+node:ekr.20180121053422.1: ** << define tips >>
-    # @@wrap
-    # @+others
-    # @+node:ekr.20180324073355.1: *3* Misc. tips
-    # @+node:ekr.20180324065653.2: *4* Most important plugins
+    #@+<< define tips >>
+    #@ << define tips >>
+    #@@wrap
+    #@+others
+    #@> Misc. tips
+    #@> Most important plugins
     UserTip(
         n=617,
         tags=['Plugins'],
@@ -200,7 +200,7 @@ tips: list[UserTip] = [
 
     """,
     ),
-    # @+node:ekr.20180324072923.1: *4* Move clones to last top-level node
+    #@ Move clones to last top-level node
     UserTip(
         n=0,
         tags=[
@@ -218,7 +218,7 @@ tips: list[UserTip] = [
 
     """,
     ),
-    # @+node:ekr.20180324065653.3: *4* myLeoSettings.leo
+    #@ myLeoSettings.leo
     UserTip(
         n=616,
         tags=[
@@ -235,7 +235,7 @@ tips: list[UserTip] = [
 
     """,
     ),
-    # @+node:ekr.20180324065152.3: *4* Re @button make-md-toc
+    #@ Re @button make-md-toc
     UserTip(
         n=625,
         tags=['Markdown', 'Documentation'],
@@ -250,8 +250,8 @@ tips: list[UserTip] = [
 
     """,
     ),
-    # @+node:ekr.20180324073053.1: *3* Tips re Commands
-    # @+node:ekr.20180324072156.1: *4* cff command
+    #@< Tips re Commands
+    #@> cff command
     UserTip(
         n=612,
         tags=['Commands', 'Power user', 'Scripting', 'Study'],
@@ -266,7 +266,7 @@ tips: list[UserTip] = [
 
     """,
     ),
-    # @+node:ekr.20180324072433.1: *4* cffm command
+    #@ cffm command
     UserTip(
         n=611,
         tags=['Command', 'Power-User'],
@@ -281,7 +281,7 @@ tips: list[UserTip] = [
 
     """,
     ),
-    # @+node:ekr.20180324072541.1: *4* find-quick-selected command
+    #@ find-quick-selected command
     UserTip(
         n=607,
         tags=['Commands', 'Find'],
@@ -292,7 +292,7 @@ tips: list[UserTip] = [
 
     """,
     ),
-    # @+node:ekr.20180324072904.1: *4* goto-next-clone command
+    #@ goto-next-clone command
     UserTip(
         n=0,
         tags=[
@@ -308,7 +308,7 @@ tips: list[UserTip] = [
 
     """,
     ),
-    # @+node:ekr.20180527052858.1: *4* help-*
+    #@ help-*
     UserTip(
         n=0,
         tags=[
@@ -327,7 +327,7 @@ tips: list[UserTip] = [
 
     """,
     ),
-    # @+node:ekr.20180324065153.6: *4* leo-* commands
+    #@ leo-* commands
     UserTip(
         n=0,
         tags=[
@@ -344,7 +344,7 @@ tips: list[UserTip] = [
 
     """,
     ),
-    # @+node:ekr.20180324072609.1: *4* parse-body command
+    #@ parse-body command
     UserTip(
         n=606,
         tags=['Commands', 'Scripting'],
@@ -355,7 +355,7 @@ tips: list[UserTip] = [
 
     """,
     ),
-    # @+node:ekr.20180324073008.1: *4* repeat-complex-command
+    #@ repeat-complex-command
     UserTip(
         n=0,
         tags=[
@@ -374,7 +374,7 @@ tips: list[UserTip] = [
 
     """,
     ),
-    # @+node:ekr.20180324065153.3: *4* rst3 command
+    #@ rst3 command
     UserTip(
         n=621,
         tags=['Tutorial', 'Commands'],
@@ -386,7 +386,7 @@ tips: list[UserTip] = [
 
     </html>""",
     ),
-    # @+node:ekr.20180324072625.1: *4* sort-siblings command
+    #@ sort-siblings command
     UserTip(
         n=605,
         tags=[
@@ -399,8 +399,8 @@ tips: list[UserTip] = [
 
     """,
     ),
-    # @+node:ekr.20180324073210.1: *3* Tips re Scripting
-    # @+node:ekr.20180324065152.1: *4* Clearing the log window
+    #@< Tips re Scripting
+    #@> Clearing the log window
     UserTip(
         n=628,
         tags=['Scripting'],
@@ -417,7 +417,7 @@ tips: list[UserTip] = [
 
     """,
     ),
-    # @+node:ekr.20180324072452.1: *4* g.callers()
+    #@ g.callers()
     UserTip(
         n=610,
         tags=['Scripting', 'Debugging', 'Beginner'],
@@ -435,7 +435,7 @@ tips: list[UserTip] = [
 
     </html>""",
     ),
-    # @+node:ekr.20180324072527.1: *4* g.pdb
+    #@ g.pdb
     UserTip(
         n=608,
         tags=['Scripting', 'Debugging'],
@@ -451,7 +451,7 @@ tips: list[UserTip] = [
 
     </html>""",
     ),
-    # @+node:ekr.20180324072513.1: *4* g.trace
+    #@ g.trace
     UserTip(
         n=609,
         tags=['Scripting', 'Debugging', 'Beginner'],
@@ -467,7 +467,7 @@ tips: list[UserTip] = [
 
     </html>""",
     ),
-    # @+node:ekr.20180324065653.1: *4* Re @button
+    #@ Re @button
     UserTip(
         n=618,
         tags=['Scripting', 'Tutorial'],
@@ -482,7 +482,7 @@ tips: list[UserTip] = [
 
     """,
     ),
-    # @+node:ekr.20180324065152.2: *4* Section refs vs @others
+    #@ Section refs vs @others
     UserTip(
         n=626,
         tags=[],
@@ -498,7 +498,7 @@ tips: list[UserTip] = [
 
     """,
     ),
-    # @+node:ekr.20180324085629.1: *4* Use section refs to avoid "one @others per node" rule
+    #@ Use section refs to avoid "one @others per node" rule
     UserTip(
         n=0,
         tags=[
@@ -517,8 +517,8 @@ tips: list[UserTip] = [
 
     """,
     ),
-    # @+node:ekr.20180324073458.1: *3* Tips re Work flow
-    # @+node:ekr.20180324065153.4: *4* Abbreviations
+    #@< Tips re Work flow
+    #@> Abbreviations
     UserTip(
         n=620,
         tags=['PIM', 'Tutorial'],
@@ -536,7 +536,7 @@ tips: list[UserTip] = [
 
     </html>""",
     ),
-    # @+node:ekr.20180324072110.1: *4* Clones
+    #@ Clones
     UserTip(
         n=615,
         tags=[
@@ -552,7 +552,7 @@ tips: list[UserTip] = [
 
     </html>""",
     ),
-    # @+node:ekr.20180324072128.1: *4* Don't remember command names
+    #@ Don't remember command names
     UserTip(
         n=614,
         tags=['Command', 'Tutorial'],
@@ -565,7 +565,7 @@ tips: list[UserTip] = [
 
     """,
     ),
-    # @+node:ekr.20180324065145.1: *4* How to assign shortcuts to scripts
+    #@ How to assign shortcuts to scripts
     UserTip(
         n=629,
         tags=['Scripting'],
@@ -582,7 +582,7 @@ tips: list[UserTip] = [
 
     """,
     ),
-    # @+node:ekr.20180324072951.1: *4* How to find documenation
+    #@ How to find documenation
     UserTip(
         n=0,
         tags=[
@@ -595,7 +595,7 @@ tips: list[UserTip] = [
 
     """,
     ),
-    # @+node:ekr.20180324072812.1: *4* How to find settings
+    #@ How to find settings
     UserTip(
         n=0,
         tags=[
@@ -610,7 +610,7 @@ tips: list[UserTip] = [
 
     """,
     ),
-    # @+node:ekr.20180312101254.1: *4* How to find your @command nodes
+    #@ How to find your @command nodes
     UserTip(
         n=0,
         tags=[
@@ -627,7 +627,7 @@ tips: list[UserTip] = [
 
     """,
     ),
-    # @+node:ekr.20180503082333.1: *4* How to see all @command commands
+    #@ How to see all @command commands
     UserTip(
         n=0,
         tags=['Command', 'Tutorial'],
@@ -640,11 +640,11 @@ tips: list[UserTip] = [
 
     """,
     ),
-    # @-others
-    # @@beautify
-    # @-<< define tips >>
+    #@-others
+    #@@beautify
+    #@-<< define tips >>
 ]
-# @@language python
-# @@tabwidth -4
-# @@pagewidth 60
-# @-leo
+#@@language python
+#@@tabwidth -4
+#@@pagewidth 60
+#@-leo

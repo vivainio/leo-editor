@@ -1,9 +1,9 @@
-# @+leo-ver=5-thin
-# @+node:edream.110203113231.924: * @file ../plugins/redirect_to_log.py
+#@+leo-ver=cub-1-thin
+#@0 [edream.110203113231.924] @f ../plugins/redirect_to_log.py
 """Sends all output to the log pane."""
 
-# @@language python
-# @@tabwidth -4
+#@@language python
+#@@tabwidth -4
 
 from leo.core import leoGlobals as g
 
@@ -22,4 +22,4 @@ def onStart(tag, keywords):
     g.redirectStderr()  # Redirect stderr
 
 
-# @-leo
+#@-leo

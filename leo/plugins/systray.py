@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ville.20110304230157.6513: * @file ../plugins/systray.py
+#@+leo-ver=cub-1-thin
+#@0 [ville.20110304230157.6513] @f ../plugins/systray.py
 """systray"""
 
 from leo.core import leoGlobals as g
@@ -11,8 +11,8 @@ from leo.core.leoQt import QAction, StandardPixmap
 g.assertUi('qt')  # May raise g.UiTypeException, caught by the plugins manager.
 
 
-# @+others
-# @+node:ville.20110219221839.6553: ** init
+#@+others
+#@> init
 def init():
     ok = g.app.gui.guiName() == "qt"
 
@@ -30,7 +30,7 @@ def init():
     return ok
 
 
-# @+node:ville.20110219221839.6560: ** createTrayIcon
+#@ createTrayIcon
 def createTrayIcon():
     g.trayIconMenu = QtWidgets.QMenu()
 
@@ -45,21 +45,21 @@ def createTrayIcon():
     g.trayIcon.setVisible(True)
 
 
-# @+node:ville.20110219221839.6554: ** onCreate
+#@ onCreate
 def onCreate(tag, keys):
     c = keys.get('c')
     if c:
         pluginController(c)
 
 
-# @+node:ville.20110219221839.6555: ** class pluginController
+#@ class pluginController
 class pluginController:
-    # @+others
-    # @+node:ville.20110219221839.6556: *3* __init__
+    #@+others
+    #@> __init__
     def __init__(self, c):
         self.c = c
 
-    # @+node:ville.20110219221839.6557: *3* makeButtons (systray.py)
+    #@ makeButtons (systray.py)
     def makeButtons(self):
         ib_w = self.c.frame.iconBar.w
         if not ib_w:
@@ -76,20 +76,20 @@ class pluginController:
         self.c.frame.iconBar.add(qaction=act_l, command=self.clickPrev)
         self.c.frame.iconBar.add(qaction=act_r, command=self.clickNext)
 
-    # @+node:ville.20110219221839.6558: *3* clickPrev
+    #@ clickPrev
     def clickPrev(self):
         c = self.c
         c.goPrevVisitedNode()
 
-    # @+node:ville.20110219221839.6559: *3* clickNext
+    #@ clickNext
     def clickNext(self):
         c = self.c
         p = c.goNextVisitedNode()
         if p:
             c.selectPosition(p)
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

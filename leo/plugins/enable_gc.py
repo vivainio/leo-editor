@@ -1,12 +1,12 @@
-# @+leo-ver=5-thin
-# @+node:edream.110203113231.732: * @file ../plugins/enable_gc.py
+#@+leo-ver=cub-1-thin
+#@0 [edream.110203113231.732] @f ../plugins/enable_gc.py
 """Enables debugging and tracing for Python's garbage collector."""
 
 from leo.core import leoGlobals as g
 
 
-# @+others
-# @+node:ekr.20100128091412.5385: ** init
+#@+others
+#@> init
 def init():
     """Return True if the plugin has loaded successfully."""
     ok = not g.unitTesting  # Not for unit testing.
@@ -16,7 +16,7 @@ def init():
     return ok
 
 
-# @+node:edream.110203113231.733: ** onStart
+#@ onStart
 def onStart(tag, keywords):
     try:
         import gc
@@ -26,7 +26,7 @@ def onStart(tag, keywords):
         pass
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

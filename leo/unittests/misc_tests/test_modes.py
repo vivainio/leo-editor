@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20250109055422.1: * @file ../unittests/misc_tests/test_modes.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20250109055422.1] @f ../unittests/misc_tests/test_modes.py
 """Tests of files in leo/modes"""
 
 import importlib
@@ -13,19 +13,19 @@ from leo.core.leoColorizer import JEditColorizer
 from leo.core.leoTest2 import LeoUnitTest
 
 
-# @+others
-# @+node:ekr.20250109055422.2: ** class TestModes(LeoUnitTest)
+#@+others
+#@> class TestModes(LeoUnitTest)
 class TestModes(LeoUnitTest):
     """Unit tests checking files in leo/modes."""
 
-    # @+others
-    # @+node:ekr.20250109055422.3: *3* TestModes.tests...
-    # @+node:ekr.20241118022857.1: *4* TestModes.test_all_mode_files
+    #@+others
+    #@> TestModes.tests...
+    #@> TestModes.test_all_mode_files
     def test_all_mode_files(self):
         tag = 'test_all_mode_files'
 
-        # @+others  # Define test_one_mode_file
-        # @+node:ekr.20241118025715.1: *5* function: test_one_mode_file
+        #@+others # Define test_one_mode_file
+        #@> function: test_one_mode_file
         def test_one_mode_file(module: Any) -> None:
             """Call all rules in the given module, a mode file."""
             c = self.c
@@ -48,7 +48,7 @@ class TestModes(LeoUnitTest):
             for rule in rules:
                 rule(colorer, s, i)
 
-        # @-others
+        #@-others
 
         fails = []
         mode_path = g.os_path_finalize_join(g.app.loadDir, '..', 'modes')
@@ -68,12 +68,12 @@ class TestModes(LeoUnitTest):
             message = f"\n{tag}:Test failed:...\n{fails_s}\n"
             raise AssertionError(message)
 
-    # @+node:ekr.20250109055901.1: *4* TestModes.test_rules_dicts
+    #@< TestModes.test_rules_dicts
     def test_rules_dicts(self):
         # tag = 'test_rules_dicts'
 
-        # @+others  # Define test_rules_dict
-        # @+node:ekr.20250109060045.1: *5* function: test_rules_dict
+        #@+others # Define test_rules_dict
+        #@> function: test_rules_dict
         def test_rules_dict(language: str, path: str) -> None:
             """Call all rules in the given module, a mode file."""
             c = self.c
@@ -91,14 +91,14 @@ class TestModes(LeoUnitTest):
             for key in word1_chars:
                 assert key in d, f"Missing key in {language}.rulesDict1: {key!r}"
 
-        # @-others
+        #@-others
 
         mode_path = g.os_path_finalize_join(g.app.loadDir, '..', 'modes')
         for language in ('python', 'rust'):
             mode_path = os.path.normpath(f"{mode_path}{os.sep}{language}.py")
             test_rules_dict(language, mode_path)
 
-    # @+node:ekr.20250114101209.1: *4* TestModes.test_rust_character_patterns
+    #@< TestModes.test_rust_character_patterns
     def test_rust_character_patterns(self):
         from leo.modes.rust import rust_char
 
@@ -170,7 +170,7 @@ class TestModes(LeoUnitTest):
             assert kind == 'literal4', kind
             assert seq == "'", repr(seq)
 
-    # @+node:ekr.20250123084454.1: *4* TestModes.test_c_label
+    #@ TestModes.test_c_label
     def test_c_label(self):
         from leo.modes.c import c_keyword
 
@@ -202,8 +202,8 @@ class TestModes(LeoUnitTest):
             assert expected_kind == actual_kind, (expected_kind, actual_kind, s)
             assert expected_seq == actual_seq, (expected_seq, actual_seq, s)
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

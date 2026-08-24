@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:edream.110203113231.724: * @file ../plugins/mod_autosave.py
+#@+leo-ver=cub-1-thin
+#@0 [edream.110203113231.724] @f ../plugins/mod_autosave.py
 """Autosaves the Leo outline every so often to a .bak file.
 
 The time between saves is given by the setting, with default as shown::
@@ -28,8 +28,8 @@ g.assertUi('qt')  # May raise g.UiTypeException, caught by the plugins manager.
 gDict: dict[Cmdr, dict] = {}
 
 
-# @+others
-# @+node:ekr.20060108123141.2: ** init (mod_autosave.py)
+#@+others
+#@> init (mod_autosave.py)
 def init():
     """Return True if the plugin has loaded successfully."""
     if g.unitTesting:
@@ -40,7 +40,7 @@ def init():
     return True
 
 
-# @+node:edream.110203113231.726: ** onCreate (mod_autosave.py)
+#@ onCreate (mod_autosave.py)
 def onCreate(tag, keywords):
     """Handle the per-Leo-file settings."""
     # global gDict
@@ -69,7 +69,7 @@ def onCreate(tag, keywords):
     g.registerHandler('idle', onIdle)
 
 
-# @+node:ekr.20100904062957.10654: ** onIdle (mod_autosave.py)
+#@ onIdle (mod_autosave.py)
 def onIdle(tag, keywords):
     """
     Save the outline to a .bak file every "interval" seconds if it has changed.
@@ -95,7 +95,7 @@ def onIdle(tag, keywords):
     d['last'] = time.time()
 
 
-# @+node:ekr.20230327042532.1: ** save (mode_autosave.py)
+#@ save (mode_autosave.py)
 def save(c: Cmdr, verbose: bool) -> None:
     """Save c's outlines to a .bak file without changing any part of the UI."""
     fc = c.fileCommands
@@ -120,7 +120,7 @@ def save(c: Cmdr, verbose: bool) -> None:
         g.app.log = old_log
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

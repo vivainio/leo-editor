@@ -1,7 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:edream.110203113231.876: * @file ../plugins/read_only_nodes.py
-# @+<< docstring >>
-# @+node:ekr.20050912052854: ** << docstring >>
+#@+leo-ver=cub-1-thin
+#@0 [edream.110203113231.876] @f ../plugins/read_only_nodes.py
+#@+<< docstring >>
+#@> << docstring >>
 """Creates and updates @read-only nodes.
 
 Here's my first attempt at customizing leo. I wanted to have the ability to
@@ -47,7 +47,7 @@ For more details, see the doc string for the class FTPurl.
 
 Davide Salomoni
 """
-# @-<< docstring >>
+#@-<< docstring >>
 
 # Contributed by Davide Salomoni <dsalomoni@yahoo.com>
 
@@ -55,8 +55,8 @@ Davide Salomoni
 
 # pylint: disable=not-callable,raise-missing-from
 
-# @+<< imports >>
-# @+node:ekr.20050311091110.1: ** << imports >>
+#@+<< imports >>
+#@ << imports >>
 from formatter import AbstractFormatter, DumbWriter
 import ftplib
 import html.parser as HTMLParser
@@ -70,13 +70,13 @@ from leo.core import leoGlobals as g
 
 # Abbreviation.
 StringIO = io.StringIO
-# @-<< imports >>
+#@-<< imports >>
 insertOnTime = None
 insertOffTime = None
 
 
-# @+others
-# @+node:ekr.20050311092840: ** init
+#@+others
+#@ init
 def init():
     """Return True if the plugin has loaded successfully."""
     ok = not g.unitTesting  # Not Ok for unit testing.
@@ -91,7 +91,7 @@ def init():
     return ok
 
 
-# @+node:edream.110203113231.879: ** class FTPurl
+#@ class FTPurl
 class FTPurl:
     """An FTP wrapper class to store/retrieve files using an FTP URL.
 
@@ -111,8 +111,8 @@ class FTPurl:
     This class raises an OSError exception if something goes wrong.
     """
 
-    # @+others
-    # @+node:edream.110203113231.880: *3* __init__
+    #@+others
+    #@> __init__
     def __init__(self, ftpURL, mode=''):
         parse = urlparse(ftpURL)  # type:ignore
         if parse[0] != 'ftp':
@@ -144,8 +144,8 @@ class FTPurl:
         self.isConnectionOpen = 1
         self.currentLine = 0
 
-    # @+node:edream.110203113231.881: *3* Getters
-    # @+node:edream.110203113231.882: *4* read
+    #@ Getters
+    #@> read
     def read(self):
         """Read the filename specified in the constructor and return it as a string.
         If the constructor specifies no filename, or if the URL ends with '/',
@@ -170,7 +170,7 @@ class FTPurl:
             exception, msg, tb = sys.exc_info()
             raise OSError(msg)
 
-    # @+node:edream.110203113231.883: *4* readline
+    #@ readline
     def readline(self):
         """Read one entire line from the remote file."""
         self.lst: list
@@ -183,8 +183,8 @@ class FTPurl:
             return s
         return ''
 
-    # @+node:edream.110203113231.884: *3* Setters
-    # @+node:edream.110203113231.885: *4* write
+    #@< Setters
+    #@> write
     def write(self, s):
         """write(s) stores the string s to the filename specified in the
         constructor."""
@@ -203,16 +203,16 @@ class FTPurl:
             exception, msg, tb = sys.exc_info()
             raise OSError(msg)
 
-    # @+node:edream.110203113231.886: *3* Utilities
-    # @+node:edream.110203113231.887: *4* seek
+    #@< Utilities
+    #@> seek
     def seek(self, offset=0):
         self.currentLine = 0  # we don't support fancy seeking via FTP
 
-    # @+node:edream.110203113231.888: *4* flush
+    #@ flush
     def flush(self):
         pass  # no fancy stuff here.
 
-    # @+node:edream.110203113231.889: *4* dir
+    #@ dir
     def dir(self, path=None):
         """Issue a LIST command passing the specified argument and return output as a string."""
         s: list = []
@@ -227,7 +227,7 @@ class FTPurl:
             exception, msg, tb = sys.exc_info()
             raise OSError(msg)
 
-    # @+node:edream.110203113231.890: *4* exists
+    #@ exists
     def exists(self, path=None):
         """
         Return True if the specified path exists.
@@ -239,14 +239,14 @@ class FTPurl:
         # return s.lower().find('no such file') == -1
         return 'no such file' not in s.lower()
 
-    # @+node:edream.110203113231.891: *4* checkParams
+    #@ checkParams
     def checkParams(self):
         if self.mode not in ('', 'b'):
             raise OSError('invalid mode: %s' % self.mode)
         if not self.isConnectionOpen:
             raise OSError('ftp connection closed')
 
-    # @+node:edream.110203113231.892: *3* close
+    #@< close
     def close(self):
         """Close an existing FTPurl connection."""
         try:
@@ -256,10 +256,10 @@ class FTPurl:
         del self.ftp
         self.isConnectionOpen = 0
 
-    # @-others
+    #@-others
 
 
-# @+node:edream.110203113231.893: ** enable/disable_body
+#@< enable/disable_body
 # Alas, these do not seem to work on XP:
 # disabling the body text _permanently_ stops the cursor from blinking.
 
@@ -289,7 +289,7 @@ def disable_body(body):
             g.es_exception()
 
 
-# @+node:edream.110203113231.894: ** insert_read_only_node (FTP version)
+#@ insert_read_only_node (FTP version)
 # Sets p's body text from the file with the given name.
 # Returns True if the body text changed.
 def insert_read_only_node(c, p, name):
@@ -319,8 +319,8 @@ def insert_read_only_node(c, p, name):
 
     ext = os.path.splitext(parse[2])[1]
     if ext.lower() in ['.htm', '.html']:
-        # @+<< convert HTML to text >>
-        # @+node:edream.110203113231.895: *3* << convert HTML to text >>
+        #@+<< convert HTML to text >>
+        #@> << convert HTML to text >>
         fh = StringIO()
         fmt = AbstractFormatter(DumbWriter(fh))
         # the parser stores parsed data into fh (file-like handle)
@@ -342,7 +342,7 @@ def insert_read_only_node(c, p, name):
             for i in range(numlinks):
                 hyperlist.append("\n[%d]: %s" % (i + 1, hyperlinks[i]))  # 3/26/03: was i.
             new = new + ''.join(hyperlist)
-        # @-<< convert HTML to text >>
+        #@-<< convert HTML to text >>
     previous = p.b
     p.b = new
     changed = g.toUnicode(new) != g.toUnicode(previous)
@@ -351,7 +351,7 @@ def insert_read_only_node(c, p, name):
     return changed
 
 
-# @+node:edream.110203113231.896: ** on_open
+#@< on_open
 #  scan the outline and process @read-only nodes.
 def on_open(tag, keywords):
     c = keywords.get("c")
@@ -374,7 +374,7 @@ def on_open(tag, keywords):
     c.redraw()
 
 
-# @+node:edream.110203113231.897: ** on_bodykey1
+#@ on_bodykey1
 # override the body key handler if we are in an @read-only node.
 
 
@@ -394,7 +394,7 @@ def on_bodykey1(tag, keywords):
     return None
 
 
-# @+node:edream.110203113231.898: ** on_headkey2
+#@ on_headkey2
 # update the body text when we press enter
 
 
@@ -412,7 +412,7 @@ def on_headkey2(tag, keywords):
             c.clearChanged()
 
 
-# @+node:edream.110203113231.899: ** on_select1
+#@ on_select1
 def on_select1(tag, keywords):
     # Doesn't work: the cursor doesn't start blinking.
     # Enable the body text so select will work properly.
@@ -420,7 +420,7 @@ def on_select1(tag, keywords):
     enable_body(c.frame.body)
 
 
-# @+node:edream.110203113231.900: ** on_select2
+#@ on_select2
 def on_select2(tag, keywords):
     c = keywords.get("c")
 
@@ -430,7 +430,7 @@ def on_select2(tag, keywords):
         enable_body(c.frame.body)
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

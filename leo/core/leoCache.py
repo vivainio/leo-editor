@@ -1,9 +1,9 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20100208065621.5894: * @file leoCache.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20100208065621.5894] @f leoCache.py
 """A module encapsulating Leo's file caching"""
 
-# @+<< leoCache imports & annotations >>
-# @+node:ekr.20100208223942.10436: ** << leoCache imports & annotations >>
+#@+<< leoCache imports & annotations >>
+#@> << leoCache imports & annotations >>
 from __future__ import annotations
 from collections.abc import Generator
 import fnmatch
@@ -20,7 +20,7 @@ if TYPE_CHECKING:  # pragma: no cover
     Args = Any
     Value = Any
 
-# @-<< leoCache imports & annotations >>
+#@-<< leoCache imports & annotations >>
 
 # pylint: disable=raise-missing-from
 
@@ -35,8 +35,8 @@ normcase = g.os_path_normcase
 split = g.os_path_split
 
 
-# @+others
-# @+node:ekr.20180627052459.1: ** class CommanderWrapper (c.db)
+#@+others
+#@ class CommanderWrapper (c.db)
 class CommanderWrapper:
     """
     A class that creates distinct keys for all commanders, allowing
@@ -73,7 +73,7 @@ class CommanderWrapper:
         self.db[f"{self.c.mFileName}:::{key}"] = value
 
 
-# @+node:ekr.20180627041556.1: ** class GlobalCacher (g.app.db)
+#@ class GlobalCacher (g.app.db)
 class GlobalCacher:
     """
     A class creating a singleton global database, g.app.db.
@@ -101,8 +101,8 @@ class GlobalCacher:
             # Use a plain dict as a dummy.
             self.db = {}
 
-    # @+others
-    # @+node:ekr.20180627045750.1: *3* g_cacher.clear
+    #@+others
+    #@> g_cacher.clear
     def clear(self) -> None:
         """Clear the global cache."""
         # Careful: self.db may be a Python dict.
@@ -117,7 +117,7 @@ class GlobalCacher:
             g.es_exception()
             self.db = {}
 
-    # @+node:ekr.20180627042948.1: *3* g_cacher.commit_and_close()
+    #@ g_cacher.commit_and_close()
     def commit_and_close(self) -> None:
         # Careful: self.db may be a dict.
         if hasattr(self.db, 'conn'):
@@ -127,17 +127,17 @@ class GlobalCacher:
             self.db.conn.commit()
             self.db.conn.close()
 
-    # @+node:ekr.20180627045953.1: *3* g_cacher.dump
+    #@ g_cacher.dump
     def dump(self, tag: str = '') -> None:
         """Dump the indicated cache if --trace-cache is in effect."""
         tag0 = 'Global Cache'
         tag2 = f"{tag0}: {tag}" if tag else tag0
         dump_cache(self.db, tag2)  # Careful: g.app.db may not be set yet.
 
-    # @-others
+    #@-others
 
 
-# @+node:vitalije.20170716201700.1: ** class SqlitePickleShare
+#@< class SqlitePickleShare
 _sentinel = object()
 
 
@@ -149,13 +149,13 @@ class SqlitePickleShare:
     Python dict instead.
     """
 
-    # @+others
-    # @+node:vitalije.20170716201700.2: *3*  Birth & special methods
+    #@+others
+    #@>  Birth & special methods
     def init_dbtables(self, conn: sqlite3.Connection) -> None:
         sql = 'create table if not exists cachevalues(key text primary key, data blob);'
         conn.execute(sql)
 
-    # @+node:vitalije.20170716201700.3: *4*  SqlitePickleShare.__init__
+    #@>  SqlitePickleShare.__init__
     def __init__(self, root: str) -> None:
         """
         Init the SqlitePickleShare class.
@@ -192,11 +192,11 @@ class SqlitePickleShare:
         self.dumper = dumpz
         self.reset_protocol_in_values()
 
-    # @+node:vitalije.20170716201700.4: *4* SqlitePickleShare.__contains__
+    #@ SqlitePickleShare.__contains__
     def __contains__(self, key: str) -> bool:
         return self.has_key(key)  # NOQA
 
-    # @+node:vitalije.20170716201700.5: *4* SqlitePickleShare.__delitem__
+    #@ SqlitePickleShare.__delitem__
     def __delitem__(self, key: str) -> None:
         """del db["key"]"""
         try:
@@ -208,7 +208,7 @@ class SqlitePickleShare:
         except sqlite3.OperationalError:
             pass
 
-    # @+node:vitalije.20170716201700.6: *4* SqlitePickleShare.__getitem__
+    #@ SqlitePickleShare.__getitem__
     def __getitem__(self, key: str) -> Any:
         """db['key'] reading"""
         try:
@@ -226,12 +226,12 @@ class SqlitePickleShare:
             raise KeyError(key)
         return obj
 
-    # @+node:vitalije.20170716201700.7: *4* SqlitePickleShare.__iter__
+    #@ SqlitePickleShare.__iter__
     def __iter__(self) -> Generator[str, None, None]:
         for k in list(self.keys()):
             yield k
 
-    # @+node:vitalije.20170716201700.8: *4* SqlitePickleShare.__repr__
+    #@ SqlitePickleShare.__repr__
     def __repr__(self) -> str:
         result = [
             '\n',
@@ -242,7 +242,7 @@ class SqlitePickleShare:
             result.append(f"{key} {self.get(key)}\n")
         return ''.join(result)
 
-    # @+node:vitalije.20170716201700.9: *4* SqlitePickleShare.__setitem__
+    #@ SqlitePickleShare.__setitem__
     def __setitem__(self, key: str, value: Value) -> None:
         """db['key'] = 5"""
         try:
@@ -251,11 +251,11 @@ class SqlitePickleShare:
         except sqlite3.OperationalError:
             g.es_exception()
 
-    # @+node:vitalije.20170716201700.10: *3* _makedirs
+    #@< _makedirs
     def _makedirs(self, fn: str, mode: int = 0o777) -> None:
         os.makedirs(fn, mode)
 
-    # @+node:vitalije.20170716201700.12: *3* _walkfiles & helpers
+    #@ _walkfiles & helpers
     def _walkfiles(self, s: str, pattern: str | None = None) -> None:
         """D.walkfiles() -> iterator over files in D, recursively.
 
@@ -265,7 +265,7 @@ class SqlitePickleShare:
         extension.
         """
 
-    # @+node:vitalije.20170716201700.13: *4* _listdir
+    #@> _listdir
     def _listdir(self, s: str, pattern: str = '') -> list[str]:
         """D.listdir() -> List of items in this directory.
 
@@ -282,7 +282,7 @@ class SqlitePickleShare:
             names = fnmatch.filter(names, pattern)
         return [join(s, child) for child in names]
 
-    # @+node:vitalije.20170716201700.14: *4* _fn_match
+    #@ _fn_match
     def _fn_match(self, s: str, pattern: str) -> bool:
         """Return True if self.name matches the given pattern.
 
@@ -290,7 +290,7 @@ class SqlitePickleShare:
         """
         return fnmatch.fnmatch(basename(s), pattern)
 
-    # @+node:vitalije.20170716201700.15: *3* clear (SqlitePickleShare)
+    #@< clear (SqlitePickleShare)
     def clear(self) -> None:
         """
         Deletes all files in the fcache subdirectory.
@@ -300,7 +300,7 @@ class SqlitePickleShare:
         """
         self.conn.execute('delete from cachevalues;')
 
-    # @+node:vitalije.20170716201700.16: *3* get  (SqlitePickleShare)
+    #@ get  (SqlitePickleShare)
     def get(self, key: str, default: Value | None = None) -> Value:
         if not self.has_key(key):  # noqa
             return default
@@ -310,7 +310,7 @@ class SqlitePickleShare:
         except Exception:  # #1444: Was KeyError.
             return default
 
-    # @+node:vitalije.20170716201700.17: *3* has_key (SqlitePickleShare)
+    #@ has_key (SqlitePickleShare)
     def has_key(self, key: str) -> bool:
         sql = 'select 1 from cachevalues where key=?;'
         try:
@@ -320,13 +320,13 @@ class SqlitePickleShare:
             pass
         return False
 
-    # @+node:vitalije.20170716201700.18: *3* items  (SqlitePickleShare)
+    #@ items  (SqlitePickleShare)
     def items(self) -> Generator[tuple[str, Any], None, None]:
         sql = 'select key,data from cachevalues;'
         for key, data in self.conn.execute(sql):
             yield key, data
 
-    # @+node:vitalije.20170716201700.19: *3* keys (SqlitePickleShare)
+    #@ keys (SqlitePickleShare)
     # Called by clear, and during unit testing.
 
     def keys(self, globpat: str = '') -> Generator[str, None, None]:
@@ -341,14 +341,14 @@ class SqlitePickleShare:
         for key in self.conn.execute(sql, args):
             yield key
 
-    # @+node:vitalije.20170818091008.1: *3* reset_protocol_in_values (SqlitePickleShare)
+    #@ reset_protocol_in_values (SqlitePickleShare)
     def reset_protocol_in_values(self) -> None:
         PROTOCOLKEY = '__cache_pickle_protocol__'
         if self.get(PROTOCOLKEY, 3) == 2:
             return
 
-        # @+others
-        # @+node:vitalije.20170818115617.1: *4* do_block
+        #@+others
+        #@> do_block
         def do_block(cur: sqlite3.Cursor) -> Value:
             if itms := tuple((self.dumper(self.loader(v)), k) for k, v in cur):
                 self.conn.executemany('update cachevalues set data=? where key=?', itms)
@@ -356,7 +356,7 @@ class SqlitePickleShare:
                 return itms[-1][1]
             return None
 
-        # @-others
+        #@-others
         self.conn.isolation_level = 'DEFERRED'
 
         sql0 = '''select key, data from cachevalues order by key limit 50'''
@@ -371,14 +371,14 @@ class SqlitePickleShare:
 
         self.conn.isolation_level = None
 
-    # @+node:vitalije.20170716201700.23: *3* uncache (SqlitePickleShare)
+    #@< uncache (SqlitePickleShare)
     def uncache(self, *items: Args) -> None:
         """not used in SqlitePickleShare"""
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20180627050237.1: ** function: dump_cache
+#@< function: dump_cache
 def dump_cache(db: dict | SqlitePickleShare, tag: str) -> None:
     """Dump the given cache."""
     print(f'\n===== {tag} =====\n')
@@ -417,8 +417,8 @@ def dump_list(heading: str, aList: list) -> None:
         print(f"{key:>30}: {val}")
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @@pagewidth 70
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@@pagewidth 70
+#@-leo

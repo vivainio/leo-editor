@@ -1,7 +1,16 @@
-# @+leo-ver=5-thin
-# @+node:ktenney.20041211072654.1: * @file ../plugins/at_view.py
-# @+<< docstring >>
-# @+node:ekr.20150411161126.1: ** << docstring >> (at_view.py)
+#@+leo-ver=cub-1-thin
+#@0 [ktenney.20041211072654.1] @f ../plugins/at_view.py
+#@+<< docstring >>
+#@-<< docstring >>
+
+from leo.core import leoGlobals as g
+
+path = g.import_module('path')
+win32clipboard = g.import_module('win32clipboard')
+
+
+#@+others
+#@> << docstring >> (at_view.py)
 r"""Adds support for \@clip, \@view and \@strip nodes.
 
 - Selecting a headline containing \@clip appends the contents of the clipboard to
@@ -16,16 +25,7 @@ r"""Adds support for \@clip, \@view and \@strip nodes.
 
 This plugin also accumulates the effect of all \@path nodes.
 """
-# @-<< docstring >>
-
-from leo.core import leoGlobals as g
-
-path = g.import_module('path')
-win32clipboard = g.import_module('win32clipboard')
-
-
-# @+others
-# @+node:ekr.20111104210837.9693: ** init
+#@ init
 def init():
     """Return True if the plugin has loaded successfully."""
     ok = path and win32clipboard  # Ok for unit testing.
@@ -37,7 +37,7 @@ def init():
     return ok
 
 
-# @+node:ktenney.20041211072654.6: ** onCreate (at_view.py)
+#@ onCreate (at_view.py)
 def onCreate(tag, keywords):
     c = keywords.get("c")
     if not c:
@@ -50,16 +50,16 @@ def onCreate(tag, keywords):
     g.plugin_signon(__name__)
 
 
-# @+node:ktenney.20041211072654.7: ** class View
+#@ class View
 class View:
     """A class to support @view, @strip and @clip nodes."""
 
-    # @+others
-    # @+node:ktenney.20041211072654.8: *3* __init__
+    #@+others
+    #@> __init__
     def __init__(self, c):
         self.c = c
 
-    # @+node:ktenney.20041211072654.9: *3* icondclick2 (at_view.py)
+    #@ icondclick2 (at_view.py)
     def icondclick2(self, tag, keywords):
         self.current = self.c.p
         hs = self.current.h
@@ -70,7 +70,7 @@ class View:
         if hs.startswith('@strip'):
             self.strip()
 
-    # @+node:ktenney.20041211203715: *3* idle
+    #@ idle
     def idle(self, tag, keywords):
         try:
             self.current = self.c.p
@@ -82,7 +82,7 @@ class View:
         if s.startswith("@clip"):
             self.clip()
 
-    # @+node:ktenney.20041211072654.10: *3* view
+    #@ view
     def view(self):
         """
         Place the contents of a file in the body pane
@@ -102,7 +102,7 @@ class View:
         else:
             g.warning('path does not exist: %s' % (str(currentPath)))
 
-    # @+node:ktenney.20041212102137: *3* clip
+    #@ clip
     def clip(self):
         """Watch the clipboard, and copy new items to the body."""
 
@@ -127,7 +127,7 @@ class View:
             body.insert(0, clipboard)
             c.setBodyText(self.current, divider.join(body))
 
-    # @+node:ktenney.20041211072654.15: *3* strip
+    #@ strip
     def strip(self):
         """Display a file with all sentinel lines removed"""
 
@@ -154,7 +154,7 @@ class View:
         else:
             g.warning('path does not exist: %s' % (str(currentPath)))
 
-    # @+node:ktenney.20041211072654.11: *3* getCurrentPath
+    #@ getCurrentPath
     def getCurrentPath(self):
         """traverse the current tree and build a path
         using all @path statements found
@@ -176,7 +176,7 @@ class View:
 
         return currentPath.normpath()
 
-    # @+node:ktenney.20041211072654.12: *3* getPathFragment
+    #@ getPathFragment
     def getPathFragment(self, p):
         """
         Return the path fragment if this node is a @path or @view or any @file node.
@@ -188,7 +188,7 @@ class View:
                 return fragment
         return ''
 
-    # @+node:ktenney.20041211072654.13: *3* processFile
+    #@ processFile
     def processFile(self, path, node):
         """parameters are a path object and a node.
         the path is a file, place it's contents into the node
@@ -198,12 +198,12 @@ class View:
 
         self.c.setBodyText(node, ''.join(path.lines()))
 
-    # @+node:ktenney.20041211072654.14: *3* processDirectory
+    #@ processDirectory
     def processDirectory(self, path, node):
         """
         create child nodes for each member of the directory
 
-        @path is a path object for a directory
+    #@@path is a path object for a directory
         @node is the node to work with
         """
         # delete all nodes before creating, to avoid duplicates
@@ -218,11 +218,11 @@ class View:
             child = node.insertAsLastChild()
             child.h = '@view %s' % file.name
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @@pagewidth 80
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@@pagewidth 80
+#@-leo

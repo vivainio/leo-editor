@@ -1,7 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20220126054240.1: * @file ../scripts/remove_duplicate_pictures.py
-# @+<< docstring (remove_duplicate_pictures.py) >>
-# @+node:ekr.20220126054240.2: ** << docstring (remove_duplicate_pictures.py) >>
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20220126054240.1] @f ../scripts/remove_duplicate_pictures.py
+#@+<< docstring (remove_duplicate_pictures.py) >>
+#@> << docstring (remove_duplicate_pictures.py) >>
 """
 Remove duplicate files.
 
@@ -44,9 +44,9 @@ The algorithm used is a faster version of the code here:
 https://medium.com/@somilshah112/how-to-find-duplicate-or-similar-images-quickly-with-python-2d636af9452f
 """
 
-# @-<< docstring (remove_duplicate_pictures.py) >>
-# @+<< imports (remove_duplicate_pictures.py) >>
-# @+node:ekr.20220126054240.3: ** << imports (remove_duplicate_pictures.py) >>
+#@-<< docstring (remove_duplicate_pictures.py) >>
+#@+<< imports (remove_duplicate_pictures.py) >>
+#@ << imports (remove_duplicate_pictures.py) >>
 import argparse
 from collections import defaultdict
 import os
@@ -82,15 +82,15 @@ try:
 except Exception:
     print('remove_duplicate_pictures.py: Qt required')
     print('pip install pyqt6')
-# @-<< imports (remove_duplicate_pictures.py) >>
+#@-<< imports (remove_duplicate_pictures.py) >>
 
 # Globals to retain references to objects.
 gApp = None
 gWindow = None
 
 
-# @+others
-# @+node:ekr.20220126054240.5: ** get_args & checkers
+#@+others
+#@ get_args & checkers
 def get_args():
     # Automatically implements the --help option.
     description = "usage: python -m remove_duplicate_pictures [options]"
@@ -128,13 +128,13 @@ def get_args():
     }
 
 
-# @+node:ekr.20220126054240.7: *3* get_extensions
+#@> get_extensions
 def get_extensions(aList):
     # Ensure extensions start with '.'
     return [z if z.startswith('.') else f".{z}" for z in aList or []]
 
 
-# @+node:ekr.20220126054240.9: *3* get_int
+#@ get_int
 def get_int(kind, n):
     if n is None:
         return None
@@ -145,7 +145,7 @@ def get_int(kind, n):
         return None
 
 
-# @+node:ekr.20220126054240.8: *3* get_path
+#@ get_path
 def get_path(path):
     if path and not os.path.exists(path):
         print(f"--path: not found: {path!r}")
@@ -153,7 +153,7 @@ def get_path(path):
     return path
 
 
-# @+node:ekr.20220126054240.12: ** main
+#@< main
 def main():
     global gApp
     gApp = QtWidgets.QApplication(sys.argv)
@@ -163,7 +163,7 @@ def main():
         sys.exit(gApp.exec())
 
 
-# @+node:ekr.20220126054240.13: ** class RemoveDuplicates
+#@ class RemoveDuplicates
 class RemoveDuplicates:
     dup_list: list[str] = []
     filename_dict: dict[str, Any] = {}  # Keys are filenames, values are hashes.
@@ -173,8 +173,8 @@ class RemoveDuplicates:
     hash_size = 8
     window_height = 900
 
-    # @+others
-    # @+node:ekr.20220126063935.1: *3* Dups.compute_dicts
+    #@+others
+    #@> Dups.compute_dicts
     def compute_dicts(self, filenames):
         for i, filename in enumerate(filenames):
             try:
@@ -187,7 +187,7 @@ class RemoveDuplicates:
                 if filename in filenames:
                     filenames.remove(filename)
 
-    # @+node:ekr.20220126064207.1: *3* Dups.create_frame
+    #@ Dups.create_frame
     def create_frame(self, filename, filenames, window):
         QLabel = QtWidgets.QLabel
         # Create the frame.
@@ -241,7 +241,7 @@ class RemoveDuplicates:
             g.es_exception()
             return None
 
-    # @+node:ekr.20220126062304.1: *3* Dups.create_window
+    #@ Dups.create_window
     def create_window(self, filenames):
         # Create the widget.
         global gWindow
@@ -287,7 +287,7 @@ class RemoveDuplicates:
         # Show the window.
         window.show()
 
-    # @+node:ekr.20220126064335.1: *3* Dups.delete_file
+    #@ Dups.delete_file
     send_to_trash_warning_given = False
 
     def delete_file(self, filename):
@@ -309,7 +309,7 @@ class RemoveDuplicates:
         else:
             print('Not found', filename)
 
-    # @+node:ekr.20220126064032.1: *3* Dups.find_duplicates
+    #@ Dups.find_duplicates
     def find_duplicates(self):
         """Find duplicates."""
         duplicates = []
@@ -319,7 +319,7 @@ class RemoveDuplicates:
                 duplicates.append(aList)
         return duplicates
 
-    # @+node:ekr.20220126060911.1: *3* Dups.get_files
+    #@ Dups.get_files
     def get_files(self, path):
         """Return all files in path, including all subdirectories."""
         return [
@@ -328,7 +328,7 @@ class RemoveDuplicates:
             if z.is_file() and os.path.splitext(str(z))[1].lower() in self.extensions
         ]
 
-    # @+node:ekr.20220126121116.1: *3* Dups.next_window
+    #@ Dups.next_window
     def next_window(self):
         """Show the next set of duplicates in a new window."""
         if self.duplicates:
@@ -337,7 +337,7 @@ class RemoveDuplicates:
         else:
             self.quit()
 
-    # @+node:ekr.20220126120555.1: *3* Dups.quit
+    #@ Dups.quit
     def quit(self):
         global gApp, gWindow
         if gApp:  # Running externally.
@@ -348,7 +348,7 @@ class RemoveDuplicates:
             gWindow = None
         print('picture_viewer: done')
 
-    # @+node:ekr.20220126060646.1: *3* Dups.run
+    #@ Dups.run
     def run(
         self,
         extensions=None,  # List of file extensions.
@@ -390,11 +390,11 @@ class RemoveDuplicates:
             self.next_window()
         return ok
 
-    # @-others
+    #@-others
 
 
-# @-others
+#@-others
 
 if __name__ == '__main__':
     main()
-# @-leo
+#@-leo

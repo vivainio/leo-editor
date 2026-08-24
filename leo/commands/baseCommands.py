@@ -1,9 +1,9 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20150514035943.1: * @file ../commands/baseCommands.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20150514035943.1] @f ../commands/baseCommands.py
 """The base class for all of Leo's user commands."""
 
-# @+<< baseCommands imports & abbreviations >>
-# @+node:ekr.20220828071357.1: ** << baseCommands imports & abbreviations >>
+#@+<< baseCommands imports & abbreviations >>
+#@> << baseCommands imports & abbreviations >>
 from __future__ import annotations
 from typing import Any, TYPE_CHECKING
 from leo.core import leoGlobals as g
@@ -13,16 +13,16 @@ if TYPE_CHECKING:  # pragma: no cover
     from leo.core.leoGui import LeoKeyEvent
     from leo.plugins.qt_text import QTextMixin
 
-# @-<< baseCommands imports & abbreviations >>
+#@-<< baseCommands imports & abbreviations >>
 
 
-# @+others
-# @+node:ekr.20160514095639.1: ** class BaseEditCommandsClass
+#@+others
+#@ class BaseEditCommandsClass
 class BaseEditCommandsClass:
     """The base class for all edit command classes"""
 
-    # @+others
-    # @+node:ekr.20150516040334.1: *3* BaseEdit.__init__
+    #@+others
+    #@> BaseEdit.__init__
     def __init__(self, c: Cmdr) -> None:
         """
         Ctor for the BaseEditCommandsClass class.
@@ -33,7 +33,7 @@ class BaseEditCommandsClass:
         self.c = c
         self.undoData: Any
 
-    # @+node:ekr.20150514043714.4: *3* BaseEdit.beginCommand
+    #@ BaseEdit.beginCommand
     def beginCommand(self, w: QTextMixin, undoType: str = 'Typing') -> QTextMixin:
         """Do the common processing at the start of each command."""
         c, p, u = self.c, self.c.p, self.c.undoer
@@ -52,7 +52,7 @@ class BaseEditCommandsClass:
             self.undoData = None  # pragma: no cover
         return w
 
-    # @+node:ekr.20150514043714.6: *3* BaseEdit.endCommand
+    #@ BaseEdit.endCommand
     def endCommand(
         self,
         label: str | None = None,
@@ -91,7 +91,7 @@ class BaseEditCommandsClass:
             else:
                 k.resetLabel()
 
-    # @+node:ekr.20150514043714.11: *3* BaseEdit._checkSelection
+    #@ BaseEdit._checkSelection
     def _checkSelection(
         self, event: LeoKeyEvent | None = None, warning: str = 'no selection'
     ) -> bool:
@@ -103,8 +103,8 @@ class BaseEditCommandsClass:
             g.es(warning, color='red')
         return val
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

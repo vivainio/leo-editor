@@ -1,7 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:edream.110203113231.669: * @file ../plugins/import_cisco_config.py
-# @+<< docstring >>
-# @+node:ekr.20050912180321: ** << docstring >>
+#@+leo-ver=cub-1-thin
+#@0 [edream.110203113231.669] @f ../plugins/import_cisco_config.py
+#@+<< docstring >>
+#@> << docstring >>
 """Allows the user to import Cisco configuration files.
 
 Adds the "File:Import:Import Cisco Configuration" menu item. The plugin will:
@@ -27,12 +27,12 @@ All created sections are alphabetically ordered.
 
 """
 
-# @-<< docstring >>
+#@-<< docstring >>
 from leo.core import leoGlobals as g
 
 
-# @+others
-# @+node:ekr.20050311102853.1: ** init
+#@+others
+#@ init
 def init():
     """Return True if the plugin has loaded successfully."""
     # This plugin is gui-independent.
@@ -41,7 +41,7 @@ def init():
     return True
 
 
-# @+node:edream.110203113231.671: ** create_import_cisco_menu
+#@ create_import_cisco_menu
 def create_import_cisco_menu(tag, keywords):
     c = keywords.get('c')
     if not c or not c.exists:
@@ -59,13 +59,13 @@ def create_import_cisco_menu(tag, keywords):
     c.frame.menu.createMenuEntries(importMenu, table)
 
 
-# @+node:edream.110203113231.672: ** importCiscoConfig
+#@ importCiscoConfig
 def importCiscoConfig(c):
     if not c or not c.exists:
         return
     current = c.p
-    # @+<< open file >>
-    # @+node:edream.110203113231.673: *3* << open file >>
+    #@+<< open file >>
+    #@> << open file >>
     name = g.app.gui.runOpenFileDialog(
         c,
         title="Import Cisco Configuration File",
@@ -88,7 +88,7 @@ def importCiscoConfig(c):
     except OSError as msg:
         g.es("error reading %s: %s" % (name, msg))
         return
-    # @-<< open file >>
+    #@-<< open file >>
 
     # define which additional child nodes will be created
     # these keywords must NOT be followed by indented blocks
@@ -115,60 +115,24 @@ def importCiscoConfig(c):
     while i < (lines - 1):
         for customLine in customBlocks:
             if linelist[i].startswith(customLine) or linelist[i].startswith('no %s' % customLine):
-                # @+<< process custom line >>
-                # @+node:edream.110203113231.674: *3* << process custom line >> (import_cisco_config.py)
-                if customLine not in blocks:
-                    blocks[customLine] = []
-                    out.append(g.angleBrackets(customLine))
-                    # create first-level child
-                    child = p.insertAsNthChild(0)
-                    child.h = g.angleBrackets(customLine)
-                    children.append(child)
-
-                blocks[customLine].append(linelist[i])
-                # @-<< process custom line >>
+                #@+<< process custom line >>
+                #@-<< process custom line >>
                 skipToNextLine = 1
                 break
         if skipToNextLine:
             skipToNextLine = 0
         else:
             if linelist[i + 1].startswith(' '):
-                # @+<< process indented block >>
-                # @+node:edream.110203113231.675: *3* << process indented block >> (import_cisco_config.py)
-                space = linelist[i].find(' ')
-                if space == -1:
-                    space = len(linelist[i])
-                key = linelist[i][:space]
-                if key in blocks:
-                    blocks[key] = []
-                    out.append(g.angleBrackets(key))
-                    # create first-level child
-                    child = p.insertAsNthChild(0)
-                    child.h = g.angleBrackets(key)
-                    children.append(child)
-
-                value = [linelist[i]]
-                # loop through the indented lines
-                i = i + 1
-                try:
-                    while linelist[i].startswith(' '):
-                        value.append(linelist[i])
-                        i = i + 1
-                except Exception:
-                    # EOF
-                    pass
-                i = i - 1  # restore index
-                # now add the value to the dictionary
-                blocks[key].append(value)
-                # @-<< process indented block >>
+                #@+<< process indented block >>
+                #@-<< process indented block >>
             else:
                 out.append(linelist[i])
         i = i + 1
     # process last line
     out.append(linelist[i])
 
-    # @+<< complete outline >>
-    # @+node:edream.110203113231.676: *3* << complete outline >>
+    #@+<< complete outline >>
+    #@ << complete outline >>
     # first print the level-0 text
     outClean = []
     prev = ''
@@ -200,10 +164,10 @@ def importCiscoConfig(c):
             g.es("Unknown key: %s" % key)
     current.expand()
     c.redraw()
-    # @-<< complete outline >>
+    #@-<< complete outline >>
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

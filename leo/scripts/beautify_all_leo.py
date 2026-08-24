@@ -1,6 +1,6 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20240323050520.1: * @file ../scripts/beautify_all_leo.py
-# @@language python
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20240323050520.1] @f ../scripts/beautify_all_leo.py
+#@@language python
 
 """
 beautify_all_leo.py: Beautify (almost) all of Leo's files.
@@ -48,4 +48,4 @@ targets = (
 python = sys.executable
 command = f"{python} -m ruff format {args} {' '.join(targets)}"
 subprocess.run(command, shell=True, check=False)
-# @-leo
+#@-leo

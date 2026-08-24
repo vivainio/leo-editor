@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:edream.110203113231.873: * @file ../plugins/at_folder.py
+#@+leo-ver=cub-1-thin
+#@0 [edream.110203113231.873] @f ../plugins/at_folder.py
 r"""Synchronizes @folder nodes with folders.
 
 If a node is named '\@folder *<path_to_folder>*', the content (filenames) of the
@@ -18,8 +18,8 @@ import os
 from leo.core import leoGlobals as g
 
 
-# @+others
-# @+node:ekr.20140920173002.17961: ** init
+#@+others
+#@> init
 def init():
     """Return True if the plugin has loaded successfully."""
     g.registerHandler("select1", onSelect)
@@ -28,7 +28,7 @@ def init():
     return True
 
 
-# @+node:ekr.20140920173002.17960: ** onSelect
+#@ onSelect
 def onSelect(tag, keywords):
     c = keywords.get('c') or keywords.get('new_c')
     if not c:
@@ -39,7 +39,7 @@ def onSelect(tag, keywords):
         sync_node_to_folder(c, v, h[8:])
 
 
-# @+node:edream.110203113231.875: ** sync_node_to_folder
+#@ sync_node_to_folder
 def sync_node_to_folder(c, parent, d):
     oldlist = {}
     newlist = []
@@ -68,7 +68,7 @@ def sync_node_to_folder(c, parent, d):
         g.es('missing: ' + ','.join(oldlist.keys()))
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

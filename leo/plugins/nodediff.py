@@ -1,7 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:peckj.20140113150237.7083: * @file ../plugins/nodediff.py
-# @+<< docstring >>
-# @+node:peckj.20140113131037.5792: ** << docstring >>
+#@+leo-ver=cub-1-thin
+#@0 [peckj.20140113150237.7083] @f ../plugins/nodediff.py
+#@+<< docstring >>
+#@> << docstring >>
 """Provides commands to run text diffs on node bodies within Leo.
 
 By Jacob M. Peck
@@ -78,23 +78,23 @@ positions as input::
     c.theNodeDiffController.run_unified_diff()
 
 """
-# @-<< docstring >>
+#@-<< docstring >>
 
 # By JMP.
 
-# @+<< imports >>
-# @+node:peckj.20140113131037.5794: ** << imports >>
+#@+<< imports >>
+#@ << imports >>
 import difflib
 from io import StringIO
 import subprocess
 
 from leo.core import leoGlobals as g
 from leo.external import leosax
-# @-<< imports >>
+#@-<< imports >>
 
 
-# @+others
-# @+node:peckj.20140113131037.5795: ** init
+#@+others
+#@ init
 def init():
     """Return True if the plugin has loaded successfully."""
     if g.app.gui is None:
@@ -108,7 +108,7 @@ def init():
     return ok
 
 
-# @+node:peckj.20140113131037.5796: ** onCreate
+#@ onCreate
 def onCreate(tag, keys):
     c = keys.get('c')
     if not c:
@@ -118,10 +118,10 @@ def onCreate(tag, keys):
     c.theNodeDiffController = theNodeDiffController
 
 
-# @+node:peckj.20140113131037.5797: ** class NodeDiffController
+#@ class NodeDiffController
 class NodeDiffController:
-    # @+others
-    # @+node:peckj.20140113131037.5798: *3* __init__ & reloadSettings (NodeDiffController, nodediff.py)
+    #@+others
+    #@> __init__ & reloadSettings (NodeDiffController, nodediff.py)
     def __init__(self, c):
         self.c = c
         # Warning: hook handlers must use keywords.get('c'), NOT self.c.
@@ -147,24 +147,24 @@ class NodeDiffController:
         if self.diff_style not in self.valid_styles.keys():
             self.diff_style = 'compare'
 
-    # @+node:peckj.20140113131037.5802: *3* getters
-    # @+node:peckj.20140113131037.5799: *4* get_selection
+    #@ getters
+    #@> get_selection
     def get_selection(self):
         s = self.c.getSelectedPositions()
         return s if len(s) == 2 else None
 
-    # @+node:peckj.20140113131037.5800: *4* get_marked
+    #@ get_marked
     def get_marked(self):
         m = [n.copy() for n in self.c.all_positions() if n.isMarked()]
         return m if len(m) == 2 else None
 
-    # @+node:peckj.20140113131037.5801: *4* get_subtree
+    #@ get_subtree
     def get_subtree(self):
         st = [p.copy() for p in self.c.p.children()]
         return st if len(st) == 2 else None
 
-    # @+node:peckj.20140113131037.5803: *3* differs
-    # @+node:peckj.20140113131037.5804: *4* run_compare
+    #@< differs
+    #@> run_compare
     def run_compare(self, l):
         g.app.log.deleteTab(self.tab_name)
         n1 = l[0]
@@ -186,7 +186,7 @@ class NodeDiffController:
             else:
                 g.es(l, tabName=self.tab_name)
 
-    # @+node:peckj.20140113131037.5805: *4* run_ndiff
+    #@ run_ndiff
     def run_ndiff(self, l):
         g.app.log.deleteTab(self.tab_name)
         n1 = l[0]
@@ -207,7 +207,7 @@ class NodeDiffController:
             else:
                 g.es(l, tabName=self.tab_name)
 
-    # @+node:peckj.20140113131037.5806: *4* run_unified_diff
+    #@ run_unified_diff
     def run_unified_diff(self, l):
         g.app.log.deleteTab(self.tab_name)
         n1 = l[0]
@@ -226,12 +226,12 @@ class NodeDiffController:
             else:
                 g.es(l, tabName=self.tab_name)
 
-    # @+node:peckj.20140113131037.5810: *4* run_appropriate_diff
+    #@ run_appropriate_diff
     def run_appropriate_diff(self, ns):
         self.valid_styles[self.diff_style](ns)
 
-    # @+node:peckj.20140113135910.5814: *3* commands
-    # @+node:peckj.20140113131037.5807: *4* run_diff_on_marked
+    #@< commands
+    #@> run_diff_on_marked
     # for command 'diff-marked'
     def run_diff_on_marked(self, event=None):
         """Runs a diff on the marked nodes.  Will only work if exactly 2 marked nodes exist in the outline."""
@@ -241,7 +241,7 @@ class NodeDiffController:
             return
         self.run_appropriate_diff(ns)
 
-    # @+node:peckj.20140113131037.5808: *4* run_diff_on_selected
+    #@ run_diff_on_selected
     # for command 'diff-selected'
     def run_diff_on_selected(self, event=None):
         """Runs a diff on the selected nodes.  Will only work if exactly two nodes are selected."""
@@ -251,7 +251,7 @@ class NodeDiffController:
             return
         self.run_appropriate_diff(ns)
 
-    # @+node:peckj.20140113131037.5809: *4* run_diff_on_subtree
+    #@ run_diff_on_subtree
     # for command 'diff-subtree'
     def run_diff_on_subtree(self, event=None):
         """
@@ -267,7 +267,7 @@ class NodeDiffController:
             return
         self.run_appropriate_diff(ns)
 
-    # @+node:tbrown.20140118145024.25546: *4* run_diff_on_saved
+    #@ run_diff_on_saved
     def run_diff_on_saved(self, event=None):
         """run_diff_on_saved - compare current node content to saved
         content
@@ -285,7 +285,7 @@ class NodeDiffController:
                 return
         g.es("Node (gnx) not found in saved file")
 
-    # @+node:tbrown.20140118145024.25562: *4* run_diff_on_vcs
+    #@ run_diff_on_vcs
     def run_diff_on_vcs(self, event=None):
         """run_diff_on_vcs - try and check out the previous version of the Leo
         file and compare a node with the same gnx in that file with the
@@ -352,10 +352,10 @@ class NodeDiffController:
                 return
         g.es("Node (gnx) not found in previous version")
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

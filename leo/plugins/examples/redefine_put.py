@@ -1,12 +1,12 @@
-# @+leo-ver=5-thin
-# @+node:edream.110203113231.921: * @file ../plugins/examples/redefine_put.py
+#@+leo-ver=cub-1-thin
+#@0 [edream.110203113231.921] @f ../plugins/examples/redefine_put.py
 """Redefine the "put" and "put_nl" methods"""
 
 from leo.core import leoGlobals as g
 
 
-# @+others
-# @+node:ekr.20111104210837.9690: ** init
+#@+others
+#@> init
 def init():
     """Return True if the plugin has loaded successfully."""
     ok = not g.unitTesting  # Not for unit testing: overrides core methods.
@@ -16,7 +16,7 @@ def init():
     return ok
 
 
-# @+node:edream.110203113231.922: ** onStart
+#@ onStart
 # This code illustrates how to redefine _any_ method of Leo.
 # Python makes this is almost too easy :-)
 
@@ -32,7 +32,7 @@ def onStart(tag, keywords):
         g.funcToMethod(newPutNl, log, "putnl")
 
 
-# @+node:edream.110203113231.923: ** newPut and newPutNl
+#@ newPut and newPutNl
 # Contrived examples of how to redefine frame.put and frame.putnl
 # Same as frame.put except converts everything to upper case.
 
@@ -65,7 +65,7 @@ def newPutNl(self):
         g.pr('')
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

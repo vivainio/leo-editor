@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20210820203000.1: * @file ../unittests/core/test_leoserver.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20210820203000.1] @f ../unittests/core/test_leoserver.py
 """Tests of leoserver.py"""
 
 import json
@@ -15,15 +15,15 @@ g_server = None
 global_g_es = global_g.es
 
 
-# @+others
-# @+node:ekr.20210901070918.1: ** class TestLeoServer(LeoUnitTest)
+#@+others
+#@> class TestLeoServer(LeoUnitTest)
 class TestLeoServer(LeoUnitTest):
     """Tests of LeoServer class."""
 
     request_number = 0
 
-    # @+others
-    # @+node:felix.20210621233316.99: *3* TestLeoServer: Setup and TearDown
+    #@+others
+    #@> TestLeoServer: Setup and TearDown
     @classmethod
     def setUpClass(cls):
         global g, g_leoserver, g_server
@@ -53,7 +53,7 @@ class TestLeoServer(LeoUnitTest):
         global_g.es = global_g_es
         g.unitTesting = False
 
-    # @+node:felix.20210621233316.100: *3* TestLeoServer._request
+    #@ TestLeoServer._request
     def _request(self, action, param=None):
         server = self.server
         self.request_number += 1
@@ -70,7 +70,7 @@ class TestLeoServer(LeoUnitTest):
             g.printObj(answer, tag=f"response to {action!r}")  # pragma: no cover
         return answer
 
-    # @+node:felix.20210621233316.102: *3* TestLeoServer.test_most_public_server_methods
+    #@ TestLeoServer.test_most_public_server_methods
     def test_most_public_server_methods(self):
         server = self.server
         tag = 'test_most_public_server_methods'
@@ -172,7 +172,7 @@ class TestLeoServer(LeoUnitTest):
         finally:
             server.close_file({"forced": True})
 
-    # @+node:felix.20210621233316.103: *3* TestLeoServer.test_open_and_close
+    #@ TestLeoServer.test_open_and_close
     def test_open_and_close(self):
         # server = self.server
         test_dot_leo = g.finalize_join(g.app.loadDir, '..', 'test', 'test.leo')
@@ -203,7 +203,7 @@ class TestLeoServer(LeoUnitTest):
         for action, package in table:
             self._request(action, package)
 
-    # @+node:felix.20210621233316.104: *3* TestLeoServer.slow_test_find_commands
+    #@ TestLeoServer.slow_test_find_commands
     def slow_test_find_commands(self):
         tag = 'test_find_commands'
         test_dot_leo = g.finalize_join(g.app.loadDir, '..', 'test', 'test.leo')
@@ -236,9 +236,9 @@ class TestLeoServer(LeoUnitTest):
             if log:
                 g.printObj(answer, tag=f"{tag}:{method}: answer")  # pragma: no cover
 
-    # @-others
+    #@-others
 
 
-# @-others
+#@-others
 
-# @-leo
+#@-leo

@@ -1,9 +1,9 @@
-# @+leo-ver=5-thin
-# @+node:edream.110203113231.734: * @file ../plugins/quit_leo.py
+#@+leo-ver=cub-1-thin
+#@0 [edream.110203113231.734] @f ../plugins/quit_leo.py
 """Shows how to force Leo to quit."""
 
-# @@language python
-# @@tabwidth -4
+#@@language python
+#@@tabwidth -4
 from leo.core import leoGlobals as g
 
 
@@ -26,4 +26,4 @@ def init():
     return ok
 
 
-# @-leo
+#@-leo

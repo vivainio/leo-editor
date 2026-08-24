@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20160316091132.1: * @file ../external/py2cs.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20160316091132.1] @f ../external/py2cs.py
 #!/usr/bin/env python
 '''
 This script makes a coffeescript file for every python source file listed
@@ -14,10 +14,13 @@ Written by Edward K. Ream.
 Hosted at: https://github.com/edreamleo/python-to-coffeescript
 '''
 
-# @+<< license >>
-# @+node:ekr.20160316091132.2: **   << license >> (python_to_coffeescript.py)
-# @@nocolor-node
-# @+at
+#@+<< license >>
+#@-<< license >>
+#@+<< imports >>
+#@-<< imports >>
+#@+others
+#@>   << license >> (python_to_coffeescript.py)
+#@@nocolor-node
 # All parts of this script are distributed under the following copyright.
 # This is intended to be the same as the MIT license, namely that this script
 # is absolutely free, even for commercial use, including resale. There is no
@@ -42,9 +45,7 @@ Hosted at: https://github.com/edreamleo/python-to-coffeescript
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.**
-# @-<< license >>
-# @+<< imports >>
-# @+node:ekr.20160316091132.3: **   << imports >> (python_to_coffeescript.py)
+#@   << imports >> (python_to_coffeescript.py)
 import ast
 import configparser
 import glob
@@ -57,9 +58,7 @@ import token as token_module
 import tokenize
 
 
-# @-<< imports >>
-# @+others
-# @+node:ekr.20160316091132.4: **   main
+#@   main
 def main():
     '''
     The driver for the stand-alone version of make-stub-files.
@@ -73,7 +72,7 @@ def main():
     print('done')
 
 
-# @+node:ekr.20160523111738.1: **   unit_test (py2cs.py)
+#@   unit_test (py2cs.py)
 def unit_test(raise_on_fail=True):
     '''Run basic unit tests for this file.'''
     import _ast
@@ -117,13 +116,13 @@ def unit_test(raise_on_fail=True):
         print(s)
 
 
-# @+node:ekr.20160316091132.5: **   utility functions
+#@   utility functions
 
 
 #
 # Utility functions...
 #
-# @+node:ekr.20160316091132.6: *3* dump
+#@> dump
 def dump(title, s=None):
     if s:
         print('===== %s...\n%s\n' % (title, s.rstrip()))
@@ -131,7 +130,7 @@ def dump(title, s=None):
         print('===== %s...\n' % title)
 
 
-# @+node:ekr.20160316091132.7: *3* dump_dict
+#@ dump_dict
 def dump_dict(title, d):
     '''Dump a dictionary with a header.'''
     dump(title)
@@ -140,7 +139,7 @@ def dump_dict(title, d):
     print('')
 
 
-# @+node:ekr.20160316091132.8: *3* dump_list
+#@ dump_list
 def dump_list(title, aList):
     '''Dump a list with a header.'''
     dump(title)
@@ -149,7 +148,7 @@ def dump_list(title, aList):
     print('')
 
 
-# @+node:ekr.20160316091132.9: *3* op_name
+#@ op_name
 def op_name(node, strict=True):
     '''Return the print name of an operator node.'''
     d = {
@@ -200,7 +199,7 @@ def op_name(node, strict=True):
     return name
 
 
-# @+node:ekr.20160316091132.10: *3* pdb
+#@ pdb
 def pdb(self):
     '''Invoke a debugger during unit testing.'''
     try:
@@ -213,19 +212,19 @@ def pdb(self):
         pdb.set_trace()
 
 
-# @+node:ekr.20160316091132.11: *3* truncate
+#@ truncate
 def truncate(s, n):
     '''Return s truncated to n characters.'''
     return s if len(s) <= n else s[: n - 3] + '...'
 
 
-# @+node:ekr.20160316091132.12: ** class CoffeeScriptTraverser
+#@< class CoffeeScriptTraverser
 class CoffeeScriptTraverser:
     '''A class to convert python sources to coffeescript sources.'''
 
     # pylint: disable=consider-using-enumerate
-    # @+others
-    # @+node:ekr.20160316091132.13: *3*  cv.ctor
+    #@+others
+    #@>  cv.ctor
     def __init__(self, controller):
         '''Ctor for CoffeeScriptFormatter class.'''
         self.controller = controller
@@ -239,7 +238,7 @@ class CoffeeScriptTraverser:
         self.trailing_comment = None
         self.trailing_comment_at_lineno = None
 
-    # @+node:ekr.20160316091132.14: *3*  cv.format
+    #@  cv.format
     def format(self, node, s, tokens):
         '''Format the node (or list of nodes) and its descendants.'''
         self.level = 0
@@ -260,7 +259,7 @@ class CoffeeScriptTraverser:
         val += ''.join(sync.trailing_lines())
         return val or ''
 
-    # @+node:ekr.20160316091132.15: *3*  cv.indent
+    #@  cv.indent
     def indent(self, s):
         '''Return s, properly indented.'''
         n = 0
@@ -269,7 +268,7 @@ class CoffeeScriptTraverser:
             s = s[1:]
         return '%s%s%s' % ('\n' * n, ' ' * 4 * self.level, s)
 
-    # @+node:ekr.20160316091132.16: *3*  cv.visit
+    #@  cv.visit
     def visit(self, node):
         '''Return the formatted version of an Ast node, or list of Ast nodes.'''
         name = node.__class__.__name__
@@ -283,12 +282,12 @@ class CoffeeScriptTraverser:
         assert isinstance(s, str), (repr(s), method.__name__)
         return s
 
-    # @+node:ekr.20160316091132.17: *3* cv.Contexts
+    #@ cv.Contexts
 
     #
     # CoffeeScriptTraverser contexts...
     #
-    # @+node:ekr.20160316091132.18: *4* cv.ClassDef
+    #@> cv.ClassDef
 
     # 2: ClassDef(identifier name, expr* bases,
     #             stmt* body, expr* decorator_list)
@@ -324,7 +323,7 @@ class CoffeeScriptTraverser:
         self.class_stack.pop()
         return ''.join(result)
 
-    # @+node:ekr.20160316091132.19: *4* cv.FunctionDef & AsyncFunctionDef
+    #@ cv.FunctionDef & AsyncFunctionDef
 
     # 2: FunctionDef(identifier name, arguments args, stmt* body, expr* decorator_list)
     # 3: FunctionDef(identifier name, arguments args, stmt* body, expr* decorator_list,
@@ -360,42 +359,42 @@ class CoffeeScriptTraverser:
 
     do_AsyncFunctionDef = do_FunctionDef
 
-    # @+node:ekr.20160316091132.20: *4* cv.Interactive
+    #@ cv.Interactive
     def do_Interactive(self, node):
         for z in node.body:
             self.visit(z)
 
-    # @+node:ekr.20160316091132.21: *4* cv.Module
+    #@ cv.Module
     def do_Module(self, node):
         return ''.join([self.visit(z) for z in node.body])
 
-    # @+node:ekr.20160316091132.22: *4* cv.Lambda
+    #@ cv.Lambda
     def do_Lambda(self, node):
         return self.indent('lambda %s: %s' % (self.visit(node.args), self.visit(node.body)))
 
-    # @+node:ekr.20160316091132.23: *3* cv.Expressions
+    #@< cv.Expressions
 
     #
     # CoffeeScriptTraverser expressions...
     #
-    # @+node:ekr.20160316091132.24: *4* cv.Expression
+    #@> cv.Expression
     def do_Expression(self, node):
         '''An inner expression: do not indent.'''
         return '%s\n' % self.visit(node.body)
 
-    # @+node:ekr.20160316091132.25: *4* cv.GeneratorExp
+    #@ cv.GeneratorExp
     def do_GeneratorExp(self, node):
         elt = self.visit(node.elt) or ''
         gens = [self.visit(z) for z in node.generators]
         gens = [z if z else '<**None**>' for z in gens]  # Kludge: probable bug.
         return '<gen %s for %s>' % (elt, ','.join(gens))
 
-    # @+node:ekr.20160316091132.26: *3* cv.Operands
+    #@< cv.Operands
 
     #
     # CoffeeScriptTraverser operands...
     #
-    # @+node:ekr.20160316091132.28: *4* cv.arg
+    #@> cv.arg
     # arg = (identifier arg, expr? annotation)
 
     def do_arg(self, node):
@@ -404,7 +403,7 @@ class CoffeeScriptTraverser:
             self.visit(node.annotation)
         return node.arg
 
-    # @+node:ekr.20160316091132.27: *4* cv.arguments
+    #@ cv.arguments
 
     # 2: arguments = (expr* args, identifier? vararg,
     #                 identifier? kwarg, expr* defaults)
@@ -440,7 +439,7 @@ class CoffeeScriptTraverser:
             args2.append('**' + self.visit(node.kwarg))
         return ','.join(args2)
 
-    # @+node:ekr.20160316091132.29: *4* cv.Attribute
+    #@ cv.Attribute
 
     # Attribute(expr value, identifier attr, expr_context ctx)
 
@@ -450,7 +449,7 @@ class CoffeeScriptTraverser:
         val = '@' if val == '@' else val + '.'
         return val + node.attr
 
-    # @+node:ekr.20160316091132.30: *4* cv.Bytes
+    #@ cv.Bytes
     def do_Bytes(self, node):  # Python 3.x only.
         if hasattr(node, 'lineno'):
             # Do *not* handle leading lines here.
@@ -459,7 +458,7 @@ class CoffeeScriptTraverser:
         g.trace('==== no lineno', node.s)
         return node.s
 
-    # @+node:ekr.20160316091132.31: *4* cv.Call & cv.keyword
+    #@ cv.Call & cv.keyword
 
     # Call(expr func, expr* args, keyword* keywords, expr? starargs, expr? kwargs)
 
@@ -477,7 +476,7 @@ class CoffeeScriptTraverser:
         s = '%s(%s)' % (func, ','.join(args))
         return s
 
-    # @+node:ekr.20160316091132.32: *5* cv.keyword
+    #@> cv.keyword
 
     # keyword = (identifier arg, expr value)
 
@@ -487,7 +486,7 @@ class CoffeeScriptTraverser:
         # This is a keyword *arg*, not a Python keyword!
         return '%s=%s' % (node.arg, value)
 
-    # @+node:ekr.20160316091132.33: *4* cv.comprehension
+    #@< cv.comprehension
     def do_comprehension(self, node):
         result = []
         name = self.visit(node.target)  # A name.
@@ -498,7 +497,7 @@ class CoffeeScriptTraverser:
             result.append(' if %s' % (''.join(ifs)))
         return ''.join(result)
 
-    # @+node:ekr.20170721093550.1: *4* cv.Constant (Python 3.6+)
+    #@ cv.Constant (Python 3.6+)
     def do_Constant(self, node):  # Python 3.6+ only.
         if not hasattr(node, 'lineno'):
             # Do *not* handle leading lines here.
@@ -522,7 +521,7 @@ class CoffeeScriptTraverser:
         g.trace('----- Oops -----', repr(node.value), g.callers())
         return node.s
 
-    # @+node:ekr.20160316091132.34: *4* cv.Dict
+    #@ cv.Dict
     def do_Dict(self, node):
         assert len(node.keys) == len(node.values)
         items, result = [], []
@@ -546,7 +545,7 @@ class CoffeeScriptTraverser:
             result.append('}')
         return ''.join(result)
 
-    # @+node:ekr.20160523135819.3: *4* cv.DictComp (new)
+    #@ cv.DictComp (new)
     # DictComp(expr key, expr value, comprehension* generators)
 
     def do_DictComp(self, node):
@@ -555,15 +554,15 @@ class CoffeeScriptTraverser:
         gens = [z if z else '<**None**>' for z in gens]  # Kludge: probable bug.
         return '%s for %s' % (elt, ''.join(gens))
 
-    # @+node:ekr.20160316091132.35: *4* cv.Ellipsis
+    #@ cv.Ellipsis
     def do_Ellipsis(self, node):
         return '...'
 
-    # @+node:ekr.20160316091132.36: *4* cv.ExtSlice
+    #@ cv.ExtSlice
     def do_ExtSlice(self, node):
         return ':'.join([self.visit(z) for z in node.dims])
 
-    # @+node:ekr.20170721093848.1: *4* cv.FormattedValue (Python 3.6+: unfinished)
+    #@ cv.FormattedValue (Python 3.6+: unfinished)
     # FormattedValue(expr value, int? conversion, expr? format_spec)
 
     def do_FormattedValue(self, node):  # Python 3.6+ only.
@@ -573,11 +572,11 @@ class CoffeeScriptTraverser:
             self.visit(node.format_spec) if node.format_spec else '',
         )
 
-    # @+node:ekr.20160316091132.37: *4* cv.Index
+    #@ cv.Index
     def do_Index(self, node):
         return self.visit(node.value)
 
-    # @+node:ekr.20170721093747.1: *4* cv.JoinedStr (Python 3.6+: unfinished)
+    #@ cv.JoinedStr (Python 3.6+: unfinished)
     # JoinedStr(expr* values)
 
     def do_JoinedStr(self, node):
@@ -585,7 +584,7 @@ class CoffeeScriptTraverser:
             for value in node.values:
                 self.visit(value)
 
-    # @+node:ekr.20160316091132.38: *4* cv.List
+    #@ cv.List
     def do_List(self, node):
         # Not used: list context.
         # self.visit(node.ctx)
@@ -593,14 +592,14 @@ class CoffeeScriptTraverser:
         elts = [z for z in elts if z]  # Defensive.
         return '[%s]' % ','.join(elts)
 
-    # @+node:ekr.20160316091132.39: *4* cv.ListComp
+    #@ cv.ListComp
     def do_ListComp(self, node):
         elt = self.visit(node.elt)
         gens = [self.visit(z) for z in node.generators]
         gens = [z if z else '<**None**>' for z in gens]  # Kludge: probable bug.
         return '%s for %s' % (elt, ''.join(gens))
 
-    # @+node:ekr.20160316091132.40: *4* cv.Name & cv.NameConstant
+    #@ cv.Name & cv.NameConstant
     def do_Name(self, node):
         return '@' if node.id == 'self' else node.id
 
@@ -608,11 +607,11 @@ class CoffeeScriptTraverser:
         s = repr(node.value)
         return 'bool' if s in ('True', 'False') else s
 
-    # @+node:ekr.20160316091132.41: *4* cv.Num
+    #@ cv.Num
     def do_Num(self, node):
         return repr(node.n)
 
-    # @+node:ekr.20160523135819.4: *4* cv.Set (new)
+    #@ cv.Set (new)
     # Set(expr* elts)
 
     def do_Set(self, node):
@@ -620,7 +619,7 @@ class CoffeeScriptTraverser:
         elts = [z for z in elts if z]  # Defensive.
         return '{%s}' % ','.join(elts)
 
-    # @+node:ekr.20160523135819.5: *4* cv.SetComp (new)
+    #@ cv.SetComp (new)
     # SetComp(expr elt, comprehension* generators)
 
     def do_SetComp(self, node):
@@ -629,7 +628,7 @@ class CoffeeScriptTraverser:
         gens = [z if z else '<**None**>' for z in gens]  # Kludge: probable bug.
         return '%s for %s' % (elt, ''.join(gens))
 
-    # @+node:ekr.20160316091132.43: *4* cv.Slice
+    #@ cv.Slice
     def do_Slice(self, node):
         lower, upper, step = '', '', ''
         if getattr(node, 'lower', None) is not None:
@@ -642,7 +641,7 @@ class CoffeeScriptTraverser:
             return '%s:%s:%s' % (lower, upper, step)
         return '%s:%s' % (lower, upper)
 
-    # @+node:ekr.20160316091132.44: *4* cv.Str
+    #@ cv.Str
     def do_Str(self, node):
         '''A string constant, including docstrings.'''
         if hasattr(node, 'lineno'):
@@ -652,7 +651,7 @@ class CoffeeScriptTraverser:
         g.trace('==== no lineno', node.s)
         return node.s
 
-    # @+node:ekr.20160316091132.45: *4* cv.Subscript
+    #@ cv.Subscript
 
     # Subscript(expr value, slice slice, expr_context ctx)
 
@@ -661,26 +660,26 @@ class CoffeeScriptTraverser:
         the_slice = self.visit(node.slice)
         return '%s[%s]' % (value, the_slice)
 
-    # @+node:ekr.20160316091132.46: *4* cv.Tuple
+    #@ cv.Tuple
     def do_Tuple(self, node):
         elts = [self.visit(z) for z in node.elts]
         return '(%s)' % ', '.join(elts)
 
-    # @+node:ekr.20160316091132.47: *3* cv.Operators
+    #@< cv.Operators
 
     #
     # CoffeeScriptTraverser operators...
     #
-    # @+node:ekr.20160316091132.48: *4* cv.BinOp
+    #@> cv.BinOp
     def do_BinOp(self, node):
         return '%s%s%s' % (self.visit(node.left), op_name(node.op), self.visit(node.right))
 
-    # @+node:ekr.20160316091132.49: *4* cv.BoolOp
+    #@ cv.BoolOp
     def do_BoolOp(self, node):
         values = [self.visit(z) for z in node.values]
         return op_name(node.op).join(values)
 
-    # @+node:ekr.20160316091132.50: *4* cv.Compare
+    #@ cv.Compare
     def do_Compare(self, node):
         result = []
         lt = self.visit(node.left)
@@ -694,7 +693,7 @@ class CoffeeScriptTraverser:
             print('can not happen: ops', repr(ops), 'comparators', repr(comps))
         return ''.join(result)
 
-    # @+node:ekr.20160316091132.51: *4* cv.ifExp (ternary operator)
+    #@ cv.ifExp (ternary operator)
     def do_IfExp(self, node):
         return '%s if %s else %s ' % (
             self.visit(node.body),
@@ -702,16 +701,16 @@ class CoffeeScriptTraverser:
             self.visit(node.orelse),
         )
 
-    # @+node:ekr.20160316091132.52: *4* cv.UnaryOp
+    #@ cv.UnaryOp
     def do_UnaryOp(self, node):
         return '%s%s' % (op_name(node.op), self.visit(node.operand))
 
-    # @+node:ekr.20160316091132.53: *3* cv.Statements
+    #@< cv.Statements
 
     #
     # CoffeeScriptTraverser statements...
     #
-    # @+node:ekr.20160316091132.54: *4*  cv.tail_after_body
+    #@>  cv.tail_after_body
     def tail_after_body(self, body, aList, result):
         '''
         Return the tail of the 'else' or 'finally' statement following the given body.
@@ -729,7 +728,7 @@ class CoffeeScriptTraverser:
             tail = '\n'
         return tail
 
-    # @+node:ekr.20170721093332.1: *4* cv.AnnAssign
+    #@ cv.AnnAssign
     # AnnAssign(expr target, expr annotation, expr? value, int simple)
 
     def do_AnnAssign(self, node):
@@ -742,7 +741,7 @@ class CoffeeScriptTraverser:
         )
         return head + self.indent(s) + tail
 
-    # @+node:ekr.20160316091132.55: *4* cv.Assert
+    #@ cv.Assert
     def do_Assert(self, node):
         head = self.leading_string(node)
         tail = self.trailing_comment(node)
@@ -753,39 +752,39 @@ class CoffeeScriptTraverser:
             s = 'assert %s' % test
         return head + self.indent(s) + tail
 
-    # @+node:ekr.20160316091132.56: *4* cv.Assign
+    #@ cv.Assign
     def do_Assign(self, node):
         head = self.leading_string(node)
         tail = self.trailing_comment(node)
         s = '%s=%s' % ('='.join([self.visit(z) for z in node.targets]), self.visit(node.value))
         return head + self.indent(s) + tail
 
-    # @+node:ekr.20160316091132.57: *4* cv.AugAssign
+    #@ cv.AugAssign
     def do_AugAssign(self, node):
         head = self.leading_string(node)
         tail = self.trailing_comment(node)
         s = '%s%s=%s' % (self.visit(node.target), op_name(node.op), self.visit(node.value))
         return head + self.indent(s) + tail
 
-    # @+node:ekr.20160523135819.2: *4* cv.Await (Python 3)
+    #@ cv.Await (Python 3)
     # Await(expr value)
 
     def do_Await(self, node):
         return self.indent('await %s\n' % (self.visit(node.value)))
 
-    # @+node:ekr.20160316091132.58: *4* cv.Break
+    #@ cv.Break
     def do_Break(self, node):
         head = self.leading_string(node)
         tail = self.trailing_comment(node)
         return head + self.indent('break') + tail
 
-    # @+node:ekr.20160316091132.59: *4* cv.Continue
+    #@ cv.Continue
     def do_Continue(self, node):
         head = self.leading_lines(node)
         tail = self.trailing_comment(node)
         return head + self.indent('continue') + tail
 
-    # @+node:ekr.20160316091132.60: *4* cv.Delete
+    #@ cv.Delete
     def do_Delete(self, node):
         head = self.leading_string(node)
         tail = self.trailing_comment(node)
@@ -793,7 +792,7 @@ class CoffeeScriptTraverser:
         s = 'del %s' % ','.join(targets)
         return head + self.indent(s) + tail
 
-    # @+node:ekr.20160316091132.61: *4* cv.ExceptHandler
+    #@ cv.ExceptHandler
     def do_ExceptHandler(self, node):
         result = self.leading_lines(node)
         tail = self.trailing_comment(node)
@@ -812,7 +811,7 @@ class CoffeeScriptTraverser:
             self.level -= 1
         return ''.join(result)
 
-    # @+node:ekr.20160316091132.63: *4* cv.Expr (outer statement)
+    #@ cv.Expr (outer statement)
     def do_Expr(self, node):
         '''An outer expression: must be indented.'''
         head = self.leading_string(node)
@@ -820,7 +819,7 @@ class CoffeeScriptTraverser:
         s = '%s' % self.visit(node.value)
         return head + self.indent(s) + tail
 
-    # @+node:ekr.20160316091132.64: *4* cv.For & AsyncFor
+    #@ cv.For & AsyncFor
     def do_For(self, node, async_flag=False):
         result = self.leading_lines(node)
         tail = self.trailing_comment(node)
@@ -846,14 +845,14 @@ class CoffeeScriptTraverser:
     def do_AsyncFor(self, node):
         return self.do_For(node, async_flag=True)
 
-    # @+node:ekr.20160316091132.65: *4* cv.Global
+    #@ cv.Global
     def do_Global(self, node):
         head = self.leading_lines(node)
         tail = self.trailing_comment(node)
         s = 'global %s' % ','.join(node.names)
         return head + self.indent(s) + tail
 
-    # @+node:ekr.20160316091132.66: *4* cv.If
+    #@ cv.If
     def do_If(self, node):
         result = self.leading_lines(node)
         tail = self.trailing_comment(node)
@@ -872,7 +871,7 @@ class CoffeeScriptTraverser:
                 self.level -= 1
         return ''.join(result)
 
-    # @+node:ekr.20160316091132.67: *4* cv.Import & helper
+    #@ cv.Import & helper
     def do_Import(self, node):
         head = self.leading_string(node)
         tail = self.trailing_comment(node)
@@ -885,7 +884,7 @@ class CoffeeScriptTraverser:
         s = 'pass # import %s' % ','.join(names)
         return head + self.indent(s) + tail
 
-    # @+node:ekr.20160316091132.68: *5* cv.get_import_names
+    #@> cv.get_import_names
     def get_import_names(self, node):
         '''Return a list of the the full file names in the import statement.'''
         result = []
@@ -895,7 +894,7 @@ class CoffeeScriptTraverser:
             result.append(data)
         return result
 
-    # @+node:ekr.20160316091132.69: *4* cv.ImportFrom
+    #@< cv.ImportFrom
     def do_ImportFrom(self, node):
         head = self.leading_string(node)
         tail = self.trailing_comment(node)
@@ -908,7 +907,7 @@ class CoffeeScriptTraverser:
         s = 'pass # from %s import %s' % (node.module, ','.join(names))
         return head + self.indent(s) + tail
 
-    # @+node:ekr.20160316151014.1: *4* cv.Nonlocal
+    #@ cv.Nonlocal
 
     # 3: Nonlocal(identifier* names)
 
@@ -919,13 +918,13 @@ class CoffeeScriptTraverser:
         names = ', '.join(node.names)
         return head + self.indent('nonlocal') + names + tail
 
-    # @+node:ekr.20160316091132.70: *4* cv.Pass
+    #@ cv.Pass
     def do_Pass(self, node):
         head = self.leading_string(node)
         tail = self.trailing_comment(node)
         return head + self.indent('pass') + tail
 
-    # @+node:ekr.20160316091132.72: *4* cv.Raise
+    #@ cv.Raise
     # Raise(expr? exc, expr? cause)
 
     def do_Raise(self, node):
@@ -938,7 +937,7 @@ class CoffeeScriptTraverser:
         s = 'raise %s' % ', '.join(args) if args else 'raise'
         return head + self.indent(s) + tail
 
-    # @+node:ekr.20160316091132.73: *4* cv.Return
+    #@ cv.Return
     def do_Return(self, node):
         head = self.leading_string(node)
         tail = self.trailing_comment(node)
@@ -948,7 +947,7 @@ class CoffeeScriptTraverser:
             s = 'return'
         return head + self.indent(s) + tail
 
-    # @+node:ekr.20160317040520.1: *4* cv.Starred
+    #@ cv.Starred
 
     # Starred(expr value, expr_context ctx)
 
@@ -956,7 +955,7 @@ class CoffeeScriptTraverser:
         # https://www.python.org/dev/peps/pep-3132/
         return '*' + self.visit(node.value)
 
-    # @+node:ekr.20160316091132.74: *4* cv.Try
+    #@ cv.Try
 
     # 3: Try(stmt* body, excepthandler* handlers, stmt* orelse, stmt* finalbody)
 
@@ -990,7 +989,7 @@ class CoffeeScriptTraverser:
                 self.level -= 1
         return ''.join(result)
 
-    # @+node:ekr.20160316091132.75: *4* cv.TryExcept
+    #@ cv.TryExcept
     def do_TryExcept(self, node):
         result = self.leading_lines(node)
         tail = self.trailing_comment(node)
@@ -1013,7 +1012,7 @@ class CoffeeScriptTraverser:
                 self.level -= 1
         return ''.join(result)
 
-    # @+node:ekr.20160316091132.76: *4* cv.TryFinally
+    #@ cv.TryFinally
     def do_TryFinally(self, node):
         result = self.leading_lines(node)
         tail = self.trailing_comment(node)
@@ -1030,7 +1029,7 @@ class CoffeeScriptTraverser:
             self.level -= 1
         return ''.join(result)
 
-    # @+node:ekr.20160316091132.77: *4* cv.While
+    #@ cv.While
     def do_While(self, node):
         result = self.leading_lines(node)
         tail = self.trailing_comment(node)
@@ -1049,7 +1048,7 @@ class CoffeeScriptTraverser:
                 self.level -= 1
         return ''.join(result)
 
-    # @+node:ekr.20160316091132.78: *4* cv.With & AsyncWith
+    #@ cv.With & AsyncWith
 
     # 2:  With(expr context_expr, expr? optional_vars,
     #          stmt* body)
@@ -1090,7 +1089,7 @@ class CoffeeScriptTraverser:
     def do_AsyncWith(self, node):
         return self.do_With(node, async_flag=True)
 
-    # @+node:ekr.20160316091132.79: *4* cv.Yield
+    #@ cv.Yield
     def do_Yield(self, node):
         head = self.leading_string(node)
         tail = self.trailing_comment(node)
@@ -1100,7 +1099,7 @@ class CoffeeScriptTraverser:
             s = 'yield'
         return head + self.indent(s) + tail
 
-    # @+node:ekr.20160317043739.1: *4* cv.YieldFrom
+    #@ cv.YieldFrom
 
     # 3: YieldFrom(expr value)
 
@@ -1111,15 +1110,15 @@ class CoffeeScriptTraverser:
         s = 'yield from %s' % self.visit(node.value)
         return head + self.indent(s) + tail
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20160316091132.80: ** class LeoGlobals
+#@<2 class LeoGlobals
 class LeoGlobals:
     '''A class supporting g.pdb and g.trace for compatibility with Leo.'''
 
-    # @+others
-    # @+node:ekr.20160316091132.81: *3* class NullObject (Python Cookbook)
+    #@+others
+    #@> class NullObject (Python Cookbook)
     class NullObject:
         """
         An object that does nothing, and does it very well.
@@ -1153,7 +1152,7 @@ class LeoGlobals:
         def __setattr__(self, attr, val):
             return self
 
-    # @+node:ekr.20160316091132.82: *3* class ReadLinesClass
+    #@ class ReadLinesClass
     class ReadLinesClass:
         """A class whose next method provides a readline method for Python's tokenize module."""
 
@@ -1171,7 +1170,7 @@ class LeoGlobals:
 
         __next__ = next
 
-    # @+node:ekr.20160316091132.83: *3* g._callerName
+    #@ g._callerName
     def _callerName(self, n=1, files=False):
         # print('_callerName: %s %s' % (n,files))
         try:  # get the function name from the call stack.
@@ -1193,7 +1192,7 @@ class LeoGlobals:
             # es_exception()
             return ''  # "<no caller name>"
 
-    # @+node:ekr.20160316091132.84: *3* g.callers
+    #@ g.callers
     def callers(self, n=4, count=0, excludeCaller=True, files=False):
         '''Return a list containing the callers of the function that called g.callerList.
 
@@ -1220,7 +1219,7 @@ class LeoGlobals:
         sep = '\n' if files else ','
         return sep.join(result)
 
-    # @+node:ekr.20160316091132.85: *3* g.cls
+    #@ g.cls
     def cls(self):
         '''Clear the screen.'''
         if sys.platform.lower().startswith('win'):
@@ -1228,7 +1227,7 @@ class LeoGlobals:
             os.system('cls')
             os.system('cls')
 
-    # @+node:ekr.20160316091132.86: *3* g.computeLeadingWhitespace
+    #@ g.computeLeadingWhitespace
     def computeLeadingWhitespace(self, width, tab_width):
         '''Returns optimized whitespace corresponding to width with the indicated tab_width.'''
         if width <= 0:
@@ -1240,7 +1239,7 @@ class LeoGlobals:
         # Negative tab width always gets converted to blanks.
         return ' ' * width
 
-    # @+node:ekr.20160316091132.87: *3* g.computeLeadingWhitespaceWidth
+    #@ g.computeLeadingWhitespaceWidth
     def computeLeadingWhitespaceWidth(self, s, tab_width):
         '''Returns optimized whitespace corresponding to width with the indicated tab_width.'''
         w = 0
@@ -1253,7 +1252,7 @@ class LeoGlobals:
                 break
         return w
 
-    # @+node:ekr.20160316091132.89: *3* g.pdb
+    #@ g.pdb
     def pdb(self):
         try:
             from leo.core import leoGlobals as leo_g
@@ -1264,18 +1263,18 @@ class LeoGlobals:
 
             pdb.set_trace()
 
-    # @+node:ekr.20160316091132.90: *3* g.shortFileName
+    #@ g.shortFileName
     def shortFileName(self, fileName, n=None):
         if n is None or n < 1:
             return os.path.basename(fileName)
         return '/'.join(fileName.replace('\\', '/').split('/')[-n:])
 
-    # @+node:ekr.20160316091132.91: *3* g.splitLines
+    #@ g.splitLines
     def splitLines(self, s):
         '''Split s into lines, preserving trailing newlines.'''
         return s.splitlines(True) if s else []
 
-    # @+node:ekr.20160316091132.92: *3* g.toUnicode (py2cs.py)
+    #@ g.toUnicode (py2cs.py)
     def toUnicode(self, s, encoding='utf-8', reportErrors=False):
         '''Convert a non-unicode string with the given encoding to unicode.'''
         if isinstance(s, str):
@@ -1297,7 +1296,7 @@ class LeoGlobals:
                 )
         return s
 
-    # @+node:ekr.20160316091132.93: *3* g.trace (py2cs.py)
+    #@ g.trace (py2cs.py)
     def trace(self, *args, **keys):
         try:
             from leo.core import leoGlobals as leo_g
@@ -1306,15 +1305,15 @@ class LeoGlobals:
         except ImportError:
             print(args, keys)
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20160316091132.95: ** class MakeCoffeeScriptController
+#@< class MakeCoffeeScriptController
 class MakeCoffeeScriptController:
     '''The controller class for python_to_coffeescript.py.'''
 
-    # @+others
-    # @+node:ekr.20160316091132.96: *3* mcs.ctor
+    #@+others
+    #@> mcs.ctor
     def __init__(self):
         '''Ctor for MakeCoffeeScriptController class.'''
         self.options = {}
@@ -1328,7 +1327,7 @@ class MakeCoffeeScriptController:
         self.overwrite = False
         self.verbose = False  # Trace config arguments.
 
-    # @+node:ekr.20160316091132.97: *3* mcs.finalize
+    #@ mcs.finalize
     def finalize(self, fn):
         '''Finalize and regularize a filename.'''
         fn = os.path.expanduser(fn)
@@ -1336,7 +1335,7 @@ class MakeCoffeeScriptController:
         fn = os.path.normpath(fn)
         return fn
 
-    # @+node:ekr.20160316091132.98: *3* mcs.make_coffeescript_file
+    #@ mcs.make_coffeescript_file
     def make_coffeescript_file(self, fn, s=None):
         '''
         Make a stub file in the output directory for all source files mentioned
@@ -1370,12 +1369,12 @@ class MakeCoffeeScriptController:
         else:
             print('output directory not not found: %s' % dir_)
 
-    # @+node:ekr.20160316091132.99: *3* mcs.output_time_stamp
+    #@ mcs.output_time_stamp
     def output_time_stamp(self, f):
         '''Put a time-stamp in the output file f.'''
         f.write('# python_to_coffeescript: %s\n' % time.strftime("%a %d %b %Y at %H:%M:%S"))
 
-    # @+node:ekr.20160316091132.100: *3* mcs.run
+    #@ mcs.run
     def run(self):
         '''
         Make stub files for all files.
@@ -1396,7 +1395,7 @@ class MakeCoffeeScriptController:
         elif not self.enable_unit_tests:
             print('no input files')
 
-    # @+node:ekr.20160316091132.101: *3* mcs.run_all_unit_tests
+    #@ mcs.run_all_unit_tests
     def run_all_unit_tests(self):
         '''Run all unit tests in the python-to-coffeescript/test directory.'''
         import unittest
@@ -1405,7 +1404,7 @@ class MakeCoffeeScriptController:
         suite = loader.discover(os.path.abspath('.'), pattern='test*.py', top_level_dir=None)
         unittest.TextTestRunner(verbosity=1).run(suite)
 
-    # @+node:ekr.20160316091132.102: *3* mcs.scan_command_line
+    #@ mcs.scan_command_line
     def scan_command_line(self):
         '''Set ivars from command-line arguments.'''
         # This automatically implements the --help option.
@@ -1446,7 +1445,7 @@ class MakeCoffeeScriptController:
             if args:
                 self.files = args
 
-    # @+node:ekr.20160316091132.103: *3* mcs.scan_options & helpers
+    #@ mcs.scan_options & helpers
     def scan_options(self):
         '''Set all configuration-related ivars.'''
         if not self.config_fn:
@@ -1486,14 +1485,14 @@ class MakeCoffeeScriptController:
         # self.general_patterns = self.scan_patterns('General Patterns')
         # self.make_patterns_dict()
 
-    # @+node:ekr.20160316091132.104: *4* mcs.create_parser
+    #@> mcs.create_parser
     def create_parser(self):
         '''Create a RawConfigParser and return it.'''
         parser = configparser.RawConfigParser()
         parser.optionxform = str
         return parser
 
-    # @+node:ekr.20160316091132.105: *4* mcs.get_config_string
+    #@ mcs.get_config_string
     def get_config_string(self):
         fn = self.finalize(self.config_fn)
         if os.path.exists(fn):
@@ -1506,7 +1505,7 @@ class MakeCoffeeScriptController:
         print('\nconfiguration file not found: %s' % fn)
         return ''
 
-    # @+node:ekr.20160316091132.106: *4* mcs.init_parser
+    #@ mcs.init_parser
     def init_parser(self, s):
         '''Add double back-slashes to all patterns starting with '['.'''
         if not s:
@@ -1524,7 +1523,7 @@ class MakeCoffeeScriptController:
         # pylint: disable=deprecated-method
         self.parser.readfp(file_object)
 
-    # @+node:ekr.20160316091132.107: *4* mcs.is_section_name
+    #@ mcs.is_section_name
     def is_section_name(self, s):
         def munge(s):
             return s.strip().lower().replace(' ', '')
@@ -1537,10 +1536,10 @@ class MakeCoffeeScriptController:
                     return True
         return False
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20160316091132.108: ** class ParseState
+#@<2 class ParseState
 class ParseState:
     '''A class representing items parse state stack.'''
 
@@ -1554,13 +1553,13 @@ class ParseState:
     __str__ = __repr__
 
 
-# @+node:ekr.20160316091132.109: ** class TokenSync
+#@ class TokenSync
 class TokenSync:
     '''A class to sync and remember tokens.'''
 
     # To do: handle comments, line breaks...
-    # @+others
-    # @+node:ekr.20160316091132.110: *3*  ts.ctor & helpers
+    #@+others
+    #@>  ts.ctor & helpers
     def __init__(self, s, tokens):
         '''Ctor for TokenSync class.'''
         assert isinstance(tokens, list)  # Not a generator.
@@ -1574,7 +1573,7 @@ class TokenSync:
         self.string_tokens = self.make_string_tokens()
         self.ignored_lines = self.make_ignored_lines()
 
-    # @+node:ekr.20160316091132.111: *4* ts.make_blank_lines
+    #@> ts.make_blank_lines
     def make_blank_lines(self):
         '''Return of list of line numbers of blank lines.'''
         result = []
@@ -1584,7 +1583,7 @@ class TokenSync:
                 result.append(i)
         return result
 
-    # @+node:ekr.20160316091132.112: *4* ts.make_ignored_lines
+    #@ ts.make_ignored_lines
     def make_ignored_lines(self):
         '''
         Return a copy of line_tokens containing ignored lines,
@@ -1611,7 +1610,7 @@ class TokenSync:
             self.first_leading_line = len(result)
         return result
 
-    # @+node:ekr.20160316091132.113: *4* ts.make_line_tokens (trace tokens)
+    #@ ts.make_line_tokens (trace tokens)
     def make_line_tokens(self, tokens):
         '''
         Return a list of lists of tokens for each list in self.lines.
@@ -1630,7 +1629,7 @@ class TokenSync:
         assert len(self.lines) + 1 == len(result), len(result)
         return result
 
-    # @+node:ekr.20160316091132.114: *4* ts.make_nl_token
+    #@ ts.make_nl_token
     def make_nl_token(self):
         '''Return a newline token with '\n' as both val and raw_val.'''
         t1 = token_module.NEWLINE
@@ -1640,7 +1639,7 @@ class TokenSync:
         t5 = '\n'
         return t1, t2, t3, t4, t5
 
-    # @+node:ekr.20160316091132.115: *4* ts.make_string_tokens
+    #@ ts.make_string_tokens
     def make_string_tokens(self):
         '''Return a copy of line_tokens containing only string tokens.'''
         result = []
@@ -1649,7 +1648,7 @@ class TokenSync:
         assert len(result) == len(self.line_tokens)
         return result
 
-    # @+node:ekr.20160316091132.116: *3* ts.check_strings
+    #@< ts.check_strings
     def check_strings(self):
         '''Check that all strings have been consumed.'''
         for i, aList in enumerate(self.string_tokens):
@@ -1658,7 +1657,7 @@ class TokenSync:
                 for z in aList:
                     print(self.dump_token(z))
 
-    # @+node:ekr.20160316091132.117: *3* ts.dump_token
+    #@ ts.dump_token
     def dump_token(self, token, verbose=False):
         '''Dump the token. It is either a string or a 5-tuple.'''
         if isinstance(token, str):
@@ -1669,7 +1668,7 @@ class TokenSync:
         val = g.toUnicode(t2)
         return 'token: %10s %r' % (kind, val) if verbose else val
 
-    # @+node:ekr.20160316091132.118: *3* ts.is_line_comment
+    #@ ts.is_line_comment
     def is_line_comment(self, token):
         '''Return True if the token represents a full-line comment.'''
         t1, t2, t3, t4, t5 = token
@@ -1677,7 +1676,7 @@ class TokenSync:
         raw_val = t5
         return kind == 'comment' and raw_val.lstrip().startswith('#')
 
-    # @+node:ekr.20160316091132.119: *3* ts.join
+    #@ ts.join
     def join(self, aList, sep=','):
         '''return the items of the list joined by sep string.'''
         tokens = []
@@ -1687,7 +1686,7 @@ class TokenSync:
                 tokens.append(sep)
         return tokens
 
-    # @+node:ekr.20160316091132.120: *3* ts.last_node
+    #@ ts.last_node
     def last_node(self, node):
         '''Return the node of node's tree with the largest lineno field.'''
 
@@ -1713,7 +1712,7 @@ class TokenSync:
         w.visit(node)
         return w.node
 
-    # @+node:ekr.20160316091132.121: *3* ts.leading_lines
+    #@ ts.leading_lines
     def leading_lines(self, node):
         '''Return a list of the preceding comment and blank lines'''
         # This can be called on arbitrary nodes.
@@ -1729,12 +1728,12 @@ class TokenSync:
             self.first_leading_line = i
         return leading
 
-    # @+node:ekr.20160316091132.122: *3* ts.leading_string
+    #@ ts.leading_string
     def leading_string(self, node):
         '''Return a string containing all lines preceding node.'''
         return ''.join(self.leading_lines(node))
 
-    # @+node:ekr.20160316091132.123: *3* ts.line_at
+    #@ ts.line_at
     def line_at(self, node, continued_lines=True):
         '''Return the lines at the node, possibly including continuation lines.'''
         n = getattr(node, 'lineno', None)
@@ -1753,7 +1752,7 @@ class TokenSync:
             return ''.join(aList)
         return self.lines[n - 1]
 
-    # @+node:ekr.20160316091132.124: *3* ts.sync_string
+    #@ ts.sync_string
     def sync_string(self, node):
         '''Return the spelling of the string at the given node.'''
         n = node.lineno
@@ -1765,7 +1764,7 @@ class TokenSync:
         g.trace('===== underflow line:', n, node.s)
         return node.s
 
-    # @+node:ekr.20160316091132.125: *3* ts.token_kind/raw_val/val
+    #@ ts.token_kind/raw_val/val
     def token_kind(self, token):
         '''Return the token's type.'''
         t1, t2, t3, t4, t5 = token
@@ -1781,7 +1780,7 @@ class TokenSync:
         t1, t2, t3, t4, t5 = token
         return g.toUnicode(t2)
 
-    # @+node:ekr.20160316091132.126: *3* ts.tokens_for_statement
+    #@ ts.tokens_for_statement
     def tokens_for_statement(self, node):
         assert isinstance(node, ast.AST), node
         name = node.__class__.__name__
@@ -1791,7 +1790,7 @@ class TokenSync:
         else:
             g.trace('no lineno', name)
 
-    # @+node:ekr.20160316091132.127: *3* ts.trailing_comment
+    #@ ts.trailing_comment
     def trailing_comment(self, node):
         '''
         Return a string containing the trailing comment for the node, if any.
@@ -1801,7 +1800,7 @@ class TokenSync:
             return self.trailing_comment_at_lineno(node.lineno)
         return '\n'
 
-    # @+node:ekr.20160316091132.128: *3* ts.trailing_comment_at_lineno
+    #@ ts.trailing_comment_at_lineno
     def trailing_comment_at_lineno(self, lineno):
         '''Return any trailing comment at the given node.lineno.'''
         tokens = self.line_tokens[lineno - 1]
@@ -1814,7 +1813,7 @@ class TokenSync:
                     return s
         return '\n'
 
-    # @+node:ekr.20160316091132.129: *3* ts.trailing_lines
+    #@ ts.trailing_lines
     def trailing_lines(self):
         '''return any remaining ignored lines.'''
         trailing = []
@@ -1828,13 +1827,13 @@ class TokenSync:
         self.first_leading_line = i
         return trailing
 
-    # @-others
+    #@-others
 
 
-# @-others
+#@-others
 
 g = LeoGlobals()  # For ekr.
 if __name__ == "__main__":
     main()
 # A final comment for testing.
-# @-leo
+#@-leo

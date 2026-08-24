@@ -1,7 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20080708094444.1: * @file leoShadow.py
-# @+<< leoShadow docstring >>
-# @+node:ekr.20080708094444.78: ** << leoShadow docstring >>
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20080708094444.1] @f leoShadow.py
+#@+<< leoShadow docstring >>
+#@> << leoShadow docstring >>
 """
 leoShadow.py
 
@@ -25,9 +25,9 @@ Settings:
   This is useful for name-based tools like py.test.
 """
 
-# @-<< leoShadow docstring >>
-# @+<< leoShadow imports & annotations >>
-# @+node:ekr.20080708094444.52: ** << leoShadow imports & annotations >>
+#@-<< leoShadow docstring >>
+#@+<< leoShadow imports & annotations >>
+#@ << leoShadow imports & annotations >>
 from __future__ import annotations
 import difflib
 import os
@@ -37,11 +37,11 @@ from leo.core import leoGlobals as g
 if TYPE_CHECKING:  # pragma: no cover
     from leo.core.leoCommands import Commands as Cmdr
     from leo.core.leoNodes import Position
-# @-<< leoShadow imports & annotations >>
+#@-<< leoShadow imports & annotations >>
 
 
-# @+others
-# @+node:ekr.20080708094444.80: ** class ShadowController
+#@+others
+#@ class ShadowController
 class ShadowController:
     __slots__ = (
         'a',
@@ -66,8 +66,8 @@ class ShadowController:
 
     """A class to manage @shadow files"""
 
-    # @+others
-    # @+node:ekr.20080708094444.79: *3*  x.ctor & x.reloadSettings
+    #@+others
+    #@>  x.ctor & x.reloadSettings
     def __init__(self, c: Cmdr, trace: bool = False, trace_writers: bool = False) -> None:
         """Ctor for ShadowController class."""
         self.c = c
@@ -95,8 +95,8 @@ class ShadowController:
         self.shadow_in_home_dir = c.config.getBool('shadow-in-home-dir', default=False)
         self.shadow_subdir = g.os_path_normpath(self.shadow_subdir)
 
-    # @+node:ekr.20080711063656.1: *3* x.File utils
-    # @+node:ekr.20080711063656.7: *4* x.baseDirName
+    #@ x.File utils
+    #@> x.baseDirName
     def baseDirName(self) -> str:
         c = self.c
         if filename := c.fileName():
@@ -105,7 +105,7 @@ class ShadowController:
         self.error('Can not compute shadow path: .leo file has not been saved')
         return ''
 
-    # @+node:ekr.20080711063656.4: *4* x.dirName and pathName
+    #@ x.dirName and pathName
     def dirName(self, filename: str) -> str:
         """Return the directory for filename."""
         x = self
@@ -117,7 +117,7 @@ class ShadowController:
         theDir = x.baseDirName()
         return g.finalize_join(theDir, filename) if theDir else ''
 
-    # @+node:ekr.20080712080505.3: *4* x.isSignificantPublicFile
+    #@ x.isSignificantPublicFile
     def isSignificantPublicFile(self, fn: str) -> bool:
         """
         This tells the AtFile.read logic whether to import a public file
@@ -125,7 +125,7 @@ class ShadowController:
         """
         return bool(g.os_path_exists(fn) and g.os_path_isfile(fn) and g.os_path_getsize(fn) > 10)
 
-    # @+node:ekr.20080710082231.19: *4* x.makeShadowDirectory
+    #@ x.makeShadowDirectory
     def makeShadowDirectory(self, fn: str) -> bool:
         """Make a shadow directory for the **public** fn."""
         x = self
@@ -135,7 +135,7 @@ class ShadowController:
             g.makeAllNonExistentDirectories(path)
         return g.os_path_exists(path) and g.os_path_isdir(path)
 
-    # @+node:ekr.20080713091247.1: *4* x.replaceFileWithString
+    #@ x.replaceFileWithString
     def replaceFileWithString(self, encoding: str, fileName: str, s: str) -> bool:
         """
         Replace the file with s if s is different from theFile's contents.
@@ -174,7 +174,7 @@ class ShadowController:
             g.es_exception()
             return False
 
-    # @+node:ekr.20080711063656.6: *4* x.shadowDirName and shadowPathName
+    #@ x.shadowDirName and shadowPathName
     def shadowDirName(self, filename: str) -> str:
         """Return the directory for the shadow file corresponding to filename."""
         x = self
@@ -202,8 +202,8 @@ class ShadowController:
             x.shadow_prefix + g.shortFileName(filename),
         )
 
-    # @+node:ekr.20080708192807.1: *3* x.Propagation
-    # @+node:ekr.20080708094444.38: *4* x.propagate_changed_lines (main algorithm) & helpers
+    #@< x.Propagation
+    #@> x.propagate_changed_lines (main algorithm) & helpers
     def propagate_changed_lines(
         self,
         new_public_lines: list[str],
@@ -211,8 +211,8 @@ class ShadowController:
         marker: Marker,
         p: Position | None = None,
     ) -> list[str]:
-        # @+<< docstring >>
-        # @+node:ekr.20150207044400.9: *5*  << docstring >>
+        #@+<< docstring >>
+        #@>  << docstring >>
         """
         The Mulder update algorithm, revised by EKR.
 
@@ -222,7 +222,7 @@ class ShadowController:
         The algorithm never deletes or rearranges sentinels. However, verbatim
         sentinels may be inserted or deleted as needed.
         """
-        # @-<< docstring >>
+        #@-<< docstring >>
         x = self
         x.init_ivars(new_public_lines, old_private_lines, marker)
         sm = difflib.SequenceMatcher(None, x.a, x.b)
@@ -237,166 +237,7 @@ class ShadowController:
         x.results.extend(x.trailing_sentinels)
         return x.results
 
-    # @+node:ekr.20150207111757.180: *5* x.dump_args
-    def dump_args(self) -> None:
-        """Dump the argument lines."""
-        x = self
-        table = (
-            (x.old_sent_lines, 'old private lines'),
-            (x.a, 'old public lines'),
-            (x.b, 'new public lines'),
-        )
-        for lines, title in table:
-            x.dump_lines(lines, title)
-        g.pr()
-
-    # @+node:ekr.20150207111757.178: *5* x.dump_lines
-    def dump_lines(self, lines: list[str], title: str) -> None:
-        """Dump the given lines."""
-        print(f"\n{title}...\n")
-        for i, line in enumerate(lines):
-            g.pr(f"{i:4} {line!r}")
-
-    # @+node:ekr.20150209044257.6: *5* x.init_data
-    def init_data(self) -> list[str]:
-        """
-        Init x.sentinels and x.trailing_sentinels arrays.
-        Return the list of non-sentinel lines in x.old_sent_lines.
-        """
-        x = self
-        lines = x.old_sent_lines
-        # The sentinels preceding each non-sentinel line,
-        # not including @verbatim sentinels.
-        sentinels: list[str] = []
-        # A list of all non-sentinel lines found.  Should match x.a.
-        new_lines: list[str] = []
-        # A list of lists of sentinels preceding each line.
-        x.sentinels = []
-        i = 0
-        while i < len(lines):
-            line = lines[i]
-            i += 1
-            if x.marker.isVerbatimSentinel(line):
-                # Do *not* include the @verbatim sentinel.
-                if i < len(lines):
-                    line = lines[i]
-                    i += 1
-                    x.sentinels.append(sentinels)
-                    sentinels = []
-                    new_lines.append(line)
-                else:
-                    x.verbatim_error()
-            elif x.marker.isSentinel(line):
-                sentinels.append(line)
-            else:
-                x.sentinels.append(sentinels)
-                sentinels = []
-                new_lines.append(line)
-        x.trailing_sentinels = sentinels
-        return new_lines
-
-    # @+node:ekr.20080708094444.40: *5* x.init_ivars
-    def init_ivars(
-        self,
-        new_public_lines: list[str],
-        old_private_lines: list[str],
-        marker: Marker,
-    ) -> None:
-        """Init all ivars used by propagate_changed_lines & its helpers."""
-        x = self
-        x.delim1, x.delim2 = marker.getDelims()
-        x.gnxDict = x.c.fileCommands.gnxDict
-        x.marker = marker
-        x.old_sent_lines = old_private_lines
-        x.results = []
-        x.verbatim_line = f"{x.delim1}@verbatim{x.delim2}\n"
-        old_public_lines = x.init_data()
-        x.b = x.preprocess(new_public_lines)
-        x.a = x.preprocess(old_public_lines)
-
-    # @+node:ekr.20150207044400.16: *5* x.op_bad
-    def op_bad(self, tag: str, ai: int, aj: int, bi: int, bj: int) -> None:
-        """Report an unexpected opcode."""
-        x = self
-        x.error(f"unknown SequenceMatcher opcode: {tag!r}")
-
-    # @+node:ekr.20150207044400.12: *5* x.op_delete
-    def op_delete(self, tag: str, ai: int, aj: int, bi: int, bj: int) -> None:
-        """Handle the 'delete' opcode."""
-        x = self
-        for i in range(ai, aj):
-            x.put_sentinels(i)
-
-    # @+node:ekr.20150207044400.13: *5* x.op_equal
-    def op_equal(self, tag: str, ai: int, aj: int, bi: int, bj: int) -> None:
-        """Handle the 'equal' opcode."""
-        x = self
-        assert aj - ai == bj - bi and x.a[ai:aj] == x.b[bi:bj]
-        for i in range(ai, aj):
-            x.put_sentinels(i)
-            # works because x.lines[ai:aj] == x.lines[bi:bj]
-            x.put_plain_line(x.a[i])
-
-    # @+node:ekr.20150207044400.14: *5* x.op_insert
-    def op_insert(self, tag: str, ai: int, aj: int, bi: int, bj: int) -> None:
-        """Handle the 'insert' opcode."""
-        x = self
-        for i in range(bi, bj):
-            x.put_plain_line(x.b[i])
-        # Prefer to put sentinels after inserted nodes.
-        # Requires a call to x.put_sentinels(0) before the main loop.
-
-    # @+node:ekr.20150207044400.15: *5* x.op_replace
-    def op_replace(self, tag: str, ai: int, aj: int, bi: int, bj: int) -> None:
-        """Handle the 'replace' opcode."""
-        x = self
-        if 1:
-            # Intersperse sentinels and lines.
-            b_lines = x.b[bi:bj]
-            for i in range(ai, aj):
-                x.put_sentinels(i)
-                if b_lines:
-                    x.put_plain_line(b_lines.pop(0))
-            # Put any trailing lines.
-            while b_lines:
-                x.put_plain_line(b_lines.pop(0))
-        else:
-            # Feasible. Causes the present unit tests to fail.
-            for i in range(ai, aj):
-                x.put_sentinels(i)
-            for i in range(bi, bj):
-                x.put_plain_line(x.b[i])
-
-    # @+node:ekr.20150208060128.7: *5* x.preprocess
-    def preprocess(self, lines: list[str]) -> list[str]:
-        """
-        Preprocess public lines, adding newlines as needed.
-        This happens before the diff.
-        """
-        result = []
-        for line in lines:
-            if not line.endswith('\n'):
-                line = line + '\n'
-            result.append(line)
-        return result
-
-    # @+node:ekr.20150208223018.4: *5* x.put_plain_line
-    def put_plain_line(self, line: str) -> None:
-        """Put a plain line to x.results, inserting verbatim lines if necessary."""
-        x = self
-        if x.marker.isSentinel(line):
-            x.results.append(x.verbatim_line)
-        x.results.append(line)
-
-    # @+node:ekr.20150209044257.8: *5* x.put_sentinels
-    def put_sentinels(self, i: int) -> None:
-        """Put all the sentinels to the results"""
-        x = self
-        if 0 <= i < len(x.sentinels):
-            sentinels = x.sentinels[i]
-            x.results.extend(sentinels)
-
-    # @+node:ekr.20080708094444.36: *4* x.propagate_changes
+    #@< x.propagate_changes
     def propagate_changes(self, old_public_file: str, old_private_file: str) -> bool:
         """
         Propagate the changes from the public file (without_sentinels)
@@ -433,7 +274,7 @@ class ShadowController:
             x.message(f"updated private {fn} from public {old_public_file}")
         return copy
 
-    # @+node:bwmulder.20041231170726: *4* x.updatePublicAndPrivateFiles
+    #@ x.updatePublicAndPrivateFiles
     def updatePublicAndPrivateFiles(self, root: Position, fn: str, shadow_fn: str) -> None:
         """handle crucial @shadow read logic.
 
@@ -443,8 +284,8 @@ class ShadowController:
             # Update the private shadow file from the public file.
             x.propagate_changes(fn, shadow_fn)
 
-    # @+node:ekr.20080708094444.89: *3* x.Utils...
-    # @+node:ekr.20080708094444.85: *4* x.error & message & verbatim_error
+    #@< x.Utils...
+    #@> x.error & message & verbatim_error
     def error(self, s: str, silent: bool = False) -> None:
         x = self
         if not silent:
@@ -460,7 +301,7 @@ class ShadowController:
         x.error('file syntax error: nothing follows verbatim sentinel')
         g.trace(g.callers())
 
-    # @+node:ekr.20090529125512.6122: *4* x.markerFromFileLines & helper
+    #@ x.markerFromFileLines & helper
     def markerFromFileLines(self, lines: list[str], fn: str) -> Marker:
         """Return the sentinel delimiter comment to be used for filename."""
         at, x = self.c.atFileCommands, self
@@ -472,7 +313,7 @@ class ShadowController:
             delims = start, '', ''
         return x.Marker(delims)
 
-    # @+node:ekr.20090529125512.6125: *5* x.findLeoLine
+    #@> x.findLeoLine
     def findLeoLine(self, lines: list[str]) -> str:
         """Return the @+leo line, or ''."""
         for line in lines:
@@ -481,7 +322,7 @@ class ShadowController:
                 return line
         return ''
 
-    # @+node:ekr.20080708094444.9: *4* x.markerFromFileName
+    #@< x.markerFromFileName
     def markerFromFileName(self, filename: str) -> Marker:
         """Return the sentinel delimiter comment to be used for filename."""
         x = self
@@ -493,7 +334,7 @@ class ShadowController:
         marker = x.Marker(delims)
         return marker
 
-    # @+node:ekr.20080708094444.29: *4* x.separate_sentinels
+    #@ x.separate_sentinels
     def separate_sentinels(self, lines: list[str], marker: Marker) -> tuple[list[str], list[str]]:
         """
         Separates regular lines from sentinel lines.
@@ -525,7 +366,7 @@ class ShadowController:
             i += 1
         return regular_lines, sentinel_lines
 
-    # @+node:ekr.20080708094444.33: *4* x.show_error & helper
+    #@ x.show_error & helper
     def show_error(
         self,
         lines1: list[str],
@@ -543,17 +384,17 @@ class ShadowController:
         x.show_error_lines(lines2, 'shadow_errors.tmp2')
         g.es_print('\n@shadow did not pick up the external changes correctly')
 
-    # @+node:ekr.20080822065427.4: *5* x.show_error_lines
+    #@> x.show_error_lines
     def show_error_lines(self, lines: list[str], fileName: str) -> None:
         for i, line in enumerate(lines):
             g.es_print(f"{i:3} {line!r}")
 
-    # @+node:ekr.20090529061522.5727: *3* class x.Marker
+    #@<2 class x.Marker
     class Marker:
         """A class representing comment delims in @shadow files."""
 
-        # @+others
-        # @+node:ekr.20090529061522.6257: *4* ctor & repr
+        #@+others
+        #@> ctor & repr
         def __init__(self, delims: tuple[str, str, str]) -> None:
             """Ctor for Marker class."""
             delim1, delim2, delim3 = delims
@@ -570,14 +411,14 @@ class ShadowController:
                 delims = f"{self.delim2} {self.delim3}"
             return f"<Marker: delims: {delims!r}>"
 
-        # @+node:ekr.20090529061522.6258: *4* getDelims
+        #@ getDelims
         def getDelims(self) -> tuple[str, str]:
             """Return the pair of delims to be used in sentinel lines."""
             if self.delim1:
                 return self.delim1, ''
             return self.delim2, self.delim3
 
-        # @+node:ekr.20090529061522.6259: *4* isSentinel
+        #@ isSentinel
         def isSentinel(self, s: str, suffix: str = '') -> bool:
             """Return True is line s contains a valid sentinel comment."""
             s = s.strip()
@@ -587,18 +428,18 @@ class ShadowController:
                 return s.startswith(self.delim2 + '@' + suffix) and s.endswith(self.delim3)
             return False
 
-        # @+node:ekr.20090529061522.6260: *4* isVerbatimSentinel
+        #@ isVerbatimSentinel
         def isVerbatimSentinel(self, s: str) -> bool:
             """Return True if s is an @verbatim sentinel."""
             return self.isSentinel(s, suffix='verbatim')
 
-        # @-others
+        #@-others
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @@pagewidth 70
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@@pagewidth 70
+#@-leo

@@ -1,16 +1,16 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20051016160700: * @file ../plugins/testRegisterCommand.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20051016160700] @f ../plugins/testRegisterCommand.py
 """A plugin to test k.registerCommand."""
 # See #560: https://github.com/leo-editor/leo-editor/issues/560
 
-# @@language python
-# @@tabwidth -4
+#@@language python
+#@@tabwidth -4
 
 from leo.core import leoGlobals as g
 
 
-# @+others
-# @+node:ekr.20051016161205: ** init
+#@+others
+#@> init
 def init():
     """Return True if the plugin has loaded successfully."""
     g.registerHandler('after-create-leo-frame', onCreate)
@@ -18,7 +18,7 @@ def init():
     return True
 
 
-# @+node:ekr.20051016161205.1: ** onCreate (testRegisterCommand.py)
+#@ onCreate (testRegisterCommand.py)
 def hello_command(event):
     g.es_print('Hello from %s' % (g.shortFileName(__file__)), color='purple')
 
@@ -38,5 +38,5 @@ def hello_command2(event):
     g.es_print('Hello 2 from %s' % (g.shortFileName(__file__)), color='red')
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

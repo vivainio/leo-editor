@@ -1,5 +1,5 @@
-#@+leo-ver=5-thin
-#@+node:bob.20180403110444.1: * @file shell_name.sh
+#@+leo-ver=cub-1-thin
+#@0 [bob.20180403110444.1] @f shell_name.sh
 #@@language shell
 
 ps  -ef | grep $$ | grep -v grep

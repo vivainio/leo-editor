@@ -1,9 +1,9 @@
-#@+leo-ver=5-thin
-#@+node:mhw.20190808083026.1: * @file remove-desktop-links.leox
+#@+leo-ver=cub-1-thin
+#@0 [mhw.20190808083026.1] @f remove-desktop-links.leox
 #@@language python
 #@@tabwidth -4
 #@+others
-#@+node:mhw.20190808083336.1: ** main
+#@> [mhw.20190808083336.1] main
 """Remove Leo Editor shortcuts from desktop and system menu
 
 The approach is naive:
@@ -47,7 +47,7 @@ for fil in lnkfiles:
 
 if debug:
     g.es_print(f"\n*** debug:\n{(scut)}")
-#@+node:lkj.20190926225552.1: ** usage
+#@ [lkj.20190926225552.1] usage
 """make_shortcut() arguments:
 ---------
 script      (str) path to script, may include command-line arguments

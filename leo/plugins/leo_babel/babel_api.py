@@ -1,18 +1,18 @@
 #!/usr/bin/python
 # coding=utf-8
-# @+leo-ver=5-thin
-# @+node:bob.20170716140541.1: * @file babel_api.py
-# @@first
-# @@first
-# @@language python
-# @@tabwidth -4
+#@+leo-ver=cub-1-thin
+#@0 [bob.20170716140541.1] @f babel_api.py
+#@@first
+#@@first
+#@@language python
+#@@tabwidth -4
 
-# @+<< version >>
-# @+node:bob.20170716140706.1: ** << version >>
+#@+<< version >>
+#@> << version >>
 __version__ = '1.0.0'
-# @-<< version >>
-# @+<< imports >>
-# @+node:bob.20170716142204.1: ** << imports >>
+#@-<< version >>
+#@+<< imports >>
+#@ << imports >>
 import os.path
 import sys
 
@@ -21,14 +21,14 @@ from leo.plugins.leo_babel import babel_lib
 import leo.core.leoGlobals as leoG
 
 _ = leoG  # Keep pyflakes happy if leoG isn't used.
-# @-<< imports >>
+#@-<< imports >>
 
-# @+others
-# @+node:bob.20170910145203.1: ** Library Functions included in API
+#@+others
+#@ Library Functions included in API
 unl2pos = babel_lib.unl2pos
 
 
-# @+node:bob.20170716142236.1: ** class BABEL_ERROR(Exception)
+#@ class BABEL_ERROR(Exception)
 class BABEL_ERROR(Exception):
     pass
 
@@ -55,12 +55,12 @@ class BABEL_UNL_NO_POS(BABEL_ERROR):
     pass
 
 
-# @+node:bob.20170726143547.1: ** class BabelGlobals(object)
+#@ class BabelGlobals(object)
 class BabelGlobals(object):
     """Globals used by leo-Babel"""
 
-    # @+others
-    # @+node:bob.20170726143547.2: *3* __init__()
+    #@+others
+    #@> __init__()
     def __init__(self):
         """Initialize the Leo-Babel globals
 
@@ -79,15 +79,15 @@ class BabelGlobals(object):
         )
         self.babel_api = sys.modules[__name__]
 
-    # @-others
+    #@-others
 
 
-# @+node:bob.20180318164514.1: ** class BabelCmdr(object)
+#@< class BabelCmdr(object)
 class BabelCmdr(object):
     """Globals used by leo-Babel"""
 
-    # @+others
-    # @+node:bob.20180318164514.2: *3* __init__(self, cmdr)
+    #@+others
+    #@> __init__(self, cmdr)
     def __init__(self, cmdr):
         """Initialize the Leo-Babel Parameters specific to this Leo-Editor file
 
@@ -99,8 +99,8 @@ class BabelCmdr(object):
 
         """
 
-        # @+others
-        # @+node:bob.20180318164514.3: *4* _getColor(cmdr, settingName, default=None)
+        #@+others
+        #@> _getColor(cmdr, settingName, default=None)
         def _getColor(cmdr, settingName, default=None):
             """Add a default option to c.config.getColor()"""
 
@@ -110,7 +110,7 @@ class BabelCmdr(object):
             else:
                 return default
 
-        # @+node:bob.20180318164514.4: *4* _getString(cmdr, settingName, default=None)
+        #@ _getString(cmdr, settingName, default=None)
         def _getString(cmdr, settingName, default=None):
             """Add a default option to c.config.getString()"""
 
@@ -120,7 +120,7 @@ class BabelCmdr(object):
             else:
                 return default
 
-        # @+node:bob.20240102112512.1: *4* _getInt(cmdr, settingName, default=None)
+        #@ _getInt(cmdr, settingName, default=None)
         def _getInt(cmdr, settingName, default=None):
             """Add a default option to c.config.getInt()"""
 
@@ -130,7 +130,7 @@ class BabelCmdr(object):
             else:
                 return default
 
-        # @-others
+        #@-others
 
         self.cmdr = cmdr
         self.babel_color_stdout = _getColor(cmdr, 'Leo-Babel-stdout', default='#000000')
@@ -166,8 +166,8 @@ class BabelCmdr(object):
         self.termMsg = None
         self.etMsg = None
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

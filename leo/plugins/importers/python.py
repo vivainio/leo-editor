@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20211209153303.1: * @file ../plugins/importers/python.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20211209153303.1] @f ../plugins/importers/python.py
 """The new, tokenize based, @auto importer for Python."""
 
 from __future__ import annotations
@@ -15,8 +15,8 @@ if TYPE_CHECKING:
     from leo.core.leoNodes import Position
 
 
-# @+others
-# @+node:ekr.20220720043557.1: ** class Python_Importer
+#@+others
+#@> class Python_Importer
 class Python_Importer(Importer):
     """Leo's Python importer"""
 
@@ -35,8 +35,8 @@ class Python_Importer(Importer):
         ('def', def_pat),
     )
 
-    # @+others
-    # @+node:ekr.20230830051934.1: *3* python_i.delete_comments_and_strings
+    #@+others
+    #@> python_i.delete_comments_and_strings
     string_pat1 = re.compile(r'([fFrR]*)("""|")')
     string_pat2 = re.compile(r"([fFrR]*)('''|')")
 
@@ -104,7 +104,7 @@ class Python_Importer(Importer):
         assert textwrap.dedent(''.join(result)) == ''.join(result)  # A crucial check.
         return result
 
-    # @+node:ekr.20230514140918.1: *3* python_i.find_blocks
+    #@ python_i.find_blocks
     def find_blocks(self, i1: int, i2: int) -> list[Block]:
         """
         Python_Importer.find_blocks: override Importer.find_blocks.
@@ -151,7 +151,7 @@ class Python_Importer(Importer):
             assert i > progress, g.callers()
         return results
 
-    # @+node:ekr.20230514140918.4: *3* python_i.find_end_of_block
+    #@ python_i.find_end_of_block
     def find_end_of_block(self, i: int, i2: int) -> int:
         """
         i is the index of the class/def line (within the *guide* lines).
@@ -228,7 +228,7 @@ class Python_Importer(Importer):
             i += 1
         return i2
 
-    # @+node:ekr.20230825095926.1: *3* python_i.postprocess & helpers
+    #@ python_i.postprocess & helpers
     def postprocess(self, parent: Position) -> None:
         """Python_Importer.postprocess."""
 
@@ -241,7 +241,7 @@ class Python_Importer(Importer):
         self.move_class_docstrings(parent)
         self.adjust_at_others(parent)
 
-    # @+node:ekr.20230830113521.1: *4* python_i.adjust_at_others
+    #@> python_i.adjust_at_others
     def adjust_at_others(self, parent: Position) -> None:
         """
         Add a blank line before @others, and remove the leading blank line in the first child.
@@ -256,7 +256,7 @@ class Python_Importer(Importer):
                         child.b = child.b[1:]
                         break
 
-    # @+node:ekr.20230825100219.1: *4* python_i.adjust_headlines
+    #@ python_i.adjust_headlines
     def adjust_headlines(self, parent: Position) -> None:
         """
         python_i.adjust_headlines.
@@ -283,7 +283,7 @@ class Python_Importer(Importer):
                     # Replace 'def ' by 'function'
                     child.h = f"function: {child.h[4:].strip()}"
 
-    # @+node:ekr.20230825164231.1: *4* python_i.find_docstring
+    #@ python_i.find_docstring
     def find_docstring(self, p: Position) -> str | None:
         """Creating a regex that returns a docstring is too tricky."""
         delims = ('"""', "'''")
@@ -307,7 +307,7 @@ class Python_Importer(Importer):
             i += 1
         return None
 
-    # @+node:ekr.20230825164234.1: *4* python_i.move_class_docstring
+    #@ python_i.move_class_docstring
     def move_class_docstring(self, docstring: str, child_p: Position, class_p: Position) -> None:
         """Move the docstring from child_p to class_p."""
 
@@ -345,7 +345,7 @@ class Python_Importer(Importer):
         ]
         class_p.b = ''.join(class_lines[:n] + docstring_lines + class_lines[n:])
 
-    # @+node:ekr.20230825111112.1: *4* python_i.move_class_docstrings
+    #@ python_i.move_class_docstrings
     def move_class_docstrings(self, parent: Position) -> None:
         """
         Move class docstrings from the class node's first child to the class node.
@@ -356,7 +356,7 @@ class Python_Importer(Importer):
                     if docstring := self.find_docstring(child1):
                         self.move_class_docstring(docstring, child1, p)
 
-    # @+node:ekr.20230930181855.1: *4* python_i.move_module_preamble
+    #@ python_i.move_module_preamble
     def move_module_preamble(self, parent: Position) -> None:
         """Move the preamble lines from the parent's first child to the start of parent.b."""
 
@@ -380,10 +380,10 @@ class Python_Importer(Importer):
                 child1.b = child1.b.replace(preamble_s, '')
                 return
 
-    # @-others
+    #@-others
 
 
-# @-others
+#@-others
 
 
 def do_import(c: Cmdr, parent: Position, s: str) -> None:
@@ -395,6 +395,6 @@ importer_dict = {
     'extensions': ['.py', '.pyw', '.pyi', '.codon'],  # mypy uses .pyi extension.
     'func': do_import,
 }
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@@language python
+#@@tabwidth -4
+#@-leo

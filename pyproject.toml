@@ -1,5 +1,5 @@
-#@+leo-ver=5-thin
-#@+node:ekr.20240227064614.1: * @file ../../pyproject.toml
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20240227064614.1] @f ../../pyproject.toml
 #@@language toml
 
 # leo-editor/pyproject.toml
@@ -21,7 +21,7 @@ build-backend = "setuptools.build_meta"
 packages = [
     "leo",
     #@+<< directories that do not contain __init__.py >>
-    #@+node:ekr.20240319155009.1: ** << directories that do not contain __init__.py >>
+    #@> << directories that do not contain __init__.py >>
     "leo.Icons",
     "leo.Icons.Tango",
     "leo.Icons.cleo",
@@ -238,7 +238,7 @@ version = "0.0.0.dev0"  # Placeholder: publish.yml stamps the real version from 
 name = "leo"
 
 #@+<< developer info >>
-#@+node:ekr.20240227084103.1: ** << developer info >>
+#@ << developer info >>
 authors =  [
     {name = "Edward K. Ream"},
     {email = "edreamleo@gmail.com"},
@@ -252,7 +252,7 @@ maintainers =  [
 ]
 #@-<< developer info >>
 #@+<< description >>
-#@+node:ekr.20240227162726.1: ** << description >>
+#@ << description >>
 classifiers = [
   "Development Status :: 6 - Mature",
   "Intended Audience :: Developers",
@@ -278,7 +278,7 @@ readme = "README.md"
 
 # Yes, we must duplicate requirements.txt.
 #@+<< pyproject.toml: dependencies >>
-#@+node:ekr.20240713074535.1: ** << pyproject.toml: dependencies >>
+#@ << pyproject.toml: dependencies >>
 # Warning: these dependencies should match those in requirements.txt.
 
 dependencies = [
@@ -343,7 +343,7 @@ leo-console = "leo.core.runLeo:run_console"
 
 [project.urls]
 #@+<< urls >>
-#@+node:ekr.20240227162816.1: ** << urls >>
+#@ << urls >>
 Documentation = "https://leo-editor.github.io/leo-editor/leo_toc.html"
 "Home Page" = "https://leo-editor.github.io/leo-editor/"
 Issues = "https://github.com/leo-editor/leo-editor/issues"

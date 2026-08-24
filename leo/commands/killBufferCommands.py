@@ -1,9 +1,9 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20150514040142.1: * @file ../commands/killBufferCommands.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20150514040142.1] @f ../commands/killBufferCommands.py
 """Leo's kill-buffer commands."""
 
-# @+<< killBufferCommands imports & annotations >>
-# @+node:ekr.20150514050411.1: ** << killBufferCommands imports & annotations >>
+#@+<< killBufferCommands imports & annotations >>
+#@> << killBufferCommands imports & annotations >>
 from __future__ import annotations
 from collections.abc import Callable
 from typing import TYPE_CHECKING
@@ -23,7 +23,7 @@ if TYPE_CHECKING:  # pragma: no cover
     from leo.core.leoNodes import Position
     from leo.plugins.qt_text import QTextMixin
 
-# @-<< killBufferCommands imports & annotations >>
+#@-<< killBufferCommands imports & annotations >>
 
 
 def cmd(name: str) -> Callable:
@@ -31,13 +31,13 @@ def cmd(name: str) -> Callable:
     return g.new_cmd_decorator(name, ['c', 'killBufferCommands'])
 
 
-# @+others
-# @+node:ekr.20160514120919.1: ** class KillBufferCommandsClass
+#@+others
+#@ class KillBufferCommandsClass
 class KillBufferCommandsClass(BaseEditCommandsClass):
     """A class to manage the kill buffer."""
 
-    # @+others
-    # @+node:ekr.20150514063305.409: *3* kill.ctor & reloadSettings
+    #@+others
+    #@> kill.ctor & reloadSettings
     def __init__(self, c: Cmdr) -> None:
         """Ctor for KillBufferCommandsClass class."""
         # pylint: disable=super-init-not-called
@@ -57,7 +57,7 @@ class KillBufferCommandsClass(BaseEditCommandsClass):
         c = self.c
         self.addWsToKillRing = c.config.getBool('add-ws-to-kill-ring')
 
-    # @+node:ekr.20150514063305.411: *3* addToKillBuffer
+    #@ addToKillBuffer
     def addToKillBuffer(self, text: str) -> None:
         """
         Insert the text into the kill buffer if force is True or
@@ -67,7 +67,7 @@ class KillBufferCommandsClass(BaseEditCommandsClass):
             g.app.globalKillBuffer = [z for z in g.app.globalKillBuffer if z != text]
             g.app.globalKillBuffer.insert(0, text)
 
-    # @+node:ekr.20150514063305.412: *3* backwardKillSentence
+    #@ backwardKillSentence
     @cmd('backward-kill-sentence')
     def backwardKillSentence(self, event: LeoKeyEvent | None = None) -> None:
         """Kill the previous sentence."""
@@ -89,7 +89,7 @@ class KillBufferCommandsClass(BaseEditCommandsClass):
         w.setInsertPoint(i2)
         self.endCommand(changed=True, setLabel=True)
 
-    # @+node:ekr.20150514063305.413: *3* backwardKillWord & killWord
+    #@ backwardKillWord & killWord
     @cmd('backward-kill-word')
     def backwardKillWord(self, event: LeoKeyEvent | None = None) -> None:
         """Kill the previous word."""
@@ -125,13 +125,13 @@ class KillBufferCommandsClass(BaseEditCommandsClass):
             self.killHelper(event, i, j, w)
             self.endCommand(changed=True, setLabel=True)
 
-    # @+node:ekr.20150514063305.414: *3* clearKillRing
+    #@ clearKillRing
     @cmd('clear-kill-ring')
     def clearKillRing(self, event: LeoKeyEvent | None = None) -> None:
         """Clear the kill ring."""
         g.app.globalKillBuffer = []
 
-    # @+node:ekr.20150514063305.415: *3* getClipboard
+    #@ getClipboard
     def getClipboard(self) -> str | None:
         """Return the contents of the clipboard."""
         try:
@@ -144,12 +144,12 @@ class KillBufferCommandsClass(BaseEditCommandsClass):
             g.es_exception()
         return None
 
-    # @+node:ekr.20150514063305.416: *3* class KillBufferIterClass
+    #@ class KillBufferIterClass
     class KillBufferIterClass:
         """Returns a list of positions in a subtree, possibly including the root of the subtree."""
 
-        # @+others
-        # @+node:ekr.20150514063305.417: *4* __init__ & __iter__ (iterateKillBuffer)
+        #@+others
+        #@> __init__ & __iter__ (iterateKillBuffer)
         def __init__(self, c: Cmdr) -> None:
             """Ctor for KillBufferIterClass class."""
             self.c = c
@@ -158,7 +158,7 @@ class KillBufferCommandsClass(BaseEditCommandsClass):
         def __iter__(self) -> Self:
             return self
 
-        # @+node:ekr.20150514063305.418: *4* __next__
+        #@ __next__
         def __next__(self) -> str:
             commands = self.c.killBufferCommands
             aList = g.app.globalKillBuffer  # commands.killBuffer
@@ -176,12 +176,12 @@ class KillBufferCommandsClass(BaseEditCommandsClass):
             self.index = i + 1
             return val
 
-        # @-others
+        #@-others
 
     def iterateKillBuffer(self) -> KillBufferIterClass:
         return self.KillBufferIterClass(self.c)
 
-    # @+node:ekr.20150514063305.419: *3* ec.killHelper
+    #@< ec.killHelper
     def killHelper(
         self,
         event: LeoKeyEvent | None,
@@ -215,7 +215,7 @@ class KillBufferCommandsClass(BaseEditCommandsClass):
             self.endCommand(changed=True, setLabel=True)
         g.app.gui.set_focus(c, w)  # 2607
 
-    # @+node:ekr.20220121073752.1: *3* ec.killParagraphHelper
+    #@ ec.killParagraphHelper
     def killParagraphHelper(
         self,
         event: LeoKeyEvent | None,
@@ -240,7 +240,7 @@ class KillBufferCommandsClass(BaseEditCommandsClass):
         if undoType:
             self.endCommand(changed=True, setLabel=True)
 
-    # @+node:ekr.20150514063305.420: *3* ec.killToEndOfLine
+    #@ ec.killToEndOfLine
     @cmd('kill-to-end-of-line')
     def killToEndOfLine(self, event: LeoKeyEvent | None = None) -> None:
         """Kill from the cursor to end of the line."""
@@ -267,7 +267,7 @@ class KillBufferCommandsClass(BaseEditCommandsClass):
         if i < j:
             self.killHelper(event, i, j, w, undoType='kill-to-end-of-line')
 
-    # @+node:ekr.20150514063305.421: *3* ec.killLine
+    #@ ec.killLine
     @cmd('kill-line')
     def killLine(self, event: LeoKeyEvent | None = None) -> None:
         """Kill the line containing the cursor."""
@@ -291,7 +291,7 @@ class KillBufferCommandsClass(BaseEditCommandsClass):
             pass  # Kill the newline in the present line.
         self.killHelper(event, i, j, w, undoType='kill-line')
 
-    # @+node:ekr.20150514063305.422: *3* killRegion & killRegionSave
+    #@ killRegion & killRegionSave
     @cmd('kill-region')
     def killRegion(self, event: LeoKeyEvent | None = None) -> None:
         """Kill the text selection."""
@@ -325,7 +325,7 @@ class KillBufferCommandsClass(BaseEditCommandsClass):
         self.addToKillBuffer(s)
         g.app.gui.replaceClipboardWith(s)
 
-    # @+node:ekr.20150514063305.423: *3* ec.killSentence
+    #@ ec.killSentence
     @cmd('kill-sentence')
     def killSentence(self, event: LeoKeyEvent | None = None) -> None:
         """Kill the sentence containing the cursor."""
@@ -345,7 +345,7 @@ class KillBufferCommandsClass(BaseEditCommandsClass):
         w.setInsertPoint(i2)
         self.endCommand(changed=True, setLabel=True)
 
-    # @+node:ekr.20150514063305.424: *3* killWs
+    #@ killWs
     @cmd('kill-ws')
     def killWs(self, event: LeoKeyEvent | None = None, undoType: str = 'kill-ws') -> None:
         """Kill whitespace."""
@@ -373,7 +373,7 @@ class KillBufferCommandsClass(BaseEditCommandsClass):
             if undoType:
                 self.endCommand(changed=True, setLabel=True)
 
-    # @+node:ekr.20150514063305.425: *3* yank & yankPop
+    #@ yank & yankPop
     @cmd('yank')
     def yank(self, event: LeoKeyEvent | None = None) -> None:
         """Insert the next entry of the kill ring."""
@@ -429,7 +429,7 @@ class KillBufferCommandsClass(BaseEditCommandsClass):
         finally:
             self.endCommand(changed=True, setLabel=True)
 
-    # @+node:ekr.20150514063305.427: *3* zapToCharacter
+    #@ zapToCharacter
     @cmd('zap-to-character')
     def zapToCharacter(self, event: LeoKeyEvent | None = None) -> None:
         """Kill characters from the insertion point to a given character."""
@@ -457,8 +457,8 @@ class KillBufferCommandsClass(BaseEditCommandsClass):
             w.setInsertPoint(ins)
             self.endCommand(changed=True, setLabel=True)
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

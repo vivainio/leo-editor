@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20140723122936.18144: * @file ../plugins/importers/javascript.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20140723122936.18144] @f ../plugins/importers/javascript.py
 """The @auto importer for JavaScript."""
 
 from __future__ import annotations
@@ -13,8 +13,8 @@ if TYPE_CHECKING:
     from leo.core.leoNodes import Position
 
 
-# @+others
-# @+node:ekr.20140723122936.18049: ** class JS_Importer(Importer)
+#@+others
+#@> class JS_Importer(Importer)
 class JS_Importer(Importer):
     language = 'javascript'
 
@@ -34,8 +34,8 @@ class JS_Importer(Importer):
         # ('let', re.compile(r'\s*\blet\s*(\w+)\s*=.*?=>')),
     )
 
-    # @+others
-    # @+node:ekr.20230919103544.1: *3* js_i.delete_comments_and_strings
+    #@+others
+    #@> js_i.delete_comments_and_strings
     def delete_comments_and_strings(self, lines: list[str]) -> list[str]:
         """
         JS_Importer.delete_comments_and_strings.
@@ -103,10 +103,10 @@ class JS_Importer(Importer):
         assert len(result) == len(lines)  # A crucial invariant.
         return result
 
-    # @-others
+    #@-others
 
 
-# @-others
+#@-others
 
 
 def do_import(c: Cmdr, parent: Position, s: str) -> None:
@@ -120,6 +120,6 @@ importer_dict = {
     ],
     'func': do_import,
 }
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@@language python
+#@@tabwidth -4
+#@-leo

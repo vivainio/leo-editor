@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20210202110241.1: * @file leoclient.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20210202110241.1] @f leoclient.py
 """
 An example client for leoserver.py, based on work by Félix Malboeuf. Used by permission.
 
@@ -38,8 +38,8 @@ n_known_response_times = 0
 n_unknown_response_times = 0
 
 
-# @+others
-# @+node:ekr.20210219105145.1: ** function: _dump_outline
+#@+others
+#@> function: _dump_outline
 def _dump_outline(c):  # pragma: no cover
     """Dump the outline."""
     print(f"_dump_outline: {c.shortFileName()}...\n")
@@ -49,7 +49,7 @@ def _dump_outline(c):  # pragma: no cover
     print('')
 
 
-# @+node:ekr.20210206075253.1: ** function: _get_action_list
+#@ function: _get_action_list
 def _get_action_list():
     """
     Return all callable public methods of the server.
@@ -141,7 +141,7 @@ def _get_action_list():
     return all_tests
 
 
-# @+node:ekr.20210206093130.1: ** function: _show_response
+#@ function: _show_response
 def _show_response(n, d):
     global n_known_response_times
     global n_unknown_response_times
@@ -173,7 +173,7 @@ def _show_response(n, d):
         print(f"{tag}: got: {d}")
 
 
-# @+node:ekr.20210205144500.1: ** function: client_main_loop
+#@ function: client_main_loop
 async def client_main_loop(timeout):
     global n_async_responses
     uri = f"ws://{wsHost}:{wsPort}"
@@ -267,7 +267,7 @@ async def client_main_loop(timeout):
         )  # About 0.1, regardless of tracing.
 
 
-# @+node:ekr.20210205141432.1: ** function: main (leoclient.py)
+#@ function: main (leoclient.py)
 def main():
     try:
         asyncio.run(client_main_loop(timeout))  # #4664
@@ -284,8 +284,8 @@ def main():
         print(f"{tag}: Unexpected exception: {e}")
 
 
-# @-others
+#@-others
 
 if __name__ == '__main__':
     main()
-# @-leo
+#@-leo

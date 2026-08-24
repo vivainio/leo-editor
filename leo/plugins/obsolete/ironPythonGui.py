@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# @+leo-ver=5-thin
-# @+node:ekr.20081121105001.80: * @file ./obsolete/ironPythonGui.py
-# @@first
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20081121105001.80] @f ./obsolete/ironPythonGui.py
+#@@first
 
 """A plugin to use IronPython and .Net Forms as Leo's gui."""
 
@@ -9,14 +9,13 @@ __version__ = '0.6'
 
 # print ('IronPythonGui 1')
 
-# @+<< version history >>
-# @+node:ekr.20081121105001.81: ** << version history >>
-# @@nocolor
-# @+at
+#@+<< version history >>
+#@> << version history >>
+#@@nocolor
 # - Work begins: February 15, 2007
-# @-<< version history >>
-# @+<< imports >>
-# @+node:ekr.20081121105001.82: ** << imports >>
+#@-<< version history >>
+#@+<< imports >>
+#@ << imports >>
 import leo.core.leoGlobals as g
 import leo.core.leoPlugins as leoPlugins
 
@@ -28,14 +27,14 @@ import leo.core.leoGui as leoGui
 # import Sytem.Windows.Forms
 
 # sys.LoadAssemblyByName("System.Windows.Forms")
-# @-<< imports >>
+#@-<< imports >>
 
 # print ('IronPythonGui 2')
 
 
-# @+others
-# @+node:ekr.20081121105001.83: ** Module level
-# @+node:ekr.20081121105001.84: *3* init
+#@+others
+#@ Module level
+#@> init
 def init():
     ok = (
         not g.app.unitTesting and System is not None
@@ -53,22 +52,22 @@ def init():
     return ok
 
 
-# @+node:ekr.20081121105001.85: ** ironPythonGui class
+#@< ironPythonGui class
 class ironPythonGui(leoGui.leoGui):
-    # @+others
-    # @+node:ekr.20081121105001.86: *3* gui birth & death
-    # @+node:ekr.20081121105001.87: *4*  ipGui.__init__
+    #@+others
+    #@> gui birth & death
+    #@>  ipGui.__init__
     def __init__(self):
         # g.trace("ironPytonGui")
 
         # Initialize the base class.
         leoGui.leoGui.__init__(self, "IronPython")
 
-    # @+node:ekr.20081121105001.88: *4* ip.Gui.createKeyHandlerClass
+    #@ ip.Gui.createKeyHandlerClass
     def createKeyHandlerClass(self, c, useGlobalKillbuffer=True, useGlobalRegisters=True):
         return wxKeyHandlerClass(c, useGlobalKillbuffer, useGlobalRegisters)
 
-    # @+node:ekr.20081121105001.89: *4* ip.createRootWindow
+    #@ ip.createRootWindow
     def createRootWindow(self):
         self.root = f = System.Windows.Forms.Form()
 
@@ -83,27 +82,27 @@ class ironPythonGui(leoGui.leoGui):
 
         return f
 
-    # @+node:ekr.20081121105001.90: *4* createLeoFrame
+    #@ createLeoFrame
     def createLeoFrame(self, title):
         """Create a new Leo frame."""
 
         return None  # ironPythonLeoFrame(title)
 
-    # @+node:ekr.20081121105001.91: *4* destroySelf
+    #@ destroySelf
     def destroySelf(self):
         pass  # Nothing more needs to be done once all windows have been destroyed.
 
-    # @+node:ekr.20081121105001.92: *4* finishCreate
+    #@ finishCreate
     def finishCreate(self):
         pass  # g.trace('ironPython gui')
 
-    # @+node:ekr.20081121105001.93: *4* killGui
+    #@ killGui
     def killGui(self, exitFlag=True):
         """Destroy a gui and terminate Leo if exitFlag is True."""
 
         pass  # Not ready yet.
 
-    # @+node:ekr.20081121105001.94: *4* recreateRootWindow
+    #@ recreateRootWindow
     def recreateRootWindow(self):
         """A do-nothing base class to create the hidden root window of a gui
 
@@ -111,14 +110,14 @@ class ironPythonGui(leoGui.leoGui):
 
         pass
 
-    # @+node:ekr.20081121105001.95: *4* runMainLoop
+    #@ runMainLoop
     def runMainLoop(self):
         '''Run IronPython's main loop.'''
 
         System.Windows.Forms.Application.Run(g.app.root)
 
-    # @+node:ekr.20081121105001.96: *3* gui dialogs
-    # @+node:ekr.20081121105001.97: *4* runAboutLeoDialog
+    #@< gui dialogs
+    #@> runAboutLeoDialog
     def runAboutLeoDialog(self, c, version, copyright, url, email):
         """Create and run a wxPython About Leo dialog."""
 
@@ -134,7 +133,7 @@ class ironPythonGui(leoGui.leoGui):
 
         wx.MessageBox(message, "About Leo", wx.Center, self.root)
 
-    # @+node:ekr.20081121105001.98: *4* runAskOkDialog
+    #@ runAskOkDialog
     def runAskOkDialog(self, c, title, message=None, text="Ok"):
         """Create and run a wxPython askOK dialog ."""
 
@@ -145,7 +144,7 @@ class ironPythonGui(leoGui.leoGui):
         d.ShowModal()
         return "ok"
 
-    # @+node:ekr.20081121105001.99: *4* runAskLeoIDDialog
+    #@ runAskLeoIDDialog
     def runAskLeoIDDialog(self):
         """Create and run a dialog to get g.app.LeoID."""
 
@@ -154,7 +153,7 @@ class ironPythonGui(leoGui.leoGui):
 
         # to do
 
-    # @+node:ekr.20081121105001.100: *4* runAskOkCancelNumberDialog (to do)
+    #@ runAskOkCancelNumberDialog (to do)
     def runAskOkCancelNumberDialog(self, c, title, message):
         """Create and run a wxPython askOkCancelNumber dialog ."""
 
@@ -163,7 +162,7 @@ class ironPythonGui(leoGui.leoGui):
 
         # to do.
 
-    # @+node:ekr.20081121105001.101: *4* runAskOkCancelStringDialog (to do)
+    #@ runAskOkCancelStringDialog (to do)
     def runAskOkCancelStringDialog(self, c, title, message):
         """Create and run a wxPython askOkCancelNumber dialog ."""
 
@@ -172,7 +171,7 @@ class ironPythonGui(leoGui.leoGui):
 
         # to do
 
-    # @+node:ekr.20081121105001.102: *4* runAskYesNoDialog
+    #@ runAskYesNoDialog
     def runAskYesNoDialog(self, c, title, message=None):
         """Create and run a wxPython askYesNo dialog."""
 
@@ -184,7 +183,7 @@ class ironPythonGui(leoGui.leoGui):
 
         return g.choose(answer == wx.YES, "yes", "no")
 
-    # @+node:ekr.20081121105001.103: *4* runAskYesNoCancelDialog
+    #@ runAskYesNoCancelDialog
     def runAskYesNoCancelDialog(
         self, c, title, message=None, yesMessage="Yes", noMessage="No", defaultButton="Yes"
     ):
@@ -204,14 +203,14 @@ class ironPythonGui(leoGui.leoGui):
             assert answer == wx.ID_CANCEL
             return "cancel"
 
-    # @+node:ekr.20081121105001.104: *4* runCompareDialog
+    #@ runCompareDialog
     def runCompareDialog(self, c):
         if g.app.unitTesting:
             return
 
         # To do
 
-    # @+node:ekr.20081121105001.105: *4* runOpenFileDialog
+    #@ runOpenFileDialog
     def runOpenFileDialog(self, title, filetypes, defaultextension):
         """Create and run a wxPython open file dialog ."""
 
@@ -236,7 +235,7 @@ class ironPythonGui(leoGui.leoGui):
         else:
             return None
 
-    # @+node:ekr.20081121105001.106: *4* runSaveFileDialog
+    #@ runSaveFileDialog
     def runSaveFileDialog(self, initialfile, title, filetypes, defaultextension):
         """Create and run a wxPython save file dialog ."""
 
@@ -261,11 +260,11 @@ class ironPythonGui(leoGui.leoGui):
         else:
             return None
 
-    # @+node:ekr.20081121105001.107: *4* simulateDialog
+    #@ simulateDialog
     def simulateDialog(self, key, defaultVal=None):
         return defaultVal
 
-    # @+node:ekr.20081121105001.108: *4* getWildcardList
+    #@ getWildcardList
     def getWildcardList(self, filetypes):
         """Create a wxWindows wildcard string for open/save dialogs."""
 
@@ -283,12 +282,12 @@ class ironPythonGui(leoGui.leoGui):
             g.trace(wildcard)
             return wildcard
 
-    # @+node:ekr.20081121105001.109: *3* gui events
+    #@< gui events
     def event_generate(self, w, kind, *args, **keys):
         '''Generate an event.'''
         return w.event_generate(kind, *args, **keys)
 
-    # @+node:ekr.20081121105001.110: *4* class leoKeyEvent (wxGui)
+    #@> class leoKeyEvent (wxGui)
     class leoKeyEvent:
         '''A gui-independent wrapper for gui events.'''
 
@@ -303,7 +302,7 @@ class ironPythonGui(leoGui.leoGui):
 
             self.w = self.widget
 
-    # @+node:ekr.20081121105001.111: *4* wxKeyDict
+    #@ wxKeyDict
     wxKeyDict = {
         # Keys are wxWidgets key codes.  Values are the standard (Tk) names.
         wx.WXK_DECIMAL: '.',
@@ -343,7 +342,6 @@ class ironPythonGui(leoGui.leoGui):
         wx.WXK_NUMPAD_BEGIN: 'Home',
     }
 
-    # @+at These are by design not compatible with unicode characters.
     # If you want to get a unicode character from a key event use
     # wxKeyEvent::GetUnicodeKey instead.
     #
@@ -440,7 +438,7 @@ class ironPythonGui(leoGui.leoGui):
     # WXK_SPECIAL18,
     # WXK_SPECIAL19,
     # WXK_SPECIAL20
-    # @+node:ekr.20081121105001.112: *4* eventChar & eventKeysym & helper
+    #@ eventChar & eventKeysym & helper
     def eventChar(self, event):
         '''Return the char field of an event, either a wx event or a converted Leo event.'''
 
@@ -455,7 +453,7 @@ class ironPythonGui(leoGui.leoGui):
         else:
             return self.keysymHelper(event, kind='keysym')
 
-    # @+node:ekr.20081121105001.113: *5* keysymHelper
+    #@> keysymHelper
     def keysymHelper(self, event, kind):
         gui = self
 
@@ -519,7 +517,7 @@ class ironPythonGui(leoGui.leoGui):
         # if kind == 'char':  g.trace(repr(keycode),repr(val)) # Tracing just val can crash!
         return val
 
-    # @+node:ekr.20081121105001.114: *5* getShiftChar
+    #@ getShiftChar
     def getShiftChar(self, char):
         d = {
             '1': '!',
@@ -545,12 +543,12 @@ class ironPythonGui(leoGui.leoGui):
         }
         return d.get(char, char)  # There must be a better way.
 
-    # @+node:ekr.20081121105001.115: *5* getUnshiftChar
+    #@ getUnshiftChar
     def getUnshiftChar(self, char):
         d = {'+': '='}
         return d.get(char, char)
 
-    # @+node:ekr.20081121105001.116: *4* eventWidget
+    #@< eventWidget
     def eventWidget(self, event):
         '''Return the widget field of an event.
         The event may be a wx event a converted Leo event or a manufactured event (a g.Bunch).'''
@@ -569,7 +567,7 @@ class ironPythonGui(leoGui.leoGui):
             g.trace('no event widget', event)
             return None
 
-    # @+node:ekr.20081121105001.117: *4* eventXY
+    #@ eventXY
     def eventXY(self, event, c=None):
         if hasattr(event, 'x') and hasattr(event, 'y'):
             return event.x, event.y
@@ -578,26 +576,26 @@ class ironPythonGui(leoGui.leoGui):
         else:
             return 0, 0
 
-    # @+node:ekr.20081121105001.118: *3* gui panels (to do)
-    # @+node:ekr.20081121105001.119: *4* createColorPanel
+    #@< gui panels (to do)
+    #@> createColorPanel
     def createColorPanel(self, c):
         """Create Color panel."""
 
         g.trace("not ready yet")
 
-    # @+node:ekr.20081121105001.120: *4* createComparePanel
+    #@ createComparePanel
     def createComparePanel(self, c):
         """Create Compare panel."""
 
         g.trace("not ready yet")
 
-    # @+node:ekr.20081121105001.121: *4* createFindPanel
+    #@ createFindPanel
     def createFindPanel(self):
         """Create a hidden Find panel."""
 
         return wxFindFrame()
 
-    # @+node:ekr.20081121105001.122: *4* createFindTab
+    #@ createFindTab
     def createFindTab(self, c, parentFrame):
         '''Create a wxWidgets find tab in the indicated frame.'''
 
@@ -608,13 +606,13 @@ class ironPythonGui(leoGui.leoGui):
 
         return self.findTabHandler
 
-    # @+node:ekr.20081121105001.123: *4* createFontPanel
+    #@ createFontPanel
     def createFontPanel(self, c):
         """Create a Font panel."""
 
         g.trace("not ready yet")
 
-    # @+node:ekr.20081121105001.124: *4* createSpellTab
+    #@ createSpellTab
     def createSpellTab(self, c, parentFrame):
         '''Create a wxWidgets spell tab in the indicated frame.'''
 
@@ -623,12 +621,12 @@ class ironPythonGui(leoGui.leoGui):
 
         return self.findTabHandler
 
-    # @+node:ekr.20081121105001.125: *4* destroyLeoFrame (NOT USED)
+    #@ destroyLeoFrame (NOT USED)
     def destroyLeoFrame(self, frame):
         frame.Close()
 
-    # @+node:ekr.20081121105001.126: *3* gui utils (must add several)
-    # @+node:ekr.20081121105001.127: *4* Clipboard
+    #@< gui utils (must add several)
+    #@> Clipboard
     def replaceClipboardWith(self, s):
         cb = wx.TheClipboard
         if cb.Open():
@@ -646,7 +644,7 @@ class ironPythonGui(leoGui.leoGui):
         else:
             return ''
 
-    # @+node:ekr.20081121105001.128: *4* Constants
+    #@ Constants
     # g.es calls gui.color to do the translation,
     # so most code in Leo's core can simply use Tk color names.
 
@@ -654,15 +652,15 @@ class ironPythonGui(leoGui.leoGui):
         '''Return the gui-specific color corresponding to the Tk color name.'''
         return color  # Do not call oops: this method is essential for the config classes.
 
-    # @+node:ekr.20081121105001.129: *4* Dialog
-    # @+node:ekr.20081121105001.130: *5* bringToFront
+    #@ Dialog
+    #@> bringToFront
     def bringToFront(self, window):
         if window.IsIconized():
             window.Maximize()
         window.Raise()
         window.Show(True)
 
-    # @+node:ekr.20081121105001.131: *5* get_window_info
+    #@ get_window_info
     def get_window_info(self, window):
         # Get the information about top and the screen.
         x, y = window.GetPosition()
@@ -670,25 +668,25 @@ class ironPythonGui(leoGui.leoGui):
 
         return w, h, x, y
 
-    # @+node:ekr.20081121105001.132: *5* center_dialog
+    #@ center_dialog
     def center_dialog(window):
         window.Center()
 
-    # @+node:ekr.20081121105001.133: *4* Focus
-    # @+node:ekr.20081121105001.134: *5* get_focus
+    #@< Focus
+    #@> get_focus
     def get_focus(self, top):
         """Returns the widget that has focus, or body if None."""
 
         return self.focus_widget
 
-    # @+node:ekr.20081121105001.135: *5* set_focus
+    #@ set_focus
     def set_focus(self, c, w):
         """Set the focus of the widget in the given commander if it needs to be changed."""
 
         c.frame.setFocus(w)
 
-    # @+node:ekr.20081121105001.136: *4* Font (wxGui) (to do)
-    # @+node:ekr.20081121105001.137: *5* getFontFromParams
+    #@< Font (wxGui) (to do)
+    #@> getFontFromParams
     def getFontFromParams(self, family, size, slant, weight):
         ## g.trace(g.app.config.defaultFont)
 
@@ -716,8 +714,8 @@ class ironPythonGui(leoGui.leoGui):
             g.es_exception()
             return g.app.config.defaultFont
 
-    # @+node:ekr.20081121105001.138: *4* Icons (wxGui) (to do)
-    # @+node:ekr.20081121105001.139: *5* attachLeoIcon
+    #@< Icons (wxGui) (to do)
+    #@> attachLeoIcon
     def attachLeoIcon(self, w):
         """Try to attach a Leo icon to the Leo Window.
 
@@ -733,15 +731,14 @@ class ironPythonGui(leoGui.leoGui):
 
         if self.bitmap == None:
             try:
-                # @+<< try to use the PIL and tkIcon packages to draw the icon >>
-                # @+node:ekr.20081121105001.140: *6* << try to use the PIL and tkIcon packages to draw the icon >>
-                # @+at This code requires Fredrik Lundh's PIL and tkIcon packages:
+                #@+<< try to use the PIL and tkIcon packages to draw the icon >>
+                #@> << try to use the PIL and tkIcon packages to draw the icon >>
                 #
                 # Download PIL    from http://www.pythonware.com/downloads/index.htm#pil
                 # Download tkIcon from http://www.effbot.org/downloads/#tkIcon
                 #
                 # Many thanks to Jonathan M. Gilligan for suggesting this code.
-                # @@c
+                #@@c
 
                 import Image, tkIcon, _tkicon
 
@@ -763,12 +760,12 @@ class ironPythonGui(leoGui.leoGui):
                         self.leoIcon = self.createLeoIcon(icon_image)
                     else:  # Assumes 64x64
                         self.leoIcon = tkIcon.Icon(icon_image)
-                # @-<< try to use the PIL and tkIcon packages to draw the icon >>
+                #@-<< try to use the PIL and tkIcon packages to draw the icon >>
             except:
                 # traceback.print_exc()
                 self.leoIcon = None
 
-    # @+node:ekr.20081121105001.141: *5* createLeoIcon
+    #@< createLeoIcon
     # This code is adapted from tkIcon.__init__
     # Unlike the tkIcon code, this code does _not_ resize the icon file.
 
@@ -800,16 +797,16 @@ class ironPythonGui(leoGui.leoGui):
         except:
             return None
 
-    # @+node:ekr.20081121105001.142: *4* Idle time (wxGui) (to do)
-    # @+node:ekr.20081121105001.143: *5* setIdleTimeHook
+    #@< Idle time (wxGui) (to do)
+    #@> setIdleTimeHook
     def setIdleTimeHook(self, idleTimeHookHandler, *args, **keys):
         pass  # g.trace(idleTimeHookHandler)
 
-    # @+node:ekr.20081121105001.144: *5* setIdleTimeHookAfterDelay
+    #@ setIdleTimeHookAfterDelay
     def setIdleTimeHookAfterDelay(self, idleTimeHookHandler, *args, **keys):
         g.trace(idleTimeHookHandler)
 
-    # @+node:ekr.20081121105001.145: *4* isTextWidget
+    #@< isTextWidget
     def isTextWidget(self, w):
         for theClass in (wx.TextCtrl, wx.richtext.RichTextCtrl, wx.stc.StyledTextCtrl):
             if isinstance(w, theClass):
@@ -817,7 +814,7 @@ class ironPythonGui(leoGui.leoGui):
         else:
             return False
 
-    # @+node:ekr.20081121105001.146: *4* widget_name
+    #@ widget_name
     def widget_name(self, w):
         # First try the wxWindow.GetName method.
         # All wx Text widgets, including wx.stc.StyledControl, have this method.
@@ -827,8 +824,8 @@ class ironPythonGui(leoGui.leoGui):
             name = repr(w)
         return name
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

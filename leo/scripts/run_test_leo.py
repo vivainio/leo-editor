@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20240322162616.1: * @file ../scripts/run_test_leo.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20240322162616.1] @f ../scripts/run_test_leo.py
 """
 run_test_leo.py: Run all of Leo's unit tests.
 
@@ -28,4 +28,4 @@ args = ' '.join(sys.argv[1:])
 python = sys.executable
 command = rf'{python} -m unittest {args}'
 subprocess.run(command, shell=True, check=False)
-# @-leo
+#@-leo

@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:EKR.20040517075715.14: * @file ../plugins/word_export.py
+#@+leo-ver=cub-1-thin
+#@0 [EKR.20040517075715.14] @f ../plugins/word_export.py
 r"""
 Adds the Plugins\:Word Export\:Export menu item to format and export
 the selected outline to a Word document, starting Word if necessary.
@@ -7,8 +7,8 @@ the selected outline to a Word document, starting Word if necessary.
 
 __plugin_name__ = "Word Export"
 
-# @+<< imports >>
-# @+node:ekr.20040909105522: ** << imports >>
+#@+<< imports >>
+#@> << imports >>
 import configparser as ConfigParser
 from leo.core import leoGlobals as g
 
@@ -20,11 +20,11 @@ try:
 except ImportError:
     g.cantImport('win32com.client')
     client = None
-# @-<< imports >>
+#@-<< imports >>
 
 
-# @+others
-# @+node:ekr.20050311165238: ** init
+#@+others
+#@ init
 def init():
     """Return True if the plugin has loaded successfully."""
     ok = client is not None  # Ok for unit test: just uses Plugins menu.
@@ -34,7 +34,7 @@ def init():
     return ok
 
 
-# @+node:EKR.20040517075715.15: ** getConfiguration
+#@ getConfiguration
 def getConfiguration():
     """Called when the user presses the "Apply" button on the Properties form"""
 
@@ -44,7 +44,7 @@ def getConfiguration():
     return config
 
 
-# @+node:ekr.20041109085615: ** getWordConnection
+#@ getWordConnection
 def getWordConnection():
     """Get a connection to Word"""
 
@@ -60,7 +60,7 @@ def getWordConnection():
         raise
 
 
-# @+node:EKR.20040517075715.17: ** doPara
+#@ doPara
 def doPara(word, text, style=None):
     """Write a paragraph to word"""
 
@@ -75,7 +75,7 @@ def doPara(word, text, style=None):
     sel.TypeParagraph()
 
 
-# @+node:EKR.20040517075715.18: ** writeNodeAndTree
+#@ writeNodeAndTree
 def writeNodeAndTree(
     c, word, header_style, level, maxlevel=3, usesections=1, sectionhead="", vnode=None
 ):
@@ -98,7 +98,7 @@ def writeNodeAndTree(
         writeNodeAndTree(c, word, header_style, level + 1, maxlevel, usesections, thishead, child)
 
 
-# @+node:EKR.20040517075715.19: ** word-export-export
+#@ word-export-export
 @g.command('word-export-export')
 def cmd_Export(event):
     """Export the current node to Word"""
@@ -125,7 +125,7 @@ def cmd_Export(event):
         g.es_exception()
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

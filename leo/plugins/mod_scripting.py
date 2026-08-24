@@ -1,7 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20060328125248: * @file ../plugins/mod_scripting.py
-# @+<< mod_scripting docstring >>
-# @+node:ekr.20060328125248.1: ** << mod_scripting docstring >>
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20060328125248] @f ../plugins/mod_scripting.py
+#@+<< mod_scripting docstring >>
+#@> << mod_scripting docstring >>
 r"""This plugin implements script buttons.
 
 Overview
@@ -138,9 +138,9 @@ Acknowledgement
 This plugin is based on e's dynabutton plugin, possibly the most brilliant idea in Leo's history.
 """
 
-# @-<< mod_scripting docstring >>
-# @+<< mod_scripting imports & annotations >>
-# @+node:ekr.20060328125248.2: ** << mod_scripting imports & annotations >>
+#@-<< mod_scripting docstring >>
+#@+<< mod_scripting imports & annotations >>
+#@ << mod_scripting imports & annotations >>
 from __future__ import annotations
 from collections import namedtuple
 from collections.abc import Callable
@@ -163,12 +163,12 @@ if TYPE_CHECKING:  # pragma: no cover
     RClicks = list[RClick]
     Value = Any
 
-# @-<< mod_scripting imports & annotations >>
+#@-<< mod_scripting imports & annotations >>
 
 
-# @+others
-# @+node:ekr.20180328085010.1: ** Top level (mod_scripting)
-# @+node:tbrown.20140819100840.37719: *3* mod_scripting.build_rclick_tree
+#@+others
+#@ Top level (mod_scripting)
+#@> mod_scripting.build_rclick_tree
 def build_rclick_tree(
     command_p: Position, rclicks: RClicks | None = None, top_level: bool = False
 ) -> list:
@@ -232,7 +232,7 @@ def build_rclick_tree(
     return rclicks
 
 
-# @+node:ekr.20060328125248.4: *3* mod_scripting.init
+#@ mod_scripting.init
 def init() -> bool:
     """Return True if the plugin has loaded successfully."""
     if g.app.gui is None:
@@ -252,7 +252,7 @@ def init() -> bool:
     return ok
 
 
-# @+node:ekr.20060328125248.5: *3* mod_scripting.onCreate
+#@ mod_scripting.onCreate
 def onCreate(tag: str, keys: KWargs) -> None:
     """Handle the onCreate event in the mod_scripting plugin."""
     if c := keys.get('c'):
@@ -261,12 +261,12 @@ def onCreate(tag: str, keys: KWargs) -> None:
         sc.createAllButtons()
 
 
-# @+node:ekr.20141031053508.7: ** class AtButtonCallback
+#@< class AtButtonCallback
 class AtButtonCallback:
     """A class whose __call__ method is a callback for @button nodes."""
 
-    # @+others
-    # @+node:ekr.20141031053508.9: *3* __init__ (AtButtonCallback)
+    #@+others
+    #@> __init__ (AtButtonCallback)
     def __init__(
         self,
         controller: ScriptingController,
@@ -287,26 +287,26 @@ class AtButtonCallback:
         self.source_c = c  # For GetArgs.command_source.
         self.__doc__ = docstring  # The docstring for this callback for g.getDocStringForFunction.
 
-    # @+node:ekr.20141031053508.10: *3* __call__ (AtButtonCallback)
+    #@ __call__ (AtButtonCallback)
     def __call__(self, event: Event | None = None) -> Value:
         """AtButtonCallbgack.__call__. The callback for @button nodes."""
         return self.execute_script()
 
-    # @+node:ekr.20141031053508.13: *3* __repr__ (AtButtonCallback)
+    #@ __repr__ (AtButtonCallback)
     def __repr__(self) -> str:
         """AtButtonCallback.__repr__."""
         c = self.c
         n = len(self.script or '')
         return f"AtButtonCallback {c.shortFileName()} gnx: {self.gnx} len(script): {n}"
 
-    # @+node:ekr.20150512041758.1: *3* __getattr__ (AtButtonCallback)
+    #@ __getattr__ (AtButtonCallback)
     def __getattr__(self, attr: Value) -> str:
         """AtButtonCallback.__getattr__. Implement __name__."""
         if attr == '__name__':
             return f"AtButtonCallback: {self.gnx}"
         raise AttributeError  # Returning None is not correct.
 
-    # @+node:ekr.20170203043042.1: *3* AtButtonCallback.execute_script & helper
+    #@ AtButtonCallback.execute_script & helper
     def execute_script(self) -> Value:
         """Execute the script associated with this button."""
         if script := self.find_script():
@@ -319,7 +319,7 @@ class AtButtonCallback:
             )
         return None
 
-    # @+node:ekr.20180313171043.1: *4* AtButtonCallback.find_script
+    #@> AtButtonCallback.find_script
     def find_script(self) -> str | None:
         gnx = self.gnx
         # First, search self.c for the gnx.
@@ -341,15 +341,15 @@ class AtButtonCallback:
                     return script
         return self.script
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20060328125248.6: ** class ScriptingController
+#@<2 class ScriptingController
 class ScriptingController:
     """A class defining scripting commands."""
 
-    # @+others
-    # @+node:ekr.20060328125248.7: *3*  sc.ctor
+    #@+others
+    #@>  sc.ctor
     def __init__(self, c: Cmdr, iconBar: QtWidgets.QWidget = None) -> None:
         self.c = c
         self.gui = c.frame.gui
@@ -394,8 +394,8 @@ class ScriptingController:
         # #74: problems with @button if defined in myLeoSettings.leo
         self.seen: set[str] = set()  # Set of gnx's (not vnodes!) that created buttons or commands.
 
-    # @+node:ekr.20150401113822.1: *3* sc.Callbacks
-    # @+node:ekr.20060328125248.23: *4* sc.addScriptButtonCommand
+    #@ sc.Callbacks
+    #@> sc.addScriptButtonCommand
     def addScriptButtonCommand(self, event: Event | None = None) -> None:
         """Called when the user presses the 'script-button' button or executes the script-button command."""
         c = self.c
@@ -408,14 +408,14 @@ class ScriptingController:
         self.createLocalAtButtonHelper(p, h, statusLine, kind='script-button', verbose=True)
         c.bodyWantsFocus()
 
-    # @+node:ekr.20060522105937.1: *4* sc.runDebugScriptCommand
+    #@ sc.runDebugScriptCommand
     def runDebugScriptCommand(self, event: Event | None = None) -> None:
         """Called when user presses the 'debug-script' button or executes the debug-script command."""
         c = self.c
         p = c.p
         if script := g.getScript(c, p, useSelectedText=True, useSentinels=False):
-            # @+<< set debugging if debugger is active >>
-            # @+node:ekr.20060523084441: *5* << set debugging if debugger is active >>
+            #@+<< set debugging if debugger is active >>
+            #@> << set debugging if debugger is active >>
             g.trace(self.debuggerKind)
             if self.debuggerKind == 'winpdb':
                 try:
@@ -430,35 +430,10 @@ class ScriptingController:
                 debugging = True
             else:
                 debugging = False
-            # @-<< set debugging if debugger is active >>
+            #@-<< set debugging if debugger is active >>
             if debugging:
-                # @+<< create leoScriptModule >>
-                # @+node:ekr.20060524073716: *5* << create leoScriptModule >> (mod_scripting.py)
-                target = g.os_path_join(g.app.loadDir, 'leoScriptModule.py')
-                with open(target, 'w') as f:
-                    f.write('# A module holding the script to be debugged.\n')
-                    if self.debuggerKind == 'idle':
-                        # This works, but uses the lame pdb debugger.
-                        f.write('import pdb\n')
-                        f.write('pdb.set_trace() # Hard breakpoint.\n')
-                    elif self.debuggerKind == 'winpdb':
-                        # pylint: disable=line-too-long
-                        f.write('import rpdb2\n')
-                        f.write(
-                            'if rpdb2.g_debugger is not None: # don\'t hang if the debugger isn\'t running.\n'
-                        )
-                        f.write(
-                            '  rpdb2.start_embedded_debugger(pwd="",fAllowUnencrypted=True) # Hard breakpoint.\n'
-                        )
-                    # f.write('# Remove all previous variables.\n')
-                    f.write('# Predefine c, g and p.\n')
-                    f.write('from leo.core import leoGlobals as g\n')
-                    f.write('c = g.app.scriptDict.get("c")\n')
-                    f.write('script_gnx = g.app.scriptDict.get("script_gnx")\n')
-                    f.write('p = c.p\n')
-                    f.write('# Actual script starts here.\n')
-                    f.write(script + '\n')
-                # @-<< create leoScriptModule >>
+                #@+<< create leoScriptModule >>
+                #@-<< create leoScriptModule >>
                 g.app.scriptDict['c'] = c
                 g.app.scriptDict = {'script_gnx': p.gnx}
                 if 'leoScriptModule' in sys.modules.keys():
@@ -470,7 +445,7 @@ class ScriptingController:
                 g.error('No debugger active')
         c.bodyWantsFocus()
 
-    # @+node:ekr.20060328125248.21: *4* sc.runScriptCommand
+    #@< sc.runScriptCommand
     def runScriptCommand(self, event: Event | None = None) -> None:
         """Called when user presses the 'run-script' button or executes the run-script command."""
         c, p = self.c, self.c.p
@@ -481,7 +456,7 @@ class ScriptingController:
             # Do not assume the script will want to remain in this commander.
             c.bodyWantsFocus()
 
-    # @+node:ekr.20060328125248.8: *3* sc.createAllButtons
+    #@< sc.createAllButtons
     def createAllButtons(self) -> None:
         """Scan for @button, @rclick, @command, @plugin and @script nodes."""
         c = self.c
@@ -531,7 +506,7 @@ class ScriptingController:
                     func(p)
                 p.moveToThreadNext()
 
-    # @+node:ekr.20060328125248.24: *3* sc.createLocalAtButtonHelper
+    #@ sc.createLocalAtButtonHelper
     def createLocalAtButtonHelper(
         self,
         p: Position,
@@ -589,7 +564,7 @@ class ScriptingController:
         )
         return b
 
-    # @+node:ekr.20060328125248.17: *3* sc.createIconButton (creates all buttons)
+    #@ sc.createIconButton (creates all buttons)
     def createIconButton(
         self,
         args: Args,
@@ -645,7 +620,7 @@ class ScriptingController:
         # Reporting this command is way too annoying.
         return b
 
-    # @+node:ekr.20231117041244.1: *3* sc.deleteAllButtons
+    #@ sc.deleteAllButtons
     def deleteAllButtons(self) -> None:
         """Delete all buttons during revert."""
         for w in self.buttonsDict:
@@ -653,7 +628,7 @@ class ScriptingController:
         self.buttonsDict = {}
         self.seen = set()
 
-    # @+node:ekr.20060328125248.28: *3* sc.executeScriptFromButton
+    #@ sc.executeScriptFromButton
     def executeScriptFromButton(
         self,
         b: QtWidgets.QButton,
@@ -683,7 +658,7 @@ class ScriptingController:
         # c.bodyWantsFocus()
         return result
 
-    # @+node:ekr.20130912061655.11294: *3* sc.open_gnx
+    #@ sc.open_gnx
     def open_gnx(self, c: Cmdr, gnx: str) -> tuple[Cmdr | None, Position | None]:
         """
         Find the node with the given gnx in c, myLeoSettings.leo and leoSettings.leo.
@@ -710,9 +685,9 @@ class ScriptingController:
             c.frame.top.leo_master.select(c)
         return None, None  # 2017/02/02.
 
-    # @+node:ekr.20150401130207.1: *3* sc.Scripts, common
+    #@ sc.Scripts, common
     # Important: common @button and @command nodes do **not** update dynamically!
-    # @+node:ekr.20080312071248.1: *4* sc.createCommonButtons
+    #@> sc.createCommonButtons
     def createCommonButtons(self) -> None:
         """Handle all global @button nodes."""
         c = self.c
@@ -726,7 +701,7 @@ class ScriptingController:
                 script = self.getScript(p)
                 self.createCommonButton(p, script, rclicks)
 
-    # @+node:ekr.20070926084600: *4* sc.createCommonButton (common @button)
+    #@ sc.createCommonButton (common @button)
     def createCommonButton(self, p: Position, script: str, rclicks: RClicks) -> None:
         """
         Create a button in the icon area for a common @button node in an
@@ -791,7 +766,7 @@ class ScriptingController:
             args=args, func=cb, h=p.h, pane='button', source_c=p.v.context, tag='@button'
         )
 
-    # @+node:ekr.20080312071248.2: *4* sc.createCommonCommands
+    #@ sc.createCommonCommands
     def createCommonCommands(self) -> None:
         """Handle all global @command nodes."""
         c = self.c
@@ -804,7 +779,7 @@ class ScriptingController:
                 script = self.getScript(p)
                 self.createCommonCommand(p, script)
 
-    # @+node:ekr.20150401130818.1: *4* sc.createCommonCommand (common @command)
+    #@ sc.createCommonCommand (common @command)
     def createCommonCommand(self, p: Position, script: str) -> None:
         """
         Handle a single @command node.
@@ -835,8 +810,8 @@ class ScriptingController:
             tag='global @command',
         )
 
-    # @+node:ekr.20150401130313.1: *3* sc.Scripts, individual
-    # @+node:ekr.20060328125248.12: *4* sc.handleAtButtonNode @button
+    #@< sc.Scripts, individual
+    #@> sc.handleAtButtonNode @button
     def handleAtButtonNode(self, p: Position) -> None:
         """
         Create a button in the icon area for an @button node.
@@ -857,7 +832,7 @@ class ScriptingController:
         # This helper is also called by the script-button callback.
         self.createLocalAtButtonHelper(p, h, statusLine, verbose=False)
 
-    # @+node:ekr.20060328125248.10: *4* sc.handleAtCommandNode @command
+    #@ sc.handleAtCommandNode @command
     def handleAtCommandNode(self, p: Position) -> None:
         """Handle @command name [@key[=]shortcut]."""
         c = self.c
@@ -888,7 +863,7 @@ class ScriptingController:
         )
         g.app.config.atLocalCommandsList.append(p.copy())
 
-    # @+node:ekr.20060328125248.13: *4* sc.handleAtPluginNode @plugin
+    #@ sc.handleAtPluginNode @plugin
     def handleAtPluginNode(self, p: Position) -> None:
         """Handle @plugin nodes."""
         tag = "@plugin"
@@ -904,7 +879,7 @@ class ScriptingController:
         else:
             g.loadOnePlugin(moduleOrFileName)
 
-    # @+node:peckj.20131113130420.6851: *4* sc.handleAtRclickNode @rclick
+    #@ sc.handleAtRclickNode @rclick
     def handleAtRclickNode(self, p: Position) -> None:
         """Handle @rclick name [@key[=]shortcut]."""
         c = self.c
@@ -932,7 +907,7 @@ class ScriptingController:
             )
         g.app.config.atLocalCommandsList.append(p.copy())
 
-    # @+node:vitalije.20180224113123.1: *4* sc.handleRclicks
+    #@ sc.handleRclicks
     def handleRclicks(self, rclicks: RClicks) -> None:
         def handlerc(rc: RClick) -> None:
             if rc.children:
@@ -944,7 +919,7 @@ class ScriptingController:
         for rc in rclicks:
             handlerc(rc)
 
-    # @+node:ekr.20060328125248.14: *4* sc.handleAtScriptNode @script
+    #@ sc.handleAtScriptNode @script
     def handleAtScriptNode(self, p: Position) -> Value:
         """Handle @script nodes."""
         c = self.c
@@ -961,8 +936,8 @@ class ScriptingController:
             c.bodyWantsFocus()
         return None
 
-    # @+node:ekr.20150401125747.1: *3* sc.Standard buttons
-    # @+node:ekr.20060522105937: *4* sc.createDebugIconButton 'debug-script'
+    #@< sc.Standard buttons
+    #@> sc.createDebugIconButton 'debug-script'
     def createDebugIconButton(self) -> None:
         """Create the 'debug-script' button and the debug-script command."""
         self.createIconButton(
@@ -973,7 +948,7 @@ class ScriptingController:
             kind='debug-script',
         )
 
-    # @+node:ekr.20060328125248.20: *4* sc.createRunScriptIconButton 'run-script'
+    #@ sc.createRunScriptIconButton 'run-script'
     def createRunScriptIconButton(self) -> None:
         """Create the 'run-script' button and the run-script command."""
         self.createIconButton(
@@ -984,7 +959,7 @@ class ScriptingController:
             kind='run-script',
         )
 
-    # @+node:ekr.20060328125248.22: *4* sc.createScriptButtonIconButton 'script-button'
+    #@ sc.createScriptButtonIconButton 'script-button'
     def createScriptButtonIconButton(self) -> None:
         """Create the 'script-button' button and the script-button command."""
         self.createIconButton(
@@ -995,8 +970,8 @@ class ScriptingController:
             kind="script-button-button",
         )
 
-    # @+node:ekr.20061014075212: *3* sc.Utils
-    # @+node:ekr.20060929135558: *4* sc.cleanButtonText
+    #@< sc.Utils
+    #@> sc.cleanButtonText
     def cleanButtonText(self, s: str, minimal: bool = False) -> str:
         """
         Clean the text following @button or @command so
@@ -1020,7 +995,7 @@ class ScriptingController:
                 s = s.strip()
         return s.replace(' ', '-').strip('-')
 
-    # @+node:ekr.20060522104419.1: *4* sc.createBalloon (gui-dependent)
+    #@ sc.createBalloon (gui-dependent)
     def createBalloon(self, w: QtWidgets.QWidgetAction, label: str) -> None:
         'Create a balloon for a widget.'
         if g.app.gui.guiName().startswith('qt'):
@@ -1028,7 +1003,7 @@ class ScriptingController:
             if hasattr(w, 'button'):
                 w.button.setToolTip(label)
 
-    # @+node:ekr.20060328125248.26: *4* sc.deleteButton
+    #@ sc.deleteButton
     def deleteButton(self, button: QtWidgets.QButton, **kw: KWargs) -> None:
         """Delete the given button.
         This is called from callbacks, it is not a callback."""
@@ -1038,7 +1013,7 @@ class ScriptingController:
             self.iconBar.deleteButton(w)
             self.c.bodyWantsFocus()
 
-    # @+node:ekr.20080813064908.4: *4* sc.getArgs
+    #@ sc.getArgs
     def getArgs(self, p: Position | None) -> list[str]:
         """Return the list of @args field of p.h."""
         args: list[str] = []
@@ -1063,7 +1038,7 @@ class ScriptingController:
         # if args: g.trace(args)
         return args
 
-    # @+node:ekr.20060328125248.15: *4* sc.getButtonText
+    #@ sc.getButtonText
     def getButtonText(self, h: str) -> str:
         """Returns the button text found in the given headline string"""
         tag = "@button"
@@ -1086,7 +1061,7 @@ class ScriptingController:
         # fullButtonText = buttonText
         return buttonText
 
-    # @+node:peckj.20140103101946.10404: *4* sc.getColor
+    #@ sc.getColor
     def getColor(self, h: str) -> str:
         """Returns the background color from the given headline string"""
         color = ''
@@ -1102,7 +1077,7 @@ class ScriptingController:
             color = h[j:k].strip()
         return color
 
-    # @+node:ekr.20060328125248.16: *4* sc.getShortcut
+    #@ sc.getShortcut
     def getShortcut(self, h: str) -> str:
         """Return the keyboard shortcut from the given headline string"""
         shortcut = ''
@@ -1123,7 +1098,7 @@ class ScriptingController:
             shortcut = shortcut.upper()
         return shortcut
 
-    # @+node:ekr.20150402042350.1: *4* sc.getScript
+    #@ sc.getScript
     def getScript(self, p: Position | None) -> str:
         """Return the script composed from p and its descendants."""
         return g.getScript(
@@ -1134,7 +1109,7 @@ class ScriptingController:
             useSentinels=True,
         )
 
-    # @+node:ekr.20120301114648.9932: *4* sc.registerAllCommands
+    #@ sc.registerAllCommands
     def registerAllCommands(
         self,
         args: Args,
@@ -1194,7 +1169,7 @@ class ScriptingController:
                         shortcut=shortcut,
                     )
 
-    # @+node:ekr.20061015125212: *4* sc.truncateButtonText
+    #@ sc.truncateButtonText
     def truncateButtonText(self, s: str) -> str:
         # 2011/10/16: Remove @button here only.
         i = 0
@@ -1210,7 +1185,7 @@ class ScriptingController:
         s = s.strip('-')
         return s.strip()
 
-    # @+node:ekr.20150402021505.1: *4* sc.setButtonColor
+    #@ sc.setButtonColor
     def setButtonColor(self, b: QtWidgets.QWidgetAction, bg: str) -> None:
         """Set the background color of Qt button b to bg."""
         # QWidgetAction is the base class of leoIconBarButton.
@@ -1230,11 +1205,11 @@ class ScriptingController:
             # g.es_exception()
             pass  # Might not be a valid color.
 
-    # @-others
+    #@-others
 
 
 scriptingController = ScriptingController
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

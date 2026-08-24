@@ -1,17 +1,17 @@
-# @+leo-ver=5-thin
-# @+node:tbrown.20091214233510.5347: * @file ../plugins/geotag.py
+#@+leo-ver=cub-1-thin
+#@0 [tbrown.20091214233510.5347] @f ../plugins/geotag.py
 """Tags nodes with latitude and longitude."""
 
-# @+<< imports >>
-# @+node:tbrown.20091214233510.5349: ** << imports >>
+#@+<< imports >>
+#@> << imports >>
 from leo.core import leoGlobals as g
 from leo.plugins.pygeotag import pygeotag
 
-# @-<< imports >>
+#@-<< imports >>
 
 
-# @+others
-# @+node:tbrown.20091214233510.5351: ** init
+#@+others
+#@ init
 def init():
     """Return True if the plugin has loaded successfully."""
     if not hasattr(g, 'pygeotag'):
@@ -26,29 +26,29 @@ def init():
     return True
 
 
-# @+node:tbrown.20091214233510.5352: ** onCreate
+#@ onCreate
 def onCreate(tag, key):
     c = key.get('c')
 
     geotag_Controller(c)
 
 
-# @+node:tbrown.20101103145611.5658: ** onQuit (geotag.py)
+#@ onQuit (geotag.py)
 def onQuit(tag, key):
     g.pygeotag.stop_server()
 
 
-# @+node:tbrown.20091214233510.5353: ** class geotag_Controller
+#@ class geotag_Controller
 class geotag_Controller:
     """A per-commander class that manages geotagging."""
 
-    # @+others
-    # @+node:tbrown.20091214233510.5354: *3* __init__
+    #@+others
+    #@> __init__
     def __init__(self, c):
         self.c = c
         c.geotag = self
 
-    # @+node:tbrown.20091215204347.11403: *3* getAttr
+    #@ getAttr
     @staticmethod
     def getAttr(p):
         for nd in p.children():
@@ -58,7 +58,7 @@ class geotag_Controller:
             nd = p.insertAsLastChild()
         return nd
 
-    # @+node:tbrown.20091214233510.5356: *3* callback
+    #@ callback
     def callback(self, data):
         c = self.c
         p = c.p
@@ -71,10 +71,10 @@ class geotag_Controller:
             c.attribEditor.updateEditorInt()
         c.redraw()
 
-    # @-others
+    #@-others
 
 
-# @+node:tbrown.20091214233510.5357: ** cmd_open_server_page (gettag_Controller)
+#@< cmd_open_server_page (gettag_Controller)
 @g.command('geotag-open-server-page')
 def cmd_OpenServerPage(event):
     # c = event.get('c')
@@ -82,7 +82,7 @@ def cmd_OpenServerPage(event):
     # g.pygeotag.callback = c.geotag.callback
 
 
-# @+node:tbrown.20091214233510.5358: ** cmd_tag_node (gettag_Controller)
+#@ cmd_tag_node (gettag_Controller)
 @g.command('geotag-tag-node')
 def cmd_TagNode(event):
     c = event.get('c')
@@ -90,7 +90,7 @@ def cmd_TagNode(event):
     c.geotag.callback(data)
 
 
-# @+node:tbrown.20091215204347.11402: ** cmd_show_node (gettag_Controller)
+#@ cmd_show_node (gettag_Controller)
 @g.command('geotag-show-node')
 def cmd_ShowNode(event):
     c = event.get('c')
@@ -110,7 +110,7 @@ def cmd_ShowNode(event):
     g.pygeotag.show_position(data)
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

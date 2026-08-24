@@ -1,9 +1,9 @@
 #!/usr/bin/env python
-# @+leo-ver=5-thin
-# @+node:ekr.20110310091639.14254: * @file ../external/codewise.py
-# @@first
-# @+<< docstring >>
-# @+node:ekr.20110310091639.14291: ** << docstring >>
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20110310091639.14254] @f ../external/codewise.py
+#@@first
+#@+<< docstring >>
+#@> << docstring >>
 r"""CodeWise - global code intelligence database
 
 Why this module
@@ -89,19 +89,19 @@ This can be much slower if you have a huge database.
 
 """
 
-# @-<< docstring >>
-# @+<< imports >>
-# @+node:ekr.20110310091639.14293: ** << imports >>
+#@-<< docstring >>
+#@+<< imports >>
+#@ << imports >>
 import os
 import sys
 import sqlite3
 from sqlite3 import ProgrammingError
 import traceback
 
-# @-<< imports >>
+#@-<< imports >>
 consoleEncoding = None
-# @+<< define usage >>
-# @+node:ekr.20110310091639.14292: ** << define usage >>
+#@+<< define usage >>
+#@ << define usage >>
 usage = """
 codewise setup
  (Optional - run this first to create template ~/.ctags)
@@ -134,9 +134,9 @@ codewise tags TAGS
  Dump already-created tagfile TAGS to database
 
 """
-# @-<< define usage >>
-# @+<< define DB_SCHEMA >>
-# @+node:ekr.20110310091639.14255: ** << define DB_SCHEMA >>
+#@-<< define usage >>
+#@+<< define DB_SCHEMA >>
+#@ << define DB_SCHEMA >>
 DB_SCHEMA = """
 BEGIN TRANSACTION;
 CREATE TABLE class (id INTEGER PRIMARY KEY, file INTEGER,  name TEXT, searchpattern TEXT);
@@ -149,15 +149,15 @@ CREATE INDEX idx_function_class ON function(class ASC);
 
 COMMIT;
 """
-# @-<< define DB_SCHEMA >>
+#@-<< define DB_SCHEMA >>
 DEFAULT_DB = os.path.normpath(os.path.expanduser("~/.codewise.db"))
 
 
 # print('default db: %s' % DEFAULT_DB)
-# @+others
-# @+node:ekr.20110310091639.14295: ** top level...
-# @+node:ekr.20110310091639.14294: *3* codewise cmd wrappers
-# @+node:ekr.20110310091639.14289: *4* cmd_functions
+#@+others
+#@ top level...
+#@> codewise cmd wrappers
+#@> cmd_functions
 def cmd_functions(args):
     cw = CodeWise()
     if args:
@@ -169,7 +169,7 @@ def cmd_functions(args):
     return lines  # EKR
 
 
-# @+node:ekr.20110310091639.14285: *4* cmd_init
+#@ cmd_init
 def cmd_init(args):
     print("Initializing CodeWise db at: %s" % DEFAULT_DB)
     if os.path.isfile(DEFAULT_DB):
@@ -177,7 +177,7 @@ def cmd_init(args):
     CodeWise()
 
 
-# @+node:ekr.20110310091639.14288: *4* cmd_members
+#@ cmd_members
 def cmd_members(args):
     cw = CodeWise()
     if args:
@@ -189,20 +189,20 @@ def cmd_members(args):
     return lines  # EKR
 
 
-# @+node:ekr.20110310091639.14283: *4* cmd_parse
+#@ cmd_parse
 def cmd_parse(args):
     assert args
     cw = CodeWise()
     cw.parse(args)
 
 
-# @+node:ekr.20110310091639.14282: *4* cmd_parseall
+#@ cmd_parseall
 def cmd_parseall(args):
     cw = CodeWise()
     cw.parseall()
 
 
-# @+node:ekr.20110310091639.14281: *4* cmd_scintilla
+#@ cmd_scintilla
 def cmd_scintilla(args):
     cw = CodeWise()
     for fil in args:
@@ -211,7 +211,7 @@ def cmd_scintilla(args):
         f.close()
 
 
-# @+node:ekr.20110310091639.14286: *4* cmd_setup
+#@ cmd_setup
 def cmd_setup(args):
     ctagsfile = os.path.normpath(os.path.expanduser("~/.ctags"))
     if os.path.isfile(ctagsfile):
@@ -223,15 +223,15 @@ def cmd_setup(args):
     # cmd_init(args)
 
 
-# @+node:ekr.20110310091639.14284: *4* cmd_tags
+#@ cmd_tags
 def cmd_tags(args):
     cw = CodeWise()
     cw.feed_ctags(open(args[0]))
 
 
-# @+node:ekr.20110310093050.14234: *3* functions from leoGlobals
-# @+node:ekr.20110310093050.14291: *4* Most common functions... (codewise.py)
-# @+node:ekr.20110310093050.14296: *5* callers & _callerName (codewise)
+#@< functions from leoGlobals
+#@> Most common functions... (codewise.py)
+#@> callers & _callerName (codewise)
 def callers(n=4, count=0, excludeCaller=True, files=False):
     '''Return a list containing the callers of the function that called callerList.
 
@@ -258,7 +258,7 @@ def callers(n=4, count=0, excludeCaller=True, files=False):
     return sep.join(result)
 
 
-# @+node:ekr.20110310093050.14297: *6* _callerName
+#@> _callerName
 def _callerName(n=1, files=False):
     try:  # get the function name from the call stack.
         f1 = sys._getframe(n)  # The stack frame, n levels up.
@@ -274,7 +274,7 @@ def _callerName(n=1, files=False):
         return ''  # "<no caller name>"
 
 
-# @+node:ekr.20110310093050.14253: *5* doKeywordArgs (codewise)
+#@< doKeywordArgs (codewise)
 def doKeywordArgs(keys, d=None):
     '''Return a result dict that is a copy of the keys dict
     with missing items replaced by defaults in d dict.'''
@@ -295,12 +295,12 @@ def doKeywordArgs(keys, d=None):
     return result
 
 
-# @+node:ekr.20180311191907.1: *5* error (codewise)
+#@ error (codewise)
 def error(*args, **keys):
     print(args, keys)
 
 
-# @+node:ekr.20180311192928.1: *5* es_exception (codewise)
+#@ es_exception (codewise)
 def es_exception(full=True, c=None, color="red"):
     typ, val, tb = sys.exc_info()
     # val is the second argument to the raise statement.
@@ -314,7 +314,7 @@ def es_exception(full=True, c=None, color="red"):
     return fileName, n
 
 
-# @+node:ekr.20180311193048.1: *5* getLastTracebackFileAndLineNumber (codewise)
+#@ getLastTracebackFileAndLineNumber (codewise)
 def getLastTracebackFileAndLineNumber():
     typ, val, tb = sys.exc_info()
     if typ == SyntaxError:
@@ -334,7 +334,7 @@ def getLastTracebackFileAndLineNumber():
     return '<string>', 0
 
 
-# @+node:ekr.20110310093050.14263: *5* pr (codewise)
+#@ pr (codewise)
 # see: http://www.diveintopython.org/xml_processing/unicode.html
 
 
@@ -362,7 +362,7 @@ def pr(*args, **keys):  # (codewise!)
     sys.stdout.write(s)  # Unit tests do not change sys.stdout.
 
 
-# @+node:ekr.20180311193230.1: *5* shortFileName (codewise)
+#@ shortFileName (codewise)
 def shortFileName(fileName, n=None):
     '''Return the base name of a path.'''
     if not fileName:
@@ -372,7 +372,7 @@ def shortFileName(fileName, n=None):
     return '/'.join(fileName.replace('\\', '/').split('/')[-n:])
 
 
-# @+node:ekr.20110310093050.14268: *5* trace (codewise)
+#@ trace (codewise)
 # Convert all args to strings.
 
 
@@ -417,7 +417,7 @@ def trace(*args, **keys):
     pr(s, newline=newline)
 
 
-# @+node:ekr.20110310093050.14264: *5* translateArgs (codewise)
+#@ translateArgs (codewise)
 def translateArgs(args, d):
     '''Return the concatenation of all args, with odd args translated.'''
     global consoleEncoding
@@ -443,8 +443,8 @@ def translateArgs(args, d):
     return ''.join(result)
 
 
-# @+node:ekr.20110310093050.14280: *4* Unicode utils (codewise)...
-# @+node:ekr.20110310093050.14282: *5* isBytes, isCallable, isString & isUnicode (codewise)
+#@< Unicode utils (codewise)...
+#@> isBytes, isCallable, isString & isUnicode (codewise)
 # The syntax of these functions must be valid on Python2K and Python3K.
 
 # Codewise
@@ -469,7 +469,7 @@ def isUnicode(s):
     return isinstance(s, str)
 
 
-# @+node:ekr.20110310093050.14283: *5* isValidEncoding (codewise)
+#@ isValidEncoding (codewise)
 def isValidEncoding(encoding):
     if not encoding:
         return False
@@ -486,7 +486,7 @@ def isValidEncoding(encoding):
         return False
 
 
-# @+node:ekr.20110310093050.14286: *5* toEncodedString (codewise)
+#@ toEncodedString (codewise)
 def toEncodedString(s, encoding='utf-8', reportErrors=False):
     '''Convert unicode string to an encoded string.'''
     if not isUnicode(s):
@@ -502,7 +502,7 @@ def toEncodedString(s, encoding='utf-8', reportErrors=False):
     return s
 
 
-# @+node:ekr.20110310093050.14287: *5* toUnicode (codewise)
+#@ toUnicode (codewise)
 def toUnicode(s, encoding='utf-8', reportErrors=False):
     '''Convert a non-unicode string with the given encoding to unicode.'''
     if isUnicode(s):
@@ -518,7 +518,7 @@ def toUnicode(s, encoding='utf-8', reportErrors=False):
     return s
 
 
-# @+node:ekr.20110310093050.14288: *5* u & ue (codewise)
+#@ u & ue (codewise)
 def u(s):
     return s
 
@@ -527,7 +527,7 @@ def ue(s, encoding):
     return s if isUnicode(s) else str(s, encoding)
 
 
-# @+node:ekr.20110310091639.14290: *3* main
+#@<2 main
 def main():
     if len(sys.argv) < 2:
         print(usage)
@@ -552,7 +552,7 @@ def main():
         cmd_setup(args)
 
 
-# @+node:ekr.20110310091639.14287: *3* printlines
+#@ printlines
 def printlines(lines):
     for l in lines:
         try:
@@ -561,7 +561,7 @@ def printlines(lines):
             pass
 
 
-# @+node:ekr.20110310091639.14280: *3* run_ctags
+#@ run_ctags
 def run_ctags(paths):
     cm = 'ctags -R --sort=no -f - ' + " ".join(paths)
     # print(cm)
@@ -569,15 +569,15 @@ def run_ctags(paths):
     return f
 
 
-# @+node:ekr.20110310091639.14296: *3* test
+#@ test
 def test(self):
     pass
 
 
-# @+node:ekr.20110310091639.14256: ** class CodeWise
+#@< class CodeWise
 class CodeWise:
-    # @+others
-    # @+node:ekr.20110310091639.14257: *3* __init__(CodeWise)
+    #@+others
+    #@> __init__(CodeWise)
     def __init__(self, dbpath=None):
         if dbpath is None:
             # use "current" db from env var
@@ -590,7 +590,7 @@ class CodeWise:
             self.dbconn = sqlite3.connect(dbpath)
             self.create_caches()
 
-    # @+node:ekr.20110310091639.14258: *3* createdb
+    #@ createdb
     def createdb(self, dbpath):
         self.dbconn = c = sqlite3.connect(dbpath)
         # print(self.dbconn)
@@ -598,7 +598,7 @@ class CodeWise:
         c.commit()
         c.close()
 
-    # @+node:ekr.20110310091639.14259: *3* create_caches
+    #@ create_caches
     def create_caches(self):
         """read existing db and create caches"""
         c = self.cursor()
@@ -610,13 +610,13 @@ class CodeWise:
             self.filecache[name] = idd
         c.close()
 
-    # @+node:ekr.20110310091639.14260: *3* reset_caches
+    #@ reset_caches
     def reset_caches(self):
         self.classcache = {}
         self.filecache = {}
         self.fileids_scanned = set()
 
-    # @+node:ekr.20110310091639.14261: *3* cursor
+    #@ cursor
     def cursor(self):
         if self.dbconn:
             try:
@@ -625,7 +625,7 @@ class CodeWise:
                 print("No cursor for codewise DB, closed database?")
         return None
 
-    # @+node:ekr.20110310091639.14262: *3* class_id
+    #@ class_id
     def class_id(self, classname):
         """return class id. May create new class"""
         if classname is None:
@@ -639,7 +639,7 @@ class CodeWise:
             self.classcache[classname] = idd
         return idd
 
-    # @+node:ekr.20110310091639.14263: *3* get_members
+    #@ get_members
     def get_members(self, classnames):
         clset = set(classnames)
         # class_by_id = dict((v, k) for k, v in self.classcache.items())
@@ -656,7 +656,7 @@ class CodeWise:
                     result.append((name, pat))
         return result
 
-    # @+node:ekr.20110310091639.14264: *3* get_functions
+    #@ get_functions
     def get_functions(self, prefix=None):
         c = self.cursor()
         if prefix is None:
@@ -669,7 +669,7 @@ class CodeWise:
             )
         return [(name, pat, klassid, fileid) for name, klassid, fileid, pat in c]
 
-    # @+node:ekr.20110310091639.14265: *3* file_id
+    #@ file_id
     def file_id(self, fname):
         if fname == '':
             return 0
@@ -690,7 +690,7 @@ class CodeWise:
             self.fileids_scanned.add(idd)
         return idd
 
-    # @+node:ekr.20110310091639.14266: *3* feed_function
+    #@ feed_function
     def feed_function(self, func_name, class_name, file_name, aux):
         """insert one function
 
@@ -706,7 +706,7 @@ class CodeWise:
             [clid, func_name, aux, fid],
         )
 
-    # @+node:ekr.20110310091639.14267: *3* feed_scintilla
+    #@ feed_scintilla
     def feed_scintilla(self, apifile_obj):
         """handle scintilla api files
 
@@ -728,7 +728,7 @@ class CodeWise:
             self.feed_function(func.strip(), shortclass.strip(), '', desc.strip())
         self.dbconn.commit()
 
-    # @+node:ekr.20110310091639.14268: *3* feed_ctags
+    #@ feed_ctags
     def feed_ctags(self, tagsfile_obj):
         for l in tagsfile_obj:
             if l.startswith('!'):
@@ -754,19 +754,19 @@ class CodeWise:
             )
         self.dbconn.commit()
 
-    # @+node:ekr.20110310091639.14269: *3* add_source
+    #@ add_source
     def add_source(self, type, src):
         c = self.cursor()
         c.execute('insert into datasource(type, src) values (?,?)', (type, src))
         self.dbconn.commit()
 
-    # @+node:ekr.20110310091639.14270: *3* sources
+    #@ sources
     def sources(self):
         c = self.cursor()
         c.execute('select type, src from datasource')
         return list(c)
 
-    # @+node:ekr.20110310091639.14271: *3* zap_symbols
+    #@ zap_symbols
     def zap_symbols(self):
         c = self.cursor()
         tables = ['class', 'file', 'function']
@@ -774,9 +774,9 @@ class CodeWise:
             c.execute('delete from ' + t)
         self.dbconn.commit()
 
-    # @+node:ekr.20110310091639.14272: *3* # high level commands
+    #@ # high level commands
     # high level commands
-    # @+node:ekr.20110310091639.14273: *3* parseall
+    #@ parseall
     def parseall(self):
         sources = self.sources()
         self.reset_caches()
@@ -785,7 +785,7 @@ class CodeWise:
         self.parse(tagdirs)
         self.dbconn.commit()
 
-    # @+node:ekr.20110310091639.14274: *3* parse
+    #@ parse
     def parse(self, paths):
         paths = set(os.path.abspath(p) for p in paths)
         f = run_ctags(paths)
@@ -795,10 +795,10 @@ class CodeWise:
             if ('tagdir', a) not in sources:
                 self.add_source('tagdir', a)
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20110310091639.14275: ** class ContextSniffer
+#@< class ContextSniffer
 class ContextSniffer:
     """Class to analyze surrounding context and guess class
 
@@ -806,13 +806,13 @@ class ContextSniffer:
 
     """
 
-    # @+others
-    # @+node:ekr.20110310091639.14276: *3* __init__ (ContextSniffer)
+    #@+others
+    #@> __init__ (ContextSniffer)
     def __init__(self):
         # var name => list of classes
         self.vars = {}
 
-    # @+node:ekr.20110310091639.14277: *3* declare
+    #@ declare
     def declare(self, var, klass):
         # print("declare",var,klass)
         vars = self.vars.get(var, [])
@@ -820,7 +820,7 @@ class ContextSniffer:
             self.vars[var] = vars
         vars.append(klass)
 
-    # @+node:ekr.20110310091639.14278: *3* push_declarations
+    #@ push_declarations
     def push_declarations(self, body):
         for l in body.splitlines():
             l = l.lstrip()
@@ -832,19 +832,19 @@ class ContextSniffer:
                 continue
             self.declare(parts[0].strip(), parts[1].strip())
 
-    # @+node:ekr.20110310091639.14279: *3* set_small_context
+    #@ set_small_context
     def set_small_context(self, body):
         """Set immediate function"""
         self.push_declarations(body)
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @@pagewidth 70
+#@-others
+#@@language python
+#@@tabwidth -4
+#@@pagewidth 70
 
 if __name__ == "__main__":
     main()
-# @-leo
+#@-leo

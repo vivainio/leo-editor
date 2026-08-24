@@ -1,9 +1,9 @@
-#@+leo-ver=5-thin
-#@+node:ekr.20101110150056.9445: * @file ../plugins/mod_leo2ascd.txt
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20101110150056.9445] @f ../plugins/mod_leo2ascd.txt
 #@@language plain
 #@@tabwidth -4
 #@+all
-#@+node:ekr.20040331071919.38: ** Leo 2 AsciiDoc Users Guide
+#@> Leo 2 AsciiDoc Users Guide
 @language plain
 @ascfile "doc/mod_asc_user.asc"
 @ascconfig maxCodeLineLength 80
@@ -56,7 +56,7 @@ equations.  In general, DocBook typesets blocks of text.
 *note*
 
 @code
-#@+node:ekr.20040331071919.2: *3* About this document
+#@> About this document
 @doc
 @ascskip # Time-stamp: "Fri, Jan  9 15:19 CST 2004  michael@redpriest About_this_document_140583820.txt"
 
@@ -92,7 +92,7 @@ Everything was generated automatically without any further work on
 my part.
 
 @code
-#@+node:ekr.20040331071919.3: *4* License
+#@> License
 @doc
 @ascskip # Time-stamp: "Mon, Jan 19 15:28 CST 2004  michael@redpriest License_141615068.txt"
 
@@ -118,7 +118,7 @@ Initiative:  http://opensource.org/licenses/mit-license.html[]
 
 
 @code
-#@+node:ekr.20040331071919.4: *5* License document
+#@> License document
 @doc
 @ascskip # Time-stamp: "Fri, Jan  9 09:18 CST 2004  michael@redpriest License_document_140581532.txt"
 ---
@@ -158,9 +158,9 @@ use or other dealings in this Software without prior written
 authorization of the copyright holder.
 ---
 @code
-#@+node:ekr.20040331071919.40: *3* Operation
+#@<2 Operation
 @language plain
-@
+#@@
 
 Using Leo2AsciiDoc is as simple as choosing the Leo menu item: "File;
 Export; Export All to AsciiDoc".  From there, you have the AsciiDoc
@@ -195,7 +195,7 @@ all the features.  It is the outline from which all the Leo2AsciiDoc HTML
 and PDF documentation and code were derived.
 
 @code
-#@+node:ekr.20040331071919.41: *4* Directives
+#@> Directives
 @doc
 @ascskip # Time-stamp: "Mon, Jan 19 13:19 CST 2004  michael@redpriest Directives_140672364.txt"
 
@@ -235,7 +235,7 @@ beginning of the line.
 
 
 @code
-#@+node:ekr.20040331071919.42: *5* Configuration
+#@> Configuration
 @doc
 @ascskip # Time-stamp: "Mon, Jan 19 13:20 CST 2004  michael@redpriest Configuration_140673612.txt"
 
@@ -266,7 +266,7 @@ document them yet.
 
 
 @code
-#@+node:ekr.20040331071919.43: *4* Markup
+#@< Markup
 @language plain
 @doc
 @ascskip # Time-stamp: "Mon, Jan 19 13:22 CST 2004  michael@redpriest Markup_140672220.txt"
@@ -283,7 +283,7 @@ contains all the Leo2AsciiDoc source and documentation, so that you
 can see exactly how markup may be used.
 
 @code
-#@+node:ekr.20040331071919.44: *5* Standard AsciiDoc Markup
+#@> Standard AsciiDoc Markup
 @doc
 @ascskip # Time-stamp: "Mon, Jan 19 13:20 CST 2004  michael@redpriest Standard_AsciiDoc_Markup_140676540.txt"
 
@@ -293,7 +293,7 @@ own, which any Leo2AsciiDoc user should read.
 
 
 @code
-#@+node:ekr.20040331071919.45: *6* Headings
+#@> Headings
 @doc
 @ascskip # Time-stamp: "Thu, Jan  8 14:06 CST 2004  michael@redpriest Headings_141020668.txt"
 
@@ -335,7 +335,7 @@ this itself from the outline headings.
 
 
 @code
-#@+node:ekr.20040331071919.46: *6* Lists
+#@ Lists
 @doc
 @ascskip # Time-stamp: "Thu, Jan  8 14:06 CST 2004  michael@redpriest Lists_141018612.txt"
 
@@ -358,7 +358,7 @@ produces:
 
 
 @code
-#@+node:ekr.20040331071919.47: *6* URLs
+#@ URLs
 @doc
 @ascskip # Time-stamp: "Thu, Jan  8 14:07 CST 2004  michael@redpriest URLs_140994492.txt"
 
@@ -378,10 +378,10 @@ http://www.docbook.org[The official home page for DocBook: The Definitive Guide.
 
 
 @code
-#@+node:ekr.20040331071919.1: ** Leo 2 AsciiDoc Developers Guide
+#@<4 Leo 2 AsciiDoc Developers Guide
 @language plain
 
-@
+#@@
 Preface
 -------
 
@@ -452,7 +452,7 @@ Marshall Research
 michael_dawson at marshallresearch dot com
 ---
 @code
-#@+node:ekr.20040331071919.6: *3* The General Approach
+#@> The General Approach
 @language plain
 @doc
 @ascskip # Time-stamp: "Fri, Jan  9 16:00 CST 2004  michael@redpriest The_General_Approach_140588436.txt"
@@ -484,7 +484,7 @@ generally:
 A specific list follows.
 
 @code
-#@+node:ekr.20040331071919.7: *4* Markup Added
+#@> Markup Added
 @language plain
 @doc
 @ascskip # Time-stamp: "Fri, Jan  9 16:05 CST 2004  michael@redpriest Markup_Added_140589620.txt"
@@ -504,7 +504,7 @@ A specific list follows.
       element.
 
 @code
-#@+node:ekr.20040331071919.14: *3* Other programs
+#@< Other programs
 @doc
 @ascskip # Time-stamp: "Tue, Jan 13 11:09 CST 2004  michael@redpriest Other_programs_140636444.txt"
 
@@ -522,7 +522,7 @@ for those who may be interested in setting up something similar.
       might find the documentation of my Leo integration and
       multi-mode support to be useful.
 @code
-#@+node:ekr.20040331071919.15: *3* <<Appendix: AsciiDoc >>
+#@ <<Appendix: AsciiDoc >>
 @language plain
 @ascskip Time-stamp: "Thu, Oct 30 10:58 CST 2003  michael@redpriest Appendix_AsciiDoc__140954356.txt"
 @doc
@@ -555,7 +555,7 @@ parameter ("-f leo-docbook.conf".)
 @ascskip on
 << Appendix: AsciiDoc >>
 @code
-#@+node:ekr.20040331071919.16: *4* << Configuration file >>
+#@> << Configuration file >>
 @language python
 @tabwidth -4
 
@@ -874,7 +874,7 @@ outfilesuffix=.xml
 
 \endif::doctype-website[]
 
-#@+node:ekr.20040331071919.17: *4* << Patches >>
+#@ << Patches >>
 @silent
 @doc
 @ascskip # Time-stamp: "Tue, Jan 13 14:11 CST 2004  michael@redpriest _Patches__140641532.txt"
@@ -969,7 +969,7 @@ diff -Naur 5.0.2-original/asciidoc.py 5.0.2-mrc-patched/asciidoc.py
              raise EAsciiDoc,'illegal document type'
          if backend == 'linuxdoc' and doctype != 'article':
              raise EAsciiDoc,'%s %s documents are not supported' \
-#@+node:ekr.20040331071919.18: *3* <<Appendix: DocBook>>
+#@< <<Appendix: DocBook>>
 @language plain
 @ascskip Time-stamp: "Fri, Dec 19 11:48 CST 2003  michael@redpriest Appendix_DocBook_140578660.txt"
 @doc
@@ -1009,7 +1009,7 @@ DocBook, just an example of a working system.
 @ascskip on
 << Appendix: DocBook >>
 @code
-#@+node:ekr.20040331071919.19: *4* << Tool Chain >>
+#@> << Tool Chain >>
 @doc
 @ascskip # Time-stamp: "Thu, Jan  8 13:57 CST 2004  michael@redpriest _Tool_Chain__140810780.txt"
 
@@ -1056,7 +1056,7 @@ chain.  You can even purchase complete packages, from text editing
 to PDF generation.
 
 @code
-#@+node:ekr.20040331071919.20: *4* << Make File >>
+#@ << Make File >>
 @language plain
 @tabwidth 4
 @doc
@@ -1279,7 +1279,7 @@ cleanclutter:
 @doc
 @ascskip xemacs-makefile-mode-off
 @code
-#@+node:ekr.20040331071919.21: *4* << Style Sheets >>
+#@ << Style Sheets >>
 @silent
 @doc
 @ascskip # Time-stamp: "Wed, Oct  1 15:33 CST 2003  michael@redpriest _Style_Sheets__140741140.txt"
@@ -1296,7 +1296,7 @@ the original stylesheet including others as needed, and always
 calling the main DocBook stylesheets at some point.
 
 @code
-#@+node:ekr.20040331071919.22: *5* << General >>
+#@> << General >>
 @comment <!-- -->
 @silent
 @doc
@@ -1351,7 +1351,7 @@ chapter   title
 @ascskip xemacs-xsl-mode-off
 
 
-#@+node:ekr.20040331071919.23: *5* << Customize >>
+#@ << Customize >>
 @comment <!-- -->
 @silent
 @doc
@@ -1451,7 +1451,7 @@ bookinfo elements we please.
 @doc
 @ascskip xemacs-xsl-mode-off
 
-#@+node:ekr.20040331071919.24: *5* << HTML: One File >>
+#@ << HTML: One File >>
 @silent
 @doc
 @ascskip # Time-stamp: "Thu, Jan  8 14:02 CST 2004  michael@redpriest _HTML_One_File__139289780.txt"
@@ -1480,7 +1480,7 @@ This is the "html.xsl" stylesheet.
 @ascskip xemacs-xsl-mode-off
 
 
-#@+node:ekr.20040331071919.25: *5* << HTML: Individual Pages >>
+#@ << HTML: Individual Pages >>
 @silent
 @doc
 @ascskip # Time-stamp: "Thu, Jan  8 14:40 CST 2004  michael@redpriest _HTML_Individual_Pages__141001292.txt"
@@ -1526,7 +1526,7 @@ The following code is the entire chunkit style sheet
 
 @doc
 @ascskip xemacs-xsl-mode-off
-#@+node:ekr.20040331071919.26: *5* << HTML: base css style sheet >>
+#@ << HTML: base css style sheet >>
 @silent
 @doc
 @ascskip # Time-stamp: "Thu, Jan  8 14:58 CST 2004  michael@redpriest _HTML_base_css_style_sheet__141160708.txt"
@@ -1630,7 +1630,7 @@ BDO[DIR="rtl"]  { direction: rtl; unicode-bidi: bidi-override }
 
 @doc
 @ascskip xemacs-css-mode-off
-#@+node:ekr.20040331071919.27: *5* << HTML: css style sheet >>
+#@ << HTML: css style sheet >>
 @silent
 @doc
 @ascskip # Time-stamp: "Wed, Jan 21 09:13 CST 2004  michael@redpriest _HTML_css_style_sheet__140659188.txt"
@@ -1953,7 +1953,7 @@ div.revhistory td[colspan="3"]
 @doc
 @ascskip xemacs-css-mode-off
 
-#@+node:ekr.20040331071919.28: *5* << HTML: common >>
+#@ << HTML: common >>
 @comment <!-- -->
 @silent
 @doc
@@ -1984,7 +1984,7 @@ The following section is the entire common-html style sheet
 </xsl:stylesheet>
 @doc
 @ascskip xemacs-xsl-mode-off
-#@+node:ekr.20040331071919.29: *5* << PDF >>
+#@ << PDF >>
 @comment <!-- -->
 @silent
 @doc
@@ -2117,7 +2117,7 @@ used by a Formatting Object processor to produce a PDF file.
 
 
 
-#@+node:ekr.20040331071919.30: *3* <<Appendix: XEmacs Text Editor>>
+#@<2 <<Appendix: XEmacs Text Editor>>
 @language plain
 @doc
 @ascskip # Time-stamp: "Tue, Jan 13 10:21 CST 2004  michael@redpriest Appendix_XEmacs_Text_Editor_140657924.txt"
@@ -2132,7 +2132,7 @@ XEmacs elisp functions.  You may find them useful.
 @ascskip on
 << Appendix: XEmacs Text Editor >>
 @code
-#@+node:ekr.20040331071919.31: *4* << Open_With Plugin >>
+#@> << Open_With Plugin >>
 @language python
 @tabwidth -4
 
@@ -2288,7 +2288,7 @@ Here is where we insert the < Call XEmacs > code fragment defined above:
         g.registerHandler(("start2","menu2","command2"), create_open_with_menu)
         g.plugin_signon(__name__)
 
-#@+node:ekr.20040331071919.32: *4* << Open_Tree Plugin >>
+#@ << Open_Tree Plugin >>
 @language python
 @tabwidth-4
 @doc
@@ -2357,7 +2357,7 @@ def CreateOpenTreeMenu (tag,keywords):
 if 1:
     g.registerHandler(("start2","menu2","command2"),CreateOpenTreeMenu)
     g.plugin_signon(__name__)
-#@+node:ekr.20040331071919.33: *4* << Filename modification >>
+#@ << Filename modification >>
 @language python
 @tabwidth -4
 @doc
@@ -2428,7 +2428,7 @@ def openWithTempFilePath (self,v,ext):
 # Register the handlers...
 g.registerHandler("start2", onStart)
 g.plugin_signon(__name__)
-#@+node:ekr.20040331071919.34: *4* << Kill Temporary Buffers >>
+#@ << Kill Temporary Buffers >>
 @language plain
 @silent
 @doc
@@ -2468,7 +2468,7 @@ XEmacs will prompt you about any buffers that have unsaved changes.
 
 @doc
 @ascskip xemacs-lisp-mode-off
-#@+node:ekr.20040331071919.35: *4* << MMM-mode >>
+#@ << MMM-mode >>
 @language plain
 @silent
 @doc
@@ -2548,7 +2548,7 @@ markers and creates the temporary file with the proper extension.
     :front "^@doc.*"
     :back "^@code"
     :insert ((?l py-leo-tag nil @ "@doc"
-                 @ "\n\n" _ "\n\n" @ "@code" @))
+#@@ "\n\n" _ "\n\n" @ "@code" @))
     ; \c % l will insert the doc-code pair at point.
     )
    (py-doc
@@ -2575,7 +2575,7 @@ markers and creates the temporary file with the proper extension.
     :front "xemacs-makefile-mode-on"
     :back "xemacs-makefile-mode-off"
     :insert ((?l text-embedded-tag nil @ "@doc"
-                 @ "\n\n" _ "\n\n" @ "@code" @))
+#@@ "\n\n" _ "\n\n" @ "@code" @))
     ; \c % l will insert the doc-code pair at point.
     )
    (txt-xsl-mode
@@ -2584,7 +2584,7 @@ markers and creates the temporary file with the proper extension.
     :front "xemacs-xsl-mode-on"
     :back "xemacs-xsl-mode-off"
     :insert ((?l text-embedded-tag nil @ "@doc"
-                 @ "\n\n" _ "\n\n" @ "@code" @))
+#@@ "\n\n" _ "\n\n" @ "@code" @))
     ; \c % l will insert the doc-code pair at point.
     )
    (txt-lisp-mode
@@ -2593,7 +2593,7 @@ markers and creates the temporary file with the proper extension.
     :front "xemacs-lisp-mode-on"
     :back "xemacs-lisp-mode-off"
     :insert ((?l text-embedded-tag nil @ "@doc"
-                 @ "\n\n" _ "\n\n" @ "@code" @))
+#@@ "\n\n" _ "\n\n" @ "@code" @))
     ; \c % l will insert the doc-code pair at point.
     )
    )
@@ -2603,7 +2603,7 @@ markers and creates the temporary file with the proper extension.
 
 @doc
 @ascskip xemacs-lisp-mode-off
-#@+node:ekr.20040331071919.36: *4* << Insert indexterm >>
+#@ << Insert indexterm >>
 @language plain
 @silent
 @doc
@@ -2647,7 +2647,7 @@ buffer]".
 @doc
 @ascskip xemacs-lisp-mode-off
 
-#@+node:ekr.20040331071919.37: *4* << Indent Leo comments >>
+#@ << Indent Leo comments >>
 @language plain
 @silent
 @doc

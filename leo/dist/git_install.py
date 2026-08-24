@@ -1,7 +1,7 @@
-#@+leo-ver=5-thin
-#@+node:DSR.20181126072740.2: * @file git_install.py
+#@+leo-ver=cub-1-thin
+#@0 [DSR.20181126072740.2] @f git_install.py
 #@+<< git_install docstring >>
-#@+node:DSR.20181126185212.1: ** << git_install docstring >>
+#@> << git_install docstring >>
 #@@language rest
 
 """
@@ -85,7 +85,7 @@ After done with work:
 """
 #@-<< git_install docstring >>
 #@+<< git_install imports >>
-#@+node:DSR.20181126190353.1: ** << git_install imports >>
+#@ << git_install imports >>
 from os      import environ
 from os      import getcwd
 from os      import mkdir
@@ -100,7 +100,7 @@ from sys     import exit
 # from subprocess import Popen, PIPE
 #@-<< git_install imports >>
 #@+<< define u >>
-#@+node:ekr.20181211044817.1: ** << define u >>
+#@ << define u >>
 #@@language rest
 
 u = \
@@ -132,7 +132,7 @@ python3 git_install.py commands
 """
 #@-<< define u >>
 #@+<< define cmds >>
-#@+node:ekr.20181211044817.2: ** << define cmds >>
+#@ << define cmds >>
 #@@language python
 
 # The following lines are displayed by entering:  `python git_install.py commands`
@@ -174,7 +174,7 @@ Please note that all the given command line options must be used, even when inst
 """
 #@-<< define cmds >>
 #@+<< git_install globals >>
-#@+node:DSR.20181126190502.1: ** << git_install globals >>
+#@ << git_install globals >>
 CWD         = getcwd()
 DATA_NAME   = "data.dat"
 DATA_FILE   = join(CWD,DATA_NAME)
@@ -185,7 +185,7 @@ ar1         = ar2 = ar3 = None
 
 #@-<< git_install globals >>
 #@+<< git_install_data >>
-#@+node:DSR.20181127213619.1: ** << git_install_data >>
+#@ << git_install_data >>
 repo_list = (
 (
 "dialite",
@@ -316,8 +316,8 @@ if exists(DATA_FILE):
 #@@language python
 #@@tabwidth -4
 #@+others
-#@+node:DSR.20181126185212.2: ** control routines
-#@+node:ekr.20181211050632.4: *3* do_step
+#@ control routines
+#@> do_step
 def do_step(item):
     """
     Do this step in the process, regardless of whether it has been done
@@ -330,12 +330,12 @@ def do_step(item):
     exec(val[0])
     print('')
     data[item] = (val[0],val[1],True)
-#@+node:ekr.20181211050632.2: *3* dump_opts
+#@ dump_opts
 def dump_opts():
     for item in order:
         print("{}: {}".format(item.ljust(7," "),data[item][1]))
     print("")
-#@+node:ekr.20181211050632.1: *3* get_args
+#@ get_args
 def get_args():
     global ar1,ar2,ar3
     try:
@@ -347,7 +347,7 @@ def get_args():
         #print("ar3 = " + ar3)
     except Exception:
         pass
-#@+node:ekr.20181211050632.5: *3* run
+#@ run
 def run():
     # ar2 is the step name.
     global ar2
@@ -386,20 +386,20 @@ def run():
     if ar2 == "commands":
         # show some interesting command lines used by this script
         print(cmds)
-#@+node:ekr.20181211050632.3: *3* save_data
+#@ save_data
 def save_data():
     with open(DATA_FILE, "wb") as f:
         dump(data,f,protocol=0)
 
-#@+node:ekr.20181211050629.1: *3* usage
+#@ usage
 def usage():
     print(u)
-#@+node:DSR.20181127045405.1: ** run routines
-#@+node:DSR.20181127174108.1: *3* setup_dirs
+#@< run routines
+#@> setup_dirs
 # def setup_dirs():
     # for item in dir_list:
         # create_dir(item)
-#@+node:DSR.20181203110307.1: *3* leo_copy_test
+#@ leo_copy_test
 def leo_copy_test():
     """
     TODO: Copy the entire directory:
@@ -407,13 +407,13 @@ def leo_copy_test():
     site-packages/leo/test
     """
     pass
-#@+node:DSR.20181127050322.1: *3* create_dir
+#@ create_dir
 def create_dir(item):
     name = join(CWD,item)
     if not exists(name):
         print("creating {}".format(name))
         mkdir(name)
-#@+node:DSR.20181128081455.1: *3* run_env_cmd
+#@ run_env_cmd
 def run_env_cmd(cmd):
     msg = "\n\nERROR! Pip install must be run under the "\
           "virtual environment:\n'{}'!\n\n".format(VIRTUAL_ENV)
@@ -425,7 +425,7 @@ def run_env_cmd(cmd):
         exit(0)
     print(cmd)
     system(cmd)
-#@+node:DSR.20181127182839.1: *3* clone_repo
+#@ clone_repo
 def clone_repo(name,branch,git_name):
     git_dir = join(CWD,SOURCES,"{}-{}/.git".format(name,branch))
     if not exists(git_dir):
@@ -435,7 +435,7 @@ def clone_repo(name,branch,git_name):
     print(cmd)
     system(cmd)
     return
-#@+node:DSR.20181127071328.1: *3* setup_git
+#@ setup_git
 def setup_git(repo_name):
     """
     Clone a bare .git directory for the github repo
@@ -446,7 +446,7 @@ def setup_git(repo_name):
     clone_repo(name,branch,git_name)
     pull_repo(name,branch,git_name)
     return
-#@+node:DSR.20181127052138.1: *3* unzip
+#@ unzip
 def unzip(name):
     dest = join(CWD,SOURCES)
     cmd = "unzip -o {} -d {}".format(name,dest)
@@ -456,7 +456,7 @@ def unzip(name):
     # src  = join(CWD,"zips","{}.zip".format(name))
     # dest = join(CWD,SOURCES)
     #print(src)
-#@+node:DSR.20181127193907.1: *3* get_names
+#@ get_names
 def get_names(repo_name):
     for item in repo_list:
         (name,branch,zip_name,git_name) = item
@@ -465,7 +465,7 @@ def get_names(repo_name):
             print(stub.format(name,branch,zip_name,git_name))
             return name,branch,zip_name,git_name
     return None,None,None,None
-#@+node:DSR.20181127195651.1: *3* setup_zip
+#@ setup_zip
 def setup_zip(repo_name):
     """
     Unzip a master zip file into its source directory
@@ -474,7 +474,7 @@ def setup_zip(repo_name):
     if not name:
         return
     unzip(zip_name)
-#@+node:DSR.20181127224128.1: *3* pull_repo
+#@ pull_repo
 def pull_repo(name,branch,git_name):
     print("pull_repo")
     repo_dir = join(CWD,SOURCES,"{}-{}".format(name,branch))
@@ -485,7 +485,7 @@ def pull_repo(name,branch,git_name):
     print(cmd)
     system(cmd)
     return
-#@+node:DSR.20181127235023.1: *3* install
+#@ install
 def install(repo_name):
 
     name,branch,zip_name,git_name = get_names(repo_name)

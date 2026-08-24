@@ -1,5 +1,5 @@
-#@+leo-ver=5-thin
-#@+node:bob.20170716135026.1: * @file examples/slowOut.sh
+#@+leo-ver=cub-1-thin
+#@0 [bob.20170716135026.1] @f slowOut.sh
 #@@language shell
 
 for xxx in 1 2 3 4 5;

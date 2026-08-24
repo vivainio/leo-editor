@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20141116100154.1: * @file ../plugins/importers/dart.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20141116100154.1] @f ../plugins/importers/dart.py
 """The @auto importer for the dart language."""
 
 from __future__ import annotations
@@ -12,8 +12,8 @@ if TYPE_CHECKING:
     from leo.core.leoNodes import Position
 
 
-# @+others
-# @+node:ekr.20161123120245.2: ** class Dart_Importer(Importer)
+#@+others
+#@> class Dart_Importer(Importer)
 class Dart_Importer(Importer):
     """The importer for the dart language."""
 
@@ -22,7 +22,7 @@ class Dart_Importer(Importer):
     block_patterns: tuple = (('function', re.compile(r'^\s*([\w\s]+)\s*\(.*?\)\s*\{')),)
 
 
-# @-others
+#@-others
 
 
 def do_import(c: Cmdr, parent: Position, s: str) -> None:
@@ -34,6 +34,6 @@ importer_dict = {
     'extensions': ['.dart'],
     'func': do_import,
 }
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@@language python
+#@@tabwidth -4
+#@-leo

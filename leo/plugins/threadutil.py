@@ -1,7 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20121126095734.12418: * @file ../plugins/threadutil.py
-# @@language python
-# @@tabwidth -4
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20121126095734.12418] @f ../plugins/threadutil.py
+#@@language python
+#@@tabwidth -4
 from collections import deque
 import logging
 import sys
@@ -16,9 +16,9 @@ g.assertUi('qt')  # May raise g.UiTypeException, caught by the plugins manager.
 log = None
 
 
-# @+others
-# @+node:ekr.20140911023403.17845: **  top-level
-# @+node:ekr.20121126095734.12432: *3* async_syscmd
+#@+others
+#@>  top-level
+#@> async_syscmd
 def async_syscmd(cmd, onfinished):
     proc = QtCore.QProcess()
 
@@ -31,12 +31,12 @@ def async_syscmd(cmd, onfinished):
     proc.start(cmd)
 
 
-# @+node:ekr.20121126095734.12423: *3* enq_task
+#@ enq_task
 def enq_task(r):
     _tq.add(r)
 
 
-# @+node:ekr.20140910173844.17826: *3* init
+#@ init
 def init():
     """Return True if the plugin has loaded successfully."""
     g.procs = SysProcessRunner()
@@ -44,12 +44,12 @@ def init():
     return True
 
 
-# @+node:ekr.20121126095734.12431: *3* later
+#@ later
 def later(f):
     QtCore.QTimer.singleShot(0, f)
 
 
-# @+node:ekr.20140910173844.17825: *3* leo_echo_cb
+#@ leo_echo_cb
 def leo_echo_cb(out, err, code, ent):
     arg = ent['arg']
     g.es("> " + arg[0] + " " + repr(arg[1:]))
@@ -59,7 +59,7 @@ def leo_echo_cb(out, err, code, ent):
         g.es_error(err)
 
 
-# @+node:ekr.20121126095734.12430: *3* log_filedes
+#@ log_filedes
 garbage: list[Any] = []
 
 
@@ -85,7 +85,7 @@ def log_filedes(f, level):
     rr.start()
 
 
-# @+node:ekr.20121126095734.12443: *3* main
+#@ main
 def main():
     # stupid test
     a = QtWidgets.QApplication([])
@@ -96,10 +96,10 @@ def main():
     a.exec()
 
 
-# @+node:ekr.20121126095734.12433: ** class NowOrLater
+#@< class NowOrLater
 class NowOrLater:
-    # @+others
-    # @+node:ekr.20121126095734.12434: *3* NowOrLater.__init__
+    #@+others
+    #@> NowOrLater.__init__
     def __init__(self, worker, gran=1.0):
         """worker takes list of tasks, does something for it"""
 
@@ -109,7 +109,7 @@ class NowOrLater:
         self.granularity = gran
         self.scheduled = False
 
-    # @+node:ekr.20121126095734.12435: *3* NowOrLater.add
+    #@ NowOrLater.add
     def add(self, task):
         now = time.time()
         self.l.append(task)
@@ -142,22 +142,22 @@ class NowOrLater:
             else:
                 pass
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20121126095734.12427: ** class Repeater
+#@< class Repeater
 class Repeater(QtCore.QThread):
     """execute f forever, signal on every run"""
 
     fragment = QtCore.pyqtSignal(object)
 
-    # @+others
-    # @+node:ekr.20121126095734.12428: *3* __init__
+    #@+others
+    #@> __init__
     def __init__(self, f, parent=None):
         super().__init__(parent)
         self.f = f
 
-    # @+node:ekr.20121126095734.12429: *3* run
+    #@ run
     def run(self):
         while 1:
             try:
@@ -176,18 +176,18 @@ class Repeater(QtCore.QThread):
                 return
             self.fragment.emit(res)
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20121126095734.12424: ** class RRunner
+#@< class RRunner
 class RRunner(QtCore.QThread):
-    # @+others
-    # @+node:ekr.20121126095734.12425: *3* __init__
+    #@+others
+    #@> __init__
     def __init__(self, f, parent=None):
         super().__init__(parent)
         self.f = f
 
-    # @+node:ekr.20121126095734.12426: *3* run
+    #@ run
     def run(self):
         try:
             self.res = self.f()
@@ -201,10 +201,10 @@ class RRunner(QtCore.QThread):
             for line in lines:
                 print(line.rstrip())
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20140910173844.17824: ** class SysProcessRunner
+#@< class SysProcessRunner
 class SysProcessRunner:
     def __init__(self):
         # dict of lists (queues)
@@ -243,15 +243,15 @@ class SysProcessRunner:
         p.finished.connect(fini)
 
 
-# @+node:ekr.20121126095734.12419: ** class ThreadQueue
+#@ class ThreadQueue
 class ThreadQueue:
-    # @+others
-    # @+node:ekr.20121126095734.12420: *3* __init__
+    #@+others
+    #@> __init__
     def __init__(self):
         """Ctor for ThreadQueue class."""
         self.threads = []
 
-    # @+node:ekr.20121126095734.12421: *3* add
+    #@ add
     def add(self, r):
         empty = not self.threads
         self.threads.append(r)
@@ -259,43 +259,43 @@ class ThreadQueue:
         if empty:
             r.start()
 
-    # @+node:ekr.20121126095734.12422: *3* pop
+    #@ pop
     def pop(self):
         if self.threads:
             ne = self.threads.pop()
             ne.start()
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20121126095734.12436: ** class UnitWorker
+#@< class UnitWorker
 class UnitWorker(QtCore.QThread):
     """Work on one work item at a time, start new one when it's done"""
 
     resultReady = QtCore.pyqtSignal()
 
-    # @+others
-    # @+node:ekr.20121126095734.12437: *3* __init__
+    #@+others
+    #@> __init__
     def __init__(self):
         super().__init__()
         self.cond = QtCore.QWaitCondition()
         self.mutex = QtCore.QMutex()
         self.input = None
 
-    # @+node:ekr.20121126095734.12438: *3* set_worker
+    #@ set_worker
     def set_worker(self, f):
         self.worker = f
 
-    # @+node:ekr.20121126095734.12439: *3* set_output_f
+    #@ set_output_f
     def set_output_f(self, f):
         self.output_f = f
 
-    # @+node:ekr.20121126095734.12440: *3* set_input
+    #@ set_input
     def set_input(self, inp):
         self.input = inp
         self.cond.wakeAll()
 
-    # @+node:ekr.20121126095734.12441: *3* do_work
+    #@ do_work
     def do_work(self, inp):
         try:
             self.output = self.worker(inp)
@@ -317,7 +317,7 @@ class UnitWorker(QtCore.QThread):
 
         later(L)
 
-    # @+node:ekr.20121126095734.12442: *3* run
+    #@ run
     def run(self):
         m = self.mutex
         while 1:
@@ -329,12 +329,12 @@ class UnitWorker(QtCore.QThread):
             if inp is not None:
                 self.do_work(inp)
 
-    # @-others
+    #@-others
 
 
-# @-others
+#@-others
 _tq = ThreadQueue()
 init()
 if __name__ == "__main__":
     main()
-# @-leo
+#@-leo

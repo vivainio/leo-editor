@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20210906141410.1: * @file ../unittests/core/test_leoUndo.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20210906141410.1] @f ../unittests/core/test_leoUndo.py
 """Tests of leoUndo.py"""
 
 # pylint: disable=no-member
@@ -9,11 +9,11 @@ from leo.core.leoTest2 import LeoUnitTest
 assert g
 
 
-# @+others
-# @+node:ekr.20210906141410.2: ** class TestUndo (LeoUnitTest)
+#@+others
+#@> class TestUndo (LeoUnitTest)
 class TestUndo(LeoUnitTest):
-    # @+others
-    # @+node:ekr.20210906141410.9: *3* TestUndo.runTest (Test)
+    #@+others
+    #@> TestUndo.runTest (Test)
     def runTest(self, before, after, i, j, func):
         """TestUndo.runTest."""
         c, p, w = self.c, self.c.p, self.c.frame.body.wrapper
@@ -42,12 +42,12 @@ class TestUndo(LeoUnitTest):
         result = w.getAllText()
         self.assertEqual(result, before, msg='after undo2')
 
-    # @+node:ekr.20210906172626.2: *3* TestUndo.test_addComments
+    #@ TestUndo.test_addComments
     def test_addComments(self):
         c = self.c
         before = self.prep(
             """
-            @language python
+    #@@language python
 
             def addCommentTest():
                 if 1:
@@ -58,7 +58,7 @@ class TestUndo(LeoUnitTest):
         )
         after = self.prep(
             """
-            @language python
+    #@@language python
 
             def addCommentTest():
                 # if 1:
@@ -72,12 +72,12 @@ class TestUndo(LeoUnitTest):
         func = c.addComments
         self.runTest(before, after, i, j, func)
 
-    # @+node:ekr.20210906172626.3: *3* TestUndo.test_convertAllBlanks
+    #@ TestUndo.test_convertAllBlanks
     def test_convertAllBlanks(self):
         c = self.c
         before = self.prep(
             """
-            @tabwidth -4
+    #@@tabwidth -4
 
             line 1
                 line 2
@@ -87,7 +87,7 @@ class TestUndo(LeoUnitTest):
         )
         after = self.prep(
             """
-            @tabwidth -4
+    #@@tabwidth -4
 
             line 1
             TABline 2
@@ -99,12 +99,12 @@ class TestUndo(LeoUnitTest):
         func = c.convertAllBlanks
         self.runTest(before, after, i, j, func)
 
-    # @+node:ekr.20210906172626.4: *3* TestUndo.test_convertAllTabs
+    #@ TestUndo.test_convertAllTabs
     def test_convertAllTabs(self):
         c = self.c
         before = self.prep(
             """
-            @tabwidth -4
+    #@@tabwidth -4
 
             line 1
             TABline 2
@@ -114,7 +114,7 @@ class TestUndo(LeoUnitTest):
         ).replace('TAB', '\t')
         after = self.prep(
             """
-            @tabwidth -4
+    #@@tabwidth -4
 
             line 1
                 line 2
@@ -126,12 +126,12 @@ class TestUndo(LeoUnitTest):
         func = c.convertAllTabs
         self.runTest(before, after, i, j, func)
 
-    # @+node:ekr.20210906172626.5: *3* TestUndo.test_convertBlanks
+    #@ TestUndo.test_convertBlanks
     def test_convertBlanks(self):
         c = self.c
         before = self.prep(
             """
-            @tabwidth -4
+    #@@tabwidth -4
 
             line 1
                 line 2
@@ -141,7 +141,7 @@ class TestUndo(LeoUnitTest):
         )
         after = self.prep(
             """
-            @tabwidth -4
+    #@@tabwidth -4
 
             line 1
             TABline 2
@@ -153,12 +153,12 @@ class TestUndo(LeoUnitTest):
         func = c.convertBlanks
         self.runTest(before, after, i, j, func)
 
-    # @+node:ekr.20210906172626.6: *3* TestUndo.test_convertTabs
+    #@ TestUndo.test_convertTabs
     def test_convertTabs(self):
         c = self.c
         before = self.prep(
             """
-            @tabwidth -4
+    #@@tabwidth -4
 
             line 1
             TABline 2
@@ -168,7 +168,7 @@ class TestUndo(LeoUnitTest):
         ).replace('TAB', '\t')
         after = self.prep(
             """
-            @tabwidth -4
+    #@@tabwidth -4
 
             line 1
                 line 2
@@ -180,7 +180,7 @@ class TestUndo(LeoUnitTest):
         func = c.convertTabs
         self.runTest(before, after, i, j, func)
 
-    # @+node:ekr.20210906172626.7: *3* TestUndo.test_dedentBody
+    #@ TestUndo.test_dedentBody
     def test_dedentBody(self):
         c = self.c
         before = self.prep(
@@ -204,12 +204,12 @@ class TestUndo(LeoUnitTest):
         func = c.dedentBody
         self.runTest(before, after, i, j, func)
 
-    # @+node:ekr.20210906172626.8: *3* TestUndo.test_deleteComments
+    #@ TestUndo.test_deleteComments
     def test_deleteComments(self):
         c = self.c
         before = self.prep(
             """
-            @language python
+    #@@language python
 
             def deleteCommentTest():
 
@@ -221,7 +221,7 @@ class TestUndo(LeoUnitTest):
         """
         )
         after = self.prep("""
-            @language python
+    #@@language python
 
             def deleteCommentTest():
 
@@ -236,12 +236,12 @@ class TestUndo(LeoUnitTest):
         func = c.deleteComments
         self.runTest(before, after, i, j, func)
 
-    # @+node:ekr.20210906172626.9: *3* TestUndo.test_deleteComments 2
+    #@ TestUndo.test_deleteComments 2
     def test_deleteComments_2(self):
         c = self.c
         before = self.prep(
             """
-            @language python
+    #@@language python
 
             def deleteCommentTest():
 
@@ -258,7 +258,7 @@ class TestUndo(LeoUnitTest):
         )
         after = self.prep(
             """
-            @language python
+    #@@language python
 
             def deleteCommentTest():
 
@@ -278,7 +278,7 @@ class TestUndo(LeoUnitTest):
         func = c.deleteComments
         self.runTest(before, after, i, j, func)
 
-    # @+node:ekr.20210906172626.16: *3* TestUndo.test_edit_headline
+    #@ TestUndo.test_edit_headline
     def test_edit_headline(self):
         # Brian Theado.
         c, p = self.c, self.c.p
@@ -306,7 +306,7 @@ class TestUndo(LeoUnitTest):
         # The undo should select the edited headline.
         self.assertEqual(c.p, node1)
 
-    # @+node:ekr.20210906172626.10: *3* TestUndo.test_extract_test
+    #@ TestUndo.test_extract_test
     def test_extract_test(self):
         c = self.c
         before = self.prep(
@@ -331,7 +331,7 @@ class TestUndo(LeoUnitTest):
         func = c.extract
         self.runTest(before, after, i, j, func)
 
-    # @+node:ekr.20210906172626.14: *3* TestUndo.test_line_to_headline
+    #@ TestUndo.test_line_to_headline
     def test_line_to_headline(self):
         c = self.c
         before = self.prep(
@@ -351,7 +351,7 @@ class TestUndo(LeoUnitTest):
         func = c.line_to_headline
         self.runTest(before, after, i, j, func)
 
-    # @+node:ekr.20210906172626.15: *3* TestUndo.test_restore_marked_bits
+    #@ TestUndo.test_restore_marked_bits
     def test_restore_marked_bits(self):
         c, p = self.c, self.c.p
         # Test of #1694.
@@ -374,7 +374,7 @@ class TestUndo(LeoUnitTest):
             self.assertEqual(p.b, newText)
             self.assertEqual(p.isMarked(), oldMarked)
 
-    # @+node:ekr.20210906172626.17: *3* TestUndo.test_undo_group
+    #@ TestUndo.test_undo_group
     def test_undo_group(self):
         # Test an off-by-one error in c.undoer.bead.
         # The buggy redoGroup code worked if the undo group was the first item on the undo stack.
@@ -382,7 +382,7 @@ class TestUndo(LeoUnitTest):
         original = p.insertAfter()
         original_s = original.b = self.prep(
             """
-            @tabwidth -4
+    #@@tabwidth -4
 
             line 1
                 line 2
@@ -405,7 +405,7 @@ class TestUndo(LeoUnitTest):
         c.undoer.redo()
         self.assertEqual(original.b, original_s)
 
-    # @+node:ekr.20250625044932.1: *3* TestUndo.test_undo_group_after_move
+    #@ TestUndo.test_undo_group_after_move
     def test_undo_group_after_move(self):
         # Test a group of moves.
         c, p, u = self.c, self.c.p, self.c.undoer
@@ -436,8 +436,8 @@ class TestUndo(LeoUnitTest):
             u.undo()
             u.redo()
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

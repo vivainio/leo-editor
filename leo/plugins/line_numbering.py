@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:vitalije.20170727201534.1: * @file ../plugins/line_numbering.py
+#@+leo-ver=cub-1-thin
+#@0 [vitalije.20170727201534.1] @f ../plugins/line_numbering.py
 """
 This plugin makes line numbers in gutter (if used), to represent
    real line numbers in generated file. Root of file is either a
@@ -10,8 +10,8 @@ This plugin makes line numbers in gutter (if used), to represent
    Author: vitalije(at)kviziracija.net
 """
 
-# @+<< imports >>
-# @+node:vitalije.20170727201931.1: ** << imports >>
+#@+<< imports >>
+#@> << imports >>
 from contextlib import contextmanager
 import re
 from leo.core import leoGlobals as g
@@ -20,15 +20,15 @@ from leo.core.leoQt import QtCore, QtWidgets
 #
 # Fail fast, right after all imports.
 g.assertUi('qt')  # May raise g.UiTypeException, caught by the plugins manager.
-# @-<< imports >>
+#@-<< imports >>
 
 LNT = 'line_number_translation'
 LNR = 'line_numbering_root'
 LNOFF = 'line_numbering_off'
 
 
-# @+others
-# @+node:vitalije.20170727203452.1: ** init
+#@+others
+#@ init
 def init():
     """Return True if the plugin has loaded successfully."""
     ok = g.app.gui.guiName() == "qt"
@@ -39,7 +39,7 @@ def init():
     return ok
 
 
-# @+node:vitalije.20170727222624.1: ** Commands
+#@ Commands
 @g.command('toggle-line-numbering-root')
 def toggleLineNumberingRoot(event):
     """Toggle state of current selected node to be treated as a
@@ -65,7 +65,7 @@ def toggleLineNumberingOff(event):
     renumber(c)
 
 
-# @+node:vitalije.20170727204246.1: ** onSelect
+#@ onSelect
 def onSelect(tag, keys):
     c = keys.get('c')
     if not c.hash():
@@ -83,7 +83,7 @@ def onSelect(tag, keys):
         c.user_dict[LNT] = tuple()
 
 
-# @+node:vitalije.20170811122518.1: ** number_bar_widget
+#@ number_bar_widget
 @contextmanager
 def number_bar_widget(c):
     w = c.frame.top and c.frame.top.findChild(QtWidgets.QFrame, 'gutter')
@@ -98,7 +98,7 @@ def number_bar_widget(c):
         yield DummyWidget()
 
 
-# @+node:vitalije.20170727214320.1: ** renumber
+#@ renumber
 NUMBERINGS: dict[str, tuple] = {}
 
 
@@ -136,7 +136,7 @@ def renumber(c):
     finish_update(c)
 
 
-# @+node:vitalije.20170727214225.1: ** request & finish_update
+#@ request & finish_update
 REQUESTS: dict[str, bool] = {}
 
 
@@ -152,7 +152,7 @@ def finish_update(c):
     REQUESTS[c.hash()] = False
 
 
-# @+node:vitalije.20170726090940.1: ** universal_line_numbers
+#@ universal_line_numbers
 def universal_line_numbers(root, target_p, delim_st, delim_en):
     """Returns tuple of line numbers corresponding to lines of
     target_p body, in a file generated from root."""
@@ -161,8 +161,8 @@ def universal_line_numbers(root, target_p, delim_st, delim_en):
     roots.add(root.gnx)
     c.user_dict['line_numbering_roots'] = roots
     flines_data: dict[tuple, tuple] = {}
-    # @+others
-    # @+node:vitalije.20170726110242.1: *3* write patterns
+    #@+others
+    #@> write patterns
     section_pat = re.compile(r'^(\s*)(<{2}[^>]+>>)(.*)$')
 
     # Important: re.M used also in others_iterator
@@ -171,7 +171,7 @@ def universal_line_numbers(root, target_p, delim_st, delim_en):
     doc_pattern = re.compile('^(@doc|@)(?:\\s(.*?)\n|\n)$')
 
     code_pattern = re.compile('^(@code|@c)$')
-    # @+node:vitalije.20170726120813.1: *3* vlines
+    #@ vlines
     vlinescache: dict[str, tuple] = {}
 
     def vlines(p):
@@ -180,7 +180,7 @@ def universal_line_numbers(root, target_p, delim_st, delim_en):
         vl = vlinescache[p.gnx] = tuple(g.splitLines(p.b))
         return vl
 
-    # @+node:vitalije.20170726124959.1: *3* is_verbatim
+    #@ is_verbatim
     verbaline = delim_st + '@'
     if delim_st:
         is_verbatim = lambda x: x.startswith(verbaline)
@@ -189,7 +189,7 @@ def universal_line_numbers(root, target_p, delim_st, delim_en):
         is_verbatim = lambda x: False
         inc = lambda x: x
 
-    # @+node:vitalije.20170726110433.1: *3* others_iterator
+    #@ others_iterator
     def others_iterator(p):
         after = p.nodeAfterTree()
         p1 = p.threadNext()
@@ -203,7 +203,7 @@ def universal_line_numbers(root, target_p, delim_st, delim_en):
                 else:
                     p1.moveToThreadNext()
 
-    # @+node:vitalije.20170726121426.1: *3* handle_first_and_last_lines
+    #@ handle_first_and_last_lines
     def handle_first_and_last_lines():
         rlines = vlines(root)
         first = last = 0
@@ -216,7 +216,7 @@ def universal_line_numbers(root, target_p, delim_st, delim_en):
         vlinescache[root.gnx] = rlines
         return first, last
 
-    # @+node:vitalije.20170726122226.1: *3* numerate_node
+    #@ numerate_node
     def numerate_node(p, st):
         f_lines = []
         st = inc(st)
@@ -228,14 +228,14 @@ def universal_line_numbers(root, target_p, delim_st, delim_en):
         flines_data[pkey(p)] = tuple(f_lines), st
         return st
 
-    # @+node:vitalije.20170726124944.1: *3* check_line
+    #@ check_line
     def check_line(p, line, st):
         # every child node ends with return
-        # @+others
-        # @+node:vitalije.20170726193840.1: *4* verbatim lines
+        #@+others
+        #@> verbatim lines
         if is_verbatim(line):
             return 1, 2
-        # @+node:vitalije.20170726193927.1: *4* others
+        #@ others
         if m := others_pat.match(line):
             n = inc(st)
             for p1 in others_iterator(p):
@@ -243,10 +243,10 @@ def universal_line_numbers(root, target_p, delim_st, delim_en):
             n = inc(n)
             # return (0, n - st) if delim_st else (0, n - st)
             return (0, n - st)  # PR #4827
-        # @+node:vitalije.20170726193858.1: *4* directives in clean
+        #@ directives in clean
         if not delim_st and g.isDirective(line):
             return 0, 0
-        # @+node:vitalije.20170726193908.1: *4* all
+        #@ all
         if line.strip() == '@all':
             n = st + 1
             for p1 in p.subtree():
@@ -263,7 +263,7 @@ def universal_line_numbers(root, target_p, delim_st, delim_en):
                     flines = [n]
                 flines_data[pkey(p1)] = tuple(flines), n
             return 1, n - st
-        # @+node:vitalije.20170726193920.1: *4* section reference
+        #@ section reference
         if m := section_pat.match(line):
             p1 = g.findReference(m.group(2), p)
             if not p1:
@@ -277,27 +277,27 @@ def universal_line_numbers(root, target_p, delim_st, delim_en):
             # return (0, n - st) if delim_st else (0, n - st)
             return (0, n - st)  # PR #4827
 
-        # @+node:vitalije.20170726193933.1: *4* doc part
+        #@ doc part
         if doc_pattern.match(line):
             if delim_st:
                 return 0, 1
             return 0, 0
-        # @+node:vitalije.20170726193941.1: *4* code part
+        #@ code part
         if code_pattern.match(line):
             if delim_st:
                 return 0, 1
             return 0, 0
-        # @-others
+        #@-others
         # if we get here it is an ordinary line
         return 0, 1
 
-    # @+node:vitalije.20170727202446.1: *3* pkey
+    #@< pkey
     def pkey(p):
         # this is enough for short-term key inside this function
         # positions will never change its archivedPosition value
         return tuple(p.archivedPosition())
 
-    # @-others
+    #@-others
     vlinescache[root.gnx] = tuple(g.splitLines(root.b))
     first, last = handle_first_and_last_lines()
     start = 2 * first + 2 if delim_st else first + 1
@@ -313,7 +313,7 @@ def universal_line_numbers(root, target_p, delim_st, delim_en):
     return flines_data.get(k, (tuple(),))[0]
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

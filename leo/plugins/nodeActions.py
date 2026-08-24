@@ -1,7 +1,24 @@
-# @+leo-ver=5-thin
-# @+node:TL.20090225102340.32: * @file ../plugins/nodeActions.py
-# @+<< docstring >>
-# @+node:TL.20080507213950.3: ** << docstring >> (nodeActions.py)
+#@+leo-ver=cub-1-thin
+#@0 [TL.20090225102340.32] @f ../plugins/nodeActions.py
+#@+<< docstring >>
+#@-<< docstring >>
+
+# Written by TL.
+# Derived from the fileActions plugin.
+# Distributed under the same licence as Leo.
+
+#@+<< imports >>
+#@> << imports >>
+import fnmatch
+import os
+import re
+from typing import Any
+from leo.core import leoGlobals as g
+#@-<< imports >>
+
+
+#@+others
+#@ << docstring >> (nodeActions.py)
 r"""Allows the definition of double-click actions.
 
 Calling the nodeaction-act command or double-clicking a node causes this plugin
@@ -193,24 +210,7 @@ execute a command in the first line of the body of a double-clicked node::
      g.os.system('"Start /b ' + pClicked.bodyString() + '"')
 
 """
-# @-<< docstring >>
-
-# Written by TL.
-# Derived from the fileActions plugin.
-# Distributed under the same licence as Leo.
-
-# @+<< imports >>
-# @+node:ekr.20040915110738.1: ** << imports >>
-import fnmatch
-import os
-import re
-from typing import Any
-from leo.core import leoGlobals as g
-# @-<< imports >>
-
-
-# @+others
-# @+node:TL.20080507213950.7: ** init (nodeActions.py)
+#@ init (nodeActions.py)
 def init():
     """Return True if the plugin has loaded successfully."""
     if not g.app.batchMode:
@@ -222,7 +222,7 @@ def init():
     return ok
 
 
-# @+node:TL.20080507213950.8: ** onIconDoubleClickNA
+#@ onIconDoubleClickNA
 def onIconDoubleClickNA(tag, keywords):
     c = keywords.get("c")
     p = keywords.get("p")
@@ -235,7 +235,7 @@ def onIconDoubleClickNA(tag, keywords):
     return None
 
 
-# @+node:caminhante.20200802125556.1: ** nodeaction-act
+#@ nodeaction-act
 @g.command('nodeaction-act')
 def cmd_nodeaction_act(event):
     c = event.get('c')
@@ -247,7 +247,7 @@ def cmd_nodeaction_act(event):
     return None
 
 
-# @+node:TL.20080507213950.9: ** doNodeAction
+#@ doNodeAction
 def doNodeAction(pClicked, c):
     hClicked = pClicked.h.strip()
 
@@ -381,7 +381,7 @@ def doNodeAction(pClicked, c):
     return False  # TL - Inform onIconDoubleClick that no action was taken
 
 
-# @+node:TL.20080507213950.10: ** applyNodeAction
+#@ applyNodeAction
 def applyNodeAction(pScript, pClicked, c):
     script = g.getScript(c, pScript)
     redirect = c.config.getBool('redirect-execute-script-output-to-log_pane')
@@ -409,8 +409,8 @@ def applyNodeAction(pScript, pClicked, c):
         os.chdir(working_directory)
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
+#@-others
+#@@language python
+#@@tabwidth -4
 
-# @-leo
+#@-leo

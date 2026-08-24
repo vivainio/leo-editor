@@ -1,6 +1,6 @@
-# @+leo-ver=5-thin
-# @+node:tom.20230424140347.1: * @file ../plugins/rpcalc.py
-# @@language python
+#@+leo-ver=cub-1-thin
+#@0 [tom.20230424140347.1] @f ../plugins/rpcalc.py
+#@@language python
 # type: ignore
 # pylint: disable=singleton-comparison
 """An RPN calculator plugin in a log tab panel.
@@ -8,8 +8,8 @@
 Adapted from rpcalc.
 """
 
-# @+<< rpcalc: imports >>
-# @+node:tom.20230425232153.1: ** << rpcalc: imports >>
+#@+<< rpcalc: imports >>
+#@> << rpcalc: imports >>
 from __future__ import annotations
 import sys
 import os.path
@@ -28,9 +28,9 @@ from leo.core.leoQt import WindowType, DialogCode
 import leo.core.leoGlobals as g
 from leo.plugins.mod_scripting import scriptingController
 
-# @-<< rpcalc: imports >>
-# @+<< rpcalc: Qt Name Assignments >>
-# @+node:tom.20230428182001.1: ** << rpcalc: Qt Name Assignments >>
+#@-<< rpcalc: imports >>
+#@+<< rpcalc: Qt Name Assignments >>
+#@ << rpcalc: Qt Name Assignments >>
 Qt = QtCore.Qt
 
 QApplication = QtWidgets.QApplication
@@ -82,7 +82,7 @@ SegmentStyle = QLCDNumber.SegmentStyle
 pyqtSignal = QtCore.pyqtSignal
 
 g.assertUi('qt')  # May raise g.UiTypeException, caught by the plugins manager.
-# @-<< rpcalc: Qt Name Assignments >>
+#@-<< rpcalc: Qt Name Assignments >>
 
 __version__ = 0.91
 __author__ = 'Douglas W. Bell, Thomas B. Passin'
@@ -91,8 +91,8 @@ TABNAME = 'RPCalc'
 module_path = PurePath(__file__).parent
 iconPath = module_path / 'rpcalc' / 'icons'
 
-# @+<< rpcalc: LICENCE >>
-# @+node:ekr.20230617002028.1: ** << rpcalc: LICENCE >>
+#@+<< rpcalc: LICENCE >>
+#@ << rpcalc: LICENCE >>
 LICENSE = """\
 This program is a modified version of the rpcalc program, a
 Reverse Polish Notation (RPN) calculator.  It has been minimally modified
@@ -123,10 +123,10 @@ The license for the modified code is:
 # at rpcalc/docs.
 #****************************************************************************
 """
-# @-<< rpcalc: LICENCE >>
+#@-<< rpcalc: LICENCE >>
 
-# @+others
-# @+node:tom.20230424130102.154: **  optiondefaults
+#@+others
+#@  optiondefaults
 defaultList = [
     "# Options for the rpCalc program",
     "#",
@@ -186,9 +186,9 @@ defaultList = [
 ]
 
 
-# @@language python
-# @@tabwidth -4
-# @+node:tom.20230428180838.1: ** init
+#@@language python
+#@@tabwidth -4
+#@ init
 def init() -> bool:
     """Return True if the plugin has loaded successfully."""
     # 2031: Allow this plugin to run without Qt.
@@ -197,7 +197,7 @@ def init() -> bool:
     return True
 
 
-# @+node:tom.20230428190428.1: ** g.command rpcalc-toggle
+#@ g.command rpcalc-toggle
 @g.command('rpcalc-toggle')
 def toggle_tab(event) -> None:
     c = event.c
@@ -206,7 +206,7 @@ def toggle_tab(event) -> None:
     toggle_app_tab(log, TABNAME, widget=CalcDlg)
 
 
-# @+node:tom.20230501083631.1: ** copyToClip
+#@ copyToClip
 def copyToClip(text):
     """Copy text to the clipboard."""
     clip = QApplication.clipboard()
@@ -215,7 +215,7 @@ def copyToClip(text):
     clip.setText(text)
 
 
-# @+node:tom.20230428180647.1: ** onCreate
+#@ onCreate
 def onCreate(tag: str, keys: Any) -> None:
     # global CMDR
     c = keys.get('c')
@@ -229,16 +229,16 @@ def onCreate(tag: str, keys: Any) -> None:
         )
 
 
-# @+node:tom.20230424130102.2: **  altbasedialog
-# @+others
-# @+node:tom.20230424130102.3: *3* class AltBaseDialog
+#@  altbasedialog
+#@+others
+#@> class AltBaseDialog
 class AltBaseDialog(QWidget):
     """Displays edit boxes for other number bases."""
 
     baseCode = {'X': 16, 'O': 8, 'B': 2, 'D': 10}
 
-    # @+others
-    # @+node:tom.20230424130102.4: *4* __init__
+    #@+others
+    #@> __init__
     def __init__(self, dlgRef, parent=None):
         QWidget.__init__(self, parent)
         self.dlgRef = dlgRef
@@ -293,7 +293,7 @@ class AltBaseDialog(QWidget):
         option = self.dlgRef.calc.option
         self.move(option.intData('AltBaseXPos', 0, 10000), option.intData('AltBaseYPos', 0, 10000))
 
-    # @+node:tom.20230424130102.5: *4* updateData
+    #@ updateData
     def updateData(self):
         """Update edit box contents for current registers."""
         if self.prevBase and self.dlgRef.calc.flag != Mode.entryMode:
@@ -302,7 +302,7 @@ class AltBaseDialog(QWidget):
         for box in self.baseBoxes.values():
             box.setValue(self.dlgRef.calc.stack[0])
 
-    # @+node:tom.20230424130102.6: *4* changeBase
+    #@ changeBase
     def changeBase(self, base, endEntryMode=True):
         """Change core's base, button depression and label highlighting."""
         self.baseBoxes[self.dlgRef.calc.base].setHighlight(False)
@@ -316,7 +316,7 @@ class AltBaseDialog(QWidget):
             self.dlgRef.calc.flag = Mode.saveMode
         self.dlgRef.calc.base = base
 
-    # @+node:tom.20230424130102.7: *4* setCodedBase
+    #@ setCodedBase
     def setCodedBase(self, baseCode, temp=True):
         """Set new base from letter code, temporarily if temp is true."""
         if temp:
@@ -328,7 +328,7 @@ class AltBaseDialog(QWidget):
         except KeyError:
             pass
 
-    # @+node:tom.20230424130102.8: *4* updateOptions
+    #@ updateOptions
     def updateOptions(self):
         """Update bit limit and two's complement use."""
         self.dlgRef.calc.setAltBaseOptions()
@@ -338,7 +338,7 @@ class AltBaseDialog(QWidget):
             text = '{0} bit, no two\'s complement'.format(self.dlgRef.calc.numBits)
         self.bitsLabel.setText(text)
 
-    # @+node:tom.20230424130102.9: *4* copyValue
+    #@ copyValue
     def copyValue(self):
         """Copy the value in the current base to the clipboard."""
         text = str(self.baseBoxes[self.dlgRef.calc.base].text())
@@ -347,31 +347,31 @@ class AltBaseDialog(QWidget):
             clip.setText(text, QClipboard.Selection)
         clip.setText(text)
 
-    # @+node:tom.20230424130102.10: *4* keyPressEvent
+    #@ keyPressEvent
     def keyPressEvent(self, keyEvent):
         """Pass all keypresses to main dialog."""
         self.dlgRef.keyPressEvent(keyEvent)
 
-    # @+node:tom.20230424130102.11: *4* keyReleaseEvent
+    #@ keyReleaseEvent
     def keyReleaseEvent(self, keyEvent):
         """Pass all key releases to main dialog."""
         self.dlgRef.keyReleaseEvent(keyEvent)
 
-    # @+node:tom.20230424130102.12: *4* closeEvent
+    #@ closeEvent
     def closeEvent(self, closeEvent):
         """Change back to base 10 before closing."""
         self.changeBase(10)
         QWidget.closeEvent(self, closeEvent)
 
-    # @-others
+    #@-others
 
 
-# @+node:tom.20230424130102.13: *3* class AltBaseBox
+#@< class AltBaseBox
 class AltBaseBox(QLabel):
     """Displays an edit box at a particular base."""
 
-    # @+others
-    # @+node:tom.20230424130102.14: *4* __init__
+    #@+others
+    #@> __init__
     def __init__(self, base, calcRef, parent=None):
         QLabel.__init__(self, parent)
         self.base = base
@@ -380,12 +380,12 @@ class AltBaseBox(QLabel):
         self.setLineWidth(3)
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-    # @+node:tom.20230424130102.15: *4* setValue
+    #@ setValue
     def setValue(self, num):
         """Set value to num in proper base."""
         self.setText(self.calcRef.numberStr(num, self.base))
 
-    # @+node:tom.20230424130102.16: *4* setHighlight
+    #@ setHighlight
     def setHighlight(self, turnOn=True):
         """Make border bolder if turnOn is true, restore if false."""
         if turnOn:
@@ -394,22 +394,22 @@ class AltBaseBox(QLabel):
             style = Shape.Panel | Shadow.Sunken
         self.setFrameStyle(style)
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @+node:tom.20230424130102.18: **  calcbutton
-# @+others
-# @+node:tom.20230424130102.19: *3* class CalcButton
+#@-others
+#@@language python
+#@@tabwidth -4
+#@<2  calcbutton
+#@+others
+#@> class CalcButton
 class CalcButton(QPushButton):
     """Calculator button class - size change & emits clicked text signal."""
 
     activated = pyqtSignal(str)
 
-    # @+others
-    # @+node:tom.20230424130102.20: *4* __init__
+    #@+others
+    #@> __init__
     def __init__(self, text, parent=None):
         QPushButton.__init__(self, text, parent)
         self.setMinimumSize(38, 16)
@@ -417,19 +417,19 @@ class CalcButton(QPushButton):
         self.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.clicked.connect(self.clickEvent)
 
-    # @+node:tom.20230424130102.21: *4* clickEvent
+    #@ clickEvent
     def clickEvent(self):
         """Emits signal with button text."""
         self.activated.emit(self.text())
 
-    # @+node:tom.20230424130102.22: *4* sizeHint
+    #@ sizeHint
     def sizeHint(self):
         """Set prefered size."""
         size = QPushButton.sizeHint(self)
         size.setWidth(size.width() // 2)
         return size
 
-    # @+node:tom.20230424130102.23: *4* tmpDown
+    #@ tmpDown
     def tmpDown(self, mSec):
         """Button shows pushed in for mSec milliseconds."""
         timer = QTimer(self)
@@ -438,20 +438,20 @@ class CalcButton(QPushButton):
         timer.start(mSec)
         self.setDown(True)
 
-    # @+node:tom.20230424130102.24: *4* timerUp
+    #@ timerUp
     def timerUp(self):
         """Button up at end of timer for tmpDown."""
         self.setDown(False)
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @+node:tom.20230424130102.26: **  calccore
-# @+others
-# @+node:tom.20230424130102.27: *3* class Mode
+#@-others
+#@@language python
+#@@tabwidth -4
+#@<2  calccore
+#@+others
+#@> class Mode
 class Mode:
     """Enum for calculator modes."""
 
@@ -465,7 +465,7 @@ class Mode:
     errorMode = 107  # error notification - any cmd to resume
 
 
-# @+node:tom.20230424130102.28: *3* class CalcCore
+#@ class CalcCore
 class CalcCore:
     """Reverse Polish calculator functionality."""
 
@@ -474,8 +474,8 @@ class CalcCore:
     minNumBits = 4
     maxNumBits = 128
 
-    # @+others
-    # @+node:tom.20230424130102.29: *4* __init__
+    #@+others
+    #@> __init__
     def __init__(self):
         self.stack = CalcStack()
         self.option = Option('rpcalc', 20)
@@ -491,7 +491,7 @@ class CalcCore:
         self.histChg = 0
         self.setAltBaseOptions()
 
-    # @+node:tom.20230424130102.30: *4* setAltBaseOptions
+    #@ setAltBaseOptions
     def setAltBaseOptions(self):
         """Update bit limit and two's complement use."""
         self.numBits = self.option.intData('AltBaseBits', CalcCore.minNumBits, CalcCore.maxNumBits)
@@ -499,7 +499,7 @@ class CalcCore:
             self.numBits = CalcCore.maxNumBits
         self.useTwosComplement = self.option.boolData('UseTwosComplement')
 
-    # @+node:tom.20230424130102.31: *4* restoreStack
+    #@ restoreStack
     def restoreStack(self):
         """Read stack from option file."""
         if self.option.boolData('SaveStacks'):
@@ -508,7 +508,7 @@ class CalcCore:
         else:
             self.mem = [0.0] * 10
 
-    # @+node:tom.20230424130102.32: *4* saveStack
+    #@ saveStack
     def saveStack(self):
         """Store stack to option file."""
         # pylint: disable=expression-not-assigned
@@ -517,7 +517,7 @@ class CalcCore:
             [self.option.changeData('Mem' + repr(x), repr(self.mem[x]), 1) for x in range(10)]
             self.option.writeChanges()
 
-    # @+node:tom.20230424130102.33: *4* updateXStr
+    #@ updateXStr
     def updateXStr(self):
         """get display string from X register."""
         if abs(self.stack[0]) > 1e299:
@@ -529,7 +529,7 @@ class CalcCore:
         else:
             self.xStr = self.formatNum(self.stack[0])
 
-    # @+node:tom.20230424130102.34: *4* formatNum
+    #@ formatNum
     def formatNum(self, num):
         """Return number formatted per options."""
         absNum = abs(num)
@@ -559,7 +559,7 @@ class CalcCore:
             numStr = '{0}e{1:+0{pl}d}'.format(numStr, exp, pl=expDigits)
         return numStr
 
-    # @+node:tom.20230424130102.35: *4* addThousandsSep
+    #@ addThousandsSep
     def addThousandsSep(self, numStr):
         """Return number string with thousands separators added."""
         leadChar = ''
@@ -574,12 +574,12 @@ class CalcCore:
             numStr = numStr[:i] + ' ' + numStr[i:]
         return leadChar + numStr
 
-    # @+node:tom.20230424130102.36: *4* sciFormatX
+    #@ sciFormatX
     def sciFormatX(self, decPlcs):
         """Return X register str in sci notation."""
         return '{: 0.{pl}e}'.format(self.stack[0], pl=decPlcs)
 
-    # @+node:tom.20230424130102.37: *4* newXValue
+    #@ newXValue
     def newXValue(self, value):
         """Push X onto stack, replace with value."""
         self.stack.enterX()
@@ -587,7 +587,7 @@ class CalcCore:
         self.updateXStr()
         self.flag = Mode.saveMode
 
-    # @+node:tom.20230424130102.38: *4* numEntry
+    #@ numEntry
     def numEntry(self, entStr):
         """Interpret a digit entered depending on mode."""
         if self.flag == Mode.saveMode:
@@ -615,7 +615,7 @@ class CalcCore:
             self.flag = Mode.entryMode
         return True
 
-    # @+node:tom.20230424130102.39: *4* numberStr
+    #@ numberStr
     def numberStr(self, number, base):
         """Return string of number in given base (2-16)."""
         digits = '0123456789abcdef'
@@ -640,7 +640,7 @@ class CalcCore:
             result = '{0}{1}'.format(digits[remainder], result)
         return '{0}{1}'.format(sign, result)
 
-    # @+node:tom.20230424130102.40: *4* convertNum
+    #@ convertNum
     def convertNum(self, numStr):
         """Convert number string to float using current base."""
         numStr = numStr.replace(' ', '')
@@ -656,7 +656,7 @@ class CalcCore:
             num = num - 2**self.numBits
         return num
 
-    # @+node:tom.20230424130102.41: *4* expCmd
+    #@ expCmd
     def expCmd(self):
         """Command to add an exponent."""
         if self.flag == Mode.expMode or self.base != 10:
@@ -671,7 +671,7 @@ class CalcCore:
         self.flag = Mode.expMode
         return True
 
-    # @+node:tom.20230424130102.42: *4* bspCmd
+    #@ bspCmd
     def bspCmd(self):
         """Backspace command."""
         if self.base != 10 and self.flag == Mode.entryMode:
@@ -699,7 +699,7 @@ class CalcCore:
             self.xStr = self.addThousandsSep(self.xStr)
         return True
 
-    # @+node:tom.20230424130102.43: *4* chsCmd
+    #@ chsCmd
     def chsCmd(self):
         """Change sign command."""
         if self.flag == Mode.expMode:
@@ -716,7 +716,7 @@ class CalcCore:
         self.stack[0] = float(self.xStr.replace(' ', ''))
         return True
 
-    # @+node:tom.20230424130102.44: *4* memStoRcl
+    #@ memStoRcl
     def memStoRcl(self, numStr):
         """Handle memMode number entry for mem & dec plcs."""
         if len(numStr) == 1 and '0' <= numStr <= '9':
@@ -737,7 +737,7 @@ class CalcCore:
         self.flag = Mode.saveMode
         return True
 
-    # @+node:tom.20230424130102.45: *4* angleConv
+    #@ angleConv
     def angleConv(self):
         """Return angular conversion factor from options."""
         type = self.option.strData('AngleUnit')
@@ -747,7 +747,7 @@ class CalcCore:
             return math.pi / 200
         return math.pi / 180  # degree
 
-    # @+node:tom.20230424130102.46: *4* cmd
+    #@ cmd
     def cmd(self, cmdStr):
         """Main command interpreter - returns true/false if change made."""
         if self.flag in (Mode.memStoMode, Mode.memRclMode, Mode.decPlcMode):
@@ -885,24 +885,24 @@ class CalcCore:
             self.flag = Mode.errorMode
             return True
 
-    # @+node:tom.20230424130102.47: *4* printDebug
+    #@ printDebug
     def printDebug(self):
         """Print display string and all registers for debug."""
         print('x =', self.xStr)
         print('\n'.join([repr(num) for num in self.stack]))
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @+node:tom.20230424130102.50: ** class CalcDlg
+#@-others
+#@@language python
+#@@tabwidth -4
+#@<2 class CalcDlg
 class CalcDlg(QWidget):
     """Main dialog for calculator program."""
 
-    # @+others
-    # @+node:tom.20230424130102.51: *3* __init__
+    #@+others
+    #@> __init__
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
         self.calc = CalcCore()
@@ -925,8 +925,8 @@ class CalcDlg(QWidget):
 
         self.altBaseView = None
         self.optDlg = None
-        # @+<< create popup menu >>
-        # @+node:tom.20230428234315.1: *4* << create popup menu >>
+        #@+<< create popup menu >>
+        #@> << create popup menu >>
         self.popupMenu = QMenu(self)
         self.popupMenu.addAction('Registers on &LCD', self.toggleReg)
         self.popupMenu.addSeparator()
@@ -945,7 +945,7 @@ class CalcDlg(QWidget):
         # self.popupMenu.addAction('&Quit', self.close)
         topLay = QVBoxLayout(self)
         self.setLayout(topLay)
-        # @-<< create popup menu >>
+        #@-<< create popup menu >>
         topLay.setSpacing(4)
         topLay.setContentsMargins(6, 6, 6, 6)
 
@@ -966,8 +966,8 @@ class CalcDlg(QWidget):
             ),
         ]
 
-        # @+<< populate lcd widget >>
-        # @+node:tom.20230428234437.1: *4* << populate lcd widget >>
+        #@+<< populate lcd widget >>
+        #@ << populate lcd widget >>
         for i in range(3):
             lcdLay.addWidget(self.extraLabels[i], i, 0, AlignLeft)
         self.extraLcds = [Lcd(1.5, 13), Lcd(1.5, 13), Lcd(1.5, 13)]
@@ -982,7 +982,7 @@ class CalcDlg(QWidget):
         self.setLcdHighlight()
         self.updateLcd()
         self.updateColors()
-        # @-<< populate lcd widget >>
+        #@-<< populate lcd widget >>
 
         self.cmdLay = QGridLayout()
         topLay.addLayout(self.cmdLay)
@@ -1079,7 +1079,7 @@ class CalcDlg(QWidget):
         QTimer.singleShot(5000, self.updateEntryLabel)
         self.standalone = False
 
-    # @+node:tom.20230424130102.52: *3* updateEntryLabel
+    #@< updateEntryLabel
     def updateEntryLabel(self, subsText=''):
         """Set entry & status label text, use entryStr or subsText, options."""
         numFormat = self.calc.option.boolData('ForceSciNotation') and 'sci' or 'fix'
@@ -1088,7 +1088,7 @@ class CalcDlg(QWidget):
         self.statusLabel.setText('{0} {1}  {2}'.format(numFormat, decPlcs, angle))
         self.entryLabel.setText(subsText or '> {0}'.format(self.entryStr))
 
-    # @+node:tom.20230424130102.53: *3* setOptions
+    #@ setOptions
     def setOptions(self):
         """Starts option dialog, called by option key."""
         oldViewReg = self.calc.option.boolData('ViewRegisters')
@@ -1155,7 +1155,7 @@ class CalcDlg(QWidget):
             self.calc.updateXStr()
         self.optDlg = None
 
-    # @+node:tom.20230424130102.54: *3* setLcdHighlight
+    #@ setLcdHighlight
     def setLcdHighlight(self):
         """Set lcd highlight based on option."""
         opt = (
@@ -1167,7 +1167,7 @@ class CalcDlg(QWidget):
         for lcd in self.extraLcds:
             lcd.setSegmentStyle(opt)
 
-    # @+node:tom.20230424130102.55: *3* updateColors
+    #@ updateColors
     def updateColors(self):
         """Adjust the colors to the current option settings."""
         if self.calc.option.boolData('UseDefaultColors'):
@@ -1187,7 +1187,7 @@ class CalcDlg(QWidget):
         pal.setColor(QPalette.Text, foreground)
         QApplication.setPalette(pal)
 
-    # @+node:tom.20230424130102.56: *3* viewExtra
+    #@ viewExtra
     def viewExtra(self, defaultTab=0):
         """Show extra data view."""
         if self.optDlg:
@@ -1198,22 +1198,22 @@ class CalcDlg(QWidget):
         self.extraView.tab.setCurrentIndex(defaultTab)
         self.extraView.show()
 
-    # @+node:tom.20230424130102.57: *3* viewReg
+    #@ viewReg
     def viewReg(self):
         """Show extra data view with register tab open."""
         self.viewExtra(0)
 
-    # @+node:tom.20230424130102.58: *3* viewHist
+    #@ viewHist
     def viewHist(self):
         """Show extra data view with history tab open."""
         self.viewExtra(1)
 
-    # @+node:tom.20230424130102.59: *3* viewMem
+    #@ viewMem
     def viewMem(self):
         """Show extra data view with memory tab open."""
         self.viewExtra(2)
 
-    # @+node:tom.20230424130102.60: *3* updateExtra
+    #@ updateExtra
     def updateExtra(self):
         """Update current extra and alt base views."""
         if self.extraView and self.extraView.isVisible():
@@ -1221,7 +1221,7 @@ class CalcDlg(QWidget):
         if self.altBaseView:
             self.altBaseView.updateData()
 
-    # @+node:tom.20230424130102.61: *3* toggleReg
+    #@ toggleReg
     def toggleReg(self):
         """Toggle register display on LCD."""
         viewReg = not self.calc.option.boolData('ViewRegisters')
@@ -1235,7 +1235,7 @@ class CalcDlg(QWidget):
         self.adjustSize()
         self.calc.updateXStr()
 
-    # @+node:tom.20230424130102.62: *3* viewAltBases
+    #@ viewAltBases
     def viewAltBases(self):
         """Show alternate base view."""
         if self.optDlg:
@@ -1246,7 +1246,7 @@ class CalcDlg(QWidget):
         self.altBaseView.updateData()
         self.altBaseView.show()
 
-    # @+node:tom.20230424130102.64: *3* help
+    #@ help
     def help(self):
         """View the ReadMe file."""
         if self.optDlg:
@@ -1255,7 +1255,7 @@ class CalcDlg(QWidget):
         self.helpView = HelpView('', 'rpCalc README File', self.icons, self)
         self.helpView.show()
 
-    # @+node:tom.20230424130102.65: *3* about
+    #@ about
     def about(self):
         """About this program."""
         QMessageBox.about(
@@ -1264,12 +1264,12 @@ class CalcDlg(QWidget):
             'rpCalc for the Leo Editor, Version {0}\n by {1}'.format(__version__, __author__),
         )
 
-    # @+node:tom.20230429090628.1: *3* license
+    #@ license
     def license(self):
         """he license for this program."""
         QMessageBox.about(self, 'rpCalc License', LICENSE)
 
-    # @+node:tom.20230424130102.66: *3* addCmdButton
+    #@ addCmdButton
     def addCmdButton(self, text, row, col):
         """Adds a CalcButton for command functions."""
         button = CalcButton(text)
@@ -1277,7 +1277,7 @@ class CalcDlg(QWidget):
         self.cmdLay.addWidget(button, row, col)
         button.activated.connect(self.issueCmd)
 
-    # @+node:tom.20230424130102.67: *3* addMainButton
+    #@ addMainButton
     def addMainButton(self, key, text, row, col, extraRow=0, extraCol=0):
         """Adds a CalcButton for number and 4-function keys."""
         button = CalcButton(text)
@@ -1285,7 +1285,7 @@ class CalcDlg(QWidget):
         self.mainLay.addWidget(button, row, col, 1 + extraRow, 1 + extraCol)
         button.activated.connect(self.issueCmd)
 
-    # @+node:tom.20230424130102.68: *3* updateLcd
+    #@ updateLcd
     def updateLcd(self):
         """Sets display back to CalcCore string."""
         numDigits = int(self.calc.option.numData('NumDecimalPlaces', 0, 9)) + 9
@@ -1300,7 +1300,7 @@ class CalcDlg(QWidget):
                 lcd.setDisplay(num, numDigits)
         self.updateExtra()
 
-    # @+node:tom.20230424130102.69: *3* issueCmd
+    #@ issueCmd
     def issueCmd(self, text):
         """Sends command text to CalcCore - connected to button signals."""
         mode = self.calc.flag
@@ -1324,7 +1324,7 @@ class CalcDlg(QWidget):
         self.showMode = False
         self.updateLcd()
 
-    # @+node:tom.20230424130102.70: *3* textEntry
+    #@ textEntry
     def textEntry(self, ch):
         """Searches for button match from text entry."""
         if not ch:
@@ -1362,7 +1362,7 @@ class CalcDlg(QWidget):
         self.updateEntryLabel()
         return True
 
-    # @+node:tom.20230424130102.71: *3* keyPressEvent
+    #@ keyPressEvent
     def keyPressEvent(self, keyEvent):
         """Event handler for keys - checks for numbers and typed commands."""
         button = self.mainDict.get(keyEvent.key())
@@ -1398,7 +1398,7 @@ class CalcDlg(QWidget):
         elif not self.textEntry(str(keyEvent.text())):
             QWidget.keyPressEvent(self, keyEvent)
 
-    # @+node:tom.20230424130102.72: *3* keyReleaseEvent
+    #@ keyReleaseEvent
     def keyReleaseEvent(self, keyEvent):
         """Event handler for keys - sets button back to raised position."""
         # A hack: our widget is not getting keyPressEvent events
@@ -1416,7 +1416,7 @@ class CalcDlg(QWidget):
         if not self.entryStr and button:
             button.setDown(False)
 
-    # @+node:tom.20230424130102.73: *3* closeEvent
+    #@ closeEvent
     def closeEvent(self, event):
         """Saves the stack prior to closing."""
         self.calc.saveStack()
@@ -1435,19 +1435,19 @@ class CalcDlg(QWidget):
         self.calc.option.writeChanges()
         QWidget.closeEvent(self, event)
 
-    # @-others
+    #@-others
 
 
-# @+node:tom.20230424130102.75: **  calclcd
+#@<  calclcd
 
 
-# @+others
-# @+node:tom.20230424130102.76: *3* class Lcd
+#@+others
+#@> class Lcd
 class Lcd(QLCDNumber):
     """Main LCD Display."""
 
-    # @+others
-    # @+node:tom.20230424130102.77: *4* __init__
+    #@+others
+    #@> __init__
     def __init__(self, sizeFactor=1, numDigits=8, parent=None):
         QLCDNumber.__init__(self, numDigits, parent)
         self.sizeFactor = sizeFactor
@@ -1455,7 +1455,7 @@ class Lcd(QLCDNumber):
         self.setMinimumSize(10, 23)
         self.setFrameStyle(Shape.NoFrame)
 
-    # @+node:tom.20230424130102.78: *4* setDisplay
+    #@ setDisplay
     def setDisplay(self, text, numDigits):
         """Update display value."""
         text = text.replace('e', ' E', 1)  # add space before exp
@@ -1464,28 +1464,28 @@ class Lcd(QLCDNumber):
         self.setNumDigits(numDigits)
         self.display(text)
 
-    # @+node:tom.20230424130102.79: *4* sizeHint
+    #@ sizeHint
     def sizeHint(self):
         """Set prefered size."""
         # default in Qt is 23 height & about 10 * numDigits
         size = QLCDNumber.sizeHint(self)
         return QSize(int(size.width() * self.sizeFactor), int(size.height() * self.sizeFactor))
 
-    # @-others
+    #@-others
 
 
-# @+node:tom.20230424130102.80: *3* class LcdBox
+#@< class LcdBox
 class LcdBox(QFrame):
     """Frame for LCD display."""
 
-    # @+others
-    # @+node:tom.20230424130102.81: *4* __init__
+    #@+others
+    #@> __init__
     def __init__(self, parent=None):
         QFrame.__init__(self, parent)
         self.setFrameStyle(Shape.Panel | Shadow.Sunken)
         self.setLineWidth(3)
 
-    # @+node:tom.20230424130102.82: *4* mouseReleaseEvent
+    #@ mouseReleaseEvent
     def mouseReleaseEvent(self, event):
         """Mouse release event for popup menus."""
         if event.button() == MouseButton.RightButton:
@@ -1494,89 +1494,89 @@ class LcdBox(QFrame):
             popup.clearFocus()
         QFrame.mouseReleaseEvent(self, event)
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @+node:tom.20230424130102.85: ** class CalcStack
+#@-others
+#@@language python
+#@@tabwidth -4
+#@<2 class CalcStack
 class CalcStack(list):
     """Stores and rotates stack of 4 numbers."""
 
-    # @+others
-    # @+node:tom.20230424130102.86: *3* __init__
+    #@+others
+    #@> __init__
     def __init__(self, initList=None):
         if initList:
             list.__init__(self, initList)
         else:
             list.__init__(self, [0.0, 0.0, 0.0, 0.0])
 
-    # @+node:tom.20230424130102.87: *3* replaceAll
+    #@ replaceAll
     def replaceAll(self, numList):
         """Replace stack with numList."""
         self[:] = numList
 
-    # @+node:tom.20230424130102.88: *3* replaceXY
+    #@ replaceXY
     def replaceXY(self, num):
         """Replace X & Y registers with num, pulls stack."""
         del self[0]
         self[0] = num
         self.append(self[2])
 
-    # @+node:tom.20230424130102.89: *3* enterX
+    #@ enterX
     def enterX(self):
         """Push X onto stack into Y register."""
         self.insert(0, self[0])
         del self[4]
 
-    # @+node:tom.20230424130102.90: *3* rollBack
+    #@ rollBack
     def rollBack(self):
         """Roll stack so x = old y, etc.."""
         num = self[0]
         del self[0]
         self.append(num)
 
-    # @+node:tom.20230424130102.91: *3* rollUp
+    #@ rollUp
     def rollUp(self):
         """Roll stack so x = old stack bottom."""
         num = self[3]
         del self[3]
         self.insert(0, num)
 
-    # @-others
+    #@-others
 
 
-# @+node:tom.20230424130102.93: **  extradisplay
+#@<  extradisplay
 
 
-# @+others
-# @+node:tom.20230424130102.94: *3* class ExtraViewWidget(QTreeWidget)
+#@+others
+#@> class ExtraViewWidget(QTreeWidget)
 class ExtraViewWidget(QTreeWidget):
     """Base class of list views for ExtraDisplay."""
 
-    # @+others
-    # @+node:tom.20230424130102.95: *4* __init__
+    #@+others
+    #@> __init__
     def __init__(self, calcRef, parent=None):
         QListView.__init__(self, parent)  # pylint: disable=non-parent-init-called
         self.calcRef = calcRef
         self.setRootIsDecorated(False)
 
-    # @+node:tom.20230424130102.96: *4* setHeadings
+    #@ setHeadings
     def setHeadings(self, headerLabels):
         """Add headings to columns."""
         self.setColumnCount(len(headerLabels))
         self.setHeaderLabels(headerLabels)
 
-    # @-others
+    #@-others
 
 
-# @+node:tom.20230424130102.97: *3* class RegViewWidget
+#@< class RegViewWidget
 class RegViewWidget(ExtraViewWidget):
     """Register list view for ExtraDisplay."""
 
-    # @+others
-    # @+node:tom.20230424130102.98: *4* __init__
+    #@+others
+    #@> __init__
     def __init__(self, calcRef, parent=None):
         ExtraViewWidget.__init__(self, calcRef, parent)
         self.setHeadings(['Name', 'Value'])
@@ -1588,13 +1588,13 @@ class RegViewWidget(ExtraViewWidget):
         self.setCurrentItem(item)
         self.updateData()
 
-    # @+node:tom.20230424130102.99: *4* updateData
+    #@ updateData
     def updateData(self):
         """Update with current data."""
         for i in range(4):
             self.topLevelItem(i).setText(1, '{:.15g}'.format(self.calcRef.stack[3 - i]))
 
-    # @+node:tom.20230424130102.100: *4* selectedValue
+    #@ selectedValue
     def selectedValue(self):
         """Return number for selected line."""
         if self.selectedItems():
@@ -1602,21 +1602,21 @@ class RegViewWidget(ExtraViewWidget):
             return self.calcRef.stack[3 - pos]
         return 0.0
 
-    # @-others
+    #@-others
 
 
-# @+node:tom.20230424130102.101: *3* class HistViewWidget
+#@< class HistViewWidget
 class HistViewWidget(ExtraViewWidget):
     """History list view for ExtraDisplay."""
 
-    # @+others
-    # @+node:tom.20230424130102.102: *4* __init__
+    #@+others
+    #@> __init__
     def __init__(self, calcRef, parent=None):
         ExtraViewWidget.__init__(self, calcRef, parent)
         self.setHeadings(['Equation', 'Value'])
         self.updateData()
 
-    # @+node:tom.20230424130102.103: *4* updateData
+    #@ updateData
     def updateData(self):
         """Update with current data."""
         if not self.calcRef.histChg:
@@ -1634,7 +1634,7 @@ class HistViewWidget(ExtraViewWidget):
         self.scrollToItem(item)
         self.calcRef.histChg = 0
 
-    # @+node:tom.20230424130102.104: *4* selectedValue
+    #@ selectedValue
     def selectedValue(self):
         """Return number for selected line."""
         if self.selectedItems():
@@ -1642,15 +1642,15 @@ class HistViewWidget(ExtraViewWidget):
             return self.calcRef.history[pos][1]
         return 0.0
 
-    # @-others
+    #@-others
 
 
-# @+node:tom.20230424130102.105: *3* class MemViewWidget
+#@< class MemViewWidget
 class MemViewWidget(ExtraViewWidget):
     """Memory list view for ExtraDisplay."""
 
-    # @+others
-    # @+node:tom.20230424130102.106: *4* __init__
+    #@+others
+    #@> __init__
     def __init__(self, calcRef, parent=None):
         ExtraViewWidget.__init__(self, calcRef, parent)
         self.setHeadings(['Num', 'Value'])
@@ -1662,13 +1662,13 @@ class MemViewWidget(ExtraViewWidget):
         self.setCurrentItem(self.topLevelItem(0))
         self.updateData()
 
-    # @+node:tom.20230424130102.107: *4* updateData
+    #@ updateData
     def updateData(self):
         """Update with current data."""
         for i in range(10):
             self.topLevelItem(i).setText(1, self.calcRef.formatNum(self.calcRef.mem[i]))
 
-    # @+node:tom.20230424130102.108: *4* selectedValue
+    #@ selectedValue
     def selectedValue(self):
         """Return number for selected line."""
         if self.selectedItems():
@@ -1676,15 +1676,15 @@ class MemViewWidget(ExtraViewWidget):
             return self.calcRef.mem[pos]
         return 0.0
 
-    # @-others
+    #@-others
 
 
-# @+node:tom.20230424130102.109: *3* class ExtraDisplay
+#@< class ExtraDisplay
 class ExtraDisplay(QWidget):
     """Displays registers, history or memory values, allows copies."""
 
-    # @+others
-    # @+node:tom.20230424130102.110: *4* __init__
+    #@+others
+    #@> __init__
     def __init__(self, dlgRef, parent=None):
         QWidget.__init__(self, parent)
         self.dlgRef = dlgRef
@@ -1732,41 +1732,41 @@ class ExtraDisplay(QWidget):
             option.intData('ExtraViewXPos', 0, 10000), option.intData('ExtraViewYPos', 0, 10000)
         )
 
-    # @+node:tom.20230424130102.111: *4* tabUpdate
+    #@ tabUpdate
     def tabUpdate(self, index):
         """Update given tab widget."""
         self.tab.widget(index).updateData()
         self.enableControls()
 
-    # @+node:tom.20230424130102.112: *4* updateData
+    #@ updateData
     def updateData(self):
         """Update data in current tab."""
         self.tab.currentWidget().updateData()
         self.enableControls()
 
-    # @+node:tom.20230424130102.113: *4* enableControls
+    #@ enableControls
     def enableControls(self):
         """Enable or disable buttons depending on content available."""
         for button in self.buttonList:
             button.setEnabled(len(self.tab.currentWidget().selectedItems()) > 0)
 
-    # @+node:tom.20230424130102.114: *4* setXValue
+    #@ setXValue
     def setXValue(self):
         """Copy selected value to calculator X register."""
         self.dlgRef.calc.newXValue(self.tab.currentWidget().selectedValue())
         self.dlgRef.updateLcd()
 
-    # @+node:tom.20230424130102.115: *4* copyAllValue
+    #@ copyAllValue
     def copyAllValue(self):
         """Copy selected value to clipboard."""
         self.copyToClip('{:.15g}'.format(self.tab.currentWidget().selectedValue()))
 
-    # @+node:tom.20230424130102.116: *4* copyFixedValue
+    #@ copyFixedValue
     def copyFixedValue(self):
         """Copy selected value to clipboard after formatting."""
         self.copyToClip(self.dlgRef.calc.formatNum(self.tab.currentWidget().selectedValue()))
 
-    # @+node:tom.20230424130102.117: *4* copyToClip
+    #@ copyToClip
     def copyToClip(self, text):
         """Copy text to the clipboard."""
         clip = QApplication.clipboard()
@@ -1774,7 +1774,7 @@ class ExtraDisplay(QWidget):
             clip.setText(text, QClipboard.Selection)
         clip.setText(text)
 
-    # @+node:tom.20230424130102.118: *4* keyPressEvent
+    #@ keyPressEvent
     def keyPressEvent(self, keyEvent):
         """Pass most keypresses to main dialog."""
         if keyEvent.modifiers == Qt.AltModifier:
@@ -1782,7 +1782,7 @@ class ExtraDisplay(QWidget):
         else:
             self.dlgRef.keyPressEvent(keyEvent)
 
-    # @+node:tom.20230424130102.119: *4* keyReleaseEvent
+    #@ keyReleaseEvent
     def keyReleaseEvent(self, keyEvent):
         """Pass most key releases to main dialog."""
         if keyEvent.modifiers == Qt.AltModifier:
@@ -1790,20 +1790,20 @@ class ExtraDisplay(QWidget):
         else:
             self.dlgRef.keyReleaseEvent(keyEvent)
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @+node:tom.20230424130102.121: **  helpview
-# @+others
-# @+node:tom.20230424130102.122: *3* class HelpView
+#@-others
+#@@language python
+#@@tabwidth -4
+#@<2  helpview
+#@+others
+#@> class HelpView
 class HelpView(QMainWindow):
     """Main window for viewing an html help file."""
 
-    # @+others
-    # @+node:tom.20230424130102.123: *4* __init__
+    #@+others
+    #@> __init__
     def __init__(self, path, caption, icons, parent=None):
         """Helpview initialize with text."""
         QMainWindow.__init__(self, parent)
@@ -1866,18 +1866,18 @@ class HelpView(QMainWindow):
         self.findNextAct.triggered.connect(self.findNext)
         self.findNextAct.setEnabled(False)
 
-    # @+node:tom.20230424130102.124: *4* showLink
+    #@ showLink
     def showLink(self, text):
         """Send link text to the statusbar."""
         self.statusBar().showMessage(f'{text}')
 
-    # @+node:tom.20230424130102.125: *4* findTextChanged
+    #@ findTextChanged
     def findTextChanged(self, text):
         """Update find controls based on text in text edit."""
         self.findPreviousAct.setEnabled(len(text) > 0)
         self.findNextAct.setEnabled(len(text) > 0)
 
-    # @+node:tom.20230424130102.126: *4* findPrevious
+    #@ findPrevious
     def findPrevious(self):
         """Command to find the previous string."""
         if self.textView.find(self.findEdit.text(), QTextDocument.FindFlag.FindBackward):
@@ -1885,7 +1885,7 @@ class HelpView(QMainWindow):
         else:
             self.statusBar().showMessage('Text string not found')
 
-    # @+node:tom.20230424130102.127: *4* findNext
+    #@ findNext
     def findNext(self):
         """Command to find the next string."""
         if self.textView.find(self.findEdit.text()):
@@ -1893,21 +1893,21 @@ class HelpView(QMainWindow):
         else:
             self.statusBar().showMessage('Text string not found')
 
-    # @-others
+    #@-others
 
 
-# @+node:tom.20230424130102.128: *3* class HelpViewer
+#@< class HelpViewer
 class HelpViewer(QTextBrowser):
     """Shows an html help file."""
 
-    # @+others
-    # @+node:tom.20230424130102.129: *4* __init__
+    #@+others
+    #@> __init__
     def __init__(self, parent=None):
         QTextBrowser.__init__(self, parent)
         self.setOpenLinks(False)
         self.anchorClicked.connect(self.setSource)
 
-    # @+node:tom.20230424130102.130: *4* setSource
+    #@ setSource
     def setSource(self, url):
         """Called when user clicks on a URL."""
         name = url.toString()
@@ -1916,34 +1916,34 @@ class HelpViewer(QTextBrowser):
         else:
             QTextBrowser.setSource(self, url)
 
-    # @+node:tom.20230424130102.131: *4* contextMenuEvent
+    #@ contextMenuEvent
     def contextMenuEvent(self, event):
         """Init popup menu on right click""."""
         self.parentWidget().menu.exec(event.globalPos())
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @+node:tom.20230424130102.134: ** class IconDict
+#@-others
+#@@language python
+#@@tabwidth -4
+#@<2 class IconDict
 class IconDict(dict):
     """Stores icons by name, loads on demand."""
 
     iconExt = ['.png', '.bmp']
 
-    # @+others
-    # @+node:tom.20230424130102.135: *3* __init__
+    #@+others
+    #@> __init__
     def __init__(self):
         dict.__init__(self, {})
         self.pathList = [iconPath]
 
-    # @+node:tom.20230424130102.136: *3* addIconPath
+    #@ addIconPath
     def addIconPath(self, potentialPaths=None):
         pass
 
-    # @+node:tom.20230424130102.137: *3* __getitem__
+    #@ __getitem__
     def __getitem__(self, name):
         """Return icon, loading if necessary."""
         try:
@@ -1954,7 +1954,7 @@ class IconDict(dict):
                 raise
             return icon
 
-    # @+node:tom.20230424130102.138: *3* loadAllIcons
+    #@ loadAllIcons
     def loadAllIcons(self):
         """Load all icons available in self.pathList."""
         self.clear()
@@ -1974,7 +1974,7 @@ class IconDict(dict):
                 pass
         print(self.items())
 
-    # @+node:tom.20230424130102.139: *3* loadIcon
+    #@ loadIcon
     def loadIcon(self, iconName):
         """Load icon from iconPath, add to dictionary and return the icon."""
         icon = QIcon()
@@ -1989,15 +1989,15 @@ class IconDict(dict):
                     return icon
         return None
 
-    # @-others
+    #@-others
 
 
-# @+node:tom.20230424130102.142: ** class Option
+#@< class Option
 class Option:
     """Stores and retrieves string options."""
 
-    # @+others
-    # @+node:tom.20230424130102.143: *3* __init__
+    #@+others
+    #@> __init__
     def __init__(self, baseFileName, keySpaces=20):
         self.path = ''
         if baseFileName:
@@ -2029,7 +2029,7 @@ class Option:
         self.dictList = (self.userDict, self.dfltDict)
         self.chgList = []
 
-    # @+node:tom.20230424130102.144: *3* loadAll
+    #@ loadAll
     def loadAll(self, defaultList):
         """Reads defaultList & file, writes file if required
         return true if file read.
@@ -2050,7 +2050,7 @@ class Option:
                 return False
         return False
 
-    # @+node:tom.20230424130102.145: *3* loadSet
+    #@ loadSet
     def loadSet(self, list, data):
         """Reads settings from list into dict."""
         for line in list:
@@ -2059,14 +2059,14 @@ class Option:
                 item = line.split(None, 1) + ['']  # add value if blank
                 data[item[0]] = item[1].strip()
 
-    # @+node:tom.20230424130102.146: *3* addData
+    #@ addData
     def addData(self, key, strData, storeChange=0):
         """Add new entry, add to write list if storeChange."""
         self.userDict[key] = strData
         if storeChange:
             self.chgList.append(key)
 
-    # @+node:tom.20230424130102.147: *3* boolData
+    #@ boolData
     def boolData(self, key):
         """Returns true or false from yes or no in option data."""
         for data in self.dictList:
@@ -2078,7 +2078,7 @@ class Option:
         print('Option error - bool key', key, 'is not valid')
         return False
 
-    # @+node:tom.20230424130102.148: *3* numData
+    #@ numData
     def numData(self, key, min=None, max=None):
         """Return float from option data."""
         for data in self.dictList:
@@ -2093,7 +2093,7 @@ class Option:
         print('Option error - float key', key, 'is not valid')
         return 0
 
-    # @+node:tom.20230424130102.149: *3* intData
+    #@ intData
     def intData(self, key, min=None, max=None):
         """Return int from option data."""
         for data in self.dictList:
@@ -2108,7 +2108,7 @@ class Option:
         print('Option error - int key', key, 'is not valid')
         return 0
 
-    # @+node:tom.20230424130102.150: *3* strData
+    #@ strData
     def strData(self, key, emptyOk=0):
         """Return string from option data."""
         for data in self.dictList:
@@ -2119,7 +2119,7 @@ class Option:
         print('Option error - string key', key, 'is not valid')
         return ''
 
-    # @+node:tom.20230424130102.151: *3* changeData
+    #@ changeData
     def changeData(self, key, strData, storeChange):
         """Change entry, add to write list if storeChange
         Return true if changed.
@@ -2136,7 +2136,7 @@ class Option:
         print('Option error - key', key, 'is not valid')
         return False
 
-    # @+node:tom.20230424130102.152: *3* writeChanges
+    #@ writeChanges
     def writeChanges(self):
         """Write any stored changes to the option file - rtn true on success."""
         if self.path and self.chgList:
@@ -2169,17 +2169,17 @@ class Option:
                 print('Error - could not write to config file', self.path)
         return False
 
-    # @-others
+    #@-others
 
 
-# @+node:tom.20230424130102.156: **  optiondlg
-# @+others
-# @+node:tom.20230424130102.157: *3* class OptionDlg
+#@<  optiondlg
+#@+others
+#@> class OptionDlg
 class OptionDlg(QDialog):
     """Works with Option class to provide a dialog for pref/options."""
 
-    # @+others
-    # @+node:tom.20230424130102.158: *4* __init__
+    #@+others
+    #@> __init__
     def __init__(self, option, parent=None):
         QDialog.__init__(self, parent)
         self.setWindowFlags(
@@ -2208,7 +2208,7 @@ class OptionDlg(QDialog):
         self.itemList = []
         self.curGroup = None
 
-    # @+node:tom.20230424130102.159: *4* addItem
+    #@ addItem
     def addItem(self, dlgItem, widget, label=None):
         """Add a control with optional label, called by OptionDlgItem."""
         row = self.gridLayout.rowCount()
@@ -2219,7 +2219,7 @@ class OptionDlg(QDialog):
             self.gridLayout.addWidget(widget, row, 0, 1, 2)
         self.itemList.append(dlgItem)
 
-    # @+node:tom.20230424130102.160: *4* startGroupBox
+    #@ startGroupBox
     def startGroupBox(self, title, intSpace=5):
         """Use a group box for next added items."""
         self.curGroup = QGroupBox(title, self)
@@ -2228,13 +2228,13 @@ class OptionDlg(QDialog):
         self.gridLayout = QGridLayout(self.curGroup)
         self.gridLayout.setVerticalSpacing(intSpace)
 
-    # @+node:tom.20230424130102.161: *4* endGroupBox
+    #@ endGroupBox
     def endGroupBox(self):
         """Cancel group box for next added items."""
         self.gridLayout = self.oldLayout
         self.curGroup = None
 
-    # @+node:tom.20230424130102.162: *4* startNewColumn
+    #@ startNewColumn
     def startNewColumn(self):
         """Cancel any group box and start a second column."""
         self.curGroup = None
@@ -2243,55 +2243,55 @@ class OptionDlg(QDialog):
         self.columnLayout.addLayout(self.gridLayout)
         self.oldLayout = self.gridLayout
 
-    # @+node:tom.20230424130102.163: *4* parentGroup
+    #@ parentGroup
     def parentGroup(self):
         """Return parent for new widgets."""
         if self.curGroup:
             return self.curGroup
         return self
 
-    # @+node:tom.20230424130102.164: *4* accept
+    #@ accept
     def accept(self):
         """Called by dialog when OK button pressed."""
         for item in self.itemList:
             item.updateData()
         QDialog.accept(self)
 
-    # @-others
+    #@-others
 
 
-# @+node:tom.20230424130102.165: *3* class OptionDlgItem
+#@< class OptionDlgItem
 class OptionDlgItem:
     """Base class for items to add to dialog."""
 
-    # @+others
-    # @+node:tom.20230424130102.166: *4* __init__
+    #@+others
+    #@> __init__
     def __init__(self, dlg, key, writeChg):
         self.dlg = dlg
         self.key = key
         self.writeChg = writeChg
         self.control = None
 
-    # @+node:tom.20230424130102.167: *4* updateData
+    #@ updateData
     def updateData(self):
         """Dummy update function."""
 
-    # @-others
+    #@-others
 
 
-# @+node:tom.20230424130102.168: *3* class OptionDlgBool
+#@< class OptionDlgBool
 class OptionDlgBool(OptionDlgItem):
     """Holds widget for bool checkbox."""
 
-    # @+others
-    # @+node:tom.20230424130102.169: *4* __init__
+    #@+others
+    #@> __init__
     def __init__(self, dlg, key, menuText, writeChg=True):
         OptionDlgItem.__init__(self, dlg, key, writeChg)
         self.control = QCheckBox(menuText, dlg.parentGroup())
         self.control.setChecked(dlg.option.boolData(key))
         dlg.addItem(self, self.control)
 
-    # @+node:tom.20230424130102.170: *4* updateData
+    #@ updateData
     def updateData(self):
         """Update Option class based on checkbox status."""
         if self.control.isChecked() != self.dlg.option.boolData(self.key):
@@ -2300,15 +2300,15 @@ class OptionDlgBool(OptionDlgItem):
             else:
                 self.dlg.option.changeData(self.key, 'no', self.writeChg)
 
-    # @-others
+    #@-others
 
 
-# @+node:tom.20230424130102.171: *3* class OptionDlgInt
+#@< class OptionDlgInt
 class OptionDlgInt(OptionDlgItem):
     """Holds widget for int spinbox."""
 
-    # @+others
-    # @+node:tom.20230424130102.172: *4* __init__
+    #@+others
+    #@> __init__
     def __init__(self, dlg, key, menuText, min, max, writeChg=True, step=1, wrap=False, suffix=''):
         OptionDlgItem.__init__(self, dlg, key, writeChg)
         label = QLabel(menuText, dlg.parentGroup())
@@ -2321,21 +2321,21 @@ class OptionDlgInt(OptionDlgItem):
         self.control.setValue(dlg.option.intData(key, min, max))
         dlg.addItem(self, self.control, label)
 
-    # @+node:tom.20230424130102.173: *4* updateData
+    #@ updateData
     def updateData(self):
         """Update Option class based on spinbox status."""
         if self.control.value() != int(self.dlg.option.numData(self.key)):
             self.dlg.option.changeData(self.key, repr(self.control.value()), self.writeChg)
 
-    # @-others
+    #@-others
 
 
-# @+node:tom.20230424130102.174: *3* class OptionDlgDbl
+#@< class OptionDlgDbl
 class OptionDlgDbl(OptionDlgItem):
     """Holds widget for double line edit."""
 
-    # @+others
-    # @+node:tom.20230424130102.175: *4* __init__
+    #@+others
+    #@> __init__
     def __init__(self, dlg, key, menuText, min, max, writeChg=True):
         OptionDlgItem.__init__(self, dlg, key, writeChg)
         label = QLabel(menuText, dlg.parentGroup())
@@ -2344,7 +2344,7 @@ class OptionDlgDbl(OptionDlgItem):
         self.control.setValidator(valid)
         dlg.addItem(self, self.control, label)
 
-    # @+node:tom.20230424130102.176: *4* updateData
+    #@ updateData
     def updateData(self):
         """Update Option class based on edit status."""
         text = self.control.text()
@@ -2355,37 +2355,37 @@ class OptionDlgDbl(OptionDlgItem):
         if num != self.dlg.option.numData(self.key):
             self.dlg.option.changeData(self.key, repr(num), self.writeChg)
 
-    # @-others
+    #@-others
 
 
-# @+node:tom.20230424130102.177: *3* class OptionDlgStr
+#@< class OptionDlgStr
 class OptionDlgStr(OptionDlgItem):
     """Holds widget for string line edit."""
 
-    # @+others
-    # @+node:tom.20230424130102.178: *4* __init__
+    #@+others
+    #@> __init__
     def __init__(self, dlg, key, menuText, writeChg=True):
         OptionDlgItem.__init__(self, dlg, key, writeChg)
         label = QLabel(menuText, dlg.parentGroup())
         self.control = QLineEdit(dlg.option.strData(key, True), dlg.parentGroup())
         dlg.addItem(self, self.control, label)
 
-    # @+node:tom.20230424130102.179: *4* updateData
+    #@ updateData
     def updateData(self):
         """Update Option class based on edit status."""
         newStr = self.control.text()
         if newStr != self.dlg.option.strData(self.key, True):
             self.dlg.option.changeData(self.key, newStr, self.writeChg)
 
-    # @-others
+    #@-others
 
 
-# @+node:tom.20230424130102.180: *3* class OptionDlgRadio
+#@< class OptionDlgRadio
 class OptionDlgRadio(OptionDlgItem):
     """Holds widget for exclusive radio button group."""
 
-    # @+others
-    # @+node:tom.20230424130102.181: *4* __init__
+    #@+others
+    #@> __init__
     def __init__(self, dlg, key, headText, textList, writeChg=True):
         # textList is list of tuples: optionText, labelText
         OptionDlgItem.__init__(self, dlg, key, writeChg)
@@ -2405,17 +2405,17 @@ class OptionDlgRadio(OptionDlgItem):
                 button.setChecked(True)
         dlg.addItem(self, buttonBox)
 
-    # @+node:tom.20230424130102.182: *4* updateData
+    #@ updateData
     def updateData(self):
         """Update Option class based on button status."""
         data = self.optionList[self.control.checkedId()]
         if data != self.dlg.option.strData(self.key):
             self.dlg.option.changeData(self.key, data, self.writeChg)
 
-    # @-others
+    #@-others
 
 
-# @+node:tom.20230424130102.183: *3* class OptionDlgPush
+#@< class OptionDlgPush
 class OptionDlgPush(OptionDlgItem):
     """Holds widget for extra misc. push button."""
 
@@ -2426,13 +2426,13 @@ class OptionDlgPush(OptionDlgItem):
         dlg.addItem(self, self.control)
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @+node:tom.20230426112545.1: ** helpfile
+#@-others
+#@@language python
+#@@tabwidth -4
+#@< helpfile
 HELPDOC = """
-# @+<< help text >>
-# @+node:tom.20230502081206.1: *3* << help text >>
+#@+<< help text >>
+#@> << help text >>
 <html>
 <head>
 <title>rpCalc ReadMe</title>
@@ -2982,11 +2982,11 @@ Issues:
 </div>
 </body>
 </html>
-# @-<< help text >>
+#@-<< help text >>
 """
 
 
-# @+node:tom.20230424140347.3: ** toggle_app_tab
+#@< toggle_app_tab
 def toggle_app_tab(log, tabname, widget=CalcDlg):
     """Create or remove our app's tab.
 
@@ -3021,6 +3021,6 @@ def toggle_app_tab(log, tabname, widget=CalcDlg):
         w.setFocus(QtCore.Qt.FocusReason.OtherFocusReason)
 
 
-# @-others
+#@-others
 
-# @-leo
+#@-leo

@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20210911052754.1: * @file ../unittests/core/test_leoExternalFiles.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20210911052754.1] @f ../unittests/core/test_leoExternalFiles.py
 """Tests of leoExternalFiles.py"""
 
 from unittest import mock
@@ -9,11 +9,11 @@ from leo.core import leoApp, leoExternalFiles
 from leo.core.leoTest2 import LeoUnitTest
 
 
-# @+others
-# @+node:ekr.20210911052754.2: ** class TestExternalFiles (LeoUnitTest)
+#@+others
+#@> class TestExternalFiles (LeoUnitTest)
 class TestExternalFiles(LeoUnitTest):
-    # @+others
-    # @+node:ekr.20210911052754.3: *3* TestExternalFiles.setUp
+    #@+others
+    #@> TestExternalFiles.setUp
     def setUp(self):
         """setUp for TestFind class"""
         super().setUp()
@@ -22,7 +22,7 @@ class TestExternalFiles(LeoUnitTest):
         g.app.idleTimeManager.start()
         g.app.externalFilesController = leoExternalFiles.ExternalFilesController(c=c)
 
-    # @+node:ekr.20210911052754.4: *3* TestExternalFiles.test_on_idle
+    #@ TestExternalFiles.test_on_idle
     def test_on_idle(self):
         """
         A minimal test of the on_idle and all its helpers.
@@ -33,7 +33,7 @@ class TestExternalFiles(LeoUnitTest):
         for i in range(100):
             efc.on_idle()
 
-    # @+node:axk.20260706115344.3: *3* TestExternalFiles.test_open_file_in_external_editor_uses_argv_on_posix
+    #@ TestExternalFiles.test_open_file_in_external_editor_uses_argv_on_posix
     def test_open_file_in_external_editor_uses_argv_on_posix(self):
         """The subprocess.Popen branch must not pass a shell-style string on posix."""
         c = self.c
@@ -60,8 +60,8 @@ class TestExternalFiles(LeoUnitTest):
         assert calls == [expected]
         assert command == f"subprocess.Popen({expected})"
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

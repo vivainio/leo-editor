@@ -1,7 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:vitalije.20190928154420.1: * @file ../plugins/history_tracer.py
-# @+<< docstring >>
-# @+node:vitalije.20190928154420.2: ** << docstring >>
+#@+leo-ver=cub-1-thin
+#@0 [vitalije.20190928154420.1] @f ../plugins/history_tracer.py
+#@+<< docstring >>
+#@> << docstring >>
 """This plugin cooperates with leo-ver-serv utilty.
 
 To install leo-ver-serv visit https://crates.io/crates/leo-ver-serv
@@ -28,9 +28,9 @@ number must be in your settings.
 Author: vitalije(at)kviziracija.net
 """
 
-# @-<< docstring >>
-# @+<< imports: history_tracer.py >>
-# @+node:vitalije.20190928154420.3: ** << imports: history_tracer.py >>
+#@-<< docstring >>
+#@+<< imports: history_tracer.py >>
+#@ << imports: history_tracer.py >>
 import datetime as dt
 import time
 import threading
@@ -42,13 +42,13 @@ from leo.core.leoQt import QtCore
 #
 # Fail fast, right after all imports.
 g.assertUi('qt')  # May raise g.UiTypeException, caught by the plugins manager.
-# @-<< imports: history_tracer.py >>
+#@-<< imports: history_tracer.py >>
 
 idle_checker = None
 
 
-# @+others
-# @+node:vitalije.20190928154420.4: ** init
+#@+others
+#@ init
 def init():
     """Return True if the plugin has loaded successfully."""
     ok = g.app.gui.guiName() == "qt"
@@ -59,13 +59,13 @@ def init():
     return ok
 
 
-# @+node:vitalije.20190928154420.6: ** c12_hook
+#@ c12_hook
 def c12_hook(tag, keys):
     c = keys.get('c')
     c.user_dict['last_command_at'] = time.time()
 
 
-# @+node:vitalije.20190928160510.1: ** IdleChecker
+#@ IdleChecker
 def init_idle_checker(tag, keys):
     global idle_checker
 
@@ -91,7 +91,7 @@ def init_idle_checker(tag, keys):
     idle_checker = IdleChecker()
 
 
-# @+node:vitalije.20190928160520.1: ** save_snapshot
+#@ save_snapshot
 def save_snapshot(c):
     data = snap(c)
     x = data.split('\n', 2)[2]
@@ -122,7 +122,7 @@ def save_snapshot(c):
     return True
 
 
-# @+node:vitalije.20190928160538.1: ** snap
+#@ snap
 def snap(c):
     today = dt.datetime.now(tz=dt.timezone.utc)  # PR #4829
     buf = [c.mFileName, '\n', today.strftime('%Y-%m-%dT%H:%M:%S.000000'), '\n']
@@ -145,7 +145,7 @@ def snap(c):
     return ''.join(buf)
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

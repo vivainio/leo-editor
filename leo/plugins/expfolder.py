@@ -1,7 +1,19 @@
-# @+leo-ver=5-thin
-# @+node:ajones.20070122153625: * @file ../plugins/expfolder.py
-# @+<< docstring >>
-# @+node:ajones.20070122153625.1: ** << docstring >> (expfolder.py)
+#@+leo-ver=cub-1-thin
+#@0 [ajones.20070122153625] @f ../plugins/expfolder.py
+#@+<< docstring >>
+#@-<< docstring >>
+
+import os
+import os.path
+import configparser as ConfigParser
+from leo.core import leoGlobals as g
+from leo.plugins.textnode import savetextnode
+
+textexts: list[str] = []
+
+
+#@+others
+#@> << docstring >> (expfolder.py)
 """Adds @expfolder nodes that represent folders in the file system.
 
 The double-click-icon-box command on an @expfolder node reads the files in
@@ -22,19 +34,7 @@ must load before the expfolder plugin. This can be set using the Plugin
 Manager's Plugin Load Order pane.
 
 """
-# @-<< docstring >>
-
-import os
-import os.path
-import configparser as ConfigParser
-from leo.core import leoGlobals as g
-from leo.plugins.textnode import savetextnode
-
-textexts: list[str] = []
-
-
-# @+others
-# @+node:ajones.20070122154835: ** init (expfolder.py)
+#@ init (expfolder.py)
 def init():
     """Return True if the plugin has loaded successfully."""
     g.plugin_signon(__name__)
@@ -50,7 +50,7 @@ def init():
     return True
 
 
-# @+node:ajones.20070122153625.2: ** on_icondclick
+#@ on_icondclick
 def on_icondclick(tag, keywords):
     c = keywords.get("c")
     p = keywords.get("p")
@@ -102,7 +102,7 @@ def on_icondclick(tag, keywords):
         c.redraw()
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

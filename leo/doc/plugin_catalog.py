@@ -1,9 +1,9 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20101112045055.5064: * @file plugin_catalog.py
-# @@language python
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20101112045055.5064] @f plugin_catalog.py
+#@@language python
 
-# @+<< docstring >>
-# @+node:ekr.20111018061632.15902: ** << docstring >>
+#@+<< docstring >>
+#@> << docstring >>
 r"""
 Extract plugin status and docs. from docstrings
 
@@ -47,9 +47,9 @@ TODO
 
 """
 
-# @-<< docstring >>
-# @+<< imports >>
-# @+node:ekr.20111018061632.15903: ** << imports >>
+#@-<< docstring >>
+#@+<< imports >>
+#@ << imports >>
 import os
 import sys
 import ast
@@ -66,22 +66,22 @@ try:
 except Exception:
     sys.stderr.write('plugin_catalog.py: can not import docutils\n')
     ok = False
-# @-<< imports >>
+#@-<< imports >>
 
 
-# @+others
-# @+node:tbrown.20111018094615.23242: ** err
+#@+others
+#@ err
 def err(s):
     sys.stderr.write(s)
     sys.stderr.flush()
 
 
-# @+node:ekr.20111018061632.15913: ** class PluginCatalog
+#@ class PluginCatalog
 class PluginCatalog:
     """see module docs. and make_parser()"""
 
-    # @+others
-    # @+node:ekr.20111018061632.15906: *3* __init__
+    #@+others
+    #@> __init__
     def __init__(self, opt):
         """opt - see make_parser() or --help"""
 
@@ -89,7 +89,7 @@ class PluginCatalog:
         self.id_num = 0  # for generating ids for the doctree
         self.document = None
 
-    # @+node:ekr.20111018061632.15910: *3* add_ids
+    #@ add_ids
     def add_ids(self, node, depth=0):
         """Recursively add ids starting with 'lid' to doctree node.
 
@@ -104,7 +104,7 @@ class PluginCatalog:
             for child in node:
                 self.add_ids(child, depth + 1)
 
-    # @+node:ekr.20111018061632.15911: *3* first_text
+    #@ first_text
     def first_text(self, node):
         """find first paragraph to use as a summary"""
 
@@ -119,7 +119,7 @@ class PluginCatalog:
 
         return None
 
-    # @+node:ekr.20111018061632.15907: *3* get_doc_strings
+    #@ get_doc_strings
     def get_doc_strings(self):
         """collect docstrings in .py files in specified locations"""
 
@@ -174,7 +174,7 @@ class PluginCatalog:
 
         return doc_strings
 
-    # @+node:ekr.20111018061632.15908: *3* make_document
+    #@ make_document
     def make_document(self, doc_strings):
         """make doctree representation of collected fragments"""
 
@@ -245,7 +245,7 @@ class PluginCatalog:
 
         return big_doc
 
-    # @+node:ekr.20111018061632.15905: *3* make_parser
+    #@ make_parser
     @staticmethod
     def make_parser():
         """Return an optparse.OptionParser"""
@@ -292,7 +292,7 @@ class PluginCatalog:
 
         return parser
 
-    # @+node:ekr.20111018061632.15909: *3* run
+    #@ run
     def run(self):
         """run with the supplied options, see make_parser()"""
 
@@ -319,10 +319,10 @@ class PluginCatalog:
             )
             err("Wrote '%s'\n" % opt.xml_output)
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20111018061632.15912: ** main
+#@< main
 def main():
     """create and run a PluginCatalog"""
 
@@ -338,9 +338,9 @@ def main():
     plugin_catalog.run()
 
 
-# @-others
+#@-others
 
 if __name__ == "__main__":
     if ok:
         main()
-# @-leo
+#@-leo

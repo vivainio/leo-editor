@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-#@+leo-ver=5-thin
-#@+node:maphew.20130611235500.2658: * @file register-leo.leox
+#@+leo-ver=cub-1-thin
+#@0 [maphew.20130611235500.2658] @f register-leo.leox
 #@@first
 #@@language python
 #@@tabwidth -4
 """Add registry keys for Leo file type and .leo file association"""
 #@+others
-#@+node:mhw-debug-1081.20190216130451.1: ** imports
+#@> [mhw-debug-1081.20190216130451.1] imports
 import leo
 import leo.core.leoGlobals as g
 import os
@@ -14,7 +14,7 @@ import sys
 import shutil
 import subprocess
 from winreg import *
-#@+node:maphew.20130510011223.1645: ** docstring
+#@ [maphew.20130510011223.1645] docstring
 """Tell Windows how to handle .leo files, enables double clicking on them to open.
 
 To run: in Leo make this the active node and press [Ctrl-B] (execute-script)
@@ -27,13 +27,13 @@ Resources used:
    @url http://stackoverflow.com/questions/771689/how-can-i-set-an-icon-for-my-own-file-extension
    @url https://stackoverflow.com/questions/130763/request-uac-elevation-from-within-a-python-script
 """
-#@+node:mhw-debug-1081.20190227224730.1: ** get_leo_libpath
+#@ [mhw-debug-1081.20190227224730.1] get_leo_libpath
 def get_leo_libpath():
     """Return Leo's library path (ie: ./leo-editor/leo or PYTHONHOME/Lib/site-packages/leo)"""
     import leo
 
     return leo.__path__[0]
-#@+node:mhw-debug-1081.20190221070850.1: ** get_launch_leo
+#@ [mhw-debug-1081.20190221070850.1] get_launch_leo
 def get_launch_leo():
     """Prefer leo exe script in PATH over launchLeo.py relative to Leo library"""
     leo_script = os.path.join(sys.exec_prefix, "Scripts", "leo.exe")
@@ -44,7 +44,7 @@ def get_launch_leo():
     if os.path.isfile(leo_script):
         return leo_script
     return None
-#@+node:maphew.20130509185752.1607: ** register_leo
+#@ [maphew.20130509185752.1607] register_leo
 def register_leo(pyexe, launchLeo, icon):
     """Create registry key for Leo file type, set default icon and launch command    
     """
@@ -55,7 +55,7 @@ def register_leo(pyexe, launchLeo, icon):
     if g.os_path_exists(icon):
         g.es_print("  Found:", icon)
         #@+<<filetype>>
-        #@+node:maphew.20130515233516.1659: *3* <<filetype>>
+        #@> [maphew.20130515233516.1659] <<filetype>>
         try:
             leoKey = CreateKey(HKEY_CLASSES_ROOT, "Leo.File")
             iconKey = CreateKey(leoKey, "DefaultIcon")
@@ -86,7 +86,7 @@ def register_leo(pyexe, launchLeo, icon):
             g.es_print("  Failed:", e)
         #@-<<filetype>>
         #@+<<association>>
-        #@+node:maphew.20130515233516.1660: *3* <<association>>
+        #@ [maphew.20130515233516.1660] <<association>>
         try:
             leoKey = CreateKey(HKEY_CLASSES_ROOT, ".leo")
             SetValue(leoKey, None, REG_SZ, "Leo.File")
@@ -108,12 +108,12 @@ def register_leo(pyexe, launchLeo, icon):
         #@-<<association>>
     else:
         g.es_print("  LeoDoc.ico not in expected location, can't continue.")
-#@+node:mhw-debug-1081.20190314005003.1: ** relaunch_elevated
+#@< [mhw-debug-1081.20190314005003.1] relaunch_elevated
 def relaunch_elevated(script):
     g.es_print("--- Relaunching and asking for elevated permissions")
     g.execute_shell_commands(["&{} {} {}".format(sys.executable, elevate, script)])
     g.es_print("---")
-#@+node:mhw-debug-1081.20190314004045.1: ** get_my_path
+#@ [mhw-debug-1081.20190314004045.1] get_my_path
 def get_my_path():
     """Return full path of currently running script or executable
     

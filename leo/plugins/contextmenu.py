@@ -1,7 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20090701111504.5294: * @file ../plugins/contextmenu.py
-# @+<< contextmenu docstring >>
-# @+node:ville.20090630210947.5460: ** << contextmenu docstring >>
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20090701111504.5294] @f ../plugins/contextmenu.py
+#@+<< contextmenu docstring >>
+#@> << contextmenu docstring >>
 """Defines various useful actions for context menus (Qt only).
 
 Examples are:
@@ -40,10 +40,10 @@ And call this in your plugin *once*::
 
 """
 
-# @-<< contextmenu docstring >>
+#@-<< contextmenu docstring >>
 # Original version by Ville M. Vainio.
-# @+<< contextmenu imports & annotations >>
-# @+node:ekr.20220828123814.1: ** << contextmenu imports & annotations >>
+#@+<< contextmenu imports & annotations >>
+#@ << contextmenu imports & annotations >>
 from __future__ import annotations
 from collections.abc import Callable
 import os
@@ -59,15 +59,15 @@ if TYPE_CHECKING:  # pragma: no cover
 
 # Fail fast, right after all imports.
 g.assertUi('qt')  # May raise g.UiTypeException, caught by the plugins manager.
-# @-<< contextmenu imports & annotations >>
+#@-<< contextmenu imports & annotations >>
 
 # Globals
 inited = False
 
 
-# @+others
-# @+node:ekr.20200304124610.1: ** Commands
-# @+node:ville.20090701224704.9805: *3* 'cm-external-editor'
+#@+others
+#@ Commands
+#@> 'cm-external-editor'
 # cm is 'contextmenu' prefix
 @g.command('cm-external-editor')
 def cm_external_editor(event: LeoKeyEvent | None = None) -> None:
@@ -89,15 +89,15 @@ def cm_external_editor(event: LeoKeyEvent | None = None) -> None:
     c.openWith(d=d)
 
 
-# @+node:tbrown.20121123075838.19937: *3* 'context_menu_open'
+#@ 'context_menu_open'
 @g.command('context-menu-open')
 def context_menu_open(event: LeoKeyEvent | None = None) -> None:
     """Provide a command for key binding to open the context menu"""
     event.c.frame.tree.onContextMenu(QtCore.QPoint(0, 0))
 
 
-# @+node:ekr.20200304124723.1: ** startup
-# @+node:ville.20090630210947.5463: *3*  init (contextmenu.py)
+#@< startup
+#@>  init (contextmenu.py)
 def init() -> bool:
     """Return True if the plugin has loaded successfully."""
     global inited
@@ -111,7 +111,7 @@ def init() -> bool:
     return True
 
 
-# @+node:ville.20090630210947.10189: *3* install_handlers (contextmenu.py)
+#@ install_handlers (contextmenu.py)
 def install_handlers() -> None:
     """Install all the wanted handlers (menu creators)"""
     handlers: list[Callable] = [
@@ -130,7 +130,7 @@ def install_handlers() -> None:
     g.tree_popup_handlers.extend(handlers)
 
 
-# @+node:tom.20210717164029.1: ** getEditor
+#@< getEditor
 def getEditor(c: Cmdr) -> tuple[str, str]:
     """Return system's best guess editor quoted.
 
@@ -148,8 +148,8 @@ def getEditor(c: Cmdr) -> tuple[str, str]:
     return "", ""
 
 
-# @+node:ekr.20140724211116.19255: ** Handlers
-# @+node:ville.20091008192104.7691: *3* configuredcommands_rclick
+#@ Handlers
+#@> configuredcommands_rclick
 def configuredcommands_rclick(c: Cmdr, p: Position, menu: LeoQtMenu) -> None:
     """Add all items given by @data contextmenu-commands"""
     config = c.config.getData('contextmenu_commands')
@@ -181,7 +181,7 @@ def configuredcommands_rclick(c: Cmdr, p: Position, menu: LeoQtMenu) -> None:
         action.triggered.connect(configcmd_rclick_cb)
 
 
-# @+node:tbrown.20091203121808.15818: *3* deletenodes_rclick
+#@ deletenodes_rclick
 def deletenodes_rclick(c: Cmdr, p: Position, menu: LeoQtMenu) -> None:
     """Delete selected nodes"""
     u = c.undoer
@@ -191,8 +191,8 @@ def deletenodes_rclick(c: Cmdr, p: Position, menu: LeoQtMenu) -> None:
         undoType += 's'
     current = p.copy()
 
-    # @+<< define deletenodes_rclick_cb >>
-    # @+node:ekr.20140613141207.17673: *4* << define deletenodes_rclick_cb >>
+    #@+<< define deletenodes_rclick_cb >>
+    #@> << define deletenodes_rclick_cb >>
     def deletenodes_rclick_cb() -> None:
         if len(pl) == 1:
             # sometimes this may leave the selected node in a more
@@ -232,12 +232,12 @@ def deletenodes_rclick(c: Cmdr, p: Position, menu: LeoQtMenu) -> None:
             c.selectPosition(c.rootPosition())
         c.redraw()
 
-    # @-<< define deletenodes_rclick_cb >>
+    #@-<< define deletenodes_rclick_cb >>
     action = menu.addAction("Delete Node")
     action.triggered.connect(deletenodes_rclick_cb)
 
 
-# @+node:ville.20090701110830.10215: *3* editnode_rclick
+#@< editnode_rclick
 def editnode_rclick(c: Cmdr, p: Position, menu: LeoQtMenu) -> None:
     """Provide "edit in EDITOR" context menu item.
 
@@ -253,7 +253,7 @@ def editnode_rclick(c: Cmdr, p: Position, menu: LeoQtMenu) -> None:
     action.triggered.connect(editnode_rclick_cb)
 
 
-# @+node:ville.20090719202132.5248: *3* marknodes_rclick
+#@ marknodes_rclick
 def marknodes_rclick(c: Cmdr, p: Position, menu: LeoQtMenu) -> None:
     """Mark selected nodes"""
     pl = c.getSelectedPositions()
@@ -277,7 +277,7 @@ def marknodes_rclick(c: Cmdr, p: Position, menu: LeoQtMenu) -> None:
         action.triggered.connect(unmarknodes_rclick_cb)
 
 
-# @+node:ville.20090702171015.5480: *3* nextclone_rclick
+#@ nextclone_rclick
 def nextclone_rclick(c: Cmdr, p: Position, menu: LeoQtMenu) -> None:
     """Go to next clone"""
     if p.isCloned():
@@ -289,7 +289,7 @@ def nextclone_rclick(c: Cmdr, p: Position, menu: LeoQtMenu) -> None:
         action.triggered.connect(nextclone_rclick_cb)
 
 
-# @+node:ekr.20120311191905.9900: *3* openurl_rclick
+#@ openurl_rclick
 def openurl_rclick(c: Cmdr, p: Position, menu: LeoQtMenu) -> None:
     """open an url"""
     url = g.getUrlFromNode(p)
@@ -304,7 +304,7 @@ def openurl_rclick(c: Cmdr, p: Position, menu: LeoQtMenu) -> None:
         action.triggered.connect(openurl_rclick_cb)
 
 
-# @+node:ville.20090630210947.5465: *3* openwith_rclick & callbacks
+#@ openwith_rclick & callbacks
 def openwith_rclick(c: Cmdr, p: Position, menu: LeoQtMenu) -> None:
     """
     Show "Edit with" in context menu for external file root nodes (@thin, @auto...)
@@ -313,8 +313,8 @@ def openwith_rclick(c: Cmdr, p: Position, menu: LeoQtMenu) -> None:
     """
 
     # define callbacks
-    # @+others
-    # @+node:ekr.20140613141207.17667: *4* function: openfolder_rclick_cb
+    #@+others
+    #@> function: openfolder_rclick_cb
     def openfolder_rclick_cb() -> None:
         if g.os_path_exists(path):
             g.os_startfile(path)
@@ -322,12 +322,12 @@ def openwith_rclick(c: Cmdr, p: Position, menu: LeoQtMenu) -> None:
             # #1257:
             g.es_print('file not found:', repr(path))
 
-    # @+node:ekr.20140613141207.17668: *4* function: create_rclick_cb
+    #@ function: create_rclick_cb
     def create_rclick_cb() -> None:
         os.makedirs(absp)
         g.es("Created " + absp)
 
-    # @+node:ekr.20140613141207.17669: *4* function: importfiles_rclick_cb
+    #@ function: importfiles_rclick_cb
     def importfiles_rclick_cb() -> None:
         def shorten(pth: str, prefix: str) -> str:
             if not pth.startswith(prefix):
@@ -351,7 +351,7 @@ def openwith_rclick(c: Cmdr, p: Position, menu: LeoQtMenu) -> None:
             chi.h = a
         c.readAtFileNodes()
 
-    # @-others
+    #@-others
 
     h = p.h
     parts = h.split(None, 1)
@@ -376,7 +376,7 @@ def openwith_rclick(c: Cmdr, p: Position, menu: LeoQtMenu) -> None:
     action.triggered.connect(openfolder_rclick_cb)
 
 
-# @+node:ville.20090630221949.5462: *3* refresh_rclick
+#@< refresh_rclick
 def refresh_rclick(c: Cmdr, p: Position, menu: LeoQtMenu) -> None:
     def refresh_rclick_cb() -> None:
         c.refreshFromDisk(p.copy())
@@ -387,7 +387,7 @@ def refresh_rclick(c: Cmdr, p: Position, menu: LeoQtMenu) -> None:
         action.triggered.connect(refresh_rclick_cb)
 
 
-# @+node:felix.20250830151921.1: *3* openatleo_rclick
+#@ openatleo_rclick
 def openatleo_rclick(c: Cmdr, p: Position, menu: LeoQtMenu) -> None:
     def openatleo_rclick_cb() -> None:
         path = c.fullPath(p)
@@ -402,8 +402,8 @@ def openatleo_rclick(c: Cmdr, p: Position, menu: LeoQtMenu) -> None:
         action.triggered.connect(openatleo_rclick_cb)
 
 
-# @+node:ekr.20140724211116.19256: ** Helpers
-# @+node:ville.20110428163751.7685: *3* guess_file_type
+#@< Helpers
+#@> guess_file_type
 def guess_file_type(fname: str) -> str:
     base, ext = os.path.splitext(fname)
     if ext.lower in ['.txt']:
@@ -411,5 +411,5 @@ def guess_file_type(fname: str) -> str:
     return "@auto"
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

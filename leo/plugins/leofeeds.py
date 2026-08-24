@@ -1,7 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:ville.20110206142055.10640: * @file ../plugins/leofeeds.py
-# @+<< docstring >>
-# @+node:ville.20110206142055.10641: ** << docstring >>
+#@+leo-ver=cub-1-thin
+#@0 [ville.20110206142055.10640] @f ../plugins/leofeeds.py
+#@+<< docstring >>
+#@> << docstring >>
 """
 Read feeds from rss / atom / whatever sources
 
@@ -16,10 +16,10 @@ Do alt-x act-on-node on that node to populate the subtree from the feed data.
 Requires "feedparser" python module.
 """
 
-# @-<< docstring >>
+#@-<< docstring >>
 # By Ville M. Vainio.
-# @+<< imports >>
-# @+node:ville.20110206142055.10643: ** << imports >>
+#@+<< imports >>
+#@ << imports >>
 import html.parser as HTMLParser
 
 # Third-party imports
@@ -28,11 +28,11 @@ import feedparser
 # Leo imports.
 from leo.core import leoGlobals as g
 from leo.core import leoPlugins  # Uses leoPlugins.TryNext
-# @-<< imports >>
+#@-<< imports >>
 
 
-# @+others
-# @+node:ville.20110206142055.10644: ** init
+#@+others
+#@ init
 def init():
     g.registerHandler('after-create-leo-frame', onCreate)
     g.plugin_signon(__name__)
@@ -40,7 +40,7 @@ def init():
     return True
 
 
-# @+node:ville.20110206142055.10645: ** onCreate
+#@ onCreate
 def onCreate(tag, keys):
     c = keys.get('c')
     if not c:
@@ -49,7 +49,7 @@ def onCreate(tag, keys):
     feeds_install()
 
 
-# @+node:ville.20110206142055.10648: ** fetch
+#@ fetch
 
 
 class MLStripper(HTMLParser.HTMLParser):
@@ -123,5 +123,5 @@ def feeds_install():
 
 # emitfeed("http://feedparser.org/docs/examples/atom10.xml", p)
 # c.redraw()
-# @-others
-# @-leo
+#@-others
+#@-leo

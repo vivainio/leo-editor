@@ -1,8 +1,8 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20050301083306: * @file ../plugins/mod_read_dir_outline.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20050301083306] @f ../plugins/mod_read_dir_outline.py
 
-# @+<< docstring >>
-# @+node:ekr.20050301084207: ** << docstring >>
+#@+<< docstring >>
+#@> << docstring >>
 """
 Allows Leo to read a complete directory tree into a Leo outline. Converts
 directories into headlines and puts the list of file names into bodies.
@@ -18,10 +18,10 @@ Feedback on this plugin can be sent to::
     <frederic [point] mommeja [at] laposte [point] net>
 
 """
-# @-<< docstring >>
+#@-<< docstring >>
 
-# @@language python
-# @@tabwidth -4
+#@@language python
+#@@tabwidth -4
 
 import os
 from leo.core import leoGlobals as g
@@ -29,8 +29,8 @@ from leo.core import leoGlobals as g
 language = 'english'  # Anything except 'french' uses english.
 
 
-# @+others
-# @+node:ekr.20050301083306.4: ** init
+#@+others
+#@ init
 def init():
     """Return True if the plugin has loaded successfully."""
     # This plugin is now gui independent.
@@ -39,7 +39,7 @@ def init():
     return True
 
 
-# @+node:ekr.20050301083306.5: ** onCreate
+#@ onCreate
 def onCreate(tag, keywords):
     c = keywords.get('c')
     cc = controller(c)
@@ -55,14 +55,14 @@ def onCreate(tag, keywords):
     c.frame.menu.createMenuEntries(menu, table)
 
 
-# @+node:ekr.20050301083306.6: ** class controller
+#@ class controller
 class controller:
-    # @+others
-    # @+node:ekr.20050301083306.7: *3* ctor
+    #@+others
+    #@> ctor
     def __init__(self, c):
         self.c = c
 
-    # @+node:ekr.20050301083306.8: *3* readDir
+    #@ readDir
     def readDir(self, event=None):
         # fr - Modifier pour adapter à votre environnement
         # en - Change it to select the starting browsing directory
@@ -89,7 +89,7 @@ class controller:
             else:
                 g.es(str(compteurglobal) + " files outlined.")
 
-    # @+node:ekr.20050301083306.10: *3* importDir
+    #@ importDir
     def importDir(self, dir, compteurglobal):
         """La routine récursive de lecture des fichiers"""
 
@@ -106,8 +106,8 @@ class controller:
         try:
             # ici, on liste le contenu du répertoire
             body = ""
-            # @+<< listdir >>
-            # @+node:ekr.20050301083306.11: *4* << listdir >>
+            #@+<< listdir >>
+            #@> << listdir >>
             try:
                 fichiers = os.listdir(dir)
                 dossiers = []
@@ -127,7 +127,7 @@ class controller:
                 else:
                     g.es("os.listdir error...")
                 g.es_exception()
-            # @-<< listdir >>
+            #@-<< listdir >>
             p = c.importCommands.createHeadline(current, body, tail)
             c.selectPosition(p)
             if dossiers:
@@ -145,8 +145,8 @@ class controller:
 
         return compteurglobal
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20231012140553.1: * @file ../plugins/importers/scheme.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20231012140553.1] @f ../plugins/importers/scheme.py
 """The @auto importer for the scheme language."""
 
 from __future__ import annotations
@@ -13,8 +13,8 @@ if TYPE_CHECKING:
     from leo.core.leoNodes import Position
 
 
-# @+others
-# @+node:ekr.20231012140553.2: ** class Scheme_Importer(Elisp_Importer)
+#@+others
+#@> class Scheme_Importer(Elisp_Importer)
 class Scheme_Importer(Elisp_Importer):
     """The importer for the Scheme language."""
 
@@ -29,7 +29,7 @@ class Scheme_Importer(Elisp_Importer):
     )
 
 
-# @-others
+#@-others
 
 
 def do_import(c: Cmdr, parent: Position, s: str) -> None:
@@ -43,6 +43,6 @@ importer_dict = {
     ],
     'func': do_import,
 }
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@@language python
+#@@tabwidth -4
+#@-leo

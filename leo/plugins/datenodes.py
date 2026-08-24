@@ -1,7 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20060807103814.1: * @file ../plugins/datenodes.py
-# @+<< docstring >>
-# @+node:bobjack.20080615065747.4: ** << docstring >>
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20060807103814.1] @f ../plugins/datenodes.py
+#@+<< docstring >>
+#@> << docstring >>
 """
 Allows users to insert headlines containing dates.
 
@@ -25,12 +25,11 @@ The following commands are available for use via the minibuffer or in
     - datenodes-this-year
 
 """
-# @-<< docstring >>
+#@-<< docstring >>
 
-# @+<< todo >>
-# @+node:bobjack.20080615065747.5: ** << todo >>
-# @@nocolor
-# @+at
+#@+<< todo >>
+#@ << todo >>
+#@@nocolor
 #
 # - add commands to allow day, month, year to be input via minibuffer
 #
@@ -41,19 +40,19 @@ The following commands are available for use via the minibuffer or in
 # - allow date ranges to be specified
 #
 # - add a dialog that allows all parameters to be slected prior to insertion
-# @-<< todo >>
+#@-<< todo >>
 
-# @+<< imports >>
-# @+node:gfunch.20041207100416.3: ** << imports >>
+#@+<< imports >>
+#@ << imports >>
 import calendar
 import codecs
 import datetime as dt
 from leo.core import leoGlobals as g
-# @-<< imports >>
+#@-<< imports >>
 
 
-# @+others
-# @+node:bobjack.20080615065747.2: ** init
+#@+others
+#@ init
 def init():
     """Return True if the plugin has loaded successfully."""
     g.registerHandler("after-create-leo-frame", on_create)
@@ -61,7 +60,7 @@ def init():
     return True  # OK for unit testing.
 
 
-# @+node:gfunch.20041207100416.5: ** class DateNodes
+#@ class DateNodes
 class DateNodes:
     """Main DateNodes class"""
 
@@ -88,8 +87,8 @@ class DateNodes:
     ]
     ascii_encoder = codecs.getencoder("ASCII")
 
-    # @+others
-    # @+node:gfunch.20041207100416.6: *3* __init__(DateNodes, datenodes.py)
+    #@+others
+    #@> __init__(DateNodes, datenodes.py)
     def __init__(self, c):
         self.c = c
         self._get_settings()
@@ -101,7 +100,7 @@ class DateNodes:
         ):
             c.k.registerCommand(commandName, method)
 
-    # @+node:gfunch.20041209073652: *3* _get_settings
+    #@ _get_settings
     def _get_settings(self):
         """Get any configuration options."""
         settings = {}
@@ -116,19 +115,19 @@ class DateNodes:
             settings[setting[10:]] = value  # Omit datenodes_ prefix
         self.settings = settings
 
-    # @+node:dcb.20060806185031: *3* _insert_date_node
+    #@ _insert_date_node
     def _insert_date_node(self, parent, date, format):
         p = parent.insertAsLastChild()
         p.h = date.strftime(g.toUnicode(format))
         return p
 
-    # @+node:dcb.20060806183810: *3* _insert_day_node
+    #@ _insert_day_node
     def _insert_day_node(self, parent, date, day_fmt):
         p = self._insert_date_node(parent, date, day_fmt)
         p.b = self.settings.get("body_text", '')
         return p
 
-    # @+node:gfunch.20041207100416.11: *3* _insert_month_node
+    #@ _insert_month_node
     def _insert_month_node(self, parent, date, day_fmt, month_fmt, omit_saturdays, omit_sundays):
         """Insert a months-worth of date nodes into the outline ."""
 
@@ -143,7 +142,7 @@ class DateNodes:
             self._insert_day_node(parent=month_node, date=day_date, day_fmt=day_fmt)
         return month_node
 
-    # @+node:gfunch.20041207100416.12: *3* _insert_year_node
+    #@ _insert_year_node
     def _insert_year_node(
         self,
         parent,
@@ -169,7 +168,7 @@ class DateNodes:
             )
         return year_node
 
-    # @+node:gfunch.20041208074734: *3* insert_day_node
+    #@ insert_day_node
     def insert_day_node(self, event=None):
         c = self.c
         today = dt.datetime.now(tz=dt.timezone.utc)
@@ -178,7 +177,7 @@ class DateNodes:
         c.selectPosition(day_node)
         c.redraw()
 
-    # @+node:dcb.20060806183928: *3* insert_month_node
+    #@ insert_month_node
     def insert_month_node(self, event=None):
         c = self.c
         today = dt.datetime.now(tz=dt.timezone.utc)
@@ -192,7 +191,7 @@ class DateNodes:
         c.selectPosition(month_node)
         c.redraw()
 
-    # @+node:dcb.20060806184117: *3* insert_year_node
+    #@ insert_year_node
     def insert_year_node(self, event=None):
         c = self.c
         today = dt.datetime.now(tz=dt.timezone.utc)
@@ -207,10 +206,10 @@ class DateNodes:
         c.selectPosition(year_node)
         c.redraw()
 
-    # @-others
+    #@-others
 
 
-# @+node:gfunch.20041207100654: ** on_create
+#@< on_create
 def on_create(tag, keywords):
     c = keywords.get("c")
     if not (c and c.exists):
@@ -223,8 +222,8 @@ def on_create(tag, keywords):
     # establish a class instance
     c.theDateNodesController = instance = DateNodes(c)
 
-    # @+<< Create the plug-in menu. >>
-    # @+node:bobjack.20080615065747.3: *3* << Create the plug-in menu. >>
+    #@+<< Create the plug-in menu. >>
+    #@> << Create the plug-in menu. >>
     if not c.config.getBool('suppress-datenodes-menus'):
         # create a menu separator
         c.frame.menu.createMenuItemsFromTable(
@@ -242,11 +241,11 @@ def on_create(tag, keywords):
         ]
         expandMenu = c.frame.menu.createNewMenu("Insert Date Nodes...", "Outline")
         c.frame.menu.createMenuEntries(expandMenu, table)
-    # @-<< Create the plug-in menu. >>
+    #@-<< Create the plug-in menu. >>
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
+#@-others
+#@@language python
+#@@tabwidth -4
 
-# @-leo
+#@-leo

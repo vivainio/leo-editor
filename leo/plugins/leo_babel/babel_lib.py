@@ -1,14 +1,14 @@
 #!/usr/bin/python
 # coding=utf-8
-# @+leo-ver=5-thin
-# @+node:bob.20170726143458.1: * @file babel_lib.py
-# @@first
-# @@first
-# @@language python
-# @@tabwidth -4
+#@+leo-ver=cub-1-thin
+#@0 [bob.20170726143458.1] @f babel_lib.py
+#@@first
+#@@first
+#@@language python
+#@@tabwidth -4
 
-# @+<< documentation >>
-# @+node:bob.20170726143458.2: ** << documentation >>
+#@+<< documentation >>
+#@> << documentation >>
 """
 The scheme for real-time streaming of stdout and stderr while the script is still executing is taken from:
 
@@ -17,13 +17,13 @@ http://stackoverflow.com/questions/18421757/live-output-from-subprocess-command
 
 """
 
-# @-<< documentation >>
-# @+<< version >>
-# @+node:bob.20170726143458.3: ** << version >>
+#@-<< documentation >>
+#@+<< version >>
+#@ << version >>
 __version__ = '1.0.0'
-# @-<< version >>
-# @+<< imports >>
-# @+node:bob.20170726143458.4: ** << imports >>
+#@-<< version >>
+#@+<< imports >>
+#@ << imports >>
 import collections
 import datetime
 import io
@@ -43,11 +43,11 @@ import PyQt5.QtWidgets as QtWidgets
 
 import leo.core.leoGlobals as leoG
 import leo.core.leoNodes as leoNodes
-# @-<< imports >>
+#@-<< imports >>
 
 
-# @+others
-# @+node:bob.20170801125314.1: ** unl2clipboard(babelG)
+#@+others
+#@ unl2clipboard(babelG)
 def unl2clipboard(babelG):
     """Put the UNL of the current node in the clipboard
 
@@ -65,7 +65,7 @@ def unl2clipboard(babelG):
     babelG.babelMenu.hide()
 
 
-# @+node:bob.20170812170608.1: ** listRoots(cmdr)
+#@ listRoots(cmdr)
 def listRoots(cmdr):
     """
     Return an ordered list of all the current
@@ -83,7 +83,7 @@ def listRoots(cmdr):
     return [root.copy() for root in root1.self_and_siblings_iter()]
 
 
-# @+node:bob.20170816103509.1: ** otpUnquote(otp)
+#@ otpUnquote(otp)
 def otpUnquote(otp):
     """
     Remove all otp-quoting from a string
@@ -92,15 +92,15 @@ def otpUnquote(otp):
     @param return:  Unquoted outline path
 
     """
-    # @+others
-    # @+node:bob.20231231133744.1: *3* quoteList = (...) tuple
+    #@+others
+    #@> quoteList = (...) tuple
     quoteList = (
         (six.u(' '), six.u('%20')),
         # (six.u('\t'), six.u('%09')),
         # (six.u("'"), six.u('%27')),
     )
 
-    # @-others
+    #@-others
 
     if otp:
         for un, qu in quoteList:
@@ -108,7 +108,7 @@ def otpUnquote(otp):
     return otp
 
 
-# @+node:bob.20170816102949.1: ** unlSplit(unl)
+#@< unlSplit(unl)
 def unlSplit(unl):
     """
     Split a UNL into a file pathname and an outline path.
@@ -145,7 +145,7 @@ def unlSplit(unl):
     return pathname, nodePart
 
 
-# @+node:bob.20170812164857.1: ** unl2pos(unl, cmdr=None)
+#@ unl2pos(unl, cmdr=None)
 def unl2pos(unl, cmdr=None):
     """Univeral Node Locator to Leo-Editor Position
 
@@ -183,7 +183,7 @@ def unl2pos(unl, cmdr=None):
     return cmdrUnl, _descendHdl(cmdrUnl, unlList)
 
 
-# @+node:bob.20170812171044.1: *3* _unlParseNodePart()
+#@> _unlParseNodePart()
 def _unlParseNodePart(nodePart):
     """
     Parse the Node part of a UNL
@@ -205,7 +205,7 @@ def _unlParseNodePart(nodePart):
     return nodePart.split('-->')
 
 
-# @+node:bob.20170812165239.1: *3* _descendHdl()
+#@ _descendHdl()
 def _descendHdl(cmdrUnl, unlList):
     """
     Descend the target outline matching the Headline outline path
@@ -250,12 +250,12 @@ def _descendHdl(cmdrUnl, unlList):
     ]
 
 
-# @+node:bob.20170726143458.9: ** class MenuPopUp(QtWidgets.QMenu)
+#@< class MenuPopUp(QtWidgets.QMenu)
 class MenuPopUp(QtWidgets.QMenu):
     """Pop-up Menu"""
 
-    # @+others
-    # @+node:bob.20170726143458.10: *3* __init__()
+    #@+others
+    #@> __init__()
     def __init__(self, babelG, parent=None):
         """Initialize a Pop Up Menu
 
@@ -297,7 +297,7 @@ class MenuPopUp(QtWidgets.QMenu):
                 # First action is the default action
                 self.setDefaultAction(actTDL)
 
-    # @+node:bob.20170726143458.11: *3* _actionHovered()
+    #@ _actionHovered()
     def _actionHovered(self, action):
         """Cursor hovering over a menu item.
 
@@ -312,15 +312,15 @@ class MenuPopUp(QtWidgets.QMenu):
         tip = action.toolTip()
         QtWidgets.QToolTip.showText(QtGui.QCursor.pos(), tip)
 
-    # @+node:bob.20170726143458.13: *3* _info()
+    #@ _info()
     def _info(self, what):
         QtWidgets.QMessageBox.information(self, 'Information Only', what)
         self.exec_(QtWidgets.QApplication.desktop().screen().rect().center() - self.rect().center())
 
-    # @-others
+    #@-others
 
 
-# @+node:bob.20170726143458.15: ** babelMenu(event)
+#@< babelMenu(event)
 def babelMenu(event):
     """Show the Leo-Babel Menu
 
@@ -341,7 +341,7 @@ def babelMenu(event):
     )
 
 
-# @+node:bob.20170726143458.16: ** babelExec(event)
+#@ babelExec(event)
 def babelExec(event):
     """Execute a Script
 
@@ -355,8 +355,8 @@ def babelExec(event):
 
     """
 
-    # @+others
-    # @+node:bob.20180402153922.1: *3* _babelExec(babelG, babelCmdr, babelRoot)
+    #@+others
+    #@> _babelExec(babelG, babelCmdr, babelRoot)
     def _babelExec(babelG, babelCmdr, babelRoot):
         """Execute a Script
 
@@ -555,7 +555,7 @@ def babelExec(event):
             raise babelG.babel_api.BABEL_ERROR('leoG.IdleTime() failed')
         itPoll.start()
 
-    # @+node:bob.20170726143458.17: *3* getScript(c, p, useSelectedText=True, forcePythonSentinels=True, sentinels=True, language='python', )
+    #@ getScript(c, p, useSelectedText=True, forcePythonSentinels=True, sentinels=True, language='python', )
     def getScript(
         c,
         p,
@@ -570,8 +570,8 @@ def babelExec(event):
         p is not the current node or if there is no text selection.
         '''
 
-        # @+others
-        # @+node:bob.20170726143458.18: *4* extractExecutableString(c, p, s, language='python')
+        #@+others
+        #@> extractExecutableString(c, p, s, language='python')
         def extractExecutableString(c, p, s, language='python'):
             '''
             Return all lines for the given @language directive.
@@ -592,7 +592,7 @@ def babelExec(event):
                     result.append(line)
             return ''.join(result)
 
-        # @+node:bob.20170726143458.19: *4* composeScript(c, p, s, forcePythonSentinels=True, sentinels=True)
+        #@ composeScript(c, p, s, forcePythonSentinels=True, sentinels=True)
         def composeScript(c, p, s, forcePythonSentinels=True, sentinels=True):
             '''Compose a script from p.b.'''
 
@@ -607,7 +607,7 @@ def babelExec(event):
             else:
                 return ''
 
-        # @-others
+        #@-others
 
         w = c.frame.body.wrapper
         if not p:
@@ -631,7 +631,7 @@ def babelExec(event):
             raise
         return script
 
-    # @+node:bob.20170726143458.20: *3* itf(linePrefix, color, fdr, babelCmdr)
+    #@< itf(linePrefix, color, fdr, babelCmdr)
     def itf(linePrefix, color, fdr, babelCmdr):
         """Echo stdout to the log pane
 
@@ -663,7 +663,7 @@ def babelExec(event):
             else:
                 babelCmdr.cmdDoneErrPolled = True
 
-    # @+node:bob.20170726143458.22: *3* itp(itPoll, cmdrB, cmdrRes, resultsRoot, subPscript, subPbabKill, wro, reo, wre, ree, itOut, itErr, start, babel_node_creation)
+    #@ itp(itPoll, cmdrB, cmdrRes, resultsRoot, subPscript, subPbabKill, wro, reo, wre, ree, itOut, itErr, start, babel_node_creation)
     def itp(
         itPoll,
         cmdrB,
@@ -749,7 +749,7 @@ def babelExec(event):
                     end=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
                 )
 
-    # @+node:bob.20170726143458.21: *3* makeBabelNodes(cmdrRes, resultsRoot, reo, ree, termMsg, etMsg)
+    #@ makeBabelNodes(cmdrRes, resultsRoot, reo, ree, termMsg, etMsg)
     def makeBabelNodes(cmdrRes, resultsRoot, reo, ree, termMsg, etMsg):
         """Create the Babel Ouput Nodes
 
@@ -795,7 +795,7 @@ def babelExec(event):
         cmdrRes.redraw()
         cmdrRes.save()
 
-    # @+node:bob.20170828151625.1: *3* scrOrResRoot(leoCmdrB, rootX, babelG, babelRoot, scrOrRes)
+    #@ scrOrResRoot(leoCmdrB, rootX, babelG, babelRoot, scrOrRes)
     def scrOrResRoot(leoCmdrB, babelCmdr, babelG, babelRoot, scrOrRes):
         """Get the Script or Results Root
 
@@ -844,7 +844,7 @@ def babelExec(event):
         posX = posX.copy()
         return leoCmdrX, posX
 
-    # @-others
+    #@-others
 
     babelG = leoG.user_dict['leo_babel']
     cmdr = event.get('c')
@@ -867,5 +867,5 @@ def babelExec(event):
         raise
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

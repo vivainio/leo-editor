@@ -1,7 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:tbrown.20100318101414.5990: * @file ../plugins/viewrendered.py
-# @+<< vr: docstring >>
-# @+node:tbrown.20100318101414.5991: ** << vr: docstring >>
+#@+leo-ver=cub-1-thin
+#@0 [tbrown.20100318101414.5990] @f ../plugins/viewrendered.py
+#@+<< vr: docstring >>
+#@> << vr: docstring >>
 """
 
 Creates a window for *live* rendering of reSTructuredText, markdown text,
@@ -193,9 +193,9 @@ Jacob Peck added markdown support to this plugin.
 
 """
 
-# @-<< vr: docstring >>
-# @+<< vr: imports >>
-# @+node:tbrown.20100318101414.5993: ** << vr: imports >>
+#@-<< vr: docstring >>
+#@+<< vr: imports >>
+#@ << vr: imports >>
 from __future__ import annotations
 from collections.abc import Callable
 import os
@@ -277,9 +277,9 @@ except Exception:
 
 # Fail fast, right after all imports.
 g.assertUi('qt')  # May raise g.UiTypeException, caught by the plugins manager.
-# @-<< vr: imports >>
-# @+<< vr: annotations >>
-# @+node:ekr.20220828161918.1: ** << vr: annotations >>
+#@-<< vr: imports >>
+#@+<< vr: annotations >>
+#@ << vr: annotations >>
 if TYPE_CHECKING:  # pragma: no cover
     from leo.core.leoCommands import Commands as Cmdr
     from leo.core.leoGui import LeoKeyEvent
@@ -291,16 +291,16 @@ if TYPE_CHECKING:  # pragma: no cover
     QGraphicsScene = QtWidgets.QGraphicsScene
     QGraphicsView = QtWidgets.QGraphicsView
     QWidget = QtWidgets.QWidget
-# @-<< vr: annotations >>
+#@-<< vr: annotations >>
 trace = False  # This global trace is convenient.
 asciidoctor_exec = shutil.which('asciidoctor')
 asciidoc3_exec = shutil.which('asciidoc3')
 pandoc_exec = shutil.which('pandoc')
 
 
-# @+others
-# @+node:ekr.20110320120020.14491: ** vr.Top-level functions
-# @+node:tbrown.20100318101414.5995: *3* vr function: init
+#@+others
+#@ vr.Top-level functions
+#@> vr function: init
 def init() -> bool:
     """Return True if the plugin has loaded successfully."""
     # global got_docutils
@@ -317,7 +317,7 @@ def init() -> bool:
     return True
 
 
-# @+node:ekr.20240727091022.1: *3* vr function: getVR
+#@ vr function: getVR
 def getVr(
     *, c: Any = None, event: Any = None, parent: QtWidgets.QWidget | None = None
 ) -> ViewRenderedController | None:
@@ -348,7 +348,7 @@ def getVr(
     return vr
 
 
-# @+node:ekr.20110317024548.14376: *3* vr function: onCreate
+#@ vr function: onCreate
 def onCreate(tag: str, keys: dict) -> None:
     c = keys.get('c')
     if not c:
@@ -363,7 +363,7 @@ def onCreate(tag: str, keys: dict) -> None:
     vr.hide()
 
 
-# @+node:vitalije.20170712174157.1: *3* vr function: onClose
+#@ vr function: onClose
 def onClose(tag: str, keys: dict) -> None:
     """
     Handle a close event in the Leo outline.
@@ -376,7 +376,7 @@ def onClose(tag: str, keys: dict) -> None:
         vr.closeEvent(event=None)
 
 
-# @+node:tbrown.20110629132207.8984: *3* vr function: show_scrolled_message
+#@ vr function: show_scrolled_message
 def show_scrolled_message(tag: str, kw: Any) -> None:
     if g.unitTesting:
         return  # This just slows the unit tests.
@@ -405,15 +405,15 @@ def show_scrolled_message(tag: str, kw: Any) -> None:
     c.bodyWantsFocusNow()
 
 
-# @+node:ekr.20110320120020.14490: ** vr.Commands
-# @+node:ekr.20131213163822.16471: *3* g.command('preview')
+#@< vr.Commands
+#@> g.command('preview')
 @g.command('preview')
 def preview(event: LeoKeyEvent | None = None) -> None:
     """A synonym for the vr-toggle command."""
     toggle_rendering_pane(event)
 
 
-# @+node:tbrown.20100318101414.5998: *3* g.command('vr')
+#@ g.command('vr')
 @g.command('vr')
 def viewrendered(event: LeoKeyEvent | None = None) -> Any | None:
     """Open render view for commander"""
@@ -427,7 +427,7 @@ def viewrendered(event: LeoKeyEvent | None = None) -> Any | None:
     return None
 
 
-# @+node:ekr.20130413061407.10362: *3* g.command('vr-contract')
+#@ g.command('vr-contract')
 @g.command('vr-contract')
 def contract_rendering_pane(event: LeoKeyEvent | None = None) -> None:
     """Contract the rendering pane."""
@@ -437,7 +437,7 @@ def contract_rendering_pane(event: LeoKeyEvent | None = None) -> None:
         vr.contract()
 
 
-# @+node:ekr.20130413061407.10361: *3* g.command('vr-expand')
+#@ g.command('vr-expand')
 @g.command('vr-expand')
 def expand_rendering_pane(event: LeoKeyEvent | None = None) -> None:
     """Expand the rendering pane."""
@@ -447,7 +447,7 @@ def expand_rendering_pane(event: LeoKeyEvent | None = None) -> None:
         vr.expand()
 
 
-# @+node:ekr.20240507095853.1: *3* g.command('vr-fully-expand')
+#@ g.command('vr-fully-expand')
 @g.command('vr-fully-expand')
 def fully_expand_rendering_pane(event: LeoKeyEvent | None = None) -> None:
     """Expand the rendering pane."""
@@ -457,7 +457,7 @@ def fully_expand_rendering_pane(event: LeoKeyEvent | None = None) -> None:
         vr.fully_expand()
 
 
-# @+node:ekr.20110917103917.3639: *3* g.command('vr-hide')
+#@ g.command('vr-hide')
 @g.command('vr-hide')
 def hide_rendering_pane(event: LeoKeyEvent | None = None) -> None:
     """Close the rendering pane."""
@@ -472,7 +472,7 @@ def hide_rendering_pane(event: LeoKeyEvent | None = None) -> None:
 close_rendering_pane = hide_rendering_pane
 
 
-# @+node:ekr.20110321072702.14507: *3* g.command('vr-lock')
+#@ g.command('vr-lock')
 @g.command('vr-lock')
 def lock_rendering_pane(event: LeoKeyEvent | None = None) -> None:
     """Lock the rendering pane."""
@@ -481,7 +481,7 @@ def lock_rendering_pane(event: LeoKeyEvent | None = None) -> None:
         vr.lock()
 
 
-# @+node:ekr.20110320233639.5777: *3* g.command('vr-pause-play')
+#@ g.command('vr-pause-play')
 @g.command('vr-pause-play-movie')
 def pause_play_movie(event: LeoKeyEvent | None = None) -> None:
     """Pause or play a movie in the rendering pane."""
@@ -494,7 +494,7 @@ def pause_play_movie(event: LeoKeyEvent | None = None) -> None:
         f()
 
 
-# @+node:ekr.20110317080650.14386: *3* g.command('vr-show')
+#@ g.command('vr-show')
 @g.command('vr-show')
 def show_rendering_pane(event: LeoKeyEvent | None = None) -> None:
     """Show the rendering pane."""
@@ -506,7 +506,7 @@ def show_rendering_pane(event: LeoKeyEvent | None = None) -> None:
         c.bodyWantsFocusNow()
 
 
-# @+node:ekr.20131001100335.16606: *3* g.command('vr-toggle-visibility')
+#@ g.command('vr-toggle-visibility')
 @g.command('vr-toggle-visibility')
 @g.command('vr-toggle')  # Legacy
 def toggle_rendering_pane(event: LeoKeyEvent | None = None) -> None:
@@ -525,7 +525,7 @@ def toggle_rendering_pane(event: LeoKeyEvent | None = None) -> None:
     c.bodyWantsFocusNow()
 
 
-# @+node:ekr.20240508082844.1: *3* g.command('vr-toggle-keep-open')
+#@ g.command('vr-toggle-keep-open')
 @g.command('vr-toggle-keep-open')
 def toggle_keep_open(event: LeoKeyEvent | None = None) -> None:
     """Toggle the visibility of the VR pane."""
@@ -537,7 +537,7 @@ def toggle_keep_open(event: LeoKeyEvent | None = None) -> None:
         vr.update_vr('keep-open', {'c': c, 'force': True})
 
 
-# @+node:ekr.20130412180825.10345: *3* g.command('vr-unlock')
+#@ g.command('vr-unlock')
 @g.command('vr-unlock')
 def unlock_rendering_pane(event: LeoKeyEvent | None = None) -> None:
     """Pause or play a movie in the rendering pane."""
@@ -546,7 +546,7 @@ def unlock_rendering_pane(event: LeoKeyEvent | None = None) -> None:
         vr.unlock()
 
 
-# @+node:ekr.20110321151523.14464: *3* g.command('vr-update')
+#@ g.command('vr-update')
 @g.command('vr-update')
 def update_rendering_pane(event: LeoKeyEvent | None = None) -> None:
     """Update the rendering pane"""
@@ -556,14 +556,14 @@ def update_rendering_pane(event: LeoKeyEvent | None = None) -> None:
         vr.update_vr(tag='view', keywords={'c': c, 'force': True})
 
 
-# @+node:ekr.20110317024548.14375: ** class ViewRenderedController (QWidget)
+#@< class ViewRenderedController (QWidget)
 class ViewRenderedController(QtWidgets.QWidget):
     """A class to control rendering in a rendering pane."""
 
-    # @+<< vr: default templates >>
-    # @+node:ekr.20241231164944.1: *3* << vr: default templates >>
-    # @+others
-    # @+node:ekr.20170324090828.1: *4* vr.default_image template
+    #@+<< vr: default templates >>
+    #@> << vr: default templates >>
+    #@+others
+    #@> vr.default_image template
     default_image_template = '''\
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -574,7 +574,7 @@ class ViewRenderedController(QtWidgets.QWidget):
     </body>
     </html>
     '''
-    # @+node:ekr.20241231121842.1: *4* vr.default_katex_template
+    #@ vr.default_katex_template
     default_katex_template = textwrap.dedent(r'''
     <!DOCTYPE html>
     <html>
@@ -599,7 +599,7 @@ class ViewRenderedController(QtWidgets.QWidget):
     </body>
     </html>
     ''')
-    # @+node:ekr.20241231122327.1: *4* vr.default_latex template
+    #@ vr.default_latex template
     default_latex_template = r'''
     \documentclass[12pt, letter-paper]{article}
     \usepackage{graphicx} % Images.
@@ -631,7 +631,7 @@ class ViewRenderedController(QtWidgets.QWidget):
 
     \end{document}
     '''
-    # @+node:ekr.20241224072714.1: *4* vr.default_mathjax_template
+    #@ vr.default_mathjax_template
     default_mathjax_template = '''
     <head>
       <script type="text/x-mathjax-config">
@@ -642,13 +642,13 @@ class ViewRenderedController(QtWidgets.QWidget):
       </script>
     </head>
     '''
-    # @+node:ekr.20241231180612.1: *4* vr.default_typst_template
+    #@ vr.default_typst_template
     default_typst_template = None
 
-    # @-others
-    # @-<< vr: default templates >>
-    # @+others
-    # @+node:ekr.20110317080650.14380: *3*  vr.ctor & helpers
+    #@-others
+    #@-<< vr: default templates >>
+    #@+others
+    #@<  vr.ctor & helpers
     def __init__(self, c: Cmdr, parent: QWidget | None = None) -> None:
         """Ctor for ViewRenderedController class."""
         self.c = c
@@ -690,7 +690,7 @@ class ViewRenderedController(QtWidgets.QWidget):
         else:
             self.hide()
 
-    # @+node:ekr.20110320120020.14478: *4* vr.create_dispatch_dict
+    #@> vr.create_dispatch_dict
     def create_dispatch_dict(self) -> dict[str, Callable]:
         d = {
             'asciidoc': self.update_asciidoc,
@@ -721,7 +721,7 @@ class ViewRenderedController(QtWidgets.QWidget):
         self.dispatch_dict = d
         return d
 
-    # @+node:ekr.20171114150510.1: *4* vr.reloadSettings
+    #@ vr.reloadSettings
     def reloadSettings(self) -> None:
         c = self.c
         c.registerReloadSettings(self)
@@ -746,7 +746,7 @@ class ViewRenderedController(QtWidgets.QWidget):
         self.mathjax_template = get_template('mathjax')
         self.typst_template = get_template('typst')
 
-    # @+node:ekr.20190614065659.1: *4* vr.create_pane
+    #@ vr.create_pane
     def create_pane(self, parent: QWidget | None) -> None:
         """Create the VR pane."""
         if g.unitTesting:
@@ -756,7 +756,7 @@ class ViewRenderedController(QtWidgets.QWidget):
         self.setLayout(QtWidgets.QVBoxLayout())
         self.layout().setContentsMargins(0, 0, 0, 0)
 
-    # @+node:tbrown.20110621120042.22676: *3* vr.closeEvent
+    #@< vr.closeEvent
     def closeEvent(self, event: QCloseEvent) -> None:
         """Deactivate callbacks when an Outline closes."""
         self.active = False
@@ -765,7 +765,7 @@ class ViewRenderedController(QtWidgets.QWidget):
         g.unregisterHandler('scrolledMessage', show_scrolled_message)
         self.destroy_widgets()
 
-    # @+node:ekr.20130413061407.10363: *3* vr.contract & expand
+    #@ vr.contract & expand
     def contract(self) -> None:
         self.change_size(-100)
 
@@ -787,7 +787,7 @@ class ViewRenderedController(QtWidgets.QWidget):
                 sizes[j] = max(0, size - int(delta / (n - 1)))
         splitter.setSizes(sizes)
 
-    # @+node:ekr.20240507100254.1: *3* vr.fully_expand
+    #@ vr.fully_expand
     def fully_expand(self) -> None:
         """Cover the body pane with the VR pane."""
         splitter = self.parent()
@@ -796,7 +796,7 @@ class ViewRenderedController(QtWidgets.QWidget):
             splitter.moveSplitter(0, i)
         self.show()
 
-    # @+node:ekr.20110321072702.14508: *3* vr.lock/unlock
+    #@ vr.lock/unlock
     def lock(self) -> None:
         """Lock the VR pane."""
         g.note('rendering pane locked')
@@ -807,7 +807,7 @@ class ViewRenderedController(QtWidgets.QWidget):
         g.note('rendering pane unlocked')
         self.locked = False
 
-    # @+node:ekr.20240507100402.1: *3* vr.restore_body
+    #@ vr.restore_body
     def restore_body(self) -> None:
         """Restore the visibility of the body pane."""
         splitter = self.parent()  # A NestedSplitter
@@ -816,7 +816,7 @@ class ViewRenderedController(QtWidgets.QWidget):
             splitter.moveSplitter(int(sum(splitter.sizes()) / 2), i)
         self.show()
 
-    # @+node:ekr.20160921071239.1: *3* vr.set_html
+    #@ vr.set_html
     def set_html(self, s: str, w: QWidget) -> None:
         """Set text in w to s, preserving scroll position."""
         p = self.c.p
@@ -837,7 +837,7 @@ class ViewRenderedController(QtWidgets.QWidget):
             assert pos is not None
             sb.setSliderPosition(pos)
 
-    # @+node:ekr.20101112195628.5426: *3* vr.update_vr & helpers
+    #@ vr.update_vr & helpers
     # Must have this signature: called by leoPlugins.callTagHandler.
 
     def update_vr(self, tag: str, keywords: Any) -> None:
@@ -887,8 +887,8 @@ class ViewRenderedController(QtWidgets.QWidget):
         else:
             self.hide()
 
-    # @+node:ekr.20241227053437.1: *4* vr.update_vr: helpers
-    # @+node:ekr.20241224074331.1: *5* vr.create_web_engineview
+    #@> vr.update_vr: helpers
+    #@> vr.create_web_engineview
     def create_web_engineview(self) -> QWidget:
         """
         Return a *new* QWebEngineView instance, deleting any previous instance.
@@ -914,7 +914,7 @@ class ViewRenderedController(QtWidgets.QWidget):
         settings.setFontSize(settings.FontSize.DefaultFontSize, n)
         return w
 
-    # @+node:ekr.20241226173150.1: *5* vr.create_web_engineview_with_pdf
+    #@ vr.create_web_engineview_with_pdf
     def create_web_engineview_with_pdf(self) -> QWidget:
         """
         Return a *new* QWebEngineView instance with support for pdf,
@@ -932,7 +932,7 @@ class ViewRenderedController(QtWidgets.QWidget):
         settings.setAttribute(settings.WebAttribute.PluginsEnabled, True)
         return w
 
-    # @+node:ekr.20241227044803.1: *5* vr.destroy_widgets
+    #@ vr.destroy_widgets
     def destroy_widgets(self) -> None:
         """Destroy all widgets."""
         # g.trace(g.shortFileName(self.c.fileName()))
@@ -943,7 +943,7 @@ class ViewRenderedController(QtWidgets.QWidget):
             setattr(self, ivar, None)
         self.w = None
 
-    # @+node:ekr.20110320120020.14486: *5* vr.embed_widget
+    #@ vr.embed_widget
     def embed_widget(self, w: QWidget) -> None:
         """Embed widget w in the layout."""
         assert w == self.w, g.callers()  # Invariant.
@@ -957,7 +957,7 @@ class ViewRenderedController(QtWidgets.QWidget):
         self.layout().addWidget(w)
         w.show()
 
-    # @+node:ekr.20110320120020.14476: *5* vr.must_update
+    #@ vr.must_update
     def must_update(self, keywords: Any) -> bool:
         """Return True if we must update the rendering pane."""
         c, p = self.c, self.c.p
@@ -976,7 +976,7 @@ class ViewRenderedController(QtWidgets.QWidget):
             return self.get_kind(p) != 'pyplot'
         return False
 
-    # @+node:ekr.20191004143229.1: *4* vr.update_asciidoc & helpers
+    #@< vr.update_asciidoc & helpers
     def update_asciidoc(self, s: str, keywords: Any) -> None:
         """Update asciidoc in the VR pane."""
         # global asciidoctor_exec, asciidoc3_exec
@@ -995,7 +995,7 @@ class ViewRenderedController(QtWidgets.QWidget):
                 g.es_exception()
         self.update_rst(s, keywords)
 
-    # @+node:ekr.20191004143805.1: *5* vr.convert_to_asciidoctor
+    #@> vr.convert_to_asciidoctor
     def convert_to_asciidoctor(self, s: str) -> str:
         """Convert s to html using the asciidoctor or asciidoc processor."""
         c, p = self.c, self.c.p
@@ -1007,7 +1007,7 @@ class ViewRenderedController(QtWidgets.QWidget):
         s = self.run_asciidoctor(s)
         return g.toUnicode(s)
 
-    # @+node:ekr.20191004144128.1: *5* vr.run_asciidoctor
+    #@ vr.run_asciidoctor
     def run_asciidoctor(self, s: str) -> str:
         """
         Process s with asciidoctor or asciidoc3.
@@ -1031,7 +1031,7 @@ class ViewRenderedController(QtWidgets.QWidget):
         with open(o_path, 'r') as f:
             return f.read()
 
-    # @+node:ekr.20110321151523.14463: *4* vr.update_graphics_script
+    #@< vr.update_graphics_script
     def update_graphics_script(self, s: str, keywords: Any) -> None:
         """Display the graphics script in `s` in the VR pane."""
         c = self.c
@@ -1055,7 +1055,7 @@ class ViewRenderedController(QtWidgets.QWidget):
             namespace={'gs': self.gs, 'gv': self.gv},
         )
 
-    # @+node:ekr.20110321005148.14534: *4* vr.update_html
+    #@ vr.update_html
     update_html_count = 0
 
     def update_html(self, s: str, keywords: Any) -> None:
@@ -1070,7 +1070,7 @@ class ViewRenderedController(QtWidgets.QWidget):
         w.show()
         c.bodyWantsFocusNow()
 
-    # @+node:ekr.20110320120020.14482: *4* vr.update_image
+    #@ vr.update_image
     def update_image(self, s: str, keywords: Any) -> None:
         """
         Display an image in the VR pane.
@@ -1095,7 +1095,7 @@ class ViewRenderedController(QtWidgets.QWidget):
         self.show()
         w.setHtml(template)
 
-    # @+node:ekr.20170105124347.1: *4* vr.update_jupyter & helper
+    #@ vr.update_jupyter & helper
     update_jupyter_count = 0
 
     def update_jupyter(self, s: str, keywords: Any) -> None:
@@ -1111,7 +1111,7 @@ class ViewRenderedController(QtWidgets.QWidget):
         if pyperclip:
             pyperclip.copy(s)
 
-    # @+node:ekr.20180311090852.1: *5* vr.get_jupyter_source
+    #@> vr.get_jupyter_source
     def get_jupyter_source(self, c: Cmdr) -> str:
         """Return the html for the @jupyter node."""
         body = c.p.b.lstrip()
@@ -1140,7 +1140,7 @@ class ViewRenderedController(QtWidgets.QWidget):
             pass  # Assume the result is html.
         return s
 
-    # @+node:ekr.20241231121212.1: *4* vr.update_katex
+    #@< vr.update_katex
     def update_katex(self, s: str, keywords: Any) -> None:
         """Display the katex text `s` in the VR pane."""
 
@@ -1158,7 +1158,7 @@ class ViewRenderedController(QtWidgets.QWidget):
         w.setHtml(contents)
         self.show()
 
-    # @+node:ekr.20170324064811.1: *4* vr.update_latex
+    #@ vr.update_latex
     def update_latex(self, s: str, keywords: Any) -> None:
         """Display the LaTeX text `s` in the VR pane."""
 
@@ -1176,7 +1176,7 @@ class ViewRenderedController(QtWidgets.QWidget):
         w.setHtml(contents)
         self.show()
 
-    # @+node:ekr.20241224072334.1: *4* vr.update_mathjax
+    #@ vr.update_mathjax
     def update_mathjax(self, s: str, keywords: Any) -> None:
         """Display the mathjax text `s` in the VR pane."""
 
@@ -1194,7 +1194,7 @@ class ViewRenderedController(QtWidgets.QWidget):
         w.setHtml(contents)
         self.show()
 
-    # @+node:peckj.20130207132858.3671: *4* vr.update_md & helper
+    #@ vr.update_md & helper
     def update_md(self, s: str, keywords: Any) -> None:
         """Display the markdown text in `s` in the VR pane."""
         c = self.c
@@ -1221,7 +1221,7 @@ class ViewRenderedController(QtWidgets.QWidget):
             # g.trace('markdown not available: using rst')
             self.update_rst(s, keywords)
 
-    # @+node:ekr.20160921134552.1: *5* vr.convert_to_markdown
+    #@> vr.convert_to_markdown
     def convert_to_markdown(self, s: str) -> str:
         """Convert s to html using the markdown processor."""
         c, p = self.c, self.c.p
@@ -1241,7 +1241,7 @@ class ViewRenderedController(QtWidgets.QWidget):
                 s = 'MD error:\n%s\n\n%s' % (msg, s)
         return s
 
-    # @+node:ekr.20110320120020.14481: *4* vr.update_movie
+    #@< vr.update_movie
     movie_warning = False
 
     def update_movie(self, s: str, keywords: Any) -> None:
@@ -1276,14 +1276,14 @@ class ViewRenderedController(QtWidgets.QWidget):
         # Won't play .mp4 files: https://bugreports.qt.io/browse/QTBUG-32783
         vp.play()
 
-    # @+node:ekr.20110320120020.14484: *4* vr.update_networkx
+    #@ vr.update_networkx
     def update_networkx(self, s: str, keywords: Any) -> None:
         """Dispaly a networkx graphic in `s` in the VR pane."""
         w = self.get_base_text_widget()
         w.setPlainText('')  # 'Networkx: len: %s' % (len(s)))
         self.show()
 
-    # @+node:ekr.20191006155748.1: *4* vr.update_pandoc & helpers (disabled)
+    #@ vr.update_pandoc & helpers (disabled)
     def update_pandoc(self, s: str, keywords: Any) -> None:
         """
         Display an @pandoc node in the VR pane.
@@ -1304,7 +1304,7 @@ class ViewRenderedController(QtWidgets.QWidget):
             return
         self.update_rst(s, keywords)
 
-    # @+node:ekr.20191006155748.3: *5* vr.convert_to_pandoc
+    #@> vr.convert_to_pandoc
     def convert_to_pandoc(self, s: str) -> str:
         """Convert s to html using the asciidoctor or asciidoc processor."""
         c, p = self.c, self.c.p
@@ -1316,7 +1316,7 @@ class ViewRenderedController(QtWidgets.QWidget):
         s = self.run_pandoc(s)
         return g.toUnicode(s)
 
-    # @+node:ekr.20191006155748.4: *5* vr.run_pandoc
+    #@ vr.run_pandoc
     def run_pandoc(self, s: str) -> str:
         """
         Process s with pandoc.
@@ -1339,7 +1339,7 @@ class ViewRenderedController(QtWidgets.QWidget):
         with open(o_path, 'r') as f:
             return f.read()
 
-    # @+node:ekr.20241226011006.1: *4* vr.update_pdf
+    #@< vr.update_pdf
     def update_pdf(self, s: str, keywords: Any) -> None:
         """
         Display a pdf file in the VR pane.
@@ -1372,7 +1372,7 @@ class ViewRenderedController(QtWidgets.QWidget):
         w.load(url)
         self.show()
 
-    # @+node:ekr.20160928023915.1: *4* vr.update_pyplot
+    #@ vr.update_pyplot
     def update_pyplot(self, s: str, keywords: Any) -> None:
         """
         Execute the pyplot script in `s` and show the results in the VR pane.
@@ -1428,7 +1428,7 @@ class ViewRenderedController(QtWidgets.QWidget):
         # Be courteous to other users - restore default pyplot drawing target
         matplotlib.use('QtAgg')
 
-    # @+node:ekr.20110320120020.14477: *4* vr.update_rst & helpers
+    #@ vr.update_rst & helpers
     def update_rst(self, s: str, keywords: Any) -> None:
         """Show the rst text in `s` in the VR pane."""
         for prefix in ('"""', "'''"):  # PR #4827
@@ -1448,7 +1448,7 @@ class ViewRenderedController(QtWidgets.QWidget):
         else:
             w.setPlainText(s)
 
-    # @+node:ekr.20160920221324.1: *5* vr.convert_to_html
+    #@> vr.convert_to_html
     def convert_to_html(self, s: str) -> str:
         """Convert s to html using docutils."""
         c, p = self.c, self.c.p
@@ -1568,7 +1568,7 @@ class ViewRenderedController(QtWidgets.QWidget):
         if oldp:
             c.redraw(oldp)
 
-    # @+node:ekr.20110320120020.14479: *4* vr.update_svg
+    #@< vr.update_svg
     # http://doc.trolltech.com/4.4/qtsvg.html
     # http://doc.trolltech.com/4.4/painting-svgviewer.html
     def update_svg(self, s: str, keywords: Any) -> None:
@@ -1619,7 +1619,7 @@ class ViewRenderedController(QtWidgets.QWidget):
                     w.load(path)
                     w.show()
 
-    # @+node:ekr.20241231121247.1: *4* vr.update_typst
+    #@ vr.update_typst
     def update_typst(self, s: str, keywords: Any) -> None:
         """Display the typest text in `s` in the VR pane."""
         # Create a new QWebEngineView.
@@ -1655,7 +1655,7 @@ class ViewRenderedController(QtWidgets.QWidget):
         w.load(url)
         self.show()
 
-    # @+node:ekr.20110321005148.14537: *4* vr.update_url
+    #@ vr.update_url
     def update_url(self, s: str, keywords: Any) -> None:
         """Display the url in `s` in the VR pane."""
         c, p = self.c, self.c.p
@@ -1678,8 +1678,8 @@ class ViewRenderedController(QtWidgets.QWidget):
             self.show()
             w.setPlainText('')
 
-    # @+node:ekr.20110322031455.5765: *3* vr: utils...
-    # @+node:ekr.20190424083049.1: *4* vr.get_base_text_widget
+    #@< vr: utils...
+    #@> vr.get_base_text_widget
     def get_base_text_widget(self) -> QWidget:
         """Create a QTextBrowser."""
         c = self.c
@@ -1717,7 +1717,7 @@ class ViewRenderedController(QtWidgets.QWidget):
         w.setOpenLinks(False)
         return w
 
-    # @+node:ekr.20110320120020.14483: *4* vr.get_kind
+    #@ vr.get_kind
     def get_kind(self, p: Position) -> str:
         """Return the proper rendering kind for node p."""
 
@@ -1764,7 +1764,7 @@ class ViewRenderedController(QtWidgets.QWidget):
                     return language
         return ''
 
-    # @+node:ekr.20110320233639.5776: *4* vr.get_fn
+    #@ vr.get_fn
     def get_fn(self, s: str, tag: str) -> tuple[bool, str]:
         """
         Return an absolute path using s or c.p.h.
@@ -1790,14 +1790,14 @@ class ViewRenderedController(QtWidgets.QWidget):
         g.trace(fn)
         return ok, fn
 
-    # @+node:ekr.20110321005148.14536: *4* vr.get_url
+    #@ vr.get_url
     def get_url(self, s: str, tag: str) -> str:
         p = self.c.p
         url = s or p.h[len(tag) :]
         url = url.strip()
         return url
 
-    # @+node:ekr.20110320120020.14485: *4* vr.remove_directives
+    #@ vr.remove_directives
     def remove_directives(self, s: str) -> str:
         lines = g.splitLines(s)
         result = []
@@ -1810,7 +1810,7 @@ class ViewRenderedController(QtWidgets.QWidget):
             result.append(s1)
         return ''.join(result)
 
-    # @+node:ekr.20250102053905.1: *4* vr.resolve_path
+    #@ vr.resolve_path
     def resolve_path(self, path: str) -> str:
         """Resolve the given path to an absolute path."""
         c = self.c
@@ -1832,10 +1832,10 @@ class ViewRenderedController(QtWidgets.QWidget):
                 path = g.finalize(path)
         return path
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

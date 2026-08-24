@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20080214092357: * @file ../plugins/test/ekr_test.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20080214092357] @f ../plugins/test/ekr_test.py
 from leo.core import leoGlobals as g
 
 
@@ -37,4 +37,4 @@ def onmenu2(tag, keys):
         c.k.registerCommand('ekr-command2', c.ekrCommand2)
 
 
-# @-leo
+#@-leo

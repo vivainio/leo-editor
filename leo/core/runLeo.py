@@ -1,11 +1,13 @@
 #! /usr/bin/env python
-# @+leo-ver=5-thin
-# @+node:ekr.20031218072017.2605: * @file runLeo.py
-# @@first
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20031218072017.2605] @f runLeo.py
+#@@first
 """Entry point for Leo in Python."""
 
-# @+<< imports and inits >>
-# @+node:ekr.20080921091311.1: ** << imports and inits >> (runLeo.py)
+#@+<< imports and inits >>
+#@-<< imports and inits >>
+#@+others
+#@> << imports and inits >> (runLeo.py)
 import os
 import sys
 import traceback
@@ -65,9 +67,7 @@ except Exception:
     sys.exit(1)
 
 
-# @-<< imports and inits >>
-# @+others
-# @+node:ekr.20031218072017.2607: ** profile_leo (runLeo.py)
+#@ profile_leo (runLeo.py)
 def profile_leo():
     """
     Gather and print statistics about Leo.
@@ -102,7 +102,7 @@ def profile_leo():
 prof = profile_leo
 
 
-# @+node:ekr.20120219154958.10499: ** run (runLeo.py)
+#@ run (runLeo.py)
 def run(fileName: str = '', pymacs: bool = False, *args, **keywords):
     """Initialize and run Leo"""
     # #1403: sys.excepthook doesn't help.
@@ -112,18 +112,18 @@ def run(fileName: str = '', pymacs: bool = False, *args, **keywords):
     g.app.loadManager.load(fileName, pymacs)
 
 
-# @+node:maphew.20180110221247.1: ** run console (runLeo.py)
+#@ run console (runLeo.py)
 def run_console(*args, **keywords):
     """Initialize and run Leo in console mode gui"""
     sys.argv.append('--gui=console')
     run(*args, **keywords)
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @@pagewidth 70
+#@-others
+#@@language python
+#@@tabwidth -4
+#@@pagewidth 70
 
 if __name__ == "__main__":
     run()
-# @-leo
+#@-leo

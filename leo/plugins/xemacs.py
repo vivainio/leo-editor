@@ -1,29 +1,13 @@
-# @+leo-ver=5-thin
-# @+node:EKR.20040517075715.12: * @file ../plugins/xemacs.py
-# @+<< docstring >>
-# @+node:ekr.20101112195628.5434: ** << docstring >> (xemacs.py)
-"""Allows you to edit nodes in emacs/xemacs.
-
-Provides the emacs-open-node command which passes the body
-text of the node to emacs.
-
-You may edit the node in the emacs buffer and changes will
-appear in Leo.
-
-"""
-# @-<< docstring >>
+#@+leo-ver=cub-1-thin
+#@0 [EKR.20040517075715.12] @f ../plugins/xemacs.py
+#@+<< docstring >>
+#@-<< docstring >>
 
 # Initial version: http://www.cs.mu.oz.au/~markn/leo/external_editors.leo
 # Edited by EKR.
 
-# @+<< imports >>
-# @+node:ekr.20050218024153: ** << imports >> (xemacs.py)
-import os
-import subprocess
-import sys
-from typing import Any
-from leo.core import leoGlobals as g
-# @-<< imports >>
+#@+<< imports >>
+#@-<< imports >>
 
 # Full path of emacsclient executable. We need the full path as spawnlp
 # is not yet implemented in leoCommands.py
@@ -44,8 +28,24 @@ else:
     _emacs_cmd = "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
 
 
-# @+others
-# @+node:ekr.20050218023308: ** xemacs.init
+#@+others
+#@> << docstring >> (xemacs.py)
+"""Allows you to edit nodes in emacs/xemacs.
+
+Provides the emacs-open-node command which passes the body
+text of the node to emacs.
+
+You may edit the node in the emacs buffer and changes will
+appear in Leo.
+
+"""
+#@ << imports >> (xemacs.py)
+import os
+import subprocess
+import sys
+from typing import Any
+from leo.core import leoGlobals as g
+#@ xemacs.init
 def init():
     """Return True if the plugin has loaded successfully."""
     ok = not g.unitTesting
@@ -54,7 +54,7 @@ def init():
     return ok
 
 
-# @+node:ekr.20050313071202: ** xemacs.open_in_emacs
+#@ xemacs.open_in_emacs
 contextmenu_message_given = False
 
 
@@ -66,7 +66,7 @@ def open_in_emacs(tag, keywords):
     return None
 
 
-# @+node:ekr.20120315101404.9748: ** xemacs.open_in_emacs_helper
+#@ xemacs.open_in_emacs_helper
 def open_in_emacs_helper(c, p):
     global contextmenu_message_given
     v = p.v
@@ -104,7 +104,7 @@ def open_in_emacs_helper(c, p):
         subprocess.run(emacs_cmd, shell=True, check=False)
 
 
-# @+node:ekr.20120315101404.9747: ** g.command('emacs-open-node')
+#@ g.command('emacs-open-node')
 @g.command('emacs-open-node')
 def open_in_emacs_command(event):
     """Open current node in (x)emacs
@@ -116,7 +116,7 @@ def open_in_emacs_command(event):
         open_in_emacs_helper(c, c.p)
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

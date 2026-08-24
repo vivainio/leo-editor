@@ -1,11 +1,11 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20240201175949.1: * @file ../../requirements.txt
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20240201175949.1] @f ../../requirements.txt
 # leo-editor/requirements.txt.
 
 # The dependencies here should match those in pyproject.toml.
 
-# @+<< requirements.txt: dependencies >>
-# @+node:ekr.20241022091142.1: ** << requirements.txt: dependencies >>
+#@+<< requirements.txt: dependencies >>
+#@> << requirements.txt: dependencies >>
 # Warning: these dependencies should match those in pyproject.toml.
 
 # For build devs.
@@ -57,9 +57,9 @@ PyQt6>= 6.6
 PyQt6-QScintilla
 PyQt6-WebEngine
 Send2Trash; platform_system=="Windows"  # For picture_viewer plugin.
-# @-<< requirements.txt: dependencies >>
+#@-<< requirements.txt: dependencies >>
 
-# @@language python
-# @@nosearch
+#@@language python
+#@@nosearch
 
-# @-leo
+#@-leo
