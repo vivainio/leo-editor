@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ville.20090503124249.1: * @file ../plugins/tomboy_import.py
+#@+leo-ver=cub-1-thin
+#@0 [ville.20090503124249.1] @f ../plugins/tomboy_import.py
 """Allows imports of notes created in Tomboy / gnote.
 
 Usage:
@@ -13,17 +13,17 @@ Usage:
 """
 # By Ville M. Vainio
 
-# @+<< imports >>
-# @+node:ville.20090503124249.4: ** << imports >>
+#@+<< imports >>
+#@> << imports >>
 import html.parser as HTMLParser
 import xml.etree.ElementTree as ET
 from leo.core import leoGlobals as g
 from leo.core import leoPlugins  # Uses leoPlugins.TryNext
 
 
-# @-<< imports >>
-# @+others
-# @+node:ville.20090503124249.5: ** init
+#@-<< imports >>
+#@+others
+#@ init
 def init():
     """Return True if the plugin has loaded successfully."""
     g.registerHandler('after-create-leo-frame', onCreate)
@@ -31,7 +31,7 @@ def init():
     return True
 
 
-# @+node:ville.20090503124249.6: ** onCreate
+#@ onCreate
 def onCreate(tag, keys):
     c = keys.get('c')
     if not c:
@@ -42,7 +42,7 @@ def onCreate(tag, keys):
     tomboy_install()
 
 
-# @+node:ville.20090503124249.7: ** the code
+#@ the code
 class MLStripper(HTMLParser.HTMLParser):
     # pylint: disable=super-init-not-called
     # pylint: disable=abstract-method
@@ -123,7 +123,7 @@ def tomboy_install():
     g.act_on_node.add(tomboy_act_on_node, 99)
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

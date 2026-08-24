@@ -1,6 +1,6 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20240321123226.1: * @file ../scripts/install_leo_from_pypi.py
-# @@language python
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20240321123226.1] @f ../scripts/install_leo_from_pypi.py
+#@@language python
 
 """
 install_leo_from_pypi.py: Install leo from https://pypi.org/project/leo/.
@@ -24,4 +24,4 @@ python = sys.executable
 command = f"{python} -m pip install leo==6.8.9"
 print(command)
 subprocess.run(command, shell=True, check=False)
-# @-leo
+#@-leo

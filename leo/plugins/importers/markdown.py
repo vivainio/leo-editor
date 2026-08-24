@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20140725190808.18066: * @file ../plugins/importers/markdown.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20140725190808.18066] @f ../plugins/importers/markdown.py
 """The @auto importer for the markdown language."""
 
 from __future__ import annotations
@@ -16,15 +16,15 @@ if TYPE_CHECKING:
 assert g
 
 
-# @+others
-# @+node:ekr.20161124192050.2: ** class Markdown_Importer(Importer)
+#@+others
+#@> class Markdown_Importer(Importer)
 class Markdown_Importer(Importer):
     """The importer for the markdown language."""
 
     language = 'md'
 
-    # @+others
-    # @+node:ekr.20230528165149.1: *3* md_i.gen_block
+    #@+others
+    #@> md_i.gen_block
     def gen_block(self, parent: Position) -> None:
         """
         Markdown_Importer: gen_block.
@@ -69,7 +69,7 @@ class Markdown_Importer(Importer):
         for p in parent.self_and_subtree():
             p.b = ''.join(self.lines_dict[p.v])
 
-    # @+node:ekr.20230528170618.2: *4* md_i.is_hash
+    #@> md_i.is_hash
     # Allow any non-blank after the hashes.
     md_hash_pattern = re.compile(r'^(#+)\s*(.+)\s*\n')
 
@@ -84,7 +84,7 @@ class Markdown_Importer(Importer):
                 return level, name
         return 0, ''  # PR #4812
 
-    # @+node:axk.20260709133000.2: *4* md_i.is_noheader_marker
+    #@ md_i.is_noheader_marker
     md_noheader_pattern = re.compile(
         r'^\s*<!--\s*leo-noheader level=(\d+)\s+headline=(.*?)\s*-->\s*\n?$'
     )
@@ -97,7 +97,7 @@ class Markdown_Importer(Importer):
             return level, name
         return None
 
-    # @+node:ekr.20230528170618.3: *4* md_i.is_underline
+    #@ md_i.is_underline
     md_pattern_table = (
         re.compile(r'^(=+)\n'),
         re.compile(r'^(-+)\n'),
@@ -111,7 +111,7 @@ class Markdown_Importer(Importer):
                 return True
         return False
 
-    # @+node:ekr.20230528170618.4: *4* md_i.lookahead_underline
+    #@ md_i.lookahead_underline
     def lookahead_underline(self, i: int) -> bool:
         """True if lines[i:i+1] form an underlined line."""
         lines = self.lines
@@ -123,7 +123,7 @@ class Markdown_Importer(Importer):
             return not ch0 and not line0.isspace() and ch1 and len(line1) >= 4
         return False
 
-    # @+node:ekr.20230528170618.5: *4* md_i.make_decls_node
+    #@ md_i.make_decls_node
     def make_decls_node(self, line: str) -> None:
         """Make a decls node."""
         lines_dict = self.lines_dict
@@ -133,14 +133,14 @@ class Markdown_Importer(Importer):
         lines_dict[child.v] = [line]
         self.stack.append(child)
 
-    # @+node:axk.20260709133000.3: *4* md_i.make_noheader_node
+    #@ md_i.make_noheader_node
     def make_noheader_node(self, level: int, name: str) -> Position:
         """Create a node represented by a Leo noheader HTML comment."""
         child = self.make_markdown_node(level, name)
         self.lines_dict[child.v].append('@noheader\n')
         return child
 
-    # @+node:ekr.20230528170618.6: *4* md_i.make_markdown_node
+    #@ md_i.make_markdown_node
     def make_markdown_node(self, level: int, name: str) -> Position:
         """Create a new node."""
         lines_dict = self.lines_dict
@@ -158,16 +158,16 @@ class Markdown_Importer(Importer):
         assert 0 <= level < len(self.stack), (level, len(self.stack))
         return self.stack[level]
 
-    # @+node:ekr.20260305084156.1: *3* md_i.postprocess
+    #@< md_i.postprocess
     def postprocess(self, parent: Position) -> None:
         """
         MarkDown_Importer.postprocess. Don't do anything!
         """
 
-    # @-others
+    #@-others
 
 
-# @-others
+#@-others
 
 
 def do_import(c: Cmdr, parent: Position, s: str) -> None:
@@ -187,6 +187,6 @@ importer_dict = {
     ],
     'func': do_import,
 }
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@@language python
+#@@tabwidth -4
+#@-leo

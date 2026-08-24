@@ -1,7 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20060328125925: * @file ../plugins/chapter_hoist.py
-# @+<< docstring >>
-# @+node:ekr.20060328125925.1: ** << docstring >>
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20060328125925] @f ../plugins/chapter_hoist.py
+#@+<< docstring >>
+#@> << docstring >>
 """Creates hoist buttons.
 
 This plugin puts two buttons in the icon area: a button called 'Save Hoist' and
@@ -12,7 +12,7 @@ button performs one level of dehoisting
 Requires at least version 0.19 of mod_scripting.
 
 """
-# @-<< docstring >>
+#@-<< docstring >>
 
 # By btheado. Edited by EKR.
 
@@ -20,8 +20,8 @@ from leo.core import leoGlobals as g
 from leo.plugins.mod_scripting import scriptingController
 
 
-# @+others
-# @+node:ekr.20060328125925.4: ** init
+#@+others
+#@ init
 def init():
     """Return True if the plugin has loaded successfully."""
     # Note: call onCreate _after_ reading the .leo file.
@@ -31,7 +31,7 @@ def init():
     return True
 
 
-# @+node:ekr.20060328125925.5: ** onCreate
+#@ onCreate
 def onCreate(tag, keys):
     """Handle the onCreate event in the chapterHoist plugin."""
     c = keys.get('c')
@@ -40,15 +40,15 @@ def onCreate(tag, keys):
         chapterHoist(sc, c)
 
 
-# @+node:ekr.20060328125925.6: ** class chapterHoist
+#@ class chapterHoist
 class chapterHoist:
-    # @+others
-    # @+node:ekr.20060328125925.7: *3*  ctor
+    #@+others
+    #@>  ctor
     def __init__(self, sc, c):
         self.createSaveHoistButton(sc, c)
         self.createDehoistButton(sc, c)
 
-    # @+node:ekr.20060328125925.8: *3* createSaveHoistButton
+    #@ createSaveHoistButton
     def createSaveHoistButton(self, sc, c):
         def saveHoistCallback(event=None, self=self, sc=sc, c=c):
             self.createChapterHoistButton(sc, c, c.p)
@@ -63,7 +63,7 @@ class chapterHoist:
 
         return b
 
-    # @+node:ekr.20060328125925.9: *3* createDehoistButton
+    #@ createDehoistButton
     def createDehoistButton(self, sc, c):
         def dehoistCallback(event=None, c=c):
             c.dehoist()
@@ -78,7 +78,7 @@ class chapterHoist:
 
         return b
 
-    # @+node:ekr.20060328125925.10: *3* createChapterHoistButton
+    #@ createChapterHoistButton
     def createChapterHoistButton(self, sc, c, p):
         """Generates a hoist button for the headline at the given position"""
         h = p.h
@@ -96,8 +96,8 @@ class chapterHoist:
             args=None, text=buttonText, command=hoistButtonCallback, statusLine=statusLine
         )
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

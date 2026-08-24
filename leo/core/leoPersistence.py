@@ -1,9 +1,9 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20140821055201.18331: * @file leoPersistence.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20140821055201.18331] @f leoPersistence.py
 """Support for persistent clones, gnx's and uA's using @persistence trees."""
 
-# @+<< leoPersistence imports & annotations >>
-# @+node:ekr.20220901064457.1: ** << leoPersistence imports & annotations >>
+#@+<< leoPersistence imports & annotations >>
+#@> << leoPersistence imports & annotations >>
 from __future__ import annotations
 import binascii
 import pickle
@@ -16,11 +16,11 @@ if TYPE_CHECKING:  # pragma: no cover
     from leo.core.leoNodes import Position
 
     Value = Any
-# @-<< leoPersistence imports & annotations >>
+#@-<< leoPersistence imports & annotations >>
 
 
-# @+others
-# @+node:ekr.20140711111623.17886: ** Commands (leoPersistence.py)
+#@+others
+#@ Commands (leoPersistence.py)
 @g.command('clean-persistence')
 def view_pack_command(event: LeoKeyEvent | None = None) -> None:
     """Remove all @data nodes that do not correspond to an existing foreign file."""
@@ -29,10 +29,12 @@ def view_pack_command(event: LeoKeyEvent | None = None) -> None:
         c.persistenceController.clean()
 
 
-# @+node:ekr.20140711111623.17790: ** class PersistenceDataController
+#@ class PersistenceDataController
 class PersistenceDataController:
-    # @+<< docstring >>
-    # @+node:ekr.20140711111623.17791: *3*  << docstring >> (class persistenceController)
+    #@+<< docstring >>
+    #@-<< docstring >>
+    #@+others
+    #@>  << docstring >> (class persistenceController)
     """
     A class to handle persistence in **foreign files**, that is,
     files created by @auto, @org-mode or @vim-outline node.
@@ -48,16 +50,14 @@ class PersistenceDataController:
                     body text: the pickled uA
     """
 
-    # @-<< docstring >>
-    # @+others
-    # @+node:ekr.20141023154408.3: *3* pd.ctor
+    #@ pd.ctor
     def __init__(self, c: Cmdr) -> None:
         """Ctor for persistenceController class."""
         self.c = c
         self.at_persistence: Position | None = None  # The position of the @position node.
 
-    # @+node:ekr.20140711111623.17793: *3* pd.Entry points
-    # @+node:ekr.20140718153519.17731: *4* pd.clean
+    #@ pd.Entry points
+    #@> pd.clean
     def clean(self) -> None:
         """Remove all @data nodes that do not correspond to an existing foreign file."""
         c = self.c
@@ -80,7 +80,7 @@ class PersistenceDataController:
             c.deletePositionsInList(delete_list)
             c.redraw()
 
-    # @+node:ekr.20140711111623.17804: *4* pd.update_before_write_foreign_file & helpers
+    #@ pd.update_before_write_foreign_file & helpers
     def update_before_write_foreign_file(self, root: Position) -> Position | None:
         """
         Update the @data node for root, a foreign node.
@@ -125,14 +125,14 @@ class PersistenceDataController:
         # g.es_print(f"updated: @data:{root.h} ")
         return at_data  # For at-file-to-at-auto command.
 
-    # @+node:ekr.20140716021139.17773: *5* pd.delete_at_data_children
+    #@> pd.delete_at_data_children
     def delete_at_data_children(self, at_data: Position, root: Position) -> None:
         """Delete all children of the @data node"""
         assert at_data.v
         if at_data.hasChildren():
             at_data.v._deleteAllChildren()
 
-    # @+node:ekr.20140711111623.17807: *4* pd.update_after_read_foreign_file & helpers
+    #@< pd.update_after_read_foreign_file & helpers
     def update_after_read_foreign_file(self, root: Position) -> None:
         """Restore gnx's, uAs and clone links using @gnxs nodes and @uas trees."""
         self.at_persistence = self.find_at_persistence_node()
@@ -149,7 +149,7 @@ class PersistenceDataController:
         if at_uas := self.has_at_uas_node(root):
             self.create_uas(at_uas, root)
 
-    # @+node:ekr.20140711111623.17810: *5* pd.restore_gnxs & helpers
+    #@> pd.restore_gnxs & helpers
     def restore_gnxs(self, at_gnxs: Position, root: Position) -> None:
         """
         Recreate gnx's and clone links from an @gnxs node.
@@ -167,7 +167,7 @@ class PersistenceDataController:
         else:
             g.trace('bad @gnxs contents', gnxs, unls)
 
-    # @+node:ekr.20141021083702.18341: *6* pd.create_outer_gnx_dict
+    #@> pd.create_outer_gnx_dict
     def create_outer_gnx_dict(self, root: Position) -> dict[str, Position]:
         """
         Return a dict whose keys are gnx's and whose values are positions
@@ -185,7 +185,7 @@ class PersistenceDataController:
                 p.moveToThreadNext()
         return d
 
-    # @+node:ekr.20140711111623.17809: *6* pd.restore_gnx
+    #@ pd.restore_gnx
     def restore_gnx(self, d: dict[str, Position], gnx: str, root: Position, unl: str) -> None:
         """
         d is an *outer* gnx dict, associating nodes *outside* the tree with positions.
@@ -210,7 +210,7 @@ class PersistenceDataController:
             p1.v.fileIndex = gnx
         g.app.nodeIndices.updateLastIndex(g.toUnicode(gnx))
 
-    # @+node:ekr.20140711111623.17892: *5* pd.create_uas
+    #@< pd.create_uas
     def create_uas(self, at_uas: Position, root: Position) -> None:
         """Recreate uA's from the @ua nodes in the @uas tree."""
         # Create an *inner* gnx dict.
@@ -239,8 +239,8 @@ class PersistenceDataController:
                     else:
                         g.trace('Can not unpickle uA in', p.h, repr(unl), type(ua), ua[:40])
 
-    # @+node:ekr.20140712105818.16750: *3* pd.Helpers
-    # @+node:ekr.20140711111623.17845: *4* pd.at_data_body
+    #@<2 pd.Helpers
+    #@> pd.at_data_body
     # Note: the unl of p relative to p is simply p.h,
     # so it is pointless to add that to @data nodes.
 
@@ -248,14 +248,14 @@ class PersistenceDataController:
         """Return the body text for p's @data node."""
         return f"gnx: {p.v.gnx}\n"
 
-    # @+node:ekr.20140712105644.16744: *4* pd.expected_headline
+    #@ pd.expected_headline
     def expected_headline(self, p: Position) -> str:
         """Return the expected imported headline for p."""
         return getattr(p.v, '_imported_headline', p.h)
 
-    # @+node:ekr.20140711111623.17854: *4* pd.find...
+    #@ pd.find...
     # The find commands create the node if not found.
-    # @+node:ekr.20140711111623.17856: *5* pd.find_at_data_node & helper
+    #@> pd.find_at_data_node & helper
     def find_at_data_node(self, root: Position) -> Position | None:
         """
         Return the @data node for root, a foreign node.
@@ -273,7 +273,7 @@ class PersistenceDataController:
         p.b = self.at_data_body(root)
         return p
 
-    # @+node:ekr.20140711111623.17857: *5* pd.find_at_gnxs_node
+    #@ pd.find_at_gnxs_node
     def find_at_gnxs_node(self, root: Position) -> Position | None:
         """
         Find the @gnxs node for root, a foreign node.
@@ -292,7 +292,7 @@ class PersistenceDataController:
             p.h = h
         return p
 
-    # @+node:ekr.20140711111623.17863: *5* pd.find_at_persistence_node
+    #@ pd.find_at_persistence_node
     def find_at_persistence_node(self) -> Position | None:
         """
         Find the first @persistence node in the outline.
@@ -312,7 +312,7 @@ class PersistenceDataController:
                 g.es_print(f"created {h} node", color='red')
         return p
 
-    # @+node:ekr.20140711111623.17891: *5* pd.find_at_uas_node
+    #@ pd.find_at_uas_node
     def find_at_uas_node(self, root: Position) -> Position | None:
         """
         Find the @uas node for root, a foreign node.
@@ -330,7 +330,7 @@ class PersistenceDataController:
             p.h = h
         return p
 
-    # @+node:ekr.20140711111623.17861: *5* pd.find_position_for_relative_unl & helpers
+    #@ pd.find_position_for_relative_unl & helpers
     def find_position_for_relative_unl(self, root: Position, unl: str) -> Position | None:
         """
         Given a unl relative to root, return the node whose
@@ -342,7 +342,7 @@ class PersistenceDataController:
         # return self.find_best_match(root, unl_list)
         return self.find_exact_match(root, unl_list)
 
-    # @+node:ekr.20140716021139.17764: *6* pd.find_best_match
+    #@> pd.find_best_match
     def find_best_match(self, root: Position, unl_list: list[str]) -> Position | None:
         """Find the best partial matches of the tail in root's tree."""
         tail = unl_list[-1]
@@ -373,7 +373,7 @@ class PersistenceDataController:
             return p
         return None
 
-    # @+node:ekr.20140716021139.17765: *6* pd.find_exact_match
+    #@ pd.find_exact_match
     def find_exact_match(self, root: Position, unl_list: list[str]) -> Position | None:
         """
         Find an exact match of the unl_list in root's tree.
@@ -390,7 +390,7 @@ class PersistenceDataController:
                 return None
         return parent
 
-    # @+node:ekr.20140711111623.17862: *5* pd.find_representative_node
+    #@< pd.find_representative_node
     def find_representative_node(self, root: Position, target: Position) -> Position | None:
         """
         root is a foreign node. target is a gnxs node within root's tree.
@@ -426,7 +426,7 @@ class PersistenceDataController:
         g.trace('no representative node for:', target, 'parent:', target.parent())
         return None
 
-    # @+node:ekr.20140712105818.16751: *4* pd.foreign_file_name
+    #@< pd.foreign_file_name
     def foreign_file_name(self, p: Position) -> str | None:
         """Return the file name for p, a foreign file node."""
         for tag in ('@auto', '@org-mode', '@vim-outline'):
@@ -434,9 +434,9 @@ class PersistenceDataController:
                 return p.h[len(tag) :].strip()
         return None
 
-    # @+node:ekr.20140711111623.17864: *4* pd.has...
+    #@ pd.has...
     # The has commands return None if the node does not exist.
-    # @+node:ekr.20140711111623.17865: *5* pd.has_at_data_node
+    #@> pd.has_at_data_node
     def has_at_data_node(self, root: Position) -> Position | None:
         """
         Return the @data node corresponding to root, a foreign node.
@@ -455,7 +455,7 @@ class PersistenceDataController:
                 return p
         return None
 
-    # @+node:ekr.20140711111623.17890: *5* pd.has_at_gnxs_node
+    #@ pd.has_at_gnxs_node
     def has_at_gnxs_node(self, root: Position) -> Position | None:
         """
         Find the @gnxs node for an @data node with the given unl.
@@ -466,7 +466,7 @@ class PersistenceDataController:
             return p and g.findNodeInTree(self.c, p, '@gnxs')
         return None
 
-    # @+node:ekr.20140711111623.17894: *5* pd.has_at_uas_node
+    #@ pd.has_at_uas_node
     def has_at_uas_node(self, root: Position) -> Position | None:
         """
         Find the @uas node for an @data node with the given unl.
@@ -477,13 +477,13 @@ class PersistenceDataController:
             return p and g.findNodeInTree(self.c, p, '@uas')
         return None
 
-    # @+node:ekr.20140711111623.17869: *5* pd.has_at_persistence_node
+    #@ pd.has_at_persistence_node
     def has_at_persistence_node(self) -> Position | None:
         """Return the @persistence node or None if it does not exist."""
         return g.findNodeAnywhere(self.c, '@persistence')
 
-    # @+node:ekr.20140711111623.17870: *4* pd.is...
-    # @+node:ekr.20140711111623.17871: *5* pd.is_at_auto_node
+    #@< pd.is...
+    #@> pd.is_at_auto_node
     def is_at_auto_node(self, p: Position) -> bool:
         """
         Return True if p is *any* kind of @auto node,
@@ -492,17 +492,17 @@ class PersistenceDataController:
         # The safe way: it tracks changes to p.isAtAutoNode.
         return p.isAtAutoNode()
 
-    # @+node:ekr.20140711111623.17897: *5* pd.is_at_file_node
+    #@ pd.is_at_file_node
     def is_at_file_node(self, p: Position) -> bool:
         """Return True if p is an @file node."""
         return g.match_word(p.h, 0, '@file')
 
-    # @+node:ekr.20140711111623.17872: *5* pd.is_cloned_outside_parent_tree
+    #@ pd.is_cloned_outside_parent_tree
     def is_cloned_outside_parent_tree(self, p: Position) -> bool:
         """Return True if a clone of p exists outside the tree of p.parent()."""
         return len(list(set(p.v.parents))) > 1
 
-    # @+node:ekr.20140712105644.16745: *5* pd.is_foreign_file
+    #@ pd.is_foreign_file
     def is_foreign_file(self, p: Position) -> bool:
         return (
             self.is_at_auto_node(p)
@@ -510,8 +510,8 @@ class PersistenceDataController:
             or g.match_word(p.h, 0, '@vim-outline')
         )  # fmt: skip
 
-    # @+node:ekr.20140713135856.17745: *4* pd.Pickling
-    # @+node:ekr.20140713062552.17737: *5* pd.pickle
+    #@< pd.Pickling
+    #@> pd.pickle
     def pickle(self, p: Position) -> str:
         """Pickle val and return the hexlified result."""
         try:
@@ -528,7 +528,7 @@ class PersistenceDataController:
             g.es_exception()
             return ''
 
-    # @+node:ekr.20140713135856.17744: *5* pd.unpickle
+    #@ pd.unpickle
     def unpickle(self, s: str) -> Value:  # An actual uA.
         """Unhexlify and unpickle string s into p."""
         try:
@@ -539,8 +539,8 @@ class PersistenceDataController:
             g.es_exception()
             return None
 
-    # @+node:ekr.20140711111623.17879: *4* pd.unls...
-    # @+node:ekr.20140711111623.17881: *5* pd.drop_unl_parent/tail
+    #@< pd.unls...
+    #@> pd.drop_unl_parent/tail
     def drop_unl_parent(self, unl: str) -> str:
         """Drop the penultimate part of the unl."""
         aList = unl.split('-->')
@@ -550,7 +550,7 @@ class PersistenceDataController:
         """Drop the last part of the unl."""
         return '-->'.join(unl.split('-->')[:-1])
 
-    # @+node:ekr.20140711111623.17883: *5* pd.relative_unl
+    #@ pd.relative_unl
     def relative_unl(self, p: Position, root: Position) -> str:
         """Return the unl of p relative to the root position."""
         result = []
@@ -561,23 +561,23 @@ class PersistenceDataController:
                 result.append(self.expected_headline(p))
         return '-->'.join(reversed(result))
 
-    # @+node:ekr.20140711111623.17896: *5* pd.unl
+    #@ pd.unl
     def unl(self, p: Position) -> str:
         """Return the unl corresponding to the given position."""
         return '-->'.join(
             reversed([self.expected_headline(p2) for p2 in p.self_and_parents(copy=False)])
         )
 
-    # @+node:ekr.20140711111623.17885: *5* pd.unl_tail
+    #@ pd.unl_tail
     def unl_tail(self, unl: str) -> str:
         """Return the last part of a unl."""
         return unl.split('-->')[:-1][0]
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @@pagewidth 70
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@@pagewidth 70
+#@-leo

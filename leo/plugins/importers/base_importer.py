@@ -1,9 +1,9 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20230529075138.1: * @file ../plugins/importers/base_importer.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20230529075138.1] @f ../plugins/importers/base_importer.py
 """base_importer.py: The base Importer class used by almost all importers."""
 
-# @+<< imports, annotations: base_importer.py >>
-# @+node:ekr.20230920091345.1: ** << imports, annotations: base_importer.py >>
+#@+<< imports, annotations: base_importer.py >>
+#@> << imports, annotations: base_importer.py >>
 from __future__ import annotations
 from collections.abc import Generator
 import re
@@ -15,15 +15,15 @@ from leo.core.leoNodes import Position, VNode
 
 if TYPE_CHECKING:
     from leo.core.leoCommands import Commands as Cmdr
-# @-<< imports, annotations: base_importer.py >>
+#@-<< imports, annotations: base_importer.py >>
 
 
 class ImporterError(Exception):
     pass
 
 
-# @+others
-# @+node:ekr.20230920130003.1: ** class Block
+#@+others
+#@ class Block
 class Block:
     """A class containing data about imported blocks."""
 
@@ -57,7 +57,7 @@ class Block:
     __str__ = __repr__
 
 
-# @+node:ekr.20230529075138.4: ** class Importer
+#@ class Importer
 class Importer:
     """
     The base class for almost all of Leo's importers.
@@ -91,8 +91,8 @@ class Importer:
     string_list: list[str] = ['"', "'"]
     compound_statements: list[str] = []
 
-    # @+others
-    # @+node:ekr.20230529075138.5: *3* i.__init__
+    #@+others
+    #@> i.__init__
     def __init__(self, c: Cmdr) -> None:
         """Importer.__init__"""
         assert self.language, g.callers()  # Do not remove.
@@ -102,9 +102,9 @@ class Importer:
         self.single_comment, self.block1, self.block2 = delims
         self.tab_width = 0  # Must be set later.
 
-    # @+node:ekr.20230529075640.1: *3* i: Generic methods: may be overridden
+    #@ i: Generic methods: may be overridden
     # The pipeline.
-    # @+node:ekr.20230529075138.37: *4* 1: i.import_from_string (entry) & helpers
+    #@> 1: i.import_from_string (entry) & helpers
     def import_from_string(self, parent: Position, s: str) -> None:
         """
         Importer.import_from_string: the so-called **Import pipeline**.
@@ -166,7 +166,7 @@ class Importer:
             if g.unitTesting:
                 raise
 
-    # @+node:ekr.20230529075138.36: *5* 1A: i.check_blanks_and_tabs
+    #@> 1A: i.check_blanks_and_tabs
     def check_blanks_and_tabs(self, lines: list[str]) -> bool:  # pragma: no cover (missing test)
         """
         Importer.check_blanks_and_tabs.
@@ -200,7 +200,7 @@ class Importer:
                 g.es(message)
         return ok
 
-    # @+node:ekr.20230529075138.39: *5* 1B: i.regularize_whitespace
+    #@ 1B: i.regularize_whitespace
     def regularize_whitespace(
         self, lines: list[str]
     ) -> list[str]:  # pragma: no cover (missing test)
@@ -236,7 +236,7 @@ class Importer:
             )
         return result
 
-    # @+node:ekr.20230529075138.38: *5* 1C: i.preprocess_lines
+    #@ 1C: i.preprocess_lines
     def preprocess_lines(self, lines: list[str]) -> list[str]:
         """
         A hook to enable preprocessing lines before calling x.find_blocks.
@@ -245,7 +245,7 @@ class Importer:
         """
         return lines
 
-    # @+node:ekr.20230529075138.12: *5* 2D: i.make_guide_lines
+    #@ 2D: i.make_guide_lines
     def make_guide_lines(self, lines: list[str]) -> list[str]:
         """
         Importer.make_guide_lines.
@@ -259,7 +259,7 @@ class Importer:
         """
         return self.delete_comments_and_strings(lines[:])
 
-    # @+node:ekr.20230529075138.9: *5* 2E: i.delete_comments_and_strings
+    #@ 2E: i.delete_comments_and_strings
     def delete_comments_and_strings(self, lines: list[str]) -> list[str]:
         """
         Return **guide-lines** from the lines, replacing strings and multi-line
@@ -322,7 +322,7 @@ class Importer:
         assert len(result) == len(lines)  # A crucial invariant.
         return result
 
-    # @+node:ekr.20230529075138.14: *4* 2: i.gen_block & helpers
+    #@< 2: i.gen_block & helpers
     def gen_block(self, parent: Position) -> None:
         """
         Importer.gen_block.
@@ -381,7 +381,7 @@ class Importer:
             # Put everything in parent.b. Do *not* change parent.h!
             parent.b = ''.join(self.lines)
 
-    # @+node:ekr.20230529075138.10: *5* 2A: i.find_blocks
+    #@> 2A: i.find_blocks
     def find_blocks(self, i1: int, i2: int) -> list[Block]:
         """
         Importer.find_blocks: Subclasses may override this method.
@@ -421,7 +421,7 @@ class Importer:
         # g.printObj(results, tag=f"{g.my_name()} {i1} {i2}")
         return results
 
-    # @+node:ekr.20230529075138.11: *5* 2B: i.find_end_of_block
+    #@ 2B: i.find_end_of_block
     def find_end_of_block(self, i: int, i2: int) -> int:
         """
         Importer.find_end_of_block.
@@ -446,7 +446,7 @@ class Importer:
                         return i
         return i2
 
-    # @+node:ekr.20230529075138.13: *5* 2C: i.compute_headline
+    #@ 2C: i.compute_headline
     def compute_headline(self, block: Block) -> str:
         """
         Importer.compute_headline.
@@ -458,7 +458,7 @@ class Importer:
         name_s = block.name or f"unnamed {block.kind}"
         return f"{block.kind} {name_s}" if block.kind else name_s
 
-    # @+node:ekr.20230920165923.1: *5* 2D: i.generate_all_bodies & helpers
+    #@ 2D: i.generate_all_bodies & helpers
     def generate_all_bodies(
         self, parent: Position, outer_block: Block, result_blocks: list[Block]
     ) -> None:
@@ -474,8 +474,8 @@ class Importer:
         while todo_list:
             block = todo_list.pop(0)
             v = block.v
-            # @+<< check block and v >>
-            # @+node:ekr.20230924154343.1: *6* << check block and v >>
+            #@+<< check block and v >>
+            #@> << check block and v >>
             assert isinstance(block, Block), repr(block)
             assert v.__class__.__name__ == 'VNode', repr(v)
             assert v, repr(block)
@@ -491,7 +491,7 @@ class Importer:
                 g.printObj(self.lines, tag='Assert failed: self.lines')
                 g.printObj(block.lines, tag='Assert failed: block.lines')
             assert self.lines == block.lines
-            # @-<< check block and v >>
+            #@-<< check block and v >>
 
             # Remove common_lws from self.lines
             block_common_lws = self.compute_common_lws(block.child_blocks)
@@ -515,57 +515,7 @@ class Importer:
             if block.v:
                 assert block.v in seen_vnodes, repr(block.v)
 
-    # @+node:ekr.20230924155035.1: *6* i.find_all_child_lines
-    def find_all_child_lines(self, block: Block) -> tuple[int, int]:
-        """Find all lines that will be covered by @others"""
-        assert block.child_blocks, block
-        # start = block.end + 1
-        # end = block.start - 1
-        block0 = block.child_blocks[0]
-        start = block0.start
-        end = block0.end
-        for child_block in block.child_blocks:
-            start = min(start, child_block.start)
-            end = max(end, child_block.end)
-        return start, end
-
-    # @+node:ekr.20230924154050.1: *6* i.handle_block_with_children
-    def handle_block_with_children(self, block: Block, block_common_lws: str) -> None:
-        """A block with children."""
-
-        # Find all lines that will be covered by @others.
-        children_start, children_end = self.find_all_child_lines(block)
-
-        # Add the head lines to block.v.
-        head_lines = self.lines[block.start : children_start]
-        block.v.b = ''.join(head_lines)
-
-        # Add an @others directive if necessary.
-        if block.v not in self.at_others_dict:
-            self.at_others_dict[block.v] = True
-            block.v.b = block.v.b + f"{block_common_lws}@others\n"
-
-        # Add the tail lines to block.v
-        tail_lines = self.lines[children_end : block.end]
-        if tail_s := ''.join(tail_lines):
-            block.v.b = block.v.b + tail_s
-
-        # Alter block.end.
-        block.end = children_start
-
-    # @+node:ekr.20230925071111.1: *6* i.remove_lws_from_blocks
-    def remove_lws_from_blocks(self, blocks: list[Block], common_lws: str) -> None:
-        """
-        Remove the given lws from all given blocks, replacing self.lines in place.
-        """
-        n = len(self.lines)
-        for block in blocks:
-            lines = self.lines[block.start : block.end]
-            lines2 = self.remove_common_lws(common_lws, lines)
-            self.lines[block.start : block.end] = lines2
-        assert n == len(self.lines)
-
-    # @+node:ekr.20230825095756.1: *4* 3: i.postprocess & helper
+    #@<2 3: i.postprocess & helper
     def postprocess(self, parent: Position) -> None:
         """
         Importer.postprocess.  A hook for language-specific post-processing.
@@ -577,7 +527,7 @@ class Importer:
         """
         self.move_blank_lines(parent)
 
-    # @+node:ekr.20250818213254.1: *5* 3A: i.move_blank_lines
+    #@> 3A: i.move_blank_lines
     def move_blank_lines(self, parent: Position) -> None:
         """Move blank lines from the start of nodes to the end of previous sibling."""
         self.move_blank_lines_helper(parent.children())
@@ -599,9 +549,9 @@ class Importer:
             back.b = back.b + '\n'
             p.b = ''.join(lines[1:])
 
-    # @+node:ekr.20230529075138.7: *3* i: Utils
+    #@<2 i: Utils
     # Subclasses are unlikely ever to need to override these methods.
-    # @+node:ekr.20230529075138.8: *4* i.compute_common_lws
+    #@> i.compute_common_lws
     def compute_common_lws(self, blocks: list[Block]) -> str:
         """
         Return the length of the common leading indentation of all non-blank
@@ -625,7 +575,7 @@ class Importer:
         ws_char = ' ' if self.tab_width < 1 else '\t'
         return ws_char * n
 
-    # @+node:ekr.20230529075138.34: *4* i.create_placeholders
+    #@ i.create_placeholders
     def create_placeholders(self, level: int, lines_dict: dict, parents: list[Position]) -> None:
         """
         Create placeholder nodes so between the current level (len(parents)) and the desired level.
@@ -645,18 +595,18 @@ class Importer:
             parents.append(child)
             lines_dict[child.v] = []
 
-    # @+node:ekr.20250819103022.1: *4* i.lws_n
+    #@ i.lws_n
     def lws_n(self, s: str) -> int:
         """Return the length of the leading whitespace for s."""
         return len(s) - len(s.lstrip())
 
-    # @+node:ekr.20230529075138.42: *4* i.get_str_lws
+    #@ i.get_str_lws
     def get_str_lws(self, s: str) -> str:
         """Return the characters of the lws of s."""
         m = re.match(r'([ \t]*)', s)
         return m.group(0) if m else ''
 
-    # @+node:ekr.20230529075138.16: *4* i.remove_common_lws
+    #@ i.remove_common_lws
     def remove_common_lws(self, lws: str, lines: list[str]) -> list[str]:
         """Remove the given leading whitespace from the given lines."""
         if len(lws) == 0:
@@ -672,11 +622,11 @@ class Importer:
                 result.append(line)
         return result
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @@pagewidth 70
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@@pagewidth 70
+#@-leo

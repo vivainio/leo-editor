@@ -1,6 +1,6 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20240321123214.1: * @file ../scripts/install_leo_locally.py
-# @@language python
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20240321123214.1] @f ../scripts/install_leo_locally.py
+#@@language python
 """
 install_leo_locally.py: Install Leo from a wheel file in the `leo-editor/leo/dist` directory.
 
@@ -56,4 +56,4 @@ else:
     print('site-packages/leo*...')
     for z in glob.glob(f"{package_dir}{os.sep}leo*"):
         print(' ', z)
-# @-leo
+#@-leo

@@ -1,8 +1,8 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20101121031443.5330: * @file ../plugins/screenshots.py
-# @+<< docstring >>
-# @+node:ekr.20100908115707.5554: ** << docstring >>
-# @@pagewidth 80
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20101121031443.5330] @f ../plugins/screenshots.py
+#@+<< docstring >>
+#@> << docstring >>
+#@@pagewidth 80
 r"""Creates stand-alone slideshows containing screenshots.
 
 This plugin defines the following commands:
@@ -306,10 +306,10 @@ the @slideshow tree whose sanitized name is
 
 """
 
-# @@pagewidth 50
-# @-<< docstring >>
-# @+<< imports >>
-# @+node:ekr.20100908110845.5604: ** << imports >>
+#@@pagewidth 50
+#@-<< docstring >>
+#@+<< imports >>
+#@ << imports >>
 import copy
 import glob
 from typing import Any, cast
@@ -336,30 +336,30 @@ except ImportError:
 
 # Fail fast, right after all imports.
 g.assertUi('qt')  # May raise g.UiTypeException, caught by the plugins manager.
-# @-<< imports >>
+#@-<< imports >>
 
 screenshot_number = 0
 
 # To do: create _static folder.
 
 
-# @+others
-# @+node:ekr.20100914090933.5771: ** Top level
-# @+node:ekr.20100908110845.5606: *3*  init (screenshots.py)
+#@+others
+#@ Top level
+#@>  init (screenshots.py)
 def init():
     """Return True if the plugin has loaded successfully."""
     g.plugin_signon(__name__)
     return True
 
 
-# @+node:ekr.20100908110845.5581: *3* g.command(apropos-slides)
+#@ g.command(apropos-slides)
 @g.command('help-for-screenshots')
 def help_for_screen_shots(event):
     # Just print the module's docstring.
     g.es(__doc__)
 
 
-# @+node:ekr.20100908110845.5583: *3* g.command(make-slide)
+#@ g.command(make-slide)
 @g.command('make-slide')
 def make_slide_command(event):
     c = event.get('c')
@@ -369,7 +369,7 @@ def make_slide_command(event):
         g.note('make-slide finished')
 
 
-# @+node:ekr.20100911044508.5634: *3* g.command(make-slide-show)
+#@ g.command(make-slide-show)
 @g.command('make-slide-show')
 def make_slide_show_command(event=None):
     c = event.get('c')
@@ -379,7 +379,7 @@ def make_slide_show_command(event=None):
         g.note('make-slide-show finished')
 
 
-# @+node:ekr.20101113193341.5459: *3* g.command(meld-slides)
+#@ g.command(meld-slides)
 @g.command('meld-slides')
 def meld_slides_command(event):
     """Meld Wink slides into an @slideshow folder.
@@ -398,7 +398,7 @@ def meld_slides_command(event):
         sc.meld_slides_command(c.p)
 
 
-# @+node:ekr.20101004082701.5733: *3* g.command(slide-show-info)
+#@ g.command(slide-show-info)
 @g.command('slide-show-info')
 def slide_show_info_command(event):
     c = event.get('c')
@@ -407,7 +407,7 @@ def slide_show_info_command(event):
         sc.slide_show_info_command(c.p)
 
 
-# @+node:ekr.20100914090933.5770: *3* g.command(take-local/global-screen-shot)
+#@ g.command(take-local/global-screen-shot)
 @g.command('take-screen-shot')
 @g.command('take-local-screen-shot')
 def start_local_screenshot(event):
@@ -453,14 +453,14 @@ def screenshot_helper(window_id):
         print(f"Screenshot saved in {file_name}")
 
 
-# @+node:ekr.20100908110845.5531: ** class ScreenShotController
+#@< class ScreenShotController
 class ScreenShotController:
     """A class to take screen shots and control Inkscape.
 
     help-for-screenshots contains a more complete description."""
 
-    # @+others
-    # @+node:ekr.20100908110845.5532: *3*  ctor & helpers
+    #@+others
+    #@>  ctor & helpers
     def __init__(self, c):
         self.c = c
         # Defaults.
@@ -522,7 +522,7 @@ class ScreenShotController:
         self.xlink = "{http://www.w3.org/1999/xlink}"
         # self.namespace = {'svg': "http://www.w3.org/2000/svg"}
 
-    # @+node:ekr.20100913085058.5657: *4* get_inkscape_bin
+    #@> get_inkscape_bin
     def get_inkscape_bin(self):
         c = self.c
         bin = c.config.getString('screenshot-bin').strip('"').strip("'")
@@ -535,8 +535,8 @@ class ScreenShotController:
             g.warning('Inkscape not found. No editing is possible.')
         return bin
 
-    # @+node:ekr.20101004082701.5731: *3* commands
-    # @+node:ekr.20101004082701.5732: *4* sc.slide-show-info_command
+    #@< commands
+    #@> sc.slide-show-info_command
     def slide_show_info_command(self, p):
         sc = self
         ok = sc.init(p)
@@ -568,7 +568,7 @@ class ScreenShotController:
         for tag, s in table:
             g.es_print(tag, s)
 
-    # @+node:ekr.20100911044508.5635: *4* sc.make_slide_show_command & helper
+    #@ sc.make_slide_show_command & helper
     def make_slide_show_command(self, p):
         """Create slides for all slide nodes (direct children)
         of the @slideshow node p."""
@@ -593,7 +593,7 @@ class ScreenShotController:
         sc.build()
         sc.c.redraw()
 
-    # @+node:ekr.20100913085058.5629: *4* sc.make_slide_command
+    #@ sc.make_slide_command
     def make_slide_command(self, p):
         sc = self
         if not sc.inkscape_bin:
@@ -611,7 +611,7 @@ class ScreenShotController:
         if sc.slide_node and not sc.slide_node.b.strip():
             g.error('No body for slide')
 
-    # @+node:ekr.20101113193341.5460: *4* sc.meld_slides_command
+    #@ sc.meld_slides_command
     def meld_slides_command(self, p):
         sc = self
         if not sc.inkscape_bin:
@@ -621,7 +621,7 @@ class ScreenShotController:
             return
         sc.meld(p)
 
-    # @+node:ekr.20101008112639.5628: *4* sc.build
+    #@ sc.build
     def build(self):
         """Do a complete sphinx build."""
         sc = self
@@ -630,7 +630,7 @@ class ScreenShotController:
         subprocess.run(['make', 'clean'], check=False)
         subprocess.run(['make', 'html'], check=False)
 
-    # @+node:ekr.20100915074635.5651: *3* init
+    #@< init
     def init(self, p):
         """Initialize from node p."""
         sc = self
@@ -682,8 +682,8 @@ class ScreenShotController:
         sc.pause_flag = sc.get_pause_flag(p)
         return True
 
-    # @+node:ekr.20100908110845.5533: *3* lxml replacements
-    # @+node:ekr.20100908110845.5534: *4* getElementsWithAttrib
+    #@ lxml replacements
+    #@> getElementsWithAttrib
     def getElementsWithAttrib(self, e, attr_name, aList=None):
         sc = self
         if aList is None:
@@ -695,7 +695,7 @@ class ScreenShotController:
             sc.getElementsWithAttrib(child, attr_name, aList)
         return aList
 
-    # @+node:ekr.20100908110845.5535: *4* getElementsWithAttribList (not used)
+    #@ getElementsWithAttribList (not used)
     def getElementsWithAttribList(self, e, attr_names, aList=None):
         sc = self
         if aList is None:
@@ -709,14 +709,14 @@ class ScreenShotController:
             sc.getElementsWithAttribList(child, attr_names, aList)
         return aList
 
-    # @+node:ekr.20100908110845.5536: *4* getIds
+    #@ getIds
     def getIds(self, e, d=None):
         """Return a dict d. Keys are ids, values are elements."""
         sc = self
         aList = sc.getElementsWithAttrib(e, 'id')
         return dict([(e.attrib.get('id'), e2) for e2 in aList])
 
-    # @+node:ekr.20100908110845.5537: *4* getParents
+    #@ getParents
     def getParents(self, e, d=None):
         sc = self
         if d is None:
@@ -727,9 +727,9 @@ class ScreenShotController:
             sc.getParents(child, d)
         return d
 
-    # @+node:ekr.20100911044508.5630: *3* options & paths
-    # @+node:ekr.20101004082701.5734: *4* Finding nodes
-    # @+node:ekr.20101008112639.5629: *5* find_node
+    #@< options & paths
+    #@> Finding nodes
+    #@> find_node
     def find_node(self, p, h):
         """Return the node in p's direct children whose headline matches h."""
         for p2 in p.children():
@@ -737,12 +737,12 @@ class ScreenShotController:
                 return p2
         return None
 
-    # @+node:ekr.20100909121239.5742: *5* find_at_screenshot_node
+    #@ find_at_screenshot_node
     def find_at_screenshot_node(self, p):
         """Return the @screenshot node in a direct child of p."""
         return self.find_node(p, '@screenshot')
 
-    # @+node:ekr.20100913085058.5660: *5* find_select_node
+    #@ find_select_node
     def find_select_node(self, p):
         """
         Find the @select node in a direct child of p.
@@ -753,7 +753,7 @@ class ScreenShotController:
         p2 = sc.find_node(p, tag)
         return p2.h[len(tag) :].strip() if p2 else ''
 
-    # @+node:ekr.20100915074635.5652: *5* find_slide_node
+    #@ find_slide_node
     def find_slide_node(self, p):
         """Return the @slide node at or near p."""
         sc = self
@@ -778,7 +778,7 @@ class ScreenShotController:
         g.trace('No @slide node found:', p1.h)
         return None
 
-    # @+node:ekr.20100913085058.5654: *5* find_slideshow_node
+    #@ find_slideshow_node
     def find_slideshow_node(self, p):
         """Return the nearest ancestor @slideshow node."""
         # sc = self
@@ -787,14 +787,14 @@ class ScreenShotController:
                 return p2
         return None
 
-    # @+node:ekr.20101004082701.5735: *4* Path utils
-    # @+node:ekr.20100908110845.5540: *5* finalize
+    #@< Path utils
+    #@> finalize
     def finalize(self, fn):
         """Return the absolute path to fn in the slideshow folder."""
         sc = self
         return sc.fix(g.finalize_join(sc.slideshow_path, fn))
 
-    # @+node:ekr.20100911044508.5632: *5* fix
+    #@ fix
     def fix(self, fn):
         """Fix the case of a file name,
         especially on Windows the case of drive letters.
@@ -804,13 +804,13 @@ class ScreenShotController:
         """
         return os.path.normcase(fn).replace('\\', '/')
 
-    # @+node:ekr.20100913085058.5658: *5* sanitize
+    #@ sanitize
     def sanitize(self, fn):
         return g.sanitize_filename(fn.lower()).replace('.', '-').replace('_', '-')
 
-    # @+node:ekr.20101004082701.5736: *4* Computed paths
+    #@< Computed paths
     # These methods compute final paths.
-    # @+node:ekr.20100911044508.5631: *5* get_at_image_fn
+    #@> get_at_image_fn
     def get_at_image_fn(self):
         """Return sc.output_fn name **relative to g.app.loadDir**.
 
@@ -823,14 +823,14 @@ class ScreenShotController:
         fn = sc.fix(fn)
         return fn
 
-    # @+node:ekr.20100909121239.5669: *5* get_directive_fn
+    #@ get_directive_fn
     def get_directive_fn(self):
         """Compute the path for use in an .. image:: directive."""
         sc = self
         assert sc.output_fn
         return g.shortFileName(sc.output_fn)
 
-    # @+node:ekr.20100911044508.5627: *5* get_output_fn
+    #@ get_output_fn
     def get_output_fn(self, p):
         """
         Return the full, absolute, output file name.
@@ -854,7 +854,7 @@ class ScreenShotController:
         fn = sc.finalize(fn)
         return fn
 
-    # @+node:ekr.20100911044508.5628: *5* get_screenshot_fn
+    #@ get_screenshot_fn
     def get_screenshot_fn(self):
         """Return the full, absolute, screenshot file name."""
         sc = self
@@ -863,14 +863,14 @@ class ScreenShotController:
         fn = sc.finalize(fn)
         return fn
 
-    # @+node:ekr.20101004082701.5738: *5* get_slide_base_name
+    #@ get_slide_base_name
     def get_slide_base_name(self):
         sc = self
         assert sc.slideshow_path
         _, name = g.os_path_split(sc.slideshow_path)
         return name
 
-    # @+node:ekr.20101004082701.5740: *5* get_slide_fn
+    #@ get_slide_fn
     def get_slide_fn(self):
         """Return the absolute path to 'slide-%03d.html.txt' % (sc.slide_number)."""
         sc = self
@@ -879,7 +879,7 @@ class ScreenShotController:
         fn = sc.finalize(fn)
         return fn
 
-    # @+node:ekr.20100919075719.5641: *5* get_slideshow_path
+    #@ get_slideshow_path
     def get_slideshow_path(self):
         """
         Return the path to the folder to be used for slides and screenshots.
@@ -898,7 +898,7 @@ class ScreenShotController:
         g.error('@slideshow node has no name')
         return None
 
-    # @+node:ekr.20100911044508.5633: *5* get_sphinx_path
+    #@ get_sphinx_path
     def get_sphinx_path(self):
         """Return the full, absolute, path to the sphinx directory.
 
@@ -931,7 +931,7 @@ class ScreenShotController:
         path = sc.fix(path)
         return path
 
-    # @+node:ekr.20100908110845.5542: *5* get_template_fn
+    #@ get_template_fn
     def get_template_fn(self, p):
         """Return the full, absolute, template file name."""
         sc = self
@@ -946,7 +946,7 @@ class ScreenShotController:
         g.error('template file not found:', fn)
         return None
 
-    # @+node:ekr.20100911044508.5626: *5* get_working_fn
+    #@ get_working_fn
     def get_working_fn(self):
         """Return the full, absolute, name of the working file."""
         sc = self
@@ -955,7 +955,7 @@ class ScreenShotController:
         fn = sc.finalize(fn)
         return fn
 
-    # @+node:ekr.20101113193341.5461: *5* get_wink_path
+    #@ get_wink_path
     def get_wink_path(self):
         """Return the full, absolute, path to the directory containing wink
         screenshots. If a relative path is given, it will resolved relative to
@@ -986,9 +986,9 @@ class ScreenShotController:
         g.trace(path)
         return path
 
-    # @+node:ekr.20101004082701.5737: *4* Options
+    #@< Options
     # These methods examine the children/descendants of a node for options nodes.
-    # @+node:ekr.20100908110845.5596: *5* get_callouts & helper
+    #@> get_callouts & helper
     def get_callouts(self, p):
         """Return the list of callouts from the
         direct children that are @callout nodes."""
@@ -1001,7 +1001,7 @@ class ScreenShotController:
                     aList.append(callout)
         return aList
 
-    # @+node:ekr.20100909121239.6096: *6* get_callout
+    #@> get_callout
     def get_callout(self, p):
         """Return the text of the callout at p."""
         if p.b.strip():
@@ -1012,13 +1012,13 @@ class ScreenShotController:
         s = s[i:].strip()
         return s
 
-    # @+node:ekr.20100911044508.5620: *5* get_edit_flag
+    #@< get_edit_flag
     def get_edit_flag(self, p):
         """Return True if any of p's children is an @edit node."""
         sc = self
         return bool(sc.find_node(p, '@edit'))
 
-    # @+node:ekr.20100908110845.5597: *5* get_markers & helper
+    #@ get_markers & helper
     def get_markers(self, p):
         """Return the list of markers from all @marker nodes."""
         sc = self
@@ -1030,7 +1030,7 @@ class ScreenShotController:
                     aList.extend(callout)
         return aList
 
-    # @+node:ekr.20100909121239.6097: *6* get_marker
+    #@> get_marker
     def get_marker(self, p):
         """Return a list of markers at p."""
         s = p.h
@@ -1039,7 +1039,7 @@ class ScreenShotController:
         s = s[i:].strip()
         return [z.strip() for z in s.split(',')]
 
-    # @+node:ekr.20101006060338.5703: *5* get_option
+    #@< get_option
     def get_option(self, option):
         """Get a local or global option.
         Global options are children of the @slideshow node.
@@ -1071,7 +1071,7 @@ class ScreenShotController:
                     return None
         return None
 
-    # @+node:ekr.20100913085058.5630: *5* get_pause_flag
+    #@ get_pause_flag
     def get_pause_flag(self, p):
         # Look for an @pause nodes in p's children.
         for child in p.children():
@@ -1079,7 +1079,7 @@ class ScreenShotController:
                 return True
         return False
 
-    # @+node:ekr.20100913085058.5628: *5* get_protect_flag
+    #@ get_protect_flag
     def get_protect_flag(self, p):
         # Look for any @protect or @ignore nodes in p's children.
         for child in p.children():
@@ -1087,7 +1087,7 @@ class ScreenShotController:
                 return True
         return False
 
-    # @+node:ekr.20101006060338.5704: *5* get_screenshot_height/width
+    #@ get_screenshot_height/width
     def get_screenshot_height(self):
         sc = self
         h = sc.get_option('screenshot_height')
@@ -1098,7 +1098,7 @@ class ScreenShotController:
         w = sc.get_option('screenshot_width')
         return sc.default_screenshot_width if w is None else w
 
-    # @+node:ekr.20101009162803.5632: *5* get_slide_title
+    #@ get_slide_title
     def get_slide_title(self):
         sc = self
         slideshow_name = sc.slideshow_node.h[len('@slideshow') :].strip()
@@ -1122,27 +1122,26 @@ class ScreenShotController:
         s = sc.default_slide_pattern % d
         return s
 
-    # @+node:ekr.20101006060338.5706: *5* get_verbose_flag
+    #@ get_verbose_flag
     def get_verbose_flag(self):
         sc = self
         val = sc.get_option('verbose')
         return sc.default_verbose_flag if val is None else val
 
-    # @+node:ekr.20100911044508.5618: *3* utilities
-    # @+node:ekr.20100911044508.5637: *4* clear_cache
+    #@<2 utilities
+    #@> clear_cache
     def clear_cache(self):
         """Clear the dimension cache."""
         sc = self
         sc.dimCache = {}
         sc.is_reads, sc.is_cache = 0, 0
 
-    # @+node:ekr.20101005193146.5687: *4* copy_files & helper
-    # @+at We would like to do sphinx "make" operations only in the top-level sphinx
+    #@ copy_files & helper
     # folder (leo/doc/html) so that only a single _build directory tree would exist.
     #
     # Alas, that doesn't work.  To get links correct, the build must be done in
     # the individual slide folders.  So we *must* copy all the files.
-    # @@c
+    #@@c
 
     def copy_files(self):
         sc = self
@@ -1161,7 +1160,7 @@ class ScreenShotController:
             if not g.os_path_exists(path):
                 sc.copy_file(sc.sphinx_path, slide_path, fn)
 
-    # @+node:ekr.20101005193146.5688: *5* copy_file
+    #@> copy_file
     def copy_file(self, src_path, dst_path, fn):
         src_fn = g.finalize_join(src_path, fn)
         dst_fn = g.finalize_join(dst_path, fn)
@@ -1169,7 +1168,7 @@ class ScreenShotController:
         g.note('creating', g.os_path_join('slides', dst_dir, fn))
         shutil.copyfile(src_fn, dst_fn)
 
-    # @+node:ekr.20100913085058.5653: *4* get_slide_number
+    #@< get_slide_number
     def get_slide_number(self, p):
         sc = self
         assert sc.slideshow_node
@@ -1190,7 +1189,7 @@ class ScreenShotController:
         g.trace('Can not happen. Not found:', p.h)
         return -666
 
-    # @+node:ekr.20100908110845.5543: *4* give_pil_warning
+    #@ give_pil_warning
     pil_message_given = False
 
     def give_pil_warning(self):
@@ -1204,13 +1203,13 @@ class ScreenShotController:
         g.warning('PIL not found: images may have transparent borders')
         print('pip install pillow')
 
-    # @+node:ekr.20100908110845.5592: *4* in_slide_show
+    #@ in_slide_show
     def in_slide_show(self, p):
         """Return True if p is a descendant of an @slideshow node."""
         sc = self
         return bool(sc.find_slideshow_node(p))
 
-    # @+node:ekr.20101004201006.5685: *4* make_all_directories
+    #@ make_all_directories
     def make_all_directories(self):
         sc = self
         # Don't create path for at_image_fn or directive_fn
@@ -1235,7 +1234,7 @@ class ScreenShotController:
                 g.trace(tag, path)
                 g.makeAllNonExistentDirectories(path)
 
-    # @+node:ekr.20101008112639.5625: *4* make_at_url_node_for_built_slide
+    #@ make_at_url_node_for_built_slide
     def make_at_url_node_for_built_slide(self):
         """Create an @url node for built slide."""
         sc = self
@@ -1252,7 +1251,7 @@ class ScreenShotController:
             p2.h = h
             p2.b = g.finalize_join(sc.slideshow_path, '_build', 'html', fn)
 
-    # @+node:ekr.20101008112639.5631: *4* make_at_url_node_for_output_file
+    #@ make_at_url_node_for_output_file
     def make_at_url_node_for_output_file(self):
         """Create an @url node for the final output file."""
         sc = self
@@ -1265,7 +1264,7 @@ class ScreenShotController:
             p2.h = h
             p2.b = sc.output_fn
 
-    # @+node:ekr.20101008112639.5627: *4* make_at_url_node_for_screenshot
+    #@ make_at_url_node_for_screenshot
     def make_at_url_node_for_screenshot(self):
         """Create an @url node for the screenshot file."""
         sc = self
@@ -1278,7 +1277,7 @@ class ScreenShotController:
             p2.h = h
             p2.b = sc.screenshot_fn
 
-    # @+node:ekr.20101008112639.5624: *4* make_at_url_node_for_working_file
+    #@ make_at_url_node_for_working_file
     def make_at_url_node_for_working_file(self):
         """Create an @url node for the working file."""
         sc = self
@@ -1291,7 +1290,7 @@ class ScreenShotController:
             p2.h = h
             p2.b = sc.working_fn
 
-    # @+node:ekr.20100908110845.5599: *4* make_image_node (not used)
+    #@ make_image_node (not used)
     # def make_image_node (self):
     # """Create an @image node as the first child of sc.slide_node."""
     # sc = self ; c = sc.c ; p = sc.slide_node
@@ -1305,11 +1304,11 @@ class ScreenShotController:
     # c.selectPosition(p)
     # p2 = p.insertAsNthChild(0)
     # p2.h = h
-    # @+node:ekr.20101006060338.5698: *4* make_toc
+    #@ make_toc
     def make_toc(self):
         sc = self
-        # @+<< define toc_body >>
-        # @+node:ekr.20101006060338.5699: *5* << define toc_body >>
+        #@+<< define toc_body >>
+        #@> << define toc_body >>
         h = sc.slideshow_node.h[len('@slideshow') :].strip()
         title = sc.underline(h.title())
         s = '''\
@@ -1328,7 +1327,7 @@ class ScreenShotController:
         # * :ref:`genindex`
         # * :ref:`search`
         toc_body = textwrap.dedent(s)
-        # @-<< define toc_body >>
+        #@-<< define toc_body >>
         fn = sc.finalize('leo_toc.html.txt')
         if g.os_path_exists(fn):
             return
@@ -1342,12 +1341,12 @@ class ScreenShotController:
             g.error('writing', fn)
             g.es_exception()
 
-    # @+node:ekr.20101113193341.5446: *4* match
+    #@< match
     def match(self, p, pattern):
         """Return True if p.h matches the pattern."""
         return g.match_word(p.h, 0, pattern)
 
-    # @+node:ekr.20101021065622.5633: *4* remove_built_slide_node
+    #@ remove_built_slide_node
     def remove_built_slide_node(self, p):
         sc = self
         c = sc.c
@@ -1359,7 +1358,7 @@ class ScreenShotController:
         if changed:
             c.redraw()
 
-    # @+node:ekr.20100909193826.5600: *4* select_at_image_node (not used)
+    #@ select_at_image_node (not used)
     # def select_at_image_node (self,p):
     # """Select the @image node in one of p's direct children."""
     # sc = self ; c = sc.c
@@ -1371,7 +1370,7 @@ class ScreenShotController:
     # else:
     # c.selectPosition(p)
     # c.redraw(p)
-    # @+node:ekr.20101005193146.5690: *4* underline
+    #@ underline
     def underline(self, s):
         """Return s overlined and underlined with '=' characters."""
         # Write longer underlines for non-ascii characters.
@@ -1380,7 +1379,7 @@ class ScreenShotController:
         return '%s\n%s\n%s\n\n' % (ch * n, s, ch * n)
         # return '%s\n%s\n' % (s,ch*n)
 
-    # @+node:ekr.20100911044508.5616: *3* sc.run & helpers
+    #@< sc.run & helpers
     def run(self, p):
         """
         Create a slide from node p.
@@ -1437,7 +1436,7 @@ class ScreenShotController:
         # Build slide after creating the output file ;-)
         sc.make_at_url_node_for_built_slide()
 
-    # @+node:ekr.20100908110845.5552: *4* edit_working_file & helper
+    #@> edit_working_file & helper
     def edit_working_file(self):
         """Invoke Inkscape on the working file."""
         sc = self
@@ -1450,7 +1449,7 @@ class ScreenShotController:
         proc.communicate()  # Wait for Inkscape to terminate.
         sc.enable_filters(sc.working_fn, True)
 
-    # @+node:ekr.20100908110845.5553: *5* enable_filters
+    #@> enable_filters
     def enable_filters(self, svgfile, enable):
         """Disable/enable filters in SVG at the XML level
 
@@ -1482,7 +1481,7 @@ class ScreenShotController:
                 i.set("style", i.get("style").replace('filter:url(', '_filter:url('))
         doc.write(open(svgfile, 'w'))
 
-    # @+node:ekr.20100908110845.5554: *4* make_output_file & helper
+    #@< make_output_file & helper
     def make_output_file(self):
         """Create the output file from the working file."""
         sc = self
@@ -1513,7 +1512,7 @@ class ScreenShotController:
                 g.trace('can not open %s' % output_fn)
         sc.make_at_url_node_for_output_file()
 
-    # @+node:ekr.20100908110845.5555: *5* trim
+    #@> trim
     def trim(self, im, border):
         if Image and ImageChops:
             bg = Image.new(im.mode, im.size, border)
@@ -1525,7 +1524,7 @@ class ScreenShotController:
             raise ValueError("cannot trim; image was empty")
         return None
 
-    # @+node:ekr.20101004082701.5739: *4* make_slide & helpers
+    #@< make_slide & helpers
     #  Don't call rstCommands.writeToDocutils--we are using sphinx!
 
     def make_slide(self):
@@ -1544,7 +1543,7 @@ class ScreenShotController:
             g.error('writing:', fn)
             g.es_exception()
 
-    # @+node:ekr.20101005193146.5689: *5* make_slide_contents
+    #@> make_slide_contents
     def make_slide_contents(self):
         sc = self
         # n = sc.slide_number
@@ -1555,7 +1554,7 @@ class ScreenShotController:
         title = sc.underline(h)
         return '%s\n%s' % (title, body)
 
-    # @+node:ekr.20101006060338.5702: *4* make_working_file & helpers
+    #@< make_working_file & helpers
     def make_working_file(self):
         sc = self
         sc.give_pil_warning()
@@ -1568,7 +1567,7 @@ class ScreenShotController:
             g.error('can not make template from:', sc.template_fn)
         return bool(template)
 
-    # @+node:ekr.20100908110845.5546: *5* make_dom & helpers
+    #@> make_dom & helpers
     def make_dom(self):
         """Create the template dom object."""
         sc = self
@@ -1636,7 +1635,7 @@ class ScreenShotController:
         os.unlink(fp)
         return template
 
-    # @+node:ekr.20100908110845.5547: *6* clear_id
+    #@> clear_id
     def clear_id(self, x):
         """Recursively clear @id on element x and descendants."""
         sc = self
@@ -1648,7 +1647,7 @@ class ScreenShotController:
             del z.attrib['id']
         return x
 
-    # @+node:ekr.20100908110845.5548: *6* get_template
+    #@ get_template
     def get_template(self):
         """Load and check the template SVG and return DOM"""
         sc = self
@@ -1663,7 +1662,7 @@ class ScreenShotController:
         g.error('template did not include all required IDs:', sc.template_fn)
         return None
 
-    # @+node:ekr.20100908110845.5549: *6* move_element
+    #@ move_element
     def move_element(self, element, x, y):
         if not element.get('transform'):
             element.set('transform', "translate(%f,%f)" % (x, y))
@@ -1673,7 +1672,7 @@ class ScreenShotController:
             oy = oy.split(')')[0]
             element.set('transform', "translate(%f,%f)" % (float(ox) + x, float(oy) + y))
 
-    # @+node:ekr.20100908110845.5550: *6* resize_curve_box & helper
+    #@ resize_curve_box & helper
     def resize_curve_box(self, fn, template, n):
         sc = self
         d = sc.getIds(template.getroot())
@@ -1718,7 +1717,7 @@ class ScreenShotController:
         d.append('z')
         frame.set('d', ' '.join(d))
 
-    # @+node:ekr.20100908110845.5551: *7* get_dim
+    #@> get_dim
     def get_dim(self, fn, Id, what):
         """return dimension of element in fn with @id Id, what is
         x, y, width, or height
@@ -1750,7 +1749,7 @@ class ScreenShotController:
         assert sc.dimCache.get(hsh)
         return sc.dimCache.get(hsh)
 
-    # @+node:ekr.20100908110845.5545: *5* make_working_file_from_template
+    #@<2 make_working_file_from_template
     def make_working_file_from_template(self, template):
         """Create the working file from the template."""
         sc = self
@@ -1762,7 +1761,7 @@ class ScreenShotController:
             g.note('wrote: ', g.shortFileName(fn))
         outfile.close()
 
-    # @+node:ekr.20100909121239.6117: *4* take_screen_shot & helpers
+    #@< take_screen_shot & helpers
     def take_screen_shot(self):
         """Take the screen shot, create an @image node,
         and add an .. image:: directive to p."""
@@ -1780,7 +1779,7 @@ class ScreenShotController:
             sc.add_image_directive()
         return ok
 
-    # @+node:ekr.20100914090933.5643: *5* create_setup_leo_file
+    #@> create_setup_leo_file
     def create_setup_leo_file(self):
         """
         Create an ouline containing all children of sc.screenshot_tree.
@@ -1821,7 +1820,7 @@ class ScreenShotController:
         c.close()  # pylint: disable=no-member
         return fn
 
-    # @+node:ekr.20100913085058.5659: *5* setup_screen_shot & helpers
+    #@ setup_screen_shot & helpers
     def setup_screen_shot(self, fn):
         """Take the screen shot after adjusting the window and outline."""
         sc = self
@@ -1837,7 +1836,7 @@ class ScreenShotController:
             ok = sc.save_clipboard_to_screenshot_file()
         return ok
 
-    # @+node:ekr.20100913085058.5656: *6* open_screenshot_app
+    #@> open_screenshot_app
     def open_screenshot_app(self, leo_fn):
         """Open the screenshot app.
         Return True if the app exists and can be opened."""
@@ -1866,7 +1865,7 @@ class ScreenShotController:
         proc.communicate()  # Wait for Leo to terminate.
         return True
 
-    # @+node:ekr.20100913085058.5655: *6* save_clipboard_to_screenshot_file
+    #@ save_clipboard_to_screenshot_file
     def save_clipboard_to_screenshot_file(self):
         """Save the clipboard to screenshot_fn.
         Return True if all went well."""
@@ -1882,7 +1881,7 @@ class ScreenShotController:
         g.error('no image on clipboard')
         return False
 
-    # @+node:ekr.20101113193341.5447: *3* sc.meld & helpers
+    #@<3 sc.meld & helpers
     def meld(self, p):
         sc = self
         if not sc.init(p):
@@ -1902,7 +1901,7 @@ class ScreenShotController:
         sc.adjust_slideshow()
         print('meld done')
 
-    # @+node:ekr.20101113193341.5448: *4* adjust_slideshow & helper
+    #@> adjust_slideshow & helper
     def adjust_slideshow(self):
         """Adjust all @slide nodes in the slideshow."""
         # Traverse the tree as in the screenshot plugin.
@@ -1923,7 +1922,7 @@ class ScreenShotController:
             else:
                 p.moveToThreadNext()
 
-    # @+node:ekr.20101113193341.5449: *5* adjust_slide_node & helpers
+    #@> adjust_slide_node & helpers
     def adjust_slide_node(self, p, slide_number):
         """Adjust p, an @slide node."""
         sc = self
@@ -1937,7 +1936,7 @@ class ScreenShotController:
         # Add the .. image:: directive.
         sc.add_image_directive(p, slide_number)
 
-    # @+node:ekr.20101113193341.5450: *6* add_at_url_final_output_file
+    #@> add_at_url_final_output_file
     def add_at_url_final_output_file(self, p, slide_number):
         """Create or update the "@url final output file" node."""
         sc = self
@@ -1952,7 +1951,7 @@ class ScreenShotController:
         p2.b = sc.finalize('slide-%03d.png' % (slide_number))
         return p2
 
-    # @+node:ekr.20101113193341.5451: *6* add_image_directive
+    #@ add_image_directive
     def add_image_directive(self, p=None, slide_number=None):
         """Add an image directive in p if it is not there."""
         sc = self
@@ -1965,7 +1964,7 @@ class ScreenShotController:
         if p.b.find(s) == -1:
             cast(Any, p).b = p.b.rstrip() + '\n\n%s\n\n' % (s)
 
-    # @+node:ekr.20101113193341.5452: *6* delete_at_url_built_slide_node
+    #@ delete_at_url_built_slide_node
     def delete_at_url_built_slide_node(self, p):
         """Delete any "@url built slide" node in p's children."""
         sc = self
@@ -1975,7 +1974,7 @@ class ScreenShotController:
                 child.doDelete()
                 break
 
-    # @+node:ekr.20101113193341.5453: *4* check_meld & helpers
+    #@<2 check_meld & helpers
     def check_meld(self, aList):
         """
         Check that len(aList) matches the number of @slide nodes in the
@@ -1997,7 +1996,7 @@ class ScreenShotController:
             )
         return True
 
-    # @+node:ekr.20101113193341.5454: *5* check_dir
+    #@> check_dir
     def check_dir(self, theDir):
         if not g.os_path_exists(theDir):
             return g.error('not found: %s' % (theDir))
@@ -2005,7 +2004,7 @@ class ScreenShotController:
             return g.error('not a directory: %s' % (theDir))
         return True
 
-    # @+node:ekr.20101113193341.5455: *5* count_slide_nodes
+    #@ count_slide_nodes
     def count_slide_nodes(self):
         """Return n1,n2
 
@@ -2030,7 +2029,7 @@ class ScreenShotController:
         g.trace(n1, n2)
         return n1, n2
 
-    # @+node:ekr.20101113193341.5456: *4* copy_screenshots & helper
+    #@< copy_screenshots & helper
     def copy_screenshots(self, aList):
         """Copy files from the wink_path to slideshow_path,
         numbering the destination files to reflect "holes"
@@ -2056,7 +2055,7 @@ class ScreenShotController:
             else:
                 p.moveToThreadNext()
 
-    # @+node:ekr.20101113193341.5457: *5* copy_screenshot
+    #@> copy_screenshot
     def copy_screenshot(self, aList, slide_n, wink_n):
         sc = self
         if wink_n >= len(aList):
@@ -2066,7 +2065,7 @@ class ScreenShotController:
         fn_dst = sc.finalize('slide-%03d.png' % (slide_n))
         shutil.copyfile(fn_src, fn_dst)
 
-    # @+node:ekr.20101113193341.5458: *4* get_wink_screenshots
+    #@< get_wink_screenshots
     def get_wink_screenshots(self):
         """Return the properly sorted list of wink screenshots."""
         sc = self
@@ -2091,7 +2090,7 @@ class ScreenShotController:
         aList.sort(key=key)  # Essential.
         return aList
 
-    # @+node:ekr.20101113193341.5445: *4* has_at_no_screenshot_node
+    #@ has_at_no_screenshot_node
     def has_at_no_screenshot_node(self, p):
         sc = self
         for p in p.children():
@@ -2099,10 +2098,10 @@ class ScreenShotController:
                 return True
         return False
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

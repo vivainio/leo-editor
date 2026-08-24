@@ -1,7 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20211021200745.1: * @file ../scripts/picture_viewer.py
-# @+<< docstring (picture_viewer.py) >>
-# @+node:ekr.20211021202710.1: ** << docstring (picture_viewer.py) >>
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20211021200745.1] @f ../scripts/picture_viewer.py
+#@+<< docstring (picture_viewer.py) >>
+#@> << docstring (picture_viewer.py) >>
 """
 Display image files in a directory tree as a slide show.
 
@@ -55,9 +55,9 @@ The following keyword arguments may be supplied to the run method:
 
 """
 
-# @-<< docstring (picture_viewer.py) >>
-# @+<< imports (picture_viewer.py) >>
-# @+node:ekr.20211021202633.1: ** << imports (picture_viewer.py) >>
+#@-<< docstring (picture_viewer.py) >>
+#@+<< imports (picture_viewer.py) >>
+#@ << imports (picture_viewer.py) >>
 import argparse
 import json
 import os
@@ -78,15 +78,15 @@ try:
 except Exception:
     print('picture_viewer.py: Qt required')
     print('pip install pyqt6')
-# @-<< imports (picture_viewer.py) >>
+#@-<< imports (picture_viewer.py) >>
 
 # Globals to retain references to objects.
 gApp = None
 gWidget = None
 
 
-# @+others
-# @+node:tom.20211023221408.1: ** get_args & checkers
+#@+others
+#@ get_args & checkers
 def get_args():
     # fmt: off
 
@@ -150,7 +150,7 @@ def get_args():
     }
 
 
-# @+node:ekr.20211101064157.1: *3* get_delay
+#@> get_delay
 def get_delay(delay):
     if delay is None:
         return None
@@ -161,13 +161,13 @@ def get_delay(delay):
         return None
 
 
-# @+node:ekr.20211024034921.1: *3* get_extensions
+#@ get_extensions
 def get_extensions(aList):
     # Ensure extensions start with '.'
     return [z if z.startswith('.') else f".{z}" for z in aList or []]
 
 
-# @+node:ekr.20211024041658.1: *3* get_path
+#@ get_path
 def get_path(path):
     if path and not os.path.exists(path):
         print(f"--path: not found: {path!r}")
@@ -175,7 +175,7 @@ def get_path(path):
     return path
 
 
-# @+node:ekr.20211024035501.1: *3* get_pixels
+#@ get_pixels
 def get_pixels(kind, pixels):
     if pixels is None:
         return None
@@ -186,7 +186,7 @@ def get_pixels(kind, pixels):
         return None
 
 
-# @+node:ekr.20211024041359.1: *3* get_scale
+#@ get_scale
 def get_scale(scale):
     try:
         return float(scale or 1.0)
@@ -195,7 +195,7 @@ def get_scale(scale):
         return 1.0
 
 
-# @+node:ekr.20211024040842.1: *3* get_sort_kind
+#@ get_sort_kind
 def get_sort_kind(kind):
     if not kind:
         return None
@@ -206,7 +206,7 @@ def get_sort_kind(kind):
     return kind
 
 
-# @+node:ekr.20211023201914.1: ** main
+#@< main
 def main():
     global gApp
     gApp = QtWidgets.QApplication(sys.argv)
@@ -216,7 +216,7 @@ def main():
         sys.exit(gApp.exec())
 
 
-# @+node:ekr.20211021202356.1: ** class Slides(QWidget)
+#@ class Slides(QWidget)
 class Slides(QtWidgets.QWidget):  # type:ignore
     # Command-line arguments...
     scale: float = 1.0
@@ -235,8 +235,8 @@ class Slides(QtWidgets.QWidget):  # type:ignore
     slide_number = -1
     timer = QtCore.QBasicTimer()
 
-    # @+others
-    # @+node:ekr.20211021200821.14: *3* Slides.show_slide
+    #@+others
+    #@> Slides.show_slide
     def show_slide(self):
         # Reset the timer.
         self.timer.stop()
@@ -277,8 +277,8 @@ class Slides(QtWidgets.QWidget):  # type:ignore
         except Exception:
             g.es_exception()
 
-    # @+node:ekr.20230219044810.1: *3* Slides: commands
-    # @+node:ekr.20230116092517.1: *4* Slides.copy
+    #@ Slides: commands
+    #@> Slides.copy
     def copy(self):
         """Issue a prompt and copy the file if the user agrees."""
         file_name = self.files_list[self.slide_number]
@@ -293,7 +293,7 @@ class Slides(QtWidgets.QWidget):  # type:ignore
             shutil.copy(file_name, new_path)
             print('Copied to', new_path)
 
-    # @+node:ekr.20211021200821.4: *4* Slides.delete
+    #@ Slides.delete
     send_to_trash_warning_given = False
 
     def delete(self):
@@ -340,7 +340,7 @@ class Slides(QtWidgets.QWidget):  # type:ignore
                 print('No more slides')
                 self.quit()
 
-    # @+node:ekr.20211021200821.7: *4* Slides.move_to
+    #@ Slides.move_to
     def move_to(self):
         """Issue a prompt and move the file if the user agrees."""
         file_name = self.files_list[self.slide_number]
@@ -358,7 +358,7 @@ class Slides(QtWidgets.QWidget):  # type:ignore
         self.next_slide()
         self.raise_()
 
-    # @+node:ekr.20211021200821.8: *4* Slides.next_slide
+    #@ Slides.next_slide
     def next_slide(self):
         # Save the previous data, if any.
         self.save_data()
@@ -375,7 +375,7 @@ class Slides(QtWidgets.QWidget):  # type:ignore
         # Show the next slide.
         self.show_slide()
 
-    # @+node:ekr.20211021200821.9: *4* Slides.prev_slide
+    #@ Slides.prev_slide
     def prev_slide(self):
         # Save the previous data.
         self.save_data()
@@ -391,7 +391,7 @@ class Slides(QtWidgets.QWidget):  # type:ignore
         # Show the previous slide.
         self.show_slide()
 
-    # @+node:ekr.20211029020533.1: *4* Slides.restart
+    #@ Slides.restart
     def restart(self):
         dialog = QtWidgets.QFileDialog(directory=self.starting_directory)
         path = dialog.getExistingDirectory()
@@ -408,7 +408,7 @@ class Slides(QtWidgets.QWidget):  # type:ignore
         self.sort(self.sort_kind)
         self.next_slide()  # show_slide resets the timer.
 
-    # @+node:ekr.20211021200821.13: *4* Slides.show_help
+    #@ Slides.show_help
     def show_help(self):
         """Show the help message."""
         print(
@@ -429,7 +429,7 @@ class Slides(QtWidgets.QWidget):  # type:ignore
     ''')
         )
 
-    # @+node:ekr.20211021200821.17: *4* Slides.toggle_full_screen
+    #@ Slides.toggle_full_screen
     def toggle_full_screen(self):
         w = self
         if w.full_screen:
@@ -443,7 +443,7 @@ class Slides(QtWidgets.QWidget):  # type:ignore
             w.picture.setGeometry(0, 0, w.width(), w.height())
             w.picture.adjustSize()
 
-    # @+node:ekr.20211021200821.18: *4* Slides.zoom_in & zoom_out
+    #@ Slides.zoom_in & zoom_out
     def zoom_in(self):
         self.scale = self.scale * 1.05
         self.save_data()
@@ -454,8 +454,8 @@ class Slides(QtWidgets.QWidget):  # type:ignore
         self.save_data()
         self.show_slide()
 
-    # @+node:ekr.20230220041302.1: *3* Slides: db
-    # @+node:ekr.20230220063749.1: *4* Slides.init_db
+    #@< Slides: db
+    #@> Slides.init_db
     def init_db(self):
         if not self.use_db:
             self.db = {}
@@ -473,7 +473,7 @@ class Slides(QtWidgets.QWidget):  # type:ignore
         except Exception:
             g.es_exception()
 
-    # @+node:ekr.20230220041332.1: *4* Slides.dump_data
+    #@ Slides.dump_data
     def dump_data(self):
         d = self.db
         # print(f"{self.db_path}...")
@@ -481,7 +481,7 @@ class Slides(QtWidgets.QWidget):  # type:ignore
             sfn = g.truncate(g.shortFileName(key), 20)
             print(f"{sfn:20} {d[key]}")
 
-    # @+node:ekr.20230219054034.1: *4* Slides.load_data
+    #@ Slides.load_data
     def load_data(self) -> None:
         file_name = self.files_list[self.slide_number]
         if file_name in self.db:
@@ -502,7 +502,7 @@ class Slides(QtWidgets.QWidget):  # type:ignore
                 f"scale: {self.scale:9.8} x: {self.dx} y: {self.dy}"
             )
 
-    # @+node:ekr.20230218180340.1: *4* Slides.save_data
+    #@ Slides.save_data
     def save_data(self):
         if 0 <= self.slide_number < len(self.files_list):
             # Don't remove this trace.
@@ -513,7 +513,7 @@ class Slides(QtWidgets.QWidget):  # type:ignore
             file_name = self.files_list[self.slide_number]
             self.db[file_name] = [self.scale, int(self.dx), int(self.dy)]
 
-    # @+node:ekr.20230219044202.1: *3* Slides: event handlers
+    #@< Slides: event handlers
     def closeEvent(self, event):
         """Override QWidget.closeEvent."""
         self.quit()
@@ -525,7 +525,7 @@ class Slides(QtWidgets.QWidget):  # type:ignore
     def timerEvent(self, e=None):
         self.next_slide()  # show_slide resets the timer.
 
-    # @+node:ekr.20211021200821.5: *4* Slides.keyPressEvent
+    #@> Slides.keyPressEvent
     def keyPressEvent(self, event):
         s = event.text()
         if not s:
@@ -555,8 +555,8 @@ class Slides(QtWidgets.QWidget):  # type:ignore
             f()
         # print(f"picture_viewer.py: ignoring key: {s!r} {event.key()}")
 
-    # @+node:ekr.20230224054924.1: *3* Slides: scrolling
-    # @+node:ekr.20230223054727.1: *4* Slides.do_scroll
+    #@< Slides: scrolling
+    #@> Slides.do_scroll
     scroll_lockout = False
 
     def do_scroll(self):
@@ -578,7 +578,7 @@ class Slides(QtWidgets.QWidget):  # type:ignore
         finally:
             w.scroll_lockout = False
 
-    # @+node:ekr.20230224054937.1: *4* Slides.reset_scroll (not used)
+    #@ Slides.reset_scroll (not used)
     def reset_scroll(self):
         """Reset the scrollbars."""
         w = self
@@ -589,7 +589,7 @@ class Slides(QtWidgets.QWidget):  # type:ignore
         finally:
             w.scroll_lockout = False
 
-    # @+node:ekr.20230219053658.1: *4* Slides.scrollContentsBy
+    #@ Slides.scrollContentsBy
     def scrollContentsBy(self, dx: int, dy: int):
         """
         Override QtWidgets.QScrollArea.scrollContentsBy.
@@ -609,8 +609,8 @@ class Slides(QtWidgets.QWidget):  # type:ignore
         except OverflowError:
             g.trace('scroll overflow', dx, dy)
 
-    # @+node:ekr.20230219045030.1: *3* Slides: startup & shutdown
-    # @+node:ekr.20211021200821.2: *4* Slides.get_files
+    #@< Slides: startup & shutdown
+    #@> Slides.get_files
     def get_files(self, path):
         """Return all files in path, including all subdirectories."""
         return [
@@ -619,7 +619,7 @@ class Slides(QtWidgets.QWidget):  # type:ignore
             if z.is_file() and os.path.splitext(str(z))[1].lower() in self.extensions
         ]
 
-    # @+node:ekr.20211021200821.12: *4* Slides.make_widgets
+    #@ Slides.make_widgets
     def make_widgets(self):
         w = self
 
@@ -649,7 +649,7 @@ class Slides(QtWidgets.QWidget):  # type:ignore
         layout.addWidget(self.scroll_area)
         w.setLayout(layout)
 
-    # @+node:ekr.20211021200821.10: *4* Slides.quit
+    #@ Slides.quit
     def quit(self):
         global gApp
         self.timer.stop()
@@ -670,7 +670,7 @@ class Slides(QtWidgets.QWidget):  # type:ignore
         if self.verbose:
             print('picture_viewer: done')
 
-    # @+node:ekr.20211021200821.11: *4* Slides.run
+    #@ Slides.run
     def run(
         self,
         background_color=None,  # Default background color.
@@ -746,7 +746,7 @@ class Slides(QtWidgets.QWidget):  # type:ignore
         self.next_slide()  # show_slide resets the timer.
         return True
 
-    # @+node:ekr.20211021200821.15: *4* Slides.sort
+    #@ Slides.sort
     def sort(self, sort_kind):
         """sort files_list based on sort_kind."""
         if sort_kind == 'date':
@@ -762,11 +762,11 @@ class Slides(QtWidgets.QWidget):  # type:ignore
         else:
             g.trace(f"unknown sort kind: {sort_kind!r}")
 
-    # @-others
+    #@-others
 
 
-# @-others
+#@-others
 
 if __name__ == '__main__':
     main()
-# @-leo
+#@-leo

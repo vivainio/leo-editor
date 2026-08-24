@@ -1,7 +1,11 @@
-# @+leo-ver=5-thin
-# @+node:ville.20091009202416.10040: * @file ../plugins/leoremote.py
-# @+<< docstring >>
-# @+node:ville.20091009202416.10041: ** << docstring >> (leoremote.py)
+#@+leo-ver=cub-1-thin
+#@0 [ville.20091009202416.10040] @f ../plugins/leoremote.py
+#@+<< docstring >>
+#@-<< docstring >>
+#@+<< imports >>
+#@-<< imports >>
+#@+others
+#@> << docstring >> (leoremote.py)
 """Remote control for Leo.
 
     NOTE: as of 2015-07-29 the http://localhostL:8130/_/exec/ mode of
@@ -30,9 +34,7 @@ Example client::
 
 """
 
-# @-<< docstring >>
-# @+<< imports >>
-# @+node:ekr.20160519045636.1: ** << imports >> (leoremote.py)
+#@ << imports >> (leoremote.py)
 import os
 import socket  # For a test of its capabilities.
 import tempfile
@@ -41,9 +43,7 @@ from leo.external import lproto
 from leo.core import leoGlobals as g
 
 
-# @-<< imports >>
-# @+others
-# @+node:ville.20091009202416.10045: ** init
+#@ init
 def init():
     """Return True if the plugin has loaded successfully."""
     ok = True
@@ -54,7 +54,7 @@ def init():
     return ok
 
 
-# @+node:ville.20091010231411.5262: ** g.command('leoserv-start')
+#@ g.command('leoserv-start')
 @g.command('leoserv-start')
 def leoserv_start(event):
     # c = event['c']
@@ -89,7 +89,7 @@ def leoserv_start(event):
     print('leoremote.py: server: %s' % fullpath)
 
 
-# @+node:ville.20091009211846.10039: ** script execution
+#@ script execution
 def run_remote_script(fname):
     # c and p are ambiguous for remote script
     print("rrs")
@@ -97,7 +97,7 @@ def run_remote_script(fname):
     g.exec_file(fname, d)
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

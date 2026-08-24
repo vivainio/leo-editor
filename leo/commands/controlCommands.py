@@ -1,9 +1,9 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20150514040100.1: * @file ../commands/controlCommands.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20150514040100.1] @f ../commands/controlCommands.py
 """Leo's control commands."""
 
-# @+<< controlCommands imports & annotations >>
-# @+node:ekr.20150514050127.1: ** << controlCommands imports & annotations >>
+#@+<< controlCommands imports & annotations >>
+#@> << controlCommands imports & annotations >>
 from __future__ import annotations
 from collections.abc import Callable
 import shlex
@@ -16,7 +16,7 @@ if TYPE_CHECKING:  # pragma: no cover
     from leo.core.leoCommands import Commands as Cmdr
     from leo.core.leoGui import LeoKeyEvent
 
-# @-<< controlCommands imports & annotations >>
+#@-<< controlCommands imports & annotations >>
 
 
 def cmd(name: str) -> Callable:
@@ -24,16 +24,16 @@ def cmd(name: str) -> Callable:
     return g.new_cmd_decorator(name, ['c', 'controlCommands'])
 
 
-# @+others
-# @+node:ekr.20160514095828.1: ** class ControlCommandsClass
+#@+others
+#@ class ControlCommandsClass
 class ControlCommandsClass(BaseEditCommandsClass):
     def __init__(self, c: Cmdr) -> None:
         """Ctor for ControlCommandsClass."""
         # pylint: disable=super-init-not-called
         self.c = c
 
-    # @+others
-    # @+node:ekr.20150514063305.91: *3* executeSubprocess
+    #@+others
+    #@> executeSubprocess
     def executeSubprocess(self, event: LeoKeyEvent | None, command: str) -> None:
         """Execute a command in a separate process."""
         trace = False
@@ -53,7 +53,7 @@ class ControlCommandsClass(BaseEditCommandsClass):
         k.keyboardQuit()  # Inits vim mode too.
         g.es(f"Done: {command}")
 
-    # @+node:ekr.20150514063305.92: *3* print plugins info...
+    #@ print plugins info...
     @cmd('show-plugin-handlers')
     def printPluginHandlers(self, event: LeoKeyEvent | None = None) -> None:
         """Print the handlers for each plugin."""
@@ -78,7 +78,7 @@ class ControlCommandsClass(BaseEditCommandsClass):
         """
         g.app.pluginsController.printPluginsInfo(self.c)
 
-    # @+node:ekr.20150514063305.93: *3* setSilentMode
+    #@ setSilentMode
     @cmd('set-silent-mode')
     def setSilentMode(self, event: LeoKeyEvent | None = None) -> None:
         """
@@ -89,7 +89,7 @@ class ControlCommandsClass(BaseEditCommandsClass):
         """
         self.c.k.silentMode = True
 
-    # @+node:ekr.20150514063305.94: *3* shellCommand (improved)
+    #@ shellCommand (improved)
     @cmd('shell-command')
     def shellCommand(self, event: LeoKeyEvent | None = None) -> None:
         """Execute a shell command."""
@@ -102,7 +102,7 @@ class ControlCommandsClass(BaseEditCommandsClass):
         if command := g.toUnicode(k.arg):
             self.executeSubprocess(event, command)
 
-    # @+node:ekr.20150514063305.95: *3* shellCommandOnRegion
+    #@ shellCommandOnRegion
     @cmd('shell-command-on-region')
     def shellCommandOnRegion(self, event: LeoKeyEvent | None = None) -> None:
         """Execute a command taken from the selected text in a separate process."""
@@ -117,7 +117,7 @@ class ControlCommandsClass(BaseEditCommandsClass):
                 g.es('No text selected')
         k.keyboardQuit()
 
-    # @+node:ekr.20150514063305.96: *3* actOnNode
+    #@ actOnNode
     @cmd('act-on-node')
     def actOnNode(self, event: LeoKeyEvent | None = None) -> None:
         """
@@ -137,7 +137,7 @@ class ControlCommandsClass(BaseEditCommandsClass):
         """
         g.act_on_node(self.c, self.c.p, event)
 
-    # @+node:ekr.20150514063305.97: *3* shutdown, saveBuffersKillEmacs & setShutdownHook
+    #@ shutdown, saveBuffersKillEmacs & setShutdownHook
     @cmd('save-buffers-kill-leo')
     def shutdown(self, event: LeoKeyEvent | None = None) -> None:
         """Quit Leo, prompting to save any unsaved files first."""
@@ -145,7 +145,7 @@ class ControlCommandsClass(BaseEditCommandsClass):
 
     saveBuffersKillLeo = shutdown
 
-    # @+node:ekr.20150514063305.98: *3* suspend & iconifyFrame
+    #@ suspend & iconifyFrame
     @cmd('suspend')
     def suspend(self, event: LeoKeyEvent | None = None) -> None:
         """Minimize the present Leo window."""
@@ -156,8 +156,8 @@ class ControlCommandsClass(BaseEditCommandsClass):
         """Minimize the present Leo window."""
         self.suspend(event)
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

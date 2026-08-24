@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20140723122936.18143: * @file ../plugins/importers/java.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20140723122936.18143] @f ../plugins/importers/java.py
 """The @auto importer for the java language."""
 
 from __future__ import annotations
@@ -13,8 +13,8 @@ if TYPE_CHECKING:
     from leo.core.leoNodes import Position
 
 
-# @+others
-# @+node:ekr.20161126161824.2: ** class Java_Importer(Importer)
+#@+others
+#@> class Java_Importer(Importer)
 class Java_Importer(Importer):
     """The importer for the java language."""
 
@@ -22,8 +22,8 @@ class Java_Importer(Importer):
 
     compound_statements = ['else', 'for', 'if', 'switch', 'while']
 
-    # @+<< Java_Importer: block_patterns >>
-    # @+node:ekr.20260412045240.1: *3* << Java_Importer: block_patterns >>
+    #@+<< Java_Importer: block_patterns >>
+    #@> << Java_Importer: block_patterns >>
     block_patterns: tuple = (
 
         ('interface', re.compile(r'^\s*interface\s+(\w+.*?)\s*((implements|throws).*?)?{')),
@@ -31,10 +31,10 @@ class Java_Importer(Importer):
         ('', re.compile(r'^\s*(\w+.*?)\(.*?\)\s*((implements|throws).*?)?{')),
 
     )  # fmt: skip
-    # @-<< Java_Importer: block_patterns >>
+    #@-<< Java_Importer: block_patterns >>
 
-    # @+others
-    # @+node:ekr.20260415021624.1: *3* java_i.postprocess
+    #@+others
+    #@ java_i.postprocess
     def postprocess(self, parent: Position) -> None:
         """Java_Importer.postprocess."""
 
@@ -44,7 +44,7 @@ class Java_Importer(Importer):
         # Subclass methods...
         self.move_module_preamble(parent)
 
-    # @+node:ekr.20260415021537.1: *3* java_i.move_module_preamble
+    #@ java_i.move_module_preamble
     def move_module_preamble(self, parent: Position) -> None:
         """Move the preamble lines from the parent's first child to the start of parent.b."""
 
@@ -68,10 +68,10 @@ class Java_Importer(Importer):
                 child1.b = child1.b.replace(preamble_s, '')
                 return
 
-    # @-others
+    #@-others
 
 
-# @-others
+#@-others
 
 
 def do_import(c: Cmdr, parent: Position, s: str) -> None:
@@ -83,6 +83,6 @@ importer_dict = {
     'extensions': ['.java'],
     'func': do_import,
 }
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@@language python
+#@@tabwidth -4
+#@-leo

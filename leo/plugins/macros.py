@@ -1,7 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20040916084945: * @file ../plugins/macros.py
-# @+<< docstring >>
-# @+node:ekr.20061102090532: ** << docstring >>
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20040916084945] @f ../plugins/macros.py
+#@+<< docstring >>
+#@> << docstring >>
 r"""Creates new nodes containing parameterized section reference.
 
 .. No longer available: http://sourceforge.net/forum/message.php?msg_id=2444117
@@ -63,14 +63,14 @@ It's a lot easier to use than to explain!
 
 """
 
-# @-<< docstring >>
+#@-<< docstring >>
 # BobS & EKR.
 import re
 from leo.core import leoGlobals as g
 
 
-# @+others
-# @+node:ekr.20070302121133: ** init
+#@+others
+#@ init
 def init():
     """Return True if this plugin loaded correctly."""
     # Ok for unit testing: adds command to Outline menu.
@@ -79,7 +79,7 @@ def init():
     return True
 
 
-# @+node:ekr.20040916091520.1: ** onCreate
+#@ onCreate
 def onCreate(tag, keywords):
     """Create the per-commander instance of ParamClass."""
     c = keywords.get("c")
@@ -87,10 +87,10 @@ def onCreate(tag, keywords):
         ParamClass(c)
 
 
-# @+node:ekr.20040916091520.2: ** class ParamClass
+#@ class ParamClass
 class ParamClass:
-    # @+others
-    # @+node:ekr.20040916091520.3: *3* __init__
+    #@+others
+    #@> __init__
     def __init__(self, c):
         """Ctor for ParamClass."""
         self.c = c
@@ -98,7 +98,7 @@ class ParamClass:
         self.regex = re.compile(self.pattern)
         self.addMenu()  # Now gui-independent.
 
-    # @+node:ekr.20040916084945.1: *3* parameterize
+    #@ parameterize
     def parameterize(self, event=None):
         c = self.c
         w = c.frame.body.wrapper
@@ -141,7 +141,7 @@ class ParamClass:
             p.h = g.angleBrackets(str(i + 1) + "$")
         c.redraw()
 
-    # @+node:ekr.20040916084945.2: *3* findParameters
+    #@ findParameters
     def findParameters(self, p):
         """Find the parameterized nodes in p's parents.."""
         tag = "parameterized nodes"
@@ -152,7 +152,7 @@ class ParamClass:
         g.es('not found', tag)
         return None
 
-    # @+node:ekr.20040916084945.3: *3* addMenu
+    #@ addMenu
     def addMenu(self):
         """Add a submenu in the outline menu."""
         c = self.c
@@ -161,10 +161,10 @@ class ParamClass:
         )  # fmt: skip
         c.frame.menu.createMenuItemsFromTable("Outline", table)
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

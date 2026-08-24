@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20110605121601.17996: * @file ../plugins/qt_commands.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20110605121601.17996] @f ../plugins/qt_commands.py
 """Leo's Qt-related commands defined by @g.command."""
 
 from __future__ import annotations
@@ -16,8 +16,8 @@ if TYPE_CHECKING:
     QWidget = QtWidgets.QWidget
 
 
-# @+others
-# @+node:ekr.20110605121601.18000: ** init
+#@+others
+#@> init
 def init() -> bool:
     """Top-level init function for qt_commands.py."""
     if g.app.gui.guiName() != "qt":
@@ -27,14 +27,14 @@ def init() -> bool:
     return True
 
 
-# @+node:ekr.20250330060728.1: ** onSelect
+#@ onSelect
 def onSelect(tag: str, keywords: Any) -> None:
     c: Cmdr = keywords.get('c') or keywords.get('new_c')
     wdg: QWidget = c.frame.top.leo_body_frame
     wdg.setWindowTitle(c.p.h)
 
 
-# @+node:ekr.20110605121601.18001: ** qt: detach-editor-toggle & helpers
+#@ qt: detach-editor-toggle & helpers
 @g.command('detach-editor-toggle')
 def detach_editor_toggle(event: LeoKeyEvent | None = None) -> None:
     """Detach or undetach body editor"""
@@ -65,7 +65,7 @@ def detach_editor_toggle_max(event: LeoKeyEvent | None = None) -> None:
         wdg.showMaximized()
 
 
-# @+node:ekr.20170324145714.1: *3* qt: detach_editor
+#@> qt: detach_editor
 def detach_editor(c: Cmdr) -> None:
     wdg: QWidget = c.frame.top.leo_body_frame
     parent = wdg.parent()
@@ -82,7 +82,7 @@ def detach_editor(c: Cmdr) -> None:
         wdg.show()
 
 
-# @+node:ekr.20170324145716.1: *3* qt: undetach_editor
+#@ qt: undetach_editor
 def undetach_editor(c: Cmdr) -> None:
     wdg: QWidget = c.frame.top.leo_body_frame
     parent, sizes = c.frame.detached_body_info
@@ -92,7 +92,7 @@ def undetach_editor(c: Cmdr) -> None:
     c.frame.detached_body_info = None
 
 
-# @+node:ekr.20170324143944.2: ** qt: show-color-names
+#@< qt: show-color-names
 @g.command('show-color-names')
 def showColorNames(event: LeoKeyEvent | None = None) -> None:
     """Put up a dialog showing color names."""
@@ -139,7 +139,7 @@ def showColorNames(event: LeoKeyEvent | None = None) -> None:
         g.es('created color picker in icon area')
 
 
-# @+node:ekr.20170324142416.1: ** qt: show-color-wheel
+#@ qt: show-color-wheel
 @g.command('show-color-wheel')
 def showColorWheel(self: Any, event: LeoKeyEvent | None = None) -> None:
     """Show a Qt color dialog."""
@@ -168,7 +168,7 @@ def showColorWheel(self: Any, event: LeoKeyEvent | None = None) -> None:
         QtWidgets.QApplication.clipboard().setText(text)
 
 
-# @+node:ekr.20170324143944.3: ** qt: show-fonts
+#@ qt: show-fonts
 @g.command('show-fonts')
 def showFonts(self: Any, event: LeoKeyEvent | None = None) -> None:
     """Open a tab in the log pane showing a font picker."""
@@ -211,7 +211,7 @@ def showFonts(self: Any, event: LeoKeyEvent | None = None) -> None:
         c.undoer.afterChangeNodeContents(p, 'change-font', udata)
 
 
-# @+node:ekr.20140918124632.17893: ** qt: show-style-sheet
+#@ qt: show-style-sheet
 @g.command('show-style-sheet')
 def print_style_sheet(event: LeoKeyEvent | None = None) -> None:
     """show-style-sheet command."""
@@ -219,7 +219,7 @@ def print_style_sheet(event: LeoKeyEvent | None = None) -> None:
         c.styleSheetManager.print_style_sheet()
 
 
-# @+node:ekr.20140918124632.17891: ** qt: style-reload
+#@ qt: style-reload
 @g.command('style-reload')
 @g.command('reload-style-sheets')
 def style_reload(event: LeoKeyEvent | None = None) -> None:
@@ -235,7 +235,7 @@ def style_reload(event: LeoKeyEvent | None = None) -> None:
         c.reloadSettings()
 
 
-# @+node:ekr.20140918124632.17892: ** qt: style-set-selected
+#@ qt: style-set-selected
 @g.command('style-set-selected')
 def style_set_selected(event: LeoKeyEvent | None = None) -> None:
     """style-set-selected command. Set the global stylesheet to c.p.b. (For testing)"""
@@ -243,8 +243,8 @@ def style_set_selected(event: LeoKeyEvent | None = None) -> None:
         c.styleSheetManager.set_selected_style_sheet()
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @@pagewidth 70
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@@pagewidth 70
+#@-leo

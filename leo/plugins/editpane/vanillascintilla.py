@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:tbrown.20171028115143.3: * @file ../plugins/editpane/vanillascintilla.py
+#@+leo-ver=cub-1-thin
+#@0 [tbrown.20171028115143.3] @f ../plugins/editpane/vanillascintilla.py
 """
 vanillascintilla.py - a LeoEditPane editor that uses QScintilla
 but does not try to add Leo key handling
@@ -13,8 +13,8 @@ assert g
 from leo.core.leoQt import QtGui, QtWidgets, Qsci
 
 
-# @+others
-# @+node:tbrown.20171028115501.2: ** DBG
+#@+others
+#@> DBG
 def DBG(text):
     """DBG - temporary debugging function
 
@@ -24,15 +24,15 @@ def DBG(text):
     # print(f"LEP: {text}")
 
 
-# @+node:tbrown.20171028115501.3: ** class LEP_VanillaScintilla
+#@ class LEP_VanillaScintilla
 if Qsci:
 
     class LEP_VanillaScintilla(Qsci.QsciScintilla):
         lep_type = "EDITOR"
         lep_name = "Vanilla Scintilla"
 
-        # @+others
-        # @+node:tbrown.20171028115501.4: *3* __init__ (LEP_VanillaScintilla)
+        #@+others
+        #@> __init__ (LEP_VanillaScintilla)
         def __init__(self, c=None, lep=None, *args, **kwargs):
             """set up"""
             super().__init__(*args, **kwargs)
@@ -53,18 +53,18 @@ if Qsci:
             self.setCaretLineVisible(True)
             self.setCaretLineBackgroundColor(QtGui.QColor("#ffe4e4"))
 
-        # @+node:tbrown.20171028115501.5: *3* focusInEvent
+        #@ focusInEvent
         def focusInEvent(self, event: QtGui.QFocusEvent) -> None:
             Qsci.QsciScintilla.focusInEvent(self, event)
             DBG("focusin()")
             self.lep.edit_widget_focus()
 
-        # @+node:tbrown.20171028115501.6: *3* focusOutEvent
+        #@ focusOutEvent
         def focusOutEvent(self, event: QtGui.QFocusEvent) -> None:
             Qsci.QsciScintilla.focusOutEvent(self, event)
             DBG("focusout()")
 
-        # @+node:tbrown.20171028115501.7: *3* new_text
+        #@ new_text
         def new_text(self, text):
             """new_text - update for new text
 
@@ -73,7 +73,7 @@ if Qsci:
             """
             self.setText(text)
 
-        # @+node:tbrown.20171028115501.8: *3* text_changed
+        #@ text_changed
         def text_changed(self):
             """text_changed - text editor text changed"""
             if QtWidgets.QApplication.focusWidget() == self:
@@ -82,7 +82,7 @@ if Qsci:
             else:
                 DBG("text changed, NOT focused")
 
-        # @+node:tbrown.20171028115501.9: *3* update_text
+        #@ update_text
         def update_text(self, text):
             """update_text - update for current text
 
@@ -92,8 +92,8 @@ if Qsci:
             DBG("update editor text")
             self.setText(text)
 
-        # @-others
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+        #@-others
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

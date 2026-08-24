@@ -1,7 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:tbrown.20171028115541.1: * @file signal_manager.py
-# @+<< signal_manager docstring >>
-# @+node:ekr.20220901092728.1: ** << signal_manager docstring >>
+#@+leo-ver=cub-1-thin
+#@0 [tbrown.20171028115541.1] @f signal_manager.py
+#@+<< signal_manager docstring >>
+#@> << signal_manager docstring >>
 """
 signal_manager.py - SignalManager - light weight signal management
 
@@ -11,20 +11,20 @@ even explicit listing of which signals exist.
 Terry Brown, terrynbrown@gmail.com, Thu Mar 23 21:13:38 2017
 """
 
-# @-<< signal_manager docstring >>
-# @+<< signal_manager imports >>
-# @+node:ekr.20220901092745.1: ** << signal_manager imports >>
+#@-<< signal_manager docstring >>
+#@+<< signal_manager imports >>
+#@ << signal_manager imports >>
 from __future__ import annotations
 from collections import defaultdict
 from collections.abc import Callable
 from typing import Any, cast
 
 
-# @-<< signal_manager imports >>
+#@-<< signal_manager imports >>
 
 
-# @+others
-# @+node:tbrown.20171028115601.2: ** class SignalData
+#@+others
+#@ class SignalData
 class SignalData:
     def __init__(self) -> None:
         self.listeners: dict[str, object] = defaultdict(list)
@@ -32,20 +32,20 @@ class SignalData:
         self.locked = False
 
 
-# @+node:tbrown.20171028115601.4: ** class MsgSignalHandled
+#@ class MsgSignalHandled
 class MsgSignalHandled:
     """A listener can return SignalManager.MsgSignalHandled to prevent
     other listeners from being called
     """
 
 
-# @+node:tbrown.20171028115601.5: ** _setup
+#@ _setup
 def _setup(obj: object) -> None:
     if not hasattr(obj, '_signal_data'):
         cast(Any, obj)._signal_data = SignalData()
 
 
-# @+node:tbrown.20171028115601.6: ** emit
+#@ emit
 def emit(source: object, signal_name: str, *args: Any, **kwargs: Any) -> None:
     """Emit signal to all listeners"""
     if not hasattr(source, '_signal_data'):
@@ -71,7 +71,7 @@ def emit(source: object, signal_name: str, *args: Any, **kwargs: Any) -> None:
         obj_to_lock._signal_data.locked = False
 
 
-# @+node:tbrown.20171028115601.7: ** connect
+#@ connect
 def connect(source: object, signal_name: str, listener: object) -> None:
     """Connect to signal"""
     _setup(source)
@@ -83,7 +83,7 @@ def connect(source: object, signal_name: str, listener: object) -> None:
         obj._signal_data.emitters.append(source)
 
 
-# @+node:tbrown.20171028115601.8: ** disconnect_all
+#@ disconnect_all
 def disconnect_all(listener: object) -> None:
     """Disconnect from all signals"""
     for emitter in listener._signal_data.emitters:
@@ -95,42 +95,42 @@ def disconnect_all(listener: object) -> None:
             ]
 
 
-# @+node:tbrown.20171028115601.9: ** is_locked
+#@ is_locked
 def is_locked(obj: object) -> bool:
     return hasattr(obj, '_signal_data') and obj._signal_data.locked
 
 
-# @+node:tbrown.20171028115601.10: ** lock
+#@ lock
 def lock(obj: object) -> None:
     _setup(obj)
     obj._signal_data.locked = True
 
 
-# @+node:tbrown.20171028115601.11: ** unlock
+#@ unlock
 def unlock(obj: object) -> None:
     _setup(obj)
     obj._signal_data.locked = False
 
 
-# @+node:tbrown.20171028115601.12: ** class SignalManager
+#@ class SignalManager
 class SignalManager:
     """SignalManager - light weight signal management mixin."""
 
-    # @+others
-    # @+node:tbrown.20171028115601.13: *3* emit
+    #@+others
+    #@> emit
     def emit(self, signal_name: str, *args: Any, **kwargs: Any) -> None:
         """Emit signal to all listeners"""
         emit(self, signal_name, *args, **kwargs)
 
-    # @+node:tbrown.20171028115601.14: *3* connect
+    #@ connect
     def connect(self, signal_name: str, listener: object) -> None:
         """Connect to signal"""
         connect(self, signal_name, listener)
 
-    # @-others
+    #@-others
 
 
-# @+node:tbrown.20171028115601.15: ** main
+#@< main
 def main() -> None:
     """test of SignalManager"""
 
@@ -174,10 +174,10 @@ def main() -> None:
     b.do_work()
 
 
-# @-others
+#@-others
 if __name__ == '__main__':
     main()
 
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@@language python
+#@@tabwidth -4
+#@-leo

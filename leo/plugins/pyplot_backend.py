@@ -1,12 +1,12 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20160928073518.1: * @file ../plugins/pyplot_backend.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20160928073518.1] @f ../plugins/pyplot_backend.py
 """
 A helper for the viewrendered plugin.
 This is *NOT* a real plugin.
 """
 
-# @+<< pyplot_backend imports >>
-# @+node:ekr.20160928074801.1: ** << pyplot_backend imports >>
+#@+<< pyplot_backend imports >>
+#@> << pyplot_backend imports >>
 from leo.core import leoGlobals as g
 from leo.plugins import viewrendered as vr
 from leo.core.leoQt import FocusPolicy
@@ -22,17 +22,17 @@ except ImportError:
 
 
 # import matplotlib
-# @-<< pyplot_backend imports >>
-# @+others
-# @+node:ekr.20240717071211.1: ** pyplot_backend: top-level functions
-# @+node:ekr.20160928073605.1: *3* function: init
+#@-<< pyplot_backend imports >>
+#@+others
+#@ pyplot_backend: top-level functions
+#@> function: init
 def init():
     """Return True if the plugin has loaded successfully."""
     g.trace('pyplot_backend.py is not a plugin.')
     return False
 
 
-# @+node:ekr.20160928074615.2: *3* function: new_figure_manager
+#@ function: new_figure_manager
 def new_figure_manager(num, *args, **kwargs):
     """
     Create a new figure manager instance
@@ -42,7 +42,7 @@ def new_figure_manager(num, *args, **kwargs):
     return new_figure_manager_given_figure(num, thisFig)
 
 
-# @+node:ekr.20160928074615.3: *3* function: new_figure_manager_given_figure
+#@ function: new_figure_manager_given_figure
 def new_figure_manager_given_figure(num, figure):
     """
     Create a new figure manager instance for the given figure.
@@ -51,7 +51,7 @@ def new_figure_manager_given_figure(num, figure):
     return LeoFigureManagerQT(canvas, num)
 
 
-# @+node:ekr.20240717071003.1: ** class DummyWindow
+#@< class DummyWindow
 class DummyWindow:
     """A dummy Qt Window."""
 
@@ -72,7 +72,7 @@ class DummyWindow:
         pass
 
 
-# @+node:ekr.20160929050151.1: ** class LeoFigureManagerQT
+#@ class LeoFigureManagerQT
 # From backend_qt5.py
 
 # matplotlib.backends.backend_qt5.FigureManager probably does exist. See:
@@ -89,8 +89,8 @@ class LeoFigureManagerQT(FigureManager):
     window      : The qt.QMainWindow (not set)
     """
 
-    # @+others
-    # @+node:ekr.20160929050151.2: *3* LeoFigureManagerQt.__init__
+    #@+others
+    #@> LeoFigureManagerQt.__init__
     # Do NOT call the base class ctor. It creates a Qt MainWindow.
     # pylint: disable=super-init-not-called
     # pylint: disable=non-parent-init-called
@@ -129,15 +129,15 @@ class LeoFigureManagerQT(FigureManager):
         # Close the figure so that we don't create too many figure instances
         plt.close(canvas.figure)
 
-    # @+node:ekr.20160929083114.1: *3* LeoFigureManagerQt.destroy
+    #@ LeoFigureManagerQt.destroy
     def destroy(self, *args):
         # Causes problems.
         # self.frame.deleteLater()
         self.frame = None
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @@language python
-# @-leo
+#@-others
+#@@language python
+#@-leo

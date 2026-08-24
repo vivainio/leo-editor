@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20090717092906.12765: * @file leoVersion.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20090717092906.12765] @f leoVersion.py
 """
 A module holding the following version-related info:
 
@@ -9,10 +9,9 @@ leoVersion.version:     Leo's version number.
 """
 
 # GitHub release pase: https://github.com/leo-editor/leo-editor/releases
-# @+<< version dates >>
-# @+node:ekr.20141117073519.12: ** << version dates >>
-# @@nocolor-node
-# @+at
+#@+<< version dates >>
+#@> << version dates >>
+#@@nocolor-node
 # 4.5.1:  September 14, 2008
 # 4.6.1:  July 30, 2009.
 # 4.7.1:  February 26, 2010.
@@ -64,7 +63,7 @@ leoVersion.version:     Leo's version number.
 # 6.8.8:  April 14, 2026.
 # 6.8.9:  June 1, 2026.
 # 6.8.10: August 17, 2026.
-# @-<< version dates >>
+#@-<< version dates >>
 try:
     from importlib.metadata import version as _installed_version
 
@@ -73,6 +72,6 @@ except Exception:
     # Not pip-installed (e.g. running from a git checkout): version is unknown.
     version = '6.8.11.dev1'
 static_date = 'August 19, 2026'
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@@language python
+#@@tabwidth -4
+#@-leo

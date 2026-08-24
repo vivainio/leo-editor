@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20170619151859.2: * @file ../plugins/auto_colorize2_0.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20170619151859.2] @f ../plugins/auto_colorize2_0.py
 """Manipulates appearance of individual tree widget items based on Yaml file.
 
 Settings are defined in a node labeled "Headline Formats".
@@ -7,8 +7,8 @@ Settings are defined in a node labeled "Headline Formats".
 By Adrian Calvin.
 """
 
-# @+<< imports auto_colorize2_0.py >>
-# @+node:ekr.20170619151859.3: ** << imports auto_colorize2_0.py >>
+#@+<< imports auto_colorize2_0.py >>
+#@> << imports auto_colorize2_0.py >>
 from typing import Any, cast
 import yaml
 from leo.core import leoGlobals as g
@@ -25,9 +25,9 @@ except Exception:
 g.assertUi('qt')  # May raise g.UiTypeException, caught by the plugins manager.
 
 
-# @-<< imports auto_colorize2_0.py >>
-# @+others
-# @+node:ekr.20170619151859.4: ** onCreate
+#@-<< imports auto_colorize2_0.py >>
+#@+others
+#@ onCreate
 def onCreate(tag, keys):
     """auto_colorize onCreate handler."""
     try:
@@ -38,7 +38,7 @@ def onCreate(tag, keys):
         g.es_trace("Could not load commander." + str(e))
 
 
-# @+node:ekr.20170619151859.5: ** init
+#@ init
 def init():
     def on_save(tag, key):
         c = key['c']
@@ -50,7 +50,7 @@ def init():
     return True
 
 
-# @+node:ekr.20170619151859.6: ** init_dict
+#@ init_dict
 def init_dict(c):
     """(Re)Initialize the formats dictionary"""
     cs = str(c)
@@ -85,7 +85,7 @@ def init_dict(c):
         g.es_error(e)
 
 
-# @+node:ekr.20170619151859.7: ** colorize
+#@ colorize
 def colorize(c, p, item):
     """Colorize by reading "Headline Formats" node, or symbol in headline"""
     cs = str(c)
@@ -116,7 +116,7 @@ def colorize(c, p, item):
     item.setFont(0, font)
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

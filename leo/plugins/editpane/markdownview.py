@@ -1,7 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:tbrown.20171028115144.4: * @file ../plugins/editpane/markdownview.py
-# @+<< markdownview imports >>
-# @+node:tbrown.20171028115507.1: ** << markdownview imports >>
+#@+leo-ver=cub-1-thin
+#@0 [tbrown.20171028115144.4] @f ../plugins/editpane/markdownview.py
+#@+<< markdownview imports >>
+#@> << markdownview imports >>
 import markdown
 from leo.core import leoGlobals as g
 
@@ -18,9 +18,9 @@ except ImportError:
 from leo.plugins.editpane.plaintextview import LEP_PlainTextView as TextView
 
 
-# @-<< markdownview imports >>
-# @+others
-# @+node:tbrown.20171028115507.2: ** to_html
+#@-<< markdownview imports >>
+#@+others
+#@ to_html
 def to_html(text):
     """to_html - convert to HTML
 
@@ -40,15 +40,15 @@ def to_html(text):
     )
 
 
-# @+node:tbrown.20171028115507.3: ** class LEP_MarkdownView
+#@ class LEP_MarkdownView
 class LEP_MarkdownView(HtmlView):
     """LEP_MarkdownView -"""
 
     lep_type = "MARKDOWN"
     lep_name = "Markdown(.py) View"
 
-    # @+others
-    # @+node:tbrown.20171028115507.4: *3* LEP_MarkdownView.__init__
+    #@+others
+    #@> LEP_MarkdownView.__init__
     def __init__(self, c=None, lep=None, *args, **kwargs):
         """set up"""
         kwargs['c'] = c
@@ -57,7 +57,7 @@ class LEP_MarkdownView(HtmlView):
         self.c = c
         self.lep = lep
 
-    # @+node:tbrown.20171028115507.5: *3* LEP_MarkdownView.new_text
+    #@ LEP_MarkdownView.new_text
     def new_text(self, text):
         """new_text - update for new text
 
@@ -66,7 +66,7 @@ class LEP_MarkdownView(HtmlView):
         """
         self.setHtml(to_html(text))
 
-    # @+node:tbrown.20171028115507.6: *3* LEP_MarkdownView.update_text
+    #@ LEP_MarkdownView.update_text
     def update_text(self, text):
         """update_text - update for current text
 
@@ -79,18 +79,18 @@ class LEP_MarkdownView(HtmlView):
         # self.horizontalScrollBar().setValue(h)
         # self.verticalScrollBar().setValue(v)
 
-    # @-others
+    #@-others
 
 
-# @+node:tbrown.20171028115507.7: ** class LEP_MarkdownHtmlView
+#@< class LEP_MarkdownHtmlView
 class LEP_MarkdownHtmlView(TextView):
     """LEP_MarkdownHtmlView - view the HTML for markdown"""
 
     lep_type = "MARKDOWN-HTML"
     lep_name = "Markdown(.py) Html View"
 
-    # @+others
-    # @+node:tbrown.20171028115507.8: *3* LEP_MarkdownHtmlView.__init__
+    #@+others
+    #@> LEP_MarkdownHtmlView.__init__
     def __init__(self, c=None, lep=None, *args, **kwargs):
         """set up"""
         kwargs['c'] = c
@@ -99,7 +99,7 @@ class LEP_MarkdownHtmlView(TextView):
         self.c = c
         self.lep = lep
 
-    # @+node:tbrown.20171028115507.9: *3* LEP_MarkdownHtmlView.new_text
+    #@ LEP_MarkdownHtmlView.new_text
     def new_text(self, text):
         """new_text - update for new text
 
@@ -108,10 +108,10 @@ class LEP_MarkdownHtmlView(TextView):
         """
         self.setPlainText(to_html(text))
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

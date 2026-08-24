@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20140726091031.18073: * @file ../plugins/writers/markdown.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20140726091031.18073] @f ../plugins/writers/markdown.py
 """The @auto write code for markdown."""
 
 import re
@@ -9,13 +9,13 @@ from leo.core.leoNodes import Position
 from leo.plugins.writers import basewriter
 
 
-# @+others
-# @+node:ekr.20140726091031.18075: ** class MarkdownWriter(BaseWriter)
+#@+others
+#@> class MarkdownWriter(BaseWriter)
 class MarkdownWriter(basewriter.BaseWriter):
     """The writer class for markdown files."""
 
-    # @+others
-    # @+node:axk.20260709120000.1: *3* mdw.has_noheader
+    #@+others
+    #@> mdw.has_noheader
     def has_noheader(self, p: Position) -> bool:
         """Return True if p contains a local @noheader directive."""
         for line in [p.h, *g.splitLines(p.b)]:
@@ -25,14 +25,14 @@ class MarkdownWriter(basewriter.BaseWriter):
                         return True
         return False
 
-    # @+node:axk.20260709133000.1: *3* mdw.noheader_marker
+    #@ mdw.noheader_marker
     def noheader_marker(self, p: Position) -> str:
         """Return the HTML comment marker for a hidden markdown node."""
         level = p.level() - self.root.level()
         headline = quote(p.h, safe='')
         return f"<!-- leo-noheader level={level} headline={headline} -->"
 
-    # @+node:ekr.20140726091031.18076: *3* mdw.write
+    #@ mdw.write
     def write(self, root: Position) -> None:
         """Write all the *descendants* of an @auto-markdown node."""
         self.root = root
@@ -53,7 +53,7 @@ class MarkdownWriter(basewriter.BaseWriter):
                         self.put(s)
         root.setVisited()
 
-    # @+node:ekr.20141110223158.20: *3* mdw.write_headline
+    #@ mdw.write_headline
     # Importer.create_placeholders creates headlines matching this pattern.
     placeholder_regex = re.compile(r'placeholder level [0-9]+')
 
@@ -77,17 +77,17 @@ class MarkdownWriter(basewriter.BaseWriter):
             # Leo 6.6.4: preserve spacing.
             self.put(f"{'#' * level} {p.h.lstrip()}")
 
-    # @+node:ekr.20171230170642.1: *3* mdw.write_root
+    #@ mdw.write_root
     def write_root(self, root: Position) -> None:
         """Write the root @auto-org node."""
         lines = [z for z in g.splitLines(root.b) if not g.isDirective(z)]
         for s in lines:  # pragma: no cover (the root node usually contains no extra text).
             self.put(s)
 
-    # @-others
+    #@-others
 
 
-# @-others
+#@-others
 writer_dict = {
     '@auto': [
         '@auto-md',
@@ -98,6 +98,6 @@ writer_dict = {
         '.md',
     ],
 }
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@@language python
+#@@tabwidth -4
+#@-leo

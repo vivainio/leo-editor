@@ -1,6 +1,6 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20240321123224.1: * @file ../scripts/run_installed_leo.py
-# @@language python
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20240321123224.1] @f ../scripts/run_installed_leo.py
+#@@language python
 
 """
 run_installed_leo.py: Run leo from Python's `site-packages` directory.
@@ -30,4 +30,4 @@ else:
     print(command)
     print('')
     subprocess.run(command, shell=True, check=False)
-# @-leo
+#@-leo

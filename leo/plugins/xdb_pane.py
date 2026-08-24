@@ -1,13 +1,13 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20181004143535.1: * @file ../plugins/xdb_pane.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20181004143535.1] @f ../plugins/xdb_pane.py
 # ty: don't check this file.
 """
 Creates a Debug tab in the log pane, containing buttons for common xdb
 commands, and an input area in which the user can type other commands.
 """
 
-# @+<< imports: xdb_pane.py >>
-# @+node:ekr.20220424085736.1: ** << imports: xdb_pane.py >>
+#@+<< imports: xdb_pane.py >>
+#@> << imports: xdb_pane.py >>
 from typing import Any
 from leo.core import leoGlobals as g
 from leo.core.leoQt import QtGui, QtWidgets
@@ -15,15 +15,15 @@ from leo.core.leoQt import ScrollBarPolicy, WrapMode
 
 # Fail fast, right after all imports.
 g.assertUi('qt')  # May raise g.UiTypeException, caught by the plugins manager.
-# @-<< imports: xdb_pane.py >>
+#@-<< imports: xdb_pane.py >>
 
 # Globals.
 controllers: dict[str, Any] = {}
 
 
-# @+others
-# @+node:ekr.20181005051820.1: ** Top-level functions
-# @+node:ekr.20181004143535.4: *3* init (xdb_pane.py)
+#@+others
+#@ Top-level functions
+#@> init (xdb_pane.py)
 def init():
     """Return True if the plugin has loaded successfully."""
     name = g.app.gui.guiName()
@@ -37,14 +37,14 @@ def init():
     return True
 
 
-# @+node:ekr.20181004143535.5: *3* onCreate (xdb_pane.py)
+#@ onCreate (xdb_pane.py)
 def onCreate(tag, key):
     c = key.get('c')
     c.xpd_pane = w = XdbPane(c)
     c.frame.log.createTab('Debug', widget=w)
 
 
-# @+node:ekr.20181004143535.7: ** class XdbPane
+#@< class XdbPane
 if g.app.gui.guiName() == "qt":
 
     class XdbPane(QtWidgets.QWidget):
@@ -55,8 +55,8 @@ if g.app.gui.guiName() == "qt":
             super().__init__()
             self.create()
 
-        # @+others
-        # @+node:ekr.20181005043209.1: *3* create & helpers
+        #@+others
+        #@> create & helpers
         def create(self):
             """Create the Debug tab in the Log pane."""
             c = self.c
@@ -70,7 +70,7 @@ if g.app.gui.guiName() == "qt":
             layout.addStretch()
             self.setLayout(layout)
 
-        # @+node:ekr.20181004182608.1: *4* create_buttons
+        #@> create_buttons
         def create_buttons(self, layout):
             """Create two rows of buttons."""
             vlayout = QtWidgets.QVBoxLayout()
@@ -98,7 +98,7 @@ if g.app.gui.guiName() == "qt":
                 vlayout.addLayout(hlayout)
             layout.addLayout(vlayout)
 
-        # @+node:ekr.20181005054101.1: *4* create_input_area
+        #@ create_input_area
         def create_input_area(self, layout):
             # Create the Label
             label = QtWidgets.QLabel()
@@ -113,7 +113,7 @@ if g.app.gui.guiName() == "qt":
             layout2.addWidget(w)
             layout.addLayout(layout2)
 
-        # @+node:ekr.20181006154605.1: *4* create_output_area
+        #@ create_output_area
         def create_output_area(self, layout):
             # Create the Label
             label = QtWidgets.QLabel()
@@ -129,13 +129,13 @@ if g.app.gui.guiName() == "qt":
             vlayout.addWidget(w)
             layout.addLayout(vlayout)
 
-        # @+node:ekr.20181004143535.20: *4* get_icon
+        #@ get_icon
         def get_icon(self, fn):
             """return the icon from Icons/debug_icons"""
             path = g.finalize_join(g.app.loadDir, '..', 'Icons', 'debug_icons', fn)
             return QtGui.QIcon(g.app.gui.getImageImage(path))
 
-        # @+node:ekr.20181005042637.1: *3* debug_*
+        #@< debug_*
         def debug_break(self, checked):
             self.c.doCommandByName('db-b')
 
@@ -174,7 +174,7 @@ if g.app.gui.guiName() == "qt":
         def debug_xdb(self, *args):
             self.c.doCommandByName('xdb')
 
-        # @+node:ekr.20181006161938.1: *3* write & clear
+        #@ write & clear
         def clear(self):
             """Clear the output area."""
             w = self.output_area
@@ -190,8 +190,8 @@ if g.app.gui.guiName() == "qt":
             else:
                 print(s.rstrip())
 
-        # @-others
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+        #@-others
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

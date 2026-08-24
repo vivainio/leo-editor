@@ -9,28 +9,28 @@
 <preferences/>
 <find_panel_settings/>
 <vnodes>
-<v t="bob.20180413130654.1"><vh>Automated tests</vh></v>
-<v t="bob.20180115163052.3"><vh>Python</vh>
-<v t="bob.20180205134933.1"><vh>Scripts executed by Ctrl-B</vh>
-<v t="bob.20180115164119.1"><vh>One example file, one results file</vh>
-<v t="bob.20180116151824.1"><vh>imports</vh></v>
-</v>
-</v>
-<v t="bob.20180205134946.1"><vh>Programs</vh>
-<v t="bob.20180125160225.1"><vh>@file tests.py</vh></v>
-</v>
-<v t="bob.20180205134900.1"><vh>Libraries</vh>
-<v t="bob.20180205135005.1"><vh>@file lib_test.py</vh></v>
-<v t="bob.20180206123613.1"><vh>@file idle_time.py</vh></v>
-</v>
-<v t="bob.20180220112341.1"><vh>Packaging</vh>
-<v t="bob.20180220112438.1"><vh>@nosent __init__.py</vh></v>
-</v>
-</v>
+  <v t="bob.20180413130654.1"><vh>Automated tests</vh></v>
+  <v t="bob.20180115163052.3"><vh>Python</vh>
+    <v t="bob.20180205134933.1"><vh>Scripts executed by Ctrl-B</vh>
+      <v t="bob.20180115164119.1"><vh>One example file, one results file</vh>
+        <v t="bob.20180116151824.1"><vh>imports</vh></v>
+      </v>
+    </v>
+    <v t="bob.20180205134946.1"><vh>Programs</vh>
+      <v t="bob.20180125160225.1"><vh>@f tests.py</vh></v>
+    </v>
+    <v t="bob.20180205134900.1"><vh>Libraries</vh>
+      <v t="bob.20180205135005.1"><vh>@f lib_test.py</vh></v>
+      <v t="bob.20180206123613.1"><vh>@f idle_time.py</vh></v>
+    </v>
+    <v t="bob.20180220112341.1"><vh>Packaging</vh>
+      <v t="bob.20180220112438.1"><vh>@nosent __init__.py</vh></v>
+    </v>
+  </v>
 </vnodes>
 <tnodes>
-<t tx="bob.20180115163052.3">@language python</t>
-<t tx="bob.20180115164119.1">@others
+  <t tx="bob.20180115163052.3">@language python</t>
+  <t tx="bob.20180115164119.1">@others
 
 while True:
     fpnTests, _ = QtWidgets.QFileDialog.getOpenFileName(parent=None, caption='Leo-Editor File containing tests',
@@ -49,7 +49,7 @@ genFindTests = lib_test.findTests(cmdrT)
 itPoll = leoG.IdleTime((lambda itRunTests: lib_test.runTests(itRunTests, cmdrT, fdR, testCmdr, genFindTests)), delay=10)
 itPoll.start()
 </t>
-<t tx="bob.20180116151824.1">import codecs
+  <t tx="bob.20180116151824.1">import codecs
 import os
 
 from PyQt5 import QtWidgets
@@ -57,12 +57,7 @@ from PyQt5 import QtWidgets
 import leo.core.leoGlobals as leoG
 
 from leo_babel.tests import lib_test</t>
-<t tx="bob.20180205134900.1"></t>
-<t tx="bob.20180205134933.1"></t>
-<t tx="bob.20180205134946.1"></t>
-<t tx="bob.20180220112341.1"></t>
-<t tx="bob.20180220112438.1"></t>
-<t tx="bob.20180413130654.1">Run in the tests sub-directory:
+  <t tx="bob.20180413130654.1">Run in the tests sub-directory:
 
 ./tests.py ../examples/examples_error.leo ../results/error.txt
 ./tests.py ../examples/examples_external.leo ../results/external.txt

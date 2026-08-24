@@ -1,7 +1,46 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20040915105758.13: * @file ../plugins/FileActions.py
-# @+<< docstring >>
-# @+node:ekr.20050912180106: ** << docstring >> (fileActions.py)
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20040915105758.13] @f ../plugins/FileActions.py
+#@+<< docstring >>
+#@-<< docstring >>
+
+# Written by Konrad Hinsen <konrad.hinsen@laposte.net>
+# Edited by TL and EKR.
+# Distributed under the same licence as Leo.
+
+#@+<< imports >>
+#@> << imports >>
+import fnmatch
+import os
+import subprocess
+import sys
+import tempfile
+from leo.core import leoGlobals as g
+#@-<< imports >>
+#@+<< define the directives that are handled by this plugin >>
+#@ << define the directives that are handled by this plugin >>
+# be used for actions on files that are not read or written by Leo at all, they
+# are just referenced to be possible targets of file actions.
+#@@c
+
+file_directives = [
+    "@file",
+    "@thin",
+    "@file-thin",
+    "@thinfile",
+    "@asis",
+    "@file-asis",
+    "@silentfile",
+    "@nosent",
+    "@file-nosent",
+    "@nosentinelsfile",
+    "@file-ref",
+    "@shadow",
+]
+#@-<< define the directives that are handled by this plugin >>
+
+
+#@+others
+#@ << docstring >> (fileActions.py)
 r"""Defines actions taken when double-clicking on @<file> nodes and supports
 @file-ref nodes.
 
@@ -35,47 +74,7 @@ node type @file-ref for referring to files purely for the purpose of file
 actions, Leo does not do anything with or to such files.
 
 """
-# @-<< docstring >>
-
-# Written by Konrad Hinsen <konrad.hinsen@laposte.net>
-# Edited by TL and EKR.
-# Distributed under the same licence as Leo.
-
-# @+<< imports >>
-# @+node:ekr.20090317093747.1: ** << imports >>
-import fnmatch
-import os
-import subprocess
-import sys
-import tempfile
-from leo.core import leoGlobals as g
-# @-<< imports >>
-# @+<< define the directives that are handled by this plugin >>
-# @+node:ekr.20040915110738.2: ** << define the directives that are handled by this plugin >>
-# @+at The @file-ref directive is not used elsewhere by Leo. It is meant to
-# be used for actions on files that are not read or written by Leo at all, they
-# are just referenced to be possible targets of file actions.
-# @@c
-
-file_directives = [
-    "@file",
-    "@thin",
-    "@file-thin",
-    "@thinfile",
-    "@asis",
-    "@file-asis",
-    "@silentfile",
-    "@nosent",
-    "@file-nosent",
-    "@nosentinelsfile",
-    "@file-ref",
-    "@shadow",
-]
-# @-<< define the directives that are handled by this plugin >>
-
-
-# @+others
-# @+node:ekr.20060108162524: ** init (FileActions.py)
+#@ init (FileActions.py)
 def init():
     """Return True if the plugin has loaded successfully."""
     ok = not g.unitTesting  # Dangerous for unit testing.
@@ -85,7 +84,7 @@ def init():
     return ok
 
 
-# @+node:ekr.20040915105758.14: ** onIconDoubleClick
+#@ onIconDoubleClick
 def onIconDoubleClick(tag, keywords):
     c = keywords.get("c")
     p = keywords.get("p")
@@ -112,7 +111,7 @@ def onIconDoubleClick(tag, keywords):
     return None
 
 
-# @+node:ekr.20040915105758.15: ** doFileAction
+#@ doFileAction
 def doFileAction(filename, c):
     p = g.findNodeAnywhere(c, "FileActions")
     if p:
@@ -132,7 +131,7 @@ def doFileAction(filename, c):
     return False  # TL - Inform onIconDoubleClick that no action was taken
 
 
-# @+node:ekr.20040915105758.16: ** applyFileAction
+#@ applyFileAction
 def applyFileAction(p, filename, c):
     script = g.getScript(c, p)
     redirect = c.config.getBool('redirect-execute-script-output-to-log_pane')
@@ -163,18 +162,18 @@ def applyFileAction(p, filename, c):
         os.chdir(working_directory)
 
 
-# @+node:ekr.20040915105758.20: ** shellScriptInWindow
+#@ shellScriptInWindow
 def shellScriptInWindow(c, script):
     if sys.platform == 'darwin':
-        # @+<< write script to temporary MacOS file >>
-        # @+node:ekr.20040915105758.22: *3* << write script to temporary MacOS file >>
+        #@+<< write script to temporary MacOS file >>
+        #@> << write script to temporary MacOS file >>
         handle, path = tempfile.mkstemp(text=True)
         directory = c.frame.openDirectory
         script = ("cd %s\n" % directory) + script + '\n' + ("rm -f %s\n" % path)
         os.write(handle, script)
         os.close(handle)
         os.chmod(path, 0x700)
-        # @-<< write script to temporary MacOS file >>
+        #@-<< write script to temporary MacOS file >>
         subprocess.run(
             "open -a /Applications/Utilities/Terminal.app " + path, shell=True, check=False
         )
@@ -183,20 +182,20 @@ def shellScriptInWindow(c, script):
         g.error("shellScriptInWindow not ready for Windows")
 
     else:
-        # @+<< write script to temporary Unix file >>
-        # @+node:ekr.20040915105758.25: *3* << write script to temporary Unix file >>
+        #@+<< write script to temporary Unix file >>
+        #@ << write script to temporary Unix file >>
         handle, path = tempfile.mkstemp(text=True)
         directory = c.frame.openDirectory
         script = ("cd %s\n" % directory) + script + '\n' + ("rm -f %s\n" % path)
         os.write(handle, script)
         os.close(handle)
         os.chmod(path, 0x700)
-        # @-<< write script to temporary Unix file >>
+        #@-<< write script to temporary Unix file >>
         subprocess.run("xterm -e sh  " + path, shell=True, check=False)
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
+#@-others
+#@@language python
+#@@tabwidth -4
 
-# @-leo
+#@-leo

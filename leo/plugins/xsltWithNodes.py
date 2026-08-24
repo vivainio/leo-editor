@@ -1,7 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:mork.20041010095009: * @file ../plugins/xsltWithNodes.py
-# @+<< docstring >>
-# @+node:ekr.20050226120104: ** << docstring >>
+#@+leo-ver=cub-1-thin
+#@0 [mork.20041010095009] @f ../plugins/xsltWithNodes.py
+#@+<< docstring >>
+#@> << docstring >>
 """Adds the Outline:XSLT menu containing XSLT-related commands.
 
 This menu contains the following items:
@@ -18,9 +18,9 @@ Requires 4Suite 1.0a3 or better, downloadable from http://4Suite.org.
 
 """
 
-# @-<< docstring >>
-# @+<< imports >>
-# @+node:mork.20041025113509: ** << imports >>
+#@-<< docstring >>
+#@+<< imports >>
+#@ << imports >>
 import io
 import weakref
 from xml.dom import minidom
@@ -36,13 +36,12 @@ except ImportError:
     Ft = None
 # Abbreviation.
 StringIO = io.StringIO
-# @-<< imports >>
-# @+<<parser problems>>
-# @+node:mork.20041024091024: ** <<parser problems>>
-# @@killcolor
+#@-<< imports >>
+#@+<<parser problems>>
+#@ <<parser problems>>
+#@@killcolor
 
 
-# @+at
 # 1. Having space before the start of the document caused it not to work. I fixed
 #    this by striping the whitespace from the start and end of the data at xslt
 #    time.
@@ -54,9 +53,9 @@ StringIO = io.StringIO
 #     @</end>
 #
 #     I dont know at this point if its just illegal xml, or its a problem in the parser. ??
-# @-<<parser problems>>
-# @+others
-# @+node:ekr.20050226120104.1: ** init
+#@-<<parser problems>>
+#@+others
+#@ init
 def init():
     """Return True if the plugin has loaded successfully."""
     ok = Ft
@@ -66,7 +65,7 @@ def init():
     return ok
 
 
-# @+node:mork.20041025115037: ** xslt elements
+#@ xslt elements
 # This dict contains elements that go into a stylesheet
 xslt = {
     'apply-imports': '<xsl:apply-imports/>',
@@ -105,7 +104,7 @@ xslt = {
     'when': "<xsl:when text='' > </xsl:when>",
     'with-param': "<xsl:with-param name=''> </xsl:with-param>",
 }
-# @+node:mork.20041010095202: ** setStyleNode
+#@ setStyleNode
 stylenodes: weakref.WeakKeyDictionary = weakref.WeakKeyDictionary()
 
 
@@ -115,7 +114,7 @@ def setStyleNode(c):
     stylenodes[c] = position
 
 
-# @+node:mork.20041010095202.1: ** processDocumentNode
+#@ processDocumentNode
 def processDocumentNode(c):
     """this executes the stylesheet node against the current node"""
     try:
@@ -154,7 +153,7 @@ def processDocumentNode(c):
     c.redraw()
 
 
-# @+node:mork.20041025121608: ** addXSLTNode
+#@ addXSLTNode
 def addXSLTNode(c):
     """creates a node and inserts some xslt boilerplate"""
     pos = c.p
@@ -169,14 +168,14 @@ def addXSLTNode(c):
     c.redraw()
 
 
-# @+node:mork.20041010110121: ** addXSLTElement
+#@ addXSLTElement
 def addXSLTElement(c, element):
     """adds some xslt to the text node"""
     w = c.frame.body.wrapper
     w.insert('insert', element)
 
 
-# @+node:mork.20041025113021: ** getString (xsltWithNodes.py)
+#@ getString (xsltWithNodes.py)
 def getString(c):
     """
     This def turns a node into a string using Leo's file-nosent write logic.
@@ -188,7 +187,7 @@ def getString(c):
     return cleanString(at.stringOutput)
 
 
-# @+node:mork.20041025120706: ** doMinidomTest
+#@ doMinidomTest
 def doMinidomTest(c):
     """
     This def performs a simple test on a node.
@@ -204,7 +203,7 @@ def doMinidomTest(c):
     g.blue("Minidom could parse the node")
 
 
-# @+node:mork.20041025090303: ** cleanString
+#@ cleanString
 def cleanString(data):
     """This method cleans a string up for the processor.  It currently just removes
     leading and trailing whitespace"""
@@ -213,7 +212,7 @@ def cleanString(data):
     return val
 
 
-# @+node:mork.20041010125444: ** jumpToStyleNode
+#@ jumpToStyleNode
 def jumpToStyleNode(c):
     """Simple method that jumps us to the current XSLT node"""
     if not styleNodeSelected(c):
@@ -223,7 +222,7 @@ def jumpToStyleNode(c):
     c.redraw()
 
 
-# @+node:mork.20041010125444.1: ** styleNodeSelected
+#@ styleNodeSelected
 def styleNodeSelected(c):
     """Determines if a XSLT Style node has not been selected"""
     if c not in stylenodes:
@@ -232,7 +231,7 @@ def styleNodeSelected(c):
     return True
 
 
-# @+node:mork.20041010100633: ** addMenu
+#@ addMenu
 def addMenu(tag, keywords):
     c = keywords.get('c')
     if not c:
@@ -268,22 +267,21 @@ def addMenu(tag, keywords):
     c.add_command(menu3, label='Test Node with Minidom', command=lambda c=c: doMinidomTest(c))
 
 
-# @+node:mork.20041025100716: ** examples/tests
-# @+at
+#@ examples/tests
 # table.leo contains the xml.  xslt is in the other node.
 #
 # To test this plugin, set the xslt node to be the xslt node.
 #
 # Process it against the table.leo node.
-# @@c
+#@@c
 
 # pylint: disable=pointless-string-statement
 
 r"""
-# @+others
-# @+node:ekr.20140906065955.18786: *3* table.leo
-# @@path /boboo/leo-4.2-final/plugins
-# @+node:ekr.20140906065955.18787: *4* @@nosent table.py
+#@+others
+#@> table.leo
+#@@path /boboo/leo-4.2-final/plugins
+#@> @@nosent table.py
 import csv
 import io
 StringIO = io.StringIO
@@ -295,8 +293,8 @@ from leo.core import leoGlobals as g
 
 class CSVVisualizer:
     arrays = []
-    # @+others
-    # @+node:ekr.20140906065955.18788: *5* init
+    #@+others
+    #@> init
     def __init__( self, c ):
 
         self.c = c
@@ -308,7 +306,7 @@ class CSVVisualizer:
 
 
 
-    # @+node:ekr.20140906065955.18789: *5* addData
+    #@ addData
     def addData( self ):
 
         arr = self.arr
@@ -323,7 +321,7 @@ class CSVVisualizer:
         return self.columns, self.rows
 
 
-    # @+node:ekr.20140906065955.18790: *5* readData
+    #@ readData
     def readData( self ):
 
         c = self.c
@@ -337,7 +335,7 @@ class CSVVisualizer:
         reader = csv.reader( cS, self.type )
         return reader
 
-    # @+node:ekr.20140906065955.18791: *5* writeData
+    #@ writeData
     def writeData( self, save ):
 
         pos = self.c.p
@@ -365,7 +363,7 @@ class CSVVisualizer:
         self.c.redraw()
 
 
-    # @+node:ekr.20140906065955.18792: *5* addColumn
+    #@ addColumn
     def addColumn( self, tab ):
 
         self.columns = self.columns + 1
@@ -375,7 +373,7 @@ class CSVVisualizer:
 
 
 
-    # @+node:ekr.20140906065955.18793: *5* deleteColumn
+    #@ deleteColumn
     def deleteColumn( self, tab ):
 
         i = tab.index( 'active' )
@@ -383,7 +381,7 @@ class CSVVisualizer:
             tab.delete_cols( i[ 1 ], 1 )
             self.columns = self.columns - 1
 
-    # @+node:ekr.20140906065955.18794: *5* addRow
+    #@ addRow
     def addRow( self , tab ):
 
         self.rows = self.rows + 1
@@ -396,14 +394,14 @@ class CSVVisualizer:
 
 
 
-    # @+node:ekr.20140906065955.18795: *5* deleteRow
+    #@ deleteRow
     def deleteRow( self, tab ):
 
         i = tab.index( 'active' )
         if i:
             tab.delete_rows( i[ 0 ], 1 )
             self.rows = self.rows - 1
-    # @+node:ekr.20140906065955.18796: *5* createDefaultRecord
+    #@ createDefaultRecord
     def createDefaultRecord( self, rows, columns ):
 
         self.rows = rows
@@ -412,7 +410,7 @@ class CSVVisualizer:
             for z1 in range( columns ):
                 self.arr.set( '%s,%s' %( z, z1 ), "" )
 
-    # @+node:ekr.20140906065955.18797: *5* newTable
+    #@ newTable
     def newTable( c ):
 
         pos = c.p
@@ -423,7 +421,7 @@ class CSVVisualizer:
         viewTable( c , True )
 
 
-    # @+node:ekr.20140906065955.18798: *5* viewTable
+    #@ viewTable
     def viewTable( c, new = False ):
 
         pos = c.p
@@ -444,7 +442,7 @@ class CSVVisualizer:
         dialog.activate()
 
 
-    # @+node:ekr.20140906065955.18799: *5* fireButton
+    #@ fireButton
     def fireButton( name, dialog, csvv ):
 
         if name == "Close":
@@ -455,7 +453,7 @@ class CSVVisualizer:
         elif name == "Save To Current":
             csvv.writeData( True )
 
-    # @+node:ekr.20140906065955.18800: *5* createDialog
+    #@ createDialog
     def createDialog( pos ):
 
         dialog = Pmw.Dialog( title = "Table Editor for " + str( pos.h),
@@ -466,7 +464,7 @@ class CSVVisualizer:
         return dialog
 
 
-    # @+node:ekr.20140906065955.18801: *5* createTable (table.py)
+    #@ createTable (table.py)
     def createTable( parent , arr ):
 
         tab = tktab.Table(parent,
@@ -478,7 +476,7 @@ class CSVVisualizer:
         tab.pack()
         return tab
 
-    # @+node:ekr.20140906065955.18802: *5* createBBox
+    #@ createBBox
     def createBBox( parent, csvv, tab ):
 
         bbox = Pmw.ButtonBox( parent )
@@ -491,7 +489,7 @@ class CSVVisualizer:
         bbox.pack()
 
 
-    # @+node:ekr.20140906065955.18803: *5* addMenu
+    #@ addMenu
     haveseen = weakref.WeakKeyDictionary()
     def addMenu( tag, keywords ):
         c = keywords.get('c') or keywords.get('new_c')
@@ -509,15 +507,15 @@ class CSVVisualizer:
 
 
 
-    # @+node:ekr.20140906065955.18804: *5* if 1:
+    #@ if 1:
     if 1:
 
         registerHandler( ('start2' , 'open2', "new") , addMenu )
         g.plugin_signon( __name__ )
 
-    # @-others
+    #@-others
 
-# @+node:mork.20041025100851.1: *3* xslt to turn leo file into html
+#@<2 xslt to turn leo file into html
 <?xml version="1.0"?>
 <xsl:transform xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 <xsl:output method = 'xml' />
@@ -562,10 +560,10 @@ class CSVVisualizer:
     </xsl:for-each>
 </xsl:template>
 </xsl:transform>
-# @-others
+#@-others
 """
-# @-others
-# @@language python
-# @@tabwidth -4
+#@-others
+#@@language python
+#@@tabwidth -4
 
-# @-leo
+#@-leo

@@ -1,16 +1,16 @@
-# @+leo-ver=5-thin
-# @+node:ville.20091010232339.6117: * @file ../external/lproto.py
-# @+<< docstring >>
-# @+node:ville.20091010205847.1364: ** << docstring >>
+#@+leo-ver=cub-1-thin
+#@0 [ville.20091010232339.6117] @f ../external/lproto.py
+#@+<< docstring >>
+#@> << docstring >>
 """lproto - simple local socket protocol dispatcher (reactor) for PyQt
 
 Author: Ville M. Vainio <vivainio@gmail.com>
 
 """
 
-# @-<< docstring >>
-# @+<< imports >>
-# @+node:ville.20091009234538.1373: ** << imports >>
+#@-<< docstring >>
+#@+<< imports >>
+#@ << imports >>
 # todo remove dependency on Qt.
 import os
 import socket
@@ -24,8 +24,8 @@ else:
     from PyQt4 import QtNetwork  # type:ignore
 
 
-# @-<< imports >>
-# @@killbeautify
+#@-<< imports >>
+#@@killbeautify
 # EKR: use this by default.
 if hasattr(socket, 'AF_UNIX'):
     standard_leo_socket_name = os.path.expanduser('~/.leo/leoserv_sockname')
@@ -33,8 +33,8 @@ else:
     standard_leo_socket_name = '(172.16.0.0:1)'  # A hack.
 
 
-# @+others
-# @+node:tbrown.20130319124904.18711: ** lprint
+#@+others
+#@ lprint
 def lprint(*args):
     """lprint "Log Print" - print args
 
@@ -50,13 +50,13 @@ def lprint(*args):
     return
 
 
-# @+node:ville.20091010205847.1363: ** sending
+#@ sending
 def mk_send_bytes(msg):
     lendesc = struct.pack('I', len(msg))
     return lendesc + msg
 
 
-# @+node:ville.20091010205847.1362: ** class LProtoBuf
+#@ class LProtoBuf
 class LProtoBuf:
     def __init__(self):
         self.plen = -1
@@ -99,10 +99,10 @@ class LProtoBuf:
         lprint("in buf", self.buf)
 
 
-# @+node:ville.20091009234538.1374: ** class LProtoServer
+#@ class LProtoServer
 class LProtoServer:
-    # @+others
-    # @+node:ekr.20111012070545.7254: *3* __init__ (LProtoServer)
+    #@+others
+    #@> __init__ (LProtoServer)
     def __init__(self):
         self.srv = QtNetwork.QLocalServer()
         self.receiver = None
@@ -112,21 +112,21 @@ class LProtoServer:
             self.srv, QtCore.SIGNAL("newConnection()"), self.connected
         )
 
-    # @+node:ekr.20111012070545.7255: *3* listen
+    #@ listen
     def listen(self, name):
         self.srv.listen(name)
         lprint("lproto.py: listen on", self.srv.fullServerName())
 
-    # @+node:ekr.20111012070545.7256: *3* msg_received
+    #@ msg_received
     def msg_received(self, msg, ses):
         if self.receiver:
             self.receiver(msg, ses)
 
-    # @+node:ekr.20111012070545.7257: *3* set_receiver
+    #@ set_receiver
     def set_receiver(self, receiver):
         self.receiver = receiver
 
-    # @+node:ekr.20111012070545.7258: *3* connected
+    #@ connected
     def connected(self):
         '''Event handler for newConnection.'''
 
@@ -152,17 +152,17 @@ class LProtoServer:
         lsock.connect(lsock, QtCore.SIGNAL('readyRead()'), readyread_cb)
         # self.connect(self.qsock, SIGNAL('connectionClosed()'), self.handleClosed)
 
-    # @+node:ekr.20111012091630.9385: *3* readyread
+    #@ readyread
     def readyread(self):
         pass
 
-    # @-others
+    #@-others
 
 
-# @+node:ville.20091010233144.10051: ** class LProtoClient
+#@< class LProtoClient
 class LProtoClient:
-    # @+others
-    # @+node:ekr.20111012070545.7210: *3* ctor (LProtoClient)
+    #@+others
+    #@> ctor (LProtoClient)
     def __init__(self, fname=standard_leo_socket_name):
         self.socket_name = fname
 
@@ -173,7 +173,7 @@ class LProtoClient:
         else:
             self.recvbuf = None
 
-    # @+node:ekr.20111012070545.7212: *3* connect
+    #@ connect
     def connect(self, fname):
         '''Connect to the server.  Return True if the connection was established.'''
         if hasattr(socket, 'AF_UNIX'):
@@ -200,16 +200,16 @@ class LProtoClient:
                 g.es_exception()
                 return False
 
-    # @+node:ekr.20111012070545.7211: *3* send
+    #@ send
     def send(self, msg):
         byts = mk_send_bytes(msg)
         self.socket.sendall(byts)
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @@pagewidth 70
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@@pagewidth 70
+#@-leo

@@ -1,9 +1,9 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20171123095353.1: * @file ../commands/commanderFileCommands.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20171123095353.1] @f ../commands/commanderFileCommands.py
 """File commands that used to be defined in leoCommands.py"""
 
-# @+<< commanderFileCommands imports & annotations >>
-# @+node:ekr.20220826120852.1: ** << commanderFileCommands imports & annotations >>
+#@+<< commanderFileCommands imports & annotations >>
+#@> << commanderFileCommands imports & annotations >>
 from __future__ import annotations
 import os
 import sys
@@ -20,12 +20,12 @@ if TYPE_CHECKING:  # pragma: no cover
     from leo.core.leoNodes import Position
 
     Self = Cmdr  # For @g.commander_command.
-# @-<< commanderFileCommands imports & annotations >>
+#@-<< commanderFileCommands imports & annotations >>
 
 
-# @+others
-# @+node:ekr.20231008163009.1: **  top-level helper functions
-# @+node:ekr.20231008163338.1: *3* function: do_error_dialogs
+#@+others
+#@  top-level helper functions
+#@> function: do_error_dialogs
 def do_error_dialogs(c: Cmdr) -> None:
     """
     Raise error dialogs.
@@ -36,7 +36,7 @@ def do_error_dialogs(c: Cmdr) -> None:
     c.raise_error_dialogs(kind='write')
 
 
-# @+node:ekr.20231008163048.1: *3* function: set_name_and_title
+#@ function: set_name_and_title
 def set_name_and_title(c: Cmdr, fileName: str) -> str:
     """
     Compute the finalized name for c.mFileName. Set related ivars.
@@ -63,7 +63,7 @@ def set_name_and_title(c: Cmdr, fileName: str) -> str:
     return c.mFileName
 
 
-# @+node:ekr.20170221033738.1: ** c_file.reloadSettings
+#@< c_file.reloadSettings
 @g.commander_command('reload-settings')
 def reloadSettings(self: Self, event: LeoKeyEvent | None = None) -> None:
     """Reload settings in all commanders, saving all existing opened files first"""
@@ -85,7 +85,7 @@ def reloadSettings(self: Self, event: LeoKeyEvent | None = None) -> None:
         c.reloadConfigurableSettings()
 
 
-# @+node:ekr.20200422075655.1: ** c_file.restartLeo
+#@ c_file.restartLeo
 @g.commander_command('restart-leo')
 def restartLeo(self: Self, event: LeoKeyEvent | None = None) -> None:
     """Restart Leo, reloading all presently open outlines."""
@@ -160,8 +160,8 @@ def restartLeo(self: Self, event: LeoKeyEvent | None = None) -> None:
     subprocess.run(args)  # pylint: disable=subprocess-run-check
 
 
-# @+node:ekr.20031218072017.2820: ** c_file.top level
-# @+node:ekr.20031218072017.2833: *3* c_file.close
+#@ c_file.top level
+#@> c_file.close
 @g.commander_command('close-window')
 def close(
     self: Self,
@@ -172,7 +172,7 @@ def close(
     g.app.closeLeoWindow(self.frame, new_c=new_c)
 
 
-# @+node:ekr.20110530124245.18245: *3* c_file.importAnyFile
+#@ c_file.importAnyFile
 @g.commander_command('import-any-file')
 @g.commander_command('import-file')
 def importAnyFile(self: Self, event: LeoKeyEvent | None = None) -> None:
@@ -278,7 +278,7 @@ g.command_alias('importNowebFiles', importAnyFile)
 g.command_alias('importTabFiles', importAnyFile)
 
 
-# @+node:ekr.20200306043104.1: *3* c_file.import_txt_file
+#@ c_file.import_txt_file
 @g.commander_command('import-text-file')
 def import_txt_file(self: Self, fn: str) -> None:
     """Import the .txt file into a new node."""
@@ -295,7 +295,7 @@ def import_txt_file(self: Self, fn: str) -> None:
     c.redraw(p)
 
 
-# @+node:ekr.20031218072017.1623: *3* c_file.new
+#@ c_file.new
 @g.commander_command('file-new')
 @g.commander_command('new')
 def new(self: Self, event: LeoKeyEvent | None = None, gui: LeoGui | None = None) -> Cmdr:
@@ -364,7 +364,7 @@ def new(self: Self, event: LeoKeyEvent | None = None, gui: LeoGui | None = None)
     return c  # For unit tests and scripts.
 
 
-# @+node:ekr.20031218072017.2821: *3* c_file.open_outline
+#@ c_file.open_outline
 @g.commander_command('open-file')
 @g.commander_command('open-outline')
 def open_outline(self: Self, event: LeoKeyEvent | None = None) -> None:
@@ -379,7 +379,7 @@ def open_outline(self: Self, event: LeoKeyEvent | None = None) -> None:
         g.openWithFileName(fileName, old_c=c)
 
 
-# @+node:ekr.20140717074441.17772: *3* c_file.refreshFromDisk
+#@ c_file.refreshFromDisk
 @g.commander_command('refresh-from-disk')
 def refreshFromDisk(
     self: Self,
@@ -435,14 +435,14 @@ def refreshFromDisk(
     c.undoer.clearAndWarn('refresh-from-disk')
 
 
-# @+node:ekr.20210610083257.1: *3* c_file.pwd
+#@ c_file.pwd
 @g.commander_command('pwd')
 def pwd_command(self: Self, event: LeoKeyEvent | None = None) -> None:
     """Print the current working directory."""
     g.es_print('pwd:', os.getcwd())
 
 
-# @+node:ekr.20031218072017.2834: *3* c_file.save
+#@ c_file.save
 @g.commander_command('save')
 @g.commander_command('file-save')
 @g.commander_command('save-file')
@@ -505,7 +505,7 @@ def save(
         do_error_dialogs(c)
 
 
-# @+node:ekr.20110228162720.13980: *3* c_file.saveAll
+#@ c_file.saveAll
 @g.commander_command('save-all')
 def saveAll(self: Self, event: LeoKeyEvent | None = None) -> None:
     """Save all open tabs windows/tabs."""
@@ -520,7 +520,7 @@ def saveAll(self: Self, event: LeoKeyEvent | None = None) -> None:
     dw.select(c)
 
 
-# @+node:ekr.20031218072017.2835: *3* c_file.saveAs
+#@ c_file.saveAs
 @g.commander_command('save-as')
 @g.commander_command('file-save-as')
 @g.commander_command('save-file-as')
@@ -574,7 +574,7 @@ def saveAs(self: Self, event: LeoKeyEvent | None = None, fileName: str | None = 
         do_error_dialogs(c)
 
 
-# @+node:ekr.20031218072017.2836: *3* c_file.saveTo
+#@ c_file.saveTo
 @g.commander_command('save-to')
 @g.commander_command('file-save-to')
 @g.commander_command('save-file-to')
@@ -625,7 +625,7 @@ def saveTo(
         do_error_dialogs(c)
 
 
-# @+node:ekr.20031218072017.2837: *3* c_file.revert
+#@ c_file.revert
 @g.commander_command('revert')
 def revert(self: Self, event: LeoKeyEvent | None = None) -> None:
     """Revert the contents of a Leo outline to last saved contents."""
@@ -646,7 +646,7 @@ def revert(self: Self, event: LeoKeyEvent | None = None) -> None:
         u.clearUndoState()
 
 
-# @+node:ekr.20210316075815.1: *3* c_file.save-as-leojs
+#@ c_file.save-as-leojs
 @g.commander_command('file-save-as-leojs')
 @g.commander_command('save-file-as-leojs')
 def save_as_leojs(self: Self, event: LeoKeyEvent | None = None) -> None:
@@ -671,7 +671,7 @@ def save_as_leojs(self: Self, event: LeoKeyEvent | None = None) -> None:
     c.fileCommands.putSavedMessage(fileName)
 
 
-# @+node:ekr.20070413045221: *3* c_file.save-as-zipped
+#@ c_file.save-as-zipped
 @g.commander_command('file-save-as-db')
 @g.commander_command('save-file-as-db')
 def save_as_db(self: Self, event: LeoKeyEvent | None = None) -> None:
@@ -696,7 +696,7 @@ def save_as_db(self: Self, event: LeoKeyEvent | None = None) -> None:
     c.fileCommands.putSavedMessage(fileName)
 
 
-# @+node:ekr.20210316075357.1: *3* c_file.save-as-xml
+#@ c_file.save-as-xml
 @g.commander_command('file-save-as-xml')
 @g.commander_command('save-file-as-xml')
 def save_as_xml(self: Self, event: LeoKeyEvent | None = None) -> None:
@@ -722,7 +722,7 @@ def save_as_xml(self: Self, event: LeoKeyEvent | None = None) -> None:
     c.fileCommands.putSavedMessage(fileName)
 
 
-# @+node:tom.20220310092720.1: *3* c_file.save-node-as-xml
+#@ c_file.save-node-as-xml
 @g.commander_command('save-node-as-xml')
 def save_node_as_xml_outline(self: Self, event: LeoKeyEvent | None = None) -> None:
     """
@@ -746,8 +746,8 @@ def save_node_as_xml_outline(self: Self, event: LeoKeyEvent | None = None) -> No
             f.write(xml)
 
 
-# @+node:ekr.20031218072017.2849: ** Export
-# @+node:ekr.20031218072017.2850: *3* c_file.exportHeadlines
+#@< Export
+#@> c_file.exportHeadlines
 @g.commander_command('export-headlines')
 def exportHeadlines(self: Self, event: LeoKeyEvent | None = None) -> None:
     """Export headlines for c.p and its subtree to an external file."""
@@ -764,7 +764,7 @@ def exportHeadlines(self: Self, event: LeoKeyEvent | None = None) -> None:
         c.importCommands.exportHeadlines(fileName)
 
 
-# @+node:ekr.20031218072017.2851: *3* c_file.flattenOutline
+#@ c_file.flattenOutline
 @g.commander_command('flatten-outline')
 def flattenOutline(self: Self, event: LeoKeyEvent | None = None) -> None:
     """
@@ -784,7 +784,7 @@ def flattenOutline(self: Self, event: LeoKeyEvent | None = None) -> None:
         c.importCommands.flattenOutline(fileName)
 
 
-# @+node:ekr.20141030120755.12: *3* c_file.flattenOutlineToNode
+#@ c_file.flattenOutlineToNode
 @g.commander_command('flatten-outline-to-node')
 def flattenOutlineToNode(self: Self, event: LeoKeyEvent | None = None) -> None:
     """
@@ -812,7 +812,7 @@ def flattenOutlineToNode(self: Self, event: LeoKeyEvent | None = None) -> None:
     c.redraw(p)
 
 
-# @+node:ekr.20031218072017.2857: *3* c_file.outlineToCWEB
+#@ c_file.outlineToCWEB
 @g.commander_command('outline-to-cweb')
 def outlineToCWEB(self: Self, event: LeoKeyEvent | None = None) -> None:
     """
@@ -833,7 +833,7 @@ def outlineToCWEB(self: Self, event: LeoKeyEvent | None = None) -> None:
         c.importCommands.outlineToWeb(fileName, "cweb")
 
 
-# @+node:ekr.20031218072017.2858: *3* c_file.outlineToNoweb
+#@ c_file.outlineToNoweb
 @g.commander_command('outline-to-noweb')
 def outlineToNoweb(self: Self, event: LeoKeyEvent | None = None) -> None:
     """
@@ -855,7 +855,7 @@ def outlineToNoweb(self: Self, event: LeoKeyEvent | None = None) -> None:
         c.outlineToNowebDefaultFileName = fileName
 
 
-# @+node:ekr.20031218072017.2859: *3* c_file.removeSentinels
+#@ c_file.removeSentinels
 @g.commander_command('remove-sentinels')
 def removeSentinels(self: Self, event: LeoKeyEvent | None = None) -> None:
     """
@@ -878,7 +878,7 @@ def removeSentinels(self: Self, event: LeoKeyEvent | None = None) -> None:
         c.importCommands.removeSentinelsCommand(names)
 
 
-# @+node:ekr.20031218072017.2860: *3* c_file.weave
+#@ c_file.weave
 @g.commander_command('weave')
 def weave(self: Self, event: LeoKeyEvent | None = None) -> None:
     """Simulate a literate-programming weave operation by writing the outline to a text file."""
@@ -898,8 +898,8 @@ def weave(self: Self, event: LeoKeyEvent | None = None) -> None:
         c.importCommands.weave(fileName)
 
 
-# @+node:ekr.20031218072017.2838: ** Read/Write
-# @+node:ekr.20070806105721.1: *3* c_file.readAtAutoNodes
+#@< Read/Write
+#@> c_file.readAtAutoNodes
 @g.commander_command('read-at-auto-nodes')
 def readAtAutoNodes(self: Self, event: LeoKeyEvent | None = None) -> None:
     """
@@ -916,7 +916,7 @@ def readAtAutoNodes(self: Self, event: LeoKeyEvent | None = None) -> None:
     c.undoer.clearAndWarn('read-at-auto-nodes')
 
 
-# @+node:ekr.20031218072017.1839: *3* c_file.readAtFileNodes
+#@ c_file.readAtFileNodes
 @g.commander_command('read-at-file-nodes')
 def readAtFileNodes(self: Self, event: LeoKeyEvent | None = None) -> None:
     """
@@ -934,7 +934,7 @@ def readAtFileNodes(self: Self, event: LeoKeyEvent | None = None) -> None:
     c.undoer.clearAndWarn('read-at-file-nodes')
 
 
-# @+node:ekr.20080801071227.4: *3* c_file.readAtShadowNodes
+#@ c_file.readAtShadowNodes
 @g.commander_command('read-at-shadow-nodes')
 def readAtShadowNodes(self: Self, event: LeoKeyEvent | None = None) -> None:
     """
@@ -951,7 +951,7 @@ def readAtShadowNodes(self: Self, event: LeoKeyEvent | None = None) -> None:
     c.undoer.clearAndWarn('read-at-shadow-nodes')
 
 
-# @+node:ekr.20070915134101: *3* c_file.readFileIntoNode
+#@ c_file.readFileIntoNode
 @g.commander_command('read-file-into-node')
 def readFileIntoNode(self: Self, event: LeoKeyEvent | None = None) -> None:
     """Read a file into a single node."""
@@ -984,7 +984,7 @@ def readFileIntoNode(self: Self, event: LeoKeyEvent | None = None) -> None:
     c.redraw(p)
 
 
-# @+node:ekr.20070915142635: *3* c_file.writeFileFromNode
+#@ c_file.writeFileFromNode
 @g.commander_command('write-file-from-node')
 def writeFileFromNode(self: Self, event: LeoKeyEvent | None = None) -> None:
     """
@@ -1023,7 +1023,7 @@ def writeFileFromNode(self: Self, event: LeoKeyEvent | None = None) -> None:
             g.error(f"can not write {fileName}")
 
 
-# @+node:tom.20230201124905.1: *3* c_file.writeFileFromSubtree
+#@ c_file.writeFileFromSubtree
 @g.commander_command('write-file-from-subtree')
 def writeFileFromSubtree(self: Self, event: LeoKeyEvent | None = None) -> None:
     """Write the entire tree from the selected node as text to a file.
@@ -1065,8 +1065,8 @@ def writeFileFromSubtree(self: Self, event: LeoKeyEvent | None = None) -> None:
             g.error(f"can not write {fileName}")
 
 
-# @+node:ekr.20031218072017.2079: ** Recent Files
-# @+node:tbrown.20080509212202.6: *3* c_file.cleanRecentFiles
+#@< Recent Files
+#@> c_file.cleanRecentFiles
 @g.commander_command('clean-recent-files')
 def cleanRecentFiles(self: Self, event: LeoKeyEvent | None = None) -> None:
     """
@@ -1079,7 +1079,7 @@ def cleanRecentFiles(self: Self, event: LeoKeyEvent | None = None) -> None:
     g.app.recentFilesManager.cleanRecentFiles(c)
 
 
-# @+node:ekr.20031218072017.2080: *3* c_file.clearRecentFiles
+#@ c_file.clearRecentFiles
 @g.commander_command('clear-recent-files')
 def clearRecentFiles(self: Self, event: LeoKeyEvent | None = None) -> None:
     """Clear the recent files list, then add the present file."""
@@ -1087,7 +1087,7 @@ def clearRecentFiles(self: Self, event: LeoKeyEvent | None = None) -> None:
     g.app.recentFilesManager.clearRecentFiles(c)
 
 
-# @+node:vitalije.20170703115710.1: *3* c_file.editRecentFiles
+#@ c_file.editRecentFiles
 @g.commander_command('edit-recent-files')
 def editRecentFiles(self: Self, event: LeoKeyEvent | None = None) -> None:
     """Opens recent files list in a new node for editing."""
@@ -1095,7 +1095,7 @@ def editRecentFiles(self: Self, event: LeoKeyEvent | None = None) -> None:
     g.app.recentFilesManager.editRecentFiles(c)
 
 
-# @+node:tbrown.20080509212202.8: *3* c_file.sortRecentFiles
+#@ c_file.sortRecentFiles
 @g.commander_command('sort-recent-files')
 def sortRecentFiles(self: Self, event: LeoKeyEvent | None = None) -> None:
     """Sort the recent files list."""
@@ -1103,7 +1103,7 @@ def sortRecentFiles(self: Self, event: LeoKeyEvent | None = None) -> None:
     g.app.recentFilesManager.sortRecentFiles(c)
 
 
-# @+node:vitalije.20170703115710.2: *3* c_file.writeEditedRecentFiles
+#@ c_file.writeEditedRecentFiles
 @g.commander_command('write-edited-recent-files')
 def writeEditedRecentFiles(self: Self, event: LeoKeyEvent | None = None) -> None:
     """
@@ -1114,8 +1114,8 @@ def writeEditedRecentFiles(self: Self, event: LeoKeyEvent | None = None) -> None
     g.app.recentFilesManager.writeEditedRecentFiles(c)
 
 
-# @+node:ekr.20180312043352.1: ** Themes
-# @+node:ekr.20180312043352.2: *3* c_file.open_theme_file
+#@< Themes
+#@> c_file.open_theme_file
 @g.commander_command('open-theme-file')
 def open_theme_file(self: Self, event: LeoKeyEvent | None = None) -> None:
     """Open a theme file in a new session and apply the theme."""
@@ -1146,5 +1146,5 @@ def open_theme_file(self: Self, event: LeoKeyEvent | None = None) -> None:
     os.chdir(leo_dir)
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

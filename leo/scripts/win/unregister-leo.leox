@@ -1,10 +1,10 @@
-#@+leo-ver=5-thin
-#@+node:maphew.20130611235500.2665: * @file unregister-leo.leox
+#@+leo-ver=cub-1-thin
+#@0 [maphew.20130611235500.2665] @f unregister-leo.leox
 #@@language python
 #@@tabwidth -4
 """Remove registry key for Leo file type and .leo file association"""
 #@+others
-#@+node:mhw-debug-1081.20190216130451.1: ** imports
+#@> [mhw-debug-1081.20190216130451.1] imports
 import leo
 import leo.core.leoGlobals as g
 import os
@@ -12,7 +12,7 @@ import sys
 import shutil
 import subprocess
 from winreg import *
-#@+node:mhw-debug-1081.20190216145532.1: ** unregister_leo
+#@ [mhw-debug-1081.20190216145532.1] unregister_leo
 def unregister_leo():
     try:
         leoKey = OpenKey(HKEY_CLASSES_ROOT, "Leo.File")
@@ -39,12 +39,12 @@ def unregister_leo():
         g.es_print("  .leojs file association removed from registry")
     except WindowsError as e:
         g.es_print("  Removing .leojs associations failed: ", e)
-#@+node:mhw-debug-1081.20190314005003.1: ** relaunch_elevated
+#@ [mhw-debug-1081.20190314005003.1] relaunch_elevated
 def relaunch_elevated(script):
     g.es_print("--- Relaunching and asking for elevated permissions")
     g.execute_shell_commands(["&{} {} {}".format(sys.executable, elevate, script)])
     g.es_print("---")
-#@+node:mhw-debug-1081.20190314004045.1: ** get_my_path
+#@ [mhw-debug-1081.20190314004045.1] get_my_path
 def get_my_path():
     """Return full path of currently running script or executable
     

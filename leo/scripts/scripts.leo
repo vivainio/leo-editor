@@ -6,468 +6,468 @@
 <preferences/>
 <find_panel_settings/>
 <vnodes>
-<v t="ekr.20070615131954"><vh>Startup</vh>
-<v t="ekr.20150302053516.3"><vh>@settings</vh>
-<v t="mhw.20181210131101.1"><vh>@bool put-expansion-bits-in-leo-files = False</vh></v>
-</v>
-<v t="ekr.20070427110751"><vh>@chapters</vh></v>
-<v t="ekr.20141116105945.2"><vh>@persistence</vh>
-<v t="ekr.20141116105945.3"><vh>@data:@auto create-leobat.bat</vh>
-<v t="ekr.20141116105945.4"><vh>@gnxs</vh></v>
-</v>
-<v t="ekr.20161206070406.1"><vh>@data:@auto-md ../doc/c2py.md</vh>
-<v t="ekr.20161206090903.1"><vh>@gnxs</vh></v>
-</v>
-<v t="maphew.20190209160547.1"><vh>@data:@auto build-leo.bat</vh>
-<v t="lkj.20190712002811.1"><vh>@gnxs</vh></v>
-</v>
-</v>
-<v t="ekr.20111017085134.16069"><vh>@ignore @button nodes</vh>
-<v t="ekr.20111017085134.16072"><vh>@button check-dirty</vh></v>
-<v t="ekr.20150508132450.1"><vh>@button create decorators</vh>
-<v t="ekr.20150508132450.2"><vh>create_d</vh></v>
-<v t="ekr.20150508132450.3"><vh>create_decorator</vh></v>
-<v t="ekr.20150508132450.4"><vh>create_decorators</vh></v>
-<v t="ekr.20150508132450.5"><vh>create_fixups</vh></v>
-<v t="ekr.20150508132450.6"><vh>find_class</vh></v>
-<v t="ekr.20150508132450.7"><vh>find_next_clone</vh></v>
-<v t="ekr.20150508132450.8"><vh>munge_lines</vh></v>
-<v t="ekr.20150508132450.9"><vh>run</vh></v>
-</v>
-<v t="ekr.20111017085134.16070"><vh>@button jython</vh></v>
-<v t="ekr.20111017085134.16074"><vh>@button Lines Down</vh>
-<v t="ekr.20111017085134.16075"><vh>moveLinesDown</vh></v>
-</v>
-<v t="ekr.20111017085134.16076"><vh>@button Lines Up</vh>
-<v t="ekr.20111017085134.16077"><vh>moveLinesUp</vh></v>
-</v>
-<v t="ekr.20111017085134.16078"><vh>@button lispCall @key=alt+6</vh>
-<v t="ekr.20111017085134.16079"><vh>ctor</vh></v>
-<v t="ekr.20111017085134.16080"><vh>run &amp; helpers</vh>
-<v t="ekr.20111017085134.16081"><vh>findCalls</vh></v>
-<v t="ekr.20111017085134.16082"><vh>findDefs</vh></v>
-<v t="ekr.20111017085134.16083"><vh>stripComments</vh></v>
-<v t="ekr.20111017085134.16084"><vh>stripLispIds</vh></v>
-<v t="ekr.20111017085134.16085"><vh>stripStrings</vh></v>
-</v>
-<v t="ekr.20111017085134.16086"><vh>class token</vh></v>
-<v t="ekr.20111017085134.16087"><vh>choose</vh></v>
-<v t="ekr.20111017085134.16088"><vh>dumpList</vh></v>
-<v t="ekr.20111017085134.16089"><vh>Parsing...</vh>
-<v t="ekr.20111017085134.16090"><vh>parse</vh></v>
-<v t="ekr.20111017085134.16091"><vh>scan &amp; helpers</vh>
-<v t="ekr.20111017085134.16092"><vh>skipComment</vh></v>
-<v t="ekr.20111017085134.16093"><vh>skipId</vh></v>
-<v t="ekr.20111017085134.16094"><vh>skipString</vh></v>
-</v>
-<v t="ekr.20111017085134.16095"><vh>scanForest</vh></v>
-</v>
-<v t="ekr.20111017085134.16096"><vh>Code generators...</vh>
-<v t="ekr.20111017085134.16097"><vh>gen</vh></v>
-<v t="ekr.20111017085134.16098"><vh>gen_token</vh></v>
-<v t="ekr.20111017085134.16099"><vh>gen_block &amp; helper</vh>
-<v t="ekr.20111017085134.16100"><vh>gen_block_id</vh></v>
-</v>
-<v t="ekr.20111017085134.16101"><vh>gen_call &amp; helper</vh>
-<v t="ekr.20111017085134.16102"><vh>gen_arg</vh></v>
-</v>
-<v t="ekr.20111017085134.16103"><vh>gen_def</vh></v>
-<v t="ekr.20111017085134.16104"><vh>gen_if &amp; helpers</vh>
-<v t="ekr.20111017085134.16105"><vh>gen_then</vh></v>
-</v>
-<v t="ekr.20111017085134.16106"><vh>gen_expr</vh></v>
-<v t="ekr.20111017085134.16107"><vh>gen_let &amp; helper</vh>
-<v t="ekr.20111017085134.16108"><vh>gen_let_bindings</vh></v>
-</v>
-<v t="ekr.20111017085134.16109"><vh>put...</vh>
-<v t="ekr.20111017085134.16110"><vh>put</vh></v>
-<v t="ekr.20111017085134.16111"><vh>put_token</vh></v>
-<v t="ekr.20111017085134.16112"><vh>put_code &amp; put_code_line</vh></v>
-<v t="ekr.20111017085134.16113"><vh>put_code_token</vh></v>
-</v>
-</v>
-</v>
-<v t="ekr.20160123185308.1"><vh>@button make_stub_files script</vh>
-<v t="ekr.20160123185308.2"><vh>class MakeStubFile</vh>
-<v t="ekr.20160123185308.3"><vh>msf.ctors &amp; helpers</vh>
-<v t="ekr.20160123185308.4"><vh>msf.make_types_dict</vh></v>
-<v t="ekr.20160123185308.5"><vh>msf.scan_types_data</vh></v>
-</v>
-<v t="ekr.20160123185308.6"><vh>msf.make_stub_file</vh></v>
-<v t="ekr.20160123185308.7"><vh>msf.run</vh></v>
-</v>
-<v t="ekr.20160123185308.8"><vh>class AstFormatter</vh>
-<v t="ekr.20160123185308.9"><vh> f.Entries</vh>
-<v t="ekr.20160123185308.10"><vh>f.format</vh></v>
-<v t="ekr.20160123185308.11"><vh>f.visit</vh></v>
-</v>
-<v t="ekr.20160123185308.12"><vh>f.Contexts</vh>
-<v t="ekr.20160123185308.13"><vh>f.ClassDef</vh></v>
-<v t="ekr.20160123185308.14"><vh>f.FunctionDef</vh></v>
-<v t="ekr.20160123185308.15"><vh>f.Interactive</vh></v>
-<v t="ekr.20160123185308.16"><vh>f.Module</vh></v>
-<v t="ekr.20160123185308.17"><vh>f.Lambda</vh></v>
-</v>
-<v t="ekr.20160123185308.18"><vh>f.Expressions</vh>
-<v t="ekr.20160123185308.19"><vh>f.Expr</vh></v>
-<v t="ekr.20160123185308.20"><vh>f.Expression</vh></v>
-<v t="ekr.20160123185308.21"><vh>f.GeneratorExp</vh></v>
-<v t="ekr.20160123185308.22"><vh>f.ctx nodes</vh></v>
-</v>
-<v t="ekr.20160123185308.23"><vh>f.Operands</vh>
-<v t="ekr.20160123185308.24"><vh>f.arguments</vh></v>
-<v t="ekr.20160123185308.25"><vh>f.arg (Python3 only)</vh></v>
-<v t="ekr.20160123185308.26"><vh>f.Attribute</vh></v>
-<v t="ekr.20160123185308.27"><vh>f.Bytes</vh></v>
-<v t="ekr.20160123185308.28"><vh>f.Call &amp; f.keyword</vh>
-<v t="ekr.20160123185308.29"><vh>f.keyword</vh></v>
-</v>
-<v t="ekr.20160123185308.30"><vh>f.comprehension</vh></v>
-<v t="ekr.20160123185308.31"><vh>f.Dict</vh></v>
-<v t="ekr.20160123185308.32"><vh>f.Ellipsis</vh></v>
-<v t="ekr.20160123185308.33"><vh>f.ExtSlice</vh></v>
-<v t="ekr.20160123185308.34"><vh>f.Index</vh></v>
-<v t="ekr.20160123185308.35"><vh>f.List</vh></v>
-<v t="ekr.20160123185308.36"><vh>f.ListComp</vh></v>
-<v t="ekr.20160123185308.37"><vh>f.Name</vh></v>
-<v t="ekr.20160123185308.38"><vh>f.Num</vh></v>
-<v t="ekr.20160123185308.39"><vh>f.Repr</vh></v>
-<v t="ekr.20160123185308.40"><vh>f.Slice</vh></v>
-<v t="ekr.20160123185308.41"><vh>f.Str</vh></v>
-<v t="ekr.20160123185308.42"><vh>f.Subscript</vh></v>
-<v t="ekr.20160123185308.43"><vh>f.Tuple</vh></v>
-</v>
-<v t="ekr.20160123185308.44"><vh>f.Operators</vh>
-<v t="ekr.20160123185308.45"><vh>f.BinOp</vh></v>
-<v t="ekr.20160123185308.46"><vh>f.BoolOp</vh></v>
-<v t="ekr.20160123185308.47"><vh>f.Compare</vh></v>
-<v t="ekr.20160123185308.48"><vh>f.UnaryOp</vh></v>
-<v t="ekr.20160123185308.49"><vh>f.ifExp (ternary operator)</vh></v>
-</v>
-<v t="ekr.20160123185308.50"><vh>f.Statements</vh>
-<v t="ekr.20160123185308.51"><vh>f.Assert</vh></v>
-<v t="ekr.20160123185308.52"><vh>f.Assign</vh></v>
-<v t="ekr.20160123185308.53"><vh>f.AugAssign</vh></v>
-<v t="ekr.20160123185308.54"><vh>f.Break</vh></v>
-<v t="ekr.20160123185308.55"><vh>f.Continue</vh></v>
-<v t="ekr.20160123185308.56"><vh>f.Delete</vh></v>
-<v t="ekr.20160123185308.57"><vh>f.ExceptHandler</vh></v>
-<v t="ekr.20160123185308.58"><vh>f.Exec</vh></v>
-<v t="ekr.20160123185308.59"><vh>f.For</vh></v>
-<v t="ekr.20160123185308.60"><vh>f.Global</vh></v>
-<v t="ekr.20160123185308.61"><vh>f.If</vh></v>
-<v t="ekr.20160123185308.62"><vh>f.Import &amp; helper</vh>
-<v t="ekr.20160123185308.63"><vh>f.get_import_names</vh></v>
-</v>
-<v t="ekr.20160123185308.64"><vh>f.ImportFrom</vh></v>
-<v t="ekr.20160123185308.65"><vh>f.Pass</vh></v>
-<v t="ekr.20160123185308.66"><vh>f.Print</vh></v>
-<v t="ekr.20160123185308.67"><vh>f.Raise</vh></v>
-<v t="ekr.20160123185308.68"><vh>f.Return</vh></v>
-<v t="ekr.20160123185308.69"><vh>f.Suite</vh></v>
-<v t="ekr.20160123185308.70"><vh>f.TryExcept</vh></v>
-<v t="ekr.20160123185308.71"><vh>f.TryFinally</vh></v>
-<v t="ekr.20160123185308.72"><vh>f.While</vh></v>
-<v t="ekr.20160123185308.73"><vh>f.With</vh></v>
-<v t="ekr.20160123185308.74"><vh>f.Yield</vh></v>
-</v>
-<v t="ekr.20160123185308.75"><vh>f.Utils</vh>
-<v t="ekr.20160123185308.76"><vh>f.kind</vh></v>
-<v t="ekr.20160123185308.77"><vh>f.indent</vh></v>
-<v t="ekr.20160123185308.78"><vh>f.op_name</vh></v>
-</v>
-</v>
-<v t="ekr.20160123185308.79"><vh>class StubFormatter (AstFormatter)</vh>
-<v t="ekr.20160123185308.80"><vh>sf.Constants &amp; Name</vh></v>
-</v>
-<v t="ekr.20160123185308.81"><vh>class StubTraverser (ast.NodeVisitor)</vh>
-<v t="ekr.20160123185308.82"><vh>st.indent &amp; out</vh></v>
-<v t="ekr.20160123185308.83"><vh>st.run</vh></v>
-<v t="ekr.20160123185308.84"><vh>st.visit (not used)</vh></v>
-<v t="ekr.20160123185308.85"><vh>st.Visitors</vh>
-<v t="ekr.20160123185308.86"><vh>st.ClassDef</vh></v>
-<v t="ekr.20160123185308.87"><vh>st.FunctionDef &amp; helpers</vh>
-<v t="ekr.20160123185308.88"><vh>format_arguments &amp; helper</vh>
-<v t="ekr.20160123185308.89"><vh>munge_arg</vh></v>
-</v>
-<v t="ekr.20160123185308.90"><vh>format_returns</vh></v>
-</v>
-<v t="ekr.20160123185308.91"><vh>st.Return</vh></v>
-</v>
-</v>
-</v>
-<v t="ekr.20111017085134.16114"><vh>@button outlineToClipboard</vh></v>
-<v t="ekr.20111017085134.16071"><vh>@button pydoc</vh></v>
-<v t="ekr.20150525161132.1"><vh>@button tokens2tree</vh>
-<v t="ekr.20150525161132.2"><vh>&lt;&lt; imports &gt;&gt;</vh></v>
-</v>
-<v t="ekr.20170301022829.1"><vh>@ignore buttons new in Leo 5.5</vh>
-<v t="ekr.20170301014329.1"><vh>@button cycling syntax coloring</vh></v>
-<v t="ekr.20170211083757.1"><vh>@button Demo @key=Ctrl-9</vh>
-<v t="ekr.20170211083757.2"><vh>&lt;&lt; imports &gt;&gt;</vh></v>
-<v t="ekr.20170211083757.3"><vh>&lt;&lt; class myDemo &gt;&gt;</vh>
-<v t="ekr.20170211083757.4"><vh>setup</vh></v>
-<v t="ekr.20170211083757.5"><vh>setup_script</vh></v>
-<v t="ekr.20170211083757.6"><vh>teardown</vh></v>
-<v t="ekr.20170211083757.7"><vh>teardown_script</vh></v>
-</v>
-<v t="ekr.20170211083757.8"><vh>demo-script</vh>
-<v t="ekr.20170211083757.9"><vh>First</vh></v>
-<v t="ekr.20170211083757.10"><vh>Full featured outliner</vh></v>
-<v t="ekr.20170211083757.11"><vh>Leo's panes</vh></v>
-<v t="ekr.20170211083757.12"><vh>Leo creates scripts from outlines</vh></v>
-<v t="ekr.20170211083757.13"><vh>Clones and cff</vh></v>
-<v t="ekr.20170211083757.14"><vh>Last</vh></v>
-</v>
-</v>
-<v t="ekr.20161006092435.1"><vh>@button import-tab-files</vh>
-<v t="ekr.20161006092435.2"><vh>class TabImporter</vh>
-<v t="ekr.20161006092435.3"><vh>check</vh></v>
-<v t="ekr.20161006092435.4"><vh>dump_stack</vh></v>
-<v t="ekr.20161006092435.5"><vh>lws</vh></v>
-<v t="ekr.20161006092435.6"><vh>scan</vh></v>
-<v t="ekr.20161006092435.7"><vh>scan_helper</vh></v>
-<v t="ekr.20161006092435.8"><vh>undent</vh></v>
-</v>
-</v>
-<v t="ekr.20170301023612.1"><vh>@button insert headlines as comments</vh></v>
-<v t="ekr.20170212105552.1"><vh>@button IntroSlides @key=Ctrl-9</vh>
-<v t="ekr.20170212105552.2"><vh>&lt;&lt; imports &gt;&gt;</vh></v>
-<v t="ekr.20170212105552.3"><vh>&lt;&lt; class IntroSlides &gt;&gt;</vh>
-<v t="ekr.20170212105552.4"><vh>setup</vh></v>
-<v t="ekr.20170212105552.5"><vh>setup_script</vh></v>
-<v t="ekr.20170212105552.6"><vh>teardown</vh></v>
-<v t="ekr.20170212105552.7"><vh>teardown_script</vh></v>
-</v>
-<v t="ekr.20170212105552.8"><vh>&lt;&lt; main &gt;&gt;</vh></v>
-<v t="ekr.20170212105552.9"><vh>Leo's Main Window</vh></v>
-<v t="ekr.20170212105552.10"><vh>intro-slides-script</vh>
-<v t="ekr.20170212105552.11"><vh>Slide 1: Leo's main window</vh></v>
-</v>
-</v>
-<v t="ekr.20160923132656.1"><vh>@button introspect</vh></v>
-<v t="ekr.20161031130627.1"><vh>@button pep8 @key=Ctrl-5</vh>
-<v t="ekr.20161031130627.2"><vh>class Pep8</vh>
-<v t="ekr.20161031130627.3"><vh>change_all &amp; helpers</vh>
-<v t="ekr.20161031130627.4"><vh>change_body</vh></v>
-<v t="ekr.20161031130627.5"><vh>change_headline</vh></v>
-</v>
-<v t="ekr.20161031130627.6"><vh>get_name</vh></v>
-<v t="ekr.20161031130627.7"><vh>run</vh></v>
-<v t="ekr.20161031130627.8"><vh>to_pep8</vh></v>
-</v>
-<v t="ekr.20161031130627.9"><vh>clear</vh></v>
-</v>
-<v t="ekr.20170225023738.1"><vh>@button test-http</vh></v>
-<v t="ekr.20170120110015.1"><vh>@ignore importer scripts</vh>
-<v t="ekr.20161120175101.1"><vh>@button make-md-heads</vh>
-<v t="ekr.20161120175101.2"><vh>markup</vh></v>
-</v>
-<v t="ekr.20161123085419.1"><vh>@button make-table</vh></v>
-<v t="ekr.20161124034654.1"><vh>@button make-importer</vh>
-<v t="ekr.20161124034654.2"><vh>&lt;&lt; define run &amp; helpers &gt;&gt;</vh>
-<v t="ekr.20161124034654.3"><vh>copy_tree</vh></v>
-<v t="ekr.20161124034654.4"><vh>make_substitutions</vh></v>
-<v t="ekr.20161124034654.5"><vh>run</vh></v>
-<v t="ekr.20161124034654.6"><vh>substitue</vh></v>
-</v>
-<v t="ekr.20161124034654.7"><vh>@@file importers/{{name}}.py</vh>
-<v t="ekr.20161124034654.8"><vh>class {{cap_name}}_Importer</vh>
-<v t="ekr.20161124034654.9"><vh>{{name}}.Overrides</vh>
-<v t="ekr.20161124034654.10"><vh>{{name}}.clean_headline</vh></v>
-<v t="ekr.20161124034654.11"><vh>{{name}}.clean_nodes</vh></v>
-</v>
-</v>
-<v t="ekr.20161124034654.12"><vh>class class {{cap_name}}_ScanState</vh>
-<v t="ekr.20161124034654.13"><vh>{{name}}_state.level</vh></v>
-<v t="ekr.20161124034654.14"><vh>{{name}}_state.update</vh></v>
-</v>
-</v>
-</v>
-<v t="ekr.20161204063803.1"><vh>@button make-md-toc</vh>
-<v t="ekr.20161204063803.2"><vh>run</vh></v>
-<v t="ekr.20161204063803.3"><vh>mak_link</vh></v>
-<v t="ekr.20161204063803.4"><vh>make_toc</vh></v>
-</v>
-</v>
-</v>
-<v t="ekr.20181019042717.1"><vh>@ignore at-button nodes in LeoSettings.leo</vh>
-<v t="ekr.20181019042907.1"><vh>@button check-bindings</vh>
-<v t="ekr.20181019042907.2"><vh>defineSetNames</vh></v>
-<v t="ekr.20181019042907.3"><vh>doSet</vh></v>
-<v t="ekr.20181019042907.4"><vh>doShortcuts</vh></v>
-<v t="ekr.20181019042907.5"><vh>checkSets</vh></v>
-<v t="ekr.20181019042907.6"><vh>main</vh></v>
-</v>
-<v t="ekr.20181019042834.1"><vh>@button check-menus-cmds</vh></v>
-<v t="ekr.20181019042808.1"><vh>@button check-settings</vh>
-<v t="ekr.20181019042808.2"><vh>ctor</vh></v>
-<v t="ekr.20181019042808.3"><vh>check &amp; helpers</vh>
-<v t="ekr.20181019042808.4"><vh>filter_get_x</vh></v>
-<v t="ekr.20181019042808.5"><vh>filter_user_config</vh></v>
-</v>
-<v t="ekr.20181019042808.6"><vh>error</vh></v>
-<v t="ekr.20181019042808.7"><vh>get_commanders</vh></v>
-<v t="ekr.20181019042808.8"><vh>get_configs &amp; helpers</vh>
-<v t="ekr.20181019042808.9"><vh>get_configs_from_outline &amp; helper</vh>
-<v t="ekr.20181019042808.10"><vh>scan_for_configs</vh></v>
-</v>
-</v>
-<v t="ekr.20181019042808.11"><vh>get_settings &amp; helper</vh>
-<v t="ekr.20181019042808.12"><vh>is_setting</vh></v>
-<v t="ekr.20181019042808.13"><vh>parse_setting</vh></v>
-</v>
-<v t="ekr.20181019042808.14"><vh>munge</vh></v>
-<v t="ekr.20181019042808.15"><vh>run</vh></v>
-</v>
-</v>
-</v>
-</v>
-<v t="ekr.20061008055616" descendentVnodeUnknownAttributes="7d7100285809000000302e312e31302e313671017d710258120000007273745f687474705f61747472696275746571035d71042858460000003c6120636c6173733d22746172676574222069643d22687474702d6e6f64652d6d61726b65722d333922206e616d653d22687474702d6e6f64652d6d61726b65722d3339223e710558040000003c2f613e71065d71072858340000003c64697620636c6173733d2273656374696f6e222069643d2272756e6e696e672d6c656f2d696e2d62617463682d6d6f6465223e710858060000003c2f6469763e71095d710a28583f0000003c64697620636c6173733d22646f63756d656e74222069643d22636861707465722d372d736372697074696e672d6c656f2d776974682d707974686f6e223e710b58060000003c2f6469763e710c5d710d2858060000003c626f64793e710e58070000003c2f626f64793e710f5d71102858430000003c68746d6c20786d6c6e733d22687474703a2f2f7777772e77332e6f72672f313939392f7868746d6c2220786d6c3a6c616e673d22656e22206c616e673d22656e223e711158070000003c2f68746d6c3e71124e6565656558070000003c2f6469763e0a7113583e0000003c64697620636c6173733d2273656374696f6e222069643d2266756e6374696f6e732d646566696e65642d696e2d6c656f676c6f62616c732d7079223e0a7114587e0000003c68313e3c6120636c6173733d22746f632d6261636b7265662220687265663d22236964323022206e616d653d2266756e6374696f6e732d646566696e65642d696e2d6c656f676c6f62616c732d7079223e46756e6374696f6e7320646566696e656420696e206c656f476c6f62616c732e70793c2f613e3c2f68313e0a711565735809000000302e312e31302e323671167d7117580b0000005f5f626f6f6b6d61726b7371187d7119580700000069735f64757065711a4930300a7373752e"><vh>Scripts</vh>
-<v t="ekr.20181019042544.1"><vh>script: regularize settings names</vh></v>
-<v t="ekr.20051110111150" descendentVnodeUnknownAttributes="7d7100285807000000302e31302e313671017d710258120000007273745f687474705f61747472696275746571035d71042858460000003c6120636c6173733d22746172676574222069643d22687474702d6e6f64652d6d61726b65722d333922206e616d653d22687474702d6e6f64652d6d61726b65722d3339223e710558040000003c2f613e71065d71072858340000003c64697620636c6173733d2273656374696f6e222069643d2272756e6e696e672d6c656f2d696e2d62617463682d6d6f6465223e710858060000003c2f6469763e71095d710a28583f0000003c64697620636c6173733d22646f63756d656e74222069643d22636861707465722d372d736372697074696e672d6c656f2d776974682d707974686f6e223e710b58060000003c2f6469763e710c5d710d2858060000003c626f64793e710e58070000003c2f626f64793e710f5d71102858430000003c68746d6c20786d6c6e733d22687474703a2f2f7777772e77332e6f72672f313939392f7868746d6c2220786d6c3a6c616e673d22656e22206c616e673d22656e223e711158070000003c2f68746d6c3e71124e6565656558070000003c2f6469763e0a7113583e0000003c64697620636c6173733d2273656374696f6e222069643d2266756e6374696f6e732d646566696e65642d696e2d6c656f676c6f62616c732d7079223e0a7114587e0000003c68313e3c6120636c6173733d22746f632d6261636b7265662220687265663d22236964323022206e616d653d2266756e6374696f6e732d646566696e65642d696e2d6c656f676c6f62616c732d7079223e46756e6374696f6e7320646566696e656420696e206c656f476c6f62616c732e70793c2f613e3c2f68313e0a711565735807000000302e31302e323671167d7117580b0000005f5f626f6f6b6d61726b7371187d7119580700000069735f64757065711a4930300a7373752e"><vh>@file leoScripts.txt</vh></v>
-</v>
-<v t="ekr.20230925012840.1"><vh>--- Recent</vh>
-<v t="ekr.20211020082938.1"><vh>script: display slides</vh>
-<v t="ekr.20211020082938.2"><vh>get_files</vh></v>
-<v t="ekr.20211020082938.3"><vh>class Slides</vh>
-<v t="ekr.20211020082938.4"><vh>Slides.delete</vh></v>
-<v t="ekr.20211020082938.5"><vh>Slides.keyPressEvent</vh></v>
-<v t="ekr.20211020082938.6"><vh>Slides.move_up/down/left/right</vh></v>
-<v t="ekr.20211020082938.7"><vh>Slides.move_to</vh></v>
-<v t="ekr.20211020082938.8"><vh>Slides.next_slide</vh></v>
-<v t="ekr.20211020082938.9"><vh>Slides.prev_slide</vh></v>
-<v t="ekr.20211020082938.10"><vh>Slides.quit</vh></v>
-<v t="ekr.20211020082938.11"><vh>Slides.run &amp; helper</vh>
-<v t="ekr.20211020082938.12"><vh>Slides.make_widgets</vh></v>
-</v>
-<v t="ekr.20211020082938.13"><vh>Slides.show_help</vh></v>
-<v t="ekr.20211020082938.14"><vh>Slides.show_slide</vh></v>
-<v t="ekr.20211020082938.15"><vh>Slides.sort</vh></v>
-<v t="ekr.20211020082938.16"><vh>Slides.timerEvent</vh></v>
-<v t="ekr.20211020082938.17"><vh>Slides.toggle_full_screen</vh></v>
-<v t="ekr.20211020082938.18"><vh>Slides.zoom_in &amp; zoom_out</vh></v>
-</v>
-</v>
-<v t="ekr.20220319162442.1"><vh>script: diff-two-revs-wo-comments</vh>
-<v t="ekr.20220319162442.2"><vh>function: make_diff_outlines_ignoring_comments</vh></v>
-<v t="ekr.20220319162442.3"><vh>function: strip_comments</vh></v>
-</v>
-<v t="ekr.20221105063835.1"><vh>script: insert-macros</vh>
-<v t="ekr.20221105063835.2"><vh>add_macros</vh></v>
-<v t="ekr.20221105063835.3"><vh>macro-test</vh>
-<v t="ekr.20221105063835.4"><vh>multiple defs</vh></v>
-<v t="ekr.20221105063835.5"><vh>spam</vh></v>
-<v t="ekr.20221105063835.6"><vh>eggs</vh></v>
-</v>
-</v>
-<v t="ekr.20230421070847.1"><vh>script: replace kwargs in mode files</vh></v>
-<v t="ekr.20230925012359.1"><vh>script: list all rhythms in a 4/4 measure</vh>
-<v t="ekr.20230925012359.2"><vh>compute_quarters</vh></v>
-<v t="ekr.20230925012359.3"><vh>convert_pattern and convert_patterns</vh></v>
-<v t="ekr.20230925012359.4"><vh>find_patterns</vh></v>
-<v t="ekr.20230925012359.5"><vh>is_square</vh></v>
-</v>
-<v t="ekr.20231008041100.1"><vh>script: to-github</vh>
-<v t="ekr.20231008041100.2"><vh>put_all_nodes</vh></v>
-<v t="ekr.20231008041100.3"><vh>python_i.delete_comments_and_strings</vh></v>
-</v>
-<v t="ekr.20231217050920.1"><vh>Tom Passin's Current Directory Buttons</vh>
-<v t="ekr.20231217050920.2"><vh>@button Show Current Dir</vh></v>
-<v t="ekr.20231217050920.3"><vh>@button Cmd Window Here</vh></v>
-<v t="ekr.20231217050920.4"><vh>@button Node Dir to Clip</vh></v>
-</v>
-</v>
-<v t="ekr.20060824111500.108"><vh>@button jEdit2Py</vh>
-<v t="ekr.20060824111500.113"><vh>top-level</vh>
-<v t="ekr.20160319080102.1"><vh>cleanSaxInputString</vh></v>
-<v t="ekr.20060824111500.115"><vh>parse_jEdit_file</vh></v>
-<v t="ekr.20060824111500.114"><vh>convert</vh></v>
-<v t="ekr.20060824111500.116"><vh>munge</vh></v>
-<v t="ekr.20160319081141.1"><vh>main</vh></v>
-</v>
-<v t="ekr.20060824111500.117"><vh>class Mode</vh>
-<v t="ekr.20060824111500.118"><vh> Mode.__init__</vh></v>
-<v t="ekr.20060824111500.119"><vh> Mode.__str__ &amp; __repr__</vh></v>
-<v t="ekr.20060824111500.153"><vh>Mode.error</vh></v>
-<v t="ekr.20060824111500.154"><vh>Mode: Getters</vh></v>
-<v t="ekr.20220927115543.1"><vh>Mode: Handlers</vh>
-<v t="ekr.20060824111500.150"><vh>Mode.doAttribute</vh></v>
-<v t="ekr.20060824111500.151"><vh>Mode.doContent</vh></v>
-<v t="ekr.20060824111500.152"><vh>Mode.endElement</vh></v>
-<v t="ekr.20060824111500.155"><vh>Mode.inRule</vh></v>
-<v t="ekr.20060824111500.156"><vh>Mode.startElement</vh></v>
-</v>
-<v t="ekr.20060824111500.120"><vh>Mode: Output...</vh>
-<v t="ekr.20060824111500.121"><vh>Mode.escapeString &amp; quoteString</vh></v>
-<v t="ekr.20060827162343"><vh>Mode.fullDelegate</vh></v>
-<v t="ekr.20060824111500.122"><vh>Mode.put</vh></v>
-<v t="ekr.20060824111500.123"><vh>Mode.putAttributes</vh></v>
-<v t="ekr.20060824111500.124"><vh>Mode.putDict &amp; putDictOfLists</vh></v>
-<v t="ekr.20060824111500.125"><vh>Mode.putImportDict</vh></v>
-<v t="ekr.20060824111500.126"><vh>Mode.putKeywordsData</vh></v>
-<v t="ekr.20060824111500.128"><vh>Mode.putModeProperties</vh></v>
-<v t="ekr.20060824111500.129"><vh>Mode.putRule &amp; rule creators</vh>
-<v t="ekr.20060824111500.130"><vh>Mode.putBadRule</vh></v>
-<v t="ekr.20060824111500.131"><vh>Mode.putEolSpan</vh></v>
-<v t="ekr.20060824111500.132"><vh>Mode.putEolSpanRegexp</vh></v>
-<v t="ekr.20060824111500.133"><vh>Mode.putImport</vh></v>
-<v t="ekr.20060824111500.134"><vh>Mode.putKeywords</vh></v>
-<v t="ekr.20060824111500.135"><vh>Mode.putMarkFollowing</vh></v>
-<v t="ekr.20060824111500.136"><vh>Mode.putMarkPrevious</vh></v>
-<v t="ekr.20060824111500.137"><vh>Mode.putSeq</vh></v>
-<v t="ekr.20060824111500.138"><vh>Mode.putSeqRegexp</vh></v>
-<v t="ekr.20060824111500.139"><vh>Mode.putSpan</vh></v>
-<v t="ekr.20060824111500.140"><vh>Mode.putSpanRegexp</vh></v>
-<v t="ekr.20060824111500.141"><vh>Mode.putTerminate</vh></v>
-</v>
-<v t="ekr.20060824111500.143"><vh>Mode.write</vh></v>
-<v t="ekr.20060824111500.142"><vh>Mode.putRules</vh></v>
-</v>
-<v t="ekr.20060824111500.144"><vh>Mode: Printing...</vh>
-<v t="ekr.20060824111500.145"><vh>Mode.printModeAttributes, printRulesetAttributes &amp; printAttributesHelper</vh></v>
-<v t="ekr.20060824111500.146"><vh>Mode.printProperty</vh></v>
-<v t="ekr.20060824111500.147"><vh>Mode.printRule</vh></v>
-<v t="ekr.20060824111500.148"><vh>Mode.printRuleset</vh></v>
-</v>
-</v>
-<v t="ekr.20060824111500.159"><vh>class Rule</vh>
-<v t="ekr.20060824111500.161"><vh>rule.getters</vh></v>
-</v>
-<v t="ekr.20060824111500.157"><vh>class Ruleset</vh></v>
-<v t="ekr.20060824111500.162"><vh>class ContentHandler(xml.sax.saxutils.XMLGenerator)</vh>
-<v t="ekr.20060824111500.163"><vh> __init__ &amp; helpers</vh></v>
-<v t="ekr.20060824111500.164"><vh>helpers</vh>
-<v t="ekr.20060824111500.165"><vh>attrsToList</vh></v>
-<v t="ekr.20060824111500.166"><vh>attrsToString</vh></v>
-<v t="ekr.20060824111500.168"><vh>error</vh></v>
-<v t="ekr.20060824111500.169"><vh>printStartElement</vh></v>
-</v>
-<v t="ekr.20060824111500.171"><vh>sax over-rides</vh>
-<v t="ekr.20060824111500.172"><vh> Do nothing...</vh></v>
-<v t="ekr.20060824111500.176"><vh>characters</vh></v>
-<v t="ekr.20060824111500.177"><vh>elements &amp; helpers</vh>
-<v t="ekr.20060824111500.179"><vh>doStartElement</vh></v>
-<v t="ekr.20060824111500.180"><vh>doEndElement</vh></v>
-</v>
-</v>
-<v t="ekr.20060824111500.181"><vh>getMode</vh></v>
-</v>
-</v>
-<v t="ekr.20241117081230.1"><vh>script: scan-modes</vh>
-<v t="ekr.20241117081901.1"><vh>scan</vh></v>
-<v t="ekr.20241117082739.1"><vh>scan_def</vh></v>
-<v t="ekr.20241117125039.1"><vh>add_matcher</vh></v>
-<v t="ekr.20241117145426.1"><vh>delete_cruft</vh></v>
-<v t="ekr.20241117131431.1"><vh>delete_strings</vh></v>
-<v t="ekr.20241117125038.1"><vh>filter_line</vh></v>
-<v t="ekr.20241117125039.2"><vh>show_line</vh></v>
-</v>
+  <v t="ekr.20070615131954"><vh>Startup</vh>
+    <v t="ekr.20150302053516.3"><vh>@settings</vh>
+      <v t="mhw.20181210131101.1"><vh>@bool put-expansion-bits-in-leo-files = False</vh></v>
+    </v>
+    <v t="ekr.20070427110751"><vh>@chapters</vh></v>
+    <v t="ekr.20141116105945.2"><vh>@persistence</vh>
+      <v t="ekr.20141116105945.3"><vh>@data:@auto create-leobat.bat</vh>
+        <v t="ekr.20141116105945.4"><vh>@gnxs</vh></v>
+      </v>
+      <v t="ekr.20161206070406.1"><vh>@data:@auto-md ../doc/c2py.md</vh>
+        <v t="ekr.20161206090903.1"><vh>@gnxs</vh></v>
+      </v>
+      <v t="maphew.20190209160547.1"><vh>@data:@auto build-leo.bat</vh>
+        <v t="lkj.20190712002811.1"><vh>@gnxs</vh></v>
+      </v>
+    </v>
+    <v t="ekr.20111017085134.16069"><vh>@ignore @button nodes</vh>
+      <v t="ekr.20111017085134.16072"><vh>@button check-dirty</vh></v>
+      <v t="ekr.20150508132450.1"><vh>@button create decorators</vh>
+        <v t="ekr.20150508132450.2"><vh>create_d</vh></v>
+        <v t="ekr.20150508132450.3"><vh>create_decorator</vh></v>
+        <v t="ekr.20150508132450.4"><vh>create_decorators</vh></v>
+        <v t="ekr.20150508132450.5"><vh>create_fixups</vh></v>
+        <v t="ekr.20150508132450.6"><vh>find_class</vh></v>
+        <v t="ekr.20150508132450.7"><vh>find_next_clone</vh></v>
+        <v t="ekr.20150508132450.8"><vh>munge_lines</vh></v>
+        <v t="ekr.20150508132450.9"><vh>run</vh></v>
+      </v>
+      <v t="ekr.20111017085134.16070"><vh>@button jython</vh></v>
+      <v t="ekr.20111017085134.16074"><vh>@button Lines Down</vh>
+        <v t="ekr.20111017085134.16075"><vh>moveLinesDown</vh></v>
+      </v>
+      <v t="ekr.20111017085134.16076"><vh>@button Lines Up</vh>
+        <v t="ekr.20111017085134.16077"><vh>moveLinesUp</vh></v>
+      </v>
+      <v t="ekr.20111017085134.16078"><vh>@button lispCall @key=alt+6</vh>
+        <v t="ekr.20111017085134.16079"><vh>ctor</vh></v>
+        <v t="ekr.20111017085134.16080"><vh>run &amp; helpers</vh>
+          <v t="ekr.20111017085134.16081"><vh>findCalls</vh></v>
+          <v t="ekr.20111017085134.16082"><vh>findDefs</vh></v>
+          <v t="ekr.20111017085134.16083"><vh>stripComments</vh></v>
+          <v t="ekr.20111017085134.16084"><vh>stripLispIds</vh></v>
+          <v t="ekr.20111017085134.16085"><vh>stripStrings</vh></v>
+        </v>
+        <v t="ekr.20111017085134.16086"><vh>class token</vh></v>
+        <v t="ekr.20111017085134.16087"><vh>choose</vh></v>
+        <v t="ekr.20111017085134.16088"><vh>dumpList</vh></v>
+        <v t="ekr.20111017085134.16089"><vh>Parsing...</vh>
+          <v t="ekr.20111017085134.16090"><vh>parse</vh></v>
+          <v t="ekr.20111017085134.16091"><vh>scan &amp; helpers</vh>
+            <v t="ekr.20111017085134.16092"><vh>skipComment</vh></v>
+            <v t="ekr.20111017085134.16093"><vh>skipId</vh></v>
+            <v t="ekr.20111017085134.16094"><vh>skipString</vh></v>
+          </v>
+          <v t="ekr.20111017085134.16095"><vh>scanForest</vh></v>
+        </v>
+        <v t="ekr.20111017085134.16096"><vh>Code generators...</vh>
+          <v t="ekr.20111017085134.16097"><vh>gen</vh></v>
+          <v t="ekr.20111017085134.16098"><vh>gen_token</vh></v>
+          <v t="ekr.20111017085134.16099"><vh>gen_block &amp; helper</vh>
+            <v t="ekr.20111017085134.16100"><vh>gen_block_id</vh></v>
+          </v>
+          <v t="ekr.20111017085134.16101"><vh>gen_call &amp; helper</vh>
+            <v t="ekr.20111017085134.16102"><vh>gen_arg</vh></v>
+          </v>
+          <v t="ekr.20111017085134.16103"><vh>gen_def</vh></v>
+          <v t="ekr.20111017085134.16104"><vh>gen_if &amp; helpers</vh>
+            <v t="ekr.20111017085134.16105"><vh>gen_then</vh></v>
+          </v>
+          <v t="ekr.20111017085134.16106"><vh>gen_expr</vh></v>
+          <v t="ekr.20111017085134.16107"><vh>gen_let &amp; helper</vh>
+            <v t="ekr.20111017085134.16108"><vh>gen_let_bindings</vh></v>
+          </v>
+          <v t="ekr.20111017085134.16109"><vh>put...</vh>
+            <v t="ekr.20111017085134.16110"><vh>put</vh></v>
+            <v t="ekr.20111017085134.16111"><vh>put_token</vh></v>
+            <v t="ekr.20111017085134.16112"><vh>put_code &amp; put_code_line</vh></v>
+            <v t="ekr.20111017085134.16113"><vh>put_code_token</vh></v>
+          </v>
+        </v>
+      </v>
+      <v t="ekr.20160123185308.1"><vh>@button make_stub_files script</vh>
+        <v t="ekr.20160123185308.2"><vh>class MakeStubFile</vh>
+          <v t="ekr.20160123185308.3"><vh>msf.ctors &amp; helpers</vh>
+            <v t="ekr.20160123185308.4"><vh>msf.make_types_dict</vh></v>
+            <v t="ekr.20160123185308.5"><vh>msf.scan_types_data</vh></v>
+          </v>
+          <v t="ekr.20160123185308.6"><vh>msf.make_stub_file</vh></v>
+          <v t="ekr.20160123185308.7"><vh>msf.run</vh></v>
+        </v>
+        <v t="ekr.20160123185308.8"><vh>class AstFormatter</vh>
+          <v t="ekr.20160123185308.9"><vh> f.Entries</vh>
+            <v t="ekr.20160123185308.10"><vh>f.format</vh></v>
+            <v t="ekr.20160123185308.11"><vh>f.visit</vh></v>
+          </v>
+          <v t="ekr.20160123185308.12"><vh>f.Contexts</vh>
+            <v t="ekr.20160123185308.13"><vh>f.ClassDef</vh></v>
+            <v t="ekr.20160123185308.14"><vh>f.FunctionDef</vh></v>
+            <v t="ekr.20160123185308.15"><vh>f.Interactive</vh></v>
+            <v t="ekr.20160123185308.16"><vh>f.Module</vh></v>
+            <v t="ekr.20160123185308.17"><vh>f.Lambda</vh></v>
+          </v>
+          <v t="ekr.20160123185308.18"><vh>f.Expressions</vh>
+            <v t="ekr.20160123185308.19"><vh>f.Expr</vh></v>
+            <v t="ekr.20160123185308.20"><vh>f.Expression</vh></v>
+            <v t="ekr.20160123185308.21"><vh>f.GeneratorExp</vh></v>
+            <v t="ekr.20160123185308.22"><vh>f.ctx nodes</vh></v>
+          </v>
+          <v t="ekr.20160123185308.23"><vh>f.Operands</vh>
+            <v t="ekr.20160123185308.24"><vh>f.arguments</vh></v>
+            <v t="ekr.20160123185308.25"><vh>f.arg (Python3 only)</vh></v>
+            <v t="ekr.20160123185308.26"><vh>f.Attribute</vh></v>
+            <v t="ekr.20160123185308.27"><vh>f.Bytes</vh></v>
+            <v t="ekr.20160123185308.28"><vh>f.Call &amp; f.keyword</vh>
+              <v t="ekr.20160123185308.29"><vh>f.keyword</vh></v>
+            </v>
+            <v t="ekr.20160123185308.30"><vh>f.comprehension</vh></v>
+            <v t="ekr.20160123185308.31"><vh>f.Dict</vh></v>
+            <v t="ekr.20160123185308.32"><vh>f.Ellipsis</vh></v>
+            <v t="ekr.20160123185308.33"><vh>f.ExtSlice</vh></v>
+            <v t="ekr.20160123185308.34"><vh>f.Index</vh></v>
+            <v t="ekr.20160123185308.35"><vh>f.List</vh></v>
+            <v t="ekr.20160123185308.36"><vh>f.ListComp</vh></v>
+            <v t="ekr.20160123185308.37"><vh>f.Name</vh></v>
+            <v t="ekr.20160123185308.38"><vh>f.Num</vh></v>
+            <v t="ekr.20160123185308.39"><vh>f.Repr</vh></v>
+            <v t="ekr.20160123185308.40"><vh>f.Slice</vh></v>
+            <v t="ekr.20160123185308.41"><vh>f.Str</vh></v>
+            <v t="ekr.20160123185308.42"><vh>f.Subscript</vh></v>
+            <v t="ekr.20160123185308.43"><vh>f.Tuple</vh></v>
+          </v>
+          <v t="ekr.20160123185308.44"><vh>f.Operators</vh>
+            <v t="ekr.20160123185308.45"><vh>f.BinOp</vh></v>
+            <v t="ekr.20160123185308.46"><vh>f.BoolOp</vh></v>
+            <v t="ekr.20160123185308.47"><vh>f.Compare</vh></v>
+            <v t="ekr.20160123185308.48"><vh>f.UnaryOp</vh></v>
+            <v t="ekr.20160123185308.49"><vh>f.ifExp (ternary operator)</vh></v>
+          </v>
+          <v t="ekr.20160123185308.50"><vh>f.Statements</vh>
+            <v t="ekr.20160123185308.51"><vh>f.Assert</vh></v>
+            <v t="ekr.20160123185308.52"><vh>f.Assign</vh></v>
+            <v t="ekr.20160123185308.53"><vh>f.AugAssign</vh></v>
+            <v t="ekr.20160123185308.54"><vh>f.Break</vh></v>
+            <v t="ekr.20160123185308.55"><vh>f.Continue</vh></v>
+            <v t="ekr.20160123185308.56"><vh>f.Delete</vh></v>
+            <v t="ekr.20160123185308.57"><vh>f.ExceptHandler</vh></v>
+            <v t="ekr.20160123185308.58"><vh>f.Exec</vh></v>
+            <v t="ekr.20160123185308.59"><vh>f.For</vh></v>
+            <v t="ekr.20160123185308.60"><vh>f.Global</vh></v>
+            <v t="ekr.20160123185308.61"><vh>f.If</vh></v>
+            <v t="ekr.20160123185308.62"><vh>f.Import &amp; helper</vh>
+              <v t="ekr.20160123185308.63"><vh>f.get_import_names</vh></v>
+            </v>
+            <v t="ekr.20160123185308.64"><vh>f.ImportFrom</vh></v>
+            <v t="ekr.20160123185308.65"><vh>f.Pass</vh></v>
+            <v t="ekr.20160123185308.66"><vh>f.Print</vh></v>
+            <v t="ekr.20160123185308.67"><vh>f.Raise</vh></v>
+            <v t="ekr.20160123185308.68"><vh>f.Return</vh></v>
+            <v t="ekr.20160123185308.69"><vh>f.Suite</vh></v>
+            <v t="ekr.20160123185308.70"><vh>f.TryExcept</vh></v>
+            <v t="ekr.20160123185308.71"><vh>f.TryFinally</vh></v>
+            <v t="ekr.20160123185308.72"><vh>f.While</vh></v>
+            <v t="ekr.20160123185308.73"><vh>f.With</vh></v>
+            <v t="ekr.20160123185308.74"><vh>f.Yield</vh></v>
+          </v>
+          <v t="ekr.20160123185308.75"><vh>f.Utils</vh>
+            <v t="ekr.20160123185308.76"><vh>f.kind</vh></v>
+            <v t="ekr.20160123185308.77"><vh>f.indent</vh></v>
+            <v t="ekr.20160123185308.78"><vh>f.op_name</vh></v>
+          </v>
+        </v>
+        <v t="ekr.20160123185308.79"><vh>class StubFormatter (AstFormatter)</vh>
+          <v t="ekr.20160123185308.80"><vh>sf.Constants &amp; Name</vh></v>
+        </v>
+        <v t="ekr.20160123185308.81"><vh>class StubTraverser (ast.NodeVisitor)</vh>
+          <v t="ekr.20160123185308.82"><vh>st.indent &amp; out</vh></v>
+          <v t="ekr.20160123185308.83"><vh>st.run</vh></v>
+          <v t="ekr.20160123185308.84"><vh>st.visit (not used)</vh></v>
+          <v t="ekr.20160123185308.85"><vh>st.Visitors</vh>
+            <v t="ekr.20160123185308.86"><vh>st.ClassDef</vh></v>
+            <v t="ekr.20160123185308.87"><vh>st.FunctionDef &amp; helpers</vh>
+              <v t="ekr.20160123185308.88"><vh>format_arguments &amp; helper</vh>
+                <v t="ekr.20160123185308.89"><vh>munge_arg</vh></v>
+              </v>
+              <v t="ekr.20160123185308.90"><vh>format_returns</vh></v>
+            </v>
+            <v t="ekr.20160123185308.91"><vh>st.Return</vh></v>
+          </v>
+        </v>
+      </v>
+      <v t="ekr.20111017085134.16114"><vh>@button outlineToClipboard</vh></v>
+      <v t="ekr.20111017085134.16071"><vh>@button pydoc</vh></v>
+      <v t="ekr.20150525161132.1"><vh>@button tokens2tree</vh>
+        <v t="ekr.20150525161132.2"><vh>&lt;&lt; imports &gt;&gt;</vh></v>
+      </v>
+      <v t="ekr.20170301022829.1"><vh>@ignore buttons new in Leo 5.5</vh>
+        <v t="ekr.20170301014329.1"><vh>@button cycling syntax coloring</vh></v>
+        <v t="ekr.20170211083757.1"><vh>@button Demo @key=Ctrl-9</vh>
+          <v t="ekr.20170211083757.2"><vh>&lt;&lt; imports &gt;&gt;</vh></v>
+          <v t="ekr.20170211083757.3"><vh>&lt;&lt; class myDemo &gt;&gt;</vh>
+            <v t="ekr.20170211083757.4"><vh>setup</vh></v>
+            <v t="ekr.20170211083757.5"><vh>setup_script</vh></v>
+            <v t="ekr.20170211083757.6"><vh>teardown</vh></v>
+            <v t="ekr.20170211083757.7"><vh>teardown_script</vh></v>
+          </v>
+          <v t="ekr.20170211083757.8"><vh>demo-script</vh>
+            <v t="ekr.20170211083757.9"><vh>First</vh></v>
+            <v t="ekr.20170211083757.10"><vh>Full featured outliner</vh></v>
+            <v t="ekr.20170211083757.11"><vh>Leo's panes</vh></v>
+            <v t="ekr.20170211083757.12"><vh>Leo creates scripts from outlines</vh></v>
+            <v t="ekr.20170211083757.13"><vh>Clones and cff</vh></v>
+            <v t="ekr.20170211083757.14"><vh>Last</vh></v>
+          </v>
+        </v>
+        <v t="ekr.20161006092435.1"><vh>@button import-tab-files</vh>
+          <v t="ekr.20161006092435.2"><vh>class TabImporter</vh>
+            <v t="ekr.20161006092435.3"><vh>check</vh></v>
+            <v t="ekr.20161006092435.4"><vh>dump_stack</vh></v>
+            <v t="ekr.20161006092435.5"><vh>lws</vh></v>
+            <v t="ekr.20161006092435.6"><vh>scan</vh></v>
+            <v t="ekr.20161006092435.7"><vh>scan_helper</vh></v>
+            <v t="ekr.20161006092435.8"><vh>undent</vh></v>
+          </v>
+        </v>
+        <v t="ekr.20170301023612.1"><vh>@button insert headlines as comments</vh></v>
+        <v t="ekr.20170212105552.1"><vh>@button IntroSlides @key=Ctrl-9</vh>
+          <v t="ekr.20170212105552.2"><vh>&lt;&lt; imports &gt;&gt;</vh></v>
+          <v t="ekr.20170212105552.3"><vh>&lt;&lt; class IntroSlides &gt;&gt;</vh>
+            <v t="ekr.20170212105552.4"><vh>setup</vh></v>
+            <v t="ekr.20170212105552.5"><vh>setup_script</vh></v>
+            <v t="ekr.20170212105552.6"><vh>teardown</vh></v>
+            <v t="ekr.20170212105552.7"><vh>teardown_script</vh></v>
+          </v>
+          <v t="ekr.20170212105552.8"><vh>&lt;&lt; main &gt;&gt;</vh></v>
+          <v t="ekr.20170212105552.9"><vh>Leo's Main Window</vh></v>
+          <v t="ekr.20170212105552.10"><vh>intro-slides-script</vh>
+            <v t="ekr.20170212105552.11"><vh>Slide 1: Leo's main window</vh></v>
+          </v>
+        </v>
+        <v t="ekr.20160923132656.1"><vh>@button introspect</vh></v>
+        <v t="ekr.20161031130627.1"><vh>@button pep8 @key=Ctrl-5</vh>
+          <v t="ekr.20161031130627.2"><vh>class Pep8</vh>
+            <v t="ekr.20161031130627.3"><vh>change_all &amp; helpers</vh>
+              <v t="ekr.20161031130627.4"><vh>change_body</vh></v>
+              <v t="ekr.20161031130627.5"><vh>change_headline</vh></v>
+            </v>
+            <v t="ekr.20161031130627.6"><vh>get_name</vh></v>
+            <v t="ekr.20161031130627.7"><vh>run</vh></v>
+            <v t="ekr.20161031130627.8"><vh>to_pep8</vh></v>
+          </v>
+          <v t="ekr.20161031130627.9"><vh>clear</vh></v>
+        </v>
+        <v t="ekr.20170225023738.1"><vh>@button test-http</vh></v>
+        <v t="ekr.20170120110015.1"><vh>@ignore importer scripts</vh>
+          <v t="ekr.20161120175101.1"><vh>@button make-md-heads</vh>
+            <v t="ekr.20161120175101.2"><vh>markup</vh></v>
+          </v>
+          <v t="ekr.20161123085419.1"><vh>@button make-table</vh></v>
+          <v t="ekr.20161124034654.1"><vh>@button make-importer</vh>
+            <v t="ekr.20161124034654.2"><vh>&lt;&lt; define run &amp; helpers &gt;&gt;</vh>
+              <v t="ekr.20161124034654.3"><vh>copy_tree</vh></v>
+              <v t="ekr.20161124034654.4"><vh>make_substitutions</vh></v>
+              <v t="ekr.20161124034654.5"><vh>run</vh></v>
+              <v t="ekr.20161124034654.6"><vh>substitue</vh></v>
+            </v>
+            <v t="ekr.20161124034654.7"><vh>@@file importers/{{name}}.py</vh>
+              <v t="ekr.20161124034654.8"><vh>class {{cap_name}}_Importer</vh>
+                <v t="ekr.20161124034654.9"><vh>{{name}}.Overrides</vh>
+                  <v t="ekr.20161124034654.10"><vh>{{name}}.clean_headline</vh></v>
+                  <v t="ekr.20161124034654.11"><vh>{{name}}.clean_nodes</vh></v>
+                </v>
+              </v>
+              <v t="ekr.20161124034654.12"><vh>class class {{cap_name}}_ScanState</vh>
+                <v t="ekr.20161124034654.13"><vh>{{name}}_state.level</vh></v>
+                <v t="ekr.20161124034654.14"><vh>{{name}}_state.update</vh></v>
+              </v>
+            </v>
+          </v>
+          <v t="ekr.20161204063803.1"><vh>@button make-md-toc</vh>
+            <v t="ekr.20161204063803.2"><vh>run</vh></v>
+            <v t="ekr.20161204063803.3"><vh>mak_link</vh></v>
+            <v t="ekr.20161204063803.4"><vh>make_toc</vh></v>
+          </v>
+        </v>
+      </v>
+      <v t="ekr.20181019042717.1"><vh>@ignore at-button nodes in LeoSettings.leo</vh>
+        <v t="ekr.20181019042907.1"><vh>@button check-bindings</vh>
+          <v t="ekr.20181019042907.2"><vh>defineSetNames</vh></v>
+          <v t="ekr.20181019042907.3"><vh>doSet</vh></v>
+          <v t="ekr.20181019042907.4"><vh>doShortcuts</vh></v>
+          <v t="ekr.20181019042907.5"><vh>checkSets</vh></v>
+          <v t="ekr.20181019042907.6"><vh>main</vh></v>
+        </v>
+        <v t="ekr.20181019042834.1"><vh>@button check-menus-cmds</vh></v>
+        <v t="ekr.20181019042808.1"><vh>@button check-settings</vh>
+          <v t="ekr.20181019042808.2"><vh>ctor</vh></v>
+          <v t="ekr.20181019042808.3"><vh>check &amp; helpers</vh>
+            <v t="ekr.20181019042808.4"><vh>filter_get_x</vh></v>
+            <v t="ekr.20181019042808.5"><vh>filter_user_config</vh></v>
+          </v>
+          <v t="ekr.20181019042808.6"><vh>error</vh></v>
+          <v t="ekr.20181019042808.7"><vh>get_commanders</vh></v>
+          <v t="ekr.20181019042808.8"><vh>get_configs &amp; helpers</vh>
+            <v t="ekr.20181019042808.9"><vh>get_configs_from_outline &amp; helper</vh>
+              <v t="ekr.20181019042808.10"><vh>scan_for_configs</vh></v>
+            </v>
+          </v>
+          <v t="ekr.20181019042808.11"><vh>get_settings &amp; helper</vh>
+            <v t="ekr.20181019042808.12"><vh>is_setting</vh></v>
+            <v t="ekr.20181019042808.13"><vh>parse_setting</vh></v>
+          </v>
+          <v t="ekr.20181019042808.14"><vh>munge</vh></v>
+          <v t="ekr.20181019042808.15"><vh>run</vh></v>
+        </v>
+      </v>
+    </v>
+  </v>
+  <v t="ekr.20061008055616" descendentVnodeUnknownAttributes="7d7100285809000000302e312e31302e313671017d710258120000007273745f687474705f61747472696275746571035d71042858460000003c6120636c6173733d22746172676574222069643d22687474702d6e6f64652d6d61726b65722d333922206e616d653d22687474702d6e6f64652d6d61726b65722d3339223e710558040000003c2f613e71065d71072858340000003c64697620636c6173733d2273656374696f6e222069643d2272756e6e696e672d6c656f2d696e2d62617463682d6d6f6465223e710858060000003c2f6469763e71095d710a28583f0000003c64697620636c6173733d22646f63756d656e74222069643d22636861707465722d372d736372697074696e672d6c656f2d776974682d707974686f6e223e710b58060000003c2f6469763e710c5d710d2858060000003c626f64793e710e58070000003c2f626f64793e710f5d71102858430000003c68746d6c20786d6c6e733d22687474703a2f2f7777772e77332e6f72672f313939392f7868746d6c2220786d6c3a6c616e673d22656e22206c616e673d22656e223e711158070000003c2f68746d6c3e71124e6565656558070000003c2f6469763e0a7113583e0000003c64697620636c6173733d2273656374696f6e222069643d2266756e6374696f6e732d646566696e65642d696e2d6c656f676c6f62616c732d7079223e0a7114587e0000003c68313e3c6120636c6173733d22746f632d6261636b7265662220687265663d22236964323022206e616d653d2266756e6374696f6e732d646566696e65642d696e2d6c656f676c6f62616c732d7079223e46756e6374696f6e7320646566696e656420696e206c656f476c6f62616c732e70793c2f613e3c2f68313e0a711565735809000000302e312e31302e323671167d7117580b0000005f5f626f6f6b6d61726b7371187d7119580700000069735f64757065711a4930300a7373752e"><vh>Scripts</vh>
+    <v t="ekr.20181019042544.1"><vh>script: regularize settings names</vh></v>
+    <v t="ekr.20051110111150" descendentVnodeUnknownAttributes="7d7100285807000000302e31302e313671017d710258120000007273745f687474705f61747472696275746571035d71042858460000003c6120636c6173733d22746172676574222069643d22687474702d6e6f64652d6d61726b65722d333922206e616d653d22687474702d6e6f64652d6d61726b65722d3339223e710558040000003c2f613e71065d71072858340000003c64697620636c6173733d2273656374696f6e222069643d2272756e6e696e672d6c656f2d696e2d62617463682d6d6f6465223e710858060000003c2f6469763e71095d710a28583f0000003c64697620636c6173733d22646f63756d656e74222069643d22636861707465722d372d736372697074696e672d6c656f2d776974682d707974686f6e223e710b58060000003c2f6469763e710c5d710d2858060000003c626f64793e710e58070000003c2f626f64793e710f5d71102858430000003c68746d6c20786d6c6e733d22687474703a2f2f7777772e77332e6f72672f313939392f7868746d6c2220786d6c3a6c616e673d22656e22206c616e673d22656e223e711158070000003c2f68746d6c3e71124e6565656558070000003c2f6469763e0a7113583e0000003c64697620636c6173733d2273656374696f6e222069643d2266756e6374696f6e732d646566696e65642d696e2d6c656f676c6f62616c732d7079223e0a7114587e0000003c68313e3c6120636c6173733d22746f632d6261636b7265662220687265663d22236964323022206e616d653d2266756e6374696f6e732d646566696e65642d696e2d6c656f676c6f62616c732d7079223e46756e6374696f6e7320646566696e656420696e206c656f476c6f62616c732e70793c2f613e3c2f68313e0a711565735807000000302e31302e323671167d7117580b0000005f5f626f6f6b6d61726b7371187d7119580700000069735f64757065711a4930300a7373752e"><vh>@f leoScripts.txt</vh></v>
+  </v>
+  <v t="ekr.20230925012840.1"><vh>--- Recent</vh>
+    <v t="ekr.20211020082938.1"><vh>script: display slides</vh>
+      <v t="ekr.20211020082938.2"><vh>get_files</vh></v>
+      <v t="ekr.20211020082938.3"><vh>class Slides</vh>
+        <v t="ekr.20211020082938.4"><vh>Slides.delete</vh></v>
+        <v t="ekr.20211020082938.5"><vh>Slides.keyPressEvent</vh></v>
+        <v t="ekr.20211020082938.6"><vh>Slides.move_up/down/left/right</vh></v>
+        <v t="ekr.20211020082938.7"><vh>Slides.move_to</vh></v>
+        <v t="ekr.20211020082938.8"><vh>Slides.next_slide</vh></v>
+        <v t="ekr.20211020082938.9"><vh>Slides.prev_slide</vh></v>
+        <v t="ekr.20211020082938.10"><vh>Slides.quit</vh></v>
+        <v t="ekr.20211020082938.11"><vh>Slides.run &amp; helper</vh>
+          <v t="ekr.20211020082938.12"><vh>Slides.make_widgets</vh></v>
+        </v>
+        <v t="ekr.20211020082938.13"><vh>Slides.show_help</vh></v>
+        <v t="ekr.20211020082938.14"><vh>Slides.show_slide</vh></v>
+        <v t="ekr.20211020082938.15"><vh>Slides.sort</vh></v>
+        <v t="ekr.20211020082938.16"><vh>Slides.timerEvent</vh></v>
+        <v t="ekr.20211020082938.17"><vh>Slides.toggle_full_screen</vh></v>
+        <v t="ekr.20211020082938.18"><vh>Slides.zoom_in &amp; zoom_out</vh></v>
+      </v>
+    </v>
+    <v t="ekr.20220319162442.1"><vh>script: diff-two-revs-wo-comments</vh>
+      <v t="ekr.20220319162442.2"><vh>function: make_diff_outlines_ignoring_comments</vh></v>
+      <v t="ekr.20220319162442.3"><vh>function: strip_comments</vh></v>
+    </v>
+    <v t="ekr.20221105063835.1"><vh>script: insert-macros</vh>
+      <v t="ekr.20221105063835.2"><vh>add_macros</vh></v>
+      <v t="ekr.20221105063835.3"><vh>macro-test</vh>
+        <v t="ekr.20221105063835.4"><vh>multiple defs</vh></v>
+        <v t="ekr.20221105063835.5"><vh>spam</vh></v>
+        <v t="ekr.20221105063835.6"><vh>eggs</vh></v>
+      </v>
+    </v>
+    <v t="ekr.20230421070847.1"><vh>script: replace kwargs in mode files</vh></v>
+    <v t="ekr.20230925012359.1"><vh>script: list all rhythms in a 4/4 measure</vh>
+      <v t="ekr.20230925012359.2"><vh>compute_quarters</vh></v>
+      <v t="ekr.20230925012359.3"><vh>convert_pattern and convert_patterns</vh></v>
+      <v t="ekr.20230925012359.4"><vh>find_patterns</vh></v>
+      <v t="ekr.20230925012359.5"><vh>is_square</vh></v>
+    </v>
+    <v t="ekr.20231008041100.1"><vh>script: to-github</vh>
+      <v t="ekr.20231008041100.2"><vh>put_all_nodes</vh></v>
+      <v t="ekr.20231008041100.3"><vh>python_i.delete_comments_and_strings</vh></v>
+    </v>
+    <v t="ekr.20231217050920.1"><vh>Tom Passin's Current Directory Buttons</vh>
+      <v t="ekr.20231217050920.2"><vh>@button Show Current Dir</vh></v>
+      <v t="ekr.20231217050920.3"><vh>@button Cmd Window Here</vh></v>
+      <v t="ekr.20231217050920.4"><vh>@button Node Dir to Clip</vh></v>
+    </v>
+  </v>
+  <v t="ekr.20060824111500.108"><vh>@button jEdit2Py</vh>
+    <v t="ekr.20060824111500.113"><vh>top-level</vh>
+      <v t="ekr.20160319080102.1"><vh>cleanSaxInputString</vh></v>
+      <v t="ekr.20060824111500.115"><vh>parse_jEdit_file</vh></v>
+      <v t="ekr.20060824111500.114"><vh>convert</vh></v>
+      <v t="ekr.20060824111500.116"><vh>munge</vh></v>
+      <v t="ekr.20160319081141.1"><vh>main</vh></v>
+    </v>
+    <v t="ekr.20060824111500.117"><vh>class Mode</vh>
+      <v t="ekr.20060824111500.118"><vh> Mode.__init__</vh></v>
+      <v t="ekr.20060824111500.119"><vh> Mode.__str__ &amp; __repr__</vh></v>
+      <v t="ekr.20060824111500.153"><vh>Mode.error</vh></v>
+      <v t="ekr.20060824111500.154"><vh>Mode: Getters</vh></v>
+      <v t="ekr.20220927115543.1"><vh>Mode: Handlers</vh>
+        <v t="ekr.20060824111500.150"><vh>Mode.doAttribute</vh></v>
+        <v t="ekr.20060824111500.151"><vh>Mode.doContent</vh></v>
+        <v t="ekr.20060824111500.152"><vh>Mode.endElement</vh></v>
+        <v t="ekr.20060824111500.155"><vh>Mode.inRule</vh></v>
+        <v t="ekr.20060824111500.156"><vh>Mode.startElement</vh></v>
+      </v>
+      <v t="ekr.20060824111500.120"><vh>Mode: Output...</vh>
+        <v t="ekr.20060824111500.121"><vh>Mode.escapeString &amp; quoteString</vh></v>
+        <v t="ekr.20060827162343"><vh>Mode.fullDelegate</vh></v>
+        <v t="ekr.20060824111500.122"><vh>Mode.put</vh></v>
+        <v t="ekr.20060824111500.123"><vh>Mode.putAttributes</vh></v>
+        <v t="ekr.20060824111500.124"><vh>Mode.putDict &amp; putDictOfLists</vh></v>
+        <v t="ekr.20060824111500.125"><vh>Mode.putImportDict</vh></v>
+        <v t="ekr.20060824111500.126"><vh>Mode.putKeywordsData</vh></v>
+        <v t="ekr.20060824111500.128"><vh>Mode.putModeProperties</vh></v>
+        <v t="ekr.20060824111500.129"><vh>Mode.putRule &amp; rule creators</vh>
+          <v t="ekr.20060824111500.130"><vh>Mode.putBadRule</vh></v>
+          <v t="ekr.20060824111500.131"><vh>Mode.putEolSpan</vh></v>
+          <v t="ekr.20060824111500.132"><vh>Mode.putEolSpanRegexp</vh></v>
+          <v t="ekr.20060824111500.133"><vh>Mode.putImport</vh></v>
+          <v t="ekr.20060824111500.134"><vh>Mode.putKeywords</vh></v>
+          <v t="ekr.20060824111500.135"><vh>Mode.putMarkFollowing</vh></v>
+          <v t="ekr.20060824111500.136"><vh>Mode.putMarkPrevious</vh></v>
+          <v t="ekr.20060824111500.137"><vh>Mode.putSeq</vh></v>
+          <v t="ekr.20060824111500.138"><vh>Mode.putSeqRegexp</vh></v>
+          <v t="ekr.20060824111500.139"><vh>Mode.putSpan</vh></v>
+          <v t="ekr.20060824111500.140"><vh>Mode.putSpanRegexp</vh></v>
+          <v t="ekr.20060824111500.141"><vh>Mode.putTerminate</vh></v>
+        </v>
+        <v t="ekr.20060824111500.143"><vh>Mode.write</vh></v>
+        <v t="ekr.20060824111500.142"><vh>Mode.putRules</vh></v>
+      </v>
+      <v t="ekr.20060824111500.144"><vh>Mode: Printing...</vh>
+        <v t="ekr.20060824111500.145"><vh>Mode.printModeAttributes, printRulesetAttributes &amp; printAttributesHelper</vh></v>
+        <v t="ekr.20060824111500.146"><vh>Mode.printProperty</vh></v>
+        <v t="ekr.20060824111500.147"><vh>Mode.printRule</vh></v>
+        <v t="ekr.20060824111500.148"><vh>Mode.printRuleset</vh></v>
+      </v>
+    </v>
+    <v t="ekr.20060824111500.159"><vh>class Rule</vh>
+      <v t="ekr.20060824111500.161"><vh>rule.getters</vh></v>
+    </v>
+    <v t="ekr.20060824111500.157"><vh>class Ruleset</vh></v>
+    <v t="ekr.20060824111500.162"><vh>class ContentHandler(xml.sax.saxutils.XMLGenerator)</vh>
+      <v t="ekr.20060824111500.163"><vh> __init__ &amp; helpers</vh></v>
+      <v t="ekr.20060824111500.164"><vh>helpers</vh>
+        <v t="ekr.20060824111500.165"><vh>attrsToList</vh></v>
+        <v t="ekr.20060824111500.166"><vh>attrsToString</vh></v>
+        <v t="ekr.20060824111500.168"><vh>error</vh></v>
+        <v t="ekr.20060824111500.169"><vh>printStartElement</vh></v>
+      </v>
+      <v t="ekr.20060824111500.171"><vh>sax over-rides</vh>
+        <v t="ekr.20060824111500.172"><vh> Do nothing...</vh></v>
+        <v t="ekr.20060824111500.176"><vh>characters</vh></v>
+        <v t="ekr.20060824111500.177"><vh>elements &amp; helpers</vh>
+          <v t="ekr.20060824111500.179"><vh>doStartElement</vh></v>
+          <v t="ekr.20060824111500.180"><vh>doEndElement</vh></v>
+        </v>
+      </v>
+      <v t="ekr.20060824111500.181"><vh>getMode</vh></v>
+    </v>
+  </v>
+  <v t="ekr.20241117081230.1"><vh>script: scan-modes</vh>
+    <v t="ekr.20241117081901.1"><vh>scan</vh></v>
+    <v t="ekr.20241117082739.1"><vh>scan_def</vh></v>
+    <v t="ekr.20241117125039.1"><vh>add_matcher</vh></v>
+    <v t="ekr.20241117145426.1"><vh>delete_cruft</vh></v>
+    <v t="ekr.20241117131431.1"><vh>delete_strings</vh></v>
+    <v t="ekr.20241117125038.1"><vh>filter_line</vh></v>
+    <v t="ekr.20241117125039.2"><vh>show_line</vh></v>
+  </v>
 </vnodes>
 <tnodes>
-<t tx="ekr.20060824111500.108">"""
+  <t tx="ekr.20060824111500.108">&quot;&quot;&quot;
 Convert jEdit description file (an .xml file) to an equivalent .py file.
-"""
+&quot;&quot;&quot;
 import string
 import textwrap
 import xml.sax
@@ -486,8 +486,7 @@ main()
 @tabwidth -4
 @pagewidth 80
 </t>
-<t tx="ekr.20060824111500.113"></t>
-<t tx="ekr.20060824111500.114">def convert(inputFileName, outputFileName):
+  <t tx="ekr.20060824111500.114">def convert(inputFileName, outputFileName):
 
     junk, fn = g.os_path_split(inputFileName)
     language, junk = g.os_path_splitext(fn)
@@ -502,7 +501,7 @@ main()
         except IOError:
             g.es_print('can not create', outputFileName)
 </t>
-<t tx="ekr.20060824111500.115">def parse_jEdit_file(inputFileName, language):
+  <t tx="ekr.20060824111500.115">def parse_jEdit_file(inputFileName, language):
 
     if not inputFileName:
         return None
@@ -516,7 +515,7 @@ main()
     try:
         f = open(path, 'r')
     except IOError:
-        g.trace(f"can not open {path!r}")
+        g.trace(f&quot;can not open {path!r}&quot;)
         return None
     try:
         try:
@@ -524,7 +523,7 @@ main()
             parser = xml.sax.make_parser()
                 # Do not include external general entities.
                 # The actual feature name is
-                # "http://xml.org/sax/features/external-general-entities"
+                # &quot;http://xml.org/sax/features/external-general-entities&quot;
             parser.setFeature(xml.sax.handler.feature_external_ges, 0)
             handler = ContentHandler(inputFileName)
             parser.setContentHandler(handler)
@@ -533,21 +532,21 @@ main()
                 # Fails with Python 2 when the file contains non-ascii characters.
             mode = handler.getMode()
         except:
-            g.es(f"unexpected exception parsing {inputFileName}", color='red')
+            g.es(f&quot;unexpected exception parsing {inputFileName}&quot;, color='red')
             g.es_exception()
     finally:
         f.close()
         return mode
 </t>
-<t tx="ekr.20060824111500.116">def munge(s):
+  <t tx="ekr.20060824111500.116">def munge(s):
 
     '''Munge a mode name so that it is a valid python id.'''
 
     valid = string.ascii_letters + string.digits + '_'
     return ''.join([ch.lower() if ch in valid else '_' for ch in s])
 </t>
-<t tx="ekr.20060824111500.117">class Mode:
-    """A class representing one jEdit language-description mode."""
+  <t tx="ekr.20060824111500.117">class Mode:
+    &quot;&quot;&quot;A class representing one jEdit language-description mode.&quot;&quot;&quot;
 
     boolAttrs = [  # Boolean attributes.
         'at_line_start', 'at_whitespace_end', 'at_word_start',
@@ -565,7 +564,7 @@ main()
 
     @others
 </t>
-<t tx="ekr.20060824111500.118">def __init__ (self, contentHandler, fileName):
+  <t tx="ekr.20060824111500.118">def __init__ (self, contentHandler, fileName):
     
     self.contentHandler = contentHandler
     self.fileName = g.shortFileName(fileName)  # The file from which the mode was imported.
@@ -589,30 +588,30 @@ main()
     self.rulesetProperties = []
     self.rulesetAttributes = {}  # The attributes of the present rules element.
 </t>
-<t tx="ekr.20060824111500.119">def __str__ (self):
-    return f"&lt;Mode for {self.fileName}&gt;"
+  <t tx="ekr.20060824111500.119">def __str__ (self):
+    return f&quot;&lt;Mode for {self.fileName}&gt;&quot;
 
 __repr__ = __str__
 </t>
-<t tx="ekr.20060824111500.120"># These methods generate the output file.
+  <t tx="ekr.20060824111500.120"># These methods generate the output file.
 </t>
-<t tx="ekr.20060824111500.121">def escapeString (self, s):
+  <t tx="ekr.20060824111500.121">def escapeString (self, s):
     '''Return string s enclosed in double quotes.'''
     if not s:
-        return '""'
+        return '&quot;&quot;'
     if isinstance(s, (list, tuple)):
         s = ''.join(s)
     s = g.toUnicode(s)
     # Order is important: escape backspaces first.
     # Don't use an f-string here!
-    return '"%s"' % s.replace('\\', '\\\\').replace('"', '\\"').replace('\t', '\\t')
+    return '&quot;%s&quot;' % s.replace('\\', '\\\\').replace('&quot;', '\\&quot;').replace('\t', '\\t')
 
 quoteString = escapeString
 </t>
-<t tx="ekr.20060824111500.122">def put (self, s):
+  <t tx="ekr.20060824111500.122">def put (self, s):
     self.outputFile.write(s)
 </t>
-<t tx="ekr.20060824111500.123">def putAttributes (self):
+  <t tx="ekr.20060824111500.123">def putAttributes (self):
 
     dd = {}
     data = (
@@ -625,8 +624,8 @@ quoteString = escapeString
     )
     for ruleset in self.rulesets:
         d = {}
-        prefix = f"{self.modeName}_{ruleset.name}"
-        self.put(f"# Attributes dict for {prefix} ruleset.\n")
+        prefix = f&quot;{self.modeName}_{ruleset.name}&quot;
+        self.put(f&quot;# Attributes dict for {prefix} ruleset.\n&quot;)
         for key, default in data:
             val = ruleset.attributes.get(key, default)
             if default == True:
@@ -637,24 +636,24 @@ quoteString = escapeString
                 else:
                     val = val or ''
             d [key] = val
-        self.putDict(f"{prefix}_attributes_dict", d)
-        dd [ prefix ] = f"{prefix}_attributes_dict"
+        self.putDict(f&quot;{prefix}_attributes_dict&quot;, d)
+        dd [ prefix ] = f&quot;{prefix}_attributes_dict&quot;
 
-    self.put(f"# Dictionary of attributes dictionaries for {self.modeName} mode.\n")
+    self.put(f&quot;# Dictionary of attributes dictionaries for {self.modeName} mode.\n&quot;)
     self.putDict('attributesDictDict', dd, escape=False)
 </t>
-<t tx="ekr.20060824111500.124">def putDict (self, name, theDict, escape=True):
+  <t tx="ekr.20060824111500.124">def putDict (self, name, theDict, escape=True):
 
     esc = self.escapeString
     esc2 = self.escapeString if escape else lambda a: a
     keys = list(set((theDict.keys())))
     keys = sorted([g.toUnicode(z) for z in keys if z])
     s = ''.join([
-        f"    {esc(key)}: {esc2(theDict.get(key))},\n" for key in keys
+        f&quot;    {esc(key)}: {esc2(theDict.get(key))},\n&quot; for key in keys
     ])
     if s:
         s = '\n' + s
-    self.put(f"{name} = {{{s}}}\n\n")
+    self.put(f&quot;{name} = {{{s}}}\n\n&quot;)
 
 def putDictOfLists (self, name, theDict, strings=False):
 
@@ -665,43 +664,43 @@ def putDictOfLists (self, name, theDict, strings=False):
     for key in keys:
         if strings:
             # Not completely general, but it works for the import dict, and that's good enough.
-            s = ', '.join([f'"{z}"' for z in theDict.get(key)])
+            s = ', '.join([f'&quot;{z}&quot;' for z in theDict.get(key)])
         else:
-             s = ', '.join([f"{z}" for z in theDict.get(key)])
-        theList.append(f"    {esc(key)}: [{s}],\n")
+             s = ', '.join([f&quot;{z}&quot; for z in theDict.get(key)])
+        theList.append(f&quot;    {esc(key)}: [{s}],\n&quot;)
     s = ''.join(theList)
     if s:
         s = '\n' + s
-    self.put(f"{name} = {{{s}}}\n\n")
+    self.put(f&quot;{name} = {{{s}}}\n\n&quot;)
 </t>
-<t tx="ekr.20060824111500.125">def putImportDict (self):
+  <t tx="ekr.20060824111500.125">def putImportDict (self):
 
     d = {}
     for ruleset in self.rulesets:
-        prefix = f"{self.modeName}_{ruleset.name}"
+        prefix = f&quot;{self.modeName}_{ruleset.name}&quot;
         for rule in ruleset.rules:
             if rule.name == 'import':
                 delegate = rule.getStrAttrib('delegate').lower()
                 if delegate:
-                    delegate_name = delegate if '::' in delegate else f"{prefix}::{delegate}"
+                    delegate_name = delegate if '::' in delegate else f&quot;{prefix}::{delegate}&quot;
                     theList = d.get(prefix, [])
                     if delegate_name not in theList:
                         theList.append(delegate_name)
                         d [prefix] = theList
 
-    self.put(f"# Import dict for {self.modeName} mode.\n")
+    self.put(f&quot;# Import dict for {self.modeName} mode.\n&quot;)
     self.putDictOfLists('importDict', d, strings=True)
 </t>
-<t tx="ekr.20060824111500.126">def putKeywordsData (self):
+  <t tx="ekr.20060824111500.126">def putKeywordsData (self):
 
     dd = {}
     for ruleset in self.rulesets:
-        prefix = f"{self.modeName}_{ruleset.name}"
+        prefix = f&quot;{self.modeName}_{ruleset.name}&quot;
         prefix = g.toUnicode(prefix)
         ignore_case = ruleset.attributes.get('ignore_case', 'false')
         if not isinstance(ignore_case, bool):
             ignore_case = ignore_case.lower() == 'false'
-        self.put(f"# Keywords dict for {prefix} ruleset.\n")
+        self.put(f&quot;# Keywords dict for {prefix} ruleset.\n&quot;)
         for rule in ruleset.rules:
             if rule.name == 'keywords':
                 # d = rule.keywordsDict
@@ -713,7 +712,7 @@ def putDictOfLists (self, name, theDict, strings=False):
                 for key in sorted(set(d.keys())):
                     if ' ' in key or '\t' in key:
                         del d [key]
-                        g.es_print(f"Ignoring keyword containing whitespace: {key!r}")
+                        g.es_print(f&quot;Ignoring keyword containing whitespace: {key!r}&quot;)
                     elif ignore_case: # New in 4.4.1 final.
                         # Downcase all keys.
                         val = d.get(key)
@@ -727,21 +726,21 @@ def putDictOfLists (self, name, theDict, strings=False):
         self.putDict('%s_keywords_dict' % (prefix), d)
         dd [ prefix ] = '%s_keywords_dict' % (prefix)
 
-    self.put(f"# Dictionary of keywords dictionaries for {self.modeName} mode.\n")
+    self.put(f&quot;# Dictionary of keywords dictionaries for {self.modeName} mode.\n&quot;)
     self.putDict('keywordsDictDict', dd, escape=False)
 </t>
-<t tx="ekr.20060824111500.128">def putModeProperties (self, language):
+  <t tx="ekr.20060824111500.128">def putModeProperties (self, language):
 
     d = {}
-    self.put(f"# Properties for {language} mode.\n")
+    self.put(f&quot;# Properties for {language} mode.\n&quot;)
     for prop in self.modeProperties:
         d2 = prop.attributes
         name = d2.get('name')
         d [name] = d2.get('value')
     self.putDict('properties', d)
 </t>
-<t tx="ekr.20060824111500.129">def putRule (self, rule):
-    """Call the rule creator for the given rule."""
+  <t tx="ekr.20060824111500.129">def putRule (self, rule):
+    &quot;&quot;&quot;Call the rule creator for the given rule.&quot;&quot;&quot;
     d = {
         'eol_span':         self.putEolSpan,
         'eol_span_regexp':  self.putEolSpanRegexp,
@@ -760,11 +759,11 @@ def putDictOfLists (self, name, theDict, strings=False):
     self.handlerCount += 1
     return val
 </t>
-<t tx="ekr.20060824111500.130">def putBadRule (self, rule):
+  <t tx="ekr.20060824111500.130">def putBadRule (self, rule):
 
-    self.put(f"\n\n# *****no output creator for {rule.name}*****")
+    self.put(f&quot;\n\n# *****no output creator for {rule.name}*****&quot;)
 </t>
-<t tx="ekr.20060824111500.131">def putEolSpan (self, rule):
+  <t tx="ekr.20060824111500.131">def putEolSpan (self, rule):
 
     quote = self.quoteString
     seq = rule.getSeq(rule.name)
@@ -787,7 +786,7 @@ def %s_rule%d(colorer, s, i):
     self.put(textwrap.dedent(s))
     return seq[0]
 </t>
-<t tx="ekr.20060824111500.132">def putEolSpanRegexp (self, rule):
+  <t tx="ekr.20060824111500.132">def putEolSpanRegexp (self, rule):
 
     quote = self.quoteString
     seq = rule.getSeq(rule.name)
@@ -811,7 +810,7 @@ def %s_rule%d(colorer, s, i):
     self.put(textwrap.dedent(s))
     return hash_char
 </t>
-<t tx="ekr.20060824111500.133"># Do nothing here: putImportDict creates x.importDict.
+  <t tx="ekr.20060824111500.133"># Do nothing here: putImportDict creates x.importDict.
 
 def putImport (self, rule):
 
@@ -819,7 +818,7 @@ def putImport (self, rule):
     self.handlerCount -= 1
     return ''
 </t>
-<t tx="ekr.20060824111500.134">def putKeywords (self, rule):
+  <t tx="ekr.20060824111500.134">def putKeywords (self, rule):
 
     s = '''\n\
 def %s_rule%d(colorer, s, i):
@@ -829,7 +828,7 @@ def %s_rule%d(colorer, s, i):
     self.put(textwrap.dedent(s))
     return 'keywords'
 </t>
-<t tx="ekr.20060824111500.135">def putMarkFollowing (self, rule):
+  <t tx="ekr.20060824111500.135">def putMarkFollowing (self, rule):
 
     quote = self.quoteString
     seq = rule.getSeq(rule.name)
@@ -850,7 +849,7 @@ def %s_rule%d(colorer, s, i):
     self.put(textwrap.dedent(s))
     return seq[0]
 </t>
-<t tx="ekr.20060824111500.136">def putMarkPrevious (self, rule):
+  <t tx="ekr.20060824111500.136">def putMarkPrevious (self, rule):
 
     quote = self.quoteString
     seq = rule.getSeq(rule.name)
@@ -871,7 +870,7 @@ def %s_rule%d(colorer, s, i):
     self.put(textwrap.dedent(s))
     return seq[0]
 </t>
-<t tx="ekr.20060824111500.137">def putSeq (self, rule):
+  <t tx="ekr.20060824111500.137">def putSeq (self, rule):
 
     quote = self.quoteString
     seq = rule.getSeq(rule.name)
@@ -892,7 +891,7 @@ def %s_rule%d(colorer, s, i):
     self.put(textwrap.dedent(s))
     return seq[0]
 </t>
-<t tx="ekr.20060824111500.138">def putSeqRegexp (self, rule):
+  <t tx="ekr.20060824111500.138">def putSeqRegexp (self, rule):
 
     quote = self.quoteString
     seq = rule.getSeq(rule.name)
@@ -915,7 +914,7 @@ def %s_rule%d(colorer, s, i):
     self.put(textwrap.dedent(s))
     return hash_char
 </t>
-<t tx="ekr.20060824111500.139">def putSpan (self, rule):
+  <t tx="ekr.20060824111500.139">def putSpan (self, rule):
 
     quote = self.quoteString
     begin, end = rule.getSpan()
@@ -942,7 +941,7 @@ def %s_rule%d(colorer, s, i):
     self.put(textwrap.dedent(s))
     return begin[0]
 </t>
-<t tx="ekr.20060824111500.140">def putSpanRegexp (self, rule):
+  <t tx="ekr.20060824111500.140">def putSpanRegexp (self, rule):
 
     quote = self.quoteString
     begin, end = rule.getSpan()
@@ -970,7 +969,7 @@ def %s_rule%d(colorer, s, i):
     self.put(textwrap.dedent(s))
     return hash_char
 </t>
-<t tx="ekr.20060824111500.141">def putTerminate (self, rule):
+  <t tx="ekr.20060824111500.141">def putTerminate (self, rule):
 
     quote = self.quoteString
 
@@ -987,38 +986,38 @@ def %s_rule%d(colorer, s, i):
     )
     self.put(textwrap.dedent(s))
 </t>
-<t tx="ekr.20060824111500.142">def putRules (self):
+  <t tx="ekr.20060824111500.142">def putRules (self):
 
     '''Create all rule matchers, a rules dict for each ruleset and x.rulesDictDict.'''
 
     d = {} ; d2Count = 0
     for ruleset in self.rulesets:
         d2 = {}
-        prefix = f"{self.modeName}_{ruleset.name}"
-        self.put(f"# Rules for {prefix} ruleset.\n")
+        prefix = f&quot;{self.modeName}_{ruleset.name}&quot;
+        self.put(f&quot;# Rules for {prefix} ruleset.\n&quot;)
         for rule in ruleset.rules:
             ch = self.putRule(rule)
             self.put('\n')
             if ch == 'keywords':
                 for ch in self.keywordChars:
                     theList = d2.get(ch, [])
-                    theList.append(f"{self.fileModeName}_rule{self.handlerCount-1}")
+                    theList.append(f&quot;{self.fileModeName}_rule{self.handlerCount-1}&quot;)
                     d2 [ch] = theList
             elif ch:
                 theList = d2.get(ch, [])
-                theList.append(f"{self.fileModeName}_rule{self.handlerCount-1}")
+                theList.append(f&quot;{self.fileModeName}_rule{self.handlerCount-1}&quot;)
                 d2 [ch] = theList
         # Create the rules dict for the ruleset.
-        self.put(f"\n# Rules dict for {prefix} ruleset.\n")
+        self.put(f&quot;\n# Rules dict for {prefix} ruleset.\n&quot;)
         d2Count += 1
-        name = f"rulesDict{d2Count}"
+        name = f&quot;rulesDict{d2Count}&quot;
         self.putDictOfLists(name, d2)
         d [prefix] = name
     # Create rulesDictDict.
-    self.put(f"# x.rulesDictDict for {self.modeName} mode.\n")    
+    self.put(f&quot;# x.rulesDictDict for {self.modeName} mode.\n&quot;)    
     self.putDict('rulesDictDict', d, escape=False)
 </t>
-<t tx="ekr.20060824111500.143">def write (self, theFile, language):
+  <t tx="ekr.20060824111500.143">def write (self, theFile, language):
 
     # Compute all the letters that can occur in a keyword.
     self.keywordChars = [ch for ch in string.ascii_letters + string.digits + '@']
@@ -1041,9 +1040,9 @@ def %s_rule%d(colorer, s, i):
     self.putRules()
     self.putImportDict()
 </t>
-<t tx="ekr.20060824111500.144"># Not used.
+  <t tx="ekr.20060824111500.144"># Not used.
 </t>
-<t tx="ekr.20060824111500.145">def printModeAttributes (self):
+  <t tx="ekr.20060824111500.145">def printModeAttributes (self):
     self.printAttributesHelper('mode attributes', self.attributes)
 
 def printRulesetAttributes (self, ruleset, tag=None):
@@ -1054,13 +1053,13 @@ def printRulesetAttributes (self, ruleset, tag=None):
 def printAttributesHelper (self, kind, attrs):
     print('%-15s' % (kind), 'attrs:', attrs)
 </t>
-<t tx="ekr.20060824111500.146">def printProperty (self, theProperty):
+  <t tx="ekr.20060824111500.146">def printProperty (self, theProperty):
     # A property is a bunch.
     d = theProperty.attributes
     if d:
         self.printAttributesHelper('property', d)
 </t>
-<t tx="ekr.20060824111500.147">def printRule (self, rule):
+  <t tx="ekr.20060824111500.147">def printRule (self, rule):
 
     # A rule is a g.Bunch.
     if rule.name == 'keywords':
@@ -1073,7 +1072,7 @@ def printAttributesHelper (self, kind, attrs):
         keys = list(d2.keys())
         keys.sort()
         for key in keys:
-            print(f"{key}: {d2.get(key)}")
+            print(f&quot;{key}: {d2.get(key)}&quot;)
         print()
     else:
         d = rule.attributes
@@ -1086,14 +1085,14 @@ def printAttributesHelper (self, kind, attrs):
                 print('contents:', d2)
             print()
 </t>
-<t tx="ekr.20060824111500.148">def printRuleset (self, ruleset, tag):
+  <t tx="ekr.20060824111500.148">def printRuleset (self, ruleset, tag):
 
     self.printRulesetAttributes(ruleset, tag)
 
     for rule in self.rulesets[0].rules:
         self.printRule(rule)
 </t>
-<t tx="ekr.20060824111500.150">def doAttribute (self, name, val):
+  <t tx="ekr.20060824111500.150">def doAttribute (self, name, val):
 
     name = str(name.lower())
     if name in self.boolAttrs:
@@ -1111,7 +1110,7 @@ def printAttributesHelper (self, kind, attrs):
     else:
         self.attributes[name] = val
 </t>
-<t tx="ekr.20060824111500.151">def doContent (self, elementName, content):
+  <t tx="ekr.20060824111500.151">def doContent (self, elementName, content):
 
     if not content:
         return
@@ -1125,7 +1124,7 @@ def printAttributesHelper (self, kind, attrs):
         d [name] = s + g.toUnicode(content)
         self.contents = d
 </t>
-<t tx="ekr.20060824111500.152">def endElement (self, elementName):
+  <t tx="ekr.20060824111500.152">def endElement (self, elementName):
 
     name = elementName.lower()
 
@@ -1143,19 +1142,19 @@ def printAttributesHelper (self, kind, attrs):
             else:
                 self.modeProperties.append(bunch)
         else:
-            self.error(f"end {name} not matched by start {name}")
+            self.error(f&quot;end {name} not matched by start {name}&quot;)
         self.presentProperty = None
     if name in self.ruleElements:
         if self.inRule(name):
             self.rules.append(self.rule)
             self.rule = None
         else:
-            self.error(f"end {name} not matched by start {name}")
+            self.error(f&quot;end {name} not matched by start {name}&quot;)
 </t>
-<t tx="ekr.20060824111500.153">def error (self, message):
+  <t tx="ekr.20060824111500.153">def error (self, message):
     self.contentHandler.error(message)
 </t>
-<t tx="ekr.20060824111500.154">def getAttributes (self):
+  <t tx="ekr.20060824111500.154">def getAttributes (self):
     return self.attributes
 
 def getAttributesForRuleset (self, ruleset):
@@ -1169,7 +1168,7 @@ def getKeywords (self, n, ruleset):
     bunch = ruleset
     keywords = bunch.keywords
     if keywords:
-        return keywords.get(f"keyword{n}", [])
+        return keywords.get(f&quot;keyword{n}&quot;, [])
     return []
 
 def getLanguage (self):
@@ -1205,10 +1204,10 @@ def getRulesForRuleset (self, name=''):
     else:
         return []
 </t>
-<t tx="ekr.20060824111500.155">def inRule (self, elementName):
+  <t tx="ekr.20060824111500.155">def inRule (self, elementName):
     return self.rule and self.rule.name == elementName
 </t>
-<t tx="ekr.20060824111500.156">def startElement (self, elementName):
+  <t tx="ekr.20060824111500.156">def startElement (self, elementName):
 
     name = elementName.lower()
 
@@ -1231,9 +1230,9 @@ def getRulesForRuleset (self, name=''):
             if name == 'keywords':
                 self.keywords = self.rule
         else:
-            self.error(f"{name} not in rules element")
+            self.error(f&quot;{name} not in rules element&quot;)
 </t>
-<t tx="ekr.20060824111500.157">class Ruleset:
+  <t tx="ekr.20060824111500.157">class Ruleset:
 
     def __init__ (self, attributes, keywords, properties, rules):
     
@@ -1245,12 +1244,12 @@ def getRulesForRuleset (self, name=''):
         self.defaultColor = self.attributes.get('default')
 
     def __str__ (self):
-        return f"&lt;ruleset {self.name}&gt;"
+        return f&quot;&lt;ruleset {self.name}&gt;&quot;
 
     __repr__ = __str__
 </t>
-<t tx="ekr.20060824111500.159">class Rule:
-    """A class representing one xml rule."""
+  <t tx="ekr.20060824111500.159">class Rule:
+    &quot;&quot;&quot;A class representing one xml rule.&quot;&quot;&quot;
     
     def __init__ (self, name):
         self.attributes = {}
@@ -1260,16 +1259,16 @@ def getRulesForRuleset (self, name=''):
 
     def __str__ (self):
         return (
-            f"&lt;Rule {self.name}\n"
-            f"   attr: {g.dictToString(self.attributes)}\n"
-            f"conents: {g.dictToString(self.contents)}"
+            f&quot;&lt;Rule {self.name}\n&quot;
+            f&quot;   attr: {g.dictToString(self.attributes)}\n&quot;
+            f&quot;conents: {g.dictToString(self.contents)}&quot;
         )
 
     __repr__ = __str__
 
     @others
 </t>
-<t tx="ekr.20060824111500.161">def getBoolAttrib(self, name):
+  <t tx="ekr.20060824111500.161">def getBoolAttrib(self, name):
     d = self.attributes
     val = d.get(name)
     return 'True' if val else 'False'
@@ -1281,7 +1280,7 @@ def getIntAttrib(self, name):
         try:
             val = int(val)
         except ValueError:
-            g.trace(f"bad int argument: {name} = {val!r}")
+            g.trace(f&quot;bad int argument: {name} = {val!r}&quot;)
             val = None
     return val
 
@@ -1300,7 +1299,7 @@ def getSeq(self, kind):
     d = self.contents
     return d.get(kind, '')
 </t>
-<t tx="ekr.20060824111500.162">class ContentHandler (xml.sax.saxutils.XMLGenerator):
+  <t tx="ekr.20060824111500.162">class ContentHandler (xml.sax.saxutils.XMLGenerator):
 
     '''A sax content handler class that handles jEdit language-description files.
 
@@ -1308,7 +1307,7 @@ def getSeq(self, kind):
 
     @others
 </t>
-<t tx="ekr.20060824111500.163">def __init__ (self, inputFileName):
+  <t tx="ekr.20060824111500.163">def __init__ (self, inputFileName):
 
     # Init the base class.
     xml.sax.saxutils.XMLGenerator.__init__(self)
@@ -1326,19 +1325,18 @@ def getSeq(self, kind):
     self.mode = None # The present mode, or None if outside all modes.
     self.modes = [] # All modes defined here or by imports.
 </t>
-<t tx="ekr.20060824111500.164"></t>
-<t tx="ekr.20060824111500.165">def attrsToList (self, attrs):
-    """
+  <t tx="ekr.20060824111500.165">def attrsToList (self, attrs):
+    &quot;&quot;&quot;
     Convert attrs to a list of g.Bunches.
 
     attrs: an Attributes item passed to startElement.
-    """
+    &quot;&quot;&quot;
     return [
         g.Bunch(name=name, val=attrs.getValue(name))
             for name in attrs.getNames()
     ]
 </t>
-<t tx="ekr.20060824111500.166">def attrsToString (self, attrs, sep='\n'):
+  <t tx="ekr.20060824111500.166">def attrsToString (self, attrs, sep='\n'):
 
     '''Convert the attributes to a string.
 
@@ -1347,28 +1345,27 @@ def getSeq(self, kind):
     sep: the separator charater between attributes.'''
 
     result = [
-        f'{bunch.name}="{bunch.val}"' for bunch in self.attrsToList(attrs)
+        f'{bunch.name}=&quot;{bunch.val}&quot;' for bunch in self.attrsToList(attrs)
     ]
     return sep.join(result)
 </t>
-<t tx="ekr.20060824111500.168">def error (self, message):
-    print(f"\n\nXML error: {message}\n")
+  <t tx="ekr.20060824111500.168">def error (self, message):
+    print(f&quot;\n\nXML error: {message}\n&quot;)
     self.errors += 1
 </t>
-<t tx="ekr.20060824111500.169">def printStartElement(self, name, attrs):
+  <t tx="ekr.20060824111500.169">def printStartElement(self, name, attrs):
 
-    name_s = g.toEncodedString(name, "ascii").strip()
+    name_s = g.toEncodedString(name, &quot;ascii&quot;).strip()
     if attrs.getLength() &gt; 0:
         attrs_s = self.attrsToString(attrs, sep=' ')
-        print(f"&lt;{name_s} {attrs_s}")
+        print(f&quot;&lt;{name_s} {attrs_s}&quot;)
     else:
-        print(f"&lt;{name_s}&gt;")
+        print(f&quot;&lt;{name_s}&gt;&quot;)
         
     if name.lower() in self.newLineAfterStartElement:
         print('')
 </t>
-<t tx="ekr.20060824111500.171"></t>
-<t tx="ekr.20060824111500.172"># Expected calls...
+  <t tx="ekr.20060824111500.172"># Expected calls...
 def endDocument(self):
     pass
     
@@ -1391,18 +1388,18 @@ def startElementNS(self, name, qname, attrs):
 def endElementNS(self, name, qname):
     g.trace(name)
 </t>
-<t tx="ekr.20060824111500.176">def characters(self, content):
+  <t tx="ekr.20060824111500.176">def characters(self, content):
     content = content.replace('\r', '')
     if content.strip():
         content = content.strip()
-    content = g.toEncodedString(content, "ascii")
+    content = g.toEncodedString(content, &quot;ascii&quot;)
     elementName = self.elementStack[-1].lower() if self.elementStack else '&lt;no element name&gt;'
     if self.mode:
         self.mode.doContent(elementName, content)
     else:
         self.error('characters outside of mode')
 </t>
-<t tx="ekr.20060824111500.177">def endElement(self, name):
+  <t tx="ekr.20060824111500.177">def endElement(self, name):
     self.doEndElement(name)
     name2 = self.elementStack.pop()
     assert name == name2
@@ -1411,7 +1408,7 @@ def startElement(self, name, attrs):
     self.elementStack.append(name)
     self.doStartElement(name, attrs)
 </t>
-<t tx="ekr.20060824111500.179">def doStartElement (self, elementName, attrs):
+  <t tx="ekr.20060824111500.179">def doStartElement (self, elementName, attrs):
 
     elementName = elementName.lower()
     if elementName == 'mode':
@@ -1424,32 +1421,28 @@ def startElement(self, name, attrs):
         for bunch in self.attrsToList(attrs):
             self.mode.doAttribute(bunch.name, bunch.val)
     else:
-        self.error(f"Start element appears outside of Mode:{elementName}")
+        self.error(f&quot;Start element appears outside of Mode:{elementName}&quot;)
         for bunch in self.attrsToList(attrs):
-            self.error(f"Attribute appears outside of Mode:{bunch.name}")
+            self.error(f&quot;Attribute appears outside of Mode:{bunch.name}&quot;)
 </t>
-<t tx="ekr.20060824111500.180">def doEndElement (self, elementName):
+  <t tx="ekr.20060824111500.180">def doEndElement (self, elementName):
     if self.mode:
         self.mode.endElement(elementName)
     else:
-        self.error(f"End element appears outside of Mode:{elementName}")
+        self.error(f&quot;End element appears outside of Mode:{elementName}&quot;)
 </t>
-<t tx="ekr.20060824111500.181">def getMode (self):
+  <t tx="ekr.20060824111500.181">def getMode (self):
     return None if self.errors else self.mode
 </t>
-<t tx="ekr.20060827162343">def fullDelegate (self, delegate):
+  <t tx="ekr.20060827162343">def fullDelegate (self, delegate):
     if not delegate:
         return ''
     delegate = delegate.lower()
     if '::' in delegate:
         return delegate
-    return f"{self.fileModeName.lower()}::{delegate}"
+    return f&quot;{self.fileModeName.lower()}::{delegate}&quot;
 </t>
-<t tx="ekr.20061008055616"></t>
-<t tx="ekr.20070427110751"></t>
-<t tx="ekr.20070615131954"></t>
-<t tx="ekr.20111017085134.16069"></t>
-<t tx="ekr.20111017085134.16070"># **** Change these as needed ***
+  <t tx="ekr.20111017085134.16070"># **** Change these as needed ***
 import os, sys
 
 tempFileName = g.os_path_abspath(
@@ -1457,14 +1450,14 @@ tempFileName = g.os_path_abspath(
 
 if sys.platform == 'win32':
     jython = r'C:\Jython-21\jython.bat'
-    command = '%s "%s"' % (jython,tempFileName) 
+    command = '%s &quot;%s&quot;' % (jython,tempFileName) 
 else:
     jython = r'cd ~/jython-2.1 ; ./jython'
-    command = '%s "%s" &amp;' % (jython,tempFileName)
+    command = '%s &quot;%s&quot; &amp;' % (jython,tempFileName)
 
 script = g.getScript(c,p).strip()
 if not script:
-    s = "no script in %s" % p.h
+    s = &quot;no script in %s&quot; % p.h
     g.es(s) ; print s
 else:
     f = file(tempFileName,'w')
@@ -1473,7 +1466,7 @@ else:
     print command
     os.system(command)
 </t>
-<t tx="ekr.20111017085134.16071">import os, sys, threading
+  <t tx="ekr.20111017085134.16071">import os, sys, threading
 
 python = sys.executable
 pythonDir,junk = g.os_path_split(python)
@@ -1486,7 +1479,7 @@ def go():
     
 threading.Thread(target=go).start()
 </t>
-<t tx="ekr.20111017085134.16072"># This works, but is too slow to be really useful.
+  <t tx="ekr.20111017085134.16072"># This works, but is too slow to be really useful.
 
 count = 0
 for p in c.all_unique_positions():
@@ -1496,13 +1489,13 @@ for p in c.all_unique_positions():
         
 g.es('%s nodes checked' % count)
 </t>
-<t tx="ekr.20111017085134.16074"># Move selected text of the body down one line.
+  <t tx="ekr.20111017085134.16074"># Move selected text of the body down one line.
 
 @others
 
 moveLinesDown(c,p)
 </t>
-<t tx="ekr.20111017085134.16075">def moveLinesDown(c,p):
+  <t tx="ekr.20111017085134.16075">def moveLinesDown(c,p):
     
     undoType = 'Move Lines Down'
     head,lines,tail,oldSel,oldYview = c.getBodyLines()
@@ -1524,13 +1517,13 @@ moveLinesDown(c,p)
     newSel = sel1,sel2
     c.updateBodyPane(head,lines,tail,undoType,newSel,oldYview)
 </t>
-<t tx="ekr.20111017085134.16076"># Move selected text of the body up one line.
+  <t tx="ekr.20111017085134.16076"># Move selected text of the body up one line.
 
 @others
 
 moveLinesUp(c,p)
 </t>
-<t tx="ekr.20111017085134.16077">def moveLinesUp(c,p):
+  <t tx="ekr.20111017085134.16077">def moveLinesUp(c,p):
     
     undoType = 'Move Lines Up'
     head,lines,tail,oldSel,oldYview = c.getBodyLines()
@@ -1552,7 +1545,7 @@ moveLinesUp(c,p)
     newSel = sel1,sel2
     c.updateBodyPane(head,lines,tail,undoType,newSel,oldYview)
 </t>
-<t tx="ekr.20111017085134.16078">'''Analyze external calls in lisp files.'''
+  <t tx="ekr.20111017085134.16078">'''Analyze external calls in lisp files.'''
 
 import glob
 class lispAnalyzer:
@@ -1566,7 +1559,7 @@ paths = [paths[0]]
 x = lispAnalyzer(c,paths)
 x.run()
 </t>
-<t tx="ekr.20111017085134.16079">def __init__ (self,c,paths):
+  <t tx="ekr.20111017085134.16079">def __init__ (self,c,paths):
 
     self.c = c
     self.paths = paths
@@ -1585,7 +1578,7 @@ x.run()
     # Dispatch dictionary.
     self.dispatchDict = {}
 </t>
-<t tx="ekr.20111017085134.16080">def run(self):
+  <t tx="ekr.20111017085134.16080">def run(self):
 
     fn = self.paths[0]
     f = open(fn)
@@ -1602,7 +1595,7 @@ x.run()
     g.trace('defs...\n',g.listToString(defs))
     g.trace('calls...\n',g.listToString(calls))
 </t>
-<t tx="ekr.20111017085134.16081">def findCalls (self,s,defs):
+  <t tx="ekr.20111017085134.16081">def findCalls (self,s,defs):
 
     calls = []
     i = 0
@@ -1620,7 +1613,7 @@ x.run()
 
     return calls       
 </t>
-<t tx="ekr.20111017085134.16082">def findDefs (self,s):
+  <t tx="ekr.20111017085134.16082">def findDefs (self,s):
 
     defs = [] ; tag = '(defun'
     i = 0
@@ -1638,7 +1631,7 @@ x.run()
             i = k
         assert progress &lt; i 
 </t>
-<t tx="ekr.20111017085134.16083">def stripComments(self,s):
+  <t tx="ekr.20111017085134.16083">def stripComments(self,s):
 
     result = []
     i = 0
@@ -1654,7 +1647,7 @@ x.run()
 
     return ''.join(result)
 </t>
-<t tx="ekr.20111017085134.16084">def stripLispIds (self,aList):
+  <t tx="ekr.20111017085134.16084">def stripLispIds (self,aList):
 
     lispIds = [
         't','f',
@@ -1701,16 +1694,16 @@ x.run()
 
     return [z for z in aList if z not in lispIds]
 </t>
-<t tx="ekr.20111017085134.16085">def stripStrings(self,s):
+  <t tx="ekr.20111017085134.16085">def stripStrings(self,s):
 
     result = []
     i = 0
     while i &lt; len(s):
         progress = i
         ch = s[i]
-        if ch == '"':
+        if ch == '&quot;':
             i = self.skipString(s,i)
-        elif ch == "'":
+        elif ch == &quot;'&quot;:
             i = self.skipId(s,i+1)
         else:
             result.append(ch)
@@ -1719,7 +1712,7 @@ x.run()
 
     return ''.join(result)
 </t>
-<t tx="ekr.20111017085134.16086">class token:
+  <t tx="ekr.20111017085134.16086">class token:
 
     '''Representing one elisp syntactic entity,
     with a list of preceding comments.'''
@@ -1742,12 +1735,12 @@ x.run()
         else:
             return '%s%s' % (self.kind,self.val)
 </t>
-<t tx="ekr.20111017085134.16087">def choose(self,cond,a,b): # warning: evaluates all arguments
+  <t tx="ekr.20111017085134.16087">def choose(self,cond,a,b): # warning: evaluates all arguments
 
     if cond: return a
     else: return b
 </t>
-<t tx="ekr.20111017085134.16088">def dumpList(self,aList):
+  <t tx="ekr.20111017085134.16088">def dumpList(self,aList):
 
     if type(aList) == type([]):
         result = self.dumpListHelper(aList,indent=0)
@@ -1783,13 +1776,12 @@ def dumpListHelper(self,aList,indent):
 
 listToString = dumpList
 </t>
-<t tx="ekr.20111017085134.16089"></t>
-<t tx="ekr.20111017085134.16090">def parse(self,s):
+  <t tx="ekr.20111017085134.16090">def parse(self,s):
 
     # Generate the nodes, including directive and section references.
     return self.scanForest(s)
 </t>
-<t tx="ekr.20111017085134.16091">def scan(self,s,i):
+  <t tx="ekr.20111017085134.16091">def scan(self,s,i):
 
     '''Scan an elisp expression.'''
 
@@ -1805,7 +1797,7 @@ listToString = dumpList
         if ch == ';':
             j = self.skipComment(s,i)
             start = i = j
-        elif ch == '"':
+        elif ch == '&quot;':
             j = self.skipString(s,i)
             start = i = j
         elif ch.isalnum() or ch == u'_':
@@ -1821,7 +1813,7 @@ listToString = dumpList
             i += 1
             return i,result
         else:
-            # if ch == "'": ch = 'quote'
+            # if ch == &quot;'&quot;: ch = 'quote'
             # if ch not in (' ','\t','\n','\r'):
                 # result.append(token(comments,'op:',ch))
             i += 1
@@ -1837,7 +1829,7 @@ listToString = dumpList
 
     return i,result
 </t>
-<t tx="ekr.20111017085134.16092">def skipComment (self,s,i):
+  <t tx="ekr.20111017085134.16092">def skipComment (self,s,i):
 
     '''Skip a comment.'''
 
@@ -1847,7 +1839,7 @@ listToString = dumpList
         i += 1
     return i
 </t>
-<t tx="ekr.20111017085134.16093">def skipId (self,s,i):
+  <t tx="ekr.20111017085134.16093">def skipId (self,s,i):
 
     while i &lt; len(s):
         ch = s[i]
@@ -1857,22 +1849,22 @@ listToString = dumpList
             break
     return i
 </t>
-<t tx="ekr.20111017085134.16094">def skipString(self,s,i):
+  <t tx="ekr.20111017085134.16094">def skipString(self,s,i):
 
-    """Skip a string literal."""
+    &quot;&quot;&quot;Skip a string literal.&quot;&quot;&quot;
 
-    assert(s[i] == '"')
+    assert(s[i] == '&quot;')
     i += 1
     while i &lt; len(s):
         ch = s[i]
         if ch == '\\' : i += 2
-        elif ch == '"':
+        elif ch == '&quot;':
             i += 1 ; break
         else: i += 1
 
     return i
 </t>
-<t tx="ekr.20111017085134.16095">def scanForest (self,s):
+  <t tx="ekr.20111017085134.16095">def scanForest (self,s):
 
     i = 0 ; result = []
 
@@ -1886,7 +1878,7 @@ listToString = dumpList
 
 
 </t>
-<t tx="ekr.20111017085134.16096">@ From Richard Deibenkorn:
+  <t tx="ekr.20111017085134.16096">@ From Richard Deibenkorn:
 
 1. Attempt what is not certain. Certainty may or may not come later. It may then
 be a valuable delusion.
@@ -1899,7 +1891,7 @@ valued--except as stimulus for further moves.
 4. Use and respond to the initial fresh qualities but consider them absolutely
 expendable.
 </t>
-<t tx="ekr.20111017085134.16097">def gen(self,tokens,indent,init=False):
+  <t tx="ekr.20111017085134.16097">def gen(self,tokens,indent,init=False):
 
     result = []
 
@@ -1914,7 +1906,7 @@ expendable.
     return result
 
 </t>
-<t tx="ekr.20111017085134.16098">def gen_token(self,token,indent):
+  <t tx="ekr.20111017085134.16098">def gen_token(self,token,indent):
 
     result = []
 
@@ -1932,7 +1924,7 @@ expendable.
 
     return result
 </t>
-<t tx="ekr.20111017085134.16099">def gen_block (self,token,indent):
+  <t tx="ekr.20111017085134.16099">def gen_block (self,token,indent):
 
     if not (token and token.val):
         return []
@@ -1951,7 +1943,7 @@ expendable.
     result.extend(aList)
     return result
 </t>
-<t tx="ekr.20111017085134.16100">def gen_block_id (self,theId,tokens,indent):
+  <t tx="ekr.20111017085134.16100">def gen_block_id (self,theId,tokens,indent):
 
     result = []
 
@@ -1973,7 +1965,7 @@ expendable.
     result.extend(aList)
     return result
 </t>
-<t tx="ekr.20111017085134.16101">def gen_call (self,funcId,tokens,indent):
+  <t tx="ekr.20111017085134.16101">def gen_call (self,funcId,tokens,indent):
 
     result = []
 
@@ -1991,7 +1983,7 @@ expendable.
     return result
 
 </t>
-<t tx="ekr.20111017085134.16102">def gen_arg(self,token,indent):
+  <t tx="ekr.20111017085134.16102">def gen_arg(self,token,indent):
 
     result = []
 
@@ -2011,7 +2003,7 @@ expendable.
 
     return result
 </t>
-<t tx="ekr.20111017085134.16103">def gen_def(self,theId,tokens,indent):
+  <t tx="ekr.20111017085134.16103">def gen_def(self,theId,tokens,indent):
 
     result = []
 
@@ -2038,7 +2030,7 @@ expendable.
 
     return result
 </t>
-<t tx="ekr.20111017085134.16104">@ if condition then-form else-forms.
+  <t tx="ekr.20111017085134.16104">@ if condition then-form else-forms.
 
 If the evaluated condition is non-nil, then-form is evaluated and the result
 returned. Otherwise, the else-forms are evaluated in textual order, and the
@@ -2069,11 +2061,11 @@ def gen_if (self,tokens,indent):
 
     return result
 </t>
-<t tx="ekr.20111017085134.16105">def gen_then (self,token):
+  <t tx="ekr.20111017085134.16105">def gen_then (self,token):
 
     pass
 </t>
-<t tx="ekr.20111017085134.16106">def gen_expr (self,theId,aList,indent):
+  <t tx="ekr.20111017085134.16106">def gen_expr (self,theId,aList,indent):
 
     binops = ('and','or',)
     result = []
@@ -2084,7 +2076,7 @@ def gen_if (self,tokens,indent):
     result.extend(aList)
     return result
 </t>
-<t tx="ekr.20111017085134.16107">@
+  <t tx="ekr.20111017085134.16107">@
 (let ((variable value)
       (variable value)
       ...)
@@ -2114,7 +2106,7 @@ def gen_let (self,tokens,indent):
     result.extend(aList)
     return result
 </t>
-<t tx="ekr.20111017085134.16108">def gen_let_bindings (self,token,indent):
+  <t tx="ekr.20111017085134.16108">def gen_let_bindings (self,token,indent):
 
     result = []
 
@@ -2140,15 +2132,14 @@ def gen_let (self,tokens,indent):
 
     return result
 </t>
-<t tx="ekr.20111017085134.16109"></t>
-<t tx="ekr.20111017085134.16110">def put (self,kind,val,indent,result):
+  <t tx="ekr.20111017085134.16110">def put (self,kind,val,indent,result):
 
     '''Append one or more lines of output to result.'''
 
     leading = '%2d: %s' % (indent,' ' * indent)
 
     if kind == 'string:':
-        val = self.choose(len(val)&gt;20,val[:20]+'..."',val)
+        val = self.choose(len(val)&gt;20,val[:20]+'...&quot;',val)
 
     if val:
         s = '%s%s %s' % (leading,str(kind),str(val))
@@ -2157,14 +2148,14 @@ def gen_let (self,tokens,indent):
 
     result.append(s)
 </t>
-<t tx="ekr.20111017085134.16111">def put_token (self,token,indent,result):
+  <t tx="ekr.20111017085134.16111">def put_token (self,token,indent,result):
 
     for z in token.comments:
         self.put('comment:',z,indent,result)
 
     self.put(token.kind,token.val,indent,result)
 </t>
-<t tx="ekr.20111017085134.16112">def put_code_line (self,s):
+  <t tx="ekr.20111017085134.16112">def put_code_line (self,s):
 
     s2 = '%s%s' % (' '*self.indent,s)
     print s2,
@@ -2173,7 +2164,7 @@ def put_code (self,s):
 
     print s,
 </t>
-<t tx="ekr.20111017085134.16113">def put_code_token (self,token):
+  <t tx="ekr.20111017085134.16113">def put_code_token (self,token):
 
     if token.kind == 'block:':
         self.put_code('&lt;block&gt;')
@@ -2181,7 +2172,7 @@ def put_code (self,s):
         self.put_code(token.val)
 
 </t>
-<t tx="ekr.20111017085134.16114">result = []
+  <t tx="ekr.20111017085134.16114">result = []
 firstLevel = p.level()
 
 for p in p.self_and_subtree_iter():
@@ -2199,17 +2190,14 @@ w = c.frame.body.bodyCtrl
 w.clipboard_clear()
 w.clipboard_append(result)
 </t>
-<t tx="ekr.20141116105945.2"></t>
-<t tx="ekr.20141116105945.3">gnx: maphew.20130809155103.2862
+  <t tx="ekr.20141116105945.3">gnx: maphew.20130809155103.2862
 </t>
-<t tx="ekr.20141116105945.4"></t>
-<t tx="ekr.20150302053516.3"></t>
-<t tx="ekr.20150508132450.1">g.cls()
+  <t tx="ekr.20150508132450.1">g.cls()
 
 class CreateDecorators:
     '''
     A class to create decorators from tables in getPublicCommands.
-    This class uses a node called "Found: getPublicCommands".
+    This class uses a node called &quot;Found: getPublicCommands&quot;.
     
     This @button node must be executed in LeoPy.leo.
     '''
@@ -2222,7 +2210,7 @@ class CreateDecorators:
 
 CreateDecorators(c).run()
 </t>
-<t tx="ekr.20150508132450.2">def create_d(self,lines,publicCommands):
+  <t tx="ekr.20150508132450.2">def create_d(self,lines,publicCommands):
     '''Create a dict. keys are method names; values are command names.'''
     trace = False
     if trace:
@@ -2242,7 +2230,7 @@ CreateDecorators(c).run()
         d [f_name] = c_name
     return d
 </t>
-<t tx="ekr.20150508132450.3">def create_decorator(self,c_name,f_name,root):
+  <t tx="ekr.20150508132450.3">def create_decorator(self,c_name,f_name,root):
     '''
     Search root for a definition of f_name.
     If found, insert @cmd(f_name) before the definition.
@@ -2263,7 +2251,7 @@ CreateDecorators(c).run()
             result.append(s)
     return found
 </t>
-<t tx="ekr.20150508132450.4">def create_decorators(self,d,root):
+  <t tx="ekr.20150508132450.4">def create_decorators(self,d,root):
     '''Create decorators for all items in d in root's tree.'''
     print('\n%s\n' % root.h)
     if root.h in self.fixups:
@@ -2288,7 +2276,7 @@ CreateDecorators(c).run()
             g.trace('not found',f_name)
             self.n_fail += 1
 </t>
-<t tx="ekr.20150508132450.5">def create_fixups(self):
+  <t tx="ekr.20150508132450.5">def create_fixups(self):
     '''
     Return a fixup dict.
     Keys are headlines for classes.
@@ -2309,7 +2297,7 @@ CreateDecorators(c).run()
         ]
     }
 </t>
-<t tx="ekr.20150508132450.6">def find_class(self,p):
+  <t tx="ekr.20150508132450.6">def find_class(self,p):
     '''Return the position of the class enclosing p.'''
     for p2 in p.parents():
         if p2.h.lower().find('class') &gt; -1 and p2.b.find('class') &gt; -1:
@@ -2318,7 +2306,7 @@ CreateDecorators(c).run()
         g.trace('*** no class for p.h')
         return None
 </t>
-<t tx="ekr.20150508132450.7">def find_next_clone(self,p):
+  <t tx="ekr.20150508132450.7">def find_next_clone(self,p):
     v = p.v
     p = p.copy()
     p.moveToThreadNext()
@@ -2336,7 +2324,7 @@ CreateDecorators(c).run()
             p = c.rootPosition()
     return p
 </t>
-<t tx="ekr.20150508132450.8">def munge_lines(self,root,publicCommands):
+  <t tx="ekr.20150508132450.8">def munge_lines(self,root,publicCommands):
     '''Return munged lines of '''
     # print('')
     # g.trace(root.h)
@@ -2349,12 +2337,12 @@ CreateDecorators(c).run()
     lines = [z[:z.find('#')] if z.find('#') &gt; -1 else z for z in lines]
     lines = [z.rstrip().rstrip(',') for z in lines]
     lines = [z[1:] for z in lines]
-    lines = [z.replace("':",' ') for z in lines]
+    lines = [z.replace(&quot;':&quot;,' ') for z in lines]
     # print('\n'.join(lines))
     self.n += len(lines)
     return lines
 </t>
-<t tx="ekr.20150508132450.9">def run(self):
+  <t tx="ekr.20150508132450.9">def run(self):
     '''Top-level code.'''
     self.n = 0
     found = g.findNodeAnywhere(c,'Found: getPublicCommands')
@@ -2368,7 +2356,7 @@ CreateDecorators(c).run()
             self.create_decorators(d,root)
     print('\n%s commands %s failed' % (self.n,self.n_fail))
 </t>
-<t tx="ekr.20150525161132.1">r'''The script to test AddTokensToTree class.'''
+  <t tx="ekr.20150525161132.1">r'''The script to test AddTokensToTree class.'''
 g.cls()
 if c.isChanged():
     c.save()
@@ -2407,7 +2395,7 @@ for h in aList:
 if project:
     print('done: %4.2f sec.' % (time.clock()-t1))
 </t>
-<t tx="ekr.20150525161132.2"># import leo.external.PythonTidy as PythonTidy
+  <t tx="ekr.20150525161132.2"># import leo.external.PythonTidy as PythonTidy
 import leo.core.leoAst as leoAst
 import leo.core.leoBeautify as leoBeautify
 import imp
@@ -2416,7 +2404,7 @@ imp.reload(leoAst)
 imp.reload(leoBeautify)
 # imp.reload(PythonTidy)
 </t>
-<t tx="ekr.20160123185308.1">'''
+  <t tx="ekr.20160123185308.1">'''
 Make a stub file in the ~/home directory for every @&lt;file&gt; node in the
 selected tree.
 '''
@@ -2427,13 +2415,13 @@ import leo.core.leoGlobals as g
 @others
 MakeStubFile(c).run(c.p)
 </t>
-<t tx="ekr.20160123185308.10">def format(self, node):
+  <t tx="ekr.20160123185308.10">def format(self, node):
     '''Format the node (or list of nodes) and its descendants.'''
     self.level = 0
     val = self.visit(node)
     return val and val.strip() or ''
 </t>
-<t tx="ekr.20160123185308.11">def visit(self, node):
+  <t tx="ekr.20160123185308.11">def visit(self, node):
     '''Return the formatted version of an Ast node, or list of Ast nodes.'''
     if isinstance(node, (list, tuple)):
         return ','.join([self.visit(z) for z in node])
@@ -2448,8 +2436,7 @@ MakeStubFile(c).run(c.p)
         assert type(s) == type('abc'), type(s)
         return s
 </t>
-<t tx="ekr.20160123185308.12"></t>
-<t tx="ekr.20160123185308.13"># ClassDef(identifier name, expr* bases, stmt* body, expr* decorator_list)
+  <t tx="ekr.20160123185308.13"># ClassDef(identifier name, expr* bases, stmt* body, expr* decorator_list)
 
 def do_ClassDef(self, node):
     result = []
@@ -2465,7 +2452,7 @@ def do_ClassDef(self, node):
         self.level -= 1
     return ''.join(result)
 </t>
-<t tx="ekr.20160123185308.14"># FunctionDef(identifier name, arguments args, stmt* body, expr* decorator_list)
+  <t tx="ekr.20160123185308.14"># FunctionDef(identifier name, arguments args, stmt* body, expr* decorator_list)
 
 def do_FunctionDef(self, node):
     '''Format a FunctionDef node.'''
@@ -2482,40 +2469,39 @@ def do_FunctionDef(self, node):
         self.level -= 1
     return ''.join(result)
 </t>
-<t tx="ekr.20160123185308.15">def do_Interactive(self, node):
+  <t tx="ekr.20160123185308.15">def do_Interactive(self, node):
     for z in node.body:
         self.visit(z)
 </t>
-<t tx="ekr.20160123185308.16">def do_Module(self, node):
+  <t tx="ekr.20160123185308.16">def do_Module(self, node):
     assert 'body' in node._fields
     result = ''.join([self.visit(z) for z in node.body])
     return result # 'module:\n%s' % (result)
 </t>
-<t tx="ekr.20160123185308.17">def do_Lambda(self, node):
+  <t tx="ekr.20160123185308.17">def do_Lambda(self, node):
     return self.indent('lambda %s: %s' % (
         self.visit(node.args),
         self.visit(node.body)))
 </t>
-<t tx="ekr.20160123185308.18"></t>
-<t tx="ekr.20160123185308.19">def do_Expr(self, node):
+  <t tx="ekr.20160123185308.19">def do_Expr(self, node):
     '''An outer expression: must be indented.'''
     return self.indent('%s\n' % self.visit(node.value))
 </t>
-<t tx="ekr.20160123185308.2">class MakeStubFile:
+  <t tx="ekr.20160123185308.2">class MakeStubFile:
     '''A class to make Python stub (.pyi) files.'''
     @others
 </t>
-<t tx="ekr.20160123185308.20">def do_Expression(self, node):
+  <t tx="ekr.20160123185308.20">def do_Expression(self, node):
     '''An inner expression: do not indent.'''
     return '%s\n' % self.visit(node.body)
 </t>
-<t tx="ekr.20160123185308.21">def do_GeneratorExp(self, node):
+  <t tx="ekr.20160123185308.21">def do_GeneratorExp(self, node):
     elt = self.visit(node.elt) or ''
     gens = [self.visit(z) for z in node.generators]
     gens = [z if z else '&lt;**None**&gt;' for z in gens] ### Kludge: probable bug.
     return '&lt;gen %s for %s&gt;' % (elt, ','.join(gens))
 </t>
-<t tx="ekr.20160123185308.22">def do_AugLoad(self, node):
+  <t tx="ekr.20160123185308.22">def do_AugLoad(self, node):
     return 'AugLoad'
 
 def do_Del(self, node):
@@ -2530,8 +2516,7 @@ def do_Param(self, node):
 def do_Store(self, node):
     return 'Store'
 </t>
-<t tx="ekr.20160123185308.23"></t>
-<t tx="ekr.20160123185308.24"># arguments = (expr* args, identifier? vararg, identifier? kwarg, expr* defaults)
+  <t tx="ekr.20160123185308.24"># arguments = (expr* args, identifier? vararg, identifier? kwarg, expr* defaults)
 
 def do_arguments(self, node):
     '''Format the arguments node.'''
@@ -2554,7 +2539,7 @@ def do_arguments(self, node):
     if name: args2.append('**' + name)
     return ','.join(args2)
 </t>
-<t tx="ekr.20160123185308.25"># Python 3:
+  <t tx="ekr.20160123185308.25"># Python 3:
 # arg = (identifier arg, expr? annotation)
 
 def do_arg(self, node):
@@ -2563,17 +2548,17 @@ def do_arg(self, node):
     else:
         return ''
 </t>
-<t tx="ekr.20160123185308.26"># Attribute(expr value, identifier attr, expr_context ctx)
+  <t tx="ekr.20160123185308.26"># Attribute(expr value, identifier attr, expr_context ctx)
 
 def do_Attribute(self, node):
     return '%s.%s' % (
         self.visit(node.value),
         node.attr) # Don't visit node.attr: it is always a string.
 </t>
-<t tx="ekr.20160123185308.27">def do_Bytes(self, node): # Python 3.x only.
+  <t tx="ekr.20160123185308.27">def do_Bytes(self, node): # Python 3.x only.
     return str(node.s)
 </t>
-<t tx="ekr.20160123185308.28"># Call(expr func, expr* args, keyword* keywords, expr? starargs, expr? kwargs)
+  <t tx="ekr.20160123185308.28"># Call(expr func, expr* args, keyword* keywords, expr? starargs, expr? kwargs)
 
 def do_Call(self, node):
     # g.trace(node,Utils().dump_ast(node))
@@ -2589,7 +2574,7 @@ def do_Call(self, node):
     args = [z for z in args if z] # Kludge: Defensive coding.
     return '%s(%s)' % (func, ','.join(args))
 </t>
-<t tx="ekr.20160123185308.29"># keyword = (identifier arg, expr value)
+  <t tx="ekr.20160123185308.29"># keyword = (identifier arg, expr value)
 
 def do_keyword(self, node):
     # node.arg is a string.
@@ -2597,12 +2582,12 @@ def do_keyword(self, node):
     # This is a keyword *arg*, not a Python keyword!
     return '%s=%s' % (node.arg, value)
 </t>
-<t tx="ekr.20160123185308.3">def __init__(self, c):
+  <t tx="ekr.20160123185308.3">def __init__(self, c):
     self.c = c
     self.d = self.scan_types_data(c) or self.make_types_dict(c)
         # Keys are strings, values are Type objects.
 </t>
-<t tx="ekr.20160123185308.30">def do_comprehension(self, node):
+  <t tx="ekr.20160123185308.30">def do_comprehension(self, node):
     result = []
     name = self.visit(node.target) # A name.
     it = self.visit(node.iter) # An attribute.
@@ -2612,7 +2597,7 @@ def do_keyword(self, node):
         result.append(' if %s' % (''.join(ifs)))
     return ''.join(result)
 </t>
-<t tx="ekr.20160123185308.31">def do_Dict(self, node):
+  <t tx="ekr.20160123185308.31">def do_Dict(self, node):
     result = []
     keys = [self.visit(z) for z in node.keys]
     values = [self.visit(z) for z in node.values]
@@ -2628,40 +2613,40 @@ def do_keyword(self, node):
             repr(keys), repr(values)))
     return ''.join(result)
 </t>
-<t tx="ekr.20160123185308.32">def do_Ellipsis(self, node):
+  <t tx="ekr.20160123185308.32">def do_Ellipsis(self, node):
     return '...'
 </t>
-<t tx="ekr.20160123185308.33">def do_ExtSlice(self, node):
+  <t tx="ekr.20160123185308.33">def do_ExtSlice(self, node):
     return ':'.join([self.visit(z) for z in node.dims])
 </t>
-<t tx="ekr.20160123185308.34">def do_Index(self, node):
+  <t tx="ekr.20160123185308.34">def do_Index(self, node):
     return self.visit(node.value)
 </t>
-<t tx="ekr.20160123185308.35">def do_List(self, node):
+  <t tx="ekr.20160123185308.35">def do_List(self, node):
     # Not used: list context.
     # self.visit(node.ctx)
     elts = [self.visit(z) for z in node.elts]
     elst = [z for z in elts if z] # Defensive.
     return '[%s]' % ','.join(elts)
 </t>
-<t tx="ekr.20160123185308.36">def do_ListComp(self, node):
+  <t tx="ekr.20160123185308.36">def do_ListComp(self, node):
     elt = self.visit(node.elt)
     gens = [self.visit(z) for z in node.generators]
     gens = [z if z else '&lt;**None**&gt;' for z in gens] ### Kludge: probable bug.
     return '%s for %s' % (elt, ''.join(gens))
 </t>
-<t tx="ekr.20160123185308.37">def do_Name(self, node):
+  <t tx="ekr.20160123185308.37">def do_Name(self, node):
     return node.id
 </t>
-<t tx="ekr.20160123185308.38">def do_Num(self, node):
+  <t tx="ekr.20160123185308.38">def do_Num(self, node):
     return repr(node.n)
 </t>
-<t tx="ekr.20160123185308.39"># Python 2.x only
+  <t tx="ekr.20160123185308.39"># Python 2.x only
 
 def do_Repr(self, node):
     return 'repr(%s)' % self.visit(node.value)
 </t>
-<t tx="ekr.20160123185308.4">def make_types_dict(self, c):
+  <t tx="ekr.20160123185308.4">def make_types_dict(self, c):
     '''Return a dict whose keys are names and values are type specs.'''
     return {
         'aList': 'Sequence',
@@ -2677,7 +2662,7 @@ def do_Repr(self, node):
         'v': 'VNode',
     }
 </t>
-<t tx="ekr.20160123185308.40">def do_Slice(self, node):
+  <t tx="ekr.20160123185308.40">def do_Slice(self, node):
     lower, upper, step = '', '', ''
     if getattr(node, 'lower', None) is not None:
         lower = self.visit(node.lower)
@@ -2690,34 +2675,33 @@ def do_Repr(self, node):
     else:
         return '%s:%s' % (lower, upper)
 </t>
-<t tx="ekr.20160123185308.41">def do_Str(self, node):
+  <t tx="ekr.20160123185308.41">def do_Str(self, node):
     '''This represents a string constant.'''
     return repr(node.s)
 </t>
-<t tx="ekr.20160123185308.42"># Subscript(expr value, slice slice, expr_context ctx)
+  <t tx="ekr.20160123185308.42"># Subscript(expr value, slice slice, expr_context ctx)
 
 def do_Subscript(self, node):
     value = self.visit(node.value)
     the_slice = self.visit(node.slice)
     return '%s[%s]' % (value, the_slice)
 </t>
-<t tx="ekr.20160123185308.43">def do_Tuple(self, node):
+  <t tx="ekr.20160123185308.43">def do_Tuple(self, node):
     elts = [self.visit(z) for z in node.elts]
     return '(%s)' % ','.join(elts)
 </t>
-<t tx="ekr.20160123185308.44"></t>
-<t tx="ekr.20160123185308.45">def do_BinOp(self, node):
+  <t tx="ekr.20160123185308.45">def do_BinOp(self, node):
     return '%s%s%s' % (
         self.visit(node.left),
         self.op_name(node.op),
         self.visit(node.right))
 </t>
-<t tx="ekr.20160123185308.46">def do_BoolOp(self, node):
+  <t tx="ekr.20160123185308.46">def do_BoolOp(self, node):
     op_name = self.op_name(node.op)
     values = [self.visit(z) for z in node.values]
     return op_name.join(values)
 </t>
-<t tx="ekr.20160123185308.47">def do_Compare(self, node):
+  <t tx="ekr.20160123185308.47">def do_Compare(self, node):
     result = []
     lt = self.visit(node.left)
     # ops   = [self.visit(z) for z in node.ops]
@@ -2731,18 +2715,18 @@ def do_Subscript(self, node):
         g.trace('ops', repr(ops), 'comparators', repr(comps))
     return ''.join(result)
 </t>
-<t tx="ekr.20160123185308.48">def do_UnaryOp(self, node):
+  <t tx="ekr.20160123185308.48">def do_UnaryOp(self, node):
     return '%s%s' % (
         self.op_name(node.op),
         self.visit(node.operand))
 </t>
-<t tx="ekr.20160123185308.49">def do_IfExp(self, node):
+  <t tx="ekr.20160123185308.49">def do_IfExp(self, node):
     return '%s if %s else %s ' % (
         self.visit(node.body),
         self.visit(node.test),
         self.visit(node.orelse))
 </t>
-<t tx="ekr.20160123185308.5">def scan_types_data(self, c):
+  <t tx="ekr.20160123185308.5">def scan_types_data(self, c):
     '''Create self.d from @data stub-types nodes.'''
     aList = c.config.getData(
         'stub-types',
@@ -2757,8 +2741,7 @@ def do_Subscript(self, node):
             g.trace(key, d.get(key))
     return d
 </t>
-<t tx="ekr.20160123185308.50"></t>
-<t tx="ekr.20160123185308.51">def do_Assert(self, node):
+  <t tx="ekr.20160123185308.51">def do_Assert(self, node):
     test = self.visit(node.test)
     if getattr(node, 'msg', None):
         message = self.visit(node.msg)
@@ -2766,28 +2749,28 @@ def do_Subscript(self, node):
     else:
         return self.indent('assert %s' % test)
 </t>
-<t tx="ekr.20160123185308.52">def do_Assign(self, node):
+  <t tx="ekr.20160123185308.52">def do_Assign(self, node):
     return self.indent('%s=%s\n' % (
         '='.join([self.visit(z) for z in node.targets]),
         self.visit(node.value)))
 </t>
-<t tx="ekr.20160123185308.53">def do_AugAssign(self, node):
+  <t tx="ekr.20160123185308.53">def do_AugAssign(self, node):
     return self.indent('%s%s=%s\n' % (
         self.visit(node.target),
         self.op_name(node.op), # Bug fix: 2013/03/08.
         self.visit(node.value)))
 </t>
-<t tx="ekr.20160123185308.54">def do_Break(self, node):
+  <t tx="ekr.20160123185308.54">def do_Break(self, node):
     return self.indent('break\n')
 </t>
-<t tx="ekr.20160123185308.55">def do_Continue(self, node):
+  <t tx="ekr.20160123185308.55">def do_Continue(self, node):
     return self.indent('continue\n')
 </t>
-<t tx="ekr.20160123185308.56">def do_Delete(self, node):
+  <t tx="ekr.20160123185308.56">def do_Delete(self, node):
     targets = [self.visit(z) for z in node.targets]
     return self.indent('del %s\n' % ','.join(targets))
 </t>
-<t tx="ekr.20160123185308.57">def do_ExceptHandler(self, node):
+  <t tx="ekr.20160123185308.57">def do_ExceptHandler(self, node):
     result = []
     result.append(self.indent('except'))
     if getattr(node, 'type', None):
@@ -2804,7 +2787,7 @@ def do_Subscript(self, node):
         self.level -= 1
     return ''.join(result)
 </t>
-<t tx="ekr.20160123185308.58"># Python 2.x only
+  <t tx="ekr.20160123185308.58"># Python 2.x only
 
 def do_Exec(self, node):
     body = self.visit(node.body)
@@ -2819,7 +2802,7 @@ def do_Exec(self, node):
     else:
         return self.indent('exec %s\n' % (body))
 </t>
-<t tx="ekr.20160123185308.59">def do_For(self, node):
+  <t tx="ekr.20160123185308.59">def do_For(self, node):
     result = []
     result.append(self.indent('for %s in %s:\n' % (
         self.visit(node.target),
@@ -2836,7 +2819,7 @@ def do_Exec(self, node):
             self.level -= 1
     return ''.join(result)
 </t>
-<t tx="ekr.20160123185308.6">def make_stub_file(self, p):
+  <t tx="ekr.20160123185308.6">def make_stub_file(self, p):
     '''Make a stub file in ~/stubs for the @&lt;file&gt; node at p.'''
     import ast
     import leo.core.leoAst as leoAst
@@ -2864,11 +2847,11 @@ def do_Exec(self, node):
     node = ast.parse(s,filename=fn,mode='exec')
     leoAst.StubTraverser(self.c, self.d, out_fn).run(node)
 </t>
-<t tx="ekr.20160123185308.60">def do_Global(self, node):
+  <t tx="ekr.20160123185308.60">def do_Global(self, node):
     return self.indent('global %s\n' % (
         ','.join(node.names)))
 </t>
-<t tx="ekr.20160123185308.61">def do_If(self, node):
+  <t tx="ekr.20160123185308.61">def do_If(self, node):
     result = []
     result.append(self.indent('if %s:\n' % (
         self.visit(node.test))))
@@ -2884,7 +2867,7 @@ def do_Exec(self, node):
             self.level -= 1
     return ''.join(result)
 </t>
-<t tx="ekr.20160123185308.62">def do_Import(self, node):
+  <t tx="ekr.20160123185308.62">def do_Import(self, node):
     names = []
     for fn, asname in self.get_import_names(node):
         if asname:
@@ -2894,7 +2877,7 @@ def do_Exec(self, node):
     return self.indent('import %s\n' % (
         ','.join(names)))
 </t>
-<t tx="ekr.20160123185308.63">def get_import_names(self, node):
+  <t tx="ekr.20160123185308.63">def get_import_names(self, node):
     '''Return a list of the the full file names in the import statement.'''
     result = []
     for ast2 in node.names:
@@ -2905,7 +2888,7 @@ def do_Exec(self, node):
             g.trace('unsupported kind in Import.names list', self.kind(ast2))
     return result
 </t>
-<t tx="ekr.20160123185308.64">def do_ImportFrom(self, node):
+  <t tx="ekr.20160123185308.64">def do_ImportFrom(self, node):
     names = []
     for fn, asname in self.get_import_names(node):
         if asname:
@@ -2916,10 +2899,10 @@ def do_Exec(self, node):
         node.module,
         ','.join(names)))
 </t>
-<t tx="ekr.20160123185308.65">def do_Pass(self, node):
+  <t tx="ekr.20160123185308.65">def do_Pass(self, node):
     return self.indent('pass\n')
 </t>
-<t tx="ekr.20160123185308.66"># Python 2.x only
+  <t tx="ekr.20160123185308.66"># Python 2.x only
 
 def do_Print(self, node):
     vals = []
@@ -2933,7 +2916,7 @@ def do_Print(self, node):
     return self.indent('print(%s)\n' % (
         ','.join(vals)))
 </t>
-<t tx="ekr.20160123185308.67">def do_Raise(self, node):
+  <t tx="ekr.20160123185308.67">def do_Raise(self, node):
     args = []
     for attr in ('type', 'inst', 'tback'):
         if getattr(node, attr, None) is not None:
@@ -2944,18 +2927,18 @@ def do_Print(self, node):
     else:
         return self.indent('raise\n')
 </t>
-<t tx="ekr.20160123185308.68">def do_Return(self, node):
+  <t tx="ekr.20160123185308.68">def do_Return(self, node):
     if node.value:
         return self.indent('return %s\n' % (
             self.visit(node.value)))
     else:
         return self.indent('return\n')
 </t>
-<t tx="ekr.20160123185308.69"># def do_Suite(self,node):
+  <t tx="ekr.20160123185308.69"># def do_Suite(self,node):
     # for z in node.body:
         # s = self.visit(z)
 </t>
-<t tx="ekr.20160123185308.7">def run(self, p):
+  <t tx="ekr.20160123185308.7">def run(self, p):
     '''Make stub files for all files in p's tree.'''
     if p.isAnyAtFileNode():
         self.make_stub_file(p)
@@ -2979,7 +2962,7 @@ def do_Print(self, node):
         else:
             g.es('no files found in tree:', p.h)
 </t>
-<t tx="ekr.20160123185308.70">def do_TryExcept(self, node):
+  <t tx="ekr.20160123185308.70">def do_TryExcept(self, node):
     result = []
     result.append(self.indent('try:\n'))
     for z in node.body:
@@ -2997,7 +2980,7 @@ def do_Print(self, node):
             self.level -= 1
     return ''.join(result)
 </t>
-<t tx="ekr.20160123185308.71">def do_TryFinally(self, node):
+  <t tx="ekr.20160123185308.71">def do_TryFinally(self, node):
     result = []
     result.append(self.indent('try:\n'))
     for z in node.body:
@@ -3011,7 +2994,7 @@ def do_Print(self, node):
         self.level -= 1
     return ''.join(result)
 </t>
-<t tx="ekr.20160123185308.72">def do_While(self, node):
+  <t tx="ekr.20160123185308.72">def do_While(self, node):
     result = []
     result.append(self.indent('while %s:\n' % (
         self.visit(node.test))))
@@ -3027,7 +3010,7 @@ def do_Print(self, node):
             self.level -= 1
     return ''.join(result)
 </t>
-<t tx="ekr.20160123185308.73">def do_With(self, node):
+  <t tx="ekr.20160123185308.73">def do_With(self, node):
     result = []
     result.append(self.indent('with '))
     if hasattr(node, 'context_expression'):
@@ -3048,22 +3031,21 @@ def do_Print(self, node):
     result.append('\n')
     return ''.join(result)
 </t>
-<t tx="ekr.20160123185308.74">def do_Yield(self, node):
+  <t tx="ekr.20160123185308.74">def do_Yield(self, node):
     if getattr(node, 'value', None):
         return self.indent('yield %s\n' % (
             self.visit(node.value)))
     else:
         return self.indent('yield\n')
 </t>
-<t tx="ekr.20160123185308.75"></t>
-<t tx="ekr.20160123185308.76">def kind(self, node):
+  <t tx="ekr.20160123185308.76">def kind(self, node):
     '''Return the name of node's class.'''
     return node.__class__.__name__
 </t>
-<t tx="ekr.20160123185308.77">def indent(self, s):
+  <t tx="ekr.20160123185308.77">def indent(self, s):
     return '%s%s' % (' ' * 4 * self.level, s)
 </t>
-<t tx="ekr.20160123185308.78">@nobeautify
+  <t tx="ekr.20160123185308.78">@nobeautify
 
 def op_name (self,node,strict=True):
     '''Return the print name of an operator node.'''
@@ -3112,10 +3094,10 @@ def op_name (self,node,strict=True):
     if strict: assert name,self.kind(node)
     return name
 </t>
-<t tx="ekr.20160123185308.79">class StubFormatter (AstFormatter):
+  <t tx="ekr.20160123185308.79">class StubFormatter (AstFormatter):
     @others
 </t>
-<t tx="ekr.20160123185308.8">class AstFormatter:
+  <t tx="ekr.20160123185308.8">class AstFormatter:
     '''
     A class to recreate source code from an AST.
     
@@ -3127,7 +3109,7 @@ def op_name (self,node,strict=True):
     # pylint: disable=consider-using-enumerate
     @others
 </t>
-<t tx="ekr.20160123185308.80"># Return generic markers allow better pattern matches.
+  <t tx="ekr.20160123185308.80"># Return generic markers allow better pattern matches.
 
 def do_BoolOp(self, node): # Python 2.x only.
     return 'bool'
@@ -3145,7 +3127,7 @@ def do_Str(self, node):
     '''This represents a string constant.'''
     return 'str' # return repr(node.s)
 </t>
-<t tx="ekr.20160123185308.81">class StubTraverser (ast.NodeVisitor):
+  <t tx="ekr.20160123185308.81">class StubTraverser (ast.NodeVisitor):
     
     def __init__(self, c, d, output_fn):
         '''Ctor for StubTraverser class.'''
@@ -3160,7 +3142,7 @@ def do_Str(self, node):
 
     @others
 </t>
-<t tx="ekr.20160123185308.82">def indent(self, s):
+  <t tx="ekr.20160123185308.82">def indent(self, s):
     '''Return s, properly indented.'''
     return '%s%s' % (' ' * 4 * self.level, s)
 
@@ -3171,7 +3153,7 @@ def out(self, s):
     else:
         print(self.indent(s))
 </t>
-<t tx="ekr.20160123185308.83">def run(self, node):
+  <t tx="ekr.20160123185308.83">def run(self, node):
     '''StubTraverser.run: write the stubs in node's tree to self.output_fn.'''
     c = self.c
     dir_ = g.os_path_dirname(self.output_fn)
@@ -3189,7 +3171,7 @@ def out(self, s):
         g.es_print('not found:', dir_)
 
 </t>
-<t tx="ekr.20160123185308.84"># This is needed only when subclassing from the leoAst.AstFullTraverser class.
+  <t tx="ekr.20160123185308.84"># This is needed only when subclassing from the leoAst.AstFullTraverser class.
 
 # def visit(self, node):
     # '''Visit a *single* ast node.  Visitors are responsible for visiting children!'''
@@ -3197,8 +3179,7 @@ def out(self, s):
     # method = getattr(self, 'do_' + node.__class__.__name__)
     # method(node)
 </t>
-<t tx="ekr.20160123185308.85"></t>
-<t tx="ekr.20160123185308.86"># ClassDef(identifier name, expr* bases, stmt* body, expr* decorator_list)
+  <t tx="ekr.20160123185308.86"># ClassDef(identifier name, expr* bases, stmt* body, expr* decorator_list)
 
 def visit_ClassDef(self, node):
 
@@ -3218,7 +3199,7 @@ def visit_ClassDef(self, node):
     self.level -= 1
     self.in_function = old_in_function
 </t>
-<t tx="ekr.20160123185308.87"># FunctionDef(identifier name, arguments args, stmt* body, expr* decorator_list)
+  <t tx="ekr.20160123185308.87"># FunctionDef(identifier name, arguments args, stmt* body, expr* decorator_list)
 
 def visit_FunctionDef(self, node):
     
@@ -3240,7 +3221,7 @@ def visit_FunctionDef(self, node):
         self.format_arguments(node.args),
         self.format_returns(node)))
 </t>
-<t tx="ekr.20160123185308.88"># arguments = (expr* args, identifier? vararg, identifier? kwarg, expr* defaults)
+  <t tx="ekr.20160123185308.88"># arguments = (expr* args, identifier? vararg, identifier? kwarg, expr* defaults)
 
 def format_arguments(self, node):
     '''
@@ -3267,13 +3248,12 @@ def format_arguments(self, node):
     if name: result.append('**' + name)
     return ', '.join(result)
 </t>
-<t tx="ekr.20160123185308.89">def munge_arg(self, s):
+  <t tx="ekr.20160123185308.89">def munge_arg(self, s):
     '''Add an annotation for s if possible.'''
     a = self.d.get(s)
     return '%s: %s' % (s, a) if a else s
 </t>
-<t tx="ekr.20160123185308.9"></t>
-<t tx="ekr.20160123185308.90">def format_returns(self, node):
+  <t tx="ekr.20160123185308.90">def format_returns(self, node):
     '''Calculate the return type.'''
     def split(s):
         return '\n     ' + self.indent(s) if len(s) &gt; 30 else s
@@ -3296,11 +3276,11 @@ def format_arguments(self, node):
         else:
             return split(', '.join(r))
 </t>
-<t tx="ekr.20160123185308.91">def visit_Return(self, node):
+  <t tx="ekr.20160123185308.91">def visit_Return(self, node):
 
     self.returns.add(node.value)
 </t>
-<t tx="ekr.20160319080102.1">def cleanSaxInputString(s):
+  <t tx="ekr.20160319080102.1">def cleanSaxInputString(s):
     '''Clean control characters from s.
     s may be a bytes or a (unicode) string.'''
     # Note: form-feed ('\f') is 12 decimal.
@@ -3315,7 +3295,7 @@ def format_arguments(self, node):
     transtable = bytes.maketrans(flatten, pad)
     return s.translate(transtable)
 </t>
-<t tx="ekr.20160319081141.1">def main():
+  <t tx="ekr.20160319081141.1">def main():
     for path1 in files:
         if path1.endswith('.xml'):
             path2 = path1[:-4] + '.py'
@@ -3328,8 +3308,8 @@ def format_arguments(self, node):
             g.es_exception()
     g.es_print('done')
 </t>
-<t tx="ekr.20160923132656.1">@language python
-"""Introspect"""
+  <t tx="ekr.20160923132656.1">@language python
+&quot;&quot;&quot;Introspect&quot;&quot;&quot;
 
 # By Terry Brown.  Requires Python 2.x.
 
@@ -3350,11 +3330,11 @@ def classname(thing):
 
 if not hasattr(c.p.v, '_introspection_target'):
     txt = g.app.gui.runAskOkCancelStringDialog(
-        c, "Introspect what", "Introspect what")
+        c, &quot;Introspect what&quot;, &quot;Introspect what&quot;)
     if txt is not None:
         o = eval(txt)
         c.p.v._introspection_target = o
-        c.p.h = "%s %s" % (txt, classname(o))
+        c.p.h = &quot;%s %s&quot; % (txt, classname(o))
 
 # c.p.deletePositionsInList([i.copy() for i in p.children()])
 
@@ -3379,7 +3359,7 @@ def show_obj(c, obj):
 
     if 'instance' in sub_mode:
         tnd = c.p.v.insertAsNthChild(0)
-        tnd.h = "&lt;by name&gt;"
+        tnd.h = &quot;&lt;by name&gt;&quot;
     else:
         tnd = c.p.v
 
@@ -3393,12 +3373,12 @@ def show_obj(c, obj):
         nd = tnd.insertAsLastChild()
         
         if not seen_already(tnd, nd, iname, o):
-            nd.h = "%s %s" % (iname, format_type(nd, o))
+            nd.h = &quot;%s %s&quot; % (iname, format_type(nd, o))
             nd._introspection_target = o
 
     if 'class' in sub_mode:
         ttnd = c.p.v.insertAsNthChild(0)
-        ttnd.h = "&lt;by class&gt;"
+        ttnd.h = &quot;&lt;by class&gt;&quot;
     else:
         ttnd = c.p.v
 
@@ -3408,7 +3388,7 @@ def show_obj(c, obj):
             tnd = ttnd
         else:
             tnd = ttnd.insertAsLastChild()
-            tnd.h = "&lt;%s&gt;"%cname
+            tnd.h = &quot;&lt;%s&gt;&quot;%cname
     
         for iname, o in sorted(things[cname]):
             
@@ -3432,7 +3412,7 @@ def seen_already(tnd, nd, iname, o):
     else:
         return False
         
-    nd.h = "[%s %s]" % (classname(o), iname)
+    nd.h = &quot;[%s %s]&quot; % (classname(o), iname)
     pos = c.vnode2position(up[0])
     nd.b = pos.get_UNL(with_file=True, with_proto=True)
     
@@ -3441,7 +3421,7 @@ def seen_already(tnd, nd, iname, o):
 def show_child(nd, iname, o):
                 
     nd._introspection_target = o
-    nd.h = "%s %s" % (format_type(nd, o), iname)
+    nd.h = &quot;%s %s&quot; % (format_type(nd, o), iname)
     
 docable = (
     types.ClassType, types.MethodType, types.UnboundMethodType, 
@@ -3456,13 +3436,13 @@ def format_type(nd, o):
     
     if isinstance(o, (str, unicode)):
         nd.b = o
-        return "%s '%s'" % (classname(o), o[:20])
+        return &quot;%s '%s'&quot; % (classname(o), o[:20])
     elif isinstance(o, bool):
-        return "%s %s" % (classname(o), 'T' if o else 'F')
+        return &quot;%s %s&quot; % (classname(o), 'T' if o else 'F')
     elif isinstance(o, (int, float)):
-        return "%s %s" % (classname(o), o)
+        return &quot;%s %s&quot; % (classname(o), o)
     elif isinstance(o, (tuple, list, dict)):
-        return "%s %s" % (classname(o), len(o))
+        return &quot;%s %s&quot; % (classname(o), len(o))
     else:
         return classname(o)
     
@@ -3470,27 +3450,27 @@ def show_list(c, list_):
     
     if len(list_) &gt; 100:
         nd = c.p.v.insertAsLastChild()
-        nd.h = "&lt;%s of %d items truncated&gt;" % len(list_.__class__.__name__, list_)
+        nd.h = &quot;&lt;%s of %d items truncated&gt;&quot; % len(list_.__class__.__name__, list_)
         
     if len(list_) == 0:
         nd = c.p.v.insertAsLastChild()
-        nd.h = "&lt;%s of 0 items&gt;" % list_.__class__.__name__
+        nd.h = &quot;&lt;%s of 0 items&gt;&quot; % list_.__class__.__name__
         
     for n, i in enumerate(list_[:100]):
         nd = c.p.v.insertAsLastChild()
         show_child(nd, '', i)
-        nd.h = "%d: %s" % (n, nd.h)
+        nd.h = &quot;%d: %s&quot; % (n, nd.h)
         nd._introspection_target = i
 
 def show_dict(c, dict_):
     
     if len(dict_) &gt; 100:
         nd = c.p.v.insertAsLastChild()
-        nd.h = "&lt;dict of %d items truncated&gt;" % len(dict_)
+        nd.h = &quot;&lt;dict of %d items truncated&gt;&quot; % len(dict_)
         
     if len(dict_) == 0:
         nd = c.p.v.insertAsLastChild()
-        nd.h = "&lt;dict of 0 items&gt;"
+        nd.h = &quot;&lt;dict of 0 items&gt;&quot;
         
     keys = dict_.keys()
     keys.sort()
@@ -3499,7 +3479,7 @@ def show_dict(c, dict_):
         nd = c.p.v.insertAsLastChild()
         i = dict_[k]
         show_child(nd, '', i)
-        nd.h = "%s: %s" % (k, nd.h)
+        nd.h = &quot;%s: %s&quot; % (k, nd.h)
         nd._introspection_target = i
 
 dispatch = {
@@ -3515,7 +3495,7 @@ func(c, obj)
 c.p.expand()
 c.redraw()
 </t>
-<t tx="ekr.20161006092435.1">'''Import tab-indented files.'''
+  <t tx="ekr.20161006092435.1">'''Import tab-indented files.'''
 g.cls()
 if c.isChanged():
     c.save()
@@ -3539,7 +3519,7 @@ else:
     root.expand()
     c.redraw()
 </t>
-<t tx="ekr.20161006092435.2">class TabImporter:
+  <t tx="ekr.20161006092435.2">class TabImporter:
     
     def __init__(self, c, root, separate):
         '''Ctor for the TabImporter class.'''
@@ -3550,7 +3530,7 @@ else:
 
     @others
 </t>
-<t tx="ekr.20161006092435.3">def check(self, lines):
+  <t tx="ekr.20161006092435.3">def check(self, lines):
     '''Return False and warn if lines contains mixed leading tabs/blanks.'''
     blanks, tabs = 0, 0
     for s in lines:
@@ -3563,14 +3543,14 @@ else:
     else:
         return True
 </t>
-<t tx="ekr.20161006092435.4">def dump_stack(self):
+  <t tx="ekr.20161006092435.4">def dump_stack(self):
     '''Dump the stack, containing (level, p) tuples.'''
     g.trace('==========')
     for i, data in enumerate(self.stack):
         level, p = data
         print('%2s %s %r' % (i, level, p.h))
 </t>
-<t tx="ekr.20161006092435.5">def lws(self, s):
+  <t tx="ekr.20161006092435.5">def lws(self, s):
     '''Return the length of the leading whitespace of s.'''
     for i, ch in enumerate(s):
         if ch not in ' \t':
@@ -3579,7 +3559,7 @@ else:
     
     
 </t>
-<t tx="ekr.20161006092435.6">def scan(self, s1):
+  <t tx="ekr.20161006092435.6">def scan(self, s1):
     trace = False and not g.unitTesting
     c, root, separate = self.c, self.root, self.separate
     if not s1.strip() or not root:
@@ -3592,7 +3572,7 @@ else:
             if s.strip() or not separate:
                 self.scan_helper(s)
 </t>
-<t tx="ekr.20161006092435.7">def scan_helper(self, s):
+  <t tx="ekr.20161006092435.7">def scan_helper(self, s):
     '''Update the stack as necessary and return (level, parent, stack).'''
     trace = False and not g.unitTesting
     root, separate, stack = self.root, self.separate, self.stack
@@ -3648,7 +3628,7 @@ else:
         parent.b = parent.b + self.undent(level, s)
     return level
 </t>
-<t tx="ekr.20161006092435.8">def undent(self, level, s):
+  <t tx="ekr.20161006092435.8">def undent(self, level, s):
     '''Unindent all lines of p.b by level.'''
     # g.trace(level, s.rstrip())
     if level &lt;= 0:
@@ -3667,7 +3647,7 @@ else:
     else:
         return ''
 </t>
-<t tx="ekr.20161031130627.1">'''
+  <t tx="ekr.20161031130627.1">'''
 Undoably converts the word at the cursor to pep8 style throughout a given tree.
 Also sets the find text to the new word.
 '''
@@ -3681,7 +3661,7 @@ table = (
 @others
 Pep8(table, change=True).run()
 </t>
-<t tx="ekr.20161031130627.2">class Pep8:
+  <t tx="ekr.20161031130627.2">class Pep8:
     '''
     Convert the word under the cursor to pep8 style in all subtrees in
     table.
@@ -3694,7 +3674,7 @@ Pep8(table, change=True).run()
         
     @others
 </t>
-<t tx="ekr.20161031130627.3">def change_all(self, name, new_name, root):
+  <t tx="ekr.20161031130627.3">def change_all(self, name, new_name, root):
     '''Undoably change name to new_name throughout root's tree.'''
     u = c.undoer
     bunch = u.beforeChangeTree(root)
@@ -3707,7 +3687,7 @@ Pep8(table, change=True).run()
         u.afterChangeTree(root, 'pep8', bunch)
     return found
 </t>
-<t tx="ekr.20161031130627.4">def change_body(self, name, new_name, p):
+  <t tx="ekr.20161031130627.4">def change_body(self, name, new_name, p):
     indices = []
     for m in self.pattern.finditer(p.b):
         indices.append(str(m.start()))
@@ -3725,7 +3705,7 @@ Pep8(table, change=True).run()
             g.es_print(s)
     return bool(indices)
 </t>
-<t tx="ekr.20161031130627.5">def change_headline(self, name, new_name, p):
+  <t tx="ekr.20161031130627.5">def change_headline(self, name, new_name, p):
     m = self.pattern.search(p.h)
     if m:
         i = m.start()
@@ -3739,14 +3719,14 @@ Pep8(table, change=True).run()
             g.es_print('headline', s)
     return bool(m)
 </t>
-<t tx="ekr.20161031130627.6">def get_name(self):
+  <t tx="ekr.20161031130627.6">def get_name(self):
     i, j = c.editCommands.extendToWord(event=None, select=False)
     w = c.frame.body.wrapper
     s = w.getAllText()
     name = s[i:j]
     return name
 </t>
-<t tx="ekr.20161031130627.7">def run(self):
+  <t tx="ekr.20161031130627.7">def run(self):
     # self.clear()
     name = self.get_name()
     new_name = self.to_pep8(name)
@@ -3768,7 +3748,7 @@ Pep8(table, change=True).run()
         else:
             g.es_print('not found:', name)
 </t>
-<t tx="ekr.20161031130627.8">def to_pep8(self, s):
+  <t tx="ekr.20161031130627.8">def to_pep8(self, s):
     
     if len(s) &gt; 1 and s[0].islower() and s.lower() != s:
         result = []
@@ -3781,11 +3761,11 @@ Pep8(table, change=True).run()
     else:
         return name
 </t>
-<t tx="ekr.20161031130627.9">def clear():
+  <t tx="ekr.20161031130627.9">def clear():
     g.cls()
     c.k.simulateCommand('clear-log')
 </t>
-<t tx="ekr.20161120175101.1">'''
+  <t tx="ekr.20161120175101.1">'''
 Create markdown headers throughout the nearest .md outline.
 
 That is, prepend p.b[0] with markdown section markup, if appriate.
@@ -3806,7 +3786,7 @@ c.redraw()
 @language python
 @tabwidth -4
 </t>
-<t tx="ekr.20161120175101.2">pattern = re.compile(r'^(#+\s+)(.*)$')
+  <t tx="ekr.20161120175101.2">pattern = re.compile(r'^(#+\s+)(.*)$')
 
 def markup(p, root):
     '''prepend p.b[0] with markdown section markup, if appriate.'''
@@ -3834,7 +3814,7 @@ def markup(p, root):
         c.setChanged(True)
         p.b = s
 </t>
-<t tx="ekr.20161123085419.1">'''
+  <t tx="ekr.20161123085419.1">'''
 Create a table of expected headlines in a unit test.
 
 To use this script, select the root of the tree containing the expected
@@ -3843,12 +3823,12 @@ results. After running this, copy the table from the console.
 g.cls()
 # Proper escapes are tricky.
 table = [
-    '"%s",' % p.h.replace('\\', '\\\\').replace('"', '\\"')
+    '&quot;%s&quot;,' % p.h.replace('\\', '\\\\').replace('&quot;', '\\&quot;')
         for p in c.p.subtree()
 ]
-print("table = (\n    %s\n)" % '\n    '.join(table))
+print(&quot;table = (\n    %s\n)&quot; % '\n    '.join(table))
 </t>
-<t tx="ekr.20161124034654.1">g.cls()
+  <t tx="ekr.20161124034654.1">g.cls()
 # define constants that describe the new language.
 name = 'otl'
     # The name of the file, and the prefix for classes.
@@ -3865,7 +3845,7 @@ state_ivar = 'self.not_used'
 &lt;&lt; define run &amp; helpers &gt;&gt;
 run(extensions, language, name, state_ivar)
 </t>
-<t tx="ekr.20161124034654.10">### Define an override if desired...
+  <t tx="ekr.20161124034654.10">### Define an override if desired...
 
 if 0: # The base class
     def clean_headline(self, s):
@@ -3893,7 +3873,7 @@ if 0: # A more complex example, for the C language.
         else:
             return s
 </t>
-<t tx="ekr.20161124034654.11">def clean_nodes(self, parent):
+  <t tx="ekr.20161124034654.11">def clean_nodes(self, parent):
     '''
     Clean all nodes in parent's tree.
     Subclasses override this as desired.
@@ -3901,7 +3881,7 @@ if 0: # A more complex example, for the C language.
     '''
     pass
 </t>
-<t tx="ekr.20161124034654.12">class {{cap_name}}_ScanState:
+  <t tx="ekr.20161124034654.12">class {{cap_name}}_ScanState:
     '''A class representing the state of the {{name}} line-oriented scan.'''
     
     def __init__(self, d=None):
@@ -3919,19 +3899,19 @@ if 0: # A more complex example, for the C language.
     def __repr__(self):
         '''{{cap_name}}_ScanState.__repr__'''
         ### Adjust these by hand.
-        return "{{cap_name}}_ScanState context: %r curlies: %s" % (
+        return &quot;{{cap_name}}_ScanState context: %r curlies: %s&quot; % (
             self.context, self.curlies)
 
     __str__ = __repr__
 
     @others
 </t>
-<t tx="ekr.20161124034654.13">def level(self):
+  <t tx="ekr.20161124034654.13">def level(self):
     '''{{cap_name}}_ScanState.level.'''
     return {{state_ivar}}
 
 </t>
-<t tx="ekr.20161124034654.14">def update(self, data):
+  <t tx="ekr.20161124034654.14">def update(self, data):
     '''
     {{cap_name}}_ScanState.update
 
@@ -3948,9 +3928,9 @@ if 0: # A more complex example, for the C language.
     # self.squares += delta_s
     return i
 </t>
-<t tx="ekr.20161124034654.2">@others
+  <t tx="ekr.20161124034654.2">@others
 </t>
-<t tx="ekr.20161124034654.3">def copy_tree(source, root, h):
+  <t tx="ekr.20161124034654.3">def copy_tree(source, root, h):
     '''Copy the source tree to the node after p, with headline h.'''
     p2 = root.insertAfter()
     source.copyTreeFromSelfTo(p2)
@@ -3958,7 +3938,7 @@ if 0: # A more complex example, for the C language.
     return p2
  
 </t>
-<t tx="ekr.20161124034654.4">def make_substitutions(destination, patterns):
+  <t tx="ekr.20161124034654.4">def make_substitutions(destination, patterns):
     '''Make all substitutions in the destination tree.'''
     for p in destination.self_and_subtree():
         h = substitute(p.h, patterns)
@@ -3970,11 +3950,11 @@ if 0: # A more complex example, for the C language.
             # g.trace('CHANGED:', p.b, '==&gt;', b)
             p.b = b
 </t>
-<t tx="ekr.20161124034654.5">def run(extensions, language, name, state_ivar):
+  <t tx="ekr.20161124034654.5">def run(extensions, language, name, state_ivar):
     '''The driver for this script.'''
     patterns = {
         'cap_name': name.capitalize(),
-        'extensions': '[%s]' % ', '.join(["'%s'" % (z) for z in extensions]),
+        'extensions': '[%s]' % ', '.join([&quot;'%s'&quot; % (z) for z in extensions]),
         'language': language.lower(),
         'name': name.lower(),
         'strict': 'True' if strict else 'False',
@@ -3991,7 +3971,7 @@ if 0: # A more complex example, for the C language.
     c.contractAllHeadlines()
     c.redraw()
 </t>
-<t tx="ekr.20161124034654.6">def substitute(s, patterns):
+  <t tx="ekr.20161124034654.6">def substitute(s, patterns):
     '''Make all substitutions in s.'''
     for pattern in patterns:
         find = '{{%s}}' % pattern
@@ -4006,7 +3986,7 @@ if 0: # A more complex example, for the C language.
             assert progress &lt; i
     return s
 </t>
-<t tx="ekr.20161124034654.7">'''The @auto importer for the {{name}} language.'''
+  <t tx="ekr.20161124034654.7">'''The @auto importer for the {{name}} language.'''
 import leo.plugins.importers.linescanner as linescanner
 Importer = linescanner.Importer
 @others
@@ -4019,7 +3999,7 @@ importer_dict = {
 
 
 </t>
-<t tx="ekr.20161124034654.8">class {{cap_name}}_Importer(Importer):
+  <t tx="ekr.20161124034654.8">class {{cap_name}}_Importer(Importer):
     '''The importer for the {{name}} lanuage.'''
 
     def __init__(self, importCommands, atAuto):
@@ -4035,9 +4015,9 @@ importer_dict = {
         
     @others
 </t>
-<t tx="ekr.20161124034654.9"># These can be overridden in subclasses.
+  <t tx="ekr.20161124034654.9"># These can be overridden in subclasses.
 </t>
-<t tx="ekr.20161204063803.1">'''Make a markdown table of contents from an @auto-md node.'''
+  <t tx="ekr.20161204063803.1">'''Make a markdown table of contents from an @auto-md node.'''
 g.cls()
 if c.isChanged(): c.save()
 
@@ -4055,7 +4035,7 @@ Controller().run(p)
 @language python
 @tabwidth -4
 </t>
-<t tx="ekr.20161204063803.2">def run(self, p):
+  <t tx="ekr.20161204063803.2">def run(self, p):
     '''The driver for @button md-toc.'''
     if p.h.startswith('@auto-md '): #  or p.h.endswith('.md'):
         last = c.lastTopLevel()
@@ -4065,7 +4045,7 @@ Controller().run(p)
     else:
         print('must be an @auto-md node or an x.md node: %s' % p.h)
 </t>
-<t tx="ekr.20161204063803.3">def make_link(self, s):
+  <t tx="ekr.20161204063803.3">def make_link(self, s):
     '''Return the markdown link for s.'''
     result = []
     for ch in s.lower():
@@ -4077,7 +4057,7 @@ Controller().run(p)
             pass
     return ''.join(result)
 </t>
-<t tx="ekr.20161204063803.4">def make_toc(self, p):
+  <t tx="ekr.20161204063803.4">def make_toc(self, p):
     '''Create the toc in self.root.b.'''
     result, stack = [], []
     prefix = p.h.lstrip('@auto-md').strip()
@@ -4101,9 +4081,9 @@ Controller().run(p)
         self.root.b = ''.join(result)
     c.redraw()
 </t>
-<t tx="ekr.20161206070406.1">gnx: ekr.20161206070323.1
+  <t tx="ekr.20161206070406.1">gnx: ekr.20161206070323.1
 </t>
-<t tx="ekr.20161206090903.1">gnx: ekr.20161206070323.2
+  <t tx="ekr.20161206090903.1">gnx: ekr.20161206070323.2
 unl: &lt;&lt; what c2py does &gt;&gt;
 gnx: ekr.20161206070323.3
 unl: &lt;&lt; theory of operation &gt;&gt;
@@ -4244,8 +4224,7 @@ unl: Scanning &amp; Replacing...--&gt;stringToList &amp; listToString--&gt;strin
 gnx: ekr.20161206070323.71
 unl: Scanning &amp; Replacing...--&gt;stringToList &amp; listToString--&gt;listToString
 </t>
-<t tx="ekr.20170120110015.1"></t>
-<t tx="ekr.20170211083757.1">if c.isChanged(): c.save()
+  <t tx="ekr.20170211083757.1">if c.isChanged(): c.save()
 &lt;&lt; imports &gt;&gt;
 &lt;&lt; class MyDemo &gt;&gt;
 # Don't use @others here.
@@ -4268,7 +4247,7 @@ except Exception:
     g.app.demo = None
     raise
 </t>
-<t tx="ekr.20170211083757.10"># Create, move, promote, demote, hoist.
+  <t tx="ekr.20170211083757.10"># Create, move, promote, demote, hoist.
 demo.retain(Title('Leo is a full featured outliner.'))
 demo.wait(1.0)
 ###
@@ -4292,25 +4271,24 @@ demo.wait(1.0)
 ###
 demo.delete_retained_widgets()
 </t>
-<t tx="ekr.20170211083757.11"># The body pane shows the text of the selected outline node.
+  <t tx="ekr.20170211083757.11"># The body pane shows the text of the selected outline node.
 </t>
-<t tx="ekr.20170211083757.12"># Section refs, @others, @file
+  <t tx="ekr.20170211083757.12"># Section refs, @others, @file
 </t>
-<t tx="ekr.20170211083757.13"></t>
-<t tx="ekr.20170211083757.14"># Callout('Thanks for watching')
+  <t tx="ekr.20170211083757.14"># Callout('Thanks for watching')
 ###
 # demo.next()
 </t>
-<t tx="ekr.20170211083757.2">from leo.core.leoQt import QtGui
+  <t tx="ekr.20170211083757.2">from leo.core.leoQt import QtGui
 import leo.plugins.demo as demo_module
 import imp
 imp.reload(demo_module)
 </t>
-<t tx="ekr.20170211083757.3">class MyDemo (demo_module.Demo):
+  <t tx="ekr.20170211083757.3">class MyDemo (demo_module.Demo):
     
     @others
 </t>
-<t tx="ekr.20170211083757.4">def setup(self, p=None):
+  <t tx="ekr.20170211083757.4">def setup(self, p=None):
     c = self.c
     self.end_on_exception = True # Good for debugging.
     self.delta = 10
@@ -4325,10 +4303,10 @@ imp.reload(demo_module)
     c.redraw()
     self.set_youtube_position()
 </t>
-<t tx="ekr.20170211083757.5">def setup_script(self):
+  <t tx="ekr.20170211083757.5">def setup_script(self):
     self.delete_widgets()
 </t>
-<t tx="ekr.20170211083757.6">def teardown(self):
+  <t tx="ekr.20170211083757.6">def teardown(self):
     c = self.c
     self.delete_all_widgets()
     # self.set_top_geometry(self.geometry1)
@@ -4341,18 +4319,18 @@ imp.reload(demo_module)
     c.selectPosition(p)
     c.redraw()
 </t>
-<t tx="ekr.20170211083757.7">def teardown_script(self):
+  <t tx="ekr.20170211083757.7">def teardown_script(self):
     if self.auto_run:
         # Default wait.
         self.wait(0.5)
 </t>
-<t tx="ekr.20170211083757.8">@language python
+  <t tx="ekr.20170211083757.8">@language python
 </t>
-<t tx="ekr.20170211083757.9">Callout('Hello. This tutorial introduces Leo')
-# Callout("First, I'll increase the text size for easier viewing")
+  <t tx="ekr.20170211083757.9">Callout('Hello. This tutorial introduces Leo')
+# Callout(&quot;First, I'll increase the text size for easier viewing&quot;)
 # demo.next(wait=1.0)
 </t>
-<t tx="ekr.20170212105552.1">@language python
+  <t tx="ekr.20170212105552.1">@language python
 '''Create intro slides for screen shots.'''
 # The *same* command/key binding calls both demo-start and demo.next.
 if c.isChanged():
@@ -4369,26 +4347,26 @@ else:
     demo = IntroSlides(c)
     main(c, demo,
         auto_run=False,
-        hoist_node = "Leo's Main Window",
+        hoist_node = &quot;Leo's Main Window&quot;,
         script_name='intro-slides-script')
 </t>
-<t tx="ekr.20170212105552.10">@language python
+  <t tx="ekr.20170212105552.10">@language python
 </t>
-<t tx="ekr.20170212105552.11">Callout("This is Leo's main window")
+  <t tx="ekr.20170212105552.11">Callout(&quot;This is Leo's main window&quot;)
 
 ###
 demo.next()
 </t>
-<t tx="ekr.20170212105552.2">from leo.core.leoQt import QtGui
+  <t tx="ekr.20170212105552.2">from leo.core.leoQt import QtGui
 import leo.plugins.demo as demo_module
 # import imp
 # imp.reload(demo_module)
 </t>
-<t tx="ekr.20170212105552.3">class IntroSlides (demo_module.Demo):
+  <t tx="ekr.20170212105552.3">class IntroSlides (demo_module.Demo):
     
     @others
 </t>
-<t tx="ekr.20170212105552.4">def setup(self, p=None):
+  <t tx="ekr.20170212105552.4">def setup(self, p=None):
     c = self.c
     self.end_on_exception = True # Good for debugging.
     self.delta = 0
@@ -4399,10 +4377,10 @@ import leo.plugins.demo as demo_module
         c.hoist()
     c.redraw()
 </t>
-<t tx="ekr.20170212105552.5">def setup_script(self):
+  <t tx="ekr.20170212105552.5">def setup_script(self):
     self.delete_widgets()
 </t>
-<t tx="ekr.20170212105552.6">def teardown(self):
+  <t tx="ekr.20170212105552.6">def teardown(self):
     c = self.c
     self.delete_all_widgets()
     if self.delta &gt; 0:
@@ -4412,12 +4390,12 @@ import leo.plugins.demo as demo_module
         c.dehoist()
     c.redraw()
 </t>
-<t tx="ekr.20170212105552.7">def teardown_script(self):
+  <t tx="ekr.20170212105552.7">def teardown_script(self):
     if self.auto_run:
         # Default wait.
         self.wait(0.5)
 </t>
-<t tx="ekr.20170212105552.8">def main(c, demo, script_name, auto_run=False, hoist_node=None):
+  <t tx="ekr.20170212105552.8">def main(c, demo, script_name, auto_run=False, hoist_node=None):
     g.cls()
     k = c.k
     class_name = demo.__class__.__name__
@@ -4434,8 +4412,7 @@ import leo.plugins.demo as demo_module
     demo.hoist_node = hoist_node and g.findNodeInTree(c, p, hoist_node)
     demo.start(script_tree, auto_run=auto_run)
 </t>
-<t tx="ekr.20170212105552.9"></t>
-<t tx="ekr.20170225023738.1">'''
+  <t tx="ekr.20170225023738.1">'''
 Web development involves endless reloading of pages.  It gets old really fast.
 
 This @button allows me to fiddle with the .css and javascript for mod_http
@@ -4459,10 +4436,10 @@ g.app.pluginsController.loadOnePlugin(
 g.app.loadManager.readGlobalSettingsFiles()
 g.handleUrl('http://127.0.0.1:8130/leoPlugins.leo')
 </t>
-<t tx="ekr.20170301014329.1">'''Cycle syntax coloring when there are multiple @langauge directives in a node.'''
+  <t tx="ekr.20170301014329.1">'''Cycle syntax coloring when there are multiple @langauge directives in a node.'''
 # Original by Terry Brown, Revised by EKR.
 while not p.isRoot():
-    if p.b.strip().startswith("@language "):
+    if p.b.strip().startswith(&quot;@language &quot;):
         lines = g.splitLines(p.b)
         words = lines[0].split()
         # Careful: don't treat comments as languages.
@@ -4475,11 +4452,11 @@ while not p.isRoot():
             break
     p.moveToParent()
 else:
-    g.es("No ambiguous @language directive found")
+    g.es(&quot;No ambiguous @language directive found&quot;)
 </t>
-<t tx="ekr.20170301022829.1"># Please don't ignore these :-)
+  <t tx="ekr.20170301022829.1"># Please don't ignore these :-)
 </t>
-<t tx="ekr.20170301023612.1">'''
+  <t tx="ekr.20170301023612.1">'''
     insert / update headlines as comments in @nosent R code
     https://gist.github.com/tbnorth/eb913fcab82f6a4b37734b5156543308
 '''
@@ -4493,23 +4470,23 @@ for nd in p.self_and_subtree():
     if lines and lines[0].startswith('### '):
         del lines[0]
     if lines and lines[0].strip():
-        lines[0: 0] = [""]
+        lines[0: 0] = [&quot;&quot;]
     lines[0: 0] = [
-        "### %s %s" % (nd.h, "#" * (80 - len(nd.h) - 5)),
+        &quot;### %s %s&quot; % (nd.h, &quot;#&quot; * (80 - len(nd.h) - 5)),
     ]
     if '.coffee' in p.h:
-        lines[0: 0] = [""]
+        lines[0: 0] = [&quot;&quot;]
     if lines[-1].strip():
-        lines.append("")
+        lines.append(&quot;&quot;)
     if lines[-2].strip():
-        lines.append("")
+        lines.append(&quot;&quot;)
     b = '\n'.join(lines)
     if nd.b != b:
         nd.b = b
 g.es('\n'.join(headlines))
 c.redraw()
 </t>
-<t tx="ekr.20181019042544.1"># Replace underscore by - in settings names.
+  <t tx="ekr.20181019042544.1"># Replace underscore by - in settings names.
 # See https://github.com/leo-editor/leo-editor/issues/993
 g.cls()
 import re
@@ -4522,7 +4499,7 @@ kinds = (
 )
 for kind in kinds:
     print('===== %s =====\n' % kind)
-    pat = re.compile(r"get%s\s*\([\'\"]([\w_]+)[\'\"][,)]" % kind)
+    pat = re.compile(r&quot;get%s\s*\([\'\&quot;]([\w_]+)[\'\&quot;][,)]&quot; % kind)
     for p in c.all_positions():
         s = p.b
         i, found = 0, False
@@ -4549,8 +4526,7 @@ for kind in kinds:
 c.setChanged()
 c.redraw()     
 </t>
-<t tx="ekr.20181019042717.1"></t>
-<t tx="ekr.20181019042808.1">'''Check the consistency of all settings.'''
+  <t tx="ekr.20181019042808.1">'''Check the consistency of all settings.'''
 # https://github.com/leo-editor/leo-editor/issues/993
 
 class Controller:
@@ -4558,7 +4534,7 @@ class Controller:
 
 Controller(c).run()
 </t>
-<t tx="ekr.20181019042808.10">def scan_for_configs(self, p, d):
+  <t tx="ekr.20181019042808.10">def scan_for_configs(self, p, d):
     '''
     Scan the body text of p, finding all calls to config.getX.
     
@@ -4583,7 +4559,7 @@ Controller(c).run()
             if i == -1: break
         elif ch == '#':
             i = g.skip_to_end_of_line(s, i)
-        elif ch in ('"', "'"):
+        elif ch in ('&quot;', &quot;'&quot;):
             i = g.skip_python_string(s, i, verbose=False)
         elif ch == '_' or ch.isalpha():
             j = g.skip_id(s, i)
@@ -4593,7 +4569,7 @@ Controller(c).run()
                 i = g.skip_ws(s, j)
                 if g.match(s, i, '('):
                     i = g.skip_ws(s, i + 1)
-                    if g.match(s, i, '"') or g.match(s, i, "'"):
+                    if g.match(s, i, '&quot;') or g.match(s, i, &quot;'&quot;):
                         j = g.skip_string(s, i)
                         name = s[i + 1: j - 1]
                         aList = d.get(kind, [])
@@ -4608,7 +4584,7 @@ Controller(c).run()
         assert progress &lt; i
     return d
 </t>
-<t tx="ekr.20181019042808.11">def get_settings(self):
+  <t tx="ekr.20181019042808.11">def get_settings(self):
     '''Return a dict containing a representation
     of all settings in leoSettings.leo.
     '''
@@ -4638,7 +4614,7 @@ Controller(c).run()
                 print('  ' + name)
     return d
 </t>
-<t tx="ekr.20181019042808.12">def is_setting(self, p):
+  <t tx="ekr.20181019042808.12">def is_setting(self, p):
     # For now, these are enough
     table = (
         '@bool', '@color', '@int', '@float',
@@ -4650,7 +4626,7 @@ Controller(c).run()
             return True
     return False
 </t>
-<t tx="ekr.20181019042808.13">def parse_setting(self, p):
+  <t tx="ekr.20181019042808.13">def parse_setting(self, p):
     s = p.h
     assert s[0] == '@'
     i = g.skip_id(s, 1)
@@ -4661,11 +4637,11 @@ Controller(c).run()
     name = s[i: j]
     return kind, name
 </t>
-<t tx="ekr.20181019042808.14">def munge(self, s):
+  <t tx="ekr.20181019042808.14">def munge(self, s):
     '''Return the canonicalized name for settings and arguments to c.config.getX.'''
     return g.toUnicode(s.replace('-', '').replace('_', '').lower())
 </t>
-<t tx="ekr.20181019042808.15">def run(self):
+  <t tx="ekr.20181019042808.15">def run(self):
     g.cls()
     self.get_commanders()
     configs = self.get_configs()
@@ -4674,7 +4650,7 @@ Controller(c).run()
         self.check(configs, settings)
     g.trace('done')
 </t>
-<t tx="ekr.20181019042808.2">def __init__(self, c):
+  <t tx="ekr.20181019042808.2">def __init__(self, c):
     self.c = c
     self.errors = 0
     # Commanders...
@@ -4682,7 +4658,7 @@ Controller(c).run()
     self.plugins = None # leoPlugins.leo.
     self.settings = None # leoSettings.leo.
 </t>
-<t tx="ekr.20181019042808.3">def check(self, configs_d, settings_d):
+  <t tx="ekr.20181019042808.3">def check(self, configs_d, settings_d):
     munge = self.munge
     table = ('Bool', 'Int', 'Float', 'Ratio', 'Path', 'String',) # 'Color', 'Font',
     #
@@ -4718,7 +4694,7 @@ Controller(c).run()
                 aList2 = [z2 for z2 in settings if munge(z2) == munge(z)]
                 g.printObj(aList2)
 </t>
-<t tx="ekr.20181019042808.4">def filter_get_x(self, setting):
+  <t tx="ekr.20181019042808.4">def filter_get_x(self, setting):
     '''
     Return False if we can safely ignore a missing call to config.get(setting).
     
@@ -4730,35 +4706,35 @@ Controller(c).run()
     # There *should* be settings for all of these, despite missing config.get calls.
     table = (
         # encodingIvarsDict...
-            "default_at_auto_file_encoding",
-            "default_derived_file_encoding",
-            "new_leo_file_encoding",
+            &quot;default_at_auto_file_encoding&quot;,
+            &quot;default_derived_file_encoding&quot;,
+            &quot;new_leo_file_encoding&quot;,
         # defaultsDict...
-            "color_directives_in_plain_text",
-            "output_doc_chunks",
-            "page_width",
-            "tab_width",
-            "tangle_outputs_header",
-            "target_language",
-            "underline_undefined_section_names",
+            &quot;color_directives_in_plain_text&quot;,
+            &quot;output_doc_chunks&quot;,
+            &quot;page_width&quot;,
+            &quot;tab_width&quot;,
+            &quot;tangle_outputs_header&quot;,
+            &quot;target_language&quot;,
+            &quot;underline_undefined_section_names&quot;,
         # ivarsDict
-            "at_root_bodies_start_in_doc_mode",
-            "create_nonexistent_directories",
-            "output_initial_comment",
-            "output_newline",
-            "page_width",
-            "read_only",
-            "redirect_execute_script_output_to_log_pane",
-            "relative_path_base_directory",
-            "remove_sentinels_extension",
-            "save_clears_undo_buffer",
-            "stylesheet",
-            "tab_width",
-            "target_language",
-            "trailing_body_newlines",
-            "use_plugins",
-            "undo_granularity",
-            "write_strips_blank_lines",
+            &quot;at_root_bodies_start_in_doc_mode&quot;,
+            &quot;create_nonexistent_directories&quot;,
+            &quot;output_initial_comment&quot;,
+            &quot;output_newline&quot;,
+            &quot;page_width&quot;,
+            &quot;read_only&quot;,
+            &quot;redirect_execute_script_output_to_log_pane&quot;,
+            &quot;relative_path_base_directory&quot;,
+            &quot;remove_sentinels_extension&quot;,
+            &quot;save_clears_undo_buffer&quot;,
+            &quot;stylesheet&quot;,
+            &quot;tab_width&quot;,
+            &quot;target_language&quot;,
+            &quot;trailing_body_newlines&quot;,
+            &quot;use_plugins&quot;,
+            &quot;undo_granularity&quot;,
+            &quot;write_strips_blank_lines&quot;,
     )
     table = [munge(z) for z in table]
     if setting in table:
@@ -4798,7 +4774,7 @@ Controller(c).run()
     # Issue a warning.
     return True
 </t>
-<t tx="ekr.20181019042808.5">def filter_user_config(self, setting):
+  <t tx="ekr.20181019042808.5">def filter_user_config(self, setting):
     '''
     Return False if we can safely ignore a setting that does not exist in leoSettings.leo.
     
@@ -4863,11 +4839,11 @@ Controller(c).run()
     # Issue a warning.
     return True
 </t>
-<t tx="ekr.20181019042808.6">def error(self, s):
+  <t tx="ekr.20181019042808.6">def error(self, s):
     print(s)
     self.errors += 1
 </t>
-<t tx="ekr.20181019042808.7">def get_commanders(self):
+  <t tx="ekr.20181019042808.7">def get_commanders(self):
     '''Open files as needed and set the commander ivars.'''
 
     def open_commander(fn):
@@ -4882,7 +4858,7 @@ Controller(c).run()
     self.plugins = open_commander(join(loadDir, '..', 'plugins', 'leoPlugins.leo'))
     self.settings = open_commander(join(loadDir, '..', 'config', 'leoSettings.leo'))
 </t>
-<t tx="ekr.20181019042808.8">def get_configs(self):
+  <t tx="ekr.20181019042808.8">def get_configs(self):
     '''
     Return a dict containing a representation of all calls to x.config.getX.
     '''
@@ -4892,7 +4868,7 @@ Controller(c).run()
         self.get_configs_from_outline(c, d)
     return d
 </t>
-<t tx="ekr.20181019042808.9">def get_configs_from_outline(self, c, d):
+  <t tx="ekr.20181019042808.9">def get_configs_from_outline(self, c, d):
     '''
     Scan the outline for all calls to x.config.getX and add items to d.
     '''
@@ -4900,7 +4876,7 @@ Controller(c).run()
         self.scan_for_configs(p, d)
     return d
 </t>
-<t tx="ekr.20181019042834.1">'''Check that all commands mentioned in the @menus tree actually exist.'''
+  <t tx="ekr.20181019042834.1">'''Check that all commands mentioned in the @menus tree actually exist.'''
 
 def checkMenu (p):
     for p2 in p.subtree_iter():
@@ -4920,7 +4896,7 @@ for p in menus.subtree_iter():
 
 print ('done')
 </t>
-<t tx="ekr.20181019042907.1">'''Check for commands that exist in some but not all key- binding sets.'''
+  <t tx="ekr.20181019042907.1">'''Check for commands that exist in some but not all key- binding sets.'''
 g.cls()
 import leo.core.leoConfig as leoConfig
 # import leo.core.leoTest as leoTest
@@ -4943,7 +4919,7 @@ shortcutsDict = {}
 @others
 main()
 </t>
-<t tx="ekr.20181019042907.2">def defineSetNames():
+  <t tx="ekr.20181019042907.2">def defineSetNames():
     global setNames
     if 1:
         setNames = []
@@ -4968,7 +4944,7 @@ main()
 
     setNames.sort()
 </t>
-<t tx="ekr.20181019042907.3">def doSet(p,name):
+  <t tx="ekr.20181019042907.3">def doSet(p,name):
 
     global shortcutsDict
 
@@ -4978,7 +4954,7 @@ main()
         if p.headString().startswith('@shortcuts'):
             doShortcuts(p,name)
 </t>
-<t tx="ekr.20181019042907.4">def doShortcuts(p,setName):
+  <t tx="ekr.20181019042907.4">def doShortcuts(p,setName):
 
     global parser,setsDict,shortcutsDict
 
@@ -4990,7 +4966,7 @@ main()
         if line and not line.startswith('#'):
             commandName,si = parser.parseShortcutLine('test',line)
             if not si:
-                g.es_print('In %s:\nmissing "=" in shortcut line:%s' % (
+                g.es_print('In %s:\nmissing &quot;=&quot; in shortcut line:%s' % (
                     p.headString(),repr(line)),color='red')
             else:
                 # Having multiple shortcuts for a command if fine,
@@ -5021,7 +4997,7 @@ main()
 
     setsDict[setName] = d
 </t>
-<t tx="ekr.20181019042907.5">def checkSets():
+  <t tx="ekr.20181019042907.5">def checkSets():
 
     global setNames, optionalCommandPrefixes, optionalCommandNames
     # Compute the union of all the command names.
@@ -5047,7 +5023,7 @@ main()
                     ):
                         g.es_print('%s is missing %-35s = None' % (setName,repr(key)))
         else:
-            g.es_print("'@keys No bindings' not found",color='blue')
+            g.es_print(&quot;'@keys No bindings' not found&quot;,color='blue')
     # Warn about undefined commands.
     for key in keys:
         if not c.commandsDict.get(key):
@@ -5068,7 +5044,7 @@ main()
                 if not ok:
                     g.es_print('Undefined command name: %s' % (key))
 </t>
-<t tx="ekr.20181019042907.6">def main ():
+  <t tx="ekr.20181019042907.6">def main ():
 
     global setNames
     defineSetNames()
@@ -5085,7 +5061,7 @@ main()
     checkSets()
     g.es('Check Bindings done')
 </t>
-<t tx="ekr.20211020082938.1">"""
+  <t tx="ekr.20211020082938.1">&quot;&quot;&quot;
 Display slides from a folder and its subfolders.
 
 Prompts for a folder containing images, then displays the images.
@@ -5110,7 +5086,7 @@ Default settings:
 - Display in random order.
 - Allowed file extensions: ['.jpeg', '.jpg', '.png']
 
-"""
+&quot;&quot;&quot;
 import os
 import pathlib
 import random
@@ -5118,7 +5094,7 @@ import textwrap
 from leo.core.leoQt import isQt5, QtCore, QtGui, QtWidgets
 
 # Defaults
-background_color = "black"
+background_color = &quot;black&quot;
 delay = 60  # seconds
 extensions = ['.jpeg', '.jpg', '.png']  # Allowed file extensions.
 full_screen = True
@@ -5133,18 +5109,18 @@ if path:
     files_list = get_files(path)
     if files_list:
         n = len(files_list)
-        print(f"Found {n} picture{g.plural(n)} in {path}")
+        print(f&quot;Found {n} picture{g.plural(n)} in {path}&quot;)
         w = Slides()
         w.run()
         print('done')
     else:
-        print(f"No slides found in {path!r}")
+        print(f&quot;No slides found in {path!r}&quot;)
 </t>
-<t tx="ekr.20211020082938.10">def quit(self):
+  <t tx="ekr.20211020082938.10">def quit(self):
     self.timer.stop()
     self.destroy()
 </t>
-<t tx="ekr.20211020082938.11">def run(self):
+  <t tx="ekr.20211020082938.11">def run(self):
     global background_color, delay, full_screen, sort_kind
     w = self
     # Init ivars
@@ -5165,13 +5141,13 @@ if path:
     self.sort(sort_kind)
     w.next_slide()  # show_slide resets the timer.
 </t>
-<t tx="ekr.20211020082938.12">def make_widgets(self):
+  <t tx="ekr.20211020082938.12">def make_widgets(self):
     
     global width, height
     w = self
 
     # Init the window's attributes.
-    w.setStyleSheet(f"background: {background_color}")
+    w.setStyleSheet(f&quot;background: {background_color}&quot;)
     w.setGeometry(0, 0, width, height)  # The non-full-screen sizes.
     
     # Create the picture area.
@@ -5193,8 +5169,8 @@ if path:
     layout.addWidget(self.scroll_area)
     w.setLayout(layout)
 </t>
-<t tx="ekr.20211020082938.13">def show_help(self):
-    """Show the help message."""
+  <t tx="ekr.20211020082938.13">def show_help(self):
+    &quot;&quot;&quot;Show the help message.&quot;&quot;&quot;
     print(textwrap.dedent('''\
                     d delete slide
                     f toggle full screen
@@ -5210,7 +5186,7 @@ if path:
           right arrow scroll right
     '''))
 </t>
-<t tx="ekr.20211020082938.14">def show_slide(self):
+  <t tx="ekr.20211020082938.14">def show_slide(self):
     # Reset the timer.
     self.timer.stop()
     self.timer.start(self.delay * 1000.0, self)
@@ -5231,8 +5207,8 @@ if path:
     except Exception:
         self.next_slide()
 </t>
-<t tx="ekr.20211020082938.15">def sort(self, sort_kind):
-    """sort files_list based on sort_kind."""
+  <t tx="ekr.20211020082938.15">def sort(self, sort_kind):
+    &quot;&quot;&quot;sort files_list based on sort_kind.&quot;&quot;&quot;
     global files_list
     if sort_kind == 'date':
         print('Sorting by date...')
@@ -5249,12 +5225,12 @@ if path:
         print('Sorting by size...')
         files_list.sort(key = os.path.getsize)
     else:
-        g.trace(f"unknown sort kind: {sort_kind!r}")
+        g.trace(f&quot;unknown sort kind: {sort_kind!r}&quot;)
 </t>
-<t tx="ekr.20211020082938.16">def timerEvent(self, e=None):
+  <t tx="ekr.20211020082938.16">def timerEvent(self, e=None):
     self.next_slide()  # show_slide resets the timer.
 </t>
-<t tx="ekr.20211020082938.17">def toggle_full_screen(self):
+  <t tx="ekr.20211020082938.17">def toggle_full_screen(self):
     w = self
     if w.full_screen:
         w.full_screen = False
@@ -5267,7 +5243,7 @@ if path:
         w.picture.setGeometry(0, 0, w.width(), w.height())
         w.picture.adjustSize()
 </t>
-<t tx="ekr.20211020082938.18">def zoom_in(self):
+  <t tx="ekr.20211020082938.18">def zoom_in(self):
     self.scale = self.scale * 1.05
     self.show_slide()
     
@@ -5275,8 +5251,8 @@ def zoom_out(self):
     self.scale = self.scale * (1.0 / 1.05)
     self.show_slide()
 </t>
-<t tx="ekr.20211020082938.2">def get_files(path):
-    """Return all files in path, including all subdirectories."""
+  <t tx="ekr.20211020082938.2">def get_files(path):
+    &quot;&quot;&quot;Return all files in path, including all subdirectories.&quot;&quot;&quot;
     global extensions
     return [
         str(z) for z in pathlib.Path(path).rglob('*')
@@ -5284,7 +5260,7 @@ def zoom_out(self):
             and os.path.splitext(str(z))[1].lower() in extensions
     ]
 </t>
-<t tx="ekr.20211020082938.3">class Slides(QtWidgets.QWidget):
+  <t tx="ekr.20211020082938.3">class Slides(QtWidgets.QWidget):
 
     scale = 1.0
     slide_number = -1
@@ -5292,32 +5268,32 @@ def zoom_out(self):
     
     @others
 </t>
-<t tx="ekr.20211020082938.4">send_to_trash_warning_given = False
+  <t tx="ekr.20211020082938.4">send_to_trash_warning_given = False
 
 def delete(self):
-    """Issue a prompt and delete the file if the user agrees."""
+    &quot;&quot;&quot;Issue a prompt and delete the file if the user agrees.&quot;&quot;&quot;
     try:
         from send2trash import send2trash
     except Exception:
         if not self.send_to_trash_warning_given:
             self.send_to_trash_warning_given = True
-            print("Deleting files requires send2trash")
-            print("pip install Send2Trash")
+            print(&quot;Deleting files requires send2trash&quot;)
+            print(&quot;pip install Send2Trash&quot;)
         return
     file_name = files_list[self.slide_number]
     result = g.app.gui.runAskYesNoDialog(c,
-        title = "Delete File?",
-        message = f"Delete file {g.shortFileName(file_name)}?"
+        title = &quot;Delete File?&quot;,
+        message = f&quot;Delete file {g.shortFileName(file_name)}?&quot;
     )
     if result == 'yes':
         # Move the file to the trash.
         send2trash(file_name)
         del files_list[self.slide_number]
-        print(f"Deleted {file_name}")
+        print(f&quot;Deleted {file_name}&quot;)
         self.slide_number = max(0, self.slide_number - 1)
         self.next_slide()
 </t>
-<t tx="ekr.20211020082938.5">def keyPressEvent (self, event):
+  <t tx="ekr.20211020082938.5">def keyPressEvent (self, event):
     
     i = event.key()
     s = event.text()
@@ -5352,7 +5328,7 @@ def delete(self):
         g.trace(repr(s), i, repr(mods))
     
 </t>
-<t tx="ekr.20211020082938.6">def move_down(self):
+  <t tx="ekr.20211020082938.6">def move_down(self):
     self.scroll_area.scrollContentsBy(0, -200)
 
 def move_left(self):
@@ -5364,34 +5340,34 @@ def move_right(self):
 def move_up(self):
     self.scroll_area.scrollContentsBy(0, 200)
 </t>
-<t tx="ekr.20211020082938.7">def move_to(self):
-    """Issue a prompt and move the file if the user agrees."""
+  <t tx="ekr.20211020082938.7">def move_to(self):
+    &quot;&quot;&quot;Issue a prompt and move the file if the user agrees.&quot;&quot;&quot;
     file_name = files_list[self.slide_number]
     path = QtWidgets.QFileDialog().getExistingDirectory()
     if path:
         new_path = os.path.join(path, os.path.basename(file_name))
         if os.path.exists(new_path):
             # result = g.app.guirunAskYesNoDialog
-            print("File exists:", new_path)
+            print(&quot;File exists:&quot;, new_path)
         else:
             pathlib.Path(file_name).rename(new_path)
             del files_list[self.slide_number]
             self.slide_number = max(0, self.slide_number - 1)
             self.next_slide()
 </t>
-<t tx="ekr.20211020082938.8">def next_slide(self):
+  <t tx="ekr.20211020082938.8">def next_slide(self):
     if self.slide_number + 1 &lt; len(files_list):
         self.slide_number += 1  # Don't wrap.
     self.scale = 1.0
     self.show_slide()
 </t>
-<t tx="ekr.20211020082938.9">def prev_slide(self):
+  <t tx="ekr.20211020082938.9">def prev_slide(self):
     if self.slide_number &gt; 0: # Don't wrap.
         self.slide_number -= 1
     self.scale = 1.0
     self.show_slide()
 </t>
-<t tx="ekr.20220319162442.1">g.cls()
+  <t tx="ekr.20220319162442.1">g.cls()
 
 # Monkey-patched git-diff-pr command.
 import leo.commands.editFileCommands as efc
@@ -5406,8 +5382,8 @@ x = efc.GitDiffController(c)
 x.make_diff_outlines = make_diff_outlines_ignoring_comments
 x.diff_two_revs(rev1, rev2)
 </t>
-<t tx="ekr.20220319162442.2">def make_diff_outlines_ignoring_comments(c1, c2, fn, rev1='', rev2=''):
-    """Create an outline-oriented diff from the *hidden* outlines c1 and c2."""
+  <t tx="ekr.20220319162442.2">def make_diff_outlines_ignoring_comments(c1, c2, fn, rev1='', rev2=''):
+    &quot;&quot;&quot;Create an outline-oriented diff from the *hidden* outlines c1 and c2.&quot;&quot;&quot;
     self = x
     added, deleted, changed = self.compute_dicts(c1, c2)
     table = (
@@ -5422,11 +5398,11 @@ x.diff_two_revs(rev1, rev2)
                 v2.b = strip_comments(v2.b)
         self.create_compare_node(c1, c2, d, kind, rev1, rev2)
 </t>
-<t tx="ekr.20220319162442.3">def strip_comments(aString):
-    """
+  <t tx="ekr.20220319162442.3">def strip_comments(aString):
+    &quot;&quot;&quot;
     Strip everything that looks like a comment from aString.
     It's fine, for now, to ignore strings and docstrings.
-    """
+    &quot;&quot;&quot;
     result = []
     lines = g.splitLines(aString)
     for s in lines:
@@ -5444,14 +5420,13 @@ x.diff_two_revs(rev1, rev2)
                     result.append(tail.rstrip() + '\n')
     return ''.join(result)
 </t>
-<t tx="ekr.20220927115543.1"></t>
-<t tx="ekr.20221105063835.1">"""
+  <t tx="ekr.20221105063835.1">&quot;&quot;&quot;
 script: Insert text-based macros in python code.
 
 - Add traces at start of each def.
 - Add traces at end of each def.
 - Add traces before each return.
-"""
+&quot;&quot;&quot;
 # This is prototype code. I have no plans to improve it.
 g.cls()
 import re
@@ -5463,7 +5438,7 @@ for p in target.self_and_subtree():
     add_macros(p)
 print('Done!')
 </t>
-<t tx="ekr.20221105063835.2">def_pat = re.compile(r'^def\s+(\w+)\(.*\).*:')
+  <t tx="ekr.20221105063835.2">def_pat = re.compile(r'^def\s+(\w+)\(.*\).*:')
 ret_pat = re.compile(r'^\s*return\b(.*)')
 
 def add_macros(p):
@@ -5488,7 +5463,7 @@ def add_macros(p):
             last_return = returns.pop()
             if not last_return:
                 indent_s = last_indent * ' '
-                result.append(f"{indent_s}g.trace('end {last_name}')\n")
+                result.append(f&quot;{indent_s}g.trace('end {last_name}')\n&quot;)
         def_m = def_pat.match(s)
         if def_m:
             # End any previous entry at this level.
@@ -5504,28 +5479,27 @@ def add_macros(p):
             last_indent = indent
             indent_s = (indent + 4) * ' '
             result.append(line)
-            result.append(f"{indent_s}g.trace('enter: {name}')\n")
+            result.append(f&quot;{indent_s}g.trace('enter: {name}')\n&quot;)
             continue
         ret_m = ret_pat.match(s)
         if ret_m:
             if indents:
                 if indents[-1] + 4 == indent:
                     returns[-1] = True
-                    # g.trace(f"Suppress end trace: {line!r}")
+                    # g.trace(f&quot;Suppress end trace: {line!r}&quot;)
                 val = ret_m.group(1).strip()
-                result.append(f"{indent_s}g.trace('return {val}')\n")
+                result.append(f&quot;{indent_s}g.trace('return {val}')\n&quot;)
             else:
-                result.append(f"### Line: {i} Return outside of def. {p.h}\n")
+                result.append(f&quot;### Line: {i} Return outside of def. {p.h}\n&quot;)
         result.append(line)
     if indents:
         indent_s = (indents[-1] + 4) * ' '
         name = names[-1]
         if not returns[-1]:
-            result.append(f"{indent_s}g.trace('end {name}')\n")
-    g.printObj(result, tag=f"{p.h}:")
+            result.append(f&quot;{indent_s}g.trace('end {name}')\n&quot;)
+    g.printObj(result, tag=f&quot;{p.h}:&quot;)
 </t>
-<t tx="ekr.20221105063835.3"></t>
-<t tx="ekr.20221105063835.4">def test_1():
+  <t tx="ekr.20221105063835.4">def test_1():
     return 'a'
     
 def test_2():
@@ -5537,13 +5511,13 @@ def test_3():
     else:
         return 2
 </t>
-<t tx="ekr.20221105063835.5">def spam():
-    print("spam")
+  <t tx="ekr.20221105063835.5">def spam():
+    print(&quot;spam&quot;)
 </t>
-<t tx="ekr.20221105063835.6">def eggs(a=None):
+  <t tx="ekr.20221105063835.6">def eggs(a=None):
     print('eggs')
 </t>
-<t tx="ekr.20230421070847.1">"""Replace default kwargs in all leo/modes files"""
+  <t tx="ekr.20230421070847.1">&quot;&quot;&quot;Replace default kwargs in all leo/modes files&quot;&quot;&quot;
 
 g.cls()
 import glob
@@ -5559,15 +5533,15 @@ bool_kwargs = (
 patterns = []
 for bool_arg in bool_kwargs:
     # Remove kwargs inited to False.
-    pattern1 = re.compile(fr"{bool_arg}=False,")
+    pattern1 = re.compile(fr&quot;{bool_arg}=False,&quot;)
     patterns.append((pattern1, ''))
-    pattern2 = re.compile(fr"{bool_arg}=False\)")
+    pattern2 = re.compile(fr&quot;{bool_arg}=False\)&quot;)
     patterns.append((pattern2, ')'))
 
 delegate_patterns = (
-    # Remove kwargs inited to "".
-    (re.compile(r'delegate="",'), ''),
-    (re.compile(r'delegate=""\)'), ')'),
+    # Remove kwargs inited to &quot;&quot;.
+    (re.compile(r'delegate=&quot;&quot;,'), ''),
+    (re.compile(r'delegate=&quot;&quot;\)'), ')'),
 )
 cleanup_patterns = [
     # Remove blank lines between trailing comma and ')'.
@@ -5575,8 +5549,8 @@ cleanup_patterns = [
 ]
 for bool_arg in bool_kwargs:
     # Remove blank lines between trailing comma and any bool kwarg.
-    pattern3 = re.compile(fr",[ ]*(\n[ ]*)*{bool_arg}")
-    cleanup_patterns.append((pattern3, fr",\n{' '*10}{bool_arg}"))   
+    pattern3 = re.compile(fr&quot;,[ ]*(\n[ ]*)*{bool_arg}&quot;)
+    cleanup_patterns.append((pattern3, fr&quot;,\n{' '*10}{bool_arg}&quot;))   
 
 for aTuple in delegate_patterns:
     patterns.append(aTuple)
@@ -5589,7 +5563,7 @@ exclude = (
     'javascript.py', 'julia.py', 'python.py',
 )
 modes = os.path.normpath(os.path.join(g.app.loadDir, '..', 'modes'))
-paths = glob.glob(f"{modes}{os.sep}*.py")
+paths = glob.glob(f&quot;{modes}{os.sep}*.py&quot;)
 paths = [z for z in paths if not any(z2 in z for z2 in exclude)]
 # g.printObj([g.shortFileName(z) for z in paths])
 
@@ -5605,10 +5579,10 @@ for path in paths:  ###
     if 0:
         g.printObj(lines, tag=path)
     if 0:
-        g.printObj(list(f"{i+660:3} {z}" for i, z in enumerate(lines[660:])))
+        g.printObj(list(f&quot;{i+660:3} {z}&quot; for i, z in enumerate(lines[660:])))
     if 0:
         contents = contents.replace('  ', ' ')
-        lines = [f"{i:3} {z}" for i, z in enumerate(g.splitLines(contents))
+        lines = [f&quot;{i:3} {z}&quot; for i, z in enumerate(g.splitLines(contents))
             if ('colorer.match' in z
                 or ',\n\n' in z
                 or any(z2 in z for z2 in bool_kwargs)
@@ -5618,7 +5592,7 @@ for path in paths:  ###
         f.write(contents)
 g.es_print('Done!')
 </t>
-<t tx="ekr.20230925012359.1">g.cls()
+  <t tx="ekr.20230925012359.1">g.cls()
 
 @others  # Define helpers
         
@@ -5629,7 +5603,7 @@ for group in range(5):
     n8 = group * 2
     n4 = compute_quarters(n8)
     print('')
-    print(f"===== Group {group + 1} =====: {n8} eighth notes, {n4} quarter notes...")
+    print(f&quot;===== Group {group + 1} =====: {n8} eighth notes, {n4} quarter notes...&quot;)
     print('')
 
     results = find_patterns(n8)
@@ -5644,47 +5618,47 @@ for group in range(5):
     total_jazz += len(jazz_patterns)
 
     print(
-        f"{len(results)} total rhythm{g.plural(len(results))}. "
-        f"{len(square_patterns)} square, {len(jazz_patterns)} jazz")
+        f&quot;{len(results)} total rhythm{g.plural(len(results))}. &quot;
+        f&quot;{len(square_patterns)} square, {len(jazz_patterns)} jazz&quot;)
 
     square_converted = [convert_pattern(z) for z in square_patterns]
     jazz_converted = [convert_pattern(z) for z in jazz_patterns]
 
     print('\nSquare:\n')
     for i, z in enumerate(square_converted):
-        print(f"{i + 1:2} {z!s}")
+        print(f&quot;{i + 1:2} {z!s}&quot;)
     
     if jazz_patterns:
         print('\nJazz:\n')
         for i, z in enumerate(jazz_converted):
-            print(f"{i + 1:2} {z!s}")
+            print(f&quot;{i + 1:2} {z!s}&quot;)
             
-print(f"\nGrand totals: {total} patterns, {total_square} square, {total_jazz} jazz")
+print(f&quot;\nGrand totals: {total} patterns, {total_square} square, {total_jazz} jazz&quot;)
 </t>
-<t tx="ekr.20230925012359.2">def compute_quarters(n8) -&gt; int:
-    """
+  <t tx="ekr.20230925012359.2">def compute_quarters(n8) -&gt; int:
+    &quot;&quot;&quot;
     Return the quarter notes in the measure containing the given number of
     eighth notes.
-    """
+    &quot;&quot;&quot;
     assert (n8 % 2) == 0, (n8, (n8 % 2))
     return int(4 - n8/2)
 </t>
-<t tx="ekr.20230925012359.3">def convert_pattern(pattern:str) -&gt; str:
-    """Convert a string of 1s and 0s to a string of dots and dashes"""
+  <t tx="ekr.20230925012359.3">def convert_pattern(pattern:str) -&gt; str:
+    &quot;&quot;&quot;Convert a string of 1s and 0s to a string of dots and dashes&quot;&quot;&quot;
     return pattern.replace('1', '.').replace('0', ' _')
 
 def convert_patterns(patterns: list[int]) -&gt; list[str]:
     return [convert_pattern(pattern) for pattern in patterns]
 </t>
-<t tx="ekr.20230925012359.4">def find_patterns(n8: int) -&gt; list[str]:
-    """
+  <t tx="ekr.20230925012359.4">def find_patterns(n8: int) -&gt; list[str]:
+    &quot;&quot;&quot;
     Given a desired number of eighth notes in a 4-beat bar, return the
     padded string representation of all the base-2 numbers (in descending
     order) representing rhythms contain the given number of eighth notes.
     
     As always in this program, 1s represent an eighth note, 0s represent
     quarter notes.
-    """
+    &quot;&quot;&quot;
     # Special case.
     if n8 == 0:
         return ['0000']
@@ -5707,10 +5681,10 @@ def convert_patterns(patterns: list[int]) -&gt; list[str]:
         n -= 1
     return results
 </t>
-<t tx="ekr.20230925012359.5">def is_square(s) -&gt; bool:
-    """
+  <t tx="ekr.20230925012359.5">def is_square(s) -&gt; bool:
+    &quot;&quot;&quot;
     Return True if s represents a square rhythm.
-    """
+    &quot;&quot;&quot;
     # Remove square patterns (0 or 11) from the left.
     # s represents a jazz pattern if the remainder ever contains 01.
     digits = list(s)
@@ -5725,12 +5699,11 @@ def convert_patterns(patterns: list[int]) -&gt; list[str]:
         digits = digits[2:]
     return True
 </t>
-<t tx="ekr.20230925012840.1"></t>
-<t tx="ekr.20231008041100.1">"""
+  <t tx="ekr.20231008041100.1">&quot;&quot;&quot;
 Convert a tree of nodes to a GitHub-formatted string.
 
 This script assumes only the top-level node contains @others.
-"""
+&quot;&quot;&quot;
 
 # Note: There is an @others in the docstring! That's why we must use guide lines!
 
@@ -5761,10 +5734,10 @@ print('Done')
 @language python
 @tabwidth -4
 </t>
-<t tx="ekr.20231008041100.2">def put_all_nodes(source_p, target_p):
-    """
+  <t tx="ekr.20231008041100.2">def put_all_nodes(source_p, target_p):
+    &quot;&quot;&quot;
     Put all nodes, expanding @others only in the top-level node.
-    """
+    &quot;&quot;&quot;
     # Leo note: guide lines contain no comments, strings or docstrings.
     #           Using guide lines prevents false matches of @others!
     lines = g.splitLines(source_p.b)
@@ -5772,7 +5745,7 @@ print('Done')
     assert len(lines) == len(guide_lines)
     target_lines = [
         '```python\n\n',
-        f"# {source_p.h}\n\n",
+        f&quot;# {source_p.h}\n\n&quot;,
     ]
     for i, line in enumerate(lines):
         guide_line = guide_lines[i]
@@ -5781,30 +5754,30 @@ print('Done')
             target_lines.append('\n')
             for child_p in source_p.subtree():
                 if child_p.h.strip().startswith('&lt;&lt;'):
-                    target_lines.append(f"# {child_p.h}\n")
+                    target_lines.append(f&quot;# {child_p.h}\n&quot;)
                 target_lines.extend(g.splitLines(child_p.b + '\n'))
     # Finish.
     target_lines.append('\n```\n')
     target_p.b = ''.join(target_lines)
 </t>
-<t tx="ekr.20231008041100.3"># Copied from leo.plugins.importers.python.
-string_pat1 = re.compile(r'([fFrR]*)("""|")')
-string_pat2 = re.compile(r"([fFrR]*)('''|')")
+  <t tx="ekr.20231008041100.3"># Copied from leo.plugins.importers.python.
+string_pat1 = re.compile(r'([fFrR]*)(&quot;&quot;&quot;|&quot;)')
+string_pat2 = re.compile(r&quot;([fFrR]*)('''|')&quot;)
 
 def delete_comments_and_strings(lines: list[str]) -&gt; list[str]:
-    """
+    &quot;&quot;&quot;
     Python_i.delete_comments_and_strings.
 
     This method handles f-strings properly.
-    """
+    &quot;&quot;&quot;
 
     def skip_string(delim: str, i: int, line: str) -&gt; tuple[str, int]:
-        """
+        &quot;&quot;&quot;
         Skip the remainder of a string.
 
         String ends:      return ('', i)
         String continues: return (delim, len(line))
-        """
+        &quot;&quot;&quot;
         if delim not in line:
             return delim, len(line)
         delim_pat = re.compile(delim)
@@ -5848,7 +5821,7 @@ def delete_comments_and_strings(lines: list[str]) -&gt; list[str]:
     assert len(result) == len(lines)  # A crucial invariant.
     return result
 </t>
-<t tx="ekr.20231217050920.1">@language rest
+  <t tx="ekr.20231217050920.1">@language rest
 @wrap
 
 Here's an example of how they can be used.
@@ -5862,8 +5835,8 @@ Now you can copy those image files to the images subdirectory.
 
 @language python
 </t>
-<t tx="ekr.20231217050920.2">@language python
-"""Open directory for a node, respecting any @path directives and "~"."""
+  <t tx="ekr.20231217050920.2">@language python
+&quot;&quot;&quot;Open directory for a node, respecting any @path directives and &quot;~&quot;.&quot;&quot;&quot;
 
 from pathlib import Path
 from subprocess import run
@@ -5883,10 +5856,10 @@ if direc:
     run([term, direc])
 
 else:
-    g.es(f"Path {direc} doesn't exist", color='red')
+    g.es(f&quot;Path {direc} doesn't exist&quot;, color='red')
 </t>
-<t tx="ekr.20231217050920.3">@language python
-"""Open command window at current directory. Expands "~"."""
+  <t tx="ekr.20231217050920.3">@language python
+&quot;&quot;&quot;Open command window at current directory. Expands &quot;~&quot;.&quot;&quot;&quot;
 
 from pathlib import Path
 from subprocess import run
@@ -5903,18 +5876,18 @@ else:
 if direc:
     normdir = str(direc.resolve())
     if g.isWindows:
-        cmd = f'start cmd.exe /K "cd {direc}"'
+        cmd = f'start cmd.exe /K &quot;cd {direc}&quot;'
         run(cmd, shell=True)
     else:
         cmd = 'x-terminal-emulator'
         run(cmd, cwd=direc)
 else:
-    g.es(f"Path {direc} doesn't exist", color='red')</t>
-<t tx="ekr.20231217050920.4">@language python
-"""Copy the effective path of the current node to the clipboard.
+    g.es(f&quot;Path {direc} doesn't exist&quot;, color='red')</t>
+  <t tx="ekr.20231217050920.4">@language python
+&quot;&quot;&quot;Copy the effective path of the current node to the clipboard.
 
 This command honors @path directives.
-"""
+&quot;&quot;&quot;
 from pathlib import Path
 
 pth = Path(c.fullPath(p))
@@ -5930,14 +5903,14 @@ if direc:
     normdir = str(direc.resolve())
     g.app.gui.replaceClipboardWith(normdir)
 else:
-    g.es(f"Path {direc} doesn't exist")
+    g.es(f&quot;Path {direc} doesn't exist&quot;)
 
 </t>
-<t tx="ekr.20241117081230.1">"""
+  <t tx="ekr.20241117081230.1">&quot;&quot;&quot;
 This script has been mostly obsoleted by TestSyntax.slow_test_all_mode_files.
 
 It summarizes the rules in mode files.
-"""
+&quot;&quot;&quot;
 
 g.cls()
 g.cls()
@@ -5962,7 +5935,7 @@ languages = (
     # '/xml.py',
 )
 mode_path = join(g.app.loadDir, '..', 'modes')
-paths = glob.glob(f"{mode_path}{os.sep}*.py")
+paths = glob.glob(f&quot;{mode_path}{os.sep}*.py&quot;)
 paths = [finalize(z) for z in paths if not z.startswith('__')]
 
 summary = set()
@@ -5972,16 +5945,16 @@ for path in paths:
 # Print the cumulative results.
 lines = sorted(list(summary))
 for i, s in enumerate(lines):
-    print(f"{i:2} {s.rstrip()}")
+    print(f&quot;{i:2} {s.rstrip()}&quot;)
 </t>
-<t tx="ekr.20241117081901.1">def scan(path: str, summary: set) -&gt; None:
+  <t tx="ekr.20241117081901.1">def scan(path: str, summary: set) -&gt; None:
     matchers: dict[str, set[str]] = {}
     fn = os.path.basename(path)
     with open(path, 'r') as f:
         contents = f.read()
     if 0:
         print('')
-        g.trace(f"contents: {len(contents):&gt;6} {fn} ")
+        g.trace(f&quot;contents: {len(contents):&gt;6} {fn} &quot;)
         print('')
     lines = g.splitLines(contents)
     for i, line in enumerate(lines):
@@ -6001,7 +5974,7 @@ for i, s in enumerate(lines):
                     # print(line)
                     summary.add(line)
 </t>
-<t tx="ekr.20241117082739.1"># matcher_pat = re.compile(r'return colorer\.(match_.*?)\s*\(')
+  <t tx="ekr.20241117082739.1"># matcher_pat = re.compile(r'return colorer\.(match_.*?)\s*\(')
 
 def scan_def(
     i: int,
@@ -6009,11 +5982,11 @@ def scan_def(
     lines: list[str],
     matchers: dict[str, set[str]],
 ) -&gt; None:
-    """
+    &quot;&quot;&quot;
     Print the definition starting at lines[i].
     
     Add all calls to matchers to the matchers_dict
-    """
+    &quot;&quot;&quot;
     show_line(i, lines[i])
     if 0:  # Brief
         i += 1
@@ -6026,23 +5999,23 @@ def scan_def(
             i += 1
         add_matcher(fn, i1, i, lines, matchers)
 </t>
-<t tx="ekr.20241117125038.1">def filter_line(line: str) -&gt; bool:
-    """
+  <t tx="ekr.20241117125038.1">def filter_line(line: str) -&gt; bool:
+    &quot;&quot;&quot;
     Return True if s is neither empty, nor a comment nor a dictionary
     entry.
-    """
+    &quot;&quot;&quot;
     s = line.strip()
     # This is mostly a hack, but it gets the job done.
     return s and not s.startswith((
-        '#', '"', "'", '}',
+        '#', '&quot;', &quot;'&quot;, '}',
         'importDict', 'rulesDict'
     ))
 </t>
-<t tx="ekr.20241117125039.1">def add_matcher(fn: str, i: int, j: int,
+  <t tx="ekr.20241117125039.1">def add_matcher(fn: str, i: int, j: int,
     lines: list[str],
     matchers: dict[str, set[str]],
 ) -&gt; None:
-    """Add matchers to the matchers dict"""
+    &quot;&quot;&quot;Add matchers to the matchers dict&quot;&quot;&quot;
     filtered_lines = [z for z in lines[i: j] if filter_line(z)]
     result_lines = [
         z.replace('\n', ' ').replace('  ', ' ').lstrip()
@@ -6056,17 +6029,17 @@ def scan_def(
     matchers [fn] = a_set
 
 </t>
-<t tx="ekr.20241117125039.2">trace = False
+  <t tx="ekr.20241117125039.2">trace = False
 
 def show_line(i: int, line: str) -&gt; None:
     if trace and filter_line(line):
-        print(f"{i:4}: {line.rstrip()}")</t>
-<t tx="ekr.20241117131431.1">def delete_strings(s: str) -&gt; str:
-    """
-    Replace all string kwargs by ""
-    """
+        print(f&quot;{i:4}: {line.rstrip()}&quot;)</t>
+  <t tx="ekr.20241117131431.1">def delete_strings(s: str) -&gt; str:
+    &quot;&quot;&quot;
+    Replace all string kwargs by &quot;&quot;
+    &quot;&quot;&quot;
     i, result = 0, s
-    has_r = '=r"' in s
+    has_r = '=r&quot;' in s
     trace = False and has_r
     if trace:
         g.trace('===== Entry', s)
@@ -6075,11 +6048,11 @@ def show_line(i: int, line: str) -&gt; None:
         if trace:
             g.trace('Loop:', i, len(result), result)
             g.trace('Loop: TAIL:', result[i:])   ###
-        for target in ('="', '=r"'):
+        for target in ('=&quot;', '=r&quot;'):
             i2 = result.find(target, i)
             if i2 &gt; -1:
                 i = i2
-                j = result.find('"', i2 + len(target))
+                j = result.find('&quot;', i2 + len(target))
                 break
         else:
             if trace:
@@ -6091,13 +6064,13 @@ def show_line(i: int, line: str) -&gt; None:
                 g.trace('Fail j', i, target, 'result', result)
                 print('')
             return result
-        if result[j + 1] == '"':
+        if result[j + 1] == '&quot;':
             j += 1
         if trace:
-            g.trace(f" FOUND: {i}:{j} target: {target:4} result: {result}")
+            g.trace(f&quot; FOUND: {i}:{j} target: {target:4} result: {result}&quot;)
             g.trace('DELETE:', result[i + len(target):j])
         result = result[:i + len(target)] + result[j:]
-        result = result.replace('r""', '""')
+        result = result.replace('r&quot;&quot;', '&quot;&quot;')
         i += len(target) + 1
         assert i &gt; progress
     if trace:
@@ -6105,11 +6078,11 @@ def show_line(i: int, line: str) -&gt; None:
         print('')
     return result
         </t>
-<t tx="ekr.20241117145426.1">def delete_cruft(s: str) -&gt; str:
-    """
+  <t tx="ekr.20241117145426.1">def delete_cruft(s: str) -&gt; str:
+    &quot;&quot;&quot;
     Return an empty string for lines that don't look like a real match.
     Otherwise, return cruft from the end.
-    """
+    &quot;&quot;&quot;
     if not s.startswith('return colorer.match_'):
         return ''
     if s.count('colorer.match') != 1:
@@ -6119,15 +6092,14 @@ def show_line(i: int, line: str) -&gt; None:
     i = s.find('(')
     j = s.find(')')
     return '' if j &lt;= i else s[:j+1]</t>
-<t tx="lkj.20190712002811.1"></t>
-<t tx="maphew.20190209160547.1">gnx: maphew.20130809155103.2863
+  <t tx="maphew.20190209160547.1">gnx: maphew.20130809155103.2863
 </t>
-<t tx="mhw.20181210131101.1">True (recommended):
-    Write "E" attribute bits in &lt;v&gt; elements.
+  <t tx="mhw.20181210131101.1">True (recommended):
+    Write &quot;E&quot; attribute bits in &lt;v&gt; elements.
     Leo outlines will record the expansion state of all nodes.
     
 False: (Good for files like unitTest.leo)
-    Suppress "E" attribute bits in &lt;v&gt; elements.
+    Suppress &quot;E&quot; attribute bits in &lt;v&gt; elements.
     Only the ancestors of the presently selected node will
     be expanded when Leo opens an outline.</t>
 </tnodes>

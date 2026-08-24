@@ -1,11 +1,11 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20241030151621.1: * @file ../modes/jupytext.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20241030151621.1] @f ../modes/jupytext.py
 """
 leo/modes/jupytext.py, Leo's colorizer for @language jupytext.
 """
 
-# @+<< jupytext.py: imports >>
-# @+node:ekr.20241031140333.1: ** << jupytext.py: imports >>
+#@+<< jupytext.py: imports >>
+#@> << jupytext.py: imports >>
 from __future__ import annotations
 
 from typing import Any
@@ -13,11 +13,11 @@ from typing import Any
 from leo.core import leoGlobals as g
 
 assert g
-# @-<< jupytext.py: imports >>
+#@-<< jupytext.py: imports >>
 
 
-# @+others  # Define rules.
-# @+node:ekr.20241105203501.1: ** jupytext_comment
+#@+others # Define rules.
+#@ jupytext_comment
 def jupytext_comment(colorer: Any, s: str, i: int) -> int:
     """
     Switch to md or python coloring if s is a %% comment, provided that
@@ -54,12 +54,12 @@ def jupytext_comment(colorer: Any, s: str, i: int) -> int:
     return n  # Succeed. Do not allow other matches.
 
 
-# @+node:ekr.20241105230332.1: ** jupytext_directive
+#@ jupytext_directive
 def jupytext_directive(colorer: Any, s: str, i: int) -> int:
     return colorer.match_leo_keywords(s, i)
 
 
-# @-others
+#@-others
 
 rulesDict1 = {
     "#": [jupytext_comment],
@@ -71,5 +71,5 @@ rulesDictDict = {
     "jupytext_main": rulesDict1,
 }
 
-# @@language python
-# @-leo
+#@@language python
+#@-leo

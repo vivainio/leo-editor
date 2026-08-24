@@ -1,12 +1,16 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20101110093449.5822: * @file ../plugins/mod_leo2ascd.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20101110093449.5822] @f ../plugins/mod_leo2ascd.py
 import re
 import os
 from leo.core import leoGlobals as g
 from leo.core import leoPlugins
 
-# @+<< patterns >>
-# @+node:ekr.20101110094152.5834: ** << patterns >> (mod_leo2ascd.py)
+#@+<< patterns >>
+#@-<< patterns >>
+
+
+#@+others
+#@> << patterns >> (mod_leo2ascd.py)
 # compile the patterns we'll be searching for frequently
 patternSectionName = re.compile(r"\<\< *(.+?) *\>\>")
 patternSectionDefinition = re.compile(r"(\<\< *)(.+?)( *\>\>)(=)")
@@ -23,11 +27,7 @@ patternAscDirectiveExit = re.compile(r"^@ascexit")
 patternAscDirectiveIgnore = re.compile(r"^@ascignore")
 patternAscDirectiveSkip = re.compile(r"^@ascskip")
 patternAscDirectiveSkipToggle = re.compile(r"^@ascskip\s*(\w+)+.*")
-# @-<< patterns >>
-
-
-# @+others
-# @+node:ekr.20140920145803.17999: ** init
+#@ init
 def init():
     """Return True if the plugin has loaded successfully."""
     leoPlugins.registerHandler(('new', 'menu2'), CreateAscMenu)
@@ -35,8 +35,8 @@ def init():
     return True
 
 
-# @+node:ekr.20140920145803.18000: ** Functions
-# @+node:ekr.20101110094152.5837: *3* CodeChunk
+#@ Functions
+#@> CodeChunk
 def CodeChunk(text, width=72):
     """Split a line of text into a list of chunks not longer
     than width."""
@@ -70,7 +70,7 @@ def CodeChunk(text, width=72):
     return chunkList
 
 
-# @+node:ekr.20101110094152.5847: *3* CreateAscMenu
+#@ CreateAscMenu
 def CreateAscMenu(tag, keywords):
     """Create the Outline to AsciiDoc menu item in the Export menu."""
     c = keywords.get('c')
@@ -86,7 +86,7 @@ def CreateAscMenu(tag, keywords):
     c.frame.menu.createMenuEntries(exportMenu, table)
 
 
-# @+node:ekr.20101110094152.5836: *3* GetAscFilename
+#@ GetAscFilename
 def GetAscFilename(c, p):
     'Checks a node for a filename directive.'
     # f is the Leo outline
@@ -107,7 +107,7 @@ def GetAscFilename(c, p):
     return ascFileName
 
 
-# @+node:ekr.20101110094152.5835: *3* SectionUnderline
+#@ SectionUnderline
 def SectionUnderline(h, level, v):
     'Return a section underline string.'
     asciiDocSectionLevels = int(Conf.current["asciiDocSectionLevels"])
@@ -124,7 +124,7 @@ def SectionUnderline(h, level, v):
     return str * max(len(h), 1)
 
 
-# @+node:ekr.20101110094152.5843: *3* WriteAll
+#@ WriteAll
 def WriteAll(c):
     p = c.rootPosition()
     while p:
@@ -136,7 +136,7 @@ def WriteAll(c):
             p.moveToThreadNext()
 
 
-# @+node:ekr.20101110094152.5845: *3* WriteAllRoots
+#@ WriteAllRoots
 def WriteAllRoots(c):
     "Writes @root directive and/or @ascfile directive to log pane."
     patternAscDirectiveFile = re.compile(r'^@ascfile')
@@ -159,7 +159,7 @@ def WriteAllRoots(c):
                 g.es('  ' + line)
 
 
-# @+node:ekr.20101110094152.5839: *3* WriteNode
+#@ WriteNode
 def WriteNode(v, startinglevel, ascFile):
     'Writes the contents of the node v to the ascFile.'
     containsAscIignore = None
@@ -295,7 +295,7 @@ def WriteNode(v, startinglevel, ascFile):
     return None
 
 
-# @+node:ekr.20101110094152.5838: *3* WriteTreeAsAsc
+#@ WriteTreeAsAsc
 def WriteTreeAsAsc(p, fn):
     'Writes the tree under p to the file ascFile'
     try:
@@ -318,7 +318,7 @@ def WriteTreeAsAsc(p, fn):
     g.es('wrote: %s' % fn)
 
 
-# @+node:ekr.20101110094152.5841: *3* WriteTreeOfCurrentNode (not used)
+#@ WriteTreeOfCurrentNode (not used)
 def WriteTreeOfCurrentNode(c):
     p = c.p
     while p:
@@ -333,28 +333,28 @@ def WriteTreeOfCurrentNode(c):
         WriteTreeAsAsc(p, ascFileN)
 
 
-# @+node:ekr.20101110094152.5824: ** class _AssignUniqueConstantValue
+#@< class _AssignUniqueConstantValue
 class _AssignUniqueConstantValue:
     """Provide unique value to be used as a constant"""
 
-    # @+others
-    # @+node:ekr.20101110094152.5825: *3* __init__
+    #@+others
+    #@> __init__
     def __init__(self):
         self.UniqueInternalValue = 0
         self.Assign_at_start()
 
-    # @+node:ekr.20101110094152.5826: *3* class ConstError
+    #@ class ConstError
     class ConstError(TypeError):
         pass
 
-    # @+node:ekr.20101110094152.5827: *3* __setattr__
+    #@ __setattr__
     def __setattr__(self, name, value):
         if name in self.__dict__:
             if name != "UniqueInternalValue":
                 raise self.ConstError("Can't rebind const(%s)" % name)
         self.__dict__[name] = value
 
-    # @+node:ekr.20101110094152.5828: *3* Assign_at_start
+    #@ Assign_at_start
     def Assign_at_start(self):
         self.END_PROGRAM = self.Next()  # signal abort
         self.LINE_WAS_NONE = self.Next()  # describe last line printed
@@ -365,24 +365,24 @@ class _AssignUniqueConstantValue:
         self.LINE_PENDING_CODE = self.Next()
         self.LINE_PENDING_DOC = self.Next()
 
-    # @+node:ekr.20101110094152.5829: *3* Next
+    #@ Next
     def Next(self):
         self.UniqueInternalValue += 1
         return self.UniqueInternalValue
 
-    # @-others
+    #@-others
 
 
 CV = _AssignUniqueConstantValue()
 CV.NODE_IGNORE = CV.Next()  # demo of adding in code
 
 
-# @+node:ekr.20101110094152.5830: ** class _ConfigOptions
+#@< class _ConfigOptions
 class _ConfigOptions:
     """Hold current configuration options."""
 
-    # @+others
-    # @+node:ekr.20101110094152.5831: *3* __init__
+    #@+others
+    #@> __init__
     def __init__(self):
         self.current = {}
         self.default = {}
@@ -394,7 +394,7 @@ class _ConfigOptions:
         self.default["asciiDocSectionLevels"] = '5'
         self.default["PrintHeadings"] = "on"
 
-    # @+node:ekr.20101110094152.5832: *3* __GetNodeOptions
+    #@ __GetNodeOptions
     def __GetNodeOptions(self, vnode):
         bodyString = vnode.bodyString()
         lines = bodyString.splitlines()
@@ -410,18 +410,18 @@ class _ConfigOptions:
                     g.es(vnode.headString())
                     g.es("  No such config option: %s" % name)
 
-    # @+node:ekr.20101110094152.5833: *3* GetCurrentOptions
+    #@ GetCurrentOptions
     def GetCurrentOptions(self, c, p):
         self.current.clear()
         self.current = self.default.copy()
         self.__GetNodeOptions(c.rootPosition())
         self.__GetNodeOptions(p)
 
-    # @-others
+    #@-others
 
 
 Conf = _ConfigOptions()
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

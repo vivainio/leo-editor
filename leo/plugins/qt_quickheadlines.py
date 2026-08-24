@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20140907123524.18777: * @file ../plugins/qt_quickheadlines.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20140907123524.18777] @f ../plugins/qt_quickheadlines.py
 """qt_quickheadlines plugin."""
 
 from __future__ import annotations
@@ -13,8 +13,8 @@ if TYPE_CHECKING:
 __qh = None  # For quick headlines.
 
 
-# @+others
-# @+node:ekr.20140907123524.18778: ** install_qt_quickheadlines_tab
+#@+others
+#@> install_qt_quickheadlines_tab
 def install_qt_quickheadlines_tab(c: Cmdr) -> None:
     global __qh
     __qh = QuickHeadlines(c)
@@ -23,7 +23,7 @@ def install_qt_quickheadlines_tab(c: Cmdr) -> None:
 g.insqh = install_qt_quickheadlines_tab
 
 
-# @+node:ekr.20110605121601.18534: ** class QuickHeadlines
+#@ class QuickHeadlines
 class QuickHeadlines:
     def __init__(self, c: Cmdr):
         self.c = c
@@ -49,8 +49,8 @@ class QuickHeadlines:
             self.listWidget.addItem(n.h)
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @@pagewidth 70
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@@pagewidth 70
+#@-leo

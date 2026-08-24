@@ -1,9 +1,9 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20210910084607.1: * @file ../unittests/plugins/test_gui.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20210910084607.1] @f ../unittests/plugins/test_gui.py
 """Tests of gui base classes"""
 
-# @+<< test_gui imports >>
-# @+node:ekr.20220911102700.1: ** << test_gui imports >>
+#@+<< test_gui imports >>
+#@> << test_gui imports >>
 import os
 import textwrap
 from leo.core import leoGlobals as g
@@ -23,17 +23,17 @@ try:
     from leo.core.leoGui import LeoKeyEvent
 except Exception:
     g.es_exception()
-# @-<< test_gui imports >>
+#@-<< test_gui imports >>
 
 
-# @+others
-# @+node:ekr.20210910084607.2: ** class TestNullGui(LeoUnitTest)
+#@+others
+#@ class TestNullGui(LeoUnitTest)
 class TestNullGui(LeoUnitTest):
     """Test cases for gui base classes."""
 
     # Note: the default setUpClass creates a null gui.
-    # @+others
-    # @+node:ekr.20210909194336.23: *3* TestNullGui.test_null_gui_ctors_for_all_dialogs
+    #@+others
+    #@> TestNullGui.test_null_gui_ctors_for_all_dialogs
     def test_null_gui_ctors_for_all_dialogs(self):
         c = self.c
         # Make sure the ctors don't crash.
@@ -45,7 +45,7 @@ class TestNullGui(LeoUnitTest):
         gui.runAskYesNoDialog(c, 'title', 'message')
         gui.runAskYesNoCancelDialog(c, 'title', 'message')
 
-    # @+node:ekr.20260405083949.1: *3* TestNullGui.test_annotations
+    #@ TestNullGui.test_annotations
     def test_annotations(self):
         # This test establishes Leo's null-gui annotations.
         c = self.c
@@ -70,15 +70,15 @@ class TestNullGui(LeoUnitTest):
         # for obj in (c.frame.body, c.frame.log, c.frame.statusLine):
         #     assert getattr(obj, 'wrapper', None), repr(obj)
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20210912064439.1: ** class TestQtGui(LeoUnitTest)
+#@< class TestQtGui(LeoUnitTest)
 class TestQtGui(LeoUnitTest):
     """Test cases for gui base classes."""
 
-    # @+others
-    # @+node:ekr.20231012085112.1: *3* TestQtGui.setUp and setUpClass
+    #@+others
+    #@> TestQtGui.setUp and setUpClass
     # Override LeoUnitTest setUpClass.
     @classmethod
     def setUpClass(cls):
@@ -90,7 +90,7 @@ class TestQtGui(LeoUnitTest):
         if not Qt:
             self.skipTest('import Qt failed')
 
-    # @+node:ekr.20210913120449.1: *3* TestQtGui.test_bug_2164
+    #@ TestQtGui.test_bug_2164
     def test_bug_2164(self):
         # show-invisibles crashes with PyQt6.
         c = self.c
@@ -101,7 +101,7 @@ class TestQtGui(LeoUnitTest):
         option = QtGui.QTextOption()
         assert hasattr(option.Flag, 'ShowTabsAndSpaces')
 
-    # @+node:ekr.20260423040149.1: *3* TestQtGui.test_bug_4626
+    #@ TestQtGui.test_bug_4626
     def test_bug_4626(self):
         # https://github.com/leo-editor/leo-editor/issues/4626
         self.skipTest('Can hang depending clipboard contents')
@@ -130,15 +130,15 @@ class TestQtGui(LeoUnitTest):
             k.keyboardQuit()
             assert s2 == s, (repr(s), repr(s2))
             # Part 3: Test Ctrl-C in all text widgets.
-            # @+<< Construct two Qt events >>
-            # @+node:ekr.20260426165432.1: *4* << Construct two Qt events >>
+            #@+<< Construct two Qt events >>
+            #@> << Construct two Qt events >>
             c_key = QtCore.Qt.Key.Key_C
             ctrl_mod = QtCore.Qt.KeyboardModifier.ControlModifier
             key_press_t = QtCore.QEvent.Type.KeyPress
             key_release_t = QtCore.QEvent.Type.KeyRelease
             key_press_event = QtGui.QKeyEvent(key_press_t, c_key, ctrl_mod, '')
             key_release_event = QtGui.QKeyEvent(key_release_t, c_key, ctrl_mod, '')
-            # @-<< Construct two Qt events >>
+            #@-<< Construct two Qt events >>
 
             def oops(why, w):
                 print(f"{why} {id(w)} {gui.widget_name(w)} {w.__class__.__name__}")
@@ -163,7 +163,7 @@ class TestQtGui(LeoUnitTest):
             gui.replaceClipboardWith(old_clipboard_contents)
             g.app.log = old_log
 
-    # @+node:ekr.20220411165627.1: *3* TestQtGui.test_put_html_links
+    #@< TestQtGui.test_put_html_links
     def test_put_html_links(self):
         c, p = self.c, self.c.p
         # Create a test outline.
@@ -211,7 +211,7 @@ class TestQtGui(LeoUnitTest):
             result = c.frame.log.put_html_links(s)
             self.assertEqual(result, expected, msg=repr(s))
 
-    # @+node:ekr.20220912093438.1: *3* TestQtGui.test_qt_attributes
+    #@ TestQtGui.test_qt_attributes
     def test_qt_attributes(self):
         # Various preliminary tests.
         c = self.c
@@ -231,7 +231,7 @@ class TestQtGui(LeoUnitTest):
                 f = getattr(c.frame.body.wrapper, method, None)
                 print(repr(f))
 
-    # @+node:ekr.20210912133358.1: *3* TestQtGui.test_qt_enums
+    #@ TestQtGui.test_qt_enums
     def test_qt_enums(self):
         # https://github.com/leo-editor/leo-editor/issues/1973 list of enums
 
@@ -251,8 +251,8 @@ class TestQtGui(LeoUnitTest):
         for ivar in table:
             assert hasattr(QtCore.Qt, ivar), repr(ivar)
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

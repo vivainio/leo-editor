@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:edream.110203113231.738: * @file ../plugins/trace_tags.py
+#@+leo-ver=cub-1-thin
+#@0 [edream.110203113231.738] @f ../plugins/trace_tags.py
 """Trace most common hooks, but not key, drag or idle hooks."""
 
 from leo.core import leoGlobals as g
@@ -7,8 +7,8 @@ from leo.core import leoGlobals as g
 tagCount = 0
 
 
-# @+others
-# @+node:ekr.20050303073056.1: ** init
+#@+others
+#@> init
 def init():
     """Return True if the plugin has loaded successfully."""
     ok = not g.unitTesting
@@ -18,7 +18,7 @@ def init():
     return ok
 
 
-# @+node:edream.110203113231.739: ** trace_tags (trace_tags.py)
+#@ trace_tags (trace_tags.py)
 def trace_tags(tag, keywords):
     global tagCount
     brief = True
@@ -64,7 +64,7 @@ def trace_tags(tag, keywords):
         g.pr('')
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

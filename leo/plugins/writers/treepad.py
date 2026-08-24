@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20180202053206.1: * @file ../plugins/writers/treepad.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20180202053206.1] @f ../plugins/writers/treepad.py
 """The @auto write code for TreePad (.hjt) files."""
 
 from leo.core import leoGlobals as g
@@ -7,13 +7,13 @@ from leo.core.leoNodes import Position
 from leo.plugins.writers import basewriter
 
 
-# @+others
-# @+node:ekr.20180202053206.2: ** class TreePad_Writer(BaseWriter)
+#@+others
+#@> class TreePad_Writer(BaseWriter)
 class TreePad_Writer(basewriter.BaseWriter):
     """The writer class for TreePad (.hjt) files."""
 
-    # @+others
-    # @+node:ekr.20180202053206.3: *3* treepad_w.write
+    #@+others
+    #@> treepad_w.write
     def write(self, root: Position) -> None:
         """Write the entire @auto tree."""
         self.put("<Treepad version 3.0>")
@@ -31,10 +31,10 @@ class TreePad_Writer(basewriter.BaseWriter):
             self.put('<end node> 5P9i0s8y19Z')
         root.setVisited()
 
-    # @-others
+    #@-others
 
 
-# @-others
+#@-others
 writer_dict = {
     '@auto': [],
     'class': TreePad_Writer,
@@ -42,6 +42,6 @@ writer_dict = {
         '.hjt',
     ],
 }
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@@language python
+#@@tabwidth -4
+#@-leo

@@ -1,7 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:EKR.20040517080049.4: * @file ../plugins/open_shell.py
-# @+<< docstring >>
-# @+node:ekr.20050111112200: ** << docstring >>
+#@+leo-ver=cub-1-thin
+#@0 [EKR.20040517080049.4] @f ../plugins/open_shell.py
+#@+<< docstring >>
+#@> << docstring >>
 """
 Creates an 'Extensions' menu containing two commands:
 Open Console Window and Open Explorer.
@@ -19,7 +19,7 @@ Current limitations:
 - On Linux, xterm must be in your path.
 
 """
-# @-<< docstring >>
+#@-<< docstring >>
 
 # Written by Ed Taekema.  Modified by EKR
 import os
@@ -37,8 +37,8 @@ else:
     pathToCmd = ''
 
 
-# @+others
-# @+node:ekr.20060107110126: ** init
+#@+others
+#@ init
 def init():
     """Return True if the plugin has loaded successfully."""
     # Ok for unit testing: creates a new menu.
@@ -47,7 +47,7 @@ def init():
     return True
 
 
-# @+node:ekr.20060107110126.1: ** onCreate
+#@ onCreate
 def onCreate(tag, keywords):
     c = keywords.get('c')
     if c:
@@ -55,14 +55,14 @@ def onCreate(tag, keywords):
         controller.load_menu()
 
 
-# @+node:ekr.20060107110126.2: ** class pluginController
+#@ class pluginController
 class pluginController:
-    # @+others
-    # @+node:ekr.20060107110126.3: *3* ctor
+    #@+others
+    #@> ctor
     def __init__(self, c):
         self.c = c
 
-    # @+node:EKR.20040517080049.6: *3* load_menu
+    #@ load_menu
     def load_menu(self):
         c = self.c
         if sys.platform == "win32":
@@ -77,21 +77,21 @@ class pluginController:
         c.frame.menu.createNewMenu("E&xtensions", "top")
         c.frame.menu.createMenuItemsFromTable("Extensions", table)
 
-    # @+node:EKR.20040517080049.7: *3* _getpath (open_shell.py)
+    #@ _getpath (open_shell.py)
     def _getpath(self, p):
         c = self.c
         path = c.fullPath(p)  # #1914
         # Use os.path.normpath to give system separators.
         return os.path.normpath(g.os_path_dirname(path))  # #1914
 
-    # @+node:EKR.20040517080049.8: *3* _getCurrentNodePath
+    #@ _getCurrentNodePath
     def _getCurrentNodePath(self):
         c = self.c
         p = c.p
         d = self._getpath(p)
         return d
 
-    # @+node:EKR.20040517080049.9: *3* launchCmd
+    #@ launchCmd
     def launchCmd(self, event=None):
         # global pathToCmd
 
@@ -99,14 +99,14 @@ class pluginController:
         myCmd = 'cd ' + d
         subprocess.Popen(['/k ', myCmd], executable=pathToCmd)
 
-    # @+node:EKR.20040517080049.10: *3* launchExplorer
+    #@ launchExplorer
     def launchExplorer(self, event=None):
         # global pathToExplorer
 
         d = self._getCurrentNodePath()
         subprocess.Popen([' ', d], executable=pathToExplorer)
 
-    # @+node:EKR.20040517080049.11: *3* launchxTerm
+    #@ launchxTerm
     def launchxTerm(self, event=None):
         d = self._getCurrentNodePath()
         curdir = os.getcwd()
@@ -114,11 +114,11 @@ class pluginController:
         subprocess.Popen(['-title Leo'], executable='xterm')
         os.chdir(curdir)
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
+#@-others
+#@@language python
+#@@tabwidth -4
 
-# @-leo
+#@-leo

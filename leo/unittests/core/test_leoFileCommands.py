@@ -1,16 +1,16 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20210910065135.1: * @file ../unittests/core/test_leoFileCommands.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20210910065135.1] @f ../unittests/core/test_leoFileCommands.py
 """Tests of leoFileCommands.py."""
 
 from leo.core import leoFileCommands
 from leo.core.leoTest2 import LeoUnitTest
 
 
-# @+others
-# @+node:ekr.20210910065135.2: ** class TestFileCommands (LeoUnitTest)
+#@+others
+#@> class TestFileCommands (LeoUnitTest)
 class TestFileCommands(LeoUnitTest):
-    # @+others
-    # @+node:ekr.20210909194336.24: *3* TestFileCommands.test_fc_resolveArchivedPosition
+    #@+others
+    #@> TestFileCommands.test_fc_resolveArchivedPosition
     def test_fc_resolveArchivedPosition(self):
         c, root = self.c, self.root_p
         root_v = root.v
@@ -49,7 +49,7 @@ class TestFileCommands(LeoUnitTest):
                 v2 = c.fileCommands.resolveArchivedPosition(archivedPosition, root_v)
                 self.assertEqual(v, v2)
 
-    # @+node:ekr.20210909194336.33: *3* TestFileCommands.test_p_archivedPosition
+    #@ TestFileCommands.test_p_archivedPosition
     def test_p_archivedPosition(self):
         p, root = self.c.p, self.root_p
         # Create the test tree. Headlines don't matter.
@@ -68,7 +68,7 @@ class TestFileCommands(LeoUnitTest):
             val = z.archivedPosition(root_p=p)
             self.assertEqual(val, [0, 1, i])
 
-    # @+node:ekr.20210909194336.38: *3* TestFileCommands.test_putDescendentVnodeUas
+    #@ TestFileCommands.test_putDescendentVnodeUas
     def test_putDescendentVnodeUas(self):
         c, root = self.c, self.root_p
         fc = c.fileCommands
@@ -83,9 +83,9 @@ class TestFileCommands(LeoUnitTest):
         s = fc.putDescendentVnodeUas(root)
         assert s.startswith(' descendentVnodeUnknownAttributes='), s
 
-    # @+node:ekr.20210909194336.39: *4* child
-    # @+node:ekr.20210909194336.40: *5* grandChild
-    # @+node:ekr.20210909194336.41: *3* TestFileCommands.test_putUa
+    #@> child
+    #@> grandChild
+    #@<2 TestFileCommands.test_putUa
     def test_putUa(self):
         c, p = self.c, self.c.p
         fc = c.fileCommands
@@ -94,7 +94,7 @@ class TestFileCommands(LeoUnitTest):
         expected = ' unit_test="58040000006162636471002e"'
         self.assertEqual(s, expected)
 
-    # @+node:ekr.20210905052021.32: *3* TestFileCommands.test_fast_readWithElementTree
+    #@ TestFileCommands.test_fast_readWithElementTree
     def test_fast_readWithElementTree(self):
         # Test that readWithElementTree strips all control characters except '\t\r\n'.
         c = self.c
@@ -104,8 +104,8 @@ class TestFileCommands(LeoUnitTest):
         s2 = s.translate(d)
         self.assertEqual(s2, 'ab\t\r\nc')
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

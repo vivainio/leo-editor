@@ -1,9 +1,9 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20210907081548.1: * @file ../unittests/plugins/test_plugins.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20210907081548.1] @f ../unittests/plugins/test_plugins.py
 """General tests of plugins."""
 
-# @+<< test_plugins: imports >>
-# @+node:ekr.20260802082604.1: ** << test_plugins: imports >>
+#@+<< test_plugins: imports >>
+#@> << test_plugins: imports >>
 import glob
 import os
 import re
@@ -11,16 +11,16 @@ from leo.core import leoGlobals as g
 from leo.core.leoPlugins import LeoPluginsController
 from leo.core.leoTest2 import LeoUnitTest
 from leo.plugins import indented_languages
-# @-<< test_plugins: imports >>
+#@-<< test_plugins: imports >>
 
 
-# @+others
-# @+node:ekr.20210907082556.1: ** class TestPlugins(LeoUnitTest)
+#@+others
+#@ class TestPlugins(LeoUnitTest)
 class TestPlugins(LeoUnitTest):
     """General tests of plugins."""
 
-    # @+others
-    # @+node:ekr.20210909165100.1: *3*  TestPlugin.check_syntax
+    #@+others
+    #@>  TestPlugin.check_syntax
     def check_syntax(self, filename):  # pylint: disable=inconsistent-return-statements
         with open(filename, 'rb') as f:
             contents = f.read()
@@ -35,7 +35,7 @@ class TestPlugins(LeoUnitTest):
         except Exception:  # pragma: no cover
             self.fail(f"unexpected error in: {filename}")
 
-    # @+node:ekr.20210907082746.1: *3*  TestPlugins.get_plugins
+    #@  TestPlugins.get_plugins
     def get_plugins(self):
         """Return a list of all plugins *without* importing them."""
         excludes = (
@@ -73,7 +73,7 @@ class TestPlugins(LeoUnitTest):
         files = [g.os_path_abspath(z) for z in files]
         return sorted(files)
 
-    # @+node:ekr.20210909165720.1: *3* TestPlugins.slow_test_import_all_plugins
+    #@ TestPlugins.slow_test_import_all_plugins
     def slow_test_import_of_all_plugins(self):  # pragma: no cover
         # This works, but is slow.
         files = self.get_plugins()
@@ -88,7 +88,7 @@ class TestPlugins(LeoUnitTest):
             except ImportError:
                 pass
 
-    # @+node:ekr.20210907081455.2: *3* TestPlugins.test_all_plugins_have_top_level_init_method
+    #@ TestPlugins.test_all_plugins_have_top_level_init_method
     def test_all_plugins_have_top_level_init_method(self):
         # Ensure all plugins have top-level init method *without* importing them.
         files = self.get_plugins()
@@ -98,7 +98,7 @@ class TestPlugins(LeoUnitTest):
             s = g.toUnicode(contents)
             assert 'def init()' in s, repr(fn)
 
-    # @+node:ekr.20210909161328.2: *3* TestPlugins.test_c_vnode2position
+    #@ TestPlugins.test_c_vnode2position
     def test_c_vnode2position(self):
         c = self.c
         for p in c.all_positions():
@@ -108,7 +108,7 @@ class TestPlugins(LeoUnitTest):
             self.assertEqual(p2.v, p.v)
             assert c.positionExists(p2), 'does not exist: %s' % p2
 
-    # @+node:ekr.20210909194336.57: *3* TestPlugins.test_regularizeName
+    #@ TestPlugins.test_regularizeName
     def test_regularizeName(self):
         pc = LeoPluginsController()
         table = (
@@ -124,13 +124,13 @@ class TestPlugins(LeoUnitTest):
             result2 = pc.regularizeName(result)
             assert result2 == result
 
-    # @+node:ekr.20210909161328.4: *3* TestPlugins.test_syntax_of_all_plugins
+    #@ TestPlugins.test_syntax_of_all_plugins
     def test_syntax_of_all_plugins(self):
         files = self.get_plugins()
         for filename in files:
             self.check_syntax(filename)
 
-    # @+node:ekr.20210907081455.3: *3* TestPlugins.test_all_qt_plugins_call_g_assertUi_qt_
+    #@ TestPlugins.test_all_qt_plugins_call_g_assertUi_qt_
     def test_all_qt_plugins_call_g_assertUi_qt_(self):
         files = self.get_plugins()
         excludes = (
@@ -153,20 +153,20 @@ class TestPlugins(LeoUnitTest):
                 continue
             self.assertTrue(re.search(r"g\.assertUi\(['\"]qt['\"]\)", s), msg=fn)
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20230917015008.1: ** class TestIndentedTypescript(LeoUnitTest)
+#@< class TestIndentedTypescript(LeoUnitTest)
 class TestIndentedTypeScript(LeoUnitTest):
     """Tests for typescript-related code in the indented_languages plugin."""
 
-    # @+others
-    # @+node:ekr.20230919025755.1: *3* test_its.test_typescript
+    #@+others
+    #@> test_its.test_typescript
     def test_typescript(self):
         c, p = self.c, self.c.p
 
-        # @+<< define contents: test_typescript >>
-        # @+node:ekr.20231022133716.1: *4* << define contents: test_typescript >>
+        #@+<< define contents: test_typescript >>
+        #@> << define contents: test_typescript >>
         # Snippets from indented_typescript_test.ts.
 
         # Contains "over-indented" parenthesized lines, a good test for check_indentation.
@@ -207,7 +207,7 @@ class TestIndentedTypeScript(LeoUnitTest):
             }
             """
         )
-        # @-<< define contents: test_typescript >>
+        #@-<< define contents: test_typescript >>
 
         # Set p.h and p.b.
         unittest_dir = os.path.dirname(__file__)
@@ -229,15 +229,15 @@ class TestIndentedTypeScript(LeoUnitTest):
             root = top_node.firstChild()
             g.printObj(g.splitLines(root.b), tag=root.h)
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20231025174626.1: ** class TestIndentedLisp(LeoUnitTest)
+#@<2 class TestIndentedLisp(LeoUnitTest)
 class TestIndentedLisp(LeoUnitTest):
     """Tests for lisp-related code in the indented_languages plugin."""
 
-    # @+others
-    # @+node:ekr.20231025174704.1: *3* test_ilisp.test_lisp_reduce_fraction
+    #@+others
+    #@> test_ilisp.test_lisp_reduce_fraction
     def test_lisp_reduce_fraction(self):
         c, p = self.c, self.c.p
         contents = """
@@ -271,8 +271,8 @@ class TestIndentedLisp(LeoUnitTest):
             print('')
             print(p.b)
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

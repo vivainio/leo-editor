@@ -1,8 +1,8 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20101110092851.5742: * @file ../plugins/leoOPML.py
-# @+<< docstring >>
-# @+node:ekr.20060904103412.1: ** << docstring >>
-# @@language rest
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20101110092851.5742] @f ../plugins/leoOPML.py
+#@+<< docstring >>
+#@> << docstring >>
+#@@language rest
 
 r"""A plugin to read and write Leo outlines in .opml
 (http://en.wikipedia.org/wiki/OPML) format.
@@ -68,11 +68,11 @@ If True, when expanding as above, skip blank dict entries.
 
 """
 
-# @-<< docstring >>
+#@-<< docstring >>
 # 2014/10/21: support Android outliner by treating _note attributes as body text.
 # To do: read/write uA's.
-# @+<< imports >>
-# @+node:ekr.20060904103412.3: ** << imports >>
+#@+<< imports >>
+#@ << imports >>
 import io
 from typing import Any, cast
 import xml.sax
@@ -84,14 +84,14 @@ from leo.core import leoPlugins
 # Abbreviations.
 StringIO = io.StringIO
 BytesIO = io.BytesIO
-# @-<< imports >>
+#@-<< imports >>
 # For traces.
 printElements: list[str] = []  # ['all','outline','head','body',]
 
 
-# @+others
-# @+node:ekr.20060904132527.9: ** Module level
-# @+node:ekr.20060904103412.4: *3* init
+#@+others
+#@ Module level
+#@> init
 def init():
     """Return True if the plugin has loaded successfully."""
     leoPlugins.registerHandler(('open2', 'new'), onCreate)
@@ -99,14 +99,14 @@ def init():
     return True
 
 
-# @+node:ekr.20060904103412.5: *3* onCreate
+#@ onCreate
 def onCreate(tag, keys):
     c = keys.get('c')
     if c:
         c.opmlController = OpmlController(c)
 
 
-# @+node:ekr.20060904141220: ** class NodeClass
+#@< class NodeClass
 class NodeClass:
     """
     A class representing one outline element.
@@ -114,8 +114,8 @@ class NodeClass:
     Use getters to access the attributes, properties and rules of this mode.
     """
 
-    # @+others
-    # @+node:ekr.20060904141220.1: *3*  node.__init__
+    #@+others
+    #@>  node.__init__
     def __init__(self):
         self.attributes = {}
         self.bodyString = ''
@@ -123,13 +123,13 @@ class NodeClass:
         self.children = []
         self.gnx = None
 
-    # @+node:ekr.20060904141220.2: *3*  node.__str__ & __repr__
+    #@  node.__str__ & __repr__
     def __str__(self):
         return '<node: %s>' % self.headString
 
     __repr__ = __str__
 
-    # @+node:ekr.20060913220507: *3* dump
+    #@ dump
     def dump(self):
         print('\nnode: %s: %s' % (self.gnx, self.headString))
         if self.children:
@@ -141,15 +141,15 @@ class NodeClass:
             print('children:[]')
         print('attrs: %s' % self.attributes.values())
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20060904103412.6: ** class OpmlController
+#@< class OpmlController
 class OpmlController:
     """The controller class for this plugin."""
 
-    # @+others
-    # @+node:ekr.20060904103412.7: *3* oc.__init__& reloadSettings
+    #@+others
+    #@> oc.__init__& reloadSettings
     def __init__(self, c):
         """Ctor for OpmlController class."""
         self.c = c
@@ -167,7 +167,7 @@ class OpmlController:
         # self.opml_read_derived_files = c.config.getBool('opml-read-derived-files')
         self.opml_write_derived_files = c.config.getBool('opml-write-derived-files')
 
-    # @+node:ekr.20060914163456: *3* oc.createVnodes & helpers
+    #@ oc.createVnodes & helpers
     def createVnodes(self, c, dummyRoot):
         """**Important**: this method and its helpers are low-level code
         corresponding to link/unlink methods in leoNodes.py.
@@ -179,7 +179,7 @@ class OpmlController:
         assert c.hiddenRootNode.children == children
         return children
 
-    # @+node:ekr.20060914171659.2: *4* oc.createChildren
+    #@> oc.createChildren
     # node is a NodeClass object, parent_v is a VNode.
 
     def createChildren(self, c, node, parent_v):
@@ -196,7 +196,7 @@ class OpmlController:
             child.parents.append(parent_v)
         return children
 
-    # @+node:ekr.20060914171659.1: *4* oc.createVnode & helpers
+    #@ oc.createVnode & helpers
     def createVnode(self, c, node, v=None):
         if not v:
             v = leoNodes.VNode(context=c)
@@ -208,7 +208,7 @@ class OpmlController:
         self.handleVnodeAttributes(node, v)
         return v
 
-    # @+node:ekr.20060917213611: *5* oc.handleVnodeAttributes
+    #@> oc.handleVnodeAttributes
     def handleVnodeAttributes(self, node, v):
         a = node.attributes.get('leo:a')
         if a:
@@ -221,14 +221,14 @@ class OpmlController:
             if 'V' in a:
                 self.currentVnode = v
 
-    # @+node:ekr.20060913220707: *3* oc.dumpTree
+    #@<2 oc.dumpTree
     def dumpTree(self, root, dummy=True):
         if not dummy:
             root.dump()
         for child in root.children:
             self.dumpTree(child, dummy=False)
 
-    # @+node:ekr.20111003220434.15488: *3* oc.parse_opml_file & helper
+    #@ oc.parse_opml_file & helper
     def parse_opml_file(self, fn):
         c = self.c
         if not fn or not fn.endswith('.opml'):
@@ -262,7 +262,7 @@ class OpmlController:
             sax_node = None
         return sax_node
 
-    # @+node:ekr.20111003220434.15490: *4* oc.cleanSaxInputString
+    #@> oc.cleanSaxInputString
     def cleanSaxInputString(self, s):
         """Clean control characters from s.
         s may be a bytes or a (unicode) string."""
@@ -278,13 +278,13 @@ class OpmlController:
         transtable = bytes.maketrans(flatten_b, pad_b)
         return s.translate(transtable)
 
-    # @+node:ekr.20141020112451.18342: *3* oc.putToOPML
+    #@< oc.putToOPML
     def putToOPML(self, owner):
         """
         Write the c.p as OPML, using the owner's put method."""
         PutToOPML(owner)
 
-    # @+node:ekr.20060904103721: *3* oc.readFile & helper
+    #@ oc.readFile & helper
     def readFile(self, fileName):
         """Read the opml file."""
         dumpTree = False
@@ -312,7 +312,7 @@ class OpmlController:
         c.redraw()
         return c  # for testing.
 
-    # @+node:ekr.20060917214140: *4* oc.setCurrentPosition
+    #@> oc.setCurrentPosition
     def setCurrentPosition(self, c):
         v = self.currentVnode
         if not v:
@@ -322,7 +322,7 @@ class OpmlController:
                 c.selectPosition(p)
                 break
 
-    # @+node:ekr.20060919201810: *3* oc.readOpmlCommand
+    #@< oc.readOpmlCommand
     def readOpmlCommand(self, event=None):
         """Open a Leo window containing the contents of an .opml file."""
         c = self.c
@@ -337,7 +337,7 @@ class OpmlController:
         else:
             c.bodyWantsFocus()
 
-    # @+node:ekr.20060904103721.1: *3* oc.writeFile
+    #@ oc.writeFile
     def writeFile(self, fileName):
         """Write fileName as an OPML file."""
         if not fileName:
@@ -350,7 +350,7 @@ class OpmlController:
         else:
             g.es_print('did not write %s' % fileName)
 
-    # @+node:ekr.20060919201330: *3* oc.writeOpmlCommand
+    #@ oc.writeOpmlCommand
     def writeOpmlCommand(self, event=None):
         """Save a Leo outline to an OPMLfile."""
         c = self.c
@@ -371,10 +371,10 @@ class OpmlController:
             fileName = g.ensure_extension(fileName, ".opml")
             c.opmlCommands.writeFile(fileName)
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20060919172012.2: ** class PutToOPML
+#@< class PutToOPML
 class PutToOPML:
     """Write c.p's tree as OPML, using the owner's put method."""
 
@@ -388,8 +388,8 @@ class PutToOPML:
     def put(self, s):
         return self.owner.put(s)
 
-    # @+others
-    # @+node:ekr.20141020112451.18340: *3* initConfig
+    #@+others
+    #@> initConfig
     def initConfig(self):
         """Init all configuration settings."""
         c = self.c
@@ -417,7 +417,7 @@ class PutToOPML:
                 g.trace(ivar, val)
                 setattr(self, ivar, val)
 
-    # @+node:ekr.20141020112451.18337: *3* putAll
+    #@ putAll
     def putAll(self):
         """
         Put the selected outline as OPML.
@@ -430,13 +430,13 @@ class PutToOPML:
         self.putOPMLNodes()
         self.putOPMLPostlog()
 
-    # @+node:ekr.20060919172012.3: *3* putOPMLProlog
+    #@ putOPMLProlog
     def putOPMLProlog(self):
         s = self.c.config.getString('opml-namespace') or 'leo:com:leo-opml'
         ver = self.c.config.getString('opml-version') or '2.0'
         self.put('<opml version="%s" xmlns:leo="%s">' % (ver, s))
 
-    # @+node:ekr.20060919172012.4: *3* putOPMLHeader
+    #@ putOPMLHeader
     # The <head> element may include any of these optional elements:
     # title, dateCreated, dateModified, ownerName, ownerEmail, expansionState,
     # vertScrollState, windowTop, windowLeft, windowBottom, windowRight.
@@ -477,7 +477,7 @@ class PutToOPML:
         self.put(f'\n{indent}<windowRight>{right}</windowRight>')
         self.put('\n</head>')
 
-    # @+node:ekr.20060919172012.5: *3* putOPMLNodes
+    #@ putOPMLNodes
     def putOPMLNodes(self):
         c = self.c
         root = c.rootPosition()
@@ -486,7 +486,7 @@ class PutToOPML:
             self.putOPMLNode(p)
         self.put('\n</body>')
 
-    # @+node:ekr.20060919172012.6: *3* putOPMLNode
+    #@ putOPMLNode
     def putOPMLNode(self, p):
         indent = ''
         body = p.bodyString() or ''
@@ -529,7 +529,7 @@ class PutToOPML:
         else:
             self.put(' />')
 
-    # @+node:ekr.20060919172012.7: *4* attributeEscape
+    #@> attributeEscape
     def attributeEscape(self, s):
         # Unlike xml.sax.saxutils.escape, replace " by &quot; and replace newlines by character reference.
         s = s or ''
@@ -541,7 +541,7 @@ class PutToOPML:
             .replace('\n', '&#10;\n')
         )
 
-    # @+node:ekr.20060919172012.8: *4* aAttributes
+    #@ aAttributes
     def aAttributes(self, p):
         c = self.c
         attr = []
@@ -553,7 +553,7 @@ class PutToOPML:
             attr.append('V')
         return ''.join(attr)
 
-    # @+node:tbrown.20061004094757: *4* uAAttributes
+    #@ uAAttributes
     def uAAttributes(self, p):
         """write unknownAttributes with various levels of expansion"""
         data = {}
@@ -571,11 +571,11 @@ class PutToOPML:
                     data['leo:ua_' + uak] = self.attributeEscape(str(uav))
         return data
 
-    # @+node:ekr.20060919172012.11: *3* putOPMLPostlog
+    #@< putOPMLPostlog
     def putOPMLPostlog(self):
         self.put('\n</opml>\n')
 
-    # @+node:ekr.20141020112451.18339: *3* putXMLLine
+    #@ putXMLLine
     def putXMLLine(self):
         """Put the **properly encoded** <?xml> element."""
         self.put(
@@ -583,15 +583,15 @@ class PutToOPML:
             % (g.app.prolog_prefix_string, self.leo_file_encoding, g.app.prolog_postfix_string)
         )
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20060904134958.164: ** class SaxContentHandler (XMLGenerator)
+#@< class SaxContentHandler (XMLGenerator)
 class SaxContentHandler(xml.sax.saxutils.XMLGenerator):
     """A sax content handler class that reads OPML files."""
 
-    # @+others
-    # @+node:ekr.20060904134958.165: *3*  __init__ & helper
+    #@+others
+    #@>  __init__ & helper
     def __init__(self, c, inputFileName):
         """Ctor for SaxContentHandler class (OMPL plugin)."""
         self.c = c
@@ -607,7 +607,7 @@ class SaxContentHandler(xml.sax.saxutils.XMLGenerator):
         self.nodeStack = []
         self.rootNode = None
 
-    # @+node:ekr.20060917185525: *4* define_disptatch_dict
+    #@> define_disptatch_dict
     def define_dispatch_dict(self):
         # There is no need for an 'end' method if all info is carried in attributes.
         # Keys are **elements**.
@@ -621,8 +621,8 @@ class SaxContentHandler(xml.sax.saxutils.XMLGenerator):
         }
         return d
 
-    # @+node:ekr.20060904134958.166: *3* helpers
-    # @+node:ekr.20060904134958.167: *4* attrsToList
+    #@< helpers
+    #@> attrsToList
     def attrsToList(self, attrs):
         """
         Convert the attributes to a list of g.Bunches.
@@ -630,16 +630,16 @@ class SaxContentHandler(xml.sax.saxutils.XMLGenerator):
         """
         return [g.Bunch(name=name, val=attrs.getValue(name)) for name in attrs.getNames()]
 
-    # @+node:ekr.20060904134958.170: *4* error
+    #@ error
     def error(self, message):
         print('\n\nXML error: %s\n' % (message))
         self.errors += 1
 
-    # @+node:ekr.20060917185525.1: *4* inElement
+    #@ inElement
     def inElement(self, name):
         return self.elementStack and name in self.elementStack
 
-    # @+node:ekr.20060904134958.171: *4* printStartElement & helpers
+    #@ printStartElement & helpers
     def printStartElement(self, name, attrs):
         indent = '\t' * self.level or ''
         if attrs.getLength() > 0:
@@ -655,7 +655,7 @@ class SaxContentHandler(xml.sax.saxutils.XMLGenerator):
         ]:
             print('')
 
-    # @+node:ekr.20060904134958.168: *5* attrsToString
+    #@> attrsToString
     def attrsToString(self, attrs, sep='\n'):
         """Convert the attributes to a string.
 
@@ -665,12 +665,12 @@ class SaxContentHandler(xml.sax.saxutils.XMLGenerator):
         result = ['%s="%s"' % (bunch.name, bunch.val) for bunch in self.attrsToList(attrs)]
         return sep.join(result)
 
-    # @+node:ekr.20060904134958.169: *5* clean
+    #@ clean
     def clean(self, s):
         return g.toEncodedString(s, "ascii")
 
-    # @+node:ekr.20060904134958.174: *3*  Do nothing...
-    # @+node:ekr.20060904134958.175: *4* other methods
+    #@<2  Do nothing...
+    #@> other methods
     def ignorableWhitespace(self, content):
         g.trace()
 
@@ -686,15 +686,15 @@ class SaxContentHandler(xml.sax.saxutils.XMLGenerator):
     def endElementNS(self, name, qname):
         g.trace(name)
 
-    # @+node:ekr.20060904134958.176: *4* endDocument
+    #@ endDocument
     def endDocument(self):
         pass
 
-    # @+node:ekr.20060904134958.177: *4* startDocument
+    #@ startDocument
     def startDocument(self):
         pass
 
-    # @+node:ekr.20060904134958.178: *3* characters
+    #@< characters
     def characters(self, content):
         name = self.elementStack[-1].lower() if self.elementStack else '<no element name>'
         # Opml elements should not have content: everything is carried in attributes.
@@ -707,7 +707,7 @@ class SaxContentHandler(xml.sax.saxutils.XMLGenerator):
             if content.strip():
                 print('content:', name, repr(content))
 
-    # @+node:ekr.20060904134958.179: *3* endElement & helpers
+    #@ endElement & helpers
     def endElement(self, name):
         name = name.lower()
         if name in printElements or 'all' in printElements:
@@ -723,19 +723,19 @@ class SaxContentHandler(xml.sax.saxutils.XMLGenerator):
         name2 = self.elementStack.pop()
         assert name == name2
 
-    # @+node:ekr.20060919193501: *4* endBodyText
+    #@> endBodyText
     def endBodyText(self):
         """End a <leo:body> element."""
         if self.content:
             cast(Any, self.node).bodyString = ''.join(self.content)
         self.content = []
 
-    # @+node:ekr.20060917185948: *4* endOutline
+    #@ endOutline
     def endOutline(self):
         self.level -= 1
         self.node = self.nodeStack.pop()
 
-    # @+node:ekr.20060904134958.180: *3* startElement & helpers
+    #@< startElement & helpers
     def startElement(self, name, attrs):
         name = name.lower()
         if name in printElements or 'all' in printElements:
@@ -749,22 +749,22 @@ class SaxContentHandler(xml.sax.saxutils.XMLGenerator):
             if func:
                 func(attrs)
 
-    # @+node:ekr.20060919193501.1: *4* startBodyText
+    #@> startBodyText
     def startBodyText(self, attrs):
         """Start a <leo:body> element."""
         self.content = []
 
-    # @+node:ekr.20060922072852: *4* startHead
+    #@ startHead
     def startHead(self, attrs):
         if not self.inElement('opml'):
             self.error('<head> outside <opml>')
         self.doHeadAttributes(attrs)
 
-    # @+node:ekr.20060922072852.1: *5* doHeadAttributes
+    #@> doHeadAttributes
     def doHeadAttributes(self, attrs):
         pass
 
-    # @+node:ekr.20060917190349: *4* startOutline (leoOpml)
+    #@< startOutline (leoOpml)
     def startOutline(self, attrs):
         if self.inElement('head'):
             self.error('<outline> inside <head>')
@@ -781,7 +781,7 @@ class SaxContentHandler(xml.sax.saxutils.XMLGenerator):
         self.doOutlineAttributes(attrs)
         self.nodeStack.append(parent)
 
-    # @+node:ekr.20060904141220.34: *5* doOutlineAttributes
+    #@> doOutlineAttributes
     def doOutlineAttributes(self, attrs):
         node = cast(Any, self.node)
         for bunch in self.attrsToList(attrs):
@@ -796,13 +796,13 @@ class SaxContentHandler(xml.sax.saxutils.XMLGenerator):
             else:
                 node.attributes[name] = val
 
-    # @+node:ekr.20060922071010: *4* startWinPos
+    #@< startWinPos
     def startWinPos(self, attrs):
         if not self.inElement('head'):
             self.error('<leo:global_window_position> outside <body>')
         self.doGlobalWindowAttributes(attrs)
 
-    # @+node:ekr.20060922071010.1: *5* doGlobalWindowAttributes
+    #@> doGlobalWindowAttributes
     def doGlobalWindowAttributes(self, attrs):
         c = self.c
         top = 50
@@ -828,15 +828,15 @@ class SaxContentHandler(xml.sax.saxutils.XMLGenerator):
         c.frame.lift()
         c.frame.update()
 
-    # @+node:ekr.20060904134958.183: *3* getNode
+    #@<2 getNode
     def getNode(self):
         return self.rootNode
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @@pagewidth 80
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@@pagewidth 80
+#@-leo

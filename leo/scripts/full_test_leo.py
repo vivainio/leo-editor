@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20240323051724.1: * @file ../scripts/full_test_leo.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20240323051724.1] @f ../scripts/full_test_leo.py
 """
 full_test_leo.py: Run all these tests scripts in this order:
 
@@ -42,4 +42,4 @@ for command in [
     rf'{python} -m leo.scripts.ty_leo',
 ]:
     subprocess.run(command, shell=True, check=False)
-# @-leo
+#@-leo

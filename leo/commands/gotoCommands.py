@@ -1,9 +1,9 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20150624112334.1: * @file ../commands/gotoCommands.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20150624112334.1] @f ../commands/gotoCommands.py
 """Leo's goto commands."""
 
-# @+<< gotoCommands imports & annotations >>
-# @+node:ekr.20220827065126.1: ** << gotoCommands imports & annotations >>
+#@+<< gotoCommands imports & annotations >>
+#@> << gotoCommands imports & annotations >>
 from __future__ import annotations
 import re
 from typing import TYPE_CHECKING
@@ -13,11 +13,11 @@ if TYPE_CHECKING:  # pragma: no cover
     from leo.core.leoCommands import Commands as Cmdr
     from leo.core.leoGui import LeoKeyEvent
     from leo.core.leoNodes import Position
-# @-<< gotoCommands imports & annotations >>
+#@-<< gotoCommands imports & annotations >>
 
 
-# @+others
-# @+node:ekr.20150625050355.1: ** class GoToCommands
+#@+others
+#@ class GoToCommands
 class GoToCommands:
     """A class implementing goto-global-line."""
 
@@ -25,8 +25,8 @@ class GoToCommands:
         """Ctor for GoToCommands class."""
         self.c = c
 
-    # @+others
-    # @+node:ekr.20100216141722.5622: *3* goto.find_file_line & helper
+    #@+others
+    #@> goto.find_file_line & helper
     def find_file_line(self, n: int, p: Position | None = None) -> tuple[Position | None, int]:
         """
         Helper for goto-global-line command.
@@ -47,7 +47,7 @@ class GoToCommands:
         p, offset = self.find_file_line_helper(n, p)
         return p, offset
 
-    # @+node:ekr.20230727074847.1: *4* goto.find_file_line_helper
+    #@> goto.find_file_line_helper
     def find_file_line_helper(
         self, n: int, p: Position | None = None
     ) -> tuple[Position | None, int]:
@@ -97,7 +97,7 @@ class GoToCommands:
         self.fail(lines, n, root)
         return None, -1
 
-    # @+node:ekr.20160921210529.1: *3* goto.find_node_start & helper
+    #@< goto.find_node_start & helper
     def find_node_start(self, p: Position, s: str | None = None) -> int | None:
         """
         Helper for show-file-line command.
@@ -142,7 +142,7 @@ class GoToCommands:
                     return i + 1
         return None
 
-    # @+node:ekr.20230803073950.1: *4* goto.prev_hidden_lines
+    #@> goto.prev_hidden_lines
     def prev_hidden_lines(
         self,
         delims: tuple[str, str, str],  # The comment delims.
@@ -161,7 +161,7 @@ class GoToCommands:
                 n_prev += 1
         return None
 
-    # @+node:ekr.20150622140140.1: *3* goto.find_script_line
+    #@< goto.find_script_line
     def find_script_line(self, n: int, root: Position) -> tuple[Position | None, int]:
         """
         Go to line n (zero based) of the script with the given root.
@@ -181,7 +181,7 @@ class GoToCommands:
         self.fail(lines, n, root)
         return None, -1
 
-    # @+node:ekr.20181003080042.1: *3* goto.node_offset_to_file_line
+    #@ goto.node_offset_to_file_line
     def node_offset_to_file_line(
         self, target_offset: int, target_p: Position, root: Position
     ) -> int:
@@ -229,7 +229,7 @@ class GoToCommands:
         g.trace('\nNot found', target_offset, target_gnx)
         return 0
 
-    # @+node:ekr.20150624085605.1: *3* goto.scan_nonsentinel_lines
+    #@ goto.scan_nonsentinel_lines
     def scan_nonsentinel_lines(
         self, lines: list[str], n: int, root: Position
     ) -> tuple[str | None, str | None, int]:
@@ -264,12 +264,10 @@ class GoToCommands:
                     gnx, h = self.get_script_node_info(s, delim2)
                 elif s2.startswith(('@+others', '@+<<')):
                     stack.append((gnx, h, offset))
-                    # @verbatim
                     # @others is visible in the outline, but *not* in the file.
                     offset += 1
                 elif s2.startswith(('@-others', '@-<<')):
                     gnx, h, offset = stack.pop()
-                    # @verbatim
                     # @-others is invisible.
                     offset += 1
                 elif s2.startswith('@@'):
@@ -289,7 +287,7 @@ class GoToCommands:
             gnx, h, offset = None, None, -1
         return gnx, h, offset
 
-    # @+node:ekr.20150623175314.1: *3* goto.scan_sentinel_lines
+    #@ goto.scan_sentinel_lines
     def scan_sentinel_lines(
         self, lines: list[str], n: int, root: Position
     ) -> tuple[str | None, str | None, int]:
@@ -332,8 +330,8 @@ class GoToCommands:
             gnx, h, offset = None, None, -1
         return gnx, h, offset
 
-    # @+node:ekr.20150624142449.1: *3* goto.Utils
-    # @+node:ekr.20150625133523.1: *4* goto.fail
+    #@ goto.Utils
+    #@> goto.fail
     def fail(self, lines: list[str], n: int, root: Position) -> None:
         """Select the last line of the last node of root's tree."""
         c = self.c
@@ -353,7 +351,7 @@ class GoToCommands:
         c.bodyWantsFocus()
         w.seeInsertPoint()
 
-    # @+node:ekr.20100216141722.5626: *4* goto.find_gnx & find_gnx2
+    #@ goto.find_gnx & find_gnx2
     def find_gnx(self, root: Position, gnx: str, vnodeName: str) -> tuple[Position | None, bool]:
         """
         Scan the outline for a node with the given gnx and vnodeName.
@@ -389,7 +387,7 @@ class GoToCommands:
                 return p.copy()
         return None
 
-    # @+node:ekr.20100216141722.5627: *4* goto.find_root
+    #@ goto.find_root
     def find_root(self, p: Position) -> tuple[Position | None, str]:
         """
         Find the closest ancestor @<file> node, except @all nodes and @edit nodes.
@@ -412,7 +410,7 @@ class GoToCommands:
                             return p2.copy(), fileName
         return None, ''
 
-    # @+node:ekr.20150625123747.1: *4* goto.get_delims
+    #@ goto.get_delims
     def get_delims(self, root: Position) -> tuple[str, str]:
         """Return the two start/end delimiters in effect at root."""
         c = self.c
@@ -427,7 +425,7 @@ class GoToCommands:
             return delims1, ''
         return delims2, delims3
 
-    # @+node:ekr.20230804034631.1: *4* goto.get_3_delims
+    #@ goto.get_3_delims
     def get_3_delims(self, root: Position) -> tuple[str, str, str]:
         """Return all three comment delimiters in effect at root."""
         c = self.c
@@ -439,7 +437,7 @@ class GoToCommands:
             c.target_language = old_target_language
         return delims
 
-    # @+node:ekr.20150624143903.1: *4* goto.get_external_file_with_sentinels
+    #@ goto.get_external_file_with_sentinels
     def get_external_file_with_sentinels(self, root: Position) -> str:
         """
         root is an @<file> node. If root is an @auto node, return the result of
@@ -457,7 +455,7 @@ class GoToCommands:
             useSentinels=True,
         )
 
-    # @+node:ekr.20150623175738.1: *4* goto.get_script_node_info
+    #@ goto.get_script_node_info
     def get_script_node_info(self, s: str, delim2: str) -> tuple[str, str]:
         """Return the gnx and headline of a #@+node."""
         i = s.find(':', 0)
@@ -472,7 +470,7 @@ class GoToCommands:
             h = h.rstrip(delim2)
         return gnx, h
 
-    # @+node:ekr.20150625124027.1: *4* goto.is_sentinel
+    #@ goto.is_sentinel
     def is_sentinel(self, delim1: str, delim2: str, s: str) -> bool:
         """Return True if s is a sentinel line with the given delims."""
         # Leo 6.7.2: Use g.is_sentinel, which handles blackened sentinels properly.
@@ -483,7 +481,7 @@ class GoToCommands:
             delims = (delim1, '', '')
         return g.is_sentinel(line=s, delims=delims)
 
-    # @+node:ekr.20100728074713.5843: *4* goto.remove_level_stars
+    #@ goto.remove_level_stars
     def remove_level_stars(self, s: str) -> str:
         i = g.skip_ws(s, 0)
         # Remove leading stars.
@@ -500,7 +498,7 @@ class GoToCommands:
             i += 1
         return s[i:]
 
-    # @+node:ekr.20100216141722.5638: *4* goto.success
+    #@ goto.success
     def success(self, n: int, n2: int, p: Position) -> None:
         """Place the cursor on line n2 of p.b."""
         c = self.c
@@ -517,10 +515,10 @@ class GoToCommands:
         c.bodyWantsFocus()
         w.seeInsertPoint()
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20180517041303.1: ** show-file-line
+#@<2 show-file-line
 @g.command('show-file-line')
 def show_file_line(event: LeoKeyEvent | None = None) -> None:
     """
@@ -551,5 +549,5 @@ def show_file_line(event: LeoKeyEvent | None = None) -> None:
     g.es_print('line', n0 + row)
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

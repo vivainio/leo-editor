@@ -1,7 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20091118065749.5261: * @file ../plugins/ctagscompleter.py
-# @+<< docstring >>
-# @+node:ville.20090317180704.8: ** << docstring >>
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20091118065749.5261] @f ../plugins/ctagscompleter.py
+#@+<< docstring >>
+#@> << docstring >>
 """This plugin uses ctags to provide an autocompletion list.
 
 Requirements:
@@ -25,9 +25,9 @@ search.
 
 """
 
-# @-<< docstring >>
-# @+<< ctagscompleter imports >>
-# @+node:ekr.20161223144720.1: ** << ctagscompleter imports >>
+#@-<< docstring >>
+#@+<< ctagscompleter imports >>
+#@ << ctagscompleter imports >>
 import os
 from typing import Any
 from leo.core import leoGlobals as g
@@ -38,15 +38,15 @@ QStringListModel = QtCore.QStringListModel
 
 # Fail fast, right after all imports.
 g.assertUi('qt')  # May raise g.UiTypeException, caught by the plugins manager.
-# @-<< ctagscompleter imports >>
+#@-<< ctagscompleter imports >>
 # Global variables
 controllers: dict[Any, Any] = {}  # Keys are commanders, values are controllers.
 tagLines: list[str] = []  # The saved contents of the tags file.
 
 
-# @+others
-# @+node:ekr.20110307092028.14155: ** Top-level functions
-# @+node:ville.20090317180704.11: *3* init (ctagscompleter.py)
+#@+others
+#@ Top-level functions
+#@> init (ctagscompleter.py)
 def init():
     """Return True if the plugin has loaded successfully."""
     global tagLines
@@ -61,7 +61,7 @@ def init():
     return True
 
 
-# @+node:ville.20090317180704.12: *3* onCreate (ctagscompleter.py)
+#@ onCreate (ctagscompleter.py)
 def onCreate(tag, keys):
     """Register the ctags-complete command for the newly-created commander."""
     c = keys.get('c')
@@ -69,7 +69,7 @@ def onCreate(tag, keys):
         c.k.registerCommand('ctags-complete', start)
 
 
-# @+node:ekr.20091015185801.5245: *3* read_tags_file
+#@ read_tags_file
 def read_tags_file():
     """Return the lines of ~/.leo/tags or [] on error."""
     tagsFileName = os.path.expanduser('~/.leo/tags')
@@ -90,7 +90,7 @@ def read_tags_file():
         return []
 
 
-# @+node:ekr.20110307092028.14160: *3* start (ctags-complete)
+#@ start (ctags-complete)
 def start(event):
     """
     The ctags-complete command.
@@ -107,12 +107,12 @@ def start(event):
     cc.start(event)
 
 
-# @+node:ekr.20110307092028.14154: ** class CtagsController
+#@< class CtagsController
 class CtagsController:
     # To do: put cursor at end of word initially.
 
-    # @+others
-    # @+node:ekr.20110307092028.14161: *3* ctags.__init__
+    #@+others
+    #@> ctags.__init__
     def __init__(self, c):
         # Init ivars.
         self.active = False
@@ -124,7 +124,7 @@ class CtagsController:
         # Patch the body's event filter.
         self.ev_filter = c.frame.body.wrapper.ev_filter
 
-    # @+node:ekr.20091015185801.5243: *3* ctags.complete
+    #@ ctags.complete
     def complete(self, event):
         """Find all completions."""
         # c = self.c
@@ -138,7 +138,7 @@ class CtagsController:
         cpl.setCompletionPrefix(prefix)
         cpl.complete()
 
-    # @+node:ekr.20110307141357.14195: *3* ctags.end
+    #@ ctags.end
     def end(self, completion=''):
         w = self.body_widget
         cpl = self.completer
@@ -155,7 +155,7 @@ class CtagsController:
             w.setTextCursor(tc)
         self.kill()
 
-    # @+node:ekr.20110307141357.14198: *3* ctags.kill
+    #@ ctags.kill
     def kill(self):
         # Delete the completer.
         self.completer.deleteLater()
@@ -163,7 +163,7 @@ class CtagsController:
         self.active = False
         self.ev_filter.ctagscompleter_active = False
 
-    # @+node:ville.20090321223959.2: *3* ctags.lookup
+    #@ ctags.lookup
     def lookup(self, prefix):
         """Return a list of all items starting with prefix."""
         # global tagLines
@@ -175,7 +175,7 @@ class CtagsController:
         desc = [z[0] for z in hits]
         return sorted(list(set(desc)))
 
-    # @+node:ekr.20110307092028.14159: *3* ctags.onKey
+    #@ ctags.onKey
     def onKey(self, event, stroke):
         stroke = stroke.lower()
         g.trace(repr(stroke))
@@ -189,7 +189,7 @@ class CtagsController:
         else:
             self.complete(event)
 
-    # @+node:ekr.20110307092028.14157: *3* ctags.start (ctags-complete)
+    #@ ctags.start (ctags-complete)
     def start(self, event):
         """Initialize."""
         c = self.c
@@ -211,8 +211,8 @@ class CtagsController:
         # Show the completions.
         self.complete(event)
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

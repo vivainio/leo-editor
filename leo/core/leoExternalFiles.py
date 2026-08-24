@@ -1,7 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20160306114544.1: * @file leoExternalFiles.py
-# @+<< leoExternalFiles imports & annotations >>
-# @+node:ekr.20220821202943.1: ** << leoExternalFiles imports & annotations >>
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20160306114544.1] @f leoExternalFiles.py
+#@+<< leoExternalFiles imports & annotations >>
+#@> << leoExternalFiles imports & annotations >>
 from __future__ import annotations
 from collections.abc import Callable
 import getpass
@@ -17,11 +17,11 @@ if TYPE_CHECKING:  # pragma: no cover
 
     Value = Any
     Widget = Any  # 'Any' is the correct annotation for base class widgets.
-# @-<< leoExternalFiles imports & annotations >>
+#@-<< leoExternalFiles imports & annotations >>
 
 
-# @+others
-# @+node:ekr.20160306110233.1: ** class ExternalFile
+#@+others
+#@ class ExternalFile
 class ExternalFile:
     """A class holding all data about an external file."""
 
@@ -39,20 +39,20 @@ class ExternalFile:
 
     __str__ = __repr__
 
-    # @+others
-    # @+node:ekr.20161011174757.1: *3* ef.shortFileName
+    #@+others
+    #@> ef.shortFileName
     def shortFileName(self) -> str:
         return g.shortFilename(self.path)
 
-    # @+node:ekr.20161011174800.1: *3* ef.exists
+    #@ ef.exists
     def exists(self) -> bool:
         """Return True if the external file still exists."""
         return g.os_path_exists(self.path)
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20150405073203.1: ** class ExternalFilesController
+#@< class ExternalFilesController
 class ExternalFilesController:
     """
     A class tracking changes to external files:
@@ -70,8 +70,8 @@ class ExternalFilesController:
     - ef is always an ExternalFiles instance.
     """
 
-    # @+others
-    # @+node:ekr.20150404083533.1: *3* efc.ctor
+    #@+others
+    #@> efc.ctor
     def __init__(self, c: Cmdr | None = None) -> None:
         """Ctor for ExternalFiles class."""
         self.checksum_d: dict[str, str] = {}  # Keys are full paths, values are file checksums.
@@ -95,8 +95,8 @@ class ExternalFilesController:
         self.yesno_all_answer: str = ''  # answer, 'yes-all', or 'no-all'
         g.app.idleTimeManager.add_callback(self.on_idle)
 
-    # @+node:ekr.20150405105938.1: *3* efc.entries
-    # @+node:ekr.20150405194745.1: *4* efc.check_overwrite (called from c.checkTimeStamp)
+    #@ efc.entries
+    #@> efc.check_overwrite (called from c.checkTimeStamp)
     def check_overwrite(self, c: Cmdr, path: str) -> bool:
         """
         Implements c.checkTimeStamp.
@@ -109,7 +109,7 @@ class ExternalFilesController:
             return val in ('yes', 'yes-all')
         return True
 
-    # @+node:ekr.20031218072017.2613: *4* efc.destroy_frame
+    #@ efc.destroy_frame
     def destroy_frame(self, frame: Widget) -> None:
         """
         Close all "Open With" files associated with frame.
@@ -121,7 +121,7 @@ class ExternalFilesController:
             self.destroy_temp_file(ef)
         self.files = [z for z in self.files if z.path not in paths]
 
-    # @+node:ekr.20150407141838.1: *4* efc.find_path_for_node (called from vim.py)
+    #@ efc.find_path_for_node (called from vim.py)
     def find_path_for_node(self, p: Position) -> str | None:
         """
         Find the path corresponding to node p.
@@ -135,7 +135,7 @@ class ExternalFilesController:
             path = None
         return path
 
-    # @+node:ekr.20150330033306.1: *4* efc.on_idle & helpers
+    #@ efc.on_idle & helpers
     on_idle_count = 0
 
     def on_idle(self) -> None:
@@ -161,18 +161,16 @@ class ExternalFilesController:
                 self.idle_check_open_with_file(c, ef)
         elif self.unchecked_commanders:
             # Check the next commander for which
-            # @verbatim
             # @bool check_for_changed_external_file is True.
             c = self.unchecked_commanders.pop()
             self.idle_check_commander(c)
         else:
             # Add all commanders for which
-            # @verbatim
             # @bool check_for_changed_external_file is True.
             self.unchecked_commanders = [z for z in g.app.commanders() if self.is_enabled(z)]
             self.unchecked_files = [z for z in self.files if z.exists()]
 
-    # @+node:ekr.20150404045115.1: *5* efc.idle_check_commander
+    #@> efc.idle_check_commander
     def idle_check_commander(self, c: Cmdr) -> None:
         """
         Check all external files corresponding to @<file> nodes in c for
@@ -229,7 +227,7 @@ class ExternalFilesController:
                 g.es_print('update:', s, color='blue')
         c.redraw()
 
-    # @+node:ekr.20201207055713.1: *5* efc.idle_check_leo_file
+    #@ efc.idle_check_leo_file
     def idle_check_leo_file(self, c: Cmdr) -> None:
         """Check c's .leo file for external changes."""
         path = c.fileName()
@@ -247,7 +245,7 @@ class ExternalFilesController:
             g.app.loadManager.revertCommander(c)
             g.es_print(f"reloaded {path}")
 
-    # @+node:ekr.20150407124259.1: *5* efc.idle_check_open_with_file & helper
+    #@ efc.idle_check_open_with_file & helper
     def idle_check_open_with_file(self, c: Cmdr, ef: ExternalFile) -> None:
         """Update the open-with node given by ef."""
         assert isinstance(ef, ExternalFile), ef
@@ -271,7 +269,7 @@ class ExternalFilesController:
         elif val == 'no':
             pass
 
-    # @+node:ekr.20150407205631.1: *6* efc.update_open_with_node
+    #@> efc.update_open_with_node
     def update_open_with_node(self, ef: ExternalFile) -> None:
         """Update the body text of ef.p to the contents of ef.path."""
         assert isinstance(ef, ExternalFile), ef
@@ -287,7 +285,7 @@ class ExternalFilesController:
             p.setDirty()
             c.setChanged()
 
-    # @+node:ekr.20150404082344.1: *4* efc.open_with & helpers
+    #@<2 efc.open_with & helpers
     def open_with(self, c: Cmdr, d: dict[str, Value]) -> None:
         """
         Called by c.openWith to handle items in the Open With... menu.
@@ -322,7 +320,7 @@ class ExternalFilesController:
             g.es('unexpected exception in c.openWith')
             g.es_exception()
 
-    # @+node:ekr.20031218072017.2824: *5* efc.compute_ext
+    #@> efc.compute_ext
     def compute_ext(self, c: Cmdr, p: Position, ext: str) -> str:
         """Return the file extension to be used in the temp file."""
         if ext:
@@ -345,7 +343,7 @@ class ExternalFilesController:
             ext = '.' + ext
         return ext
 
-    # @+node:ekr.20031218072017.2832: *5* efc.compute_temp_file_path & helpers
+    #@ efc.compute_temp_file_path & helpers
     def compute_temp_file_path(self, c: Cmdr, p: Position, ext: str) -> str:
         """Return the path to the temp file for p and ext."""
         if c.config.getBool('open-with-clean-filenames'):
@@ -356,7 +354,7 @@ class ExternalFilesController:
             g.error('c.temp_file_path failed')
         return path
 
-    # @+node:ekr.20150406055221.2: *6* efc.clean_file_name
+    #@> efc.clean_file_name
     def clean_file_name(self, c: Cmdr, ext: str, p: Position) -> str:
         """Compute the file name when subdirectories mirror the node's hierarchy in Leo."""
         use_extensions = c.config.getBool('open-with-uses-derived-file-extensions')
@@ -387,7 +385,7 @@ class ExternalFilesController:
         path = os.path.join(td, name)
         return path
 
-    # @+node:ekr.20150406055221.3: *6* efc.legacy_file_name
+    #@ efc.legacy_file_name
     def legacy_file_name(self, c: Cmdr, ext: str, p: Position) -> str:
         """Compute a legacy file name for unsupported operating systems."""
         try:
@@ -403,7 +401,7 @@ class ExternalFilesController:
         path = os.path.join(td, name)
         return path
 
-    # @+node:ekr.20100203050306.5937: *5* efc.create_temp_file
+    #@< efc.create_temp_file
     def create_temp_file(self, c: Cmdr, ext: str, p: Position) -> str | None:
         """
         Create the file used by open-with if necessary.
@@ -431,7 +429,7 @@ class ExternalFilesController:
         self.files.append(ExternalFile(c, ext, p, path, time))
         return path
 
-    # @+node:ekr.20031218072017.2829: *5* efc.open_file_in_external_editor
+    #@ efc.open_file_in_external_editor
     def open_file_in_external_editor(
         self,
         c: Cmdr,
@@ -507,7 +505,7 @@ class ExternalFilesController:
             g.es_exception()
         return command  # for unit testing.
 
-    # @+node:ekr.20190123051253.1: *5* efc.remove_temp_file
+    #@ efc.remove_temp_file
     def remove_temp_file(self, p: Position, path: str) -> None:
         """
         Remove any existing *temp* file for p and path, updating self.files.
@@ -518,12 +516,12 @@ class ExternalFilesController:
                 self.files = [z for z in self.files if z != ef]
                 return
 
-    # @+node:felix.20260401212949.1: *4* efc.reloadSettings
+    #@< efc.reloadSettings
     def reloadSettings(self) -> None:
         """Clear the enabled_d dict"""
         self.enabled_d = {}
 
-    # @+node:ekr.20150404092538.1: *4* efc.shut_down
+    #@ efc.shut_down
     def shut_down(self) -> None:
         """
         Destroy all temporary open-with files.
@@ -536,9 +534,9 @@ class ExternalFilesController:
             self.destroy_temp_file(ef)
         self.files = []
 
-    # @+node:ekr.20150405110219.1: *3* efc.utilities
+    #@< efc.utilities
 
-    # @+node:ekr.20150405200212.1: *4* efc.ask
+    #@> efc.ask
     def ask(self, c: Cmdr, path: str, p: Position | None = None) -> str:
         """
         Ask user whether to overwrite an @<file> tree.
@@ -585,7 +583,7 @@ class ExternalFilesController:
         # #1888: return one of ('yes', 'no', 'yes-all', 'no-all')
         return result.lower() if result else 'no'
 
-    # @+node:ekr.20150404052819.1: *4* efc.checksum
+    #@ efc.checksum
     def checksum(self, path: str) -> str:
         """Return the checksum of the file at the given path."""
         import hashlib
@@ -595,7 +593,7 @@ class ExternalFilesController:
             s = f.read()
         return hashlib.md5(s).hexdigest()
 
-    # @+node:ekr.20031218072017.2614: *4* efc.destroy_temp_file
+    #@ efc.destroy_temp_file
     def destroy_temp_file(self, ef: ExternalFile) -> None:
         """Destroy the *temp* file corresponding to ef, an ExternalFile instance."""
         # Do not use g.trace here.
@@ -605,12 +603,12 @@ class ExternalFilesController:
             except Exception:
                 pass
 
-    # @+node:ekr.20150407204201.1: *4* efc.get_mtime
+    #@ efc.get_mtime
     def get_mtime(self, path: str) -> float:
         """Return the modification time of a file for the given path."""
         return g.os_path_getmtime(g.os_path_realpath(path))
 
-    # @+node:ekr.20150405122428.1: *4* efc.get_time
+    #@ efc.get_time
     def get_time(self, path: str) -> float | None:
         """
         return timestamp stored for the given path
@@ -619,7 +617,7 @@ class ExternalFilesController:
         """
         return self._time_d.get(g.os_path_realpath(path))
 
-    # @+node:ekr.20150403045207.1: *4* efc.has_changed
+    #@ efc.has_changed
     def has_changed(self, path: str) -> bool:
         """Return True if the file at path has changed outside of Leo."""
         if not path:
@@ -655,7 +653,7 @@ class ExternalFilesController:
         # The file has really changed.
         return True
 
-    # @+node:ekr.20150405104340.1: *4* efc.is_enabled
+    #@ efc.is_enabled
     def is_enabled(self, c: Cmdr) -> bool:
         """Return the cached @bool check_for_changed_external_file setting."""
         d = self.enabled_d
@@ -665,24 +663,24 @@ class ExternalFilesController:
             d[c] = val
         return val
 
-    # @+node:ekr.20150404083049.1: *4* efc.join
+    #@ efc.join
     def join(self, s1: str, s2: str) -> str:
         """Return s1 + ' ' + s2"""
         return f"{s1} {s2}"
 
-    # @+node:axk.20260706115344.1: *4* efc.make_popen_args
+    #@ efc.make_popen_args
     def make_popen_args(self, args: list[str], fn: str) -> list[str]:
         """Return argv suitable for subprocess.Popen on posix platforms."""
         return [self.unquote_arg(z) for z in args] + [fn]
 
-    # @+node:axk.20260706115344.2: *4* efc.unquote_arg
+    #@ efc.unquote_arg
     def unquote_arg(self, s: str) -> str:
         """Strip matching quotes surrounding an @openwith arg."""
         if len(s) >= 2 and s[0] == s[-1] and s[0] in '"\'':
             return s[1:-1]
         return s
 
-    # @+node:tbrown.20150904102518.1: *4* efc.set_time
+    #@ efc.set_time
     def set_time(self, path: str, new_time: float | None = None) -> None:
         """
         Implements c.setTimeStamp.
@@ -697,7 +695,7 @@ class ExternalFilesController:
         t = new_time or self.get_mtime(path)
         self._time_d[g.os_path_realpath(path)] = t
 
-    # @+node:ekr.20190218055230.1: *4* efc.warn
+    #@ efc.warn
     def warn(self, c: Cmdr, path: str, p: Position) -> None:
         """
         Warn that an @asis or @nosent node has been changed externally.
@@ -727,11 +725,11 @@ class ExternalFilesController:
             title='External file changed',
         )
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @@pagewidth 70
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@@pagewidth 70
+#@-leo

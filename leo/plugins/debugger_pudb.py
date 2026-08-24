@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20101110091234.5689: * @file ../plugins/debugger_pudb.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20101110091234.5689] @f ../plugins/debugger_pudb.py
 """Makes g.pdb() enter the Pudb debugger instead of pdb.
 
 Pudb is a full-screen Python debugger:
@@ -17,8 +17,8 @@ except ImportError:
 from leo.core import leoGlobals as g
 
 
-# @+others
-# @+node:ville.20090712141419.5253: ** init
+#@+others
+#@> init
 def init():
     """Return True if the plugin has loaded successfully."""
     ok = pudb is not None
@@ -32,5 +32,5 @@ def init():
     return ok
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

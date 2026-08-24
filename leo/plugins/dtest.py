@@ -1,7 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20070119094733.1: * @file ../plugins/dtest.py
-# @+<< docstring >>
-# @+node:ekr.20070119094733.4: ** << docstring >>
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20070119094733.1] @f ../plugins/dtest.py
+#@+<< docstring >>
+#@> << docstring >>
 """Sends code to the doctest module and reports the result.
 
 When the Dtest plugin is enabled, the ``dtest`` command is active.
@@ -27,19 +27,13 @@ http://tinyurl.com/pxhlq - Jim Fulton's presentation::
 
 """
 
-# @-<< docstring >>
-# @+<< imports >>
-# @+node:ekr.20070119094733.2: ** <<imports>>
-import copy
-import doctest
-import os
-from leo.core import leoGlobals as g
-from leo.core.leoPlugins import BaseLeoPlugin
-# @-<< imports >>
+#@-<< docstring >>
+#@+<< imports >>
+#@-<< imports >>
 
 
-# @+others
-# @+node:ekr.20070119094733.5: ** init
+#@+others
+#@ init
 def init():
     """Return True if the plugin has loaded successfully."""
     g.registerHandler('after-create-leo-frame', DT)
@@ -47,7 +41,7 @@ def init():
     return True
 
 
-# @+node:ekr.20070119094733.6: ** class DT
+#@ class DT
 class DT(BaseLeoPlugin):
     """Sends code to the doctest module and reports the result
     If text is selected, tests only the selection.
@@ -64,8 +58,8 @@ class DT(BaseLeoPlugin):
     >>>
     """
 
-    # @+others
-    # @+node:ekr.20070119094733.8: *3* __init__
+    #@+others
+    #@> __init__
     def __init__(self, tag, keywords):
         """Init doctest plugin"""
         super().__init__(tag, keywords)
@@ -73,7 +67,7 @@ class DT(BaseLeoPlugin):
 
         self.c = keywords['c']
 
-    # @+node:ekr.20070119094733.9: *3* dtest
+    #@ dtest
     def dtest(self, event):
         """The handler for dtest"""
         # get a valid temporary filename
@@ -111,8 +105,8 @@ class DT(BaseLeoPlugin):
             tempfilename, module_relative=False, optionflags=doctest.ELLIPSIS, globs=globals
         )
 
-        # @+<<report summary of results>>
-        # @+node:ekr.20070119094733.10: *4* <<report summary of results>>
+        #@+<<report summary of results>>
+        #@> <<report summary of results>>
         if selected:
             g.es('Result of running doctest on selected text;')
         else:
@@ -123,15 +117,15 @@ class DT(BaseLeoPlugin):
             g.error("There was one failure in %s tests" % tests)
         if failures > 1:
             g.error("%s failures in %s tests" % (failures, tests))
-        # @-<<report summary of results>>
+        #@-<<report summary of results>>
 
         # clean up temp file
         os.remove(tempfilename)
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

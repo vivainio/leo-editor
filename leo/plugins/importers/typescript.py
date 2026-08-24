@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20140723122936.18152: * @file ../plugins/importers/typescript.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20140723122936.18152] @f ../plugins/importers/typescript.py
 """The @auto importer for TypeScript."""
 
 from __future__ import annotations
@@ -14,17 +14,17 @@ if TYPE_CHECKING:
     from leo.core.leoNodes import Position
 
 
-# @+others
-# @+node:ekr.20161118093751.1: ** class TS_Importer(JS_Importer)
+#@+others
+#@> class TS_Importer(JS_Importer)
 class TS_Importer(JS_Importer):
     language = 'typescript'
 
-    # @+<< define non-function patterns >>
-    # @+node:ekr.20200817090227.1: *3* << define non-function patterns >>
+    #@+<< define non-function patterns >>
+    #@> << define non-function patterns >>
     non_function_patterns = (re.compile(r'catch\s*\(.*\)'),)
-    # @-<< define non-function patterns >>
-    # @+<< define function patterns >>
-    # @+node:ekr.20180523172655.1: *3* << define function patterns >>
+    #@-<< define non-function patterns >>
+    #@+<< define function patterns >>
+    #@ << define function patterns >>
     kinds = r'(async|public|private|static)'
 
     # The pattern table. Order matters!
@@ -52,10 +52,10 @@ class TS_Importer(JS_Importer):
         # name (...) {
     )
     block_patterns = function_patterns
-    # @-<< define function patterns >>
+    #@-<< define function patterns >>
 
 
-# @-others
+#@-others
 
 
 def do_import(c: Cmdr, parent: Position, s: str) -> None:
@@ -69,6 +69,6 @@ importer_dict = {
     ],
     'func': do_import,
 }
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@@language python
+#@@tabwidth -4
+#@-leo

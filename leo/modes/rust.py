@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20231103124615.1: * @file ../modes/rust.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20231103124615.1] @f ../modes/rust.py
 # Leo colorizer control file for rust mode.
 # This file is in the public domain.
 
@@ -7,8 +7,8 @@ import re
 import string
 from leo.core import leoGlobals as g
 
-# @+<< rust: properties dict >>
-# @+node:ekr.20250106042726.1: ** << rust: properties dict >>
+#@+<< rust: properties dict >>
+#@> << rust: properties dict >>
 # Properties for rust mode.
 properties = {
     "commentEnd": "*/",
@@ -21,9 +21,9 @@ properties = {
     "lineUpClosingBracket": "true",
     "wordBreakChars": ",+-=<>/?^&*",
 }
-# @-<< rust: properties dict >>
-# @+<< rust: attributes dicts >>
-# @+node:ekr.20250105164117.1: ** << rust: attributes dicts >>
+#@-<< rust: properties dict >>
+#@+<< rust: attributes dicts >>
+#@ << rust: attributes dicts >>
 # Attributes dict for rust_main ruleset.
 rust_main_attributes_dict = {
     "default": "null",
@@ -38,9 +38,9 @@ rust_main_attributes_dict = {
 attributesDictDict = {
     "rust_main": rust_main_attributes_dict,
 }
-# @-<< rust: attributes dicts >>
-# @+<< rust: keywords dicts >>
-# @+node:ekr.20250106043953.1: ** << rust: keywords dicts >>
+#@-<< rust: attributes dicts >>
+#@+<< rust: keywords dicts >>
+#@ << rust: keywords dicts >>
 # Keywords dict for rust_main ruleset.
 rust_main_keywords_dict = {
     'Self': 'keyword1',
@@ -120,17 +120,17 @@ keywordsDictDict = {
 }
 
 
-# @-<< rust: keywords dicts >>
-# @+<< rust: rules >>
-# @+node:ekr.20250105163810.1: ** << rust: rules >>
+#@-<< rust: keywords dicts >>
+#@+<< rust: rules >>
+#@ << rust: rules >>
 # Rules for rust_main ruleset.
-# @+others
-# @+node:ekr.20250106042808.3: *3* function: rust_rule2
+#@+others
+#@> function: rust_rule2
 def rust_rule2(colorer, s, i):
     return colorer.match_span(s, i, kind="comment1", begin="/*", end="*/")
 
 
-# @+node:ekr.20250106054207.1: *3* function: rust_slash
+#@ function: rust_slash
 def rust_slash(colorer, s, i) -> int:
     def has_tag(i: int, pattern: str) -> int:
         m = pattern.match(s, i)
@@ -167,8 +167,8 @@ def rust_slash(colorer, s, i) -> int:
     return i + 1
 
 
-# @+node:ekr.20250106062326.1: *3* rust: strings and chars, with escapes
-# @+node:ekr.20250106042808.5: *4* function: rust_char
+#@ rust: strings and chars, with escapes
+#@> function: rust_char
 char_patterns = (
     # '\u{7FFF}'
     re.compile(r"'\\u\{[0-7][0-7a-fA-F]{3}\}'"),
@@ -194,18 +194,18 @@ def rust_char(colorer, s, i):
     return colorer.match_seq(s, i, kind="literal4", seq="'")
 
 
-# @+node:ekr.20250106052237.1: *4* function: rust_string
+#@ function: rust_string
 def rust_string(colorer, s, i):
     # match_span handles escapes.
     return colorer.match_span(s, i, kind="literal1", begin="\"", end="\"")
 
 
-# @+node:ekr.20250108125839.1: *3* function: rust_colon
+#@< function: rust_colon
 def rust_colon(colorer, s, i):
     return colorer.match_plain_seq(s, i, kind="operator", seq=':')
 
 
-# @+node:ekr.20250106042808.9: *3* function: rust_raw_string_literal
+#@ function: rust_raw_string_literal
 # #3631
 # https://doc.rust-lang.org/reference/tokens.html#raw-string-literals
 # Up to 255 '#' are allowed.
@@ -225,17 +225,17 @@ def rust_raw_string_literal(colorer, s, i):
     return 0
 
 
-# @+node:ekr.20250106042808.12: *3* function: rust_at_operator
+#@ function: rust_at_operator
 def rust_at_operator(colorer, s, i):
     return colorer.match_plain_seq(s, i, kind="operator", seq="@")
 
 
-# @+node:ekr.20250106054547.1: *3* function: rust_pound
+#@ function: rust_pound
 def rust_pound(colorer, s, i):
     return colorer.match_plain_eol_span(s, i, kind="keyword2")
 
 
-# @+node:ekr.20250106054731.1: *3* function: rust_open_angle & rust_close_angle
+#@ function: rust_open_angle & rust_close_angle
 def rust_open_angle(colorer, s, i):
     seq = '<=' if i + 2 < len(s) and s[i + 1] == '=' else '<'
     return colorer.match_plain_seq(s, i, kind="operator", seq=seq)
@@ -246,95 +246,95 @@ def rust_close_angle(colorer, s, i):
     return colorer.match_plain_seq(s, i, kind="operator", seq=seq)
 
 
-# @+node:ekr.20250106042808.14: *3* function: rust_rule6
+#@ function: rust_rule6
 def rust_rule6(colorer, s, i):
     return colorer.match_eol_span(s, i, kind="keyword2", seq="#")
 
 
-# @+node:ekr.20250106042808.16: *3* function: rust_rule8
+#@ function: rust_rule8
 def rust_rule8(colorer, s, i):
     return colorer.match_plain_seq(s, i, kind="operator", seq="=")
 
 
-# @+node:ekr.20250106042808.17: *3* function: rust_rule9
+#@ function: rust_rule9
 def rust_rule9(colorer, s, i):
     return colorer.match_plain_seq(s, i, kind="operator", seq="!")
 
 
-# @+node:ekr.20250106042808.20: *3* function: rust_rule12
+#@ function: rust_rule12
 def rust_rule12(colorer, s, i):
     return colorer.match_plain_seq(s, i, kind="operator", seq="+")
 
 
-# @+node:ekr.20250106042808.21: *3* function: rust_rule13
+#@ function: rust_rule13
 def rust_rule13(colorer, s, i):
     return colorer.match_plain_seq(s, i, kind="operator", seq="-")
 
 
-# @+node:ekr.20250106042808.23: *3* function: rust_rule15
+#@ function: rust_rule15
 def rust_rule15(colorer, s, i):
     return colorer.match_plain_seq(s, i, kind="operator", seq="*")
 
 
-# @+node:ekr.20250106042808.24: *3* function: rust_rule16
+#@ function: rust_rule16
 def rust_rule16(colorer, s, i):
     return colorer.match_plain_seq(s, i, kind="operator", seq=">")
 
 
-# @+node:ekr.20250106042808.25: *3* function: rust_rule17
+#@ function: rust_rule17
 def rust_rule17(colorer, s, i):
     return colorer.match_plain_seq(s, i, kind="operator", seq="<")
 
 
-# @+node:ekr.20250106042808.26: *3* function: rust_rule18
+#@ function: rust_rule18
 def rust_rule18(colorer, s, i):
     return colorer.match_plain_seq(s, i, kind="operator", seq="%")
 
 
-# @+node:ekr.20250106042808.27: *3* function: rust_rule19
+#@ function: rust_rule19
 def rust_rule19(colorer, s, i):
     return colorer.match_plain_seq(s, i, kind="operator", seq="&")
 
 
-# @+node:ekr.20250106042808.28: *3* function: rust_rule20
+#@ function: rust_rule20
 def rust_rule20(colorer, s, i):
     return colorer.match_plain_seq(s, i, kind="operator", seq="|")
 
 
-# @+node:ekr.20250106042808.29: *3* function: rust_rule21
+#@ function: rust_rule21
 def rust_rule21(colorer, s, i):
     return colorer.match_plain_seq(s, i, kind="operator", seq="^")
 
 
-# @+node:ekr.20250106042808.30: *3* function: rust_rule22
+#@ function: rust_rule22
 def rust_rule22(colorer, s, i):
     return colorer.match_plain_seq(s, i, kind="operator", seq="~")
 
 
-# @+node:ekr.20250106042808.31: *3* function: rust_rule23
+#@ function: rust_rule23
 def rust_rule23(colorer, s, i):
     return colorer.match_plain_seq(s, i, kind="operator", seq="}")
 
 
-# @+node:ekr.20250106042808.32: *3* function: rust_rule24
+#@ function: rust_rule24
 def rust_rule24(colorer, s, i):
     return colorer.match_plain_seq(s, i, kind="operator", seq="{")
 
 
-# @+node:ekr.20250106042808.34: *3* function: rust_rule26
+#@ function: rust_rule26
 def rust_rule26(colorer, s, i):
     return colorer.match_mark_previous(s, i, kind="function", pattern="(", exclude_match=True)
 
 
-# @+node:ekr.20250106042808.35: *3* function: rust_keywords
+#@ function: rust_keywords
 def rust_keywords(colorer, s, i):
     return colorer.match_keywords(s, i)
 
 
-# @-others
-# @-<< rust: rules >>
-# @+<< rust: rules dicts >>
-# @+node:ekr.20231103125350.1: ** << rust: rules dicts >>
+#@-others
+#@-<< rust: rules >>
+#@+<< rust: rules dicts >>
+#@< << rust: rules dicts >>
 # Rules dict for rust.
 rulesDict1 = {
     # New rules...
@@ -370,7 +370,7 @@ for lead_in in lead_ins:
     if rust_keywords not in aList:
         aList.insert(0, rust_keywords)
         rulesDict1[lead_in] = aList
-# @-<< rust: rules dicts >>
+#@-<< rust: rules dicts >>
 
 # x.rulesDictDict for rust mode.
 rulesDictDict = {
@@ -380,4 +380,4 @@ rulesDictDict = {
 
 # Import dict for rust mode.
 importDict = {}
-# @-leo
+#@-leo

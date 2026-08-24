@@ -1,15 +1,15 @@
-# @+leo-ver=5-thin
-# @+node:edream.110203113231.925: * @file ../plugins/script_io_to_body.py
+#@+leo-ver=cub-1-thin
+#@0 [edream.110203113231.925] @f ../plugins/script_io_to_body.py
 """Sends output from the Execute Script command to the end of the body pane."""
 
-# @+<< imports >>
-# @+node:ekr.20050101090207.4: ** << imports >>
+#@+<< imports >>
+#@> << imports >>
 from leo.core import leoGlobals as g
-# @-<< imports >>
+#@-<< imports >>
 
 
-# @+others
-# @+node:ekr.20071025195133: ** init
+#@+others
+#@ init
 def init():
     """Return True if the plugin has loaded successfully."""
     g.registerHandler('after-create-leo-frame', onCreate)
@@ -17,7 +17,7 @@ def init():
     return True
 
 
-# @+node:ekr.20071212092332: ** onCreate
+#@ onCreate
 def onCreate(tag, keys):
     c = keys.get('c')
     if c and c.frame.log:
@@ -34,7 +34,7 @@ def onCreate(tag, keys):
         c.k.overrideCommand('execute-script', c.executeScript)
 
 
-# @+node:edream.110203113231.928: ** newPut and newPutNl (script_io_to_body.py)
+#@ newPut and newPutNl (script_io_to_body.py)
 # Same as frame.put except sends output to the end of the body text.
 def newPut(self, s, *args, **keys):
     p, u = self.c.p, self.c.undoer
@@ -52,7 +52,7 @@ def newPutNl(self, s, *args, **keys):
     newPut(self, '\n')
 
 
-# @+node:ekr.20071212091008.1: ** newExecuteScript & helpers
+#@ newExecuteScript & helpers
 def newExecuteScript(
     self,
     event=None,
@@ -80,7 +80,7 @@ def newExecuteScript(
         g.es("end of script", color="purple", tabName=tabName)
 
 
-# @+node:ekr.20071212090128: *3* redirect
+#@> redirect
 def redirect(c):
     log = c.frame.log.__class__
 
@@ -88,7 +88,7 @@ def redirect(c):
     g.funcToMethod(newPutNl, log, "putnl")
 
 
-# @+node:ekr.20071212091008: *3* undirect
+#@ undirect
 def undirect(c):
     log = c.frame.log.__class__
 
@@ -96,8 +96,8 @@ def undirect(c):
     g.funcToMethod(c.script_io_to_body_oldputnl, log, "putnl")
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
+#@-others
+#@@language python
+#@@tabwidth -4
 
-# @-leo
+#@-leo

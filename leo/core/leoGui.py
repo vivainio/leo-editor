@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20031218072017.3719: * @file leoGui.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20031218072017.3719] @f leoGui.py
 """
 A module containing the base gui-related classes.
 
@@ -9,8 +9,8 @@ Leo's core calls this class to allocate all gui objects.
 Plugins may define their own gui classes by setting g.app.gui.
 """
 
-# @+<< leoGui imports & annotations >>
-# @+node:ekr.20220414080546.1: ** << leoGui imports & annotations >>
+#@+<< leoGui imports & annotations >>
+#@> << leoGui imports & annotations >>
 from __future__ import annotations
 from collections.abc import Callable
 from typing import Any, TYPE_CHECKING
@@ -29,17 +29,17 @@ if TYPE_CHECKING:  # pragma: no cover
     Widget = Any  # 'Any' is the correct annotation for base class widgets.
 
 
-# @-<< leoGui imports & annotations >>
-# @+others
-# @+node:ekr.20031218072017.3720: ** class LeoGui
+#@-<< leoGui imports & annotations >>
+#@+others
+#@ class LeoGui
 class LeoGui:
     """The base class of all gui classes.
 
     Subclasses are expected to override all do-nothing methods of this class.
     """
 
-    # @+others
-    # @+node:ekr.20031218072017.3722: *3*  LeoGui.__init__
+    #@+others
+    #@>  LeoGui.__init__
     def __init__(self, guiName: str) -> None:
         """Ctor for the LeoGui class."""
         self.active = False  # Used only by qt_gui.
@@ -64,11 +64,11 @@ class LeoGui:
         self.FKeys: list[str] = []  # The representation of F-keys.
         self.specialChars: list[str] = []  # A list of characters/keys to be handle specially.
 
-    # @+node:ekr.20051206103652: *3* LeoGui.widget_name
+    #@ LeoGui.widget_name
     def widget_name(self, w: Widget) -> str:
         return w.getName() or '' if hasattr(w, 'getName') else ''
 
-    # @+node:ekr.20070228154059: *3* LeoGui: May be defined in subclasses
+    #@ LeoGui: May be defined in subclasses
     def dismiss_splash_screen(self) -> None:
         pass
 
@@ -84,8 +84,8 @@ class LeoGui:
     def put_help(self, c: Cmdr, s: str, short_title: str) -> None:
         pass
 
-    # @+node:ekr.20061109212618.1: *3* LeoGui: Must be defined only in base class
-    # @+node:ekr.20110605121601.18847: *4* LeoGui.create_key_event
+    #@ LeoGui: Must be defined only in base class
+    #@> LeoGui.create_key_event
     def create_key_event(
         self,
         c: Cmdr,
@@ -105,35 +105,35 @@ class LeoGui:
             c, binding=binding, char=char, w=w, x=x, y=y, x_root=x_root, y_root=y_root
         )
 
-    # @+node:ekr.20031218072017.3740: *4* LeoGui.guiName
+    #@ LeoGui.guiName
     def guiName(self) -> str:
         try:
             return self.mGuiName
         except Exception:
             return "invalid gui name"
 
-    # @+node:ekr.20031218072017.2231: *4* LeoGui.setScript
+    #@ LeoGui.setScript
     def setScript(self, script: str = '', scriptFileName: str = '') -> None:
         self.script = script
         self.scriptFileName = scriptFileName
 
-    # @+node:ekr.20110605121601.18845: *4* LeoGui.event_generate
+    #@ LeoGui.event_generate
     def event_generate(self, c: Cmdr, char: str, shortcut: str, w: QTextMixin) -> None:
         event = self.create_key_event(c, binding=shortcut, char=char, w=w)
         c.k.masterKeyHandler(event)
         c.outerUpdate()
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20070228160107: ** class LeoKeyEvent
+#@<2 class LeoKeyEvent
 class LeoKeyEvent:
     """A gui-independent wrapper for gui events."""
 
     __slots__ = ('c', 'char', 'stroke', 'w', 'x', 'x_root', 'y', 'y_root')
 
-    # @+others
-    # @+node:ekr.20110605121601.18846: *3*  LeoKeyEvent.__init__
+    #@+others
+    #@>  LeoKeyEvent.__init__
     def __init__(
         self,
         c: Cmdr,
@@ -240,14 +240,14 @@ class LeoKeyEvent:
         else:
             trace('unusual w', info(w))
 
-    # @+node:ekr.20140907103315.18774: *3*  LeoKeyEvent.__repr__
+    #@  LeoKeyEvent.__repr__
     def __repr__(self) -> str:
         d = {'c': self.c.shortFileName()}
         for ivar in ('char', 'stroke', 'w'):
             d[ivar] = getattr(self, ivar)
         return f"LeoKeyEvent:\n{g.objToString(d)}"
 
-    # @+node:ekr.20150511181702.1: *3* LeoKeyEvent.get & __getitem__
+    #@ LeoKeyEvent.get & __getitem__
     def get(self, attr: str) -> Any:
         """Compatibility with g.bunch: return an attr."""
         return getattr(self, attr, None)
@@ -256,19 +256,19 @@ class LeoKeyEvent:
         """Compatibility with g.bunch: return an attr."""
         return getattr(self, attr, None)
 
-    # @+node:ekr.20140907103315.18775: *3* LeoKeyEvent.type
+    #@ LeoKeyEvent.type
     def type(self) -> str:
         return 'LeoKeyEvent'
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20031218072017.2223: ** class NullGui (LeoGui)
+#@< class NullGui (LeoGui)
 class NullGui(LeoGui):
     """Null gui class."""
 
-    # @+others
-    # @+node:ekr.20031218072017.2225: *3*  NullGui.__init__
+    #@+others
+    #@>  NullGui.__init__
     def __init__(self, guiName: str = 'nullGui') -> None:
         """ctor for the NullGui class."""
         super().__init__(guiName)
@@ -279,7 +279,7 @@ class NullGui(LeoGui):
         self.lastFrame: Widget = None  # The outer frame, to set g.app.log in runMainLoop.
         self.script = ''
 
-    # @+node:ekr.20031218072017.3744: *3* NullGui.dialogs
+    #@ NullGui.dialogs
     def openFindDialog(self, c: Cmdr) -> None:
         return None
 
@@ -371,7 +371,7 @@ class NullGui(LeoGui):
     ) -> str:
         return 'cancel'
 
-    # @+node:ekr.20170613101737.1: *3* NullGui.clipboard & focus
+    #@ NullGui.clipboard & focus
     def get_focus(self, *args: str, **kwargs: str) -> Widget:
         return self.focusWidget
 
@@ -384,7 +384,7 @@ class NullGui(LeoGui):
     def set_focus(self, commander: str, widget: Widget) -> None:
         self.focusWidget = widget
 
-    # @+node:ekr.20230916153234.1: *3* NullGui.createSpellTab
+    #@ NullGui.createSpellTab
     def createSpellTab(self, c: Cmdr, spellHandler: Any, tabName: str) -> Any:
         class NullSpellTab:
             def __init__(self, c: Cmdr, spellHandler: Any, tabName: str) -> None:
@@ -397,7 +397,7 @@ class NullGui(LeoGui):
 
         return NullSpellTab(c, spellHandler, tabName)
 
-    # @+node:ekr.20070301171901: *3* NullGui.do nothings
+    #@ NullGui.do nothings
     def alert(self, c: Cmdr, message: str) -> None:
         pass
 
@@ -442,7 +442,7 @@ class NullGui(LeoGui):
     def onDeactivateEvent(self, *args: str, **keys: str) -> None:
         pass
 
-    # @+node:ekr.20070228155807: *3* NullGui.isTextWidget & isTextWrapper
+    #@ NullGui.isTextWidget & isTextWrapper
     def isTextWidget(self, w: Widget) -> bool:
         return True  # Must be True for unit tests.
 
@@ -450,7 +450,7 @@ class NullGui(LeoGui):
         """Return True if w is a Text widget suitable for text-oriented commands."""
         return issubclass(w.__class__, StringTextWrapper)
 
-    # @+node:ekr.20070301172456: *3* NullGui: panels
+    #@ NullGui: panels
     def createComparePanel(self, c: Cmdr) -> None:
         """Create Compare panel."""
 
@@ -463,7 +463,7 @@ class NullGui(LeoGui):
         self.lastFrame = leoFrame.NullFrame(c, title, gui)
         return self.lastFrame
 
-    # @+node:ekr.20031218072017.2229: *3* NullGui.runMainLoop
+    #@ NullGui.runMainLoop
     def runMainLoop(self) -> None:
         """Run the null gui's main loop."""
         if self.script:
@@ -474,10 +474,10 @@ class NullGui(LeoGui):
             print('**** NullGui.runMainLoop: terminating Leo.')
         # Getting here will terminate Leo.
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20080707150137.5: ** class NullScriptingControllerClass
+#@< class NullScriptingControllerClass
 class NullScriptingControllerClass:
     """A default, do-nothing class to be overridden by mod_scripting or other plugins.
 
@@ -491,7 +491,7 @@ class NullScriptingControllerClass:
         pass
 
 
-# @+node:ekr.20171128093401.1: ** class StringCheckBox (leoGui.py)
+#@ class StringCheckBox (leoGui.py)
 class StringCheckBox:
     """Simulate a QCheckBox."""
 
@@ -515,12 +515,12 @@ class StringCheckBox:
         self.value = not self.value
 
 
-# @+node:ekr.20210221130549.1: ** class StringFindTabManager (leoGui.py)
+#@ class StringFindTabManager (leoGui.py)
 class StringFindTabManager:
     """A string-based FindTabManager class for unit tests."""
 
-    # @+others
-    # @+node:ekr.20210221130549.2: *3*  sftm.__init__
+    #@+others
+    #@>  sftm.__init__
 
     def __init__(self, c: Cmdr) -> None:
         """Ctor for the FindTabManager class."""
@@ -551,7 +551,7 @@ class StringFindTabManager:
         # Init the default values.
         self.init_widgets()
 
-    # @+node:ekr.20210221130549.5: *3* sftm.clear_focus & init_focus & set_entry_focus
+    #@ sftm.clear_focus & init_focus & set_entry_focus
     def clear_focus(self) -> None:
         pass
 
@@ -561,7 +561,7 @@ class StringFindTabManager:
     def set_entry_focus(self) -> None:
         pass
 
-    # @+node:ekr.20210221130549.4: *3* sftm.get_settings
+    #@ sftm.get_settings
     def get_settings(self) -> g.Bunch:
         """
         Return a g.bunch representing all widget values.
@@ -588,7 +588,7 @@ class StringFindTabManager:
             whole_word      = self.check_box_whole_word.isChecked(),
         )  # fmt: skip
 
-    # @+node:ekr.20210221130549.7: *3* sftm.init_widgets
+    #@ sftm.init_widgets
     def init_widgets(self) -> None:
         """
         Init widgets and ivars from c.config settings.
@@ -641,7 +641,7 @@ class StringFindTabManager:
             if not w.isChecked():
                 w.toggle()
 
-    # @+node:ekr.20210312122351.1: *3* sftm.set_body_and_headline_checkbox
+    #@ sftm.set_body_and_headline_checkbox
     def set_body_and_headline_checkbox(self) -> None:
         """Return the search-body and search-headline checkboxes to their defaults."""
         # #1840: headline-only one-shot
@@ -658,7 +658,7 @@ class StringFindTabManager:
             if val != w.isChecked():
                 w.toggle()
 
-    # @+node:ekr.20210221130549.8: *3* sftm.set_radio_button
+    #@ sftm.set_radio_button
     def set_radio_button(self, name: str) -> None:
         """Set the value of the radio buttons"""
         d = {
@@ -671,7 +671,7 @@ class StringFindTabManager:
             if not w.isChecked():
                 w.toggle()
 
-    # @+node:ekr.20210221130549.3: *3* sftm: getters/setters
+    #@ sftm: getters/setters
     def get_find_text(self) -> str:
         s = self.find_findbox.text()
         if s and s[-1] in ('\r', '\n'):
@@ -697,7 +697,7 @@ class StringFindTabManager:
     def set_widgets_from_dict(self, d: g.Bunch) -> None:
         pass
 
-    # @+node:ekr.20210221130549.9: *3* sftm.toggle_checkbox
+    #@ sftm.toggle_checkbox
     def toggle_checkbox(self, checkbox_name: str) -> None:
         """Toggle the value of the checkbox whose name is given."""
         d = {
@@ -712,10 +712,10 @@ class StringFindTabManager:
         if w := d.get(checkbox_name):
             w.toggle()
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20171128093503.1: ** class StringLineEdit (leoGui)
+#@< class StringLineEdit (leoGui)
 class StringLineEdit:
     """Simulate a QLineEdit."""
 
@@ -742,7 +742,7 @@ class StringLineEdit:
         return self.s
 
 
-# @+node:ekr.20171128093602.1: ** class StringRadioButton (leoGui.py)
+#@ class StringRadioButton (leoGui.py)
 class StringRadioButton:
     """Simulate a QRadioButton."""
 
@@ -761,13 +761,13 @@ class StringRadioButton:
         self.value = not self.value
 
 
-# @+node:ekr.20031218072017.3742: ** class UnitTestGui (NullGui)
+#@ class UnitTestGui (NullGui)
 class UnitTestGui(NullGui):
     """A gui class for use by unit tests."""
 
     # Presently used only by the import/export unit tests.
-    # @+others
-    # @+node:ekr.20031218072017.3743: *3* UnitTestGui.__init__
+    #@+others
+    #@> UnitTestGui.__init__
     def __init__(self, theDict: dict | None = None) -> None:
         """ctor for the UnitTestGui class."""
         self.oldGui = g.app.gui
@@ -778,11 +778,11 @@ class UnitTestGui(NullGui):
     def destroySelf(self) -> None:
         g.app.gui = self.oldGui
 
-    # @+node:ekr.20071128094234.1: *3* UnitTestGui.createSpellTab
+    #@ UnitTestGui.createSpellTab
     def createSpellTab(self, c: Cmdr, spellHandler: Any, tabName: str) -> None:
         pass  # This method keeps pylint happy.
 
-    # @+node:ekr.20111001155050.15484: *3* UnitTestGui.runAtIdle
+    #@ UnitTestGui.runAtIdle
     if 1:  # Huh?
 
         def runAtIdle(self, aFunc: Callable) -> None:
@@ -791,11 +791,11 @@ class UnitTestGui(NullGui):
             This is a kludge, but it is probably the best that can be done.
             """
             aFunc()
-    # @-others
+    #@-others
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @@pagewidth 70
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@@pagewidth 70
+#@-leo

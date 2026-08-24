@@ -1,7 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:danr7.20060912105041.1: * @file ../plugins/paste_as_headlines.py
-# @+<< docstring >>
-# @+node:danr7.20060912105041.2: ** << docstring >>
+#@+leo-ver=cub-1-thin
+#@0 [danr7.20060912105041.1] @f ../plugins/paste_as_headlines.py
+#@+<< docstring >>
+#@> << docstring >>
 """Creates new headlines from clipboard text.
 
 If the pasted text would be greater than 50 characters in length, the plugin
@@ -11,16 +11,16 @@ under the existing Paste option.
 
 """
 
-# @-<< docstring >>
+#@-<< docstring >>
 # By Dan Rahmel.
-# @+<< imports >>
-# @+node:danr7.20060912105041.4: ** << imports >>
+#@+<< imports >>
+#@ << imports >>
 from leo.core import leoGlobals as g
 
 
-# @-<< imports >>
-# @+others
-# @+node:ekr.20100128073941.5377: ** init
+#@-<< imports >>
+#@+others
+#@ init
 def init():
     """Return True if the plugin has loaded successfully."""
     g.registerHandler("create-optional-menus", createPasteAsHeadlinesMenu)
@@ -28,7 +28,7 @@ def init():
     return True  # Ok for unit testing: creates menu.
 
 
-# @+node:danr7.20060912105041.5: ** createPasteAsHeadlinesMenu
+#@ createPasteAsHeadlinesMenu
 def createPasteAsHeadlinesMenu(tag, keywords):
     c = keywords.get("c")
     if not c:
@@ -49,7 +49,7 @@ def createPasteAsHeadlinesMenu(tag, keywords):
     )
 
 
-# @+node:danr7.20060912105041.6: ** paste_as_headlines
+#@ paste_as_headlines
 def paste_as_headlines(c):
     # g.es("Starting...")
     currentPos = c.p
@@ -81,7 +81,7 @@ def paste_as_headlines(c):
     c.redraw()
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

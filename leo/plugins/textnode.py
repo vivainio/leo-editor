@@ -1,7 +1,16 @@
-# @+leo-ver=5-thin
-# @+node:ajones.20070122160142: * @file ../plugins/textnode.py
-# @+<< docstring >>
-# @+node:ajones.20070122160142.1: ** << docstring >> (textnode.py)
+#@+leo-ver=cub-1-thin
+#@0 [ajones.20070122160142] @f ../plugins/textnode.py
+#@+<< docstring >>
+#@-<< docstring >>
+
+# Terry Brown: support for @path ancestors and uses universal newline mode for opening.
+
+import os.path
+from leo.core import leoGlobals as g
+
+
+#@+others
+#@> << docstring >> (textnode.py)
 """Supports @text nodes for reading and writing external files.
 
 This plugin has been superceded by @edit nodes.
@@ -15,16 +24,7 @@ contents of an @text node, execute the double-click-icon-box command on the
 node.
 
 """
-# @-<< docstring >>
-
-# Terry Brown: support for @path ancestors and uses universal newline mode for opening.
-
-import os.path
-from leo.core import leoGlobals as g
-
-
-# @+others
-# @+node:ajones.20070122160142.2: ** init (textnode.py)
+#@ init (textnode.py)
 def init():
     """Return True if the plugin has loaded successfully."""
     g.registerHandler(('new', 'open2'), on_open)
@@ -35,7 +35,7 @@ def init():
     return True
 
 
-# @+node:ajones.20070122181914: ** on_icondclick
+#@ on_icondclick
 def on_icondclick(tag, keywords):
     c = keywords['c']
     p = keywords['p']
@@ -48,7 +48,7 @@ def on_icondclick(tag, keywords):
         readtextnode(c, p)
 
 
-# @+node:ajones.20070122160142.3: ** on_open
+#@ on_open
 def on_open(tag, keywords):
     c = keywords.get("c")
     if not c:
@@ -61,7 +61,7 @@ def on_open(tag, keywords):
     c.redraw()
 
 
-# @+node:ajones.20070122161942: ** on_save
+#@ on_save
 def on_save(tag, keywords):
     c = keywords.get("c")
     if not c:
@@ -74,7 +74,7 @@ def on_save(tag, keywords):
             p.b = ""
 
 
-# @+node:tbrown.20080128221824: ** getPath (textnode.py)
+#@ getPath (textnode.py)
 def getPath(c, p):
     path = [i.h[6:] for i in p.self_and_parents() if i.h[:6] in ('@path ', '@text ')]
     path.append(g.getBaseDirectory(c))
@@ -82,7 +82,7 @@ def getPath(c, p):
     return os.path.join(*path)
 
 
-# @+node:ajones.20070122181914.1: ** readtextnode
+#@ readtextnode
 def readtextnode(c, p):
     name = getPath(c, p)
     try:
@@ -98,7 +98,7 @@ def readtextnode(c, p):
         p.setDirty()
 
 
-# @+node:ajones.20070122185020: ** savetextnode
+#@ savetextnode
 def savetextnode(c, p):
     name = getPath(c, p)
     try:
@@ -112,7 +112,7 @@ def savetextnode(c, p):
         p.setMarked()
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

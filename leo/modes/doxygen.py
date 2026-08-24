@@ -1,10 +1,10 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20250110042632.1: * @file ../modes/doxygen.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20250110042632.1] @f ../modes/doxygen.py
 # Leo colorizer control file for doxygen mode.
 # This file is in the public domain.
 
-# @+<< doxygen: properties and attributes dicts >>
-# @+node:ekr.20250110042800.1: ** << doxygen: properties and attributes dicts >>
+#@+<< doxygen: properties and attributes dicts >>
+#@> << doxygen: properties and attributes dicts >>
 
 # Properties for doxygen mode.
 properties = {
@@ -36,7 +36,7 @@ attributesDictDict = {
     "doxygen_doxygen": doxygen_doxygen_attributes_dict,
     "doxygen_main": doxygen_main_attributes_dict,
 }
-# @-<< doxygen: properties and attributes dicts >>
+#@-<< doxygen: properties and attributes dicts >>
 
 # Keywords dict for doxygen_main ruleset.
 doxygen_main_keywords_dict = {
@@ -44,8 +44,8 @@ doxygen_main_keywords_dict = {
     "YES": "keyword2",
 }
 
-# @+<< doxygen: doxygen_doxygen_keywords_dict >>
-# @+node:ekr.20250110042847.1: ** << doxygen: doxygen_doxygen_keywords_dict >>
+#@+<< doxygen: doxygen_doxygen_keywords_dict >>
+#@ << doxygen: doxygen_doxygen_keywords_dict >>
 # Keywords dict for doxygen_doxygen ruleset.
 doxygen_doxygen_keywords_dict = {
     "&": "label",
@@ -298,7 +298,7 @@ doxygen_doxygen_keywords_dict = {
     "\\xrefitem": "label",
     "\\~": "label",
 }
-# @-<< doxygen: doxygen_doxygen_keywords_dict >>
+#@-<< doxygen: doxygen_doxygen_keywords_dict >>
 
 # Dictionary of keywords dictionaries for doxygen mode.
 keywordsDictDict = {
@@ -306,55 +306,55 @@ keywordsDictDict = {
     "doxygen_main": doxygen_main_keywords_dict,
 }
 
-# @+<< doxgen: doxygen_main rules >>
-# @+node:ekr.20250110043035.1: ** << doxgen: doxygen_main rules >>
+#@+<< doxgen: doxygen_main rules >>
+#@ << doxgen: doxygen_main rules >>
 # Rules for doxygen_main ruleset.
 
 
-# @+others
-# @+node:ekr.20250110045205.1: *3* function: doxygen_rule0
+#@+others
+#@> function: doxygen_rule0
 def doxygen_rule0(colorer, s, i):
     return colorer.match_eol_span(s, i, kind="comment1", seq="#")
 
 
-# @+node:ekr.20250110045205.2: *3* function: doxygen_rule1
+#@ function: doxygen_rule1
 def doxygen_rule1(colorer, s, i):
     return colorer.match_mark_previous(
         s, i, kind="keyword1", pattern="=", at_line_start=True, exclude_match=True
     )
 
 
-# @+node:ekr.20250110045205.3: *3* function: doxygen_rule2
+#@ function: doxygen_rule2
 def doxygen_rule2(colorer, s, i):
     return colorer.match_mark_previous(
         s, i, kind="keyword1", pattern="+=", at_line_start=True, exclude_match=True
     )
 
 
-# @+node:ekr.20250110045205.4: *3* function: doxygen_rule3
+#@ function: doxygen_rule3
 def doxygen_rule3(colorer, s, i):
     return colorer.match_span(s, i, kind="literal1", begin="\"", end="\"", no_line_break=True)
 
 
-# @+node:ekr.20250110045205.5: *3* function: doxygen_rule4
+#@ function: doxygen_rule4
 def doxygen_rule4(colorer, s, i):
     return colorer.match_span(s, i, kind="literal1", begin="'", end="'", no_line_break=True)
 
 
-# @+node:ekr.20250110045205.6: *3* function: doxygen_rule5
+#@ function: doxygen_rule5
 def doxygen_rule5(colorer, s, i):
     return colorer.match_span(s, i, kind="literal1", begin="`", end="`", no_line_break=True)
 
 
-# @+node:ekr.20250110045205.7: *3* function: doxygen_rule6
+#@ function: doxygen_rule6
 def doxygen_rule6(colorer, s, i):
     return colorer.match_keywords(s, i)
 
 
-# @-others
-# @-<< doxgen: doxygen_main rules >>
-# @+<< doxygen: rulesDict1 >>
-# @+node:ekr.20250110043114.1: ** << doxygen: rulesDict1 >>
+#@-others
+#@-<< doxgen: doxygen_main rules >>
+#@+<< doxygen: rulesDict1 >>
+#@< << doxygen: rulesDict1 >>
 # Rules dict for doxygen_main ruleset.
 rulesDict1 = {
     "\"": [
@@ -596,54 +596,54 @@ rulesDict1 = {
         doxygen_rule6,
     ],
 }
-# @-<< doxygen: rulesDict1 >>
-# @+<< doxygen: doxygen_doxygen rules >>
-# @+node:ekr.20250110043203.1: ** << doxygen: doxygen_doxygen rules >>
+#@-<< doxygen: rulesDict1 >>
+#@+<< doxygen: doxygen_doxygen rules >>
+#@ << doxygen: doxygen_doxygen rules >>
 # Rules for doxygen_doxygen ruleset.
 
 
-# @+others
-# @+node:ekr.20250110045223.1: *3* function: doxygen_rule7
+#@+others
+#@> function: doxygen_rule7
 def doxygen_rule7(colorer, s, i):
     return colorer.match_plain_seq(s, i, kind="comment3", seq="*")
 
 
-# @+node:ekr.20250110045223.2: *3* function: doxygen_rule8
+#@ function: doxygen_rule8
 def doxygen_rule8(colorer, s, i):
     return colorer.match_span(s, i, kind="comment1", begin="<!--", end="-->")
 
 
-# @+node:ekr.20250110045223.3: *3* function: doxygen_rule9
+#@ function: doxygen_rule9
 def doxygen_rule9(colorer, s, i):
     return colorer.match_plain_seq(s, i, kind="comment3", seq="<<")
 
 
-# @+node:ekr.20250110045223.4: *3* function: doxygen_rule10
+#@ function: doxygen_rule10
 def doxygen_rule10(colorer, s, i):
     return colorer.match_plain_seq(s, i, kind="comment3", seq="<=")
 
 
-# @+node:ekr.20250110045223.5: *3* function: doxygen_rule11
+#@ function: doxygen_rule11
 def doxygen_rule11(colorer, s, i):
     return colorer.match_plain_seq(s, i, kind="comment3", seq="< ")
 
 
-# @+node:ekr.20250110045223.6: *3* function: doxygen_rule12
+#@ function: doxygen_rule12
 def doxygen_rule12(colorer, s, i):
     return colorer.match_span(
         s, i, kind="markup", begin="<", end=">", delegate="xml::tags", no_line_break=True
     )
 
 
-# @+node:ekr.20250110045223.7: *3* function: doxygen_rule13
+#@ function: doxygen_rule13
 def doxygen_rule13(colorer, s, i):
     return colorer.match_keywords(s, i)
 
 
-# @-others
-# @-<< doxygen: doxygen_doxygen rules >>
-# @+<< doxygen: rulesDict2 >>
-# @+node:ekr.20250110043345.1: ** << doxygen: rulesDict2 >>
+#@-others
+#@-<< doxygen: doxygen_doxygen rules >>
+#@+<< doxygen: rulesDict2 >>
+#@< << doxygen: rulesDict2 >>
 # Rules dict for doxygen_doxygen ruleset.
 rulesDict2 = {
     "#": [
@@ -877,7 +877,7 @@ rulesDict2 = {
         doxygen_rule13,
     ],
 }
-# @-<< doxygen: rulesDict2 >>
+#@-<< doxygen: rulesDict2 >>
 
 # x.rulesDictDict for doxygen mode.
 rulesDictDict = {
@@ -887,4 +887,4 @@ rulesDictDict = {
 
 # Import dict for doxygen mode.
 importDict = {}
-# @-leo
+#@-leo

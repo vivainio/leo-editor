@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20210329114352.1: * @file ../plugins/example_rst_filter.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20210329114352.1] @f ../plugins/example_rst_filter.py
 """
 Filters for the rst3 command.
 
@@ -46,6 +46,6 @@ def headline_filter(c, p):
     return '' if has_cloned_parent(c, p) else p.h
 
 
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@@language python
+#@@tabwidth -4
+#@-leo

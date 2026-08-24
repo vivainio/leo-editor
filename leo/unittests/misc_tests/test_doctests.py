@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20210926044012.1: * @file ../unittests/misc_tests/test_doctests.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20210926044012.1] @f ../unittests/misc_tests/test_doctests.py
 """Run all doctests."""
 
 import doctest
@@ -12,8 +12,8 @@ unittest_dir = os.path.dirname(__file__)
 leo_dir = os.path.abspath(os.path.join(unittest_dir, '..', '..'))
 
 
-# @+others  # Define a function containing a doctest.
-# @+node:ekr.20210926053601.1: ** factorial (test_dectests.py)
+#@+others # Define a function containing a doctest.
+#@> factorial (test_dectests.py)
 def factorial(n):
     # Modified from https://docs.python.org/3/library/doctest.html
     # Must import factorial. See: stackoverflow.com/questions/65066002
@@ -62,7 +62,7 @@ def factorial(n):
     return result
 
 
-# @-others
+#@-others
 
 
 class TestDocTests(unittest.TestCase):  # No need to be a subclass of leoTest2.LeoUnitTest.
@@ -94,4 +94,4 @@ class TestDocTests(unittest.TestCase):  # No need to be a subclass of leoTest2.L
             g.printObj(fails_list, tag="files containing a failed doctest")
 
 
-# @-leo
+#@-leo

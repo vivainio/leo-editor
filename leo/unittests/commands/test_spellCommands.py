@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20230916141635.1: * @file ../unittests/commands/test_spellCommands.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20230916141635.1] @f ../unittests/commands/test_spellCommands.py
 """
 New unit tests for Leo's outline commands.
 
@@ -12,15 +12,15 @@ from leo.core import leoGlobals as g
 assert g
 
 
-# @+others
-# @+node:ekr.20230916141635.2: ** class TestSpellCommands(LeoUnitTest)
+#@+others
+#@> class TestSpellCommands(LeoUnitTest)
 class TestSpellCommands(LeoUnitTest):
     """
     Unit tests for Leo's outline commands.
     """
 
-    # @+others
-    # @+node:ekr.20230916141635.3: *3* TestSpellCommands.test_SpellTabHandler_find
+    #@+others
+    #@> TestSpellCommands.test_SpellTabHandler_find
     def test_SpellTabHandler_find(self):
         if not g.isWindows:
             self.skipTest('Requires Windows')
@@ -84,8 +84,8 @@ class TestSpellCommands(LeoUnitTest):
             result = handler.find()
             assert result == expected, (repr(result), repr(expected))
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20260414092941.1: * @file ../scripts/update_leo_tools.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20260414092941.1] @f ../scripts/update_leo_tools.py
 """
 update_leo_tools.py: Update Leo's checker tools.
 
@@ -30,4 +30,4 @@ for command in [
     print('')
     print(command)
     subprocess.run(command, shell=True, check=False)
-# @-leo
+#@-leo

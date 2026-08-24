@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20240322173704.1: * @file ../scripts/pip_install_r.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20240322173704.1] @f ../scripts/pip_install_r.py
 """
 pip_install_r.py: Install all of Leo's requirements from requirements.txt.
 
@@ -29,4 +29,4 @@ for command in [
 ]:
     print(command)
     subprocess.run(command, shell=True, check=False)
-# @-leo
+#@-leo

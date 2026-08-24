@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20081214160729.1: * @file ../plugins/setHomeDirectory.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20081214160729.1] @f ../plugins/setHomeDirectory.py
 """Sets g.app.homeDir to a hard-coded path."""
 
 from leo.core import leoGlobals as g
@@ -12,4 +12,4 @@ def init():
     return True
 
 
-# @-leo
+#@-leo

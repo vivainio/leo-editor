@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20210903162431.1: * @file ../unittests/core/test_leoCommands.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20210903162431.1] @f ../unittests/core/test_leoCommands.py
 """Tests of leoCommands.py"""
 
 # pylint: disable=no-member
@@ -8,20 +8,20 @@ from leo.plugins.mod_scripting import scriptingController
 from leo.core.leoTest2 import LeoUnitTest
 
 
-# @+others
-# @+node:ekr.20210903162431.2: ** class TestCommands(LeoUnitTest)
+#@+others
+#@> class TestCommands(LeoUnitTest)
 class TestCommands(LeoUnitTest):
     """Test cases for leoCommands.py"""
 
-    # @+others
-    # @+node:ekr.20210906075242.28: *3* TestCommands.test_add_comments_with_multiple_language_directives
+    #@+others
+    #@> TestCommands.test_add_comments_with_multiple_language_directives
     def test_add_comments_with_multiple_language_directives(self):
         c, p, w = self.c, self.c.p, self.c.frame.body.wrapper
         p.b = self.prep(
             """
-            @language rest
+    #@@language rest
             rest text.
-            @language python
+    #@@language python
             def spam():
                 pass
             # after
@@ -29,9 +29,9 @@ class TestCommands(LeoUnitTest):
         )
         expected = self.prep(
             """
-            @language rest
+    #@@language rest
             rest text.
-            @language python
+    #@@language python
             def spam():
                 # pass
             # after
@@ -43,12 +43,12 @@ class TestCommands(LeoUnitTest):
         c.addComments()
         self.assertEqual(p.b, expected)
 
-    # @+node:ekr.20210906075242.30: *3* TestCommands.test_add_html_comments
+    #@ TestCommands.test_add_html_comments
     def test_add_html_comments(self):
         c, p, w = self.c, self.c.p, self.c.frame.body.wrapper
         p.b = self.prep(
             """
-            @language html
+    #@@language html
             <html>
                 text
             </html>
@@ -56,7 +56,7 @@ class TestCommands(LeoUnitTest):
         )
         expected = self.prep(
             """
-            @language html
+    #@@language html
             <html>
                 <!-- text -->
             </html>
@@ -67,12 +67,12 @@ class TestCommands(LeoUnitTest):
         c.addComments()
         self.assertEqual(p.b, expected)
 
-    # @+node:ekr.20210906075242.32: *3* TestCommands.test_add_python_comments
+    #@ TestCommands.test_add_python_comments
     def test_add_python_comments(self):
         c, p, w = self.c, self.c.p, self.c.frame.body.wrapper
         p.b = self.prep(
             """
-            @language python
+    #@@language python
             def spam():
                 pass
             # after
@@ -80,7 +80,7 @@ class TestCommands(LeoUnitTest):
         )
         expected = self.prep(
             """
-            @language python
+    #@@language python
             def spam():
                 # pass
             # after
@@ -91,33 +91,33 @@ class TestCommands(LeoUnitTest):
         c.addComments()
         self.assertEqual(p.b, expected)
 
-    # @+node:ekr.20210906075242.2: *3* TestCommands.test_c_alert
+    #@ TestCommands.test_c_alert
     def test_c_alert(self):
         c = self.c
         c.alert('test of c.alert')
 
-    # @+node:ekr.20230727044355.1: *3* TestCommands.test_c_check_links
+    #@ TestCommands.test_c_check_links
     def check_c_checkVnodeLinks(self):
         c = self.c
         self.assertEqual(c.checkVnodeLinks(), 0)  # Leo's main checker.
         self.assertEqual(c.checkLinks(), 0)  # A slow test, suitable only for unit tests.
 
-    # @+node:ekr.20210906075242.3: *3* TestCommands.test_c_checkOutline
+    #@ TestCommands.test_c_checkOutline
     def test_c_checkOutline(self):
         c = self.c
         self.assertEqual(0, c.checkOutline())
 
-    # @+node:ekr.20210901140645.15: *3* TestCommands.test_c_checkPythonCode
+    #@ TestCommands.test_c_checkPythonCode
     def test_c_checkPythonCode(self):
         c = self.c
         c.checkPythonCode(event=None, ignoreAtIgnore=False, checkOnSave=False)
 
-    # @+node:ekr.20210901140645.16: *3* TestCommands.test_c_checkPythonNode
+    #@ TestCommands.test_c_checkPythonNode
     def test_c_checkPythonNode(self):
         c, p = self.c, self.c.p
         p.b = self.prep(
             """
-            @language python
+    #@@language python
 
             def abc:  # missing parens.
                 pass
@@ -126,7 +126,7 @@ class TestCommands(LeoUnitTest):
         result = c.checkPythonCode(event=None, checkOnSave=False, ignoreAtIgnore=True)
         self.assertEqual(result, 'error')
 
-    # @+node:ekr.20210906075242.4: *3* TestCommands.test_c_contractAllHeadlines
+    #@ TestCommands.test_c_contractAllHeadlines
     def test_c_contractAllHeadlines(self):
         c = self.c
         c.contractAllHeadlines()
@@ -135,7 +135,7 @@ class TestCommands(LeoUnitTest):
             p.moveToNext()
         c.redraw(p)
 
-    # @+node:ekr.20210906075242.6: *3* TestCommands.test_c_demote_illegal_clone_demote
+    #@ TestCommands.test_c_demote_illegal_clone_demote
     def test_c_demote_illegal_clone_demote(self):
         c, p = self.c, self.c.p
         # Create two cloned children.
@@ -153,7 +153,7 @@ class TestCommands(LeoUnitTest):
         self.assertEqual(0, c.checkOutline())
         self.assertEqual(2, p.numberOfChildren())
 
-    # @+node:felix.20250414224343.1: *3* TestCommands.test_c_doCommandByName_return_result
+    #@ TestCommands.test_c_doCommandByName_return_result
     def test_c_doCommandByName_return_result(self):
         c, p = self.c, self.c.p
 
@@ -163,7 +163,7 @@ class TestCommands(LeoUnitTest):
         p2 = c.p
         p2.b = self.prep(
             """
-            @language python
+    #@@language python
 
             def abc():  # this contains spaces
                 pass
@@ -179,7 +179,7 @@ class TestCommands(LeoUnitTest):
         val = c.doCommandByName('convert-blanks')
         assert val is False, f"expected: False got: {val}"
 
-    # @+node:felix.20250414224344.1: *3* TestCommands.test_c_doCommandByName_return_result_from_leo_script
+    #@ TestCommands.test_c_doCommandByName_return_result_from_leo_script
     def test_c_doCommandByName_return_result_from_leo_script(self):
         c, p = self.c, self.c.p
 
@@ -205,7 +205,7 @@ class TestCommands(LeoUnitTest):
         val = c.doCommandByName('test-return-result')
         assert val == 42, f"expected: 42 got: {val}"
 
-    # @+node:ekr.20210906075242.7: *3* TestCommands.test_c_expand_path_expression
+    #@ TestCommands.test_c_expand_path_expression
     def test_c_expand_path_expression(self):
         import os
 
@@ -233,7 +233,7 @@ class TestCommands(LeoUnitTest):
                 got = c.expand_path_expression(s)
                 self.assertEqual(got, expected, msg=s)
 
-    # @+node:ekr.20210906075242.8: *3* TestCommands.test_c_findMatchingBracket
+    #@ TestCommands.test_c_findMatchingBracket
     def test_c_findMatchingBracket(self):
         c, w = self.c, self.c.frame.body.wrapper
         s = '(abc)'
@@ -250,7 +250,7 @@ class TestCommands(LeoUnitTest):
             i2, j2 = w.getSelectionRange()
             self.assertTrue(i2 < j2, msg=f"i: {i}, j: {j}")
 
-    # @+node:ekr.20250404075346.1: *3* TestCommands.test_c_getEncoding
+    #@ TestCommands.test_c_getEncoding
     def test_c_getEncoding(self):
         c, p = self.c, self.c.p
         self.root_p.b = ''  # To ensure default.
@@ -274,7 +274,7 @@ class TestCommands(LeoUnitTest):
             message = f"expected: {expected} got: {encoding} {p2.h}"
             assert encoding == expected, message
 
-    # @+node:ekr.20250412054157.1: *3* TestCommands.test_c_getLineEnding
+    #@ TestCommands.test_c_getLineEnding
     def test_c_getLineEnding(self):
         c = self.c
         p = c.p
@@ -292,7 +292,7 @@ class TestCommands(LeoUnitTest):
             message = f"{directive}: expected {expected_ending!r} got {ending!r}"
             assert ending == expected_ending, message
 
-    # @+node:ekr.20250412054231.1: *3* TestCommands.test_c_getPageWidth
+    #@ TestCommands.test_c_getPageWidth
     def test_c_getPageWidth(self):
         c = self.c
         p = c.p
@@ -301,7 +301,7 @@ class TestCommands(LeoUnitTest):
             n = c.getPageWidth(p)
             assert n == w
 
-    # @+node:ekr.20250412054256.1: *3* TestCommands.test_c_gettabWidth
+    #@ TestCommands.test_c_gettabWidth
     def test_c_getTabWidth(self):
         c = self.c
         p = c.p
@@ -310,7 +310,7 @@ class TestCommands(LeoUnitTest):
             n = c.getTabWidth(p)
             assert n == w
 
-    # @+node:ekr.20250412054404.1: *3* TestCommands.test_c_getWrap
+    #@ TestCommands.test_c_getWrap
     def test_c_getWrap(self):
         c = self.c
         p = c.p
@@ -324,14 +324,14 @@ class TestCommands(LeoUnitTest):
             val = c.getWrap(p)
             assert val == expected_val
 
-    # @+node:ekr.20210906075242.9: *3* TestCommands.test_c_hiddenRootNode_fileIndex
+    #@ TestCommands.test_c_hiddenRootNode_fileIndex
     def test_c_hiddenRootNode_fileIndex(self):
         c = self.c
         assert c.hiddenRootNode.fileIndex.startswith('hidden-root-vnode-gnx'), (
             c.hiddenRootNode.fileIndex
         )
 
-    # @+node:ekr.20210906075242.10: *3* TestCommands.test_c_hoist_chapter_node
+    #@ TestCommands.test_c_hoist_chapter_node
     def test_c_hoist_chapter_node(self):
         c = self.c
         # Create the @settings and @chapter nodes.
@@ -350,7 +350,7 @@ class TestCommands(LeoUnitTest):
         self.assertEqual(c.p, aaa)
         self.assertEqual(c.hoistStack, [])
 
-    # @+node:ekr.20210906075242.11: *3* TestCommands.test_c_hoist_followed_by_goto_first_node
+    #@ TestCommands.test_c_hoist_followed_by_goto_first_node
     def test_c_hoist_followed_by_goto_first_node(self):
         c = self.c
         # Create the @settings and @chapter nodes.
@@ -377,13 +377,13 @@ class TestCommands(LeoUnitTest):
             self.assertEqual(c.p, c.rootPosition())
             assert c.p.isVisible(c)
 
-    # @+node:ekr.20210906075242.12: *3* TestCommands.test_c_hoist_with_no_children
+    #@ TestCommands.test_c_hoist_with_no_children
     def test_c_hoist_with_no_children(self):
         c = self.c
         c.hoist()
         c.dehoist()
 
-    # @+node:ekr.20210906075242.13: *3* TestCommands.test_c_insertBodyTime
+    #@ TestCommands.test_c_insertBodyTime
     def test_c_insertBodyTime(self):
         c = self.c
         # p = c.p
@@ -392,7 +392,7 @@ class TestCommands(LeoUnitTest):
         # w.setInsertPoint(len(s))
         c.insertBodyTime()
 
-    # @+node:ekr.20210906075242.15: *3* TestCommands.test_c_markSubheads
+    #@ TestCommands.test_c_markSubheads
     def test_c_markSubheads(self):
         c = self.c
         child1 = c.rootPosition().insertAsLastChild()
@@ -400,7 +400,7 @@ class TestCommands(LeoUnitTest):
         assert child1 and child2
         c.markSubheads()
 
-    # @+node:ekr.20210906075242.16: *3* TestCommands.test_c_pasteOutline_does_not_clone_top_node
+    #@ TestCommands.test_c_pasteOutline_does_not_clone_top_node
     def test_c_pasteOutline_does_not_clone_top_node(self):
         c = self.c
         p = c.p
@@ -412,7 +412,7 @@ class TestCommands(LeoUnitTest):
         assert p2
         assert not p2.isCloned()
 
-    # @+node:ekr.20250404075519.1: *3* TestCommands.test_c_getPath
+    #@ TestCommands.test_c_getPath
     def test_c_getPath(self):
         c, p = self.c, self.c.p
         child = p.insertAfter()
@@ -439,7 +439,7 @@ class TestCommands(LeoUnitTest):
         endpath = g.os_path_normpath('one/two')
         assert path.endswith(endpath), f"expected '{endpath}' got '{path}'"
 
-    # @+node:ekr.20210901140645.17: *3* TestCommands.test_c_tabNannyNode
+    #@ TestCommands.test_c_tabNannyNode
     def test_c_tabNannyNode(self):
         c, p = self.c, self.c.p
         # Test 1.
@@ -465,14 +465,14 @@ class TestCommands(LeoUnitTest):
         except IndentationError:
             pass
 
-    # @+node:ekr.20210906075242.20: *3* TestCommands.test_c_unmarkAll
+    #@ TestCommands.test_c_unmarkAll
     def test_c_unmarkAll(self):
         c = self.c
         c.unmarkAll()
         for p in c.all_positions():
             assert not p.isMarked(), p.h
 
-    # @+node:ekr.20210906075242.21: *3* TestCommands.test_class_StubConfig
+    #@ TestCommands.test_class_StubConfig
     def test_class_StubConfig(self):
         c = self.c
 
@@ -483,14 +483,14 @@ class TestCommands(LeoUnitTest):
         assert not x.getBool(c, 'mySetting')
         assert not x.enabledPluginsFileName
 
-    # @+node:ekr.20210906075242.29: *3* TestCommands.test_delete_comments_with_multiple_at_language_directives
+    #@ TestCommands.test_delete_comments_with_multiple_at_language_directives
     def test_delete_comments_with_multiple_at_language_directives(self):
         c, p, w = self.c, self.c.p, self.c.frame.body.wrapper
         p.b = self.prep(
             """
-            @language rest
+    #@@language rest
             rest text.
-            @language python
+    #@@language python
             def spam():
                 pass
             # after
@@ -498,9 +498,9 @@ class TestCommands(LeoUnitTest):
         )
         expected = self.prep(
             """
-            @language rest
+    #@@language rest
             rest text.
-            @language python
+    #@@language python
             def spam():
                 pass
             # after
@@ -511,12 +511,12 @@ class TestCommands(LeoUnitTest):
         c.deleteComments()
         self.assertEqual(p.b, expected)
 
-    # @+node:ekr.20210906075242.31: *3* TestCommands.test_delete_html_comments
+    #@ TestCommands.test_delete_html_comments
     def test_delete_html_comments(self):
         c, p, w = self.c, self.c.p, self.c.frame.body.wrapper
         p.b = self.prep(
             """
-            @language html
+    #@@language html
             <html>
                 <!-- text -->
             </html>
@@ -524,7 +524,7 @@ class TestCommands(LeoUnitTest):
         )
         expected = self.prep(
             """
-            @language html
+    #@@language html
             <html>
                 text
             </html>
@@ -535,12 +535,12 @@ class TestCommands(LeoUnitTest):
         c.deleteComments()
         self.assertEqual(p.b, expected)
 
-    # @+node:ekr.20210906075242.33: *3* TestCommands.test_delete_python_comments
+    #@ TestCommands.test_delete_python_comments
     def test_delete_python_comments(self):
         c, p, w = self.c, self.c.p, self.c.frame.body.wrapper
         p.b = self.prep(
             """
-            @language python
+    #@@language python
             def spam():
                 # pass
             # after
@@ -548,7 +548,7 @@ class TestCommands(LeoUnitTest):
         )
         expected = self.prep(
             """
-            @language python
+    #@@language python
             def spam():
                 pass
             # after
@@ -559,7 +559,7 @@ class TestCommands(LeoUnitTest):
         c.deleteComments()
         self.assertEqual(p.b, expected)
 
-    # @+node:ekr.20230308103855.1: *3* TestCommands.test_find_b_h
+    #@ TestCommands.test_find_b_h
     def test_find_b_h(self):
         c, p = self.c, self.c.p
 
@@ -581,7 +581,7 @@ class TestCommands(LeoUnitTest):
         list4 = c.find_b(r'.*\bline2\n', it=[child1])
         assert list4 == [child1], repr(list3)
 
-    # @+node:ekr.20210901140645.27: *3* TestCommands.test_koi8_r_encoding
+    #@ TestCommands.test_koi8_r_encoding
     def test_koi8_r_encoding(self):
         c, p = self.c, self.c.p
         p1 = p.insertAsLastChild()
@@ -594,7 +594,7 @@ class TestCommands(LeoUnitTest):
         p2 = p1.next()
         self.assertEqual(p1.b, p2.b)
 
-    # @+node:ekr.20210901140645.9: *3* TestCommands.test_official_commander_ivars
+    #@ TestCommands.test_official_commander_ivars
     def test_official_commander_ivars(self):
         c = self.c
         f = c.frame
@@ -617,8 +617,8 @@ class TestCommands(LeoUnitTest):
         for ivar in ivars:
             self.assertTrue(hasattr(c, ivar), msg=ivar)
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

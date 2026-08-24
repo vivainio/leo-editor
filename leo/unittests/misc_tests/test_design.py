@@ -1,9 +1,9 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20230506095312.1: * @file ../unittests/misc_tests/test_design.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20230506095312.1] @f ../unittests/misc_tests/test_design.py
 """Global design tests."""
 
-# @+<< test_design imports >>
-# @+node:ekr.20230507094414.1: ** << test_design imports >>
+#@+<< test_design imports >>
+#@> << test_design imports >>
 import ast
 from ast import NodeVisitor
 import glob
@@ -13,15 +13,15 @@ import re
 import unittest
 from leo.core import leoGlobals as g
 from leo.core.leoTest2 import LeoUnitTest
-# @-<< test_design imports >>
+#@-<< test_design imports >>
 
 # Keys are paths, values are contents of file.
 files_dict: dict[str, tuple[str, ast.AST]] = None
 
 
-# @+others
-# @+node:ekr.20230508065238.1: ** functions...
-# @+node:ekr.20230507170833.1: *3* function: dump_chains
+#@+others
+#@ functions...
+#@> function: dump_chains
 def dump_chains(chains_list, long_chains_list):
     c_pat = re.compile(r'\b(c[0-9]?|[\w_]+_c)\b')
     p_pat = re.compile(r'\b(p[0-9]?|[\w_]+_p)\b')
@@ -35,7 +35,7 @@ def dump_chains(chains_list, long_chains_list):
             print(s)
 
 
-# @+node:ekr.20230508064034.1: *3* function: filter_chain
+#@ function: filter_chain
 array_pat = re.compile(r'(\[).*?(\])')
 call_pat = re.compile(r'(\().*?(\))')
 string_pat1 = re.compile(r"(\').*?(\')")
@@ -52,7 +52,7 @@ def filter_chain(s: str) -> str:
     return s
 
 
-# @+node:ekr.20230506154039.1: *3* function: load_files
+#@ function: load_files
 def load_files():
     """
     Create the files_dict if necessary.
@@ -88,8 +88,8 @@ def load_files():
             files_dict[path] = (contents, tree)
 
 
-# @+node:ekr.20230506111929.1: ** Traverser classes
-# @+node:ekr.20230506111649.1: *3* class AnnotationsTraverser(NodeVisitor)
+#@< Traverser classes
+#@> class AnnotationsTraverser(NodeVisitor)
 class AnnotationsTraverser(NodeVisitor):
     annotations_set = set()
 
@@ -97,8 +97,8 @@ class AnnotationsTraverser(NodeVisitor):
         super().__init__()
         self.tester = tester
 
-    # @+others
-    # @+node:ekr.20230506123402.1: *4* test_annotation
+    #@+others
+    #@> test_annotation
     annotation_table = (
         (re.compile(r'\b(c[0-9]?|[\w_]+_c)\b'), 'Cmdr'),
         (re.compile(r'\b(p[0-9]?|[\w_]+_p)\b'), 'Position'),
@@ -139,7 +139,7 @@ class AnnotationsTraverser(NodeVisitor):
                 if annotation_s not in expected:
                     print(msg)
 
-    # @+node:ekr.20230506111649.3: *4* visit_AnnAssign
+    #@ visit_AnnAssign
     def visit_AnnAssign(self, node):
         # AnnAssign(expr target, expr annotation, expr? value, int simple)
         if isinstance(node.target, ast.Name):
@@ -147,7 +147,7 @@ class AnnotationsTraverser(NodeVisitor):
                 id_s = node.target.id
                 self.test_annotation(node, id_s, node.annotation)
 
-    # @+node:ekr.20230506111649.4: *4* visit_FunctionDef
+    #@ visit_FunctionDef
     def visit_FunctionDef(self, node):
         arguments = node.args
         for arg in arguments.args:
@@ -159,10 +159,10 @@ class AnnotationsTraverser(NodeVisitor):
                 self.test_annotation(node, id_s, annotation)
         self.generic_visit(node)  # Visit all children.
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20230506111927.1: *3* class ChainsTraverser(NodeVisitor)
+#@< class ChainsTraverser(NodeVisitor)
 class ChainsTraverser(NodeVisitor):
     chains_set = set()
 
@@ -175,12 +175,12 @@ class ChainsTraverser(NodeVisitor):
         self.chains_set.add(chain)
 
 
-# @+node:ekr.20230506095516.1: ** class TestAnnotations(unittest.TestCase)
+#@< class TestAnnotations(unittest.TestCase)
 class TestAnnotations(unittest.TestCase):
     """Test that annotations of c, g, p, s, v are as expected."""
 
-    # @+others
-    # @+node:ekr.20230508150535.1: *3* TestAnnotations.slow_test_all_paths
+    #@+others
+    #@> TestAnnotations.slow_test_all_paths
     def slow_test_all_paths(self):
         load_files()
         traverser = AnnotationsTraverser(tester=self)
@@ -192,15 +192,15 @@ class TestAnnotations(unittest.TestCase):
             for s in sorted(list(traverser.annotations_set)):
                 print(s)
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20230506095648.1: ** class TestChains(unittest.TestCase)
+#@< class TestChains(unittest.TestCase)
 class TestChains(unittest.TestCase):
     """Ensure that only certain chains exist."""
 
-    # @+others
-    # @+node:ekr.20230507122923.1: *3* TestChains.slow_test_all_paths
+    #@+others
+    #@> TestChains.slow_test_all_paths
     def slow_test_all_paths(self):
         load_files()
         traverser = ChainsTraverser()
@@ -225,7 +225,7 @@ class TestChains(unittest.TestCase):
             dump_chains(chains_list, long_chains_list)
         self.assertTrue(len(long_chains_list) > 400)
 
-    # @+node:ekr.20230507171657.1: *3* TestChains.test_bare_chain
+    #@ TestChains.test_bare_chain
     def test_bare_chain(self):
         contents = 'leoImport.MORE_Importer(c).import_file(fn)'
         tree = ast.parse(contents, filename='test_one_chain')
@@ -236,7 +236,7 @@ class TestChains(unittest.TestCase):
         chain = filter_chain(chains_list[0])
         self.assertEqual(chain, 'leoImport.MORE_Importer().import_file')
 
-    # @+node:ekr.20230507122925.1: *3* TestChains.test_one_chain
+    #@ TestChains.test_one_chain
     def test_one_chain(self):
         contents = """w = c.frame.body.wrapper.widget"""
         tree = ast.parse(contents, filename='test_one_chain')
@@ -247,15 +247,15 @@ class TestChains(unittest.TestCase):
         chain = filter_chain(chains_list[0])
         self.assertEqual(chain, 'c.frame.body.wrapper.widget')
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20250723090648.1: ** class TestCommands(LeoUnitTest)
+#@< class TestCommands(LeoUnitTest)
 class TestCommands(LeoUnitTest):
     """Global tests of commands."""
 
-    # @+others
-    # @+node:ekr.20250723090810.1: *3* TestCommands.test_event_kwarg
+    #@+others
+    #@> TestCommands.test_event_kwarg
     def test_event_kwarg(self):
         """Global test that all commands have an 'event' kwarg."""
         c = self.c
@@ -265,8 +265,8 @@ class TestCommands(LeoUnitTest):
             params = sig.parameters
             assert 'event' in params, f"{func.__name__}{params}"
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

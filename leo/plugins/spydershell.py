@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ville.20090815203828.5235: * @file ../plugins/spydershell.py
+#@+leo-ver=cub-1-thin
+#@0 [ville.20090815203828.5235] @f ../plugins/spydershell.py
 """Launches the spyder environment with access to Leo instance.
 See http://packages.python.org/spyder/
 
@@ -10,8 +10,8 @@ if it was closed before.
 """
 
 # Written by VMV.
-# @+<< imports >>
-# @+node:ville.20090815203828.5238: ** << imports >>
+#@+<< imports >>
+#@> << imports >>
 import sys
 from leo.core import leoGlobals as g
 
@@ -20,15 +20,15 @@ from leo.core import leoGlobals as g
 g.assertUi('qt')  # May raise g.UiTypeException, caught by the plugins manager.
 
 
-# @-<< imports >>
-# @+others
-# @+node:ville.20090815203828.5239: ** init
+#@-<< imports >>
+#@+others
+#@ init
 def init():
     """Return True if the plugin has loaded successfully."""
     return g.app.gui.guiName() == 'qt'
 
 
-# @+node:ville.20090815203828.5240: ** Leo commands
+#@ Leo commands
 @g.command('spyder-launch')
 def spyder_launch(event):
     """Launch spyder"""
@@ -82,7 +82,7 @@ def spyder_update(event):
     g.spyder.show()
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

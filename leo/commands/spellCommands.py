@@ -1,9 +1,9 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20150514040239.1: * @file ../commands/spellCommands.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20150514040239.1] @f ../commands/spellCommands.py
 """Leo's spell-checking commands."""
 
-# @+<< spellCommands imports & annotations >>
-# @+node:ekr.20150514050530.1: ** << spellCommands imports & annotations >>
+#@+<< spellCommands imports & annotations >>
+#@> << spellCommands imports & annotations >>
 from __future__ import annotations
 from collections.abc import Callable
 import re
@@ -24,7 +24,7 @@ if TYPE_CHECKING:  # pragma: no cover
 
     SpellDict = dict[str, list[str]]
     KWargs = Any
-# @-<< spellCommands imports & annotations >>
+#@-<< spellCommands imports & annotations >>
 
 
 def cmd(name: str) -> Callable:
@@ -32,8 +32,8 @@ def cmd(name: str) -> Callable:
     return g.new_cmd_decorator(name, ['c', 'spellCommands'])
 
 
-# @+others
-# @+node:ekr.20180207071908.1: ** class BaseSpellWrapper
+#@+others
+#@ class BaseSpellWrapper
 class BaseSpellWrapper:
     """Code common to EnchantWrapper and DefaultWrapper"""
 
@@ -41,8 +41,8 @@ class BaseSpellWrapper:
     c: Cmdr
     d: dict
 
-    # @+others
-    # @+node:ekr.20150514063305.513: *3* BaseSpellWrapper.clean_dict
+    #@+others
+    #@> BaseSpellWrapper.clean_dict
     def clean_dict(self, fn: str) -> None:
         if g.os_path_exists(fn):
             with open(fn, mode='rb') as f:
@@ -56,7 +56,7 @@ class BaseSpellWrapper:
                 with open(fn, mode='wb') as f:
                     f.write(s2)
 
-    # @+node:ekr.20180207071114.5: *3* BaseSpellWrapper.create
+    #@ BaseSpellWrapper.create
     def create(self, fn: str) -> None:
         """Create the given file with empty contents."""
         # Make the directories as needed.
@@ -79,30 +79,30 @@ class BaseSpellWrapper:
             g.error(f"unexpected error creating: {fn}")
             g.es_exception()
 
-    # @+node:ekr.20180207074613.1: *3* BaseSpellWrapper.default_dict
+    #@ BaseSpellWrapper.default_dict
     def default_dict(self, language: str) -> SpellDict:
         try:
             return enchant.Dict(language)  # type:ignore
         except Exception:
             return {}
 
-    # @+node:ekr.20180207073536.1: *3* BaseSpellWrapper.create_dict_from_file
+    #@ BaseSpellWrapper.create_dict_from_file
     def create_dict_from_file(self, fn: str, language: str) -> SpellDict:
         try:
             return enchant.DictWithPWL(language, fn)  # type:ignore
         except Exception:
             return {}
 
-    # @+node:ekr.20260725045445.1: *3* BaseSpellWrapper.find_user_dict
+    #@ BaseSpellWrapper.find_user_dict
     def find_user_dict(self) -> str:
         """Must be overridden in subclasses"""
         return ''
 
-    # @+node:ekr.20150514063305.515: *3* BaseSpellWrapper.ignore
+    #@ BaseSpellWrapper.ignore
     def ignore(self, word: str) -> None:
         self.d.add_to_session(word)
 
-    # @+node:ekr.20150514063305.517: *3* BaseSpellWrapper.process_word
+    #@ BaseSpellWrapper.process_word
     def process_word(self, word: str) -> list[str]:
         """
         Check the word. Return None if the word is properly spelled.
@@ -132,7 +132,7 @@ class BaseSpellWrapper:
             return []
         return d.suggest(word)
 
-    # @+node:ekr.20180209142310.1: *3* BaseSpellWrapper.show_info
+    #@ BaseSpellWrapper.show_info
     def show_info(self) -> None:
         g.es_print('pyenchant spell checker')
         g.es_print(f"user dictionary:   {self.find_user_dict()}")
@@ -143,10 +143,10 @@ class BaseSpellWrapper:
         except Exception:
             g.es_exception()
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20180207075606.1: ** class DefaultDict
+#@< class DefaultDict
 class DefaultDict:
     """A class with the same interface as the enchant dict class."""
 
@@ -155,25 +155,25 @@ class DefaultDict:
         self.ignored_words: set[str] = set()
         self.words: set[str] = set() if words is None else set(words)
 
-    # @+others
-    # @+node:ekr.20180207075740.1: *3* DefaultDict.add
+    #@+others
+    #@> DefaultDict.add
     def add(self, word: str) -> None:
         """Add a word to the dictionary."""
         self.words.add(word)
         self.added_words.add(word)
 
-    # @+node:ekr.20180207075751.1: *3* DefaultDict.add_to_session
+    #@ DefaultDict.add_to_session
     def add_to_session(self, word: str) -> None:
         self.ignored_words.add(word)
 
-    # @+node:ekr.20180207101513.1: *3* DefaultDict.add_words_from_dict
+    #@ DefaultDict.add_words_from_dict
     def add_words_from_dict(self, kind: str, fn: str, words: list[str]) -> None:
         """For use by DefaultWrapper."""
         for word in words or []:
             self.words.add(word)
             self.words.add(word.lower())
 
-    # @+node:ekr.20180207080007.1: *3* DefaultDict.check
+    #@ DefaultDict.check
     def check(self, word: str) -> bool:
         """Return True if the word is in the dict."""
         for s in (word, word.lower(), word.capitalize()):
@@ -181,7 +181,7 @@ class DefaultDict:
                 return True
         return False
 
-    # @+node:ekr.20180207085717.1: *3* DefaultDict.edits1 & edits2
+    #@ DefaultDict.edits1 & edits2
     # fmt: off
 
     def edits1(self, word: str) -> list[str]:
@@ -200,7 +200,7 @@ class DefaultDict:
         "All edits that are two edits away from `word`."
         return [e2 for e1 in self.edits1(word) for e2 in self.edits1(e1)]
 
-    # @+node:ekr.20180207081634.1: *3* DefaultDict.suggest & helpers
+    #@ DefaultDict.suggest & helpers
     def suggest(self, word: str) -> list[str]:
         def known(words: list[str]) -> list[str]:
             """Return the words that are in the dictionary."""
@@ -213,10 +213,10 @@ class DefaultDict:
         )
         return suggestions
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20180207071114.1: ** class DefaultWrapper (BaseSpellWrapper)
+#@< class DefaultWrapper (BaseSpellWrapper)
 class DefaultWrapper(BaseSpellWrapper):
     """
     A default spell checker for when pyenchant is not available.
@@ -230,8 +230,8 @@ class DefaultWrapper(BaseSpellWrapper):
     - ~/.leo/spellpyx.txt
     """
 
-    # @+others
-    # @+node:ekr.20180207071114.2: *3* DefaultWrapper. __init__
+    #@+others
+    #@> DefaultWrapper. __init__
     def __init__(self, c: Cmdr) -> None:
         """Ctor for DefaultWrapper class."""
         # pylint: disable=super-init-not-called
@@ -252,14 +252,14 @@ class DefaultWrapper(BaseSpellWrapper):
                 words = self.read_words(kind, fn)
                 self.d.add_words_from_dict(kind, fn, words)
 
-    # @+node:ekr.20180207110701.1: *3* DefaultWrapper.add
+    #@ DefaultWrapper.add
     def add(self, word: str) -> None:
         """Add a word to the user dictionary."""
         self.d.add(word)
         self.d.add(word.lower())
         self.save_user_dict()
 
-    # @+node:ekr.20180207100238.1: *3* DefaultWrapper.find_main_dict
+    #@ DefaultWrapper.find_main_dict
     def find_main_dict(self) -> str | None:
         """Return the full path to the global dictionary."""
         c = self.c
@@ -270,7 +270,7 @@ class DefaultWrapper(BaseSpellWrapper):
         fn = g.finalize_join(g.app.homeDir, '.leo', 'main_spelling_dict.txt')
         return fn if g.os_path_exists(fn) else None
 
-    # @+node:ekr.20230926171905.1: *3* DefaultWrapper.find_user_dict
+    #@ DefaultWrapper.find_user_dict
     def find_user_dict(self) -> str:
         """Return the full path to the global dictionary."""
         c = self.c
@@ -281,7 +281,7 @@ class DefaultWrapper(BaseSpellWrapper):
         fn = g.finalize_join(g.app.homeDir, '.leo', 'spellpyx.txt')
         return fn if g.os_path_exists(fn) else ''
 
-    # @+node:ekr.20180207073815.1: *3* DefaultWrapper.read_words
+    #@ DefaultWrapper.read_words
     def read_words(self, kind: str, fn: str) -> set[str]:
         """Return all the words from the dictionary file."""
         words = set()
@@ -297,7 +297,7 @@ class DefaultWrapper(BaseSpellWrapper):
             g.es_print(f"can not open {kind} dictionary: {fn}")
         return words
 
-    # @+node:ekr.20180207110718.1: *3* DefaultWrapper.save_dict
+    #@ DefaultWrapper.save_dict
     def save_dict(self, kind: str, fn: str, trace: bool = False) -> None:
         """
         Save the dictionary whose name is given, alphabetizing the file.
@@ -318,7 +318,7 @@ class DefaultWrapper(BaseSpellWrapper):
         f.write(g.toEncodedString(s))
         f.close()
 
-    # @+node:ekr.20180211104628.1: *3* DefaultWrapper.save_main/user_dict
+    #@ DefaultWrapper.save_main/user_dict
     def save_main_dict(self, trace: bool = False) -> None:
         if self.main_fn:
             self.save_dict('main', self.main_fn, trace=trace)
@@ -327,7 +327,7 @@ class DefaultWrapper(BaseSpellWrapper):
         if self.user_fn:
             self.save_dict('user', self.user_fn, trace=trace)
 
-    # @+node:ekr.20180209141933.1: *3* DefaultWrapper.show_info
+    #@ DefaultWrapper.show_info
     def show_info(self) -> None:
         table: tuple
         if self.main_fn:
@@ -346,17 +346,17 @@ class DefaultWrapper(BaseSpellWrapper):
         for kind, fn in table:
             g.es_print(f"{kind} dictionary: {(g.os_path_normpath(fn) if fn else 'None')}")
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20150514063305.510: ** class EnchantWrapper (BaseSpellWrapper)
+#@< class EnchantWrapper (BaseSpellWrapper)
 class EnchantWrapper(BaseSpellWrapper):
     """A wrapper class for PyEnchant spell checker"""
 
     # Contains all methods referencing self.c and self.d
 
-    # @+others
-    # @+node:ekr.20150514063305.511: *3* enchant. __init__
+    #@+others
+    #@> enchant. __init__
     def __init__(self, c: Cmdr) -> None:
         """Ctor for EnchantWrapper class."""
         # pylint: disable=super-init-not-called
@@ -366,12 +366,12 @@ class EnchantWrapper(BaseSpellWrapper):
         self.d: SpellDict = self.open_dict_file(fn)
         g.app.spellDict = self.d
 
-    # @+node:ekr.20180207071114.3: *3* enchant.add
+    #@ enchant.add
     def add(self, word: str) -> None:
         """Add a word to the user dictionary."""
         self.d.add(word)
 
-    # @+node:ekr.20180207072351.1: *3* enchant.find_user_dict
+    #@ enchant.find_user_dict
     def find_user_dict(self) -> str:
         """Return the full path to the local dictionary."""
         c = self.c
@@ -391,7 +391,7 @@ class EnchantWrapper(BaseSpellWrapper):
         # #1453: Return the default path.
         return join(g.app.homeDir, '.leo', 'spellpyx.txt')
 
-    # @+node:ekr.20180207072846.1: *3* enchant.init_language
+    #@ enchant.init_language
     def init_language(self) -> None:
         """Init self.language."""
         c = self.c
@@ -412,7 +412,7 @@ class EnchantWrapper(BaseSpellWrapper):
                 language = 'en_US'
         self.language = language
 
-    # @+node:ekr.20180207102856.1: *3* enchant.open_dict_file
+    #@ enchant.open_dict_file
     def open_dict_file(self, fn: str) -> SpellDict:  # A pyenchant dict or a DefaultDict.
         """Open or create the dict with the given fn."""
         language = self.language
@@ -445,15 +445,15 @@ class EnchantWrapper(BaseSpellWrapper):
             g.es_print('pip install pyenchant, NOT enchant')
         return d  # type:ignore
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20150514063305.481: ** class SpellCommandsClass
+#@< class SpellCommandsClass
 class SpellCommandsClass(BaseEditCommandsClass):
     """Commands to support the Spell Tab."""
 
-    # @+others
-    # @+node:ekr.20150514063305.482: *3* ctor & reloadSettings(SpellCommandsClass)
+    #@+others
+    #@> ctor & reloadSettings(SpellCommandsClass)
     def __init__(self, c: Cmdr) -> None:
         """
         Ctor for SpellCommandsClass class.
@@ -470,7 +470,7 @@ class SpellCommandsClass(BaseEditCommandsClass):
         c = self.c
         self.page_width = c.config.getInt("page-width")  # for wrapping
 
-    # @+node:ekr.20150514063305.484: *3* openSpellTab
+    #@ openSpellTab
     @cmd('spell-tab-open')
     def openSpellTab(self, event: LeoKeyEvent | None = None) -> None:
         """Open the Spell Checker tab in the log pane."""
@@ -494,8 +494,8 @@ class SpellCommandsClass(BaseEditCommandsClass):
         self.spell_as_you_type = False
         self.wrap_as_you_type = False
 
-    # @+node:ekr.20150514063305.492: *3* as_you_type_* commands
-    # @+node:ekr.20150514063305.493: *4* as_you_type_toggle
+    #@ as_you_type_* commands
+    #@> as_you_type_toggle
     @cmd('spell-as-you-type-toggle')
     def as_you_type_toggle(self, event: LeoKeyEvent | None = None) -> None:
         """as_you_type_toggle - toggle spell as you type."""
@@ -510,7 +510,7 @@ class SpellCommandsClass(BaseEditCommandsClass):
             g.registerHandler('bodykey2', self.as_you_type_onkey)
         g.es("Spell as you type enabled")
 
-    # @+node:ekr.20150514063305.494: *4* as_you_type_wrap
+    #@ as_you_type_wrap
     @cmd('spell-as-you-type-wrap')
     def as_you_type_wrap(self, event: LeoKeyEvent | None = None) -> None:
         """as_you_type_wrap - toggle wrap as you type."""
@@ -525,7 +525,7 @@ class SpellCommandsClass(BaseEditCommandsClass):
             g.registerHandler('bodykey2', self.as_you_type_onkey)
         g.es("Wrap as you type enabled")
 
-    # @+node:ekr.20150514063305.495: *4* as_you_type_next
+    #@ as_you_type_next
     @cmd('spell-as-you-type-next')
     def as_you_type_next(self, event: LeoKeyEvent | None = None) -> None:
         """as_you_type_next - cycle word behind cursor to next suggestion."""
@@ -536,7 +536,7 @@ class SpellCommandsClass(BaseEditCommandsClass):
         self.suggestion_idx = (self.suggestion_idx + 1) % len(self.suggestions)
         self.as_you_type_replace(word)
 
-    # @+node:ekr.20150514063305.496: *4* as_you_type_undo
+    #@ as_you_type_undo
     @cmd('spell-as-you-type-undo')
     def as_you_type_undo(self, event: LeoKeyEvent | None = None) -> None:
         """as_you_type_undo - replace word behind cursor with word
@@ -547,7 +547,7 @@ class SpellCommandsClass(BaseEditCommandsClass):
             return
         self.as_you_type_replace(self.word)
 
-    # @+node:ekr.20150514063305.497: *4* as_you_type_onkey
+    #@ as_you_type_onkey
     def as_you_type_onkey(self, tag: str, kwargs: KWargs) -> None:
         """as_you_type_onkey - handle a keystroke in the body when
         spell as you type is active
@@ -600,7 +600,7 @@ class SpellCommandsClass(BaseEditCommandsClass):
                 c.p.b = txt
                 w.setInsertPoint(i + 1)  # must come after c.p.b assignment
 
-    # @+node:ekr.20150514063305.498: *4* as_you_type_replace
+    #@ as_you_type_replace
     def as_you_type_replace(self, word: str) -> None:
         """as_you_type_replace - replace the word behind the cursor
         with `word`
@@ -627,15 +627,15 @@ class SpellCommandsClass(BaseEditCommandsClass):
         w.setInsertPoint(i + len(word) + xtra - 1)
         c.bodyWantsFocusNow()
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20150514063305.499: ** class SpellTabHandler
+#@<2 class SpellTabHandler
 class SpellTabHandler:
     """A class to create and manage Leo's Spell Check dialog."""
 
-    # @+others
-    # @+node:ekr.20150514063305.501: *3* SpellTabHandler.__init__
+    #@+others
+    #@> SpellTabHandler.__init__
     def __init__(self, c: Cmdr, tabName: str) -> None:
         """Ctor for SpellTabHandler class."""
         # New in Leo 6.7.5: This class works in a null gui.
@@ -661,8 +661,8 @@ class SpellTabHandler:
             # g.es_print('No main dictionary')
             self.tab = None
 
-    # @+node:ekr.20150514063305.502: *3* Commands
-    # @+node:ekr.20150514063305.503: *4* SpellTabHandler.add
+    #@ Commands
+    #@> SpellTabHandler.add
     def add(self, event: LeoKeyEvent | None = None) -> None:
         """Add the selected suggestion to the dictionary."""
         if self.loaded:
@@ -670,7 +670,7 @@ class SpellTabHandler:
                 self.spellController.add(w)
                 self.tab.onFindButton()
 
-    # @+node:ekr.20150514063305.504: *4* SpellTabHandler.change
+    #@ SpellTabHandler.change
     def change(self, event: LeoKeyEvent | None = None) -> bool:
         """Make the selected change to the text"""
         if not self.loaded:
@@ -702,7 +702,7 @@ class SpellTabHandler:
         c.bodyWantsFocus()
         return False
 
-    # @+node:ekr.20150514063305.505: *4* SpellTabHandler.find & helper
+    #@ SpellTabHandler.find & helper
     # Create a pattern that matches words, including contractions.
 
     # The following pattern below is only approximate!
@@ -854,7 +854,7 @@ class SpellTabHandler:
                 c.bodyWantsFocus()
                 return None
 
-    # @+node:ekr.20160415033936.1: *5* SpellTabHandler.showMisspelled
+    #@> SpellTabHandler.showMisspelled
     def showMisspelled(self, p: Position) -> None:
         """Show the position p, contracting the tree as needed."""
         c = self.c
@@ -873,11 +873,11 @@ class SpellTabHandler:
         else:
             c.selectPosition(p)
 
-    # @+node:ekr.20150514063305.508: *4* SpellTabHandler.hide
+    #@< SpellTabHandler.hide
     def hide(self, event: LeoKeyEvent | None = None) -> None:
         self.c.frame.log.selectTab('Log')
 
-    # @+node:ekr.20150514063305.509: *4* SpellTabHandler.ignore
+    #@ SpellTabHandler.ignore
     def ignore(self, event: LeoKeyEvent | None = None) -> None:
         """Ignore the incorrect word for the duration of this spell check session."""
         if self.loaded:
@@ -885,17 +885,17 @@ class SpellTabHandler:
                 self.spellController.ignore(w)
                 self.tab.onFindButton()
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20180209141207.1: ** @g.command('show-spell-info')
+#@<2 @g.command('show-spell-info')
 @g.command('show-spell-info')
 def show_spell_info(event: LeoKeyEvent | None = None) -> None:
     if c := event.get('c') if event else None:
         c.spellCommands.handler.spellController.show_info()
 
 
-# @+node:ekr.20180211104019.1: ** @g.command('clean-main-spell-dict')
+#@ @g.command('clean-main-spell-dict')
 @g.command('clean-main-spell-dict')
 def clean_main_spell_dict(event: LeoKeyEvent | None = None) -> None:
     """
@@ -908,7 +908,7 @@ def clean_main_spell_dict(event: LeoKeyEvent | None = None) -> None:
         DefaultWrapper(c).save_main_dict(trace=True)
 
 
-# @+node:ekr.20180211105748.1: ** @g.command('clean-user-spell-dict')
+#@ @g.command('clean-user-spell-dict')
 @g.command('clean-user-spell-dict')
 def clean_user_spell_dict(event: LeoKeyEvent | None = None) -> None:
     """
@@ -921,7 +921,7 @@ def clean_user_spell_dict(event: LeoKeyEvent | None = None) -> None:
         DefaultWrapper(c).save_user_dict(trace=True)
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

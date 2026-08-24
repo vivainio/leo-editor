@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20210905151702.1: * @file ../unittests/core/test_leoColorizer.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20210905151702.1] @f ../unittests/core/test_leoColorizer.py
 """Tests of leoColorizer.py"""
 
 # pylint: disable=line-too-long
@@ -14,13 +14,13 @@ from leo.core.leoTest2 import create_app, LeoUnitTest
 assert g
 
 
-# @+others
-# @+node:ekr.20210905151702.2: ** class TestColorizer(LeoUnitTest)
+#@+others
+#@> class TestColorizer(LeoUnitTest)
 class TestColorizer(LeoUnitTest):
     """Test cases for leoColorizer.py"""
 
-    # @+others
-    # @+node:ekr.20210905161336.1: *3* TestColorizer.color
+    #@+others
+    #@> TestColorizer.color
     def color(self, language_name, text):
         """
         Run the test by colorizing a node with the given text.
@@ -50,11 +50,11 @@ class TestColorizer(LeoUnitTest):
         for s in g.splitLines(text):
             x.pygmentsMainLoop(s)
 
-    # @+node:ekr.20210905170507.2: *3* TestColorizer.test__comment_after_language_plain
+    #@ TestColorizer.test__comment_after_language_plain
     def test__comment_after_language_plain(self):
         text = self.prep(
             """
-            @comment # /* */
+    #@@comment # /* */
 
             This is plain text.
 
@@ -70,7 +70,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('plain', text)
 
-    # @+node:ekr.20210905170507.3: *3* TestColorizer.test_bc_scanLanguageDirectives
+    #@ TestColorizer.test_bc_scanLanguageDirectives
     def test_bc_scanLanguageDirectives(self):
         if not Qt:
             self.skipTest('Requires Qt')
@@ -92,7 +92,7 @@ class TestColorizer(LeoUnitTest):
             got = x.scanLanguageDirectives(grand)
             self.assertEqual(got, language, msg=f"i: {i} {language}")
 
-    # @+node:ekr.20210905170507.4: *3* TestColorizer.test_bc_useSyntaxColoring
+    #@ TestColorizer.test_bc_useSyntaxColoring
     def test_bc_useSyntaxColoring(self):
         if not Qt:
             self.skipTest('Requires Qt')
@@ -117,7 +117,6 @@ class TestColorizer(LeoUnitTest):
             # Unambiguous child.
             (False, '', '@killcolor\n'),
             (True, '', '@color\n'),
-            # @verbatim
             # @nocolor-node rules node.
             (False, '', '@nocolor-node\n'),
             (False, '', '@color\n@nocolor-node\n'),
@@ -133,7 +132,7 @@ class TestColorizer(LeoUnitTest):
             got = x.useSyntaxColoring(grand)
             self.assertEqual(got, expected, msg=f"i: {i} {language}")
 
-    # @+node:ekr.20231229142541.1: *3* TestColorizer.test_match_fstring_helper
+    #@ TestColorizer.test_match_fstring_helper
     def test_match_fstring_helper(self):
         c = self.c
         colorizer = JEditColorizer(c, None)
@@ -160,13 +159,13 @@ class TestColorizer(LeoUnitTest):
                 else:
                     assert n == len(s) + 1, (n, len(s), s)
 
-    # @+node:ekr.20210905170507.39: *3* TestColorizer.test_scanColorDirectives
+    #@ TestColorizer.test_scanColorDirectives
     def test_scanColorDirectives(self):
         c = self.c
         language = g.findLanguageDirectives(c, c.p)
         self.assertEqual(language, 'python')
 
-    # @+node:ekr.20260519084534.1: *3* TestQtColorizer.test_underlines_in_setTag
+    #@ [ekr.20260519084534.1] TestQtColorizer.test_underlines_in_setTag
     def test_underlines_in_setTag(self):
         # Test the calls in setTag.
         # colorer = self.c.frame.body.colorizer
@@ -188,8 +187,8 @@ class TestColorizer(LeoUnitTest):
             format.setUnderlineStyle(style)
         format.setFontUnderline(True)
 
-    # @+node:ekr.20260519084430.1: *3* TestColorizer: per-language tests
-    # @+node:ekr.20210905170507.5: *4* TestColorizer.test_colorizer_Actionscript
+    #@ TestColorizer: per-language tests
+    #@> TestColorizer.test_colorizer_Actionscript
     def test_colorizer_Actionscript(self):
         text = self.prep(
             """
@@ -252,14 +251,14 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('actionscript', text)
 
-    # @+node:ekr.20210905170507.6: *4* TestColorizer.test_colorizer_C
+    #@ TestColorizer.test_colorizer_C
     def test_colorizer_C(self):
         text = self.prep(
             """
-            @comment /* */
+    #@@comment /* */
 
             @
-            @c
+    #@@c
 
             #define WIPEOUT 0 /*
                                * Causes database card number & flags to be set to zero.
@@ -276,12 +275,12 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('c', text)
 
-    # @+node:ekr.20210905170507.7: *4* TestColorizer.test_colorizer_C_
+    #@ TestColorizer.test_colorizer_C_
     def test_colorizer_C_(self):
         text = self.prep(
             """
             @ comment
-            @c
+    #@@c
 
             /* block
             comment */
@@ -314,7 +313,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('csharp', text)
 
-    # @+node:ekr.20210905170507.8: *4* TestColorizer.test_colorizer_css
+    #@ TestColorizer.test_colorizer_css
     def test_colorizer_css(self):
         text = self.prep(
             """
@@ -389,7 +388,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('css', text)
 
-    # @+node:ekr.20210905170507.10: *4* TestColorizer.test_colorizer_cython
+    #@ TestColorizer.test_colorizer_cython
     def test_colorizer_cython(self):
         text = self.prep(
             """
@@ -408,7 +407,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('cython', text)
 
-    # @+node:ekr.20210905170507.11: *4* TestColorizer.test_colorizer_elisp
+    #@ TestColorizer.test_colorizer_elisp
     def test_colorizer_elisp(self):
         text = self.prep(
             """
@@ -435,7 +434,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('elisp', text)
 
-    # @+node:ekr.20210905170507.12: *4* TestColorizer.test_colorizer_erlang
+    #@ TestColorizer.test_colorizer_erlang
     def test_colorizer_erlang(self):
         text = self.prep(
             """
@@ -446,7 +445,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('erlang', text)
 
-    # @+node:ekr.20210905170507.13: *4* TestColorizer.test_colorizer_forth
+    #@ TestColorizer.test_colorizer_forth
     def test_colorizer_forth(self):
         text = self.prep(
             r"""\\\
@@ -465,7 +464,7 @@ class TestColorizer(LeoUnitTest):
                until
 
             @ test
-            @c
+    #@@c
 
             { abc }
 
@@ -484,7 +483,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('forth', text)
 
-    # @+node:ekr.20210905170507.15: *4* TestColorizer.test_colorizer_HTML1
+    #@ TestColorizer.test_colorizer_HTML1
     def test_colorizer_HTML1(self):
         text = self.prep(
             """
@@ -582,7 +581,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('html', text)
 
-    # @+node:ekr.20210905170507.16: *4* TestColorizer.test_colorizer_HTML2
+    #@ TestColorizer.test_colorizer_HTML2
     def test_colorizer_HTML2(self):
         text = self.prep(
             """
@@ -594,7 +593,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('html', text)
 
-    # @+node:ekr.20230421104052.1: *4* TestColorizer.test_colorizer_HTML_script_tag
+    #@ TestColorizer.test_colorizer_HTML_script_tag
     def test_colorizer_HTML_script_tag(self):
         text = self.prep(
             """
@@ -617,7 +616,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('html', text)
 
-    # @+node:ekr.20210905170507.14: *4* TestColorizer.test_colorizer_HTML_string_bug
+    #@ TestColorizer.test_colorizer_HTML_string_bug
     def test_colorizer_HTML_string_bug(self):
         text = self.prep(
             """
@@ -627,14 +626,14 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('html', text)
 
-    # @+node:ekr.20210905170507.17: *4* TestColorizer.test_colorizer_Java
+    #@ TestColorizer.test_colorizer_Java
     def test_colorizer_Java(self):
         text = self.prep(
             '''
             @ doc part
-            @c
+    #@@c
 
-            @language java /* Colored by match_leo_keyword: tag = leoKeyword. */
+    #@@language java /* Colored by match_leo_keyword: tag = leoKeyword. */
 
             @whatever /* Colored by java match_following rule: tag = keyword4. */
 
@@ -647,7 +646,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('java', text)
 
-    # @+node:ekr.20210905170507.18: *4* TestColorizer.test_colorizer_LaTex
+    #@ TestColorizer.test_colorizer_LaTex
     def test_colorizer_LaTex(self):
         text = self.prep(
             r"""\\\
@@ -656,7 +655,7 @@ class TestColorizer(LeoUnitTest):
             This is a test of \LaTeX mode.
 
             @ blah blah blah
-            @c
+    #@@c
 
             \c and \LaTeX are latex keywords.
 
@@ -676,7 +675,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('latex', text)
 
-    # @+node:ekr.20210905170507.19: *4* TestColorizer.test_colorizer_lisp
+    #@ TestColorizer.test_colorizer_lisp
     def test_colorizer_lisp(self):
         text = self.prep(
             """
@@ -703,7 +702,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('lisp', text)
 
-    # @+node:ekr.20240206051426.1: *4* TestColorizer.test_colorizer_nim
+    #@ TestColorizer.test_colorizer_nim
     def test_colorizer_nim(self):
         text = self.prep(
             """
@@ -744,7 +743,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('nim', text)
 
-    # @+node:ekr.20210905170507.20: *4* TestColorizer.test_colorizer_objective_c
+    #@ TestColorizer.test_colorizer_objective_c
     def test_colorizer_objective_c(self):
         text = self.prep(
             """
@@ -782,7 +781,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('objective_c', text)
 
-    # @+node:ekr.20210905170507.21: *4* TestColorizer.test_colorizer_perl
+    #@ TestColorizer.test_colorizer_perl
     def test_colorizer_perl(self):
         text = self.prep(
             """
@@ -843,13 +842,13 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('perl', text)
 
-    # @+node:ekr.20210905170507.22: *4* TestColorizer.test_colorizer_PHP
+    #@ TestColorizer.test_colorizer_PHP
     def test_colorizer_PHP(self):
         text = self.prep(
             """
             @ doc
             This is a doc part.
-            @c
+    #@@c
 
             and or
             array
@@ -864,7 +863,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('php', text)
 
-    # @+node:ekr.20210905170507.23: *4* TestColorizer.test_colorizer_plsql
+    #@ TestColorizer.test_colorizer_plsql
     def test_colorizer_plsql(self):
         text = self.prep(
             """
@@ -1249,7 +1248,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('plsql', text)
 
-    # @+node:ekr.20210905170507.25: *4* TestColorizer.test_colorizer_Python1
+    #@ TestColorizer.test_colorizer_Python1
     def test_colorizer_Python1(self):
         text = self.prep(
             """
@@ -1260,7 +1259,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('python', text)
 
-    # @+node:ekr.20210905170507.26: *4* TestColorizer.test_colorizer_Python2
+    #@ TestColorizer.test_colorizer_Python2
     def test_colorizer_Python2(self):
         text = self.prep(
             '''
@@ -1284,7 +1283,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('python', text)
 
-    # @+node:ekr.20231209161622.1: *4* TestColorizer.test_colorizer_Python_fstrings
+    #@ TestColorizer.test_colorizer_Python_fstrings
     def test_colorizer_Python_fstrings(self):
         text = self.prep(
             r'''
@@ -1300,7 +1299,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('python', text)
 
-    # @+node:ekr.20210905170507.24: *4* TestColorizer.test_colorizer_python_xml_jEdit_
+    #@ TestColorizer.test_colorizer_python_xml_jEdit_
     def test_colorizer_python_xml_jEdit_(self):
         text = self.prep(
             r"""\\\
@@ -1326,7 +1325,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('html', text)
 
-    # @+node:ekr.20210905170507.27: *4* TestColorizer.test_colorizer_r
+    #@ TestColorizer.test_colorizer_r
     def test_colorizer_r(self):
         text = self.prep(
             """
@@ -1340,7 +1339,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('r', text)
 
-    # @+node:ekr.20210905170507.29: *4* TestColorizer.test_colorizer_Rebol
+    #@ TestColorizer.test_colorizer_Rebol
     def test_colorizer_Rebol(self):
         text = self.prep(
             """
@@ -1412,7 +1411,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('rebol', text)
 
-    # @+node:ekr.20210905170507.30: *4* TestColorizer.test_colorizer_rest
+    #@ TestColorizer.test_colorizer_rest
     def test_colorizer_rest(self):
         text = self.prep(
             r"""\\\
@@ -1426,7 +1425,7 @@ class TestColorizer(LeoUnitTest):
             stylesheet_path=..\doc
             write_intermediate_file = False
             verbose=True
-            @c
+    #@@c
 
             . Links used in this document...
 
@@ -1482,7 +1481,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('rest', text)
 
-    # @+node:ekr.20210905170507.31: *4* TestColorizer.test_colorizer_scala
+    #@ TestColorizer.test_colorizer_scala
     def test_colorizer_scala(self):
         text = self.prep(
             """
@@ -1497,7 +1496,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('scala', text)
 
-    # @+node:ekr.20210905170507.32: *4* TestColorizer.test_colorizer_shell
+    #@ TestColorizer.test_colorizer_shell
     def test_colorizer_shell(self):
         text = self.prep(
             """
@@ -1524,7 +1523,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('shell', text)
 
-    # @+node:ekr.20210905170507.33: *4* TestColorizer.test_colorizer_shellscript
+    #@ TestColorizer.test_colorizer_shellscript
     def test_colorizer_shellscript(self):
         text = self.prep(
             """
@@ -1549,7 +1548,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('shellscript', text)
 
-    # @+node:ekr.20210905170507.34: *4* TestColorizer.test_colorizer_tex_xml_jEdit_
+    #@ TestColorizer.test_colorizer_tex_xml_jEdit_
     def test_colorizer_tex_xml_jEdit_(self):
         text = self.prep(
             """
@@ -1576,12 +1575,12 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('html', text)
 
-    # @+node:ekr.20210905170507.36: *4* TestColorizer.test_colorizer_wikiTest
+    #@ TestColorizer.test_colorizer_wikiTest
     def test_colorizer_wikiTest(self):
         # both color_markup & add_directives plugins must be enabled.
         text = self.prep(
             '''
-            @markup wiki
+    #@@markup wiki
 
             """ text~~red:some text~~more text"""
 
@@ -1593,7 +1592,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('html', text)
 
-    # @+node:ekr.20210905170507.40: *4* TestColorizer.test_vbscript
+    #@ TestColorizer.test_vbscript
     def test_vbscript(self):
         text = self.prep(
             """
@@ -1603,7 +1602,7 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('vbscript', text)
 
-    # @+node:ekr.20250501.40: *4* TestColorizer.test_colorizer_pug
+    #@ TestColorizer.test_colorizer_pug
     def test_colorizer_pug(self):
         text = self.prep(
             """
@@ -1644,10 +1643,10 @@ class TestColorizer(LeoUnitTest):
         )
         self.color('pug', text)
 
-    # @-others
+    #@-others
 
 
-# @+node:ekr.20260519090359.1: ** class TestQtColorizer(LeoUnitTest)
+#@<2 class TestQtColorizer(LeoUnitTest)
 class TestQtColorizer(LeoUnitTest):
     """Qt test cases for leoColorizer.py"""
 
@@ -1655,8 +1654,8 @@ class TestQtColorizer(LeoUnitTest):
     def setUpClass(cls: Any) -> None:
         create_app(gui_name='null')  # *not* 'qt'
 
-    # @+others
-    # @+node:ekr.20260519084534.1: *3* TestQtColorizer.test_underlines_in_setTag
+    #@+others
+    #@> [ekr.20260519084534.1] TestQtColorizer.test_underlines_in_setTag
     def test_underlines_in_setTag(self):
         # Test the calls in setTag.
         # colorer = self.c.frame.body.colorizer
@@ -1678,8 +1677,8 @@ class TestQtColorizer(LeoUnitTest):
             format.setUnderlineStyle(style)
         format.setFontUnderline(True)
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

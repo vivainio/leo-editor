@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20101110095202.5882: * @file ../plugins/zenity_file_dialogs.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20101110095202.5882] @f ../plugins/zenity_file_dialogs.py
 """Replaces the tk file dialogs on Linux with external
 calls to the zenity gtk dialog package.
 
@@ -19,8 +19,8 @@ from leo.core import leoPlugins
 trace = False
 
 
-# @+others
-# @+node:ekr.20101110095557.5886: ** testForZenity
+#@+others
+#@> testForZenity
 def testForZenity():
     command = ['which', 'zenity']
     o = subprocess.Popen(command, stdout=subprocess.PIPE)
@@ -30,7 +30,7 @@ def testForZenity():
     return not ret
 
 
-# @+node:ekr.20101110095557.5888: ** init
+#@ init
 def init():
     """Return True if the plugin has loaded successfully."""
     if g.unitTesting:
@@ -44,14 +44,14 @@ def init():
     return ok
 
 
-# @+node:ekr.20101110095557.5890: ** onStart2
+#@ onStart2
 def onStart2(tag, keywords):
     """Replace tkfile open/save method with external calls to zenity."""
     g.funcToMethod(runOpenFileDialog, g.app.gui)
     g.funcToMethod(runSaveFileDialog, g.app.gui)
 
 
-# @+node:ekr.20101110095557.5892: ** callZenity
+#@ callZenity
 def callZenity(title: str, save: bool = False, test: bool = False) -> bytes | None:
     command = ['zenity', '--file-selection', '--title=%s' % title]
     if save:
@@ -69,7 +69,7 @@ def callZenity(title: str, save: bool = False, test: bool = False) -> bytes | No
     return filename
 
 
-# @+node:ekr.20101110095557.5894: ** runOpenFileDialog
+#@ runOpenFileDialog
 def runOpenFileDialog(
     title,
     *,
@@ -81,7 +81,7 @@ def runOpenFileDialog(
     return callZenity(title)
 
 
-# @+node:ekr.20101110095557.5896: ** runSaveFileDialog
+#@ runSaveFileDialog
 def runSaveFileDialog(
     title='',
     *,
@@ -93,7 +93,7 @@ def runSaveFileDialog(
     return callZenity(title, save=True)
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

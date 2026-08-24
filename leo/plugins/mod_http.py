@@ -1,11 +1,11 @@
-# @+leo-ver=5-thin
-# @+node:EKR.20040517080250.1: * @file ../plugins/mod_http.py
+#@+leo-ver=cub-1-thin
+#@0 [EKR.20040517080250.1] @f ../plugins/mod_http.py
 # pylint: disable=no-member
 # mypy: ignore-errors
-# @+<< docstring >>
-# @+node:ekr.20050111111238: ** << docstring >>
-# @@language rest
-# @@wrap
+#@+<< docstring >>
+#@> << docstring >>
+#@@language rest
+#@@wrap
 """
 An http plug-in for LEO, based on AsyncHttpServer.py.
 
@@ -222,9 +222,9 @@ which node is selected.
 
 """
 
-# @-<< docstring >>
-# @+<< imports >>
-# @+node:EKR.20040517080250.3: ** << imports >>
+#@-<< docstring >>
+#@+<< imports >>
+#@ << imports >>
 # pylint: disable=deprecated-method
 # parse_qs
 try:
@@ -249,17 +249,17 @@ from leo.core import leoGlobals as g
 SimpleHTTPRequestHandler = http.server.SimpleHTTPRequestHandler
 StringIO = io.StringIO
 BytesIO = io.BytesIO
-# @-<< imports >>
-# @+<< data >>
-# @+node:ekr.20161001100345.1: ** << data >>
+#@-<< imports >>
+#@+<< data >>
+#@ << data >>
 # This encoding must match the character encoding used in your browser.
 # If it does not, non-ascii characters will look very strange.
 # To do: Can we query the browser for this?
 browser_encoding = 'utf-8'
 sockets_to_close = []
-# @-<< data >>
-# @+others
-# @+node:ekr.20060830091349: ** init & helpers (mod_http.py)
+#@-<< data >>
+#@+others
+#@ init & helpers (mod_http.py)
 message_given = False
 
 
@@ -295,7 +295,7 @@ def init():
     return True
 
 
-# @+node:tbrown.20111005140148.18223: *3* getGlobalConfiguration
+#@> getGlobalConfiguration
 def getGlobalConfiguration():
     """read config."""
     # timeout.
@@ -320,7 +320,7 @@ def getGlobalConfiguration():
         config.rst2_http_attributename = new_rst2_http_attributename
 
 
-# @+node:EKR.20040517080250.45: *3* plugin_wrapper
+#@ plugin_wrapper
 def plugin_wrapper(tag, keywords):
     if g.app.killed:
         return
@@ -329,7 +329,7 @@ def plugin_wrapper(tag, keywords):
         pass
 
 
-# @+node:bwmulder.20050326191345.1: *3* onFileOpen (not used) (mod_http.py)
+#@ onFileOpen (not used) (mod_http.py)
 def onFileOpen(tag, keywords):
     assert asyncore is not None
     c = keywords.get("new_c")
@@ -343,7 +343,7 @@ def onFileOpen(tag, keywords):
         g.es("http serving enabled on port %s, " % (config.http_port), color="purple")
 
 
-# @+node:EKR.20040517080250.48: *3* getConfiguration (not used)
+#@ getConfiguration (not used)
 def getConfiguration(c):
     """Called when the user opens a new file."""
     # timeout.
@@ -364,7 +364,7 @@ def getConfiguration(c):
         config.rst2_http_attributename = new_rst2_http_attributename
 
 
-# @+node:ekr.20161003140938.1: ** getData
+#@< getData
 def getData(setting):
     """Return the given @data node."""
     # Plug an important security hole.
@@ -382,7 +382,7 @@ def getData(setting):
     return s
 
 
-# @+node:bwmulder.20050326191345: ** class config
+#@ class config
 class config:
     enabled = None  # True when security check re http-allow-remote-exec passes.
     http_active = False
@@ -392,12 +392,12 @@ class config:
     rst2_http_attributename = 'rst_http_attribute'
 
 
-# @+node:EKR.20040517080250.4: ** class delayedSocketStream
+#@ class delayedSocketStream
 if asyncore:
 
     class delayedSocketStream(asyncore.dispatcher_with_send):
-        # @+others
-        # @+node:EKR.20040517080250.5: *3* __init__
+        #@+others
+        #@> __init__
         def __init__(self, sock):
             # pylint: disable=super-init-not-called
             self._map = asyncore.socket_map
@@ -406,11 +406,11 @@ if asyncore:
             self.closed = 1  # compatibility with SocketServer
             self.buffer = []
 
-        # @+node:EKR.20040517080250.6: *3* write
+        #@ write
         def write(self, data):
             self.buffer.append(data)
 
-        # @+node:EKR.20040517080250.7: *3* initiate_sending
+        #@ initiate_sending
         def initiate_sending(self):
             # Create a bytes string.
             aList = [g.toEncodedString(z) for z in self.buffer]
@@ -425,24 +425,24 @@ if asyncore:
                 # The addr isn't crucial
                 pass
 
-        # @+node:EKR.20040517080250.8: *3* handle_read
+        #@ handle_read
         def handle_read(self):
             pass
 
-        # @+node:EKR.20040517080250.9: *3* writable
+        #@ writable
         def writable(self):
             result = (not self.connected) or len(self.out_buffer)
             if not result:
                 sockets_to_close.append(self)
             return result
 
-        # @-others
+        #@-others
 
 
-# @+node:EKR.20040517080250.20: ** class leo_interface
+#@< class leo_interface
 class leo_interface:
-    # @+others
-    # @+node:bwmulder.20050322224921: *3* send_head & helpers
+    #@+others
+    #@> send_head & helpers
     def send_head(self):
         """Common code for GET and HEAD commands.
 
@@ -498,7 +498,7 @@ class leo_interface:
             raise
         return None
 
-    # @+node:EKR.20040517080250.26: *4* find_window_and_root
+    #@> find_window_and_root
     def find_window_and_root(self, path):
         """
         given a path of the form:
@@ -514,7 +514,7 @@ class leo_interface:
                 return w, w.c.rootPosition()
         return None, None
 
-    # @+node:EKR.20040517080250.30: *4* split_leo_path
+    #@ split_leo_path
     def split_leo_path(self, path):
         """Split self.path."""
         if path == '/':
@@ -523,7 +523,7 @@ class leo_interface:
             path = path[1:]
         return path.split('/')
 
-    # @+node:ekr.20161001114512.1: *4* write_leo_tree & helpers
+    #@ write_leo_tree & helpers
     def write_leo_tree(self, f, window, root):
         """Wriite the entire html file to f."""
         root = root.copy()
@@ -539,7 +539,7 @@ class leo_interface:
         self.write_body_pane(f, root)
         f.write('</body></html>')
 
-    # @+node:ekr.20161001124752.1: *5* write_body_pane
+    #@> write_body_pane
     def write_body_pane(self, f, p):
         f.write('<div class="bodypane">')
         f.write('<pre class="body-text">')
@@ -548,7 +548,7 @@ class leo_interface:
         f.write('<code class="body-code">%s</code>' % escape(p.b))
         f.write('</pre></div>')
 
-    # @+node:ekr.20161001121838.1: *5* write_head
+    #@ write_head
     def write_head(self, f, headString, window):
         f.write(
             """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
@@ -572,7 +572,7 @@ class leo_interface:
             )
         )
 
-    # @+node:ekr.20161001122919.1: *5* write_node_and_subtree
+    #@ write_node_and_subtree
     def write_node_and_subtree(self, f, p):
         # This organization, with <headline> elements in <node> elements,
         # allows proper highlighting of nodes.
@@ -591,7 +591,7 @@ class leo_interface:
             self.write_node_and_subtree(f, child)
         f.write('</div>')
 
-    # @+node:EKR.20040517080250.27: *4* write_leo_windowlist
+    #@< write_leo_windowlist
     def write_leo_windowlist(self):
         f = StringIO()
         f.write(
@@ -622,7 +622,7 @@ class leo_interface:
         f.write('</ul><hr /></body></html>')
         return f
 
-    # @+node:bwmulder.20050319135316: *3* node_reference & helpers
+    #@< node_reference & helpers
     def node_reference(self, vnode):
         """
         Given a position p, return the name of the node.
@@ -642,7 +642,7 @@ class leo_interface:
         result = self.create_leo_h_reference(window, vnode)
         return result
 
-    # @+node:EKR.20040517080250.21: *4* add_leo_links (mod_http.py)
+    #@> add_leo_links (mod_http.py)
     def add_leo_links(self, window, node, f):
         """
         Given a node 'node', add links to:
@@ -699,19 +699,19 @@ class leo_interface:
                 f.write("</li>\n")
             f.write("</ol>\n")
 
-    # @+node:EKR.20040517080250.22: *4* create_href
+    #@ create_href
     def create_href(self, href, text, f):
         f.write('<a href="%s">' % href)
         f.write(escape(text))
         f.write("</a>\n")
 
-    # @+node:bwmulder.20050319134815: *4* create_leo_h_reference
+    #@ create_leo_h_reference
     def create_leo_h_reference(self, window, node):
         parts = [window.shortFileName()] + self.get_leo_nameparts(node)
         href = '/' + '/'.join(parts)
         return href
 
-    # @+node:EKR.20040517080250.23: *4* create_leo_reference
+    #@ create_leo_reference
     def create_leo_reference(self, window, node, text, f):
         """
         Create a reference to 'node' in 'window', displaying 'text'
@@ -719,7 +719,7 @@ class leo_interface:
         href = self.create_leo_h_reference(window, node)
         self.create_href(href, text, f)
 
-    # @+node:EKR.20040517080250.28: *4* write_path
+    #@ write_path
     def write_path(self, node, f):
         result = []
         while node:
@@ -739,10 +739,10 @@ class leo_interface:
             f.write(escape(result[-1]))
             f.write("</h2>\n")
 
-    # @-others
+    #@-others
 
 
-# @+node:tbrown.20110930093028.34530: ** class LeoActions
+#@<2 class LeoActions
 class LeoActions:
     """
     A place to collect other URL based actions like saving bookmarks from
@@ -750,13 +750,13 @@ class LeoActions:
     but putting it here for separation for now.
     """
 
-    # @+others
-    # @+node:tbrown.20110930220448.18077: *3* __init__(LeoActions)
+    #@+others
+    #@> __init__(LeoActions)
     def __init__(self, request_handler):
         self.request_handler = request_handler
         self.bookmark_unl = g.app.commanders()[0].config.getString('http-bookmark-unl')
 
-    # @+node:tbrown.20110930220448.18075: *3* add_bookmark
+    #@ add_bookmark
     def add_bookmark(self):
         """Return the file like 'f' that leo_interface.send_head makes"""
         parsed_url = urlparse.urlparse(self.request_handler.path)
@@ -877,7 +877,7 @@ class LeoActions:
         )
         return f
 
-    # @+node:tbrown.20131122091143.54044: *3* get_one_tab
+    #@ get_one_tab
     def get_one_tab(self, links, nd):
         """get_one_tab - Add child bookmarks from OneTab chrome extension
 
@@ -898,7 +898,7 @@ class LeoActions:
                     '',
                 )
 
-    # @+node:tbrown.20111002082827.18325: *3* add_bookmark_selection
+    #@ add_bookmark_selection
     def add_bookmark_selection(self, node, text):
         '''Insert the selected text into the bookmark node,
         after any earlier selections but before the users comments.
@@ -945,7 +945,7 @@ class LeoActions:
         node.b = '\n'.join(b)
         node.setDirty()
 
-    # @+node:tbrown.20111005093154.17683: *3* get_favicon
+    #@ get_favicon
     def get_favicon(self):
         path = g.os_path_join(g.computeLeoDir(), 'Icons', 'LeoApp16.ico')
         try:
@@ -957,7 +957,7 @@ class LeoActions:
         except Exception:
             return None
 
-    # @+node:tbrown.20110930220448.18076: *3* get_response (mod_http.py)
+    #@ get_response (mod_http.py)
     def get_response(self):
         """Return the file like 'f' that leo_interface.send_head makes"""
         if self.request_handler.path.startswith('/_/add/bkmk/'):
@@ -973,15 +973,15 @@ class LeoActions:
         f.write("Unknown URL in LeoActions.get_response()")
         return f
 
-    # @-others
+    #@-others
 
 
-# @+node:EKR.20040517080250.10: ** class nodeNotFound
+#@< class nodeNotFound
 class nodeNotFound(Exception):
     pass
 
 
-# @+node:bwmulder.20061014153544: ** class noLeoNodePath
+#@ class noLeoNodePath
 class noLeoNodePath(Exception):
     """
     Raised if the path can not be converted a filename and a series of numbers.
@@ -989,14 +989,14 @@ class noLeoNodePath(Exception):
     """
 
 
-# @+node:EKR.20040517080250.13: ** class RequestHandler
+#@ class RequestHandler
 if asynchat:
 
     class RequestHandler(leo_interface, asynchat.async_chat, SimpleHTTPRequestHandler):
         # pylint: disable=too-many-ancestors
         # pylint: disable=super-init-not-called
-        # @+others
-        # @+node:EKR.20040517080250.14: *3* __init__
+        #@+others
+        #@> __init__
         def __init__(self, conn, addr, server):
             self.leo_actions = LeoActions(self)
             super().__init__(conn)
@@ -1014,7 +1014,7 @@ if asynchat:
             self.use_encoding = True
             self.encoding = 'utf-8'
 
-        # @+node:EKR.20040517080250.15: *3* copyfile
+        #@ copyfile
         def copyfile(self, source, outputfile):
             """Copy all data between two file objects.
 
@@ -1030,7 +1030,7 @@ if asynchat:
             """
             shutil.copyfileobj(source, outputfile, length=255)
 
-        # @+node:EKR.20040517080250.16: *3* log_message
+        #@ log_message
         def log_message(self, format, *args):
             """Log an arbitrary message.
 
@@ -1053,12 +1053,12 @@ if asynchat:
             )  # fmt: skip
             g.es(message)
 
-        # @+node:EKR.20040517080250.17: *3* collect_incoming_data
+        #@ collect_incoming_data
         def collect_incoming_data(self, data):
             """Collects the data arriving on the connexion"""
             self.buffer.write(data)
 
-        # @+node:EKR.20040517080250.18: *3* prepare_POST
+        #@ prepare_POST
         def prepare_POST(self):
             """Prepare to read the request body"""
             bytesToRead = int(self.headers.getheader('content-length'))
@@ -1068,20 +1068,20 @@ if asynchat:
             # control will be passed to a new found_terminator
             self.found_terminator = self.handle_post_data  # type:ignore
 
-        # @+node:EKR.20040517080250.19: *3* handle_post_data
+        #@ handle_post_data
         def handle_post_data(self):
             """Called when a POST request body has been read"""
             self.rfile = StringIO(self.buffer.getvalue())  # type:ignore
             self.do_POST()
             self.finish()
 
-        # @+node:EKR.20040517080250.31: *3* do_GET
+        #@ do_GET
         def do_GET(self):
             """Begins serving a GET request"""
             # nothing more to do before handle_data()
             self.handle_data()
 
-        # @+node:EKR.20040517080250.32: *3* do_POST
+        #@ do_POST
         def do_POST(self):
             """
             Begins serving a POST request. The request data must be readable
@@ -1090,7 +1090,7 @@ if asynchat:
             header = self.headers.getheader('content-type')
             g.trace('not ready yet', repr(header))
 
-        # @+node:EKR.20040517080250.33: *3* query
+        #@ query
         def query(self, parsedQuery):
             """Returns the QUERY dictionary, similar to the result of urllib.parse_qs
             except that :
@@ -1106,19 +1106,19 @@ if asynchat:
                     res[item] = value[0] if value else ''
             return res
 
-        # @+node:EKR.20040517080250.34: *3* handle_data
+        #@ handle_data
         def handle_data(self):
             """Class to override"""
             f = self.send_head()
             if f:
                 self.copyfile(f, self.wfile)
 
-        # @+node:ekr.20110522152535.18254: *3* handle_read_event (NEW)
+        #@ handle_read_event (NEW)
         def handle_read_event(self):
             """Over-ride SimpleHTTPRequestHandler.handle_read_event."""
             asynchat.async_chat.handle_read_event(self)
 
-        # @+node:EKR.20040517080250.35: *3* handle_request_line (aka found_terminator)
+        #@ handle_request_line (aka found_terminator)
         def handle_request_line(self):
             """Called when the http request line and headers have been received"""
             # prepare attributes needed in parse_request()
@@ -1144,30 +1144,30 @@ if asynchat:
             else:
                 self.send_error(501, "Unsupported method (%s)" % self.command)
 
-        # @+node:ekr.20110522152535.18256: *3* found_terminator
+        #@ found_terminator
         def found_terminator(self) -> None:
             # pylint: disable=method-hidden
             # Control may be passed to another found_terminator.
             self.handle_request_line()
 
-        # @+node:EKR.20040517080250.36: *3* finish
+        #@ finish
         def finish(self):
             """Reset terminator (required after POST method), then close"""
             self.set_terminator(self.term)
             self.wfile.initiate_sending()
             # self.close()
 
-        # @-others
+        #@-others
 
 
-# @+node:EKR.20040517080250.37: ** class Server
+#@< class Server
 if asyncore:
 
     class Server(asyncore.dispatcher):
         """Copied from http_server in medusa"""
 
-        # @+others
-        # @+node:EKR.20040517080250.38: *3* __init__
+        #@+others
+        #@> __init__
         def __init__(self, ip, port, handler):
             self.ip = ip
             self.port = port
@@ -1179,7 +1179,7 @@ if asyncore:
             # lower this to 5 if your OS complains
             self.listen(1024)
 
-        # @+node:EKR.20040517080250.39: *3* handle_accept
+        #@ handle_accept
         def handle_accept(self):
             try:
                 # pylint: disable=unpacking-non-sequence
@@ -1195,11 +1195,11 @@ if asyncore:
             # on the incoming connexion
             self.handler(conn, addr, self)
 
-        # @-others
+        #@-others
 
 
-# @+node:ekr.20140920145803.17997: ** functions
-# @+node:EKR.20040517080250.47: *3* a_read (asynchore override)
+#@< functions
+#@> a_read (asynchore override)
 def a_read(obj: Any) -> None:
     try:
         obj.handle_read_event()
@@ -1209,7 +1209,7 @@ def a_read(obj: Any) -> None:
         obj.handle_error()
 
 
-# @+node:ekr.20110522152535.18252: *3* escape
+#@ escape
 def escape(s):
     s = s.replace('&', "&amp;")
     s = s.replace('<', "&lt;")
@@ -1245,7 +1245,7 @@ def escape(s):
     return s
 
 
-# @+node:EKR.20040517080250.44: *3* loop (asynchore override)
+#@ loop (asynchore override)
 def loop(timeout=5.0, use_poll=0, map=None):
     """
     Override the loop function of asynchore.
@@ -1255,7 +1255,7 @@ def loop(timeout=5.0, use_poll=0, map=None):
     return poll(timeout)
 
 
-# @+node:bwmulder.20050322135114: *3* node_reference
+#@ node_reference
 def node_reference(vnode):
     """
     Use by the rst3 plugin.
@@ -1263,7 +1263,7 @@ def node_reference(vnode):
     return leo_interface().node_reference(vnode)
 
 
-# @+node:EKR.20040517080250.40: *3* poll
+#@ poll
 def poll(timeout=0.0):
     global sockets_to_close
     map = asyncore.socket_map
@@ -1287,39 +1287,39 @@ def poll(timeout=0.0):
     if [] == r == w == e:  # pylint: disable=bad-option-value,use-implicit-booleaness-not-comparison
         time.sleep(timeout)
     else:
-        # @+<< try r, w, e = select.select >>
-        # @+node:EKR.20040517080250.41: *4* << try r, w, e = select.select >>
+        #@+<< try r, w, e = select.select >>
+        #@> << try r, w, e = select.select >>
         try:
             r, w, e = select.select(r, w, e, timeout)
         except OSError:
             return False  # EKR: EINTR is undefined.
-        # @-<< try r, w, e = select.select >>
+        #@-<< try r, w, e = select.select >>
     for fd in r:
-        # @+<< asyncore.read(map.get(fd)) >>
-        # @+node:EKR.20040517080250.42: *4* << asyncore.read(map.get(fd)) >>
+        #@+<< asyncore.read(map.get(fd)) >>
+        #@ << asyncore.read(map.get(fd)) >>
         obj = map.get(fd)
         if obj is not None:
             asyncore.read(obj)
-        # @-<< asyncore.read(map.get(fd)) >>
+        #@-<< asyncore.read(map.get(fd)) >>
     for fd in w:
-        # @+<< asyncore.write(map.get(fd)) >>
-        # @+node:EKR.20040517080250.43: *4* << asyncore.write(map.get(fd)) >>
+        #@+<< asyncore.write(map.get(fd)) >>
+        #@ << asyncore.write(map.get(fd)) >>
         obj = map.get(fd)
         if obj is not None:
             asyncore.write(obj)
-        # @-<< asyncore.write(map.get(fd)) >>
+        #@-<< asyncore.write(map.get(fd)) >>
     return len(r) > 0 or len(w) > 0
 
 
-# @+node:bwmulder.20050322132919: *3* rst_related functions
-# @+node:bwmulder.20050322132919.2: *4* get_http_attribute
+#@< rst_related functions
+#@> get_http_attribute
 def get_http_attribute(p):
     if hasattr(p.v, 'unknownAttributes'):
         return p.v.unknownAttributes.get(config.rst2_http_attributename, None)
     return None
 
 
-# @+node:bwmulder.20050322134325: *4* reconstruct_html_from_attrs
+#@ reconstruct_html_from_attrs
 def reconstruct_html_from_attrs(attrs, how_much_to_ignore=0):
     """
     Given an attribute, reconstruct the html for this node.
@@ -1341,7 +1341,7 @@ def reconstruct_html_from_attrs(attrs, how_much_to_ignore=0):
     return result
 
 
-# @+node:bwmulder.20050322133050: *4* set_http_attribute
+#@ set_http_attribute
 def set_http_attribute(p, value):
     vnode = p.v
     if hasattr(vnode, 'unknownAttributes'):
@@ -1350,7 +1350,7 @@ def set_http_attribute(p, value):
         vnode.unknownAttributes = {config.rst2_http_attributename: value}
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

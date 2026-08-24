@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-# @+leo-ver=5-thin
-# @+node:bob.20170502144044.1: * @file babel_kill.py
-# @@first
+#@+leo-ver=cub-1-thin
+#@0 [bob.20170502144044.1] @f babel_kill.py
+#@@first
 # -*- encoding: utf-8 -*-
-# @@language python
-# @@tabwidth -4
+#@@language python
+#@@tabwidth -4
 
 from PyQt5 import QtWidgets  # Can't fail, because Leo-Babel won't run without it.
 import signal  # Can't fail, because Leo-Babel won't run without it.
@@ -35,4 +35,4 @@ if reply == QtWidgets.QMessageBox.Yes:
     os.kill(pidTarg, signal.SIGHUP)
     # This kills most Bash scripts and most Python scripts
 
-# @-leo
+#@-leo

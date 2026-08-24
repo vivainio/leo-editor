@@ -1,18 +1,18 @@
-# @+leo-ver=5-thin
-# @+node:tbrown.20171028115144.1: * @file ../plugins/editpane/plaintextview.py
+#@+leo-ver=cub-1-thin
+#@0 [tbrown.20171028115144.1] @f ../plugins/editpane/plaintextview.py
 from leo.core.leoQt import QtWidgets
 
 
-# @+others
-# @+node:tbrown.20171028115502.2: ** class LEP_PlainTextView
+#@+others
+#@> class LEP_PlainTextView
 class LEP_PlainTextView(QtWidgets.QTextBrowser):
     """LEP_PlainTextView - simplest possible LeoEditorPane viewer"""
 
     lep_type = "TEXT"
     lep_name = "Plain Text View"
 
-    # @+others
-    # @+node:tbrown.20171028115502.3: *3* __init__
+    #@+others
+    #@> __init__
     def __init__(self, c=None, lep=None, *args, **kwargs):
         """set up"""
         super().__init__(*args, **kwargs)
@@ -20,7 +20,7 @@ class LEP_PlainTextView(QtWidgets.QTextBrowser):
         self.lep = lep
         self.setStyleSheet("* {background: #998; color: #222; }")
 
-    # @+node:tbrown.20171028115502.4: *3* new_text
+    #@ new_text
     def new_text(self, text):
         """new_text - update for new text
 
@@ -29,7 +29,7 @@ class LEP_PlainTextView(QtWidgets.QTextBrowser):
         """
         self.setPlainText(text)
 
-    # @+node:tbrown.20171028115502.5: *3* update_text
+    #@ update_text
     def update_text(self, text):
         """update_text - update for current text
 
@@ -42,10 +42,10 @@ class LEP_PlainTextView(QtWidgets.QTextBrowser):
         self.horizontalScrollBar().setValue(h)
         self.verticalScrollBar().setValue(v)
 
-    # @-others
+    #@-others
 
 
-# @+node:tbrown.20171028115502.6: ** class LEP_PlainTextViewB
+#@< class LEP_PlainTextViewB
 class LEP_PlainTextViewB(LEP_PlainTextView):
     """LEP_PlainTextViewB - copy of LEP_PlainTextView with different
     background color to test multiple viewers
@@ -53,8 +53,8 @@ class LEP_PlainTextViewB(LEP_PlainTextView):
 
     lep_name = "Plain Text View 'B'"
 
-    # @+others
-    # @+node:tbrown.20171028115502.7: *3* LEP_PlainTextViewB.__init__
+    #@+others
+    #@> LEP_PlainTextViewB.__init__
     def __init__(self, c=None, lep=None, *args, **kwargs):
         """set up"""
         kwargs['c'] = c
@@ -62,10 +62,10 @@ class LEP_PlainTextViewB(LEP_PlainTextView):
         super().__init__(*args, **kwargs)
         self.setStyleSheet("* {background: #899; color: #222; }")
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@-others
+#@@language python
+#@@tabwidth -4
+#@-leo

@@ -1,7 +1,7 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20060831165821: * @file ../plugins/slideshow.py
-# @+<< docstring >>
-# @+node:ekr.20060831165845.1: ** << docstring >>
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20060831165821] @f ../plugins/slideshow.py
+#@+<< docstring >>
+#@> << docstring >>
 """Supports slideshows in Leo outlines.
 
 This plugin defines four new commands:
@@ -20,19 +20,19 @@ All these commands ignore @ignore trees.
 
 """
 
-# @-<< docstring >>
-# @+<< imports >>
-# @+node:ekr.20060831165845.3: ** << imports >>
+#@-<< docstring >>
+#@+<< imports >>
+#@ << imports >>
 from leo.core import leoGlobals as g
-# @-<< imports >>
+#@-<< imports >>
 
 # To do:
 # - Add sound/script support for slides.
 # - Save/restore changes to slides when entering/leaving a slide.
 
 
-# @+others
-# @+node:ekr.20060831165845.4: ** init
+#@+others
+#@ init
 def init():
     """Return True if the plugin has loaded successfully."""
     g.registerHandler(('open2', 'new2'), onCreate)
@@ -40,17 +40,17 @@ def init():
     return True
 
 
-# @+node:ekr.20060831165845.5: ** onCreate
+#@ onCreate
 def onCreate(tag, keys):
     c = keys.get('c')
     if c:
         slideshowController(c)
 
 
-# @+node:ekr.20060831165845.6: ** class slideshowController
+#@ class slideshowController
 class slideshowController:
-    # @+others
-    # @+node:ekr.20060831165845.7: *3* __init__
+    #@+others
+    #@> __init__
     def __init__(self, c):
         self.c = c
         self.firstSlideShow = None
@@ -58,7 +58,7 @@ class slideshowController:
         self.slide = None
         self.createCommands()
 
-    # @+node:ekr.20060831171016: *3* createCommands (slideshowController)
+    #@ createCommands (slideshowController)
     def createCommands(self):
         c = self.c
         k = c.k
@@ -70,7 +70,7 @@ class slideshowController:
         ):
             k.registerCommand(commandName, func)
 
-    # @+node:ekr.20060901182318: *3* findFirstSlideShow
+    #@ findFirstSlideShow
     def findFirstSlideShow(self):
         c = self.c
         for p in c.all_positions():
@@ -83,14 +83,14 @@ class slideshowController:
         self.firstSlideShow = None
         return None
 
-    # @+node:ekr.20060904110319: *3* ignored
+    #@ ignored
     def ignored(self, p):
         for p2 in p.self_and_parents():
             if g.match_word(p2.h, 0, '@ignore') or g.match_word(p2.h, 0, '@noslide'):
                 return True
         return False
 
-    # @+node:ekr.20060831171016.5: *3* nextSlide
+    #@ nextSlide
     def nextSlide(self, event=None):
         c = self.c
         p = c.p
@@ -115,7 +115,7 @@ class slideshowController:
             # else: p = p.threadNext()
         return g.es('At end of slide show' if self.slideShowRoot else 'Not in any slide show')
 
-    # @+node:ekr.20060901142848: *3* nextSlideShow
+    #@ nextSlideShow
     def nextSlideShow(self, event=None):
         c = self.c
         self.findFirstSlideShow()
@@ -143,7 +143,7 @@ class slideshowController:
         self.select(self.slideShowRoot)
         g.es('At start of last slide show')
 
-    # @+node:ekr.20060831171016.4: *3* prevSlide
+    #@ prevSlide
     def prevSlide(self, event=None):
         c = self.c
         p = c.p
@@ -172,7 +172,7 @@ class slideshowController:
             return g.es('At start of first slide show')
         return g.es('No slide show found')
 
-    # @+node:ekr.20060901142848.1: *3* prevSlideShow
+    #@ prevSlideShow
     def prevSlideShow(self, event=None):
         c = self.c
         self.findFirstSlideShow()
@@ -198,7 +198,7 @@ class slideshowController:
         self.select(self.firstSlideShow)
         g.es('At start of first slide show')
 
-    # @+node:ekr.20060901145257: *3* select
+    #@ select
     def select(self, p):
         """Make p the present slide, and set self.slide and maybe self.slideShowRoot."""
         c = self.c
@@ -211,8 +211,8 @@ class slideshowController:
             self.slideShowRoot = p.copy()
         self.slide = p.copy()
 
-    # @-others
+    #@-others
 
 
-# @-others
-# @-leo
+#@-others
+#@-leo

@@ -1,17 +1,17 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20210904022712.2: * @file ../unittests/commands/test_checkerCommands.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20210904022712.2] @f ../unittests/commands/test_checkerCommands.py
 """Tests of leo.commands.leoCheckerCommands."""
 
 from leo.core.leoTest2 import LeoUnitTest
 
 
-# @+others
-# @+node:ekr.20210904022712.3: ** class TestChecker(LeoUnitTest):
+#@+others
+#@> class TestChecker(LeoUnitTest):
 class TestChecker(LeoUnitTest):
     """Test cases for leoCheckerCommands.py"""
 
-    # @+others
-    # @+node:ekr.20230221104054.1: *3* test_check_nodes
+    #@+others
+    #@> test_check_nodes
     def test_check_nodes(self):
         c = self.c
         from leo.commands import checkerCommands
@@ -36,9 +36,9 @@ class TestChecker(LeoUnitTest):
             x.get_data()
             assert x.is_dubious_node(p)
 
-    # @-others
+    #@-others
 
 
-# @-others
+#@-others
 
-# @-leo
+#@-leo

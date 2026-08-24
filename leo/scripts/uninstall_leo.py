@@ -1,6 +1,6 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20240321123225.1: * @file ../scripts/uninstall_leo.py
-# @@language python
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20240321123225.1] @f ../scripts/uninstall_leo.py
+#@@language python
 
 """
 uninstall_leo.py: Run `pip uninstall leo` from the *parent* directory of the `leo-editor` directory.
@@ -46,4 +46,4 @@ else:
         if os.path.exists(egg_dir):
             print(f"removed: {egg_dir}")
             shutil.rmtree(egg_dir)
-# @-leo
+#@-leo

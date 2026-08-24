@@ -1,7 +1,19 @@
-# @+leo-ver=5-thin
-# @+node:tbrown.20130420091241.44181: * @file ../plugins/screen_capture.py
-# @+<< docstring >>
-# @+node:ekr.20140910173844.17823: ** << docstring >> (screen_capture.py)
+#@+leo-ver=cub-1-thin
+#@0 [tbrown.20130420091241.44181] @f ../plugins/screen_capture.py
+#@+<< docstring >>
+#@-<< docstring >>
+import os
+import time
+from leo.core import leoGlobals as g
+from leo.core.leoQt import QtCore, QtGui
+
+#
+# Fail fast, right after all imports.
+g.assertUi('qt')  # May raise g.UiTypeException, caught by the plugins manager.
+
+
+#@+others
+#@> << docstring >> (screen_capture.py)
 """
 screen_capture.py
 =================
@@ -31,19 +43,7 @@ Settings
 Terry Brown, Terry_N_Brown@yahoo.com, Fri Apr 19 16:33:45 2013
 """
 
-# @-<< docstring >>
-import os
-import time
-from leo.core import leoGlobals as g
-from leo.core.leoQt import QtCore, QtGui
-
-#
-# Fail fast, right after all imports.
-g.assertUi('qt')  # May raise g.UiTypeException, caught by the plugins manager.
-
-
-# @+others
-# @+node:tbrown.20130419143128.29676: ** init
+#@ init
 def init():
     """Return True if the plugin has loaded successfully."""
     if g.unitTesting:
@@ -53,7 +53,7 @@ def init():
     return ok
 
 
-# @+node:tbrown.20130419143128.29669: ** class Recorder
+#@ class Recorder
 class Recorder:
     """Recorder - record video of Leo
 
@@ -67,8 +67,8 @@ class Recorder:
     rm -k /tmp/image*.ppm /tmp/image*.png
     """
 
-    # @+others
-    # @+node:tbrown.20130419143128.29670: *3* __init__
+    #@+others
+    #@> __init__
     def __init__(self):
         """Ctor for Recorder class."""
         self.recording = False
@@ -89,7 +89,7 @@ class Recorder:
         # performance testing
         self.times = []
 
-    # @+node:tbrown.20130419143128.29671: *3* grab_frame
+    #@ grab_frame
     def grab_frame(self, filename=None):
         """Grab one frame."""
         if not self.recording and not filename:
@@ -101,7 +101,6 @@ class Recorder:
             # not capture the pointer in the image, which is quite
             # typical for screen captures - this code draws a pointer
             # in the right place, and may be need to be enabled by a
-            # @verbatim
             # @setting in future, if pointer capture does not occur in
             # all environments - pointer is captured in
             cursor = self.widget.cursor()
@@ -121,21 +120,21 @@ class Recorder:
         pm.save(filename)
         self.frame += 1
 
-    # @+node:tbrown.20130419143128.29672: *3* make_pointer
+    #@ make_pointer
     def make_pointer(self):
         """Return a pixmap for a pointer."""
         path = g.computeLeoDir()
         path = g.os_path_join(path, 'Icons', 'recorder', 'pointer.png')
         return QtGui.QPixmap(path)
 
-    # @+node:tbrown.20130419143128.29673: *3* run
+    #@ run
     def run(self):
         """Start recording."""
         self.recording = True
         self.last_time = time.time()
         # self.timer.start()
 
-    # @+node:tbrown.20130419143128.29674: *3* stop
+    #@ stop
     def stop(self):
         """Stop recording"""
         # self.timer.stop()
@@ -143,10 +142,10 @@ class Recorder:
         print("\nMean seconds: %0.3f = %0.3f fps" % (mean, 1.0 / mean))
         self.times = []
 
-    # @-others
+    #@-others
 
 
-# @+node:tbrown.20130419143128.29677: ** screen_capture_now
+#@< screen_capture_now
 @g.command('screen-capture-now')
 def screen_capture_now(kwargs=None):
     """screen_capture_now - save a screenshot
@@ -171,7 +170,7 @@ def screen_capture_now(kwargs=None):
     print("Screenshot: %s" % filename)
 
 
-# @+node:tbrown.20130419143128.29679: ** screen_capture_5sec
+#@ screen_capture_5sec
 @g.command('screen-capture-5sec')
 def screen_capture_5sec(kwargs):
     """screen_capture_5sec - save a screenshot in 5 seconds
@@ -183,8 +182,8 @@ def screen_capture_5sec(kwargs):
     QtCore.QTimer.singleShot(5000, screen_capture_now)
 
 
-# @-others
-# @@language python
-# @@tabwidth -4
+#@-others
+#@@language python
+#@@tabwidth -4
 
-# @-leo
+#@-leo

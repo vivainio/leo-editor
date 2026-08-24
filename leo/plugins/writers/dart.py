@@ -1,5 +1,5 @@
-# @+leo-ver=5-thin
-# @+node:ekr.20141116100154.2: * @file ../plugins/writers/dart.py
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20141116100154.2] @f ../plugins/writers/dart.py
 """The @auto write code for dart."""
 
 from leo.core import leoGlobals as g  # Required
@@ -7,13 +7,13 @@ from leo.core.leoNodes import Position
 from leo.plugins.writers import basewriter
 
 
-# @+others
-# @+node:ekr.20220812173827.1: ** class DartWriter(BaseWriter)
+#@+others
+#@> class DartWriter(BaseWriter)
 class DartWriter(basewriter.BaseWriter):
     """The writer class for .dart files."""
 
-    # @+others
-    # @+node:ekr.20141116100154.4: *3* dart.write
+    #@+others
+    #@> dart.write
     def write(self, root: Position) -> None:
         """Write all the *descendants* of an .dart node."""
         root_level = root.level()
@@ -25,10 +25,10 @@ class DartWriter(basewriter.BaseWriter):
                     self.put(s)
         root.setVisited()
 
-    # @-others
+    #@-others
 
 
-# @-others
+#@-others
 writer_dict = {
     '@auto': [],
     'class': DartWriter,
@@ -36,6 +36,6 @@ writer_dict = {
         '.dart',
     ],
 }
-# @@language python
-# @@tabwidth -4
-# @-leo
+#@@language python
+#@@tabwidth -4
+#@-leo

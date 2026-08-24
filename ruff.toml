@@ -1,5 +1,5 @@
-#@+leo-ver=5-thin
-#@+node:ekr.20240406013108.1: * @file ../../ruff.toml
+#@+leo-ver=cub-1-thin
+#@0 [ekr.20240406013108.1] @f ../../ruff.toml
 #@@language toml
 
 # When this file exists, ruff ignores pyproject.toml's [tool.ruff] and [tool.ruff.format] tables.
